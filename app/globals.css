@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+@theme {
+  /* Palette: warm near black night, warm off white, firelight accent,
+     muted neutral for captions and metadata. */
+  --color-night: #131009;
+  --color-soot: #1e1810;
+  --color-starlight: #f2ecdf;
+  --color-ember: #c98a4b;
+  --color-dust: #94897a;
+
+  --font-display: var(--font-fraunces), "Georgia", serif;
+  --font-body: var(--font-figtree), system-ui, sans-serif;
+  --font-meta: var(--font-plex-mono), ui-monospace, monospace;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--color-night);
+  color: var(--color-starlight);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: var(--color-ember);
+  color: var(--color-night);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-ember);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Documentary metadata label */
+.meta-label {
+  font-family: var(--font-meta);
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-dust);
+}
+
+/* Scroll reveal. Motion is opt in; reduced motion sees content immediately. */
+.reveal {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(1.25rem);
+    transition:
+      opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero-rise {
+    animation: hero-rise 1.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  @keyframes hero-rise {
+    from {
+      opacity: 0;
+      transform: translateY(1.5rem);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+/* Dignified placeholder texture for empty photo slots */
+.slot-placeholder {
+  background-color: var(--color-soot);
+  background-image:
+    radial-gradient(
+      ellipse 80% 60% at 30% 20%,
+      rgb(201 138 75 / 0.07),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 70% 60% at 75% 85%,
+      rgb(242 236 223 / 0.04),
+      transparent
+    ),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+}
