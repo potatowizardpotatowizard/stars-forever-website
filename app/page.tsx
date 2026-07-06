@@ -21,6 +21,11 @@ export default function HomePage() {
         <StarField />
         <div className="relative mx-auto w-full max-w-7xl px-5 pb-20 pt-40 sm:px-8">
           <div className="max-w-3xl">
+            {/* The visual hero is the anchor verse; this h1 names the page
+                for screen readers and search without changing the design. */}
+            <h1 className="sr-only">
+              Stars Forever: a ministry for creators, artists, and entrepreneurs
+            </h1>
             <blockquote className="hero-rise">
               <p className="font-display text-2xl leading-snug text-starlight sm:text-4xl sm:leading-snug">
                 {ANCHOR_VERSE.text}
