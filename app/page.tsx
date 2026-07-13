@@ -52,8 +52,8 @@ export default function HomePage() {
             <ul className="space-y-4">
               {HERO_MENU.map((item, i) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="mono-link text-lg sm:text-xl">
-                    <GlitchText text={item.label} delay={300 + i * 140} />
+                  <Link href={item.href} className="hero-menu-link">
+                    <GlitchText text={item.label.toUpperCase()} delay={300 + i * 140} />
                   </Link>
                 </li>
               ))}

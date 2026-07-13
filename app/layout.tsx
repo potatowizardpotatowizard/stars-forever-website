@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Archivo, Figtree, Courier_Prime } from "next/font/google";
+import { Archivo, Figtree, Fragment_Mono } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { SITE_NAME, SITE_DESCRIPTION } from "@/content/site";
@@ -16,10 +16,10 @@ const figtree = Figtree({
   variable: "--font-figtree",
 });
 
-const courier = Courier_Prime({
+const fragmentMono = Fragment_Mono({
   subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-courier",
+  weight: "400",
+  variable: "--font-fragment",
 });
 
 export const metadata: Metadata = {
@@ -44,7 +44,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${archivo.variable} ${figtree.variable} ${courier.variable}`}
+      className={`${archivo.variable} ${figtree.variable} ${fragmentMono.variable}`}
     >
       <body>
         <a

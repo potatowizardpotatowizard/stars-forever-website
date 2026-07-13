@@ -12,7 +12,7 @@
 
   --font-display: var(--font-archivo), "Helvetica Neue", Arial, sans-serif;
   --font-body: var(--font-figtree), system-ui, sans-serif;
-  --font-meta: var(--font-courier), "Courier New", monospace;
+  --font-meta: var(--font-fragment), monospace;
 }
 
 :root {
@@ -53,6 +53,26 @@ h4 {
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--color-dust);
+}
+
+/* The hero tape menu, exact to the brand page: Fragment Mono 22px,
+   regular weight, natural letter spacing */
+.hero-menu-link {
+  font-family: var(--font-meta);
+  font-size: 1.375rem;
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: uppercase;
+  color: var(--color-starlight);
+  transition:
+    color 0.2s ease,
+    text-shadow 0.2s ease;
+}
+.hero-menu-link:hover {
+  color: #ffffff;
+  text-shadow:
+    0 0 12px rgb(167 139 250 / 0.9),
+    0 0 32px rgb(109 40 217 / 0.6);
 }
 
 /* Typewriter menu link, as on the hero of the brand page */
