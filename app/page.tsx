@@ -63,7 +63,10 @@ export default function HomePage() {
 
         {/* Lower third: mission line left, glowing wordmark right */}
         <div className="relative mx-auto flex w-full max-w-7xl flex-col items-start gap-8 px-5 pb-10 sm:flex-row sm:items-end sm:justify-between sm:px-8">
-          <p className="meta-label hero-rise max-w-xs" style={{ animationDelay: "0.5s" }}>
+          <p
+            className="hero-rise max-w-md font-meta text-sm uppercase leading-relaxed tracking-[0.14em] text-starlight/75"
+            style={{ animationDelay: "0.5s" }}
+          >
             {HOME.hero.missionLine}
           </p>
           <Image
@@ -196,7 +199,7 @@ export default function HomePage() {
                     width={960}
                     height={340}
                     sizes="(min-width: 768px) 50vw, 100vw"
-                    className="aspect-[21/8] w-full object-cover opacity-70 transition-transform duration-700 group-hover:scale-[1.03]"
+                    className="aspect-[16/9] w-full object-cover opacity-70 transition-transform duration-700 group-hover:scale-[1.03] sm:aspect-[21/8]"
                   />
                   <div
                     aria-hidden="true"

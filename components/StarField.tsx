@@ -33,11 +33,11 @@ export default function StarField() {
       x: Math.random() * 2 - 1,
       y: Math.random() * 2 - 1,
       z: initial ? NEAR + Math.random() * (FAR - NEAR) : FAR,
-      speed: 0.09 + Math.random() * 0.16, // depth per second: light speed
+      speed: 0.04 + Math.random() * 0.08, // depth per second: a gentle jump
     });
 
     const seed = (w: number, h: number) => {
-      const count = Math.min(320, Math.floor((w * h) / 3600));
+      const count = Math.min(200, Math.floor((w * h) / 5800));
       stars = Array.from({ length: count }, () => spawnStar(true));
     };
 
@@ -71,16 +71,16 @@ export default function StarField() {
 
         // Approaching stars grow from a distant speck to a bright point.
         const depth = 1 - (s.z - NEAR) / (FAR - NEAR); // 0 far, 1 near
-        const alpha = (0.12 + 0.8 * depth * depth) * resolve;
-        const radius = 0.3 + 1.4 * depth;
+        const alpha = (0.1 + 0.55 * depth * depth) * resolve;
+        const radius = 0.3 + 1.1 * depth;
 
         // Hyperspace stretch: the streak reaches back toward where the
         // star was deeper in the field, elongating as it nears the camera.
-        if (!reduceMotion && depth > 0.1) {
-          const back = project({ x: s.x, y: s.y, z: s.z + 0.1 + 0.1 * depth });
-          ctx.globalAlpha = alpha * 0.65;
+        if (!reduceMotion && depth > 0.15) {
+          const back = project({ x: s.x, y: s.y, z: s.z + 0.05 + 0.05 * depth });
+          ctx.globalAlpha = alpha * 0.45;
           ctx.strokeStyle = "#efecf7";
-          ctx.lineWidth = Math.max(0.5, radius * 0.8);
+          ctx.lineWidth = Math.max(0.4, radius * 0.7);
           ctx.lineCap = "round";
           ctx.beginPath();
           ctx.moveTo(back.px, back.py);
