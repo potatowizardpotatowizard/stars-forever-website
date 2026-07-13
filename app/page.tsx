@@ -120,7 +120,7 @@ export default function HomePage() {
       </section>
 
       {/* Two minute explainer */}
-      <section className="mx-auto max-w-7xl px-5 pb-24 sm:px-8 sm:pb-32">
+      <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
         <Reveal className="max-w-3xl">
           <Kicker>{HOME.video.kicker}</Kicker>
           <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
