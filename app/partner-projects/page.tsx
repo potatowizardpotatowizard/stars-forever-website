@@ -46,22 +46,28 @@ export default function PartnerProjectsPage() {
         </div>
       </header>
 
-      {/* Success metrics */}
-      <section className="mx-auto max-w-7xl px-5 py-12 sm:px-8">
-        <Reveal>
-          <Kicker>{PARTNER.metrics.kicker}</Kicker>
-        </Reveal>
-        <div className="mt-10 grid gap-6 md:grid-cols-2">
-          {PARTNER.metrics.items.map((m) => (
-            <Reveal key={m.title}>
-              <div className="h-full rounded-lg border border-dust/20 bg-soot/40 p-8">
-                <h2 className="meta-label text-ember">{m.title}</h2>
-                <p className="mt-4 font-display text-xl font-bold leading-snug">
-                  {m.body}
-                </p>
-              </div>
-            </Reveal>
-          ))}
+      {/* Success metrics, under the hero's purple afterglow */}
+      <section className="relative overflow-hidden">
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 top-0 h-[45vh] bg-[linear-gradient(to_bottom,rgb(109_40_217/0.3),rgb(109_40_217/0.1)_45%,transparent)]"
+        />
+        <div className="relative mx-auto max-w-7xl px-5 py-12 sm:px-8">
+          <Reveal>
+            <Kicker>{PARTNER.metrics.kicker}</Kicker>
+          </Reveal>
+          <div className="mt-10 grid gap-6 md:grid-cols-2">
+            {PARTNER.metrics.items.map((m) => (
+              <Reveal key={m.title}>
+                <div className="h-full rounded-lg border border-dust/20 bg-soot/40 p-8">
+                  <h2 className="meta-label text-ember">{m.title}</h2>
+                  <p className="mt-4 font-display text-xl font-bold leading-snug">
+                    {m.body}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
