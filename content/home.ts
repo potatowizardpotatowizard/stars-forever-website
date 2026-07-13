@@ -20,7 +20,7 @@ export const HOME = {
   },
   programs: {
     kicker: "What we do",
-    heading: "We do two things with creators",
+    heading: "Our Mission",
     items: [
       {
         title: "Partner Projects",

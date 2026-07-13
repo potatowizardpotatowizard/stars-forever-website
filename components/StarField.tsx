@@ -33,7 +33,7 @@ export default function StarField() {
       x: Math.random() * 2 - 1,
       y: Math.random() * 2 - 1,
       z: initial ? NEAR + Math.random() * (FAR - NEAR) : FAR,
-      speed: 0.02 + Math.random() * 0.05, // depth per second: a slow approach
+      speed: 0.09 + Math.random() * 0.16, // depth per second: light speed
     });
 
     const seed = (w: number, h: number) => {
@@ -59,32 +59,31 @@ export default function StarField() {
       ctx.clearRect(0, 0, width, height);
 
       for (const s of stars) {
-        const before = project(s);
         if (!reduceMotion) {
           s.z -= s.speed * dt;
           if (s.z <= NEAR) Object.assign(s, spawnStar(false));
         }
         const { px, py } = project(s);
-        if (px < -20 || px > width + 20 || py < -20 || py > height + 20) {
+        if (px < -40 || px > width + 40 || py < -40 || py > height + 40) {
           Object.assign(s, spawnStar(false));
           continue;
         }
 
         // Approaching stars grow from a distant speck to a bright point.
         const depth = 1 - (s.z - NEAR) / (FAR - NEAR); // 0 far, 1 near
-        const alpha = (0.15 + 0.75 * depth * depth) * resolve;
-        const radius = 0.3 + 1.3 * depth;
+        const alpha = (0.12 + 0.8 * depth * depth) * resolve;
+        const radius = 0.3 + 1.4 * depth;
 
-        // A short motion trail pointing back where the star came from.
-        const trailX = before.px - px;
-        const trailY = before.py - py;
-        const trailLen = Math.hypot(trailX, trailY);
-        if (!reduceMotion && trailLen > 0.1 && depth > 0.3) {
-          ctx.globalAlpha = alpha * 0.5;
+        // Hyperspace stretch: the streak reaches back toward where the
+        // star was deeper in the field, elongating as it nears the camera.
+        if (!reduceMotion && depth > 0.1) {
+          const back = project({ x: s.x, y: s.y, z: s.z + 0.1 + 0.1 * depth });
+          ctx.globalAlpha = alpha * 0.65;
           ctx.strokeStyle = "#efecf7";
-          ctx.lineWidth = radius * 0.9;
+          ctx.lineWidth = Math.max(0.5, radius * 0.8);
+          ctx.lineCap = "round";
           ctx.beginPath();
-          ctx.moveTo(px + (trailX / trailLen) * (4 + 26 * depth * depth), py + (trailY / trailLen) * (4 + 26 * depth * depth));
+          ctx.moveTo(back.px, back.py);
           ctx.lineTo(px, py);
           ctx.stroke();
         }

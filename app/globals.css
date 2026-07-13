@@ -26,6 +26,19 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Subtle stars behind every page. A fixed tile of faint dots sits between
+   the page background and the content; sections with their own art simply
+   cover it. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='480'%3E%3Cg fill='%23efecf7'%3E%3Ccircle cx='23' cy='41' r='0.7' opacity='0.5'/%3E%3Ccircle cx='97' cy='18' r='0.5' opacity='0.35'/%3E%3Ccircle cx='166' cy='73' r='0.9' opacity='0.6'/%3E%3Ccircle cx='241' cy='34' r='0.5' opacity='0.3'/%3E%3Ccircle cx='318' cy='91' r='0.7' opacity='0.45'/%3E%3Ccircle cx='412' cy='26' r='0.6' opacity='0.5'/%3E%3Ccircle cx='455' cy='129' r='0.8' opacity='0.4'/%3E%3Ccircle cx='57' cy='142' r='0.5' opacity='0.4'/%3E%3Ccircle cx='137' cy='188' r='0.6' opacity='0.3'/%3E%3Ccircle cx='219' cy='151' r='1.0' opacity='0.55'/%3E%3Ccircle cx='296' cy='204' r='0.5' opacity='0.4'/%3E%3Ccircle cx='377' cy='167' r='0.7' opacity='0.5'/%3E%3Ccircle cx='31' cy='239' r='0.8' opacity='0.45'/%3E%3Ccircle cx='113' cy='277' r='0.5' opacity='0.3'/%3E%3Ccircle cx='187' cy='249' r='0.6' opacity='0.5'/%3E%3Ccircle cx='268' cy='302' r='0.8' opacity='0.35'/%3E%3Ccircle cx='349' cy='266' r='0.5' opacity='0.45'/%3E%3Ccircle cx='428' cy='311' r='0.9' opacity='0.55'/%3E%3Ccircle cx='72' cy='338' r='0.6' opacity='0.4'/%3E%3Ccircle cx='152' cy='372' r='0.7' opacity='0.5'/%3E%3Ccircle cx='233' cy='401' r='0.5' opacity='0.3'/%3E%3Ccircle cx='314' cy='356' r='0.6' opacity='0.4'/%3E%3Ccircle cx='396' cy='417' r='0.7' opacity='0.5'/%3E%3Ccircle cx='44' cy='431' r='0.9' opacity='0.5'/%3E%3Ccircle cx='124' cy='456' r='0.5' opacity='0.35'/%3E%3Ccircle cx='287' cy='448' r='0.7' opacity='0.45'/%3E%3Ccircle cx='461' cy='391' r='0.5' opacity='0.3'/%3E%3Ccircle cx='205' cy='58' r='0.5' opacity='0.4'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 480px 480px;
+}
+
 /* Display headings carry weight; Archivo at 400 reads too plain */
 h1,
 h2,
