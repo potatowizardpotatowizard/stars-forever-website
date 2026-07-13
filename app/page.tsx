@@ -71,12 +71,7 @@ export default function HomePage() {
         />
         <Grain />
         <div className="relative mx-auto max-w-7xl px-5 pb-24 pt-20 sm:px-8 sm:pb-28 sm:pt-24">
-          <Reveal className="max-w-2xl">
-            <p className="font-meta text-sm uppercase leading-relaxed tracking-[0.14em] text-starlight/80">
-              {HOME.hero.missionLine}
-            </p>
-          </Reveal>
-          <Reveal className="mt-20 max-w-3xl sm:mt-24">
+          <Reveal className="max-w-3xl">
             <blockquote>
               <p className="font-meta text-xl leading-relaxed text-starlight sm:text-2xl sm:leading-relaxed">
                 {ANCHOR_VERSE.text}
@@ -272,6 +267,9 @@ export default function HomePage() {
                 {HOME.closing.emailCta}
               </Cta>
             </div>
+            <p className="mx-auto mt-20 max-w-md font-meta text-xs uppercase leading-relaxed tracking-[0.14em] text-starlight/60 sm:mt-24">
+              {HOME.hero.missionLine}
+            </p>
           </Reveal>
         </div>
       </section>
