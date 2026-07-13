@@ -13,10 +13,10 @@ export const HOME = {
   },
   video: {
     kicker: "Press play",
-    heading: "Stars Forever in two minutes",
+    heading: "Stars Forever",
     src: "/brand/video/stars-forever-explainer.mp4",
     poster: "/brand/poster-stars-forever-explainer.jpg",
-    caption: "Stars Forever, explained in two minutes",
+    caption: "explained in two minutes",
   },
   programs: {
     kicker: "What we do",
