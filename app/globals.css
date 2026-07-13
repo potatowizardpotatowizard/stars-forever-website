@@ -169,6 +169,88 @@ h4 {
   }
 }
 
+/* Hyperspace arrival: the destination fades in from black */
+@keyframes warp-arrive {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* VHS tape intro: tracking bands, scanlines, and an OSD label that
+   resolve into the page on first visit */
+.tape-intro {
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgb(0 0 0 / 0.25) 0px,
+      rgb(0 0 0 / 0.25) 1px,
+      transparent 1px,
+      transparent 3px
+    ),
+    var(--color-night);
+  animation: tape-resolve 1.3s steps(12) forwards;
+  pointer-events: none;
+}
+.tape-band {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 9%;
+  background: rgb(239 236 247 / 0.06);
+  filter: blur(1px);
+  animation: tape-judder 0.16s steps(2) infinite;
+}
+.tape-band-1 {
+  top: 18%;
+}
+.tape-band-2 {
+  top: 47%;
+  animation-delay: 0.05s;
+}
+.tape-band-3 {
+  top: 76%;
+  animation-delay: 0.1s;
+}
+.tape-osd {
+  position: absolute;
+  top: 28px;
+  left: 32px;
+  margin: 0;
+  font-family: var(--font-meta);
+  font-size: 18px;
+  letter-spacing: 0.2em;
+  color: rgb(239 236 247 / 0.85);
+  animation: tape-blink 0.4s steps(1) infinite;
+}
+@keyframes tape-resolve {
+  0%,
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes tape-judder {
+  0% {
+    transform: translateX(0) scaleY(1);
+  }
+  50% {
+    transform: translateX(-14px) scaleY(1.6);
+  }
+  100% {
+    transform: translateX(9px) scaleY(0.8);
+  }
+}
+@keyframes tape-blink {
+  50% {
+    opacity: 0.2;
+  }
+}
+
 /* Scroll reveal. Motion is opt in; reduced motion sees content immediately. */
 .reveal {
   opacity: 1;
@@ -190,6 +272,21 @@ h4 {
 
   .hero-rise {
     animation: hero-rise 1.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  /* Footer wordmark sweeps in with a glow once scrolled into view */
+  .reveal.is-visible .logo-wipe {
+    animation: logo-wipe 1.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  @keyframes logo-wipe {
+    from {
+      clip-path: inset(0 100% 0 0);
+      filter: drop-shadow(0 0 30px rgb(167 139 250 / 0.9));
+    }
+    to {
+      clip-path: inset(0 0 0 0);
+      filter: drop-shadow(0 0 14px rgb(167 139 250 / 0.4));
+    }
   }
   @keyframes hero-rise {
     from {

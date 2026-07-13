@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Cta from "@/components/Cta";
+import GlitchText from "@/components/GlitchText";
 import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
@@ -12,6 +13,7 @@ import { CONTACT } from "@/content/site";
 export const metadata: Metadata = {
   title: "Revolutionary",
   description: REVOLUTIONARY.definition,
+  openGraph: { images: [{ url: "/brand/og-revolutionary.jpg", width: 1200, height: 630 }] },
 };
 
 export default function RevolutionaryPage() {
@@ -58,7 +60,7 @@ export default function RevolutionaryPage() {
         <Reveal className="max-w-3xl">
           <Kicker>Press play</Kicker>
           <h2 className="mt-6 font-display text-4xl sm:text-5xl">
-            Revolutionary in two minutes
+            <GlitchText text="Revolutionary in two minutes" />
           </h2>
           <VideoBlock
             src="/brand/video/revolutionary-cohort-explainer.mp4"
@@ -149,7 +151,7 @@ export default function RevolutionaryPage() {
         <Reveal className="mx-auto max-w-2xl text-center">
           <Kicker>{REVOLUTIONARY.attend.kicker}</Kicker>
           <h2 className="mt-6 font-display text-4xl">
-            {REVOLUTIONARY.attend.heading}
+            <GlitchText text={REVOLUTIONARY.attend.heading} />
           </h2>
           <p className="mt-6 leading-relaxed text-starlight/75">
             {REVOLUTIONARY.attend.body}

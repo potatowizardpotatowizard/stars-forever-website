@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { track } from "@vercel/analytics";
 
 const styles = {
   primary:
@@ -18,10 +21,16 @@ export default function Cta({
   variant?: keyof typeof styles;
 }) {
   const external = href.startsWith("http") || href.startsWith("mailto:");
+  const onClick = () =>
+    track("cta_click", {
+      href,
+      label: typeof children === "string" ? children : href,
+    });
   if (external) {
     return (
       <a
         href={href}
+        onClick={onClick}
         className={styles[variant]}
         {...(href.startsWith("http")
           ? { target: "_blank", rel: "noopener noreferrer" }
@@ -32,7 +41,7 @@ export default function Cta({
     );
   }
   return (
-    <Link href={href} className={styles[variant]}>
+    <Link href={href} onClick={onClick} className={styles[variant]}>
       {children}
     </Link>
   );

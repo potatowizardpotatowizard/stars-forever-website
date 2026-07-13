@@ -123,7 +123,7 @@ export default function HomePage() {
         <Reveal className="max-w-3xl">
           <Kicker>{HOME.video.kicker}</Kicker>
           <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
-            {HOME.video.heading}
+            <GlitchText text={HOME.video.heading} />
           </h2>
           <VideoBlock
             src={HOME.video.src}
@@ -144,7 +144,7 @@ export default function HomePage() {
           <Reveal>
             <Kicker>{HOME.programs.kicker}</Kicker>
             <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
-              {HOME.programs.heading}
+              <GlitchText text={HOME.programs.heading} />
             </h2>
           </Reveal>
           <div className="mt-14 grid gap-8 md:grid-cols-2">
@@ -226,7 +226,7 @@ export default function HomePage() {
         <Reveal>
           <Kicker>{HOME.proof.kicker}</Kicker>
           <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
-            {HOME.proof.heading}
+            <GlitchText text={HOME.proof.heading} />
           </h2>
         </Reveal>
         <div className="mt-14 grid gap-10 md:grid-cols-3">

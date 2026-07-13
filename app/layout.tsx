@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import { Archivo, Figtree, Fragment_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ShootingStar from "@/components/ShootingStar";
+import TapeIntro from "@/components/TapeIntro";
+import WarpNavigator from "@/components/WarpNavigator";
 import { SITE_NAME, SITE_DESCRIPTION } from "@/content/site";
 import "./globals.css";
 
@@ -38,6 +42,16 @@ export const metadata: Metadata = {
   },
 };
 
+const ORG_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: SITE_NAME,
+  description: SITE_DESCRIPTION,
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://stars-forever.vercel.app",
+  logo: `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://stars-forever.vercel.app"}/brand/icon-512.png`,
+  email: "flixforauzi@gmail.com",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -47,15 +61,23 @@ export default function RootLayout({
       className={`${archivo.variable} ${figtree.variable} ${fragmentMono.variable}`}
     >
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(ORG_JSON_LD) }}
+        />
         <a
           href="#main"
           className="meta-label sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-soot focus:px-4 focus:py-2"
         >
           Skip to content
         </a>
+        <TapeIntro />
+        <ShootingStar />
         <Header />
         <main id="main">{children}</main>
         <Footer />
+        <WarpNavigator />
+        <Analytics />
       </body>
     </html>
   );

@@ -1,0 +1,58 @@
+import type { Metadata } from "next";
+import Image from "next/image";
+import ApplyForm from "@/components/ApplyForm";
+import Grain from "@/components/Grain";
+import Kicker from "@/components/Kicker";
+import { CONTACT } from "@/content/site";
+
+export const metadata: Metadata = {
+  title: "Apply",
+  description:
+    "Apply for a Partner Project: one creator, one project that shares Jesus with their secular audience. It costs you nothing.",
+  openGraph: { images: [{ url: "/brand/og-partner.jpg", width: 1200, height: 630 }] },
+};
+
+export default function ApplyPage() {
+  return (
+    <article>
+      <header className="relative overflow-hidden">
+        <Image
+          src="/brand/bg-purple-meteor.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover opacity-60"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/25 to-night"
+        />
+        <Grain />
+        <div className="relative mx-auto max-w-7xl px-5 pb-16 pt-44 sm:px-8">
+          <Kicker>Partner Project</Kicker>
+          <h1 className="mt-6 font-display text-5xl font-bold sm:text-6xl">
+            Bring us your God dream
+          </h1>
+          <p className="mt-6 max-w-2xl text-lg text-starlight/80">
+            One creator per month. It costs you nothing. Three short questions
+            and we will take it from there. Prefer to talk first?{" "}
+            <a
+              href={CONTACT.bookingUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-ember transition-colors hover:text-starlight"
+            >
+              Book a call
+            </a>
+            .
+          </p>
+        </div>
+      </header>
+
+      <section className="mx-auto max-w-3xl px-5 py-16 sm:px-8 sm:py-20">
+        <ApplyForm />
+      </section>
+    </article>
+  );
+}

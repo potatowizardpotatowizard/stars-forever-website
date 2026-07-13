@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Cta from "@/components/Cta";
+import GlitchText from "@/components/GlitchText";
 import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
@@ -14,6 +15,7 @@ import { CONTACT } from "@/content/site";
 export const metadata: Metadata = {
   title: "Partner Projects",
   description: PARTNER.definition,
+  openGraph: { images: [{ url: "/brand/og-partner.jpg", width: 1200, height: 630 }] },
 };
 
 export default function PartnerProjectsPage() {
@@ -68,7 +70,7 @@ export default function PartnerProjectsPage() {
         <Reveal className="max-w-3xl">
           <Kicker>Press play</Kicker>
           <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
-            The Partner Project in two minutes
+            <GlitchText text="The Partner Project in two minutes" />
           </h2>
           <VideoBlock
             src="/brand/video/partner-project-explainer.mp4"
@@ -86,7 +88,7 @@ export default function PartnerProjectsPage() {
           <Reveal>
             <Kicker>{MISSIONS_INDEX.kicker}</Kicker>
             <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
-              The projects so far
+              <GlitchText text="The projects so far" />
             </h2>
             <p className="mt-6 max-w-2xl text-lg text-starlight/80">
               {MISSIONS_INDEX.intro}
@@ -126,7 +128,7 @@ export default function PartnerProjectsPage() {
         <Reveal>
           <Kicker>{PARTNER.process.kicker}</Kicker>
           <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
-            {PARTNER.process.heading}
+            <GlitchText text={PARTNER.process.heading} />
           </h2>
         </Reveal>
         <ol className="mt-14 max-w-3xl">
@@ -190,7 +192,10 @@ export default function PartnerProjectsPage() {
             {PARTNER.closing.body}
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <Cta href={CONTACT.bookingUrl}>{PARTNER.closing.bookCta}</Cta>
+            <Cta href="/apply">Start an application</Cta>
+            <Cta href={CONTACT.bookingUrl} variant="ghost">
+              {PARTNER.closing.bookCta}
+            </Cta>
             <Cta href={`mailto:${CONTACT.primaryEmail}`} variant="ghost">
               {PARTNER.closing.emailCta}
             </Cta>

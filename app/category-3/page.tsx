@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Cta from "@/components/Cta";
+import GlitchText from "@/components/GlitchText";
 import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import Reveal from "@/components/Reveal";
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
   title: "Category 3 Explained",
   description:
     "The educational framework behind Stars Forever: the difference between Category 1, 2, and 3 content, and why it matters.",
+  openGraph: { images: [{ url: "/brand/og-category3.jpg", width: 1200, height: 630 }] },
 };
 
 export default function Category3Page() {
@@ -80,7 +82,7 @@ export default function Category3Page() {
         <Reveal>
           <Kicker>{CATEGORY3.mechanism.kicker}</Kicker>
           <h2 className="mt-6 max-w-2xl font-display text-4xl sm:text-5xl">
-            {CATEGORY3.mechanism.heading}
+            <GlitchText text={CATEGORY3.mechanism.heading} />
           </h2>
         </Reveal>
         <div className="mt-16 space-y-16">

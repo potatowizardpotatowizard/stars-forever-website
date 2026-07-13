@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   title: "Speaking",
   description:
     "We are not pastors, but we have shared Jesus creatively across the world: on MrBeast's island, with Red Bull across Europe, at a college in Tokyo.",
+  openGraph: { images: [{ url: "/brand/og-speaking.jpg", width: 1200, height: 630 }] },
 };
 
 export default function SpeakingPage() {

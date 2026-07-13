@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import GlitchText from "@/components/GlitchText";
 import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
   title: "The Story",
   description:
     "Seven days before Beast Games season one, Auzi's brother died. What happened next became Stars Forever.",
+  openGraph: { images: [{ url: "/brand/og-story.jpg", width: 1200, height: 630 }] },
 };
 
 export default function StoryPage() {
@@ -106,7 +108,7 @@ export default function StoryPage() {
         <Reveal>
           <Kicker>{STORY.founders.kicker}</Kicker>
           <h2 className="mt-6 font-display text-4xl sm:text-5xl">
-            {STORY.founders.heading}
+            <GlitchText text={STORY.founders.heading} />
           </h2>
         </Reveal>
         <div className="mt-14 grid gap-10 sm:grid-cols-3">

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Cta from "@/components/Cta";
+import GlitchText from "@/components/GlitchText";
 import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
@@ -11,6 +12,7 @@ import { CONTACT, GIVING_URL } from "@/content/site";
 export const metadata: Metadata = {
   title: "Get Involved",
   description: GET_INVOLVED.intro,
+  openGraph: { images: [{ url: "/brand/og-involved.jpg", width: 1200, height: 630 }] },
 };
 
 export default function GetInvolvedPage() {
@@ -51,7 +53,7 @@ export default function GetInvolvedPage() {
         <Reveal>
           <Kicker>{GET_INVOLVED.creators.kicker}</Kicker>
           <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
-            {GET_INVOLVED.creators.heading}
+            <GlitchText text={GET_INVOLVED.creators.heading} />
           </h2>
         </Reveal>
         <div className="mt-12 grid gap-6 md:grid-cols-3">
@@ -128,7 +130,7 @@ export default function GetInvolvedPage() {
         <div className="relative mx-auto max-w-7xl px-5 py-28 text-center sm:px-8 sm:py-36">
           <Reveal>
             <h2 className="mx-auto max-w-2xl font-display text-4xl font-bold sm:text-5xl">
-              {give.donate.heading}
+              <GlitchText text={give.donate.heading} />
             </h2>
             {GIVING_URL ? null : (
               <p className="mx-auto mt-6 max-w-xl text-starlight/75">
@@ -180,17 +182,24 @@ export default function GetInvolvedPage() {
           <Reveal>
             <Kicker>Contact</Kicker>
             <h2 className="mx-auto mt-6 max-w-2xl font-display text-4xl font-bold">
-              Talk to a human
+              <GlitchText text="Talk to a human" />
             </h2>
             <p className="mx-auto mt-5 max-w-xl text-starlight/75">
-              Write to us directly or put time on the calendar. Every message
-              gets read.
+              Write to us directly or grab a time below. Every message gets
+              read.
             </p>
             <div className="mt-10 flex flex-wrap justify-center gap-4">
-              <Cta href={CONTACT.bookingUrl}>Book a call</Cta>
               <Cta href={`mailto:${CONTACT.primaryEmail}`} variant="ghost">
                 Email us
               </Cta>
+            </div>
+            <div className="mx-auto mt-12 max-w-4xl overflow-hidden rounded-xl border border-dust/25 bg-starlight">
+              <iframe
+                src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ28jCrfJdxZsfN0ASScQH3JSRwxTrL0V0JnXDQpOC7KJK4a1k9zC-derUx5N5_mnYzFiSh1R_ZS?gv=true"
+                title="Book a call with Stars Forever"
+                loading="lazy"
+                className="h-[600px] w-full border-0"
+              />
             </div>
           </Reveal>
         </div>

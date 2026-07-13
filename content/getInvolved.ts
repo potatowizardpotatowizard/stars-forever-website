@@ -12,8 +12,8 @@ export const GET_INVOLVED = {
       {
         title: "Apply for a Partner Project",
         body: "We partner with one creator per month on a single project that shares Jesus with their secular audience. It costs you nothing. Bring your most audacious idea.",
-        cta: "See how it works",
-        href: "/partner-projects",
+        cta: "Start an application",
+        href: "/apply",
       },
       {
         title: "Attend a Revolutionary Cohort",

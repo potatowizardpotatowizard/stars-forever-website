@@ -9,6 +9,8 @@ import {
   SOCIAL,
 } from "@/content/site";
 import Grain from "@/components/Grain";
+import NewsletterForm from "@/components/NewsletterForm";
+import Reveal from "@/components/Reveal";
 
 export default function Footer() {
   return (
@@ -17,17 +19,26 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
         <div className="grid gap-12 md:grid-cols-4">
           <div className="md:col-span-2">
-            <Image
-              src="/brand/logo-full.png"
-              alt={SITE_NAME}
-              width={220}
-              height={124}
-              className="vhs-glow -ml-3"
-            />
+            <Reveal>
+              <Image
+                src="/brand/logo-full.png"
+                alt={SITE_NAME}
+                width={220}
+                height={124}
+                className="logo-wipe vhs-glow -ml-3"
+              />
+            </Reveal>
             <p className="mt-5 max-w-sm font-meta text-sm leading-relaxed text-dust">
               {ANCHOR_VERSE.text}
             </p>
             <p className="meta-label mt-3">{ANCHOR_VERSE.reference}</p>
+            <h2 className="meta-label mt-8">Mission updates</h2>
+            <p className="mt-2 max-w-sm text-sm text-starlight/70">
+              Field notes from the mission, straight to your inbox. No noise.
+            </p>
+            <div className="mt-4">
+              <NewsletterForm />
+            </div>
           </div>
 
           <div>
