@@ -36,12 +36,12 @@ export default function HomePage() {
           {SITE_NAME}: a ministry for creators, artists, and entrepreneurs
         </h1>
 
-        {/* Centered tape menu */}
+        {/* Tape menu, dead center of the viewport */}
         <nav
           aria-label="Main"
-          className="relative flex flex-1 items-center justify-center px-5"
+          className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center px-5"
         >
-          <div className="hero-rise text-center">
+          <div className="hero-rise pointer-events-auto text-center">
             <Image
               src="/brand/star-smeared.png"
               alt=""
@@ -62,9 +62,9 @@ export default function HomePage() {
         </nav>
 
         {/* Lower third: mission line left, glowing wordmark right */}
-        <div className="relative mx-auto flex w-full max-w-7xl flex-col items-start gap-8 px-5 pb-10 sm:flex-row sm:items-end sm:justify-between sm:px-8">
+        <div className="relative mx-auto mt-auto flex w-full max-w-7xl flex-col items-start gap-8 px-5 pb-10 sm:flex-row sm:items-end sm:justify-between sm:px-8">
           <p
-            className="hero-rise max-w-md font-meta text-sm uppercase leading-relaxed tracking-[0.14em] text-starlight/75"
+            className="hero-rise max-w-sm font-meta text-xs uppercase leading-relaxed tracking-[0.14em] text-starlight/75"
             style={{ animationDelay: "0.5s" }}
           >
             {HOME.hero.missionLine}
