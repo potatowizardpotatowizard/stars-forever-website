@@ -1,10 +1,20 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
 import Reveal from "@/components/Reveal";
 import { MISSIONS } from "@/content/missions";
+import { resolveSlot } from "@/lib/media";
+
+// Brand art colorway per project, shown until its hero photo arrives.
+const HERO_ART: Record<string, string> = {
+  "tokyo-drift": "/brand/bg-orange-comet.jpg",
+  "revolutionary-cohort": "/brand/bg-greenpurple.jpg",
+  "beast-games": "/brand/bg-green.jpg",
+};
 
 export function generateStaticParams() {
   return MISSIONS.map((m) => ({ slug: m.slug }));
@@ -29,16 +39,29 @@ export default async function MissionPage({
   const { slug } = await params;
   const mission = MISSIONS.find((m) => m.slug === slug);
   if (!mission) notFound();
+  const heroPhoto = resolveSlot(mission.heroSlot);
 
   return (
     <article>
-      {/* Full bleed hero */}
+      {/* Full bleed hero: real photo when it exists, brand art until then */}
       <header className="relative flex min-h-[70svh] items-end overflow-hidden">
-        <MediaSlot name={mission.heroSlot} fill priority />
+        {heroPhoto.src ? (
+          <MediaSlot name={mission.heroSlot} fill priority />
+        ) : (
+          <Image
+            src={HERO_ART[mission.slug] ?? "/brand/bg-purple-meteor.jpg"}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover opacity-80"
+          />
+        )}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-b from-night/60 via-night/30 to-night"
+          className="absolute inset-0 bg-gradient-to-b from-night/45 via-transparent to-night/90"
         />
+        <Grain />
         <div className="relative mx-auto w-full max-w-7xl px-5 pb-16 pt-44 sm:px-8">
           <h1 className="font-display text-5xl sm:text-7xl">{mission.name}</h1>
         </div>

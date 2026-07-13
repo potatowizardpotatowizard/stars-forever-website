@@ -38,7 +38,7 @@ export const IMAGES: Record<string, ImageSlot> = {
   },
   "home-proof-joshua-tree": {
     file: "home-proof-joshua-tree.jpg",
-    alt: "Creators gathered around candlelight in a dark desert house",
+    alt: "The first cohort gathered together at night in the desert",
     caption: { where: "Joshua Tree, California", when: "May 2026" },
     ratio: "3 / 2",
   },
@@ -165,13 +165,13 @@ export const IMAGES: Record<string, ImageSlot> = {
   // ---- Mission: Revolutionary Cohort, Joshua Tree --------------------------
   "joshua-hero": {
     file: "joshua-hero.jpg",
-    alt: "The desert at dusk outside Joshua Tree",
+    alt: "The first cohort standing together in the desert at dusk",
     caption: { where: "Joshua Tree, California", when: "May 2026" },
     ratio: "21 / 9",
   },
   "joshua-candles": {
     file: "joshua-candles.jpg",
-    alt: "Creators holding lit candles in a dark room",
+    alt: "The cohort gathered in the house after dark on opening night",
     caption: { where: "Joshua Tree, California" },
     ratio: "3 / 2",
   },
@@ -189,25 +189,25 @@ export const IMAGES: Record<string, ImageSlot> = {
   },
   "joshua-prayer": {
     file: "joshua-prayer.jpg",
-    alt: "Personal prayer time in the desert",
+    alt: "Alone with God in the desert at dusk",
     caption: { where: "Joshua Tree, California" },
     ratio: "3 / 2",
   },
   "joshua-meal": {
     file: "joshua-meal.jpg",
-    alt: "A shared meal around one long table",
+    alt: "Gathered around the table in the cohort house",
     caption: { where: "Joshua Tree, California" },
     ratio: "3 / 2",
   },
   "joshua-stargazing": {
     file: "joshua-stargazing.jpg",
-    alt: "Stargazing at Hidden Valley in Joshua Tree National Park",
+    alt: "The cohort lying on the rocks under the night sky",
     caption: { where: "Joshua Tree National Park" },
     ratio: "3 / 2",
   },
   "joshua-desert": {
     file: "joshua-desert.jpg",
-    alt: "Joshua trees under an open sky",
+    alt: "The cohort under a Joshua tree on the last day",
     caption: { where: "Joshua Tree, California" },
     ratio: "3 / 2",
   },
@@ -253,13 +253,13 @@ export const IMAGES: Record<string, ImageSlot> = {
   // ---- Revolutionary ---------------------------------------------------------
   "rev-strip-1": {
     file: "rev-strip-1.jpg",
-    alt: "Creators arriving at the cohort house",
+    alt: "Creators settling into the cohort house",
     caption: { where: "Joshua Tree, California" },
     ratio: "3 / 2",
   },
   "rev-strip-2": {
     file: "rev-strip-2.jpg",
-    alt: "Candlelight during the opening night",
+    alt: "The cohort outside after dark on the first night",
     caption: { where: "Joshua Tree, California" },
     ratio: "3 / 2",
   },
@@ -271,7 +271,7 @@ export const IMAGES: Record<string, ImageSlot> = {
   },
   "rev-strip-4": {
     file: "rev-strip-4.jpg",
-    alt: "Stargazing in Joshua Tree National Park",
+    alt: "Stargazing on the rocks in Joshua Tree National Park",
     caption: { where: "Joshua Tree National Park" },
     ratio: "3 / 2",
   },

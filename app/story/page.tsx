@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
 import Reveal from "@/components/Reveal";
-import StarMark from "@/components/StarMark";
 import { STORY } from "@/content/story";
 import { FOUNDERS } from "@/content/site";
 
@@ -15,14 +16,29 @@ export const metadata: Metadata = {
 export default function StoryPage() {
   return (
     <article>
-      {/* Opening: quiet, typographic, no effects */}
-      <header className="mx-auto max-w-7xl px-5 pb-20 pt-44 sm:px-8">
-        <p className="meta-label">
-          {STORY.meta.where} · {STORY.meta.when}
-        </p>
-        <h1 className="mt-8 max-w-4xl font-display text-4xl leading-tight sm:text-6xl sm:leading-tight">
-          {STORY.intro}
-        </h1>
+      {/* Opening: quiet, typographic, held by a dark starfield */}
+      <header className="relative overflow-hidden">
+        <Image
+          src="/brand/bg-black-stars.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover opacity-50"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-b from-night/50 via-night/30 to-night"
+        />
+        <Grain />
+        <div className="relative mx-auto max-w-7xl px-5 pb-20 pt-44 sm:px-8">
+          <p className="meta-label">
+            {STORY.meta.where} · {STORY.meta.when}
+          </p>
+          <h1 className="mt-8 max-w-4xl font-display text-4xl leading-tight sm:text-6xl sm:leading-tight">
+            {STORY.intro}
+          </h1>
+        </div>
       </header>
 
       {/* Photo essay beats */}
@@ -122,7 +138,13 @@ export default function StoryPage() {
           ))}
         </div>
         <div className="mt-24 flex justify-center">
-          <StarMark className="h-4 w-4 text-ember" />
+          <Image
+            src="/brand/star-sharp.png"
+            alt=""
+            width={44}
+            height={44}
+            className="vhs-glow"
+          />
         </div>
       </section>
     </article>

@@ -18,17 +18,10 @@ export const HOME = {
     poster: "/brand/poster-stars-forever-explainer.jpg",
     caption: "Stars Forever, explained in two minutes",
   },
-  pillars: {
-    kicker: "The mission",
-    heading: "Four ways into the work",
+  programs: {
+    kicker: "What we do",
+    heading: "We do two things with creators",
     items: [
-      {
-        title: "Category 3",
-        body: "The framework everything runs on. Why almost no quality Christian content reaches a secular audience, and how creators change that.",
-        cta: "Explore the framework",
-        href: "/category-3",
-        art: "/brand/bg-black-meteor.jpg",
-      },
       {
         title: "Partner Projects",
         body: "One creator, one project that shares Jesus with their secular audience. Tokyo Drift was the first. Yours could be next.",
@@ -41,14 +34,26 @@ export const HOME = {
         body: "A catalytic weekend that equips and activates creators to boldly share Jesus with a secular audience.",
         cta: "Meet the cohort",
         href: "/revolutionary",
-        art: "/brand/bg-purple-5.jpg",
+        art: "/brand/bg-green.jpg",
+      },
+    ],
+  },
+  learn: {
+    kicker: "Learn and take part",
+    items: [
+      {
+        title: "Category 3 Explained",
+        body: "Not a program. The educational framework behind everything we do: the difference between Category 1, 2, and 3 content, and why it matters.",
+        cta: "Learn the framework",
+        href: "/category-3",
+        art: "/brand/bg-black-meteor.jpg",
       },
       {
         title: "Get Involved",
         body: "Give to fuel real missions, apply to work together, or ask about attending one of our events.",
         cta: "Ways to get involved",
         href: "/get-involved",
-        art: "/brand/bg-black-shooting.jpg",
+        art: "/brand/bg-orange-star.jpg",
       },
     ],
   },

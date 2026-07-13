@@ -6,6 +6,7 @@ import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
 import Reveal from "@/components/Reveal";
+import StarField from "@/components/StarField";
 import VideoBlock from "@/components/VideoBlock";
 import { HOME } from "@/content/home";
 import { ANCHOR_VERSE, CONTACT, HERO_MENU, SITE_NAME } from "@/content/site";
@@ -28,6 +29,7 @@ export default function HomePage() {
           aria-hidden="true"
           className="absolute inset-0 bg-gradient-to-b from-night/60 via-night/30 to-night/80"
         />
+        <StarField />
         <Grain />
 
         <h1 className="sr-only">
@@ -129,28 +131,28 @@ export default function HomePage() {
         </Reveal>
       </section>
 
-      {/* Four pillars */}
+      {/* The two creator programs */}
       <section
-        aria-label={HOME.pillars.heading}
+        aria-label={HOME.programs.heading}
         className="relative overflow-hidden border-y border-dust/10 bg-soot/40"
       >
         <Grain />
         <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
           <Reveal>
-            <Kicker>{HOME.pillars.kicker}</Kicker>
+            <Kicker>{HOME.programs.kicker}</Kicker>
             <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
-              {HOME.pillars.heading}
+              {HOME.programs.heading}
             </h2>
           </Reveal>
           <div className="mt-14 grid gap-8 md:grid-cols-2">
-            {HOME.pillars.items.map((pillar) => (
-              <Reveal key={pillar.title}>
+            {HOME.programs.items.map((program) => (
+              <Reveal key={program.title}>
                 <Link
-                  href={pillar.href}
+                  href={program.href}
                   className="group relative block overflow-hidden rounded-xl border border-dust/20"
                 >
                   <Image
-                    src={pillar.art}
+                    src={program.art}
                     alt=""
                     width={960}
                     height={540}
@@ -163,13 +165,52 @@ export default function HomePage() {
                   />
                   <div className="absolute inset-x-0 bottom-0 p-7">
                     <h3 className="mono-link text-xl font-bold group-hover:text-ember sm:text-2xl">
-                      <GlitchText text={pillar.title.toUpperCase()} />
+                      <GlitchText text={program.title.toUpperCase()} />
                     </h3>
                     <p className="mt-3 max-w-md text-sm leading-relaxed text-starlight/80">
-                      {pillar.body}
+                      {program.body}
                     </p>
                     <span className="meta-label mt-4 inline-block text-ember">
-                      {pillar.cta}
+                      {program.cta}
+                    </span>
+                  </div>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
+
+          {/* Learn and take part */}
+          <Reveal className="mt-20">
+            <Kicker>{HOME.learn.kicker}</Kicker>
+          </Reveal>
+          <div className="mt-8 grid gap-8 md:grid-cols-2">
+            {HOME.learn.items.map((item) => (
+              <Reveal key={item.title}>
+                <Link
+                  href={item.href}
+                  className="group relative block overflow-hidden rounded-xl border border-dust/20"
+                >
+                  <Image
+                    src={item.art}
+                    alt=""
+                    width={960}
+                    height={340}
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                    className="aspect-[21/8] w-full object-cover opacity-70 transition-transform duration-700 group-hover:scale-[1.03]"
+                  />
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-0 bg-gradient-to-t from-night/95 via-night/50 to-transparent"
+                  />
+                  <div className="absolute inset-x-0 bottom-0 p-6">
+                    <h3 className="mono-link text-lg font-bold group-hover:text-ember">
+                      <GlitchText text={item.title.toUpperCase()} />
+                    </h3>
+                    <p className="mt-2 max-w-md text-sm leading-relaxed text-starlight/80">
+                      {item.body}
+                    </p>
+                    <span className="meta-label mt-3 inline-block text-ember">
+                      {item.cta}
                     </span>
                   </div>
                 </Link>

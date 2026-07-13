@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Cta from "@/components/Cta";
+import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
 import Reveal from "@/components/Reveal";
@@ -15,19 +17,34 @@ export const metadata: Metadata = {
 export default function SpeakingPage() {
   return (
     <article>
-      <header className="mx-auto max-w-7xl px-5 pb-24 pt-44 sm:px-8">
-        <h1 className="font-display text-5xl sm:text-6xl">
-          {SPEAKING.opening.heading}
-        </h1>
-        <div className="mt-8 max-w-2xl space-y-3">
-          {SPEAKING.opening.lines.map((line) => (
-            <p
-              key={line}
-              className="font-display text-2xl leading-snug text-starlight/85"
-            >
-              {line}
-            </p>
-          ))}
+      <header className="relative overflow-hidden">
+        <Image
+          src="/brand/bg-blue.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover opacity-60"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/25 to-night"
+        />
+        <Grain />
+        <div className="relative mx-auto max-w-7xl px-5 pb-24 pt-44 sm:px-8">
+          <h1 className="font-display text-5xl sm:text-6xl">
+            {SPEAKING.opening.heading}
+          </h1>
+          <div className="mt-8 max-w-2xl space-y-3">
+            {SPEAKING.opening.lines.map((line) => (
+              <p
+                key={line}
+                className="font-display text-2xl leading-snug text-starlight/85"
+              >
+                {line}
+              </p>
+            ))}
+          </div>
         </div>
       </header>
 
