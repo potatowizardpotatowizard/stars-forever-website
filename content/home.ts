@@ -24,7 +24,7 @@ export const HOME = {
     items: [
       {
         title: "Partner Projects",
-        body: "One creator, one project that shares Jesus with their secular audience. Tokyo Drift was the first. Yours could be next.",
+        body: "A collaborative project that shares Jesus with your secular audience. Tokyo Drift was the first. Yours could be next.",
         cta: "See the projects",
         href: "/partner-projects",
         art: "/brand/bg-purple-meteor.jpg",
