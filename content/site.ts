@@ -25,7 +25,7 @@ export const GIVING_URL: string | null = null;
 export const NAV = [
   { label: "The Story", href: "/story" },
   { label: "Partner Projects", href: "/partner-projects" },
-  { label: "Christian Content Explained", href: "/category-3" },
+  { label: "Category 1, 2, & 3 Explained", href: "/category-3" },
   { label: "Revolutionary Cohort", href: "/revolutionary" },
   { label: "Contact", href: "/get-involved" },
 ];
@@ -34,7 +34,7 @@ export const NAV = [
 export const HERO_MENU = [
   { label: "The Story", href: "/story" },
   { label: "Partner Projects", href: "/partner-projects" },
-  { label: "Christian Content Explained", href: "/category-3" },
+  { label: "Category 1, 2, & 3 Explained", href: "/category-3" },
   { label: "Revolutionary Cohort", href: "/revolutionary" },
   { label: "Contact", href: "/get-involved" },
 ];
