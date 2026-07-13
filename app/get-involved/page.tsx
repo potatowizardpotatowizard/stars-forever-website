@@ -26,7 +26,7 @@ export default function GetInvolvedPage() {
       {/* Analog hero band */}
       <header className="relative overflow-hidden">
         <Image
-          src="/brand/bg-black-shooting.jpg"
+          src="/brand/bg-orange-star.jpg"
           alt=""
           fill
           priority
@@ -48,8 +48,13 @@ export default function GetInvolvedPage() {
         </div>
       </header>
 
-      {/* For creators */}
-      <section className="mx-auto max-w-7xl px-5 py-12 sm:px-8">
+      {/* For creators, under the hero's orange afterglow */}
+      <section className="relative overflow-hidden">
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 top-0 h-[45vh] bg-[linear-gradient(to_bottom,rgb(194_65_12/0.3),rgb(194_65_12/0.1)_45%,transparent)]"
+        />
+        <div className="relative mx-auto max-w-7xl px-5 py-12 sm:px-8">
         <Reveal>
           <Kicker>{GET_INVOLVED.creators.kicker}</Kicker>
           <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
@@ -72,6 +77,7 @@ export default function GetInvolvedPage() {
               </div>
             </Reveal>
           ))}
+        </div>
         </div>
       </section>
 

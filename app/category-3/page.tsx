@@ -42,11 +42,16 @@ export default function Category3Page() {
         </div>
       </header>
 
-      {/* The three categories as a horizontal progression */}
+      {/* The three categories, under a faint starlight afterglow */}
       <section
         aria-label="The three categories"
-        className="mx-auto max-w-7xl px-5 py-12 sm:px-8"
+        className="relative overflow-hidden"
       >
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 top-0 h-[40vh] bg-[linear-gradient(to_bottom,rgb(239_236_247/0.07),rgb(239_236_247/0.02)_45%,transparent)]"
+        />
+        <div className="relative mx-auto max-w-7xl px-5 py-12 sm:px-8">
         <ol className="grid gap-6 md:grid-cols-3">
           {CATEGORY3.categories.map((cat, i) => {
             const isThree = i === 2;
@@ -75,6 +80,7 @@ export default function Category3Page() {
             );
           })}
         </ol>
+        </div>
       </section>
 
       {/* The mechanism: three practical paths */}

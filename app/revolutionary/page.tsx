@@ -21,7 +21,7 @@ export default function RevolutionaryPage() {
     <article>
       <header className="relative overflow-hidden">
         <Image
-          src="/brand/bg-purple-5.jpg"
+          src="/brand/bg-green.jpg"
           alt=""
           fill
           priority
@@ -55,8 +55,13 @@ export default function RevolutionaryPage() {
         </div>
       </header>
 
-      {/* Two minute explainer */}
-      <section className="mx-auto max-w-7xl px-5 pt-12 sm:px-8">
+      {/* Two minute explainer, under the hero's green afterglow */}
+      <section className="relative overflow-hidden">
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 top-0 h-[45vh] bg-[linear-gradient(to_bottom,rgb(22_101_52/0.35),rgb(22_101_52/0.12)_45%,transparent)]"
+        />
+        <div className="relative mx-auto max-w-7xl px-5 pt-12 sm:px-8">
         <Reveal className="max-w-3xl">
           <Kicker>Press play</Kicker>
           <h2 className="mt-6 font-display text-4xl sm:text-5xl">
@@ -69,6 +74,7 @@ export default function RevolutionaryPage() {
             className="mt-10"
           />
         </Reveal>
+        </div>
       </section>
 
       {/* Ben Pierce intro block */}
