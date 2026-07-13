@@ -63,7 +63,7 @@ export default function HomePage() {
 
       </section>
 
-      {/* Anchor verse and the reframe, under the hero's purple afterglow */}
+      {/* Two minute explainer, under the hero's purple afterglow */}
       <section className="relative overflow-hidden">
         <div
           aria-hidden="true"
@@ -71,6 +71,25 @@ export default function HomePage() {
         />
         <Grain />
         <div className="relative mx-auto max-w-7xl px-5 pb-24 pt-20 sm:px-8 sm:pb-28 sm:pt-24">
+          <Reveal className="max-w-3xl">
+            <Kicker>{HOME.video.kicker}</Kicker>
+            <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
+              <GlitchText text={HOME.video.heading} />
+            </h2>
+            <VideoBlock
+              src={HOME.video.src}
+              poster={HOME.video.poster}
+              title={HOME.video.caption}
+              className="mt-10"
+            />
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Anchor verse and the reframe */}
+      <section className="relative overflow-hidden">
+        <Grain />
+        <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-28">
           <Reveal className="max-w-3xl">
             <blockquote>
               <p className="font-meta text-xl leading-relaxed text-starlight sm:text-2xl sm:leading-relaxed">
@@ -100,22 +119,6 @@ export default function HomePage() {
             </div>
           </Reveal>
         </div>
-      </section>
-
-      {/* Two minute explainer */}
-      <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
-        <Reveal className="max-w-3xl">
-          <Kicker>{HOME.video.kicker}</Kicker>
-          <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
-            <GlitchText text={HOME.video.heading} />
-          </h2>
-          <VideoBlock
-            src={HOME.video.src}
-            poster={HOME.video.poster}
-            title={HOME.video.caption}
-            className="mt-10"
-          />
-        </Reveal>
       </section>
 
       {/* The two creator programs */}
