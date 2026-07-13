@@ -79,7 +79,7 @@ export default function HomePage() {
           className="absolute inset-x-0 top-0 h-[50vh] bg-[linear-gradient(to_bottom,rgb(109_40_217/0.3),rgb(109_40_217/0.1)_45%,transparent)]"
         />
         <Grain />
-        <div className="relative mx-auto max-w-7xl px-5 pb-24 pt-20 sm:px-8 sm:pb-28 sm:pt-24">
+        <div className="relative mx-auto max-w-7xl px-5 pb-10 pt-20 sm:px-8 sm:pb-12 sm:pt-24">
           <Reveal className="max-w-3xl">
             <Kicker>{HOME.video.kicker}</Kicker>
             <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
@@ -98,7 +98,7 @@ export default function HomePage() {
       {/* Anchor verse and the reframe */}
       <section className="relative overflow-hidden">
         <Grain />
-        <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-28">
+        <div className="relative mx-auto max-w-7xl px-5 pb-24 pt-10 sm:px-8 sm:pb-28 sm:pt-12">
           <Reveal className="max-w-3xl">
             <blockquote>
               <p className="font-meta text-xl leading-relaxed text-starlight sm:text-2xl sm:leading-relaxed">
