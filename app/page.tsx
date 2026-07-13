@@ -27,7 +27,7 @@ export default function HomePage() {
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-b from-night/60 via-night/30 to-night/80"
+          className="absolute inset-0 bg-[linear-gradient(to_bottom,rgb(7_5_12/0.6),rgb(7_5_12/0.3)_55%,rgb(7_5_12/0.75)_85%,var(--color-night))]"
         />
         <StarField />
         <Grain />
@@ -80,10 +80,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Anchor verse */}
-      <section className="relative overflow-hidden border-t border-dust/10">
+      {/* Anchor verse and the reframe, under the hero's purple afterglow */}
+      <section className="relative overflow-hidden">
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 top-0 h-[50vh] bg-[linear-gradient(to_bottom,rgb(109_40_217/0.3),rgb(109_40_217/0.1)_45%,transparent)]"
+        />
         <Grain />
-        <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
+        <div className="relative mx-auto max-w-7xl px-5 pb-24 pt-20 sm:px-8 sm:pb-28 sm:pt-24">
           <Reveal className="max-w-3xl">
             <blockquote>
               <p className="font-meta text-xl leading-relaxed text-starlight sm:text-2xl sm:leading-relaxed">
@@ -94,28 +98,25 @@ export default function HomePage() {
               </cite>
             </blockquote>
           </Reveal>
-        </div>
-      </section>
 
-      {/* The reframe */}
-      <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
-        <Reveal className="max-w-3xl">
-          <Kicker>{HOME.reframe.kicker}</Kicker>
-          <div className="mt-8 space-y-6">
-            {HOME.reframe.lines.map((line, i) => (
-              <p
-                key={line}
-                className={
-                  i === HOME.reframe.lines.length - 1
-                    ? "font-display text-3xl font-bold text-ember sm:text-4xl"
-                    : "font-display text-3xl font-bold text-starlight sm:text-4xl"
-                }
-              >
-                {line}
-              </p>
-            ))}
-          </div>
-        </Reveal>
+          <Reveal className="mt-24 max-w-3xl sm:mt-32">
+            <Kicker>{HOME.reframe.kicker}</Kicker>
+            <div className="mt-8 space-y-6">
+              {HOME.reframe.lines.map((line, i) => (
+                <p
+                  key={line}
+                  className={
+                    i === HOME.reframe.lines.length - 1
+                      ? "font-display text-3xl font-bold text-ember sm:text-4xl"
+                      : "font-display text-3xl font-bold text-starlight sm:text-4xl"
+                  }
+                >
+                  {line}
+                </p>
+              ))}
+            </div>
+          </Reveal>
+        </div>
       </section>
 
       {/* Two minute explainer */}
