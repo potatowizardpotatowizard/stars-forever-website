@@ -8,7 +8,7 @@ import Reveal from "@/components/Reveal";
 import { CATEGORY3 } from "@/content/category3";
 
 export const metadata: Metadata = {
-  title: "Category 3 Explained",
+  title: "Christian Content Explained",
   description:
     "The educational framework behind Stars Forever: the difference between Category 1, 2, and 3 content, and why it matters.",
   openGraph: { images: [{ url: "/brand/og-category3.jpg", width: 1200, height: 630 }] },

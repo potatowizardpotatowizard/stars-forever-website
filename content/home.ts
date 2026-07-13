@@ -42,7 +42,7 @@ export const HOME = {
     kicker: "Learn and take part",
     items: [
       {
-        title: "Category 3 Explained",
+        title: "Christian Content Explained",
         body: "Not a program. The educational framework behind everything we do: the difference between Category 1, 2, and 3 content, and why it matters.",
         cta: "Learn the framework",
         href: "/category-3",
