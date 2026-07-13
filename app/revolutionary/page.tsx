@@ -60,12 +60,12 @@ export default function RevolutionaryPage() {
         <Reveal className="max-w-3xl">
           <Kicker>Press play</Kicker>
           <h2 className="mt-6 font-display text-4xl sm:text-5xl">
-            <GlitchText text="Revolutionary in two minutes" />
+            <GlitchText text="Revolutionary Cohort" />
           </h2>
           <VideoBlock
             src="/brand/video/revolutionary-cohort-explainer.mp4"
             poster="/brand/poster-revolutionary-cohort-explainer.jpg"
-            title="The Revolutionary Cohort, explained in two minutes"
+            title="explained in two minutes"
             className="mt-10"
           />
         </Reveal>

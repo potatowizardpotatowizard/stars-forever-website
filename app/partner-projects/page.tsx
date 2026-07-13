@@ -70,12 +70,12 @@ export default function PartnerProjectsPage() {
         <Reveal className="max-w-3xl">
           <Kicker>Press play</Kicker>
           <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
-            <GlitchText text="The Partner Project in two minutes" />
+            <GlitchText text="Partner Projects" />
           </h2>
           <VideoBlock
             src="/brand/video/partner-project-explainer.mp4"
             poster="/brand/poster-partner-project-explainer.jpg"
-            title="The Partner Project, explained in two minutes"
+            title="explained in two minutes"
             className="mt-10"
           />
         </Reveal>
