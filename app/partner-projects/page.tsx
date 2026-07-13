@@ -1,0 +1,202 @@
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import Cta from "@/components/Cta";
+import Grain from "@/components/Grain";
+import Kicker from "@/components/Kicker";
+import MediaSlot from "@/components/MediaSlot";
+import Reveal from "@/components/Reveal";
+import VideoBlock from "@/components/VideoBlock";
+import { MISSIONS, MISSIONS_INDEX } from "@/content/missions";
+import { PARTNER } from "@/content/partner";
+import { CONTACT } from "@/content/site";
+
+export const metadata: Metadata = {
+  title: "Partner Projects",
+  description: PARTNER.definition,
+};
+
+export default function PartnerProjectsPage() {
+  return (
+    <article>
+      {/* Analog hero band */}
+      <header className="relative overflow-hidden">
+        <Image
+          src="/brand/bg-purple-meteor.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover opacity-70"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night"
+        />
+        <Grain />
+        <div className="relative mx-auto max-w-7xl px-5 pb-20 pt-44 sm:px-8">
+          <h1 className="font-display text-5xl font-bold sm:text-6xl">
+            Partner Projects
+          </h1>
+          <p className="mt-8 max-w-3xl font-display text-2xl leading-snug text-starlight/90 sm:text-3xl">
+            {PARTNER.definition}
+          </p>
+        </div>
+      </header>
+
+      {/* Success metrics */}
+      <section className="mx-auto max-w-7xl px-5 py-12 sm:px-8">
+        <Reveal>
+          <Kicker>{PARTNER.metrics.kicker}</Kicker>
+        </Reveal>
+        <div className="mt-10 grid gap-6 md:grid-cols-2">
+          {PARTNER.metrics.items.map((m) => (
+            <Reveal key={m.title}>
+              <div className="h-full rounded-lg border border-dust/20 bg-soot/40 p-8">
+                <h2 className="meta-label text-ember">{m.title}</h2>
+                <p className="mt-4 font-display text-xl font-bold leading-snug">
+                  {m.body}
+                </p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* Two minute explainer */}
+      <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
+        <Reveal className="max-w-3xl">
+          <Kicker>Press play</Kicker>
+          <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
+            The Partner Project in two minutes
+          </h2>
+          <VideoBlock
+            src="/brand/video/partner-project-explainer.mp4"
+            poster="/brand/poster-partner-project-explainer.jpg"
+            title="The Partner Project, explained in two minutes"
+            className="mt-10"
+          />
+        </Reveal>
+      </section>
+
+      {/* Project showcase */}
+      <section className="relative overflow-hidden border-y border-dust/10 bg-soot/40">
+        <Grain />
+        <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
+          <Reveal>
+            <Kicker>{MISSIONS_INDEX.kicker}</Kicker>
+            <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
+              The projects so far
+            </h2>
+            <p className="mt-6 max-w-2xl text-lg text-starlight/80">
+              {MISSIONS_INDEX.intro}
+            </p>
+          </Reveal>
+          <div className="mt-14 grid gap-10 md:grid-cols-3">
+            {MISSIONS.map((mission) => (
+              <Reveal key={mission.slug}>
+                <Link
+                  href={`/partner-projects/${mission.slug}`}
+                  className="group block"
+                >
+                  <MediaSlot
+                    name={mission.cardImageSlot}
+                    sizes="(min-width: 768px) 33vw, 100vw"
+                    showCaption={false}
+                    className="overflow-hidden rounded-lg"
+                  />
+                  <p className="meta-label mt-6">
+                    {mission.location} · {mission.date}
+                  </p>
+                  <h3 className="mt-2 font-display text-2xl font-bold transition-colors group-hover:text-ember">
+                    {mission.name}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-starlight/70">
+                    {mission.summary}
+                  </p>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* The process */}
+      <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
+        <Reveal>
+          <Kicker>{PARTNER.process.kicker}</Kicker>
+          <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
+            {PARTNER.process.heading}
+          </h2>
+        </Reveal>
+        <ol className="mt-14 max-w-3xl">
+          {PARTNER.process.steps.map((step, i) => (
+            <Reveal as="li" key={step}>
+              <div className="flex gap-8 border-t border-dust/15 py-7">
+                <span className="meta-label pt-1 text-ember">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <p className="text-lg text-starlight/85">{step}</p>
+              </div>
+            </Reveal>
+          ))}
+        </ol>
+      </section>
+
+      {/* FAQ */}
+      <section className="border-y border-dust/15 bg-soot/40">
+        <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
+          <Reveal>
+            <Kicker>{PARTNER.faq.kicker}</Kicker>
+          </Reveal>
+          <div className="mt-10 max-w-3xl">
+            {PARTNER.faq.items.map((item) => (
+              <details
+                key={item.question}
+                className="group border-t border-dust/20 last:border-b"
+              >
+                <summary className="flex cursor-pointer items-center justify-between gap-6 py-6 font-display text-xl font-bold marker:content-none [&::-webkit-details-marker]:hidden">
+                  {item.question}
+                  <span
+                    aria-hidden="true"
+                    className="text-ember transition-transform group-open:rotate-45"
+                  >
+                    +
+                  </span>
+                </summary>
+                <p className="pb-8 leading-relaxed text-starlight/75">
+                  {item.answer}
+                </p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Closing CTA */}
+      <section className="mx-auto max-w-7xl px-5 py-28 text-center sm:px-8 sm:py-36">
+        <Reveal>
+          <Image
+            src="/brand/star-sharp.png"
+            alt=""
+            width={44}
+            height={44}
+            className="vhs-glow mx-auto"
+          />
+          <h2 className="mx-auto mt-8 max-w-2xl font-display text-4xl font-bold sm:text-5xl">
+            {PARTNER.closing.heading}
+          </h2>
+          <p className="mx-auto mt-6 max-w-xl text-starlight/75">
+            {PARTNER.closing.body}
+          </p>
+          <div className="mt-10 flex flex-wrap justify-center gap-4">
+            <Cta href={CONTACT.bookingUrl}>{PARTNER.closing.bookCta}</Cta>
+            <Cta href={`mailto:${CONTACT.primaryEmail}`} variant="ghost">
+              {PARTNER.closing.emailCta}
+            </Cta>
+          </div>
+        </Reveal>
+      </section>
+    </article>
+  );
+}

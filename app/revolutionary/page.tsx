@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Cta from "@/components/Cta";
+import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
 import Reveal from "@/components/Reveal";
+import VideoBlock from "@/components/VideoBlock";
 import { REVOLUTIONARY } from "@/content/revolutionary";
 import { CONTACT } from "@/content/site";
 
@@ -14,7 +17,21 @@ export const metadata: Metadata = {
 export default function RevolutionaryPage() {
   return (
     <article>
-      <header className="mx-auto max-w-7xl px-5 pb-16 pt-44 sm:px-8">
+      <header className="relative overflow-hidden">
+        <Image
+          src="/brand/bg-purple-5.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover opacity-70"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night"
+        />
+        <Grain />
+        <div className="relative mx-auto max-w-7xl px-5 pb-16 pt-44 sm:px-8">
         <h1 className="font-display text-5xl sm:text-6xl">
           {REVOLUTIONARY.title}
         </h1>
@@ -33,7 +50,24 @@ export default function RevolutionaryPage() {
             {REVOLUTIONARY.attribution.linkLabel}
           </a>
         </p>
+        </div>
       </header>
+
+      {/* Two minute explainer */}
+      <section className="mx-auto max-w-7xl px-5 pt-12 sm:px-8">
+        <Reveal className="max-w-3xl">
+          <Kicker>Press play</Kicker>
+          <h2 className="mt-6 font-display text-4xl sm:text-5xl">
+            Revolutionary in two minutes
+          </h2>
+          <VideoBlock
+            src="/brand/video/revolutionary-cohort-explainer.mp4"
+            poster="/brand/poster-revolutionary-cohort-explainer.jpg"
+            title="The Revolutionary Cohort, explained in two minutes"
+            className="mt-10"
+          />
+        </Reveal>
+      </section>
 
       {/* Ben Pierce intro block */}
       <section className="mx-auto max-w-7xl px-5 py-12 sm:px-8">

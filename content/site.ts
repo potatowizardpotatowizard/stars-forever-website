@@ -23,14 +23,26 @@ export const CONTACT = {
 export const GIVING_URL: string | null = null;
 
 export const NAV = [
-  { label: "Home", href: "/" },
-  { label: "The Story", href: "/story" },
   { label: "Category 3", href: "/category-3" },
-  { label: "Missions", href: "/missions" },
-  { label: "Revolutionary", href: "/revolutionary" },
-  { label: "Partner Project", href: "/partner-project" },
+  { label: "Partner Projects", href: "/partner-projects" },
+  { label: "Revolutionary Cohort", href: "/revolutionary" },
+  { label: "The Story", href: "/story" },
+  { label: "Get Involved", href: "/get-involved" },
+];
+
+// The hero menu on the home page: the site itself, presented like a tape menu.
+export const HERO_MENU = [
+  { label: "Category 3", href: "/category-3" },
+  { label: "Partner Projects", href: "/partner-projects" },
+  { label: "Revolutionary Cohort", href: "/revolutionary" },
+  { label: "The Story", href: "/story" },
+  { label: "Get Involved", href: "/get-involved" },
+  { label: "Contact", href: "/get-involved#contact" },
+];
+
+// Secondary pages reachable from the footer.
+export const FOOTER_NAV = [
   { label: "Speaking", href: "/speaking" },
-  { label: "Give", href: "/give" },
 ];
 
 export const SOCIAL = [

@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { Fraunces, Figtree, IBM_Plex_Mono } from "next/font/google";
+import { Archivo, Figtree, Courier_Prime } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { SITE_NAME, SITE_DESCRIPTION } from "@/content/site";
 import "./globals.css";
 
-const fraunces = Fraunces({
+const archivo = Archivo({
   subsets: ["latin"],
-  variable: "--font-fraunces",
-  axes: ["opsz"],
+  style: ["normal", "italic"],
+  variable: "--font-archivo",
 });
 
 const figtree = Figtree({
@@ -16,15 +16,15 @@ const figtree = Figtree({
   variable: "--font-figtree",
 });
 
-const plexMono = IBM_Plex_Mono({
+const courier = Courier_Prime({
   subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-plex-mono",
+  weight: ["400", "700"],
+  variable: "--font-courier",
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://starsforever.vercel.app",
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://stars-forever.vercel.app",
   ),
   title: {
     default: `${SITE_NAME}: a ministry for creators, artists, and entrepreneurs`,
@@ -34,6 +34,7 @@ export const metadata: Metadata = {
   openGraph: {
     siteName: SITE_NAME,
     type: "website",
+    images: [{ url: "/brand/og-purple-star.jpg", width: 1920, height: 1072 }],
   },
 };
 
@@ -43,7 +44,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${fraunces.variable} ${figtree.variable} ${plexMono.variable}`}
+      className={`${archivo.variable} ${figtree.variable} ${courier.variable}`}
     >
       <body>
         <a

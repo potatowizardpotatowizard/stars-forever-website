@@ -1,46 +1,94 @@
+import Image from "next/image";
 import Link from "next/link";
 import Cta from "@/components/Cta";
+import GlitchText from "@/components/GlitchText";
+import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
 import Reveal from "@/components/Reveal";
-import StarField from "@/components/StarField";
-import StarMark from "@/components/StarMark";
+import VideoBlock from "@/components/VideoBlock";
 import { HOME } from "@/content/home";
-import { ANCHOR_VERSE, CONTACT } from "@/content/site";
+import { ANCHOR_VERSE, CONTACT, HERO_MENU, SITE_NAME } from "@/content/site";
 
 export default function HomePage() {
   return (
     <>
-      {/* Hero: full bleed photo, star field resolving above it, anchor verse */}
-      <section className="relative flex min-h-svh items-end overflow-hidden">
-        <MediaSlot name={HOME.hero.imageSlot} fill priority />
+      {/* Hero: the brand page. Analog black, purple nebula, typewriter menu,
+          glowing wordmark. The menu IS the navigation on this page. */}
+      <section className="relative flex min-h-svh flex-col overflow-hidden bg-night">
+        <Image
+          src="/brand/bg-purple-hero.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-b from-night/70 via-night/40 to-night"
+          className="absolute inset-0 bg-gradient-to-b from-night/60 via-night/30 to-night/80"
         />
-        <StarField />
-        <div className="relative mx-auto w-full max-w-7xl px-5 pb-20 pt-40 sm:px-8">
-          <div className="max-w-3xl">
-            {/* The visual hero is the anchor verse; this h1 names the page
-                for screen readers and search without changing the design. */}
-            <h1 className="sr-only">
-              Stars Forever: a ministry for creators, artists, and entrepreneurs
-            </h1>
-            <blockquote className="hero-rise">
-              <p className="font-display text-2xl leading-snug text-starlight sm:text-4xl sm:leading-snug">
+        <Grain />
+
+        <h1 className="sr-only">
+          {SITE_NAME}: a ministry for creators, artists, and entrepreneurs
+        </h1>
+
+        {/* Centered tape menu */}
+        <nav
+          aria-label="Main"
+          className="relative flex flex-1 items-center justify-center px-5"
+        >
+          <div className="hero-rise text-center">
+            <Image
+              src="/brand/star-smeared.png"
+              alt=""
+              width={64}
+              height={64}
+              className="vhs-glow mx-auto mb-8"
+            />
+            <ul className="space-y-4">
+              {HERO_MENU.map((item, i) => (
+                <li key={item.href}>
+                  <Link href={item.href} className="mono-link text-lg sm:text-xl">
+                    <GlitchText text={item.label} delay={300 + i * 140} />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </nav>
+
+        {/* Lower third: mission line left, glowing wordmark right */}
+        <div className="relative mx-auto flex w-full max-w-7xl flex-col items-start gap-8 px-5 pb-10 sm:flex-row sm:items-end sm:justify-between sm:px-8">
+          <p className="meta-label hero-rise max-w-xs" style={{ animationDelay: "0.5s" }}>
+            {HOME.hero.missionLine}
+          </p>
+          <Image
+            src="/brand/logo-full.png"
+            alt={SITE_NAME}
+            width={340}
+            height={191}
+            priority
+            className="vhs-glow vhs-flicker -mb-6 self-end sm:-mr-4"
+          />
+        </div>
+      </section>
+
+      {/* Anchor verse */}
+      <section className="relative overflow-hidden border-t border-dust/10">
+        <Grain />
+        <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
+          <Reveal className="max-w-3xl">
+            <blockquote>
+              <p className="font-meta text-xl leading-relaxed text-starlight sm:text-2xl sm:leading-relaxed">
                 {ANCHOR_VERSE.text}
               </p>
-              <cite className="meta-label mt-5 block not-italic">
+              <cite className="meta-label mt-5 block not-italic text-ember">
                 {ANCHOR_VERSE.reference}
               </cite>
             </blockquote>
-            <p
-              className="hero-rise mt-10 max-w-xl text-lg text-starlight/85"
-              style={{ animationDelay: "0.35s" }}
-            >
-              {HOME.hero.missionLine}
-            </p>
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -54,8 +102,8 @@ export default function HomePage() {
                 key={line}
                 className={
                   i === HOME.reframe.lines.length - 1
-                    ? "font-display text-3xl text-ember sm:text-4xl"
-                    : "font-display text-3xl text-starlight sm:text-4xl"
+                    ? "font-display text-3xl font-bold text-ember sm:text-4xl"
+                    : "font-display text-3xl font-bold text-starlight sm:text-4xl"
                 }
               >
                 {line}
@@ -65,55 +113,65 @@ export default function HomePage() {
         </Reveal>
       </section>
 
-      {/* Two doors */}
-      <section aria-label={HOME.doors.heading} className="mx-auto max-w-7xl px-5 pb-24 sm:px-8 sm:pb-32">
-        <div className="grid gap-10 md:grid-cols-2">
-          {HOME.doors.items.map((door) => (
-            <Reveal key={door.title}>
-              <Link href={door.href} className="group block">
-                <MediaSlot
-                  name={door.imageSlot}
-                  sizes="(min-width: 768px) 50vw, 100vw"
-                  showCaption={false}
-                />
-                <h2 className="mt-7 font-display text-3xl transition-colors group-hover:text-ember sm:text-4xl">
-                  {door.title}
-                </h2>
-                <p className="mt-4 max-w-md text-starlight/75">{door.body}</p>
-                <span className="meta-label mt-6 inline-block text-ember">
-                  {door.cta}
-                </span>
-              </Link>
-            </Reveal>
-          ))}
-        </div>
+      {/* Two minute explainer */}
+      <section className="mx-auto max-w-7xl px-5 pb-24 sm:px-8 sm:pb-32">
+        <Reveal className="max-w-3xl">
+          <Kicker>{HOME.video.kicker}</Kicker>
+          <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
+            {HOME.video.heading}
+          </h2>
+          <VideoBlock
+            src={HOME.video.src}
+            poster={HOME.video.poster}
+            title={HOME.video.caption}
+            className="mt-10"
+          />
+        </Reveal>
       </section>
 
-      {/* Proof strip */}
-      <section className="border-y border-dust/15 bg-soot/40">
-        <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
+      {/* Four pillars */}
+      <section
+        aria-label={HOME.pillars.heading}
+        className="relative overflow-hidden border-y border-dust/10 bg-soot/40"
+      >
+        <Grain />
+        <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
           <Reveal>
-            <Kicker>{HOME.proof.kicker}</Kicker>
-            <h2 className="mt-6 font-display text-4xl sm:text-5xl">
-              {HOME.proof.heading}
+            <Kicker>{HOME.pillars.kicker}</Kicker>
+            <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
+              {HOME.pillars.heading}
             </h2>
           </Reveal>
-          <div className="mt-14 grid gap-10 md:grid-cols-3">
-            {HOME.proof.cards.map((card) => (
-              <Reveal key={card.title}>
-                <Link href={card.href} className="group block">
-                  <MediaSlot
-                    name={card.imageSlot}
-                    sizes="(min-width: 768px) 33vw, 100vw"
-                    showCaption={false}
+          <div className="mt-14 grid gap-8 md:grid-cols-2">
+            {HOME.pillars.items.map((pillar) => (
+              <Reveal key={pillar.title}>
+                <Link
+                  href={pillar.href}
+                  className="group relative block overflow-hidden rounded-xl border border-dust/20"
+                >
+                  <Image
+                    src={pillar.art}
+                    alt=""
+                    width={960}
+                    height={540}
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                    className="aspect-[16/9] w-full object-cover opacity-80 transition-transform duration-700 group-hover:scale-[1.03]"
                   />
-                  <p className="meta-label mt-6">{card.meta}</p>
-                  <h3 className="mt-2 font-display text-2xl transition-colors group-hover:text-ember">
-                    {card.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-starlight/70">
-                    {card.body}
-                  </p>
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-0 bg-gradient-to-t from-night/95 via-night/40 to-transparent"
+                  />
+                  <div className="absolute inset-x-0 bottom-0 p-7">
+                    <h3 className="mono-link text-xl font-bold group-hover:text-ember sm:text-2xl">
+                      <GlitchText text={pillar.title.toUpperCase()} />
+                    </h3>
+                    <p className="mt-3 max-w-md text-sm leading-relaxed text-starlight/80">
+                      {pillar.body}
+                    </p>
+                    <span className="meta-label mt-4 inline-block text-ember">
+                      {pillar.cta}
+                    </span>
+                  </div>
                 </Link>
               </Reveal>
             ))}
@@ -121,31 +179,57 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Category 3 teaser */}
+      {/* Proof strip */}
       <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
-        <Reveal className="max-w-3xl">
-          <Kicker>{HOME.category3.kicker}</Kicker>
-          <h2 className="mt-6 font-display text-4xl sm:text-5xl">
-            {HOME.category3.heading}
+        <Reveal>
+          <Kicker>{HOME.proof.kicker}</Kicker>
+          <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
+            {HOME.proof.heading}
           </h2>
-          <p className="mt-6 text-lg leading-relaxed text-starlight/80">
-            {HOME.category3.body}
-          </p>
-          <div className="mt-9">
-            <Cta href={HOME.category3.href} variant="ghost">
-              {HOME.category3.cta}
-            </Cta>
-          </div>
         </Reveal>
+        <div className="mt-14 grid gap-10 md:grid-cols-3">
+          {HOME.proof.cards.map((card) => (
+            <Reveal key={card.title}>
+              <Link href={card.href} className="group block">
+                <MediaSlot
+                  name={card.imageSlot}
+                  sizes="(min-width: 768px) 33vw, 100vw"
+                  showCaption={false}
+                  className="overflow-hidden rounded-lg"
+                />
+                <p className="meta-label mt-6">{card.meta}</p>
+                <h3 className="mt-2 font-display text-2xl font-bold transition-colors group-hover:text-ember">
+                  {card.title}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-starlight/70">
+                  {card.body}
+                </p>
+              </Link>
+            </Reveal>
+          ))}
+        </div>
       </section>
 
       {/* Closing call to action */}
-      <section className="relative overflow-hidden border-t border-dust/15">
-        <StarField />
+      <section className="relative overflow-hidden border-t border-dust/10">
+        <Image
+          src="/brand/bg-black-stars.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover opacity-60"
+        />
+        <Grain />
         <div className="relative mx-auto max-w-7xl px-5 py-28 text-center sm:px-8 sm:py-36">
           <Reveal>
-            <StarMark className="mx-auto h-4 w-4 text-ember" />
-            <h2 className="mx-auto mt-8 max-w-2xl font-display text-4xl leading-tight sm:text-5xl">
+            <Image
+              src="/brand/star-sharp.png"
+              alt=""
+              width={44}
+              height={44}
+              className="vhs-glow mx-auto"
+            />
+            <h2 className="mx-auto mt-8 max-w-2xl font-display text-4xl font-bold leading-tight sm:text-5xl">
               {HOME.closing.heading}
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-starlight/75">

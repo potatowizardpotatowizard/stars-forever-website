@@ -2,9 +2,9 @@ import Link from "next/link";
 
 const styles = {
   primary:
-    "inline-block bg-ember px-7 py-3.5 font-body text-sm font-semibold tracking-wide text-night transition-colors hover:bg-starlight",
+    "inline-block bg-ember px-7 py-3.5 font-meta text-xs font-bold uppercase tracking-[0.14em] text-night transition-colors hover:bg-starlight",
   ghost:
-    "inline-block border border-dust/40 px-7 py-3.5 font-body text-sm font-semibold tracking-wide text-starlight transition-colors hover:border-ember hover:text-ember",
+    "inline-block border border-dust/40 px-7 py-3.5 font-meta text-xs font-bold uppercase tracking-[0.14em] text-starlight transition-colors hover:border-ember hover:text-ember",
 };
 
 // Every call to action on the site. Buttons say exactly what happens.

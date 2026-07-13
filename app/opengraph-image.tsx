@@ -16,15 +16,15 @@ export default function OgImage() {
           flexDirection: "column",
           justifyContent: "center",
           padding: 80,
-          backgroundColor: "#131009",
-          color: "#f2ecdf",
-          fontFamily: "Georgia, serif",
+          backgroundColor: "#07050c",
+          color: "#efecf7",
+          fontFamily: "monospace",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
           <svg width="34" height="34" viewBox="0 0 24 24">
             <path
-              fill="#c98a4b"
+              fill="#a78bfa"
               d="M12 0c.9 6.8 4.2 10.1 12 12c-7.8 1.9-11.1 5.2-12 12c-.9-6.8-4.2-10.1-12-12C7.8 10.1 11.1 6.8 12 0Z"
             />
           </svg>
@@ -45,7 +45,7 @@ export default function OgImage() {
           style={{
             marginTop: 32,
             fontSize: 24,
-            color: "#94897a",
+            color: "#978bad",
             letterSpacing: 6,
             textTransform: "uppercase",
           }}
