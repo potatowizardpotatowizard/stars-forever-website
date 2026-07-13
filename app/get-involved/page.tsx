@@ -188,7 +188,7 @@ export default function GetInvolvedPage() {
           <Reveal>
             <Kicker>Contact</Kicker>
             <h2 className="mx-auto mt-6 max-w-2xl font-display text-4xl font-bold">
-              <GlitchText text="Talk to a human" />
+              <GlitchText text="Talk to a Human" />
             </h2>
             <p className="mx-auto mt-5 max-w-xl text-starlight/75">
               Write to us directly or grab a time below. Every message gets

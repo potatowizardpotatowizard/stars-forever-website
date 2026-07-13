@@ -11,7 +11,7 @@ import { REVOLUTIONARY } from "@/content/revolutionary";
 import { CONTACT } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "Revolutionary",
+  title: "Revolutionary Cohort",
   description: REVOLUTIONARY.definition,
   openGraph: { images: [{ url: "/brand/og-revolutionary.jpg", width: 1200, height: 630 }] },
 };

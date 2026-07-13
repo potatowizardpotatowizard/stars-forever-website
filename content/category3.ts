@@ -28,7 +28,7 @@ export const CATEGORY3 = {
   ],
   mechanism: {
     kicker: "How it works",
-    heading: "Three practical paths to Category 3",
+    heading: "Three Practical Paths to Category 3",
     paths: [
       {
         title: "Make Christian content so compelling it breaks out",

@@ -94,7 +94,7 @@ export default function PartnerProjectsPage() {
           <Reveal>
             <Kicker>{MISSIONS_INDEX.kicker}</Kicker>
             <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
-              <GlitchText text="The projects so far" />
+              <GlitchText text="The Projects So Far" />
             </h2>
             <p className="mt-6 max-w-2xl text-lg text-starlight/80">
               {MISSIONS_INDEX.intro}

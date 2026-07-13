@@ -7,7 +7,7 @@ export const GET_INVOLVED = {
 
   creators: {
     kicker: "For creators",
-    heading: "Bring us your God dream",
+    heading: "Bring Us Your God Dream",
     paths: [
       {
         title: "Apply for a Partner Project",

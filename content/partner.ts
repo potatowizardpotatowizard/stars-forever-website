@@ -17,7 +17,7 @@ export const PARTNER = {
   },
   process: {
     kicker: "The process",
-    heading: "Seven steps, in order",
+    heading: "Seven Steps, in Order",
     steps: [
       "Book a call and share your massive God dream.",
       "If accepted, we figure out everything needed to bring it to life.",

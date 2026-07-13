@@ -23,7 +23,7 @@ export const GIVE = {
     ],
   },
   donate: {
-    heading: "Partner financially",
+    heading: "Partner Financially",
     body: "We are setting up an online giving platform. Until it is live, email us directly and we will get you connected.",
     cta: "Email us to partner financially",
     // mailto subject line
@@ -31,7 +31,7 @@ export const GIVE = {
   },
   consulting: {
     kicker: "Another way to support",
-    heading: "Social strategy consulting",
+    heading: "Social Strategy Consulting",
     body: "Team members take consulting calls at 100 dollars per hour to fund the ministry. If you are not satisfied with your call, say so at the end and receive an immediate refund.",
     offers: [
       {

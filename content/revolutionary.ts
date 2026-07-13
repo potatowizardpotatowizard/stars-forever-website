@@ -1,5 +1,5 @@
 export const REVOLUTIONARY = {
-  title: "Revolutionary",
+  title: "Revolutionary Cohort",
   definition:
     "Revolutionary is a catalytic experience designed to equip and activate creators to boldly share Jesus with a secular audience.",
   attribution: {
@@ -51,7 +51,7 @@ export const REVOLUTIONARY = {
   },
   attend: {
     kicker: "How to attend",
-    heading: "Currently invite only",
+    heading: "Currently Invite Only",
     body: "If you are consistent and committed in a creative space and you want to involve Jesus more in your work, book a call and tell us why you would benefit from and add value to this event. Numbers do not qualify or disqualify anyone. We look for consistency and commitment, not metrics.",
   },
   strip: ["rev-strip-1", "rev-strip-2", "rev-strip-3", "rev-strip-4"],

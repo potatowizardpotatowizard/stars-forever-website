@@ -32,7 +32,7 @@ export default function ApplyPage() {
         <div className="relative mx-auto max-w-7xl px-5 pb-16 pt-44 sm:px-8">
           <Kicker>Partner Project</Kicker>
           <h1 className="mt-6 font-display text-5xl font-bold sm:text-6xl">
-            Bring us your God dream
+            Bring Us Your God Dream
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-starlight/80">
             One creator per month. It costs you nothing. Three short questions

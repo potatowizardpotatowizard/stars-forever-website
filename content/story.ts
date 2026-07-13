@@ -44,6 +44,6 @@ export const STORY = {
   },
   founders: {
     kicker: "The cofounders",
-    heading: "Three people carry this",
+    heading: "Three People Carry This",
   },
 };
