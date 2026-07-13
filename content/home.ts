@@ -1,7 +1,7 @@
 export const HOME = {
   hero: {
     missionLine:
-      "Stars Forever is a ministry that helps creators, artists, and entrepreneurs use their platforms for Jesus.",
+      "Stars Forever is a ministry that helps creators use their lives and platforms for Jesus.",
   },
   reframe: {
     kicker: "What is a star?",

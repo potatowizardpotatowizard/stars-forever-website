@@ -2,8 +2,9 @@
 
 import { useEffect, useRef } from "react";
 
-// The living sky behind the hero: faint twinkling stars plus slow drifting
-// streaks, like scratches on old film stock. Static under reduced motion.
+// Stars flying in from deep space toward the viewer: each star starts far
+// back near the center of the sky and drifts outward, growing brighter as
+// it approaches. Static under prefers reduced motion.
 export default function StarField() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -17,60 +18,33 @@ export default function StarField() {
       "(prefers-reduced-motion: reduce)",
     ).matches;
 
+    const FAR = 1.0; // spawn depth
+    const NEAR = 0.05; // recycle depth
     let width = 0;
     let height = 0;
-    let stars: {
-      x: number;
-      y: number;
-      r: number;
-      phase: number;
-      speed: number;
-    }[] = [];
-    let streaks: {
-      x: number;
-      y: number;
-      len: number;
-      angle: number;
-      vx: number;
-      vy: number;
-      life: number;
-      maxLife: number;
-    }[] = [];
+    let scale = 0;
+    let stars: { x: number; y: number; z: number; speed: number }[] = [];
     let raf = 0;
     let start = 0;
     let last = 0;
 
-    const spawnStreak = () => {
-      // Film scratch dashes, as on the brand page: short lived marks that
-      // flicker in at random spots, barely move, and vanish.
-      const angle = (Math.PI / 180) * (Math.random() * 60 - 30);
-      const speed = 10 + Math.random() * 20;
-      return {
-        x: Math.random() * width,
-        y: Math.random() * height,
-        len: 6 + Math.random() * 14,
-        angle,
-        vx: Math.cos(angle) * speed,
-        vy: Math.sin(angle) * speed,
-        life: 0,
-        maxLife: 0.4 + Math.random() * 1.0,
-      };
-    };
+    const spawnStar = (initial: boolean) => ({
+      // Unit-square offsets from the sky's center; z gives depth.
+      x: Math.random() * 2 - 1,
+      y: Math.random() * 2 - 1,
+      z: initial ? NEAR + Math.random() * (FAR - NEAR) : FAR,
+      speed: 0.02 + Math.random() * 0.05, // depth per second: a slow approach
+    });
 
     const seed = (w: number, h: number) => {
-      const count = Math.min(160, Math.floor((w * h) / 14000));
-      stars = Array.from({ length: count }, () => ({
-        x: Math.random() * w,
-        y: Math.random() * h,
-        r: Math.random() * 1.0 + 0.3,
-        phase: Math.random() * Math.PI * 2,
-        speed: Math.random() * 0.4 + 0.1,
-      }));
-      const streakCount = Math.min(60, Math.floor((w * h) / 25000));
-      streaks = Array.from({ length: streakCount }, spawnStreak);
-      // Stagger initial lives so scratches do not pulse in unison.
-      for (const s of streaks) s.life = Math.random() * s.maxLife;
+      const count = Math.min(320, Math.floor((w * h) / 3600));
+      stars = Array.from({ length: count }, () => spawnStar(true));
     };
+
+    const project = (s: { x: number; y: number; z: number }) => ({
+      px: width / 2 + (s.x / s.z) * scale,
+      py: height / 2 + (s.y / s.z) * scale,
+    });
 
     const draw = (t: number) => {
       if (!start) {
@@ -85,38 +59,41 @@ export default function StarField() {
       ctx.clearRect(0, 0, width, height);
 
       for (const s of stars) {
-        const twinkle = reduceMotion
-          ? 0.7
-          : 0.55 + 0.45 * Math.sin(s.phase + elapsed * s.speed);
-        ctx.globalAlpha = 0.65 * resolve * twinkle;
-        ctx.beginPath();
-        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-        ctx.fillStyle = "#efecf7";
-        ctx.fill();
-      }
-
-      for (const s of streaks) {
+        const before = project(s);
         if (!reduceMotion) {
-          s.life += dt;
-          s.x += s.vx * dt;
-          s.y += s.vy * dt;
-          if (s.life > s.maxLife) {
-            Object.assign(s, spawnStreak());
-          }
+          s.z -= s.speed * dt;
+          if (s.z <= NEAR) Object.assign(s, spawnStar(false));
         }
-        // Quick flicker: fade in and out across the scratch's short life.
-        const p = s.life / s.maxLife;
-        const fade = Math.sin(Math.min(Math.PI, p * Math.PI));
-        ctx.globalAlpha = 0.55 * resolve * fade;
-        ctx.strokeStyle = "#efecf7";
-        ctx.lineWidth = 0.8;
+        const { px, py } = project(s);
+        if (px < -20 || px > width + 20 || py < -20 || py > height + 20) {
+          Object.assign(s, spawnStar(false));
+          continue;
+        }
+
+        // Approaching stars grow from a distant speck to a bright point.
+        const depth = 1 - (s.z - NEAR) / (FAR - NEAR); // 0 far, 1 near
+        const alpha = (0.15 + 0.75 * depth * depth) * resolve;
+        const radius = 0.3 + 1.3 * depth;
+
+        // A short motion trail pointing back where the star came from.
+        const trailX = before.px - px;
+        const trailY = before.py - py;
+        const trailLen = Math.hypot(trailX, trailY);
+        if (!reduceMotion && trailLen > 0.1 && depth > 0.3) {
+          ctx.globalAlpha = alpha * 0.5;
+          ctx.strokeStyle = "#efecf7";
+          ctx.lineWidth = radius * 0.9;
+          ctx.beginPath();
+          ctx.moveTo(px + (trailX / trailLen) * (4 + 26 * depth * depth), py + (trailY / trailLen) * (4 + 26 * depth * depth));
+          ctx.lineTo(px, py);
+          ctx.stroke();
+        }
+
+        ctx.globalAlpha = alpha;
+        ctx.fillStyle = "#efecf7";
         ctx.beginPath();
-        ctx.moveTo(s.x, s.y);
-        ctx.lineTo(
-          s.x - Math.cos(s.angle) * s.len,
-          s.y - Math.sin(s.angle) * s.len,
-        );
-        ctx.stroke();
+        ctx.arc(px, py, radius, 0, Math.PI * 2);
+        ctx.fill();
       }
 
       if (!reduceMotion || resolve < 1) {
@@ -128,6 +105,7 @@ export default function StarField() {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       width = canvas.offsetWidth;
       height = canvas.offsetHeight;
+      scale = Math.min(width, height) * 0.5;
       canvas.width = width * dpr;
       canvas.height = height * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);

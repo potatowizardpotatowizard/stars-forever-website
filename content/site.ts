@@ -4,7 +4,7 @@
 export const SITE_NAME = "Stars Forever";
 
 export const SITE_DESCRIPTION =
-  "Stars Forever is a ministry that helps creators, artists, and entrepreneurs use their platforms for Jesus.";
+  "Stars Forever is a ministry that helps creators use their lives and platforms for Jesus.";
 
 export const ANCHOR_VERSE = {
   // Reproduced exactly as provided. Do not edit.
