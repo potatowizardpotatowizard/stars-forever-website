@@ -101,7 +101,7 @@ export default function PartnerProjectsPage() {
             </p>
           </Reveal>
           <div className="mt-14 grid gap-10 md:grid-cols-3">
-            {MISSIONS.map((mission) => (
+            {MISSIONS.filter((m) => m.slug !== "revolutionary-cohort").map((mission) => (
               <Reveal key={mission.slug}>
                 <Link
                   href={`/partner-projects/${mission.slug}`}
