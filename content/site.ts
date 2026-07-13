@@ -25,18 +25,18 @@ export const GIVING_URL: string | null = null;
 export const NAV = [
   { label: "The Story", href: "/story" },
   { label: "Partner Projects", href: "/partner-projects" },
-  { label: "Revolutionary Cohort", href: "/revolutionary" },
   { label: "Category 3 Explained", href: "/category-3" },
-  { label: "Get Involved", href: "/get-involved" },
+  { label: "Revolutionary Cohort", href: "/revolutionary" },
+  { label: "Contact", href: "/get-involved" },
 ];
 
 // The hero menu on the home page: the site itself, presented like a tape menu.
 export const HERO_MENU = [
   { label: "The Story", href: "/story" },
   { label: "Partner Projects", href: "/partner-projects" },
-  { label: "Revolutionary Cohort", href: "/revolutionary" },
   { label: "Category 3 Explained", href: "/category-3" },
-  { label: "Get Involved", href: "/get-involved" },
+  { label: "Revolutionary Cohort", href: "/revolutionary" },
+  { label: "Contact", href: "/get-involved" },
 ];
 
 // Secondary pages reachable from the footer.

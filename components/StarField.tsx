@@ -41,33 +41,34 @@ export default function StarField() {
     let last = 0;
 
     const spawnStreak = () => {
-      // Streaks drift slowly down and to the right, like the brand page.
-      const angle = (Math.PI / 180) * (18 + Math.random() * 24);
-      const speed = 6 + Math.random() * 10; // px per second: slow drift
+      // Film scratch dashes, as on the brand page: short lived marks that
+      // flicker in at random spots, barely move, and vanish.
+      const angle = (Math.PI / 180) * (Math.random() * 60 - 30);
+      const speed = 10 + Math.random() * 20;
       return {
         x: Math.random() * width,
         y: Math.random() * height,
-        len: 8 + Math.random() * 26,
+        len: 6 + Math.random() * 14,
         angle,
         vx: Math.cos(angle) * speed,
         vy: Math.sin(angle) * speed,
         life: 0,
-        maxLife: 6 + Math.random() * 8,
+        maxLife: 0.4 + Math.random() * 1.0,
       };
     };
 
     const seed = (w: number, h: number) => {
-      const count = Math.min(220, Math.floor((w * h) / 9000));
+      const count = Math.min(160, Math.floor((w * h) / 14000));
       stars = Array.from({ length: count }, () => ({
         x: Math.random() * w,
         y: Math.random() * h,
-        r: Math.random() * 1.1 + 0.3,
+        r: Math.random() * 1.0 + 0.3,
         phase: Math.random() * Math.PI * 2,
         speed: Math.random() * 0.4 + 0.1,
       }));
-      const streakCount = Math.min(26, Math.floor(w / 55));
+      const streakCount = Math.min(60, Math.floor((w * h) / 25000));
       streaks = Array.from({ length: streakCount }, spawnStreak);
-      // Stagger initial lives so streaks do not pulse in unison.
+      // Stagger initial lives so scratches do not pulse in unison.
       for (const s of streaks) s.life = Math.random() * s.maxLife;
     };
 
@@ -99,14 +100,14 @@ export default function StarField() {
           s.life += dt;
           s.x += s.vx * dt;
           s.y += s.vy * dt;
-          if (s.life > s.maxLife || s.x > width + 40 || s.y > height + 40) {
-            Object.assign(s, spawnStreak(), { x: Math.random() * width, y: -20 });
+          if (s.life > s.maxLife) {
+            Object.assign(s, spawnStreak());
           }
         }
-        // Fade in and out across the streak's life.
+        // Quick flicker: fade in and out across the scratch's short life.
         const p = s.life / s.maxLife;
         const fade = Math.sin(Math.min(Math.PI, p * Math.PI));
-        ctx.globalAlpha = 0.5 * resolve * fade;
+        ctx.globalAlpha = 0.55 * resolve * fade;
         ctx.strokeStyle = "#efecf7";
         ctx.lineWidth = 0.8;
         ctx.beginPath();
