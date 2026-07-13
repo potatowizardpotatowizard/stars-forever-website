@@ -61,23 +61,6 @@ export default function HomePage() {
           </div>
         </nav>
 
-        {/* Lower third: mission line left, glowing wordmark right */}
-        <div className="relative mx-auto flex w-full max-w-7xl flex-col items-start gap-8 px-5 pb-10 sm:flex-row sm:items-end sm:justify-between sm:px-8">
-          <p
-            className="hero-rise max-w-md font-meta text-sm uppercase leading-relaxed tracking-[0.14em] text-starlight/75"
-            style={{ animationDelay: "0.5s" }}
-          >
-            {HOME.hero.missionLine}
-          </p>
-          <Image
-            src="/brand/logo-full.png"
-            alt={SITE_NAME}
-            width={340}
-            height={191}
-            priority
-            className="vhs-glow vhs-flicker -mb-6 self-end sm:-mr-4"
-          />
-        </div>
       </section>
 
       {/* Anchor verse and the reframe, under the hero's purple afterglow */}
@@ -88,7 +71,12 @@ export default function HomePage() {
         />
         <Grain />
         <div className="relative mx-auto max-w-7xl px-5 pb-24 pt-20 sm:px-8 sm:pb-28 sm:pt-24">
-          <Reveal className="max-w-3xl">
+          <Reveal className="max-w-2xl">
+            <p className="font-meta text-sm uppercase leading-relaxed tracking-[0.14em] text-starlight/80">
+              {HOME.hero.missionLine}
+            </p>
+          </Reveal>
+          <Reveal className="mt-20 max-w-3xl sm:mt-24">
             <blockquote>
               <p className="font-meta text-xl leading-relaxed text-starlight sm:text-2xl sm:leading-relaxed">
                 {ANCHOR_VERSE.text}
