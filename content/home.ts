@@ -59,7 +59,7 @@ export const HOME = {
   },
   proof: {
     kicker: "Field notes",
-    heading: "Our History",
+    heading: "Recent Work",
     cards: [
       {
         title: "Tokyo Drift",
