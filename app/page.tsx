@@ -188,31 +188,29 @@ export default function HomePage() {
           </Reveal>
           <div className="mt-8 grid gap-8 md:grid-cols-2">
             {HOME.learn.items.map((item) => (
-              <Reveal key={item.title}>
+              <Reveal key={item.title} className="h-full">
                 <Link
                   href={item.href}
-                  className="group relative block overflow-hidden rounded-xl border border-dust/20"
+                  className="group flex h-full flex-col overflow-hidden rounded-xl border border-dust/20 bg-night/60"
                 >
-                  <Image
-                    src={item.art}
-                    alt=""
-                    width={960}
-                    height={340}
-                    sizes="(min-width: 768px) 50vw, 100vw"
-                    className="aspect-[16/9] w-full object-cover opacity-70 transition-transform duration-700 group-hover:scale-[1.03] sm:aspect-[21/8]"
-                  />
-                  <div
-                    aria-hidden="true"
-                    className="absolute inset-0 bg-gradient-to-t from-night/95 via-night/50 to-transparent"
-                  />
-                  <div className="absolute inset-x-0 bottom-0 p-6">
+                  <div className="overflow-hidden">
+                    <Image
+                      src={item.art}
+                      alt=""
+                      width={960}
+                      height={340}
+                      sizes="(min-width: 768px) 50vw, 100vw"
+                      className="aspect-[21/8] w-full object-cover opacity-80 transition-transform duration-700 group-hover:scale-[1.03]"
+                    />
+                  </div>
+                  <div className="flex flex-1 flex-col p-6">
                     <h3 className="mono-link text-lg font-bold group-hover:text-ember">
                       <GlitchText text={item.title.toUpperCase()} />
                     </h3>
-                    <p className="mt-2 max-w-md text-sm leading-relaxed text-starlight/80">
+                    <p className="mt-2 flex-1 text-sm leading-relaxed text-starlight/75">
                       {item.body}
                     </p>
-                    <span className="meta-label mt-3 inline-block text-ember">
+                    <span className="meta-label mt-5 inline-block text-ember">
                       {item.cta}
                     </span>
                   </div>

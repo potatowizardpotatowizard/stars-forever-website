@@ -37,7 +37,7 @@ body::before {
   background-image: url("/brand/bg-black-stars.jpg");
   background-size: cover;
   background-position: center;
-  opacity: 0.45;
+  opacity: 0.3;
 }
 
 /* Display headings carry weight; Archivo at 400 reads too plain */
