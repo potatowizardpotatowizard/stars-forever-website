@@ -61,6 +61,15 @@ export default function HomePage() {
           </div>
         </nav>
 
+        {/* One liner, lower left of the hero */}
+        <div className="relative mx-auto w-full max-w-7xl px-5 pb-10 sm:px-8">
+          <p
+            className="hero-rise max-w-md font-meta text-sm uppercase leading-relaxed tracking-[0.14em] text-starlight/75"
+            style={{ animationDelay: "0.5s" }}
+          >
+            {HOME.hero.missionLine}
+          </p>
+        </div>
       </section>
 
       {/* Two minute explainer, under the hero's purple afterglow */}
@@ -82,9 +91,6 @@ export default function HomePage() {
               title={HOME.video.caption}
               className="mt-10"
             />
-            <p className="mt-10 max-w-md font-meta text-sm uppercase leading-relaxed tracking-[0.14em] text-starlight/75">
-              {HOME.hero.missionLine}
-            </p>
           </Reveal>
         </div>
       </section>
