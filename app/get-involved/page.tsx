@@ -103,7 +103,7 @@ export default function GetInvolvedPage() {
         <Reveal>
           <Kicker>{give.produces.kicker}</Kicker>
         </Reveal>
-        <div className="mt-10 grid gap-10 md:grid-cols-3">
+        <div className="mt-10 grid gap-10 md:grid-cols-2">
           {give.produces.items.map((item) => (
             <Reveal key={item.title}>
               <MediaSlot

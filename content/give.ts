@@ -20,11 +20,6 @@ export const GIVE = {
         body: "Real Category 3 projects that put Jesus in front of secular audiences.",
         imageSlot: "give-discipleship",
       },
-      {
-        title: "Baptisms and discipleship",
-        body: "New believers baptized and walked with, from Tokyo to a remote island.",
-        imageSlot: "give-baptism",
-      },
     ],
   },
   donate: {
