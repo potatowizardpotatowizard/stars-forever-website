@@ -175,11 +175,7 @@ export const MISSIONS: Mission[] = [
         label: "Courtney's baptism story",
         href: "https://youtu.be/FKqkqQt5CsY",
       },
-      {
-        label: "Auzi's insider recap",
-        href: "https://www.youtube.com/results?search_query=auzi+beast+games+recap",
-      },
-      { label: "Read The Story", href: "/story" },
+      { label: "Read How Beast Games Inspired Stars Forever", href: "/story" },
     ],
   },
 ];
