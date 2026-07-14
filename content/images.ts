@@ -271,8 +271,8 @@ export const IMAGES: Record<string, ImageSlot> = {
   },
   "rev-strip-4": {
     file: "rev-strip-4.jpg",
-    alt: "Stargazing on the rocks in Joshua Tree National Park",
-    caption: { where: "Joshua Tree National Park" },
+    alt: "The whole cohort gathered on a desert hill at dusk",
+    caption: { where: "Joshua Tree, California" },
     ratio: "3 / 2",
   },
   "rev-ben-pierce": {
