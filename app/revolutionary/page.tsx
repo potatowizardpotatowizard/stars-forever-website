@@ -73,6 +73,24 @@ export default function RevolutionaryPage() {
             title="explained in two minutes"
             className="mt-10"
           />
+          <figure className="mt-12">
+            <div className="overflow-hidden rounded-xl border border-dust/20">
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                poster="/brand/poster-cohort-dusk.jpg"
+                className="block aspect-video w-full object-cover"
+              >
+                <source src="/brand/video/cohort-dusk.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <figcaption className="meta-label mt-3">
+              Dusk on the hill · Joshua Tree, California
+            </figcaption>
+          </figure>
         </Reveal>
         </div>
       </section>
@@ -143,27 +161,7 @@ export default function RevolutionaryPage() {
         aria-label="Photos from Joshua Tree"
         className="mx-auto max-w-7xl px-5 py-24 sm:px-8"
       >
-        <Reveal>
-          <figure>
-            <div className="overflow-hidden rounded-xl border border-dust/20">
-              <video
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                poster="/brand/poster-cohort-dusk.jpg"
-                className="block aspect-video w-full object-cover"
-              >
-                <source src="/brand/video/cohort-dusk.mp4" type="video/mp4" />
-              </video>
-            </div>
-            <figcaption className="meta-label mt-3">
-              Dusk on the hill · Joshua Tree, California
-            </figcaption>
-          </figure>
-        </Reveal>
-        <div className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {REVOLUTIONARY.strip.map((slot) => (
             <Reveal key={slot}>
               <MediaSlot name={slot} sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw" />
