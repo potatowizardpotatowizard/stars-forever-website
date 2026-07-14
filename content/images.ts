@@ -233,7 +233,7 @@ export const IMAGES: Record<string, ImageSlot> = {
   },
   "beast-podcast-auzi": {
     file: "beast-podcast-auzi.jpg",
-    alt: "Auzi recording his Beast Games recap",
+    alt: "Auzi hanging on in the five million dollar challenge",
     caption: { who: "Auzi Films" },
     ratio: "3 / 2",
   },
@@ -245,7 +245,7 @@ export const IMAGES: Record<string, ImageSlot> = {
   },
   "beast-baptism": {
     file: "beast-baptism.jpg",
-    alt: "Two girls baptized on a remote island",
+    alt: "Arriving at the remote island where two girls were baptized",
     caption: { where: "A remote island" },
     ratio: "3 / 2",
   },
