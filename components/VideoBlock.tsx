@@ -16,7 +16,7 @@ export default function VideoBlock({
       <div className="relative overflow-hidden rounded-xl border border-dust/20 bg-soot">
         <video
           controls
-          preload="none"
+          preload="metadata"
           poster={poster}
           playsInline
           className="block aspect-video w-full"
