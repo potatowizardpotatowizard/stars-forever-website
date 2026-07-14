@@ -32,7 +32,7 @@ export const IMAGES: Record<string, ImageSlot> = {
   },
   "home-proof-tokyo": {
     file: "home-proof-tokyo.jpg",
-    alt: "A drift car sliding through a corner at a Japanese circuit",
+    alt: "The team and new friends gathered in Japan",
     caption: { where: "Japan", when: "Winter 2025" },
     ratio: "3 / 2",
   },
@@ -103,38 +103,38 @@ export const IMAGES: Record<string, ImageSlot> = {
   // ---- Mission: Tokyo Drift ----------------------------------------------
   "tokyo-hero": {
     file: "tokyo-hero.jpg",
-    alt: "A drift car mid slide under stadium lights in Japan",
-    caption: { where: "Ebisu Circuit, Japan", when: "November 2025" },
+    alt: "Walking the neon streets of Tokyo at night",
+    caption: { where: "Tokyo, Japan", when: "November 2025" },
     ratio: "21 / 9",
   },
   "tokyo-owen": {
     file: "tokyo-owen.jpg",
-    alt: "Owen Tucker filming in Tokyo",
-    caption: { who: "Owen Tucker", where: "Tokyo" },
+    alt: "Filming on the streets of Japan",
+    caption: { where: "Japan" },
     ratio: "3 / 2",
   },
   "tokyo-subway": {
     file: "tokyo-subway.jpg",
-    alt: "Meeting drifting YouTubers on the Tokyo subway",
-    caption: { where: "Tokyo subway" },
+    alt: "A night out with new friends in Tokyo",
+    caption: { where: "Tokyo" },
     ratio: "3 / 2",
   },
   "tokyo-hitchhike": {
     file: "tokyo-hitchhike.jpg",
-    alt: "Hitchhiking to a drift event in rural Japan",
+    alt: "On the road in rural Japan",
     caption: { where: "Rural Japan" },
     ratio: "3 / 2",
   },
   "tokyo-circuit": {
     file: "tokyo-circuit.jpg",
-    alt: "Cars lined up at a Japanese drift circuit",
-    caption: { where: "Nikko Circuit, Japan" },
+    alt: "The crew gathered under the giant lucky cat",
+    caption: { where: "Japan" },
     ratio: "3 / 2",
   },
   "tokyo-ebisu": {
     file: "tokyo-ebisu.jpg",
-    alt: "Tandem drifting at Ebisu Circuit",
-    caption: { where: "Ebisu Circuit, Fukushima" },
+    alt: "Inside the light museum in Tokyo",
+    caption: { where: "Tokyo" },
     ratio: "3 / 2",
   },
   "tokyo-church": {
@@ -145,8 +145,8 @@ export const IMAGES: Record<string, ImageSlot> = {
   },
   "tokyo-seven": {
     file: "tokyo-seven.jpg",
-    alt: "Seven, a local Japanese creator, on a video shoot",
-    caption: { who: "Seven", where: "Japan" },
+    alt: "A night shoot in the old streets of Japan",
+    caption: { where: "Japan" },
     ratio: "3 / 2",
   },
   "tokyo-baptism": {

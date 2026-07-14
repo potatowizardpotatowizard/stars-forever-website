@@ -61,7 +61,7 @@ export const MISSIONS: Mission[] = [
           "We shared life deeply with four unbelievers: church, lunches, baptisms, theme parks, birthdays. We discipled Seven, a local Japanese creator who drove hours to our shoots and learned to seek God inside his art. And pastor Kento, moved by the work, invited us in to talk about the mission.",
           "This trip is now the blueprint: help a creator seek God, encounter His power personally, preach the gospel through their creative gifts, strengthen the local church, and watch lives change.",
         ],
-        imageSlots: ["tokyo-church", "tokyo-seven", "tokyo-baptism", "tokyo-friends"],
+        imageSlots: ["tokyo-church", "tokyo-seven", "tokyo-friends"],
       },
     ],
     links: [
