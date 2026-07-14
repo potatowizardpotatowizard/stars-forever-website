@@ -6,6 +6,7 @@ import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
 import Reveal from "@/components/Reveal";
+import YouTubeEmbed from "@/components/YouTubeEmbed";
 import { MISSIONS } from "@/content/missions";
 import { resolveSlot } from "@/lib/media";
 
@@ -93,6 +94,18 @@ export default async function MissionPage({
             <p className="mt-8 font-display text-3xl leading-snug sm:text-4xl">
               {mission.burningQuestion}
             </p>
+          </Reveal>
+        </div>
+      ) : null}
+
+      {mission.videoEmbed ? (
+        <div className="mx-auto max-w-7xl px-5 pt-20 sm:px-8">
+          <Reveal className="mx-auto max-w-4xl">
+            <YouTubeEmbed
+              youtubeId={mission.videoEmbed.youtubeId}
+              title={mission.name}
+              caption={mission.videoEmbed.caption}
+            />
           </Reveal>
         </div>
       ) : null}

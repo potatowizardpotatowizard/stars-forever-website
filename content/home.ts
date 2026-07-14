@@ -57,6 +57,15 @@ export const HOME = {
       },
     ],
   },
+  feature: {
+    kicker: "The first Partner Project",
+    heading: "Tokyo Drift",
+    body: "A gospel centered YouTube video made for a secular audience, filmed across thirty days in Japan. This is what Category 3 looks like in the wild.",
+    youtubeId: "Y3qLQOLS-3s",
+    caption: "Tokyo Drift, the full video",
+    cta: "Read the full story",
+    href: "/partner-projects/tokyo-drift",
+  },
   proof: {
     kicker: "Field notes",
     heading: "Recent Work",

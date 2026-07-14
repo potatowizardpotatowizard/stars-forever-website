@@ -8,6 +8,7 @@ import MediaSlot from "@/components/MediaSlot";
 import Reveal from "@/components/Reveal";
 import StarField from "@/components/StarField";
 import VideoBlock from "@/components/VideoBlock";
+import YouTubeEmbed from "@/components/YouTubeEmbed";
 import { HOME } from "@/content/home";
 import { ANCHOR_VERSE, CONTACT, HERO_MENU, SITE_NAME } from "@/content/site";
 
@@ -217,8 +218,32 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Proof strip */}
+      {/* Featured: the Tokyo Drift video */}
       <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
+        <Reveal className="mx-auto max-w-4xl">
+          <Kicker>{HOME.feature.kicker}</Kicker>
+          <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
+            <GlitchText text={HOME.feature.heading} />
+          </h2>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-starlight/80">
+            {HOME.feature.body}
+          </p>
+          <YouTubeEmbed
+            youtubeId={HOME.feature.youtubeId}
+            title={HOME.feature.heading}
+            caption={HOME.feature.caption}
+            className="mt-10"
+          />
+          <div className="mt-8">
+            <Cta href={HOME.feature.href} variant="ghost">
+              {HOME.feature.cta}
+            </Cta>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* Proof strip */}
+      <section className="mx-auto max-w-7xl px-5 pb-24 sm:px-8 sm:pb-32">
         <Reveal>
           <Kicker>{HOME.proof.kicker}</Kicker>
           <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">

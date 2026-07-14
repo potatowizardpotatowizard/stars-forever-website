@@ -15,6 +15,8 @@ export type Mission = {
   cardImageSlot: string;
   heroSlot: string;
   burningQuestion?: string;
+  /** YouTube embed featured at the top of the project page */
+  videoEmbed?: { youtubeId: string; caption: string };
   sections: MissionSection[];
   links: { label: string; href: string }[];
 };
@@ -39,6 +41,10 @@ export const MISSIONS: Mission[] = [
     heroSlot: "tokyo-hero",
     burningQuestion:
       "What would it look like to share Jesus in a secular YouTube video?",
+    videoEmbed: {
+      youtubeId: "Y3qLQOLS-3s",
+      caption: "Tokyo Drift, the full video",
+    },
     sections: [
       {
         kicker: "The dream",
@@ -66,8 +72,8 @@ export const MISSIONS: Mission[] = [
     ],
     links: [
       {
-        label: "Watch the video on Owen's channel",
-        href: "https://www.youtube.com/@owensasian",
+        label: "Watch Tokyo Drift on YouTube",
+        href: "https://youtu.be/Y3qLQOLS-3s",
       },
       {
         label: "Watch the podcast with Owen Tucker about creating Tokyo Drift",
