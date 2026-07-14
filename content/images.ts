@@ -243,6 +243,12 @@ export const IMAGES: Record<string, ImageSlot> = {
     caption: { where: "Beast Games set" },
     ratio: "3 / 2",
   },
+  "beast-island-prayer": {
+    file: "beast-island-prayer.jpg",
+    alt: "Praying together on the island beach",
+    caption: { where: "A remote island" },
+    ratio: "3 / 2",
+  },
   "beast-baptism": {
     file: "beast-baptism.jpg",
     alt: "Arriving at the remote island where two girls were baptized",

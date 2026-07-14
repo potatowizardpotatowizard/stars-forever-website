@@ -130,6 +130,14 @@ export default async function MissionPage({
                   {p}
                 </p>
               ))}
+              {section.link ? (
+                <Link
+                  href={section.link.href}
+                  className="mono-link inline-block text-sm font-bold text-ember"
+                >
+                  {section.link.label} →
+                </Link>
+              ) : null}
             </div>
             {section.imageSlots?.length ? (
               <div

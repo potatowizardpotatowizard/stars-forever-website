@@ -3,6 +3,8 @@ export type MissionSection = {
   heading?: string;
   paragraphs: string[];
   imageSlots?: string[];
+  /** Optional link rendered after the paragraphs */
+  link?: { label: string; href: string };
 };
 
 export type Mission = {
@@ -166,14 +168,21 @@ export const MISSIONS: Mission[] = [
           "beast-podcast-jeremy",
           "beast-podcast-courtney",
           "beast-podcast-auzi",
-          "beast-baptism",
         ],
+      },
+      {
+        kicker: "The island",
+        paragraphs: [
+          "The faith that formed on set went with the contestants to a remote island. The group gathered on the beach to pray together, and before they left, two girls were baptized right there on the beach.",
+        ],
+        imageSlots: ["beast-island-prayer", "beast-baptism"],
       },
       {
         kicker: "Where it started",
         paragraphs: [
-          "The full origin of Stars Forever runs through this set: a brother's death, a prayer, and the most Auzi had ever seen God move. Read The Story for the whole account.",
+          "The full origin of Stars Forever runs through this set: a brother's death, a prayer, and the most Auzi had ever seen God move.",
         ],
+        link: { label: "Read the full testimony here", href: "/story" },
       },
     ],
     links: [
