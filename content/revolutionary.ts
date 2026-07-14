@@ -28,15 +28,15 @@ export const REVOLUTIONARY = {
     kicker: "What to expect",
     items: [
       {
-        title: "Two to three full days",
+        title: "Two to Three Full Days",
         body: "In person, usually over a weekend, in a shared house with shared meals.",
       },
       {
-        title: "Revolutionary teaching principles",
+        title: "Revolutionary Teaching Principles",
         body: "Teaching built for Jesus following creators, artists, and entrepreneurs, with real Category 3 examples broken down together.",
       },
       {
-        title: "Seeking God together",
+        title: "Seeking God Together",
         body: "Group discussion, personal prayer time, and space to hear from God about your next step.",
       },
       {
@@ -44,7 +44,7 @@ export const REVOLUTIONARY = {
         body: "Creators work together with God and one another to make a clear and actionable plan for sharing Jesus to their secular audience.",
       },
       {
-        title: "Community that lasts",
+        title: "Community That Lasts",
         body: "The weekend ends. The friendships and the accountability do not.",
       },
     ],
