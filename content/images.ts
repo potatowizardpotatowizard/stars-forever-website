@@ -137,6 +137,18 @@ export const IMAGES: Record<string, ImageSlot> = {
     caption: { where: "Tokyo" },
     ratio: "3 / 2",
   },
+  "tokyo-temple": {
+    file: "tokyo-temple.jpg",
+    alt: "In traditional dress outside an old Japanese house at golden hour",
+    caption: { where: "Japan" },
+    ratio: "3 / 2",
+  },
+  "tokyo-community": {
+    file: "tokyo-community.jpg",
+    alt: "Arm in arm with new friends in Japan",
+    caption: { where: "Japan" },
+    ratio: "3 / 2",
+  },
   "tokyo-church": {
     file: "tokyo-church.jpg",
     alt: "Friends gathered at church in Tokyo",
