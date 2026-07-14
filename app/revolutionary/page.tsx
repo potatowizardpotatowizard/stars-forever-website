@@ -150,6 +150,11 @@ export default function RevolutionaryPage() {
             </Reveal>
           ))}
         </div>
+        <Reveal className="mt-12 text-center">
+          <Cta href="/partner-projects/revolutionary-cohort" variant="ghost">
+            Check Out Past Cohorts
+          </Cta>
+        </Reveal>
       </section>
 
       {/* How to attend + CTA */}
