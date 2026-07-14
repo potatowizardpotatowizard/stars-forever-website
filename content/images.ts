@@ -53,7 +53,7 @@ export const IMAGES: Record<string, ImageSlot> = {
   "story-set": {
     file: "story-set.jpg",
     alt: "The set of Beast Games at night",
-    caption: { where: "Beast Games set", when: "Season one" },
+    caption: { where: "Beast Games set", when: "July 2024 to February 2025" },
     ratio: "21 / 9",
   },
   "story-prayer": {
@@ -216,7 +216,7 @@ export const IMAGES: Record<string, ImageSlot> = {
   "beast-hero": {
     file: "beast-hero.jpg",
     alt: "The Beast Games arena",
-    caption: { where: "Beast Games set", when: "Season one" },
+    caption: { where: "Beast Games set", when: "July 2024 to February 2025" },
     ratio: "21 / 9",
   },
   "beast-podcast-jeremy": {

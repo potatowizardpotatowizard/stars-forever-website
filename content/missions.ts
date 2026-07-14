@@ -128,7 +128,7 @@ export const MISSIONS: Mission[] = [
     name: "Beast Games",
     location: "On set and beyond",
     partner: "Auzi Films",
-    date: "Season one",
+    date: "July 2024 to February 2025",
     summary:
       "Ten plus podcasts filmed around the biggest competition show on earth, many carrying Jesus conversations to a secular audience of fans.",
     cardImageSlot: "home-proof-beast-games",
