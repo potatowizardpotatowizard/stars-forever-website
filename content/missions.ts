@@ -18,7 +18,7 @@ export type Mission = {
   /** YouTube embed featured at the top of the project page */
   videoEmbed?: { youtubeId: string; caption: string };
   /** Photo slots that click through to an external link */
-  slotLinks?: Record<string, string>;
+  slotLinks?: Record<string, { href: string; label: string }>;
   sections: MissionSection[];
   links: { label: string; href: string }[];
 };
@@ -136,8 +136,18 @@ export const MISSIONS: Mission[] = [
     cardImageSlot: "home-proof-beast-games",
     heroSlot: "beast-hero",
     slotLinks: {
-      "beast-podcast-jeremy": "https://youtu.be/iLmdLG0fWIU",
-      "beast-podcast-courtney": "https://youtu.be/FKqkqQt5CsY",
+      "beast-podcast-jeremy": {
+        href: "https://youtu.be/iLmdLG0fWIU",
+        label: "Watch the podcast ▶",
+      },
+      "beast-podcast-courtney": {
+        href: "https://youtu.be/FKqkqQt5CsY",
+        label: "Watch the podcast ▶",
+      },
+      "beast-podcast-auzi": {
+        href: "https://youtu.be/Lav88YGfIIo",
+        label: "Listen to Auzi's personal Beast Games testimony ▶",
+      },
     },
     sections: [
       {

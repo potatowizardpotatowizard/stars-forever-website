@@ -138,31 +138,31 @@ export default async function MissionPage({
                 }`}
               >
                 {section.imageSlots.map((slot) => {
-                  const linkHref = mission.slotLinks?.[slot];
+                  const slotLink = mission.slotLinks?.[slot];
                   const media = (
                     <MediaSlot
-                      key={linkHref ? undefined : slot}
+                      key={slotLink ? undefined : slot}
                       name={slot}
                       sizes="(min-width: 640px) 50vw, 100vw"
                     />
                   );
-                  if (!linkHref) return media;
+                  if (!slotLink) return media;
                   return (
                     <a
                       key={slot}
-                      href={linkHref}
+                      href={slotLink.href}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="group relative block"
                     >
                       {media}
-                      <span className="pointer-events-none absolute inset-0 flex items-center justify-center bg-night/60 opacity-0 backdrop-blur-[2px] transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
+                      <span className="pointer-events-none absolute inset-0 flex items-center justify-center bg-night/60 px-6 text-center opacity-0 backdrop-blur-[2px] transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
                         <span className="mono-link text-sm font-bold">
-                          Watch the podcast ▶
+                          {slotLink.label}
                         </span>
                       </span>
                       <span className="meta-label mt-2 inline-block text-ember sm:hidden">
-                        Watch the podcast ▶
+                        {slotLink.label}
                       </span>
                     </a>
                   );
