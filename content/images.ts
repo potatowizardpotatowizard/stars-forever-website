@@ -257,7 +257,7 @@ export const IMAGES: Record<string, ImageSlot> = {
   },
   "beast-island-prayer": {
     file: "beast-island-prayer.jpg",
-    alt: "Praying together on the island beach",
+    alt: "Huddled together in prayer on the island beach",
     caption: { where: "A remote island" },
     ratio: "3 / 2",
   },
