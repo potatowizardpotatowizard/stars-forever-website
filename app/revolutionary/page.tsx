@@ -52,24 +52,6 @@ export default function RevolutionaryPage() {
             {REVOLUTIONARY.attribution.linkLabel}
           </a>
         </p>
-        <figure className="mt-10 max-w-2xl">
-          <div className="overflow-hidden rounded-xl border border-dust/20">
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              poster="/brand/poster-cohort-dusk.jpg"
-              className="block aspect-video w-full object-cover"
-            >
-              <source src="/brand/video/cohort-dusk.mp4" type="video/mp4" />
-            </video>
-          </div>
-          <figcaption className="meta-label mt-3">
-            Dusk on the hill · Joshua Tree, California
-          </figcaption>
-        </figure>
         </div>
       </header>
 

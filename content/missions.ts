@@ -90,10 +90,11 @@ export const MISSIONS: Mission[] = [
   },
   {
     slug: "revolutionary-cohort",
-    name: "Revolutionary Cohort",
+    name: "Revolutionary Cohort 1",
     location: "Joshua Tree, California",
     partner: "Ben Pierce, Steiger Ministries",
     date: "May 15 to 17, 2026",
+    heroVideo: "/brand/video/cohort-dusk.mp4",
     summary:
       "Ten creators from different niches, one desert house, a weekend of full commitment. Proof that the model works, and the invitation to the next one.",
     cardImageSlot: "home-proof-joshua-tree",
