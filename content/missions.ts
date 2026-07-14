@@ -23,6 +23,8 @@ export type Mission = {
   heroVideo?: string;
   /** Photo slots that click through to an external link */
   slotLinks?: Record<string, { href: string; label: string }>;
+  /** The people who took part, with their main channels */
+  roster?: { heading: string; people: { name: string; href: string }[] };
   sections: MissionSection[];
   links: { label: string; href: string }[];
 };
@@ -95,6 +97,21 @@ export const MISSIONS: Mission[] = [
     partner: "Ben Pierce, Steiger Ministries",
     date: "May 15 to 17, 2026",
     heroVideo: "/brand/video/cohort-dusk.mp4",
+    roster: {
+      heading: "The Ten Creators",
+      people: [
+        { name: "Weston Vansoest", href: "https://www.instagram.com/westonvansoest/" },
+        { name: "Owen Tucker", href: "https://www.youtube.com/@owensasian" },
+        { name: "Andrew Nemes", href: "https://www.instagram.com/andrewnemes/" },
+        { name: "Lucas Mayfield", href: "https://www.instagram.com/lucas.mayfield/" },
+        { name: "Jordan Orme", href: "https://www.youtube.com/@JordanOrme" },
+        { name: "Austin Pepito", href: "https://www.instagram.com/austin.pep/" },
+        { name: "Blake Vandevegte", href: "https://www.instagram.com/blakevandevegte/" },
+        { name: "Jacob Vargas", href: "https://www.instagram.com/juicy.jacobb/" },
+        { name: "Justin Leusner", href: "https://www.instagram.com/basketballtodayofficial/" },
+        { name: "Nelly Crux", href: "http://johnelcruxmagic.com/" },
+      ],
+    },
     summary:
       "Ten creators from different niches, one desert house, a weekend of full commitment. Proof that the model works, and the invitation to the next one.",
     cardImageSlot: "home-proof-joshua-tree",

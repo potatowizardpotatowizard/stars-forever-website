@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import GlitchText from "@/components/GlitchText";
 import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
@@ -117,6 +118,31 @@ export default async function MissionPage({
             </p>
           </Reveal>
         </div>
+      ) : null}
+
+      {mission.roster ? (
+        <section className="mx-auto max-w-7xl px-5 pt-20 sm:px-8">
+          <Reveal>
+            <Kicker>Who came</Kicker>
+            <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
+              <GlitchText text={mission.roster.heading} />
+            </h2>
+            <ul className="mt-10 grid gap-x-8 gap-y-4 sm:grid-cols-2 lg:grid-cols-3">
+              {mission.roster.people.map((person) => (
+                <li key={person.name}>
+                  <a
+                    href={person.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mono-link text-sm font-bold"
+                  >
+                    {person.name} ↗
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+        </section>
       ) : null}
 
       {mission.videoEmbed ? (

@@ -143,6 +143,11 @@ export default function RevolutionaryPage() {
         aria-label="Photos from Joshua Tree"
         className="mx-auto max-w-7xl px-5 py-24 sm:px-8"
       >
+        <Reveal className="mb-12 text-center">
+          <Cta href="/partner-projects/revolutionary-cohort" variant="ghost">
+            Check Out Past Cohorts
+          </Cta>
+        </Reveal>
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {REVOLUTIONARY.strip.map((slot) => (
             <Reveal key={slot}>
@@ -150,11 +155,6 @@ export default function RevolutionaryPage() {
             </Reveal>
           ))}
         </div>
-        <Reveal className="mt-12 text-center">
-          <Cta href="/partner-projects/revolutionary-cohort" variant="ghost">
-            Check Out Past Cohorts
-          </Cta>
-        </Reveal>
       </section>
 
       {/* How to attend + CTA */}

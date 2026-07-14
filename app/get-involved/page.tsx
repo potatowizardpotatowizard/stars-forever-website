@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import Cta from "@/components/Cta";
 import GlitchText from "@/components/GlitchText";
 import Grain from "@/components/Grain";
@@ -106,12 +107,28 @@ export default function GetInvolvedPage() {
         <div className="mt-10 grid gap-10 md:grid-cols-2">
           {give.produces.items.map((item) => (
             <Reveal key={item.title}>
-              <MediaSlot
-                name={item.imageSlot}
-                sizes="(min-width: 768px) 33vw, 100vw"
-                showCaption={false}
-                className="overflow-hidden rounded-lg"
-              />
+              {item.href ? (
+                <Link href={item.href} className="group relative block">
+                  <MediaSlot
+                    name={item.imageSlot}
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                    showCaption={false}
+                    className="overflow-hidden rounded-lg"
+                  />
+                  <span className="pointer-events-none absolute inset-0 flex items-center justify-center rounded-lg bg-night/60 opacity-0 backdrop-blur-[2px] transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
+                    <span className="mono-link text-sm font-bold">
+                      Learn More ▶
+                    </span>
+                  </span>
+                </Link>
+              ) : (
+                <MediaSlot
+                  name={item.imageSlot}
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  showCaption={false}
+                  className="overflow-hidden rounded-lg"
+                />
+              )}
               <h3 className="mt-6 font-display text-2xl font-bold">
                 {item.title}
               </h3>

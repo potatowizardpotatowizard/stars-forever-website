@@ -314,7 +314,7 @@ export const IMAGES: Record<string, ImageSlot> = {
   // ---- Give ----------------------------------------------------------------------
   "give-reached": {
     file: "give-reached.jpg",
-    alt: "A creator sharing the gospel on camera",
+    alt: "The first Revolutionary Cohort gathered in the desert at dusk",
     ratio: "3 / 2",
   },
   "give-baptism": {
@@ -324,7 +324,7 @@ export const IMAGES: Record<string, ImageSlot> = {
   },
   "give-discipleship": {
     file: "give-discipleship.jpg",
-    alt: "Discipleship over an open Bible",
+    alt: "On mission in Tokyo for the first Partner Project",
     ratio: "3 / 2",
   },
 };

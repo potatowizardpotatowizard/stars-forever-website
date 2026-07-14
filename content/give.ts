@@ -11,14 +11,16 @@ export const GIVE = {
     kicker: "What giving produces",
     items: [
       {
-        title: "Creators reached",
+        title: "Creators Reached",
         body: "Hand picked creators taught to seek God and to carry the gospel into their work.",
         imageSlot: "give-reached",
+        href: "/revolutionary",
       },
       {
-        title: "Gospel projects published",
+        title: "Gospel Projects Published",
         body: "Real Category 3 projects that put Jesus in front of secular audiences.",
         imageSlot: "give-discipleship",
+        href: "/partner-projects",
       },
     ],
   },
