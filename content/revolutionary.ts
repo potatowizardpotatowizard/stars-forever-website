@@ -40,8 +40,8 @@ export const REVOLUTIONARY = {
         body: "Group discussion, personal prayer time, and space to hear from God about your next step.",
       },
       {
-        title: "A complete digital media fast",
-        body: "Phones go away for the event so nothing competes with the reason you came.",
+        title: "Create Eternity Changing Art",
+        body: "Creators work together with God and one another to make a clear and actionable plan for sharing Jesus to their secular audience.",
       },
       {
         title: "Community that lasts",
