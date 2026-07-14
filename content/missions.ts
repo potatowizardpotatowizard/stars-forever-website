@@ -47,6 +47,7 @@ export const MISSIONS: Mission[] = [
     heroSlot: "tokyo-hero",
     burningQuestion:
       "What would it look like to share Jesus in a secular YouTube video?",
+    heroVideo: "/brand/video/tokyo-hero-bg.mp4",
     videoEmbed: {
       youtubeId: "Y3qLQOLS-3s",
       caption: "Tokyo Drift, the full video",
