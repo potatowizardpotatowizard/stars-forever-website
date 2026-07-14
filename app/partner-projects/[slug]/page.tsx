@@ -10,6 +10,15 @@ import YouTubeEmbed from "@/components/YouTubeEmbed";
 import { MISSIONS } from "@/content/missions";
 import { resolveSlot } from "@/lib/media";
 
+// Pull a YouTube video id out of an href so linked videos can show
+// their real thumbnails in Go Deeper.
+function youtubeId(href: string): string | null {
+  const m = href.match(
+    /(?:youtu\.be\/|youtube\.com\/watch\?v=)([\w-]{6,})/,
+  );
+  return m ? m[1] : null;
+}
+
 // Brand art colorway per project, shown until its hero photo arrives.
 const HERO_ART: Record<string, string> = {
   "tokyo-drift": "/brand/bg-orange-comet.jpg",
@@ -145,35 +154,68 @@ export default async function MissionPage({
         ))}
       </div>
 
-      {/* Linked media */}
+      {/* Linked media: YouTube links show their real thumbnails */}
       <section className="border-t border-dust/15 bg-soot/40">
         <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8">
           <Kicker>Go deeper</Kicker>
-          <ul className="mt-8 space-y-4">
-            {mission.links.map((link) =>
-              link.href.startsWith("/") ? (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="font-display text-xl text-starlight transition-colors hover:text-ember"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ) : (
-                <li key={link.href}>
+          <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {mission.links.map((link) => {
+              const yt = youtubeId(link.href);
+              if (yt) {
+                return (
                   <a
+                    key={link.href}
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-display text-xl text-starlight transition-colors hover:text-ember"
+                    className="group block"
                   >
-                    {link.label}
+                    <div className="relative overflow-hidden rounded-xl border border-dust/20">
+                      <Image
+                        src={`https://i.ytimg.com/vi/${yt}/maxresdefault.jpg`}
+                        alt=""
+                        width={1280}
+                        height={720}
+                        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                        className="aspect-video w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                      />
+                      <span
+                        aria-hidden="true"
+                        className="absolute inset-0 flex items-center justify-center"
+                      >
+                        <span className="flex h-14 w-14 items-center justify-center rounded-full bg-night/70 pl-1 text-xl text-starlight backdrop-blur-sm transition-colors group-hover:bg-ember group-hover:text-night">
+                          ▶
+                        </span>
+                      </span>
+                    </div>
+                    <p className="mt-4 font-display text-lg font-bold leading-snug transition-colors group-hover:text-ember">
+                      {link.label}
+                    </p>
                   </a>
-                </li>
-              ),
-            )}
-          </ul>
+                );
+              }
+              const cardClass =
+                "flex min-h-24 items-center rounded-xl border border-dust/20 bg-night/40 p-6 font-display text-lg font-bold leading-snug transition-colors hover:border-ember hover:text-ember";
+              if (link.href.startsWith("/")) {
+                return (
+                  <Link key={link.href} href={link.href} className={cardClass}>
+                    {link.label}
+                  </Link>
+                );
+              }
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cardClass}
+                >
+                  {link.label}
+                </a>
+              );
+            })}
+          </div>
         </div>
       </section>
     </article>
