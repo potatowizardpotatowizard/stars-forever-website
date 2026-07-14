@@ -134,20 +134,34 @@ export default async function MissionPage({
             {section.imageSlots?.length ? (
               <div
                 className={`mt-14 grid gap-8 ${
-                  section.imageSlots.length === 1
-                    ? ""
-                    : section.imageSlots.length === 2
-                      ? "sm:grid-cols-2"
-                      : "sm:grid-cols-2"
+                  section.imageSlots.length === 1 ? "" : "sm:grid-cols-2"
                 }`}
               >
-                {section.imageSlots.map((slot) => (
-                  <MediaSlot
-                    key={slot}
-                    name={slot}
-                    sizes="(min-width: 640px) 50vw, 100vw"
-                  />
-                ))}
+                {section.imageSlots.map((slot) => {
+                  const linkHref = mission.slotLinks?.[slot];
+                  const media = (
+                    <MediaSlot
+                      key={linkHref ? undefined : slot}
+                      name={slot}
+                      sizes="(min-width: 640px) 50vw, 100vw"
+                    />
+                  );
+                  if (!linkHref) return media;
+                  return (
+                    <a
+                      key={slot}
+                      href={linkHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group block transition-opacity hover:opacity-90"
+                    >
+                      {media}
+                      <span className="meta-label mt-2 inline-block text-ember">
+                        Watch the episode ▶
+                      </span>
+                    </a>
+                  );
+                })}
               </div>
             ) : null}
           </Reveal>

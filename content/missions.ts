@@ -17,6 +17,8 @@ export type Mission = {
   burningQuestion?: string;
   /** YouTube embed featured at the top of the project page */
   videoEmbed?: { youtubeId: string; caption: string };
+  /** Photo slots that click through to an external link */
+  slotLinks?: Record<string, string>;
   sections: MissionSection[];
   links: { label: string; href: string }[];
 };
@@ -133,6 +135,10 @@ export const MISSIONS: Mission[] = [
       "Ten plus podcasts filmed around the biggest competition show on earth, many carrying Jesus conversations to a secular audience of fans.",
     cardImageSlot: "home-proof-beast-games",
     heroSlot: "beast-hero",
+    slotLinks: {
+      "beast-podcast-jeremy": "https://youtu.be/iLmdLG0fWIU",
+      "beast-podcast-courtney": "https://youtu.be/FKqkqQt5CsY",
+    },
     sections: [
       {
         kicker: "The platform",
@@ -163,11 +169,11 @@ export const MISSIONS: Mission[] = [
     links: [
       {
         label: "Jeremy's testimony podcast",
-        href: "https://www.youtube.com/results?search_query=beast+games+jeremy+christian+podcast",
+        href: "https://youtu.be/iLmdLG0fWIU",
       },
       {
         label: "Courtney's baptism story",
-        href: "https://www.youtube.com/results?search_query=beast+games+courtney+baptism+podcast",
+        href: "https://youtu.be/FKqkqQt5CsY",
       },
       {
         label: "Auzi's insider recap",
