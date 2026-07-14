@@ -70,8 +70,8 @@ export const MISSIONS: Mission[] = [
         href: "https://www.youtube.com/@owensasian",
       },
       {
-        label: "Listen to the podcast episode",
-        href: "https://www.youtube.com/results?search_query=stars+forever+owen+tucker+podcast",
+        label: "Watch the podcast with Owen Tucker about creating Tokyo Drift",
+        href: "https://youtu.be/lmKsfZ4lbts",
       },
     ],
   },
