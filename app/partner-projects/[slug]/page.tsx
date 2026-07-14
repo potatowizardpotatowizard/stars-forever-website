@@ -153,11 +153,16 @@ export default async function MissionPage({
                       href={linkHref}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group block transition-opacity hover:opacity-90"
+                      className="group relative block"
                     >
                       {media}
-                      <span className="meta-label mt-2 inline-block text-ember">
-                        Watch the episode ▶
+                      <span className="pointer-events-none absolute inset-0 flex items-center justify-center bg-night/60 opacity-0 backdrop-blur-[2px] transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
+                        <span className="mono-link text-sm font-bold">
+                          Watch the podcast ▶
+                        </span>
+                      </span>
+                      <span className="meta-label mt-2 inline-block text-ember sm:hidden">
+                        Watch the podcast ▶
                       </span>
                     </a>
                   );
