@@ -68,8 +68,8 @@ export default function StoryPage() {
         aria-label="Tribute"
         className="mx-auto max-w-7xl px-5 py-32 sm:px-8 sm:py-44"
       >
-        <div className="mx-auto max-w-sm">
-          <MediaSlot name={STORY.tribute.imageSlot} showCaption={false} sizes="24rem" />
+        <div className="mx-auto max-w-lg">
+          <MediaSlot name={STORY.tribute.imageSlot} showCaption={false} sizes="32rem" />
           <div className="mt-10 space-y-3 text-center">
             {STORY.tribute.lines.map((line) => (
               <p key={line} className="font-display text-xl text-starlight/90">

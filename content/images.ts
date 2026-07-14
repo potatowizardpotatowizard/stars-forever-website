@@ -58,8 +58,8 @@ export const IMAGES: Record<string, ImageSlot> = {
   },
   "story-prayer": {
     file: "story-prayer.jpg",
-    alt: "Contestants praying together before a challenge",
-    caption: { who: "Contestants", where: "Beast Games set" },
+    alt: "Auzi praying over a fellow contestant before a challenge",
+    caption: { where: "Beast Games set" },
     ratio: "3 / 2",
   },
   "story-church-service": {
@@ -70,14 +70,14 @@ export const IMAGES: Record<string, ImageSlot> = {
   },
   "story-baptism-island": {
     file: "story-baptism-island.jpg",
-    alt: "A baptism in the ocean off a remote island",
+    alt: "Gathered on the island beach where two girls were baptized",
     caption: { where: "A remote island" },
     ratio: "3 / 2",
   },
   "story-tribute": {
     file: "story-tribute.jpg",
-    alt: "Portrait of Auzi's brother",
-    ratio: "4 / 5",
+    alt: "Auzi and his brother at home with their dogs",
+    ratio: "4 / 3",
   },
   "story-vision": {
     file: "story-vision.jpg",
