@@ -19,6 +19,8 @@ export type Mission = {
   burningQuestion?: string;
   /** YouTube embed featured at the top of the project page */
   videoEmbed?: { youtubeId: string; caption: string };
+  /** Ambient video that plays behind the hero */
+  heroVideo?: string;
   /** Photo slots that click through to an external link */
   slotLinks?: Record<string, { href: string; label: string }>;
   sections: MissionSection[];
@@ -137,6 +139,7 @@ export const MISSIONS: Mission[] = [
       "Ten plus podcasts filmed around the biggest competition show on earth, many carrying Jesus conversations to a secular audience of fans.",
     cardImageSlot: "home-proof-beast-games",
     heroSlot: "beast-hero",
+    heroVideo: "/brand/video/beast-hero-bg.mp4",
     slotLinks: {
       "beast-podcast-jeremy": {
         href: "https://youtu.be/iLmdLG0fWIU",

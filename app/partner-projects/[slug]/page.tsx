@@ -53,9 +53,21 @@ export default async function MissionPage({
 
   return (
     <article>
-      {/* Full bleed hero: real photo when it exists, brand art until then */}
+      {/* Full bleed hero: ambient video when provided, else photo or art */}
       <header className="relative flex min-h-[70svh] items-end overflow-hidden">
-        {heroPhoto.src ? (
+        {mission.heroVideo ? (
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster={heroPhoto.src ?? undefined}
+            className="absolute inset-0 h-full w-full object-cover opacity-40"
+          >
+            <source src={mission.heroVideo} type="video/mp4" />
+          </video>
+        ) : heroPhoto.src ? (
           <MediaSlot name={mission.heroSlot} fill priority />
         ) : (
           <Image
