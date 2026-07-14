@@ -63,7 +63,7 @@ export default async function MissionPage({
             playsInline
             preload="metadata"
             poster={heroPhoto.src ?? undefined}
-            className="absolute inset-0 h-full w-full object-cover opacity-40"
+            className="absolute inset-0 h-full w-full object-cover opacity-55"
           >
             <source src={mission.heroVideo} type="video/mp4" />
           </video>
