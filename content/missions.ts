@@ -56,7 +56,7 @@ export const MISSIONS: Mission[] = [
       {
         kicker: "The dream",
         paragraphs: [
-          "We believe God places certain dreams on our hearts. Owen, a Japanese lifestyle YouTuber, always dreamed of drifting in Japan. He loves cars and adventures. So we started there, and we sought God daily: God, help us make something of eternal value. Help us to be bold with the gospel in this video and our lives. Help us reach a secular audience who truly needs to know you.",
+          "We believe God places certain dreams on our hearts. Owen, a travel adventure YouTuber, always dreamed of drifting in Japan. He loves cars so we started there and we sought God daily: God, help us make something of eternal value. Help us to be bold with the gospel in this video and our lives. Help us reach a secular audience who truly needs to know you.",
         ],
         imageSlots: ["tokyo-owen", "tokyo-subway"],
       },
