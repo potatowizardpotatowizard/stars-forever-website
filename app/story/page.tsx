@@ -136,15 +136,6 @@ export default function StoryPage() {
             </Reveal>
           ))}
         </div>
-        <div className="mt-24 flex justify-center">
-          <Image
-            src="/brand/star-sharp.png"
-            alt=""
-            width={44}
-            height={44}
-            className="vhs-glow"
-          />
-        </div>
       </section>
     </article>
   );
