@@ -74,7 +74,17 @@ export default function Category3Page() {
                   <p className="mt-4 flex-1 text-sm leading-relaxed text-starlight/70">
                     {cat.body}
                   </p>
-                  <p className="meta-label mt-6">{cat.example}</p>
+                  <p className="meta-label mt-6">
+                    Example:{" "}
+                    <a
+                      href={cat.exampleHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-ember transition-colors hover:text-starlight"
+                    >
+                      {cat.example} ↗
+                    </a>
+                  </p>
                 </div>
               </Reveal>
             );
