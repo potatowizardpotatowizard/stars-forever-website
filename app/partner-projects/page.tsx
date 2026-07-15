@@ -8,6 +8,7 @@ import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
 import Reveal from "@/components/Reveal";
 import VideoBlock from "@/components/VideoBlock";
+import WaitlistForm from "@/components/WaitlistForm";
 import { MISSIONS, MISSIONS_INDEX } from "@/content/missions";
 import { PARTNER } from "@/content/partner";
 import { CONTACT } from "@/content/site";
@@ -181,7 +182,7 @@ export default function PartnerProjectsPage() {
         </div>
       </section>
 
-      {/* Closing CTA */}
+      {/* Closing CTA + wait list */}
       <section className="mx-auto max-w-7xl px-5 py-28 text-center sm:px-8 sm:py-36">
         <Reveal>
           <Image
@@ -191,20 +192,29 @@ export default function PartnerProjectsPage() {
             height={44}
             className="vhs-glow mx-auto"
           />
-          <h2 className="mx-auto mt-8 max-w-2xl font-display text-4xl font-bold sm:text-5xl">
+          <p className="meta-label mt-8 text-ember">{PARTNER.closing.kicker}</p>
+          <h2 className="mx-auto mt-6 max-w-2xl font-display text-4xl font-bold sm:text-5xl">
             {PARTNER.closing.heading}
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-starlight/75">
             {PARTNER.closing.body}
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <Cta href="/apply">Start an application</Cta>
+            <Cta href="/apply">Start an Application</Cta>
             <Cta href={CONTACT.bookingUrl} variant="ghost">
               {PARTNER.closing.bookCta}
             </Cta>
             <Cta href={`mailto:${CONTACT.primaryEmail}`} variant="ghost">
               {PARTNER.closing.emailCta}
             </Cta>
+          </div>
+          <div className="mt-14">
+            <WaitlistForm
+              list="Partner Project"
+              label="Partner Project Wait List"
+              button="Join the Partner Project Wait List"
+              doneNote="When the next Partner Project starts forming, you will be one of the first to hear about it."
+            />
           </div>
         </Reveal>
       </section>

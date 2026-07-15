@@ -4,13 +4,23 @@ import { useState } from "react";
 import { track } from "@vercel/analytics";
 import { CONTACT } from "@/content/site";
 
-// Revolutionary Cohort 2 waitlist. Sends through the API when mail is
+// Waitlist signup, reusable per list. Sends through the API when mail is
 // configured; otherwise opens a prefilled email so no signup is lost.
 
 const field =
   "w-full rounded-md border border-dust/30 bg-soot/60 px-4 py-3 text-starlight placeholder:text-dust/60 focus:border-ember focus:outline-none";
 
-export default function WaitlistForm() {
+export default function WaitlistForm({
+  list = "Revolutionary Cohort 2",
+  label = "Cohort 2 waitlist",
+  button = "Join the Cohort 2 Waitlist",
+  doneNote = "When Cohort 2 starts forming, you will be one of the first to hear about it.",
+}: {
+  list?: string;
+  label?: string;
+  button?: string;
+  doneNote?: string;
+}) {
   const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">(
     "idle",
   );
@@ -34,7 +44,7 @@ export default function WaitlistForm() {
       const res = await fetch("/api/waitlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, list }),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -45,7 +55,7 @@ export default function WaitlistForm() {
       track("waitlist_signup");
       if (!data.sent) {
         window.location.href = `mailto:${CONTACT.primaryEmail}?subject=${encodeURIComponent(
-          `Cohort 2 waitlist: ${form.name}`,
+          `${list} waitlist: ${form.name}`,
         )}&body=${encodeURIComponent(data.body)}`;
       }
       setStatus("done");
@@ -60,8 +70,7 @@ export default function WaitlistForm() {
       <div className="rounded-lg border border-ember/40 bg-soot/50 p-8 text-center">
         <p className="font-display text-2xl font-bold">You are on the list.</p>
         <p className="mx-auto mt-3 max-w-md text-sm text-starlight/75">
-          When Cohort 2 starts forming, you will be one of the first to hear
-          about it.
+          {doneNote}
         </p>
       </div>
     );
@@ -72,7 +81,7 @@ export default function WaitlistForm() {
       onSubmit={submit}
       className="mx-auto max-w-md rounded-lg border border-dust/25 bg-night/50 p-6 text-left sm:p-8"
     >
-      <p className="meta-label text-ember">Cohort 2 waitlist</p>
+      <p className="meta-label text-ember">{label}</p>
       <div className="mt-5 space-y-4">
         <div>
           <label htmlFor="wl-name" className="meta-label mb-2 block">
@@ -138,7 +147,7 @@ export default function WaitlistForm() {
         disabled={status === "sending"}
         className="mt-6 w-full bg-ember px-7 py-3.5 font-meta text-xs font-bold uppercase tracking-[0.14em] text-night transition-colors hover:bg-starlight disabled:opacity-50"
       >
-        {status === "sending" ? "Joining…" : "Join the Cohort 2 Waitlist"}
+        {status === "sending" ? "Joining…" : button}
       </button>
     </form>
   );

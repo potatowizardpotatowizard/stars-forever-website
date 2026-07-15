@@ -49,7 +49,7 @@ export const REVOLUTIONARY = {
       },
       {
         title: "Showcase Week",
-        body: "One to three months after the cohort, creators gather again in person to premiere the gospel art the weekend set in motion, celebrating it together and sharing it in front of their audiences.",
+        body: "One to three months after the cohort, creators are given an opportunity to gather again in person to premiere the gospel art the weekend set in motion, celebrating it together and sharing it in front of their audiences.",
       },
     ],
   },

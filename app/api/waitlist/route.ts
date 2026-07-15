@@ -12,7 +12,7 @@ export async function POST(request: Request) {
   // Honeypot: real people never fill this field.
   if (body.website) return NextResponse.json({ sent: true });
 
-  const { name, email, handle } = body;
+  const { name, email, handle, list } = body;
   if (!name?.trim() || !email?.includes("@")) {
     return NextResponse.json(
       { error: "Name and a valid email are required." },
@@ -20,8 +20,9 @@ export async function POST(request: Request) {
     );
   }
 
+  const listName = list?.trim() || "Revolutionary Cohort 2";
   const text = [
-    `Revolutionary Cohort 2 waitlist signup`,
+    `${listName} waitlist signup`,
     ``,
     `Name: ${name.trim()}`,
     `Email: ${email.trim()}`,
@@ -29,7 +30,7 @@ export async function POST(request: Request) {
   ].join("\n");
 
   const sent = await sendMail({
-    subject: `Cohort 2 waitlist: ${name.trim()}`,
+    subject: `${listName} waitlist: ${name.trim()}`,
     text,
     replyTo: email.trim(),
   });
