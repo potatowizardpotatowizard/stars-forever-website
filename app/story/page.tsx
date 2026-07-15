@@ -3,8 +3,8 @@ import Image from "next/image";
 import GlitchText from "@/components/GlitchText";
 import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
+import Constellation from "@/components/Constellation";
 import MediaSlot from "@/components/MediaSlot";
-import Polaroid from "@/components/Polaroid";
 import Reveal from "@/components/Reveal";
 import { STORY } from "@/content/story";
 import { FOUNDERS } from "@/content/site";
@@ -44,25 +44,33 @@ export default function StoryPage() {
         </div>
       </header>
 
-      {/* Photo essay beats: kept photographs hung on a constellation line */}
-      <div className="relative mx-auto max-w-7xl px-5 pt-8 sm:px-8">
+      {/* Photo essay beats, threaded on a constellation that draws itself */}
+      <div className="relative mx-auto max-w-7xl px-5 pt-4 sm:px-8">
         <div aria-hidden="true" className="story-spine hidden md:block" />
-        <div className="space-y-24 sm:space-y-32">
+        <div className="space-y-20 sm:space-y-28">
           {STORY.beats.map((beat, i) => (
-            <Reveal as="section" key={beat.imageSlot}>
+            <Reveal as="section" key={beat.imageSlot} className="relative">
+              <Constellation
+                variant={(["a", "b", "c"] as const)[i % 3]}
+                className={`hidden lg:block ${
+                  i % 2 === 0 ? "-left-2 top-10" : "-right-2 top-16"
+                }`}
+              />
               <div aria-hidden="true" className="story-node hidden md:flex">
+                <span className="story-draw" />
                 <Image
                   src="/brand/star-sharp.png"
                   alt=""
                   width={20}
                   height={20}
+                  className="story-star"
                 />
               </div>
-              <Polaroid
+              <MediaSlot
                 name={beat.imageSlot}
-                caption={beat.polaroidCaption}
-                tilt={i % 2 === 0 ? "left" : "right"}
+                sizes="(min-width: 1280px) 1216px, 100vw"
                 priority={i === 0}
+                className="overflow-hidden rounded-xl"
               />
               <div className="mx-auto mt-12 max-w-2xl space-y-6">
                 {beat.paragraphs.map((p) => (
@@ -76,16 +84,27 @@ export default function StoryPage() {
         </div>
       </div>
 
-      {/* Tribute: maximum reverence. The photo kept closest. */}
+      {/* Tribute: maximum reverence, held by its own quiet star */}
       <section
         aria-label="Tribute"
-        className="relative mx-auto max-w-7xl px-5 py-32 sm:px-8 sm:py-44"
+        className="relative mx-auto max-w-7xl px-5 py-28 sm:px-8 sm:py-36"
       >
-        <div className="mx-auto max-w-lg">
-          <Polaroid
+        <Reveal className="mx-auto max-w-lg">
+          <div aria-hidden="true" className="story-node hidden md:flex">
+            <span className="story-draw" />
+            <Image
+              src="/brand/star-sharp.png"
+              alt=""
+              width={20}
+              height={20}
+              className="story-star"
+            />
+          </div>
+          <MediaSlot
             name={STORY.tribute.imageSlot}
-            caption={STORY.tribute.polaroidCaption}
+            showCaption={false}
             sizes="32rem"
+            className="overflow-hidden rounded-xl"
           />
           <div className="mt-12 space-y-3 text-center">
             {STORY.tribute.lines.map((line) => (
@@ -94,7 +113,7 @@ export default function StoryPage() {
               </p>
             ))}
           </div>
-        </div>
+        </Reveal>
       </section>
 
       {/* Bridge into the vision */}

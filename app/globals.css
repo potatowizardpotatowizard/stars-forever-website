@@ -300,39 +300,8 @@ h4 {
   }
 }
 
-/* Instant film frames for The Story: warm white border, deep shadow,
-   a strip of tape, and a typewriter caption in the bottom margin */
-.polaroid {
-  background: #f4f1e8;
-  padding: 14px 14px 0;
-  box-shadow:
-    0 14px 40px rgb(0 0 0 / 0.55),
-    0 2px 8px rgb(0 0 0 / 0.4);
-}
-.polaroid-caption {
-  font-family: var(--font-meta);
-  font-size: 0.8125rem;
-  letter-spacing: 0.06em;
-  color: #4a4453;
-  padding: 12px 4px 16px;
-  min-height: 2.75rem;
-  text-align: center;
-}
-.polaroid-tape {
-  position: absolute;
-  top: -12px;
-  left: 50%;
-  z-index: 1;
-  width: 110px;
-  height: 26px;
-  transform: translateX(-50%) rotate(-2deg);
-  background: rgb(239 236 247 / 0.16);
-  backdrop-filter: blur(1px);
-  border-left: 1px dashed rgb(239 236 247 / 0.12);
-  border-right: 1px dashed rgb(239 236 247 / 0.12);
-}
-
-/* Constellation spine: the line the story hangs from */
+/* The Story constellation: a faint spine runs the length of the essay;
+   each chapter draws its segment and ignites its star as it scrolls in */
 .story-spine {
   position: absolute;
   top: 0;
@@ -342,8 +311,8 @@ h4 {
   background: linear-gradient(
     to bottom,
     transparent,
-    rgb(167 139 250 / 0.35) 8%,
-    rgb(151 139 173 / 0.25) 92%,
+    rgb(151 139 173 / 0.14) 8%,
+    rgb(151 139 173 / 0.14) 92%,
     transparent
   );
 }
@@ -351,11 +320,80 @@ h4 {
   position: relative;
   z-index: 1;
   display: flex;
-  justify-content: center;
-  padding: 0 0 40px;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 36px;
 }
-.story-node img {
-  filter: drop-shadow(0 0 10px rgb(167 139 250 / 0.7));
+.story-draw {
+  width: 1px;
+  height: 90px;
+  background: linear-gradient(to bottom, transparent, rgb(167 139 250 / 0.8));
+  transform: scaleY(0);
+  transform-origin: top;
+}
+.story-star {
+  margin-top: 10px;
+  opacity: 0.15;
+}
+.reveal.is-visible .story-star {
+  opacity: 1;
+  filter: drop-shadow(0 0 12px rgb(167 139 250 / 0.9));
+}
+
+/* Constellation clusters draw their lines and twinkle once revealed */
+.constellation {
+  opacity: 0.55;
+}
+.constellation line {
+  stroke-dasharray: 220;
+  stroke-dashoffset: 220;
+  opacity: 0.45;
+}
+.reveal.is-visible .constellation line {
+  stroke-dashoffset: 0;
+}
+.constellation circle {
+  opacity: 0.9;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .story-draw {
+    transition: transform 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.15s;
+  }
+  .reveal.is-visible .story-draw {
+    transform: scaleY(1);
+  }
+  .story-star {
+    transition:
+      opacity 0.9s ease 0.9s,
+      filter 0.9s ease 0.9s;
+  }
+  .constellation line {
+    transition: stroke-dashoffset 1.6s ease;
+  }
+  .constellation circle {
+    animation: constellation-twinkle 4s ease-in-out infinite;
+  }
+  @keyframes constellation-twinkle {
+    0%,
+    100% {
+      opacity: 0.9;
+    }
+    50% {
+      opacity: 0.35;
+    }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .story-draw {
+    transform: scaleY(1);
+  }
+  .story-star {
+    opacity: 1;
+  }
+  .constellation line {
+    stroke-dashoffset: 0;
+  }
 }
 
 /* Dignified placeholder texture for empty photo slots */
