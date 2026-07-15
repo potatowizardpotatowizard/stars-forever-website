@@ -36,6 +36,7 @@ export default function StoryPage() {
           className="absolute inset-0 bg-gradient-to-b from-night/50 via-night/30 to-night"
         />
         <Grain />
+        <span aria-hidden="true" className="hero-meteor" />
         <div className="relative mx-auto max-w-7xl px-5 pb-20 pt-44 sm:px-8">
           <p className="meta-label">
             {STORY.meta.where} · {STORY.meta.when}

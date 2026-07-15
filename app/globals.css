@@ -300,6 +300,45 @@ h4 {
   }
 }
 
+/* A shooting star that periodically crosses the lower hero of The Story */
+.hero-meteor {
+  position: absolute;
+  bottom: 22%;
+  left: -18%;
+  width: 240px;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, rgb(239 236 247 / 0.95));
+  box-shadow: 0 0 8px rgb(167 139 250 / 0.7);
+  transform: rotate(9deg);
+  opacity: 0;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-meteor {
+    animation: hero-meteor 7s linear infinite;
+    animation-delay: 1.2s;
+  }
+  @keyframes hero-meteor {
+    0% {
+      transform: translate(0, 0) rotate(9deg);
+      opacity: 0;
+    }
+    4% {
+      opacity: 0.9;
+    }
+    18% {
+      opacity: 0.9;
+    }
+    26% {
+      transform: translate(80vw, 12vw) rotate(9deg);
+      opacity: 0;
+    }
+    100% {
+      transform: translate(80vw, 12vw) rotate(9deg);
+      opacity: 0;
+    }
+  }
+}
+
 /* The Story constellation: a faint spine runs the length of the essay;
    each chapter draws its segment and ignites its star as it scrolls in */
 .story-spine {
