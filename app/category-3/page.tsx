@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Category3Intro from "@/components/Category3Intro";
 import Cta from "@/components/Cta";
 import GlitchText from "@/components/GlitchText";
 import Grain from "@/components/Grain";
@@ -32,24 +31,7 @@ export default function Category3Page() {
           className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night"
         />
         <Grain />
-        <Category3Intro />
         <div className="relative mx-auto max-w-7xl px-5 pb-20 pt-44 sm:px-8">
-          <div aria-hidden="true" className="hero-rise mb-10 flex items-center">
-            <span className="flex flex-col items-center gap-2">
-              <span className="spectrum-node" />
-              <span className="meta-label">1</span>
-            </span>
-            <span className="spectrum-seg mb-6" />
-            <span className="flex flex-col items-center gap-2">
-              <span className="spectrum-node" />
-              <span className="meta-label">2</span>
-            </span>
-            <span className="spectrum-seg mb-6" />
-            <span className="flex flex-col items-center gap-2">
-              <span className="spectrum-node bright" />
-              <span className="meta-label text-ember">3</span>
-            </span>
-          </div>
           <Kicker>{CATEGORY3.burningQuestion.kicker}</Kicker>
           <h1 className="mt-8 max-w-4xl font-display text-3xl leading-tight sm:text-5xl sm:leading-tight">
             {CATEGORY3.burningQuestion.heading}

@@ -4,7 +4,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import GlitchText from "@/components/GlitchText";
 import Grain from "@/components/Grain";
-import ParallaxLayer from "@/components/ParallaxLayer";
 import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
 import Reveal from "@/components/Reveal";
@@ -57,41 +56,37 @@ export default async function MissionPage({
     <article>
       {/* Full bleed hero: ambient video when provided, else photo or art */}
       <header className="relative flex min-h-[70svh] items-end overflow-hidden">
-        <ParallaxLayer className="absolute inset-0">
-          {mission.heroVideo ? (
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              poster={heroPhoto.src ?? undefined}
-              className="absolute inset-0 h-full w-full object-cover opacity-55"
-            >
-              <source src={mission.heroVideo} type="video/mp4" />
-            </video>
-          ) : heroPhoto.src ? (
-            <MediaSlot name={mission.heroSlot} fill priority />
-          ) : (
-            <Image
-              src={HERO_ART[mission.slug] ?? "/brand/bg-purple-meteor.jpg"}
-              alt=""
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover opacity-80"
-            />
-          )}
-        </ParallaxLayer>
+        {mission.heroVideo ? (
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster={heroPhoto.src ?? undefined}
+            className="absolute inset-0 h-full w-full object-cover opacity-55"
+          >
+            <source src={mission.heroVideo} type="video/mp4" />
+          </video>
+        ) : heroPhoto.src ? (
+          <MediaSlot name={mission.heroSlot} fill priority />
+        ) : (
+          <Image
+            src={HERO_ART[mission.slug] ?? "/brand/bg-purple-meteor.jpg"}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover opacity-80"
+          />
+        )}
         <div
           aria-hidden="true"
           className="absolute inset-0 bg-gradient-to-b from-night/45 via-transparent to-night/90"
         />
         <Grain />
         <div className="relative mx-auto w-full max-w-7xl px-5 pb-16 pt-44 sm:px-8">
-          <h1 className="font-display text-5xl sm:text-7xl">
-            <GlitchText text={mission.name} />
-          </h1>
+          <h1 className="font-display text-5xl sm:text-7xl">{mission.name}</h1>
         </div>
       </header>
 
