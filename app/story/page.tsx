@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import GlitchText from "@/components/GlitchText";
 import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
-import Constellation from "@/components/Constellation";
 import MediaSlot from "@/components/MediaSlot";
 import Reveal from "@/components/Reveal";
-import StoryConnector from "@/components/StoryConnector";
+import StoryJourney from "@/components/StoryJourney";
 import { STORY } from "@/content/story";
 import { FOUNDERS } from "@/content/site";
+import { resolveSlot } from "@/lib/media";
 
 export const metadata: Metadata = {
   title: "The Story",
@@ -45,77 +46,26 @@ export default function StoryPage() {
         </div>
       </header>
 
-      {/* Photo essay beats, threaded on a constellation that draws itself */}
-      <div className="relative mx-auto max-w-7xl px-5 pt-4 sm:px-8">
-        <div className="space-y-14 sm:space-y-16">
-          {STORY.beats.map((beat, i) => (
-            <Reveal as="section" key={beat.imageSlot} className="relative">
-              <Constellation
-                variant={(["a", "b", "c"] as const)[i % 3]}
-                className={`hidden lg:block ${
-                  i % 2 === 0 ? "-left-2 top-10" : "-right-2 top-16"
-                }`}
-              />
-              <div aria-hidden="true" className="story-node hidden md:flex">
-                <StoryConnector variant={(["a", "b", "c"] as const)[i % 3]} />
-                <Image
-                  src="/brand/star-sharp.png"
-                  alt=""
-                  width={20}
-                  height={20}
-                  className="story-star"
-                />
-              </div>
-              <MediaSlot
-                name={beat.imageSlot}
-                sizes="(min-width: 1280px) 1216px, 100vw"
-                priority={i === 0}
-                className="overflow-hidden rounded-xl"
-              />
-              <div className="mx-auto mt-12 max-w-2xl space-y-6">
-                {beat.paragraphs.map((p) => (
-                  <p key={p} className="text-lg leading-relaxed text-starlight/85">
-                    {p}
-                  </p>
-                ))}
-              </div>
-            </Reveal>
-          ))}
-        </div>
+      {/* The journey: chapters scattered across the sky, a guiding star
+          traveling the constellation between them, ending at the cross */}
+      <div className="mx-auto max-w-7xl px-5 pt-10 sm:px-8">
+        <StoryJourney
+          beats={STORY.beats.map((beat) => {
+            const slot = resolveSlot(beat.imageSlot);
+            return {
+              src: slot.src ?? "",
+              alt: slot.alt,
+              ratio: slot.ratio,
+              paragraphs: beat.paragraphs,
+            };
+          })}
+          tribute={{
+            src: resolveSlot(STORY.tribute.imageSlot).src ?? "",
+            alt: resolveSlot(STORY.tribute.imageSlot).alt,
+            lines: STORY.tribute.lines,
+          }}
+        />
       </div>
-
-      {/* Tribute: maximum reverence, held by its own quiet star */}
-      <section
-        aria-label="Tribute"
-        className="relative mx-auto max-w-7xl px-5 py-28 sm:px-8 sm:py-36"
-      >
-        <Reveal className="mx-auto max-w-lg">
-          <div aria-hidden="true" className="story-node hidden md:flex">
-            <StoryConnector variant="d" />
-            <Image
-              src="/brand/star-sharp.png"
-              alt=""
-              width={20}
-              height={20}
-              className="story-star"
-            />
-          </div>
-          <div className="tribute-glow overflow-hidden rounded-xl">
-            <MediaSlot
-              name={STORY.tribute.imageSlot}
-              showCaption={false}
-              sizes="32rem"
-            />
-          </div>
-          <div className="mt-12 space-y-3 text-center">
-            {STORY.tribute.lines.map((line) => (
-              <p key={line} className="font-display text-xl text-starlight/90">
-                {line}
-              </p>
-            ))}
-          </div>
-        </Reveal>
-      </section>
 
       {/* Bridge into the vision */}
       <section className="border-t border-dust/15 bg-soot/40">
@@ -131,11 +81,20 @@ export default function StoryPage() {
             </div>
           </Reveal>
           <Reveal className="mt-16">
-            <MediaSlot
-              name={STORY.vision.imageSlot}
-              sizes="(min-width: 1280px) 1216px, 100vw"
-              showCaption={false}
-            />
+            <Link
+              href="/partner-projects/revolutionary-cohort"
+              className="group relative block"
+            >
+              <MediaSlot
+                name={STORY.vision.imageSlot}
+                sizes="(min-width: 1280px) 1216px, 100vw"
+                showCaption={false}
+                className="overflow-hidden rounded-xl"
+              />
+              <span className="pointer-events-none absolute inset-0 flex items-center justify-center rounded-xl bg-night/60 opacity-0 backdrop-blur-[2px] transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
+                <span className="mono-link text-sm font-bold">Learn More ▶</span>
+              </span>
+            </Link>
           </Reveal>
         </div>
       </section>

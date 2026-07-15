@@ -81,7 +81,8 @@ export const IMAGES: Record<string, ImageSlot> = {
   },
   "story-vision": {
     file: "story-vision.jpg",
-    alt: "A crowd of people lit by their phone screens in the dark",
+    alt: "The first Revolutionary Cohort standing together in the desert at dusk",
+    caption: { where: "Joshua Tree, California", when: "May 2026" },
     ratio: "21 / 9",
   },
   "story-founder-benjiman": {
