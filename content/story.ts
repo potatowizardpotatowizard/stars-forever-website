@@ -8,18 +8,21 @@ export const STORY = {
   beats: [
     {
       imageSlot: "story-set",
+      polaroidCaption: "the set at night · july 2024",
       paragraphs: [
         "He prayed a prayer that would change everything: Jesus, I want my brother's death to turn into other people's eternities.",
       ],
     },
     {
       imageSlot: "story-prayer",
+      polaroidCaption: "prayer before the challenge",
       paragraphs: [
         "On the set of MrBeast's Amazon Prime show, he met other Christians. Together they prayed before every challenge. They hosted a church service. They preached the gospel and did life with unbelievers, day after day, in the middle of the biggest competition show on earth.",
       ],
     },
     {
       imageSlot: "story-baptism-island",
+      polaroidCaption: "the remote island",
       paragraphs: [
         "On a remote island, they baptized two girls.",
         "It was the most he had ever seen God move. And it happened outside a church. Despite the fresh grief, he had certainty that he was living exactly what God had designed for him, and he did not want it to end with the show. From that moment he knew he wanted to spend the rest of his life preaching Jesus through creators and creator environments.",
@@ -29,6 +32,7 @@ export const STORY = {
   ],
   tribute: {
     imageSlot: "story-tribute",
+    polaroidCaption: "auzi and his brother",
     lines: [
       "This is Auzi's brother, now spending eternity with Jesus.",
       "He inspired Stars Forever.",

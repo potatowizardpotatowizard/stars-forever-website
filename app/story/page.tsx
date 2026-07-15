@@ -4,6 +4,7 @@ import GlitchText from "@/components/GlitchText";
 import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
+import Polaroid from "@/components/Polaroid";
 import Reveal from "@/components/Reveal";
 import { STORY } from "@/content/story";
 import { FOUNDERS } from "@/content/site";
@@ -43,34 +44,50 @@ export default function StoryPage() {
         </div>
       </header>
 
-      {/* Photo essay beats */}
-      <div className="mx-auto max-w-7xl space-y-24 px-5 sm:px-8 sm:space-y-32">
-        {STORY.beats.map((beat, i) => (
-          <Reveal as="section" key={beat.imageSlot}>
-            <MediaSlot
-              name={beat.imageSlot}
-              sizes="(min-width: 1280px) 1216px, 100vw"
-              priority={i === 0}
-            />
-            <div className="mx-auto mt-12 max-w-2xl space-y-6">
-              {beat.paragraphs.map((p) => (
-                <p key={p} className="text-lg leading-relaxed text-starlight/85">
-                  {p}
-                </p>
-              ))}
-            </div>
-          </Reveal>
-        ))}
+      {/* Photo essay beats: kept photographs hung on a constellation line */}
+      <div className="relative mx-auto max-w-7xl px-5 pt-8 sm:px-8">
+        <div aria-hidden="true" className="story-spine hidden md:block" />
+        <div className="space-y-24 sm:space-y-32">
+          {STORY.beats.map((beat, i) => (
+            <Reveal as="section" key={beat.imageSlot}>
+              <div aria-hidden="true" className="story-node hidden md:flex">
+                <Image
+                  src="/brand/star-sharp.png"
+                  alt=""
+                  width={20}
+                  height={20}
+                />
+              </div>
+              <Polaroid
+                name={beat.imageSlot}
+                caption={beat.polaroidCaption}
+                tilt={i % 2 === 0 ? "left" : "right"}
+                priority={i === 0}
+              />
+              <div className="mx-auto mt-12 max-w-2xl space-y-6">
+                {beat.paragraphs.map((p) => (
+                  <p key={p} className="text-lg leading-relaxed text-starlight/85">
+                    {p}
+                  </p>
+                ))}
+              </div>
+            </Reveal>
+          ))}
+        </div>
       </div>
 
-      {/* Tribute: maximum reverence, generous whitespace, no decoration */}
+      {/* Tribute: maximum reverence. The photo kept closest. */}
       <section
         aria-label="Tribute"
-        className="mx-auto max-w-7xl px-5 py-32 sm:px-8 sm:py-44"
+        className="relative mx-auto max-w-7xl px-5 py-32 sm:px-8 sm:py-44"
       >
         <div className="mx-auto max-w-lg">
-          <MediaSlot name={STORY.tribute.imageSlot} showCaption={false} sizes="32rem" />
-          <div className="mt-10 space-y-3 text-center">
+          <Polaroid
+            name={STORY.tribute.imageSlot}
+            caption={STORY.tribute.polaroidCaption}
+            sizes="32rem"
+          />
+          <div className="mt-12 space-y-3 text-center">
             {STORY.tribute.lines.map((line) => (
               <p key={line} className="font-display text-xl text-starlight/90">
                 {line}

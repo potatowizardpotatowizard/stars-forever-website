@@ -300,6 +300,64 @@ h4 {
   }
 }
 
+/* Instant film frames for The Story: warm white border, deep shadow,
+   a strip of tape, and a typewriter caption in the bottom margin */
+.polaroid {
+  background: #f4f1e8;
+  padding: 14px 14px 0;
+  box-shadow:
+    0 14px 40px rgb(0 0 0 / 0.55),
+    0 2px 8px rgb(0 0 0 / 0.4);
+}
+.polaroid-caption {
+  font-family: var(--font-meta);
+  font-size: 0.8125rem;
+  letter-spacing: 0.06em;
+  color: #4a4453;
+  padding: 12px 4px 16px;
+  min-height: 2.75rem;
+  text-align: center;
+}
+.polaroid-tape {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  z-index: 1;
+  width: 110px;
+  height: 26px;
+  transform: translateX(-50%) rotate(-2deg);
+  background: rgb(239 236 247 / 0.16);
+  backdrop-filter: blur(1px);
+  border-left: 1px dashed rgb(239 236 247 / 0.12);
+  border-right: 1px dashed rgb(239 236 247 / 0.12);
+}
+
+/* Constellation spine: the line the story hangs from */
+.story-spine {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgb(167 139 250 / 0.35) 8%,
+    rgb(151 139 173 / 0.25) 92%,
+    transparent
+  );
+}
+.story-node {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  padding: 0 0 40px;
+}
+.story-node img {
+  filter: drop-shadow(0 0 10px rgb(167 139 250 / 0.7));
+}
+
 /* Dignified placeholder texture for empty photo slots */
 .slot-placeholder {
   background-color: var(--color-soot);
