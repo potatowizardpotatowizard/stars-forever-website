@@ -6,6 +6,7 @@ import Kicker from "@/components/Kicker";
 import Constellation from "@/components/Constellation";
 import MediaSlot from "@/components/MediaSlot";
 import Reveal from "@/components/Reveal";
+import StoryConnector from "@/components/StoryConnector";
 import { STORY } from "@/content/story";
 import { FOUNDERS } from "@/content/site";
 
@@ -46,7 +47,6 @@ export default function StoryPage() {
 
       {/* Photo essay beats, threaded on a constellation that draws itself */}
       <div className="relative mx-auto max-w-7xl px-5 pt-4 sm:px-8">
-        <div aria-hidden="true" className="story-spine hidden md:block" />
         <div className="space-y-20 sm:space-y-28">
           {STORY.beats.map((beat, i) => (
             <Reveal as="section" key={beat.imageSlot} className="relative">
@@ -57,7 +57,7 @@ export default function StoryPage() {
                 }`}
               />
               <div aria-hidden="true" className="story-node hidden md:flex">
-                <span className="story-draw" />
+                <StoryConnector variant={(["a", "b", "c"] as const)[i % 3]} />
                 <Image
                   src="/brand/star-sharp.png"
                   alt=""
@@ -91,7 +91,7 @@ export default function StoryPage() {
       >
         <Reveal className="mx-auto max-w-lg">
           <div aria-hidden="true" className="story-node hidden md:flex">
-            <span className="story-draw" />
+            <StoryConnector variant="b" />
             <Image
               src="/brand/star-sharp.png"
               alt=""
