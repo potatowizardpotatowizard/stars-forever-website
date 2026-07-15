@@ -127,19 +127,41 @@ export default async function MissionPage({
             <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
               <GlitchText text={mission.roster.heading} />
             </h2>
-            <ul className="mt-10 grid gap-x-8 gap-y-4 sm:grid-cols-2 lg:grid-cols-3">
-              {mission.roster.people.map((person) => (
-                <li key={person.name}>
-                  <a
-                    href={person.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mono-link text-sm font-bold"
-                  >
-                    {person.name} ↗
-                  </a>
-                </li>
-              ))}
+            <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+              {mission.roster.people.map((person) => {
+                const platform = person.href.includes("instagram")
+                  ? "Instagram"
+                  : person.href.includes("youtube")
+                    ? "YouTube"
+                    : "Website";
+                return (
+                  <li key={person.name} className="h-full">
+                    <a
+                      href={person.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex h-full flex-col rounded-lg border border-dust/20 bg-night/50 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-ember/70 hover:shadow-[0_0_24px_rgb(109_40_217/0.35)]"
+                    >
+                      <Image
+                        src="/brand/star-sharp.png"
+                        alt=""
+                        width={22}
+                        height={22}
+                        className="opacity-60 transition-opacity group-hover:opacity-100"
+                      />
+                      <span className="mt-4 font-display text-lg font-bold leading-snug transition-colors group-hover:text-ember">
+                        {person.name}
+                      </span>
+                      {person.niche ? (
+                        <span className="meta-label mt-1.5">{person.niche}</span>
+                      ) : null}
+                      <span className="meta-label mt-5 flex-1 content-end text-ember">
+                        {platform} ↗
+                      </span>
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
           </Reveal>
         </section>

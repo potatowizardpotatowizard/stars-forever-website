@@ -24,7 +24,10 @@ export type Mission = {
   /** Photo slots that click through to an external link */
   slotLinks?: Record<string, { href: string; label: string }>;
   /** The people who took part, with their main channels */
-  roster?: { heading: string; people: { name: string; href: string }[] };
+  roster?: {
+    heading: string;
+    people: { name: string; href: string; niche?: string }[];
+  };
   sections: MissionSection[];
   links: { label: string; href: string }[];
 };
@@ -100,16 +103,16 @@ export const MISSIONS: Mission[] = [
     roster: {
       heading: "The Ten Creators",
       people: [
-        { name: "Weston Vansoest", href: "https://www.instagram.com/westonvansoest/" },
-        { name: "Owen Tucker", href: "https://www.youtube.com/@owensasian" },
-        { name: "Andrew Nemes", href: "https://www.instagram.com/andrewnemes/" },
-        { name: "Lucas Mayfield", href: "https://www.instagram.com/lucas.mayfield/" },
-        { name: "Jordan Orme", href: "https://www.youtube.com/@JordanOrme" },
-        { name: "Austin Pepito", href: "https://www.instagram.com/austin.pep/" },
-        { name: "Blake Vandevegte", href: "https://www.instagram.com/blakevandevegte/" },
-        { name: "Jacob Vargas", href: "https://www.instagram.com/juicy.jacobb/" },
-        { name: "Justin Leusner", href: "https://www.instagram.com/basketballtodayofficial/" },
-        { name: "Nelly Crux", href: "http://johnelcruxmagic.com/" },
+        { name: "Weston Vansoest", href: "https://www.instagram.com/westonvansoest/", niche: "Entertainment" },
+        { name: "Owen Tucker", href: "https://www.youtube.com/@owensasian", niche: "Entertainment" },
+        { name: "Andrew Nemes", href: "https://www.instagram.com/andrewnemes/", niche: "Evangelism" },
+        { name: "Lucas Mayfield", href: "https://www.instagram.com/lucas.mayfield/", niche: "Social Confidence" },
+        { name: "Jordan Orme", href: "https://www.youtube.com/@JordanOrme", niche: "Editing" },
+        { name: "Austin Pepito", href: "https://www.instagram.com/austin.pep/", niche: "Dancing" },
+        { name: "Blake Vandevegte", href: "https://www.instagram.com/blakevandevegte/", niche: "Christian Content" },
+        { name: "Jacob Vargas", href: "https://www.instagram.com/juicy.jacobb/", niche: "IRL Comedy" },
+        { name: "Justin Leusner", href: "https://www.instagram.com/basketballtodayofficial/", niche: "Sports" },
+        { name: "Nelly Crux", href: "http://johnelcruxmagic.com/", niche: "Magic" },
       ],
     },
     summary:
