@@ -88,7 +88,7 @@ export const MISSIONS: Mission[] = [
         href: "https://youtu.be/Y3qLQOLS-3s",
       },
       {
-        label: "Watch the podcast with Owen Tucker about creating Tokyo Drift",
+        label: "Watch The Podcast With Owen Tucker About Creating Tokyo Drift",
         href: "https://youtu.be/lmKsfZ4lbts",
       },
     ],
@@ -165,11 +165,11 @@ export const MISSIONS: Mission[] = [
     slotLinks: {
       "beast-podcast-jeremy": {
         href: "https://youtu.be/iLmdLG0fWIU",
-        label: "Watch the podcast ▶",
+        label: "Watch The Podcast ▶",
       },
       "beast-podcast-courtney": {
         href: "https://youtu.be/FKqkqQt5CsY",
-        label: "Watch the podcast ▶",
+        label: "Watch The Podcast ▶",
       },
       "beast-podcast-auzi": {
         href: "https://youtu.be/Lav88YGfIIo",
