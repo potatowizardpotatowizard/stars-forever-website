@@ -324,12 +324,12 @@ h4 {
   align-items: center;
   padding-bottom: 36px;
 }
-.story-connector polyline {
-  stroke-dasharray: 320;
-  stroke-dashoffset: 320;
+.story-connector line {
+  stroke-dasharray: 120;
+  stroke-dashoffset: 120;
   opacity: 0.7;
 }
-.reveal.is-visible .story-connector polyline {
+.reveal.is-visible .story-connector line {
   stroke-dashoffset: 0;
 }
 .story-connector circle {
@@ -365,8 +365,8 @@ h4 {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .story-connector polyline {
-    transition: stroke-dashoffset 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.15s;
+  .story-connector line {
+    transition: stroke-dashoffset 0.9s cubic-bezier(0.22, 1, 0.36, 1);
   }
   .story-connector circle {
     transition: opacity 0.7s ease;
@@ -394,7 +394,7 @@ h4 {
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .story-connector polyline {
+  .story-connector line {
     stroke-dashoffset: 0;
   }
   .story-connector circle {
