@@ -66,12 +66,29 @@ const SHAPES: Record<string, Shape> = {
       [56, 108, 1.8],
     ],
   },
+  // the tribute's constellation: a cross of stars
+  d: {
+    lines: [
+      [100, 0, 100, 42], // entry
+      [100, 42, 100, 118], // upright
+      [74, 66, 126, 66], // beam
+      [100, 118, 100, 150], // exit
+    ],
+    dots: [
+      [100, 4, 1.4],
+      [100, 42, 2.2],
+      [74, 66, 2.0],
+      [100, 66, 1.6],
+      [126, 66, 2.0],
+      [100, 118, 2.2],
+    ],
+  },
 };
 
 export default function StoryConnector({
   variant = "a",
 }: {
-  variant?: "a" | "b" | "c";
+  variant?: "a" | "b" | "c" | "d";
 }) {
   const shape = SHAPES[variant];
   return (

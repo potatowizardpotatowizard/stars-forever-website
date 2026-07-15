@@ -91,7 +91,7 @@ export default function StoryPage() {
       >
         <Reveal className="mx-auto max-w-lg">
           <div aria-hidden="true" className="story-node hidden md:flex">
-            <StoryConnector variant="b" />
+            <StoryConnector variant="d" />
             <Image
               src="/brand/star-sharp.png"
               alt=""
