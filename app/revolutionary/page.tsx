@@ -7,6 +7,7 @@ import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
 import Reveal from "@/components/Reveal";
 import VideoBlock from "@/components/VideoBlock";
+import WaitlistForm from "@/components/WaitlistForm";
 import { REVOLUTIONARY } from "@/content/revolutionary";
 import { CONTACT } from "@/content/site";
 
@@ -169,6 +170,9 @@ export default function RevolutionaryPage() {
           </p>
           <div className="mt-10">
             <Cta href={CONTACT.bookingUrl}>{REVOLUTIONARY.cta.label}</Cta>
+          </div>
+          <div className="mt-14">
+            <WaitlistForm />
           </div>
         </Reveal>
       </section>
