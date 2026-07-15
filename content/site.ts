@@ -18,9 +18,9 @@ export const CONTACT = {
   bookingUrl: "https://calendar.app.google/RctCvj7JcxaCzEMv5",
 };
 
-// Donation platform link. Left null for v1; drop a URL in later and the
-// Give page picks it up without any redesign.
-export const GIVING_URL: string | null = null;
+// Donation platform link: EquipNet missionary page for Auzi Weber.
+export const GIVING_URL: string | null =
+  "https://www.equipnet.org/missionaries/aweber";
 
 export const NAV = [
   { label: "The Story", href: "/story" },

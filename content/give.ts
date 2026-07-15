@@ -27,7 +27,7 @@ export const GIVE = {
   donate: {
     heading: "Partner Financially",
     body: "We are setting up an online giving platform. Until it is live, email us directly and we will get you connected.",
-    cta: "Email us to partner financially",
+    cta: "Give to the Mission",
     // mailto subject line
     subject: "Partnering financially with Stars Forever",
   },
