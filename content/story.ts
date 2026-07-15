@@ -4,7 +4,7 @@
 export const STORY = {
   title: "The Story",
   intro: "Seven days before Beast Games season one, Auzi's brother died.",
-  meta: { where: "Beast Games set", when: "July 2024 to February 2025" },
+  meta: { where: "Beast Games", when: "July 2024 to February 2025" },
   beats: [
     {
       imageSlot: "story-set",
