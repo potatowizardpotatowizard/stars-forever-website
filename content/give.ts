@@ -37,12 +37,12 @@ export const GIVE = {
     body: "Team members take consulting calls at 100 dollars per hour to fund the ministry. If you are not satisfied with your call, say so at the end and receive an immediate refund.",
     offers: [
       {
-        title: "Long form YouTube strategy",
+        title: "Long Form YouTube Strategy",
         person: "Auzi",
         email: "flixforauzi@gmail.com",
       },
       {
-        title: "Short form and clipping",
+        title: "Short Form and Clipping",
         person: "Ben",
         email: "benjimanschleg@gmail.com",
       },
