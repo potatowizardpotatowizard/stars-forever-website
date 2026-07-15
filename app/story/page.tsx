@@ -21,19 +21,19 @@ export const metadata: Metadata = {
 export default function StoryPage() {
   return (
     <article>
-      {/* Opening: quiet, typographic, held by a dark starfield */}
+      {/* Opening: quiet, typographic, held by the deep blue starfield */}
       <header className="relative overflow-hidden">
         <Image
-          src="/brand/bg-black-stars.jpg"
+          src="/brand/bg-blue.jpg"
           alt=""
           fill
           priority
           sizes="100vw"
-          className="object-cover opacity-50"
+          className="object-cover opacity-70"
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-b from-night/50 via-night/30 to-night"
+          className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night"
         />
         <Grain />
         <span aria-hidden="true" className="hero-meteor" />
@@ -48,8 +48,14 @@ export default function StoryPage() {
       </header>
 
       {/* The journey: chapters scattered across the sky, a guiding star
-          traveling the constellation between them, ending at the cross */}
-      <div className="mx-auto max-w-7xl px-5 pt-10 sm:px-8">
+          traveling the constellation between them, ending at the cross.
+          Opens under the hero's blue afterglow. */}
+      <div className="relative overflow-hidden">
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 top-0 h-[45vh] bg-[linear-gradient(to_bottom,rgb(34_30_121/0.45),rgb(34_30_121/0.16)_45%,transparent)]"
+        />
+        <div className="relative mx-auto max-w-7xl px-5 pt-10 sm:px-8">
         <StoryJourney
           beats={STORY.beats.map((beat) => {
             const slot = resolveSlot(beat.imageSlot);
@@ -66,6 +72,7 @@ export default function StoryPage() {
             lines: STORY.tribute.lines,
           }}
         />
+        </div>
       </div>
 
       {/* Bridge into the vision */}
