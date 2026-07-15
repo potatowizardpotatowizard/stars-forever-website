@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import Cta from "@/components/Cta";
 import GlitchText from "@/components/GlitchText";
 import Grain from "@/components/Grain";
@@ -33,6 +34,8 @@ export default function RevolutionaryPage() {
           aria-hidden="true"
           className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night"
         />
+        <div aria-hidden="true" className="candle-veil" />
+        <span aria-hidden="true" className="candle-glow" />
         <Grain />
         <div className="relative mx-auto max-w-7xl px-5 pb-16 pt-44 sm:px-8">
         <h1 className="font-display text-5xl sm:text-6xl">
@@ -53,6 +56,31 @@ export default function RevolutionaryPage() {
             {REVOLUTIONARY.attribution.linkLabel}
           </a>
         </p>
+        <Link
+          href="#waitlist"
+          className="hero-rise group mt-10 inline-flex items-center gap-4"
+          style={{ animationDelay: "0.5s" }}
+        >
+          <span className="flex items-center gap-2">
+            {Array.from({ length: 10 }).map((_, i) => (
+              <Image
+                key={i}
+                src="/brand/star-sharp.png"
+                alt=""
+                width={16}
+                height={16}
+                className={
+                  i === 6
+                    ? "opacity-25 motion-safe:animate-pulse"
+                    : "opacity-90"
+                }
+              />
+            ))}
+          </span>
+          <span className="meta-label transition-colors group-hover:text-ember">
+            One seat is yours
+          </span>
+        </Link>
         </div>
       </header>
 
@@ -171,7 +199,7 @@ export default function RevolutionaryPage() {
           <div className="mt-10">
             <Cta href={CONTACT.bookingUrl}>{REVOLUTIONARY.cta.label}</Cta>
           </div>
-          <div className="mt-14">
+          <div className="mt-14 scroll-mt-24" id="waitlist">
             <WaitlistForm />
           </div>
         </Reveal>

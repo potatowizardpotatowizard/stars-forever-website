@@ -39,7 +39,27 @@ export default function GetInvolvedPage() {
           className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night"
         />
         <Grain />
-        <div className="relative mx-auto max-w-7xl px-5 pb-20 pt-44 sm:px-8">
+        <Link
+          href="#creators"
+          aria-label="For creators"
+          className="group absolute inset-y-0 left-0 z-[5] hidden w-1/2 md:block"
+        >
+          <span className="absolute inset-0 bg-gradient-to-r from-orange-700/25 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+          <span className="meta-label absolute bottom-16 left-8 text-starlight opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+            I am a creator ↓
+          </span>
+        </Link>
+        <Link
+          href="#give"
+          aria-label="For supporters"
+          className="group absolute inset-y-0 right-0 z-[5] hidden w-1/2 md:block"
+        >
+          <span className="absolute inset-0 bg-gradient-to-l from-violet-700/25 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+          <span className="meta-label absolute bottom-16 right-8 text-starlight opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+            I want to give ↓
+          </span>
+        </Link>
+        <div className="pointer-events-none relative z-10 mx-auto max-w-7xl px-5 pb-24 pt-44 sm:px-8">
           <h1 className="font-display text-5xl font-bold sm:text-6xl">
             {GET_INVOLVED.title}
           </h1>
@@ -47,10 +67,20 @@ export default function GetInvolvedPage() {
             {GET_INVOLVED.intro}
           </p>
         </div>
+        <div aria-hidden="true" className="verse-ticker">
+          <div className="verse-ticker-inner">
+            <span>
+              Paul made tents (Acts 18:3) · Paul also received support from the churches (2 Corinthians 11:8) · Giving fuels real missions · Creators bring the God dreams ·&nbsp;
+            </span>
+            <span>
+              Paul made tents (Acts 18:3) · Paul also received support from the churches (2 Corinthians 11:8) · Giving fuels real missions · Creators bring the God dreams ·&nbsp;
+            </span>
+          </div>
+        </div>
       </header>
 
       {/* For creators, under the hero's orange afterglow */}
-      <section className="relative overflow-hidden">
+      <section className="relative scroll-mt-16 overflow-hidden" id="creators">
         <div
           aria-hidden="true"
           className="absolute inset-x-0 top-0 h-[45vh] bg-[linear-gradient(to_bottom,rgb(194_65_12/0.3),rgb(194_65_12/0.1)_45%,transparent)]"
@@ -141,7 +171,7 @@ export default function GetInvolvedPage() {
       </section>
 
       {/* Primary giving CTA */}
-      <section className="relative overflow-hidden border-y border-dust/15">
+      <section className="relative scroll-mt-16 overflow-hidden border-y border-dust/15" id="give">
         <Image
           src="/brand/bg-purple-2.jpg"
           alt=""

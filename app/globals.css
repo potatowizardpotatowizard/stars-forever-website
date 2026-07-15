@@ -300,6 +300,296 @@ h4 {
   }
 }
 
+/* Typewriter cursor for headlines that write themselves */
+.type-cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 1em;
+  margin-left: 0.08em;
+  vertical-align: baseline;
+  transform: translateY(0.12em);
+  background: var(--color-ember);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .type-cursor {
+    animation: cursor-blink 0.9s steps(1) infinite;
+  }
+  @keyframes cursor-blink {
+    50% {
+      opacity: 0;
+    }
+  }
+}
+
+/* The Story hero easter egg: the stars briefly form the cross */
+.hero-cross {
+  position: absolute;
+  right: 14%;
+  top: 24%;
+  width: 90px;
+  opacity: 0;
+  color: var(--color-starlight);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-cross {
+    animation: hero-cross 16s ease-in-out infinite 6s;
+  }
+  @keyframes hero-cross {
+    0%,
+    100% {
+      opacity: 0;
+    }
+    8%,
+    18% {
+      opacity: 0.4;
+    }
+    26% {
+      opacity: 0;
+    }
+  }
+}
+
+/* Partner Projects hero: the living project reel */
+.reel-layer {
+  position: absolute;
+  inset: 0;
+}
+.reel-layer video {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.reel-a {
+  opacity: 0.45;
+}
+.reel-b {
+  opacity: 0;
+}
+.reel-tag {
+  position: absolute;
+  bottom: 18px;
+  right: 22px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .reel-a {
+    animation: reel-fade 16s ease-in-out infinite;
+  }
+  .reel-b {
+    animation: reel-fade 16s ease-in-out infinite;
+    animation-delay: -8s;
+  }
+  @keyframes reel-fade {
+    0%,
+    42% {
+      opacity: 0.45;
+    }
+    50%,
+    92% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0.45;
+    }
+  }
+}
+
+/* Category 3 hero: the spectrum, taught wordlessly */
+.spectrum-node {
+  width: 13px;
+  height: 13px;
+  border-radius: 9999px;
+  background: rgb(151 139 173 / 0.55);
+  box-shadow: 0 0 8px rgb(151 139 173 / 0.4);
+}
+.spectrum-node.bright {
+  width: 18px;
+  height: 18px;
+  background: var(--color-ember);
+  box-shadow: 0 0 16px rgb(167 139 250 / 0.9);
+}
+.spectrum-seg {
+  width: 56px;
+  height: 1px;
+  background: linear-gradient(90deg, rgb(151 139 173 / 0.35), rgb(167 139 250 / 0.5));
+}
+@media (prefers-reduced-motion: no-preference) {
+  .spectrum-node.bright {
+    animation: node-breathe 3s ease-in-out infinite;
+  }
+  @keyframes node-breathe {
+    50% {
+      box-shadow: 0 0 26px rgb(167 139 250 / 1);
+    }
+  }
+}
+
+/* Category 3 channel flip intro */
+.c3-intro {
+  background: var(--color-night);
+  animation: c3-out 2.5s steps(2) forwards;
+  pointer-events: none;
+}
+.c3-frame {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+}
+.c3-ch {
+  font-family: var(--font-meta);
+  font-size: 3rem;
+  letter-spacing: 0.2em;
+  color: var(--color-starlight);
+  margin: 0;
+}
+.c3-label {
+  font-family: var(--font-meta);
+  font-size: 0.8125rem;
+  letter-spacing: 0.22em;
+  color: var(--color-dust);
+  margin: 10px 0 0;
+}
+.c3-frame-1 {
+  animation: c3-frame 2.5s steps(1) forwards;
+}
+.c3-frame-2 {
+  animation: c3-frame2 2.5s steps(1) forwards;
+}
+.c3-frame-3 {
+  animation: c3-frame3 2.5s steps(1) forwards;
+}
+@keyframes c3-frame {
+  0% {
+    opacity: 1;
+  }
+  26%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes c3-frame2 {
+  0%,
+  32% {
+    opacity: 0;
+  }
+  33% {
+    opacity: 1;
+  }
+  58%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes c3-frame3 {
+  0%,
+  64% {
+    opacity: 0;
+  }
+  65%,
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes c3-out {
+  0%,
+  88% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Revolutionary hero: opens in darkness, lit by a single candle */
+.candle-veil {
+  position: absolute;
+  inset: 0;
+  background: var(--color-night);
+  opacity: 0;
+}
+.candle-glow {
+  position: absolute;
+  bottom: -12%;
+  left: 50%;
+  width: 540px;
+  max-width: 90vw;
+  height: 420px;
+  transform: translateX(-50%);
+  background: radial-gradient(
+    ellipse at 50% 100%,
+    rgb(240 150 50 / 0.4),
+    rgb(194 65 12 / 0.18) 45%,
+    transparent 72%
+  );
+  filter: blur(6px);
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .candle-veil {
+    opacity: 1;
+    animation: veil-lift 2.4s ease-out 0.9s forwards;
+  }
+  @keyframes veil-lift {
+    to {
+      opacity: 0;
+    }
+  }
+  .candle-glow {
+    animation: candle-flicker 3.2s ease-in-out infinite;
+  }
+  @keyframes candle-flicker {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    18% {
+      opacity: 0.82;
+    }
+    41% {
+      opacity: 0.95;
+    }
+    63% {
+      opacity: 0.78;
+    }
+    82% {
+      opacity: 0.92;
+    }
+  }
+}
+
+/* Get Involved hero: the verse as a slow ticker along the base */
+.verse-ticker {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  border-top: 1px solid rgb(151 139 173 / 0.12);
+  padding: 11px 0;
+}
+.verse-ticker-inner {
+  display: inline-flex;
+  white-space: nowrap;
+  font-family: var(--font-meta);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgb(151 139 173 / 0.8);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .verse-ticker-inner {
+    animation: verse-scroll 46s linear infinite;
+  }
+  @keyframes verse-scroll {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
 /* A shooting star that periodically crosses the lower hero of The Story */
 .hero-meteor {
   position: absolute;

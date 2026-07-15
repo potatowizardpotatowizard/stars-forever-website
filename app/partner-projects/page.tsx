@@ -29,8 +29,20 @@ export default function PartnerProjectsPage() {
           fill
           priority
           sizes="100vw"
-          className="object-cover opacity-70"
+          className="object-cover opacity-40"
         />
+        <div aria-hidden="true" className="reel-layer reel-a">
+          <video autoPlay muted loop playsInline preload="metadata">
+            <source src="/brand/video/tokyo-hero-bg.mp4" type="video/mp4" />
+          </video>
+          <span className="reel-tag meta-label">Tokyo Drift · 2025</span>
+        </div>
+        <div aria-hidden="true" className="reel-layer reel-b">
+          <video autoPlay muted loop playsInline preload="metadata">
+            <source src="/brand/video/beast-hero-bg.mp4" type="video/mp4" />
+          </video>
+          <span className="reel-tag meta-label">Beast Games · 2024</span>
+        </div>
         <div
           aria-hidden="true"
           className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night"
@@ -42,6 +54,12 @@ export default function PartnerProjectsPage() {
           </h1>
           <p className="mt-8 max-w-3xl font-display text-2xl leading-snug text-starlight/90 sm:text-3xl">
             {PARTNER.definition}
+          </p>
+          <p className="hero-rise mt-10 font-meta text-xs uppercase tracking-[0.18em] text-dust" style={{ animationDelay: "0.4s" }}>
+            Projects: 02 · Cohorts: 01 · Next:{" "}
+            <Link href="/apply" className="text-ember transition-colors hover:text-starlight">
+              <GlitchText text="YOURS" delay={1200} />
+            </Link>
           </p>
         </div>
       </header>

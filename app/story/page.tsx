@@ -7,6 +7,7 @@ import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
 import Reveal from "@/components/Reveal";
 import StoryJourney from "@/components/StoryJourney";
+import TypeHeadline from "@/components/TypeHeadline";
 import { STORY } from "@/content/story";
 import { FOUNDERS } from "@/content/site";
 import { resolveSlot } from "@/lib/media";
@@ -37,13 +38,25 @@ export default function StoryPage() {
         />
         <Grain />
         <span aria-hidden="true" className="hero-meteor" />
+        <svg aria-hidden="true" viewBox="0 0 60 90" className="hero-cross">
+          <g stroke="currentColor" strokeWidth="0.8" fill="currentColor">
+            <line x1="30" y1="6" x2="30" y2="80" />
+            <line x1="10" y1="30" x2="50" y2="30" />
+            <circle cx="30" cy="6" r="2.2" />
+            <circle cx="10" cy="30" r="2" />
+            <circle cx="30" cy="30" r="1.6" />
+            <circle cx="50" cy="30" r="2" />
+            <circle cx="30" cy="80" r="2.2" />
+          </g>
+        </svg>
         <div className="relative mx-auto max-w-7xl px-5 pb-20 pt-44 sm:px-8">
           <p className="meta-label">
             {STORY.meta.where} · {STORY.meta.when}
           </p>
-          <h1 className="mt-8 max-w-4xl font-display text-4xl leading-tight sm:text-6xl sm:leading-tight">
-            {STORY.intro}
-          </h1>
+          <TypeHeadline
+            text={STORY.intro}
+            className="mt-8 max-w-4xl font-meta text-3xl leading-snug sm:text-5xl sm:leading-snug"
+          />
         </div>
       </header>
 
