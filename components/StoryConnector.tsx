@@ -1,86 +1,86 @@
-// The thread between story chapters: a full constellation figure with
-// triangles and squares among the stars, drawing itself edge by edge and
-// lighting each vertex as the chapter scrolls in.
+// The thread between story chapters: wide, low constellation figures with
+// triangles and squares among the stars, drawing edge by edge and lighting
+// each vertex as the chapter scrolls in. Kept short so the story flows.
 type Shape = {
   lines: [number, number, number, number][];
   dots: [number, number, number][];
 };
 
 const SHAPES: Record<string, Shape> = {
-  // entry line into a triangle, then down to the node
+  // a wide triangle slung between the chapters
   a: {
     lines: [
-      [100, 0, 128, 42], // entry
-      [128, 42, 74, 66], // triangle
-      [74, 66, 118, 96],
-      [118, 96, 128, 42],
-      [118, 96, 100, 150], // exit
+      [150, 0, 104, 26], // entry
+      [104, 26, 198, 34], // triangle
+      [198, 34, 138, 58],
+      [138, 58, 104, 26],
+      [138, 58, 150, 100], // exit
     ],
     dots: [
-      [100, 4, 1.4],
-      [128, 42, 2.2],
-      [74, 66, 2.2],
-      [118, 96, 2.2],
+      [150, 4, 1.4],
+      [104, 26, 2.2],
+      [198, 34, 2.2],
+      [138, 58, 2.2],
     ],
   },
-  // a tilted square hung mid line
+  // a wide tilted square
   b: {
     lines: [
-      [100, 0, 68, 36], // entry
-      [68, 36, 104, 58], // square
-      [104, 58, 132, 92],
-      [132, 92, 96, 112],
-      [96, 112, 68, 36],
-      [96, 112, 100, 150], // exit
+      [150, 0, 92, 30], // entry
+      [92, 30, 152, 20], // square
+      [152, 20, 212, 40],
+      [212, 40, 150, 56],
+      [150, 56, 92, 30],
+      [150, 56, 150, 100], // exit
     ],
     dots: [
-      [100, 4, 1.4],
-      [68, 36, 2.2],
-      [104, 58, 2.0],
-      [132, 92, 2.2],
-      [96, 112, 2.2],
+      [150, 4, 1.4],
+      [92, 30, 2.2],
+      [152, 20, 2.0],
+      [212, 40, 2.2],
+      [150, 56, 2.2],
     ],
   },
-  // triangle chained to a small square, like a kite with a box tail
+  // triangle bridged to a small box, spread across the sky
   c: {
     lines: [
-      [100, 0, 136, 30], // entry
-      [136, 30, 92, 46], // triangle
-      [92, 46, 122, 66],
-      [122, 66, 136, 30],
-      [122, 66, 74, 92], // bridge
-      [74, 92, 96, 110], // square
-      [96, 110, 78, 128],
-      [78, 128, 56, 108],
-      [56, 108, 74, 92],
-      [78, 128, 100, 150], // exit
+      [150, 0, 78, 22], // entry
+      [78, 22, 134, 14], // triangle
+      [134, 14, 118, 42],
+      [118, 42, 78, 22],
+      [118, 42, 190, 36], // bridge
+      [190, 36, 226, 50], // box
+      [226, 50, 202, 70],
+      [202, 70, 166, 56],
+      [166, 56, 190, 36],
+      [202, 70, 150, 100], // exit
     ],
     dots: [
-      [100, 4, 1.4],
-      [136, 30, 2.2],
-      [92, 46, 2.0],
-      [122, 66, 2.2],
-      [74, 92, 2.0],
-      [96, 110, 1.8],
-      [78, 128, 2.0],
-      [56, 108, 1.8],
+      [150, 4, 1.4],
+      [78, 22, 2.2],
+      [134, 14, 2.0],
+      [118, 42, 2.2],
+      [190, 36, 2.0],
+      [226, 50, 2.0],
+      [202, 70, 2.0],
+      [166, 56, 1.8],
     ],
   },
-  // the tribute's constellation: a cross of stars
+  // the tribute's constellation: a compact cross of stars
   d: {
     lines: [
-      [100, 0, 100, 42], // entry
-      [100, 42, 100, 118], // upright
-      [74, 66, 126, 66], // beam
-      [100, 118, 100, 150], // exit
+      [150, 0, 150, 22], // entry
+      [150, 22, 150, 76], // upright
+      [124, 40, 176, 40], // beam
+      [150, 76, 150, 100], // exit
     ],
     dots: [
-      [100, 4, 1.4],
-      [100, 42, 2.2],
-      [74, 66, 2.0],
-      [100, 66, 1.6],
-      [126, 66, 2.0],
-      [100, 118, 2.2],
+      [150, 4, 1.4],
+      [150, 22, 2.2],
+      [124, 40, 2.0],
+      [150, 40, 1.6],
+      [176, 40, 2.0],
+      [150, 76, 2.2],
     ],
   },
 };
@@ -93,9 +93,9 @@ export default function StoryConnector({
   const shape = SHAPES[variant];
   return (
     <svg
-      viewBox="0 0 200 150"
+      viewBox="0 0 300 100"
       aria-hidden="true"
-      className="story-connector mx-auto block h-44 w-60 text-ember"
+      className="story-connector mx-auto block h-24 w-72 text-ember"
     >
       {shape.lines.map(([x1, y1, x2, y2], i) => (
         <line

@@ -322,7 +322,32 @@ h4 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 36px;
+  padding-bottom: 22px;
+}
+
+/* The tribute photo carries its own halo */
+.tribute-glow {
+  box-shadow:
+    0 0 40px rgb(167 139 250 / 0.35),
+    0 0 110px rgb(109 40 217 / 0.28);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .tribute-glow {
+    animation: tribute-breathe 6s ease-in-out infinite;
+  }
+  @keyframes tribute-breathe {
+    0%,
+    100% {
+      box-shadow:
+        0 0 40px rgb(167 139 250 / 0.35),
+        0 0 110px rgb(109 40 217 / 0.28);
+    }
+    50% {
+      box-shadow:
+        0 0 55px rgb(167 139 250 / 0.5),
+        0 0 140px rgb(109 40 217 / 0.38);
+    }
+  }
 }
 .story-connector line {
   stroke-dasharray: 120;

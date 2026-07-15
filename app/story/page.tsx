@@ -47,7 +47,7 @@ export default function StoryPage() {
 
       {/* Photo essay beats, threaded on a constellation that draws itself */}
       <div className="relative mx-auto max-w-7xl px-5 pt-4 sm:px-8">
-        <div className="space-y-20 sm:space-y-28">
+        <div className="space-y-14 sm:space-y-16">
           {STORY.beats.map((beat, i) => (
             <Reveal as="section" key={beat.imageSlot} className="relative">
               <Constellation
@@ -100,12 +100,13 @@ export default function StoryPage() {
               className="story-star"
             />
           </div>
-          <MediaSlot
-            name={STORY.tribute.imageSlot}
-            showCaption={false}
-            sizes="32rem"
-            className="overflow-hidden rounded-xl"
-          />
+          <div className="tribute-glow overflow-hidden rounded-xl">
+            <MediaSlot
+              name={STORY.tribute.imageSlot}
+              showCaption={false}
+              sizes="32rem"
+            />
+          </div>
           <div className="mt-12 space-y-3 text-center">
             {STORY.tribute.lines.map((line) => (
               <p key={line} className="font-display text-xl text-starlight/90">
