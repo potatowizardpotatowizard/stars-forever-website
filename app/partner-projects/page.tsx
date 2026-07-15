@@ -8,7 +8,6 @@ import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
 import Reveal from "@/components/Reveal";
 import VideoBlock from "@/components/VideoBlock";
-import WaitlistForm from "@/components/WaitlistForm";
 import { MISSIONS, MISSIONS_INDEX } from "@/content/missions";
 import { PARTNER } from "@/content/partner";
 import { CONTACT } from "@/content/site";
@@ -207,14 +206,6 @@ export default function PartnerProjectsPage() {
             <Cta href={`mailto:${CONTACT.primaryEmail}`} variant="ghost">
               {PARTNER.closing.emailCta}
             </Cta>
-          </div>
-          <div className="mt-14">
-            <WaitlistForm
-              list="Partner Project"
-              label="Partner Project Wait List"
-              button="Join the Partner Project Wait List"
-              doneNote="When the next Partner Project starts forming, you will be one of the first to hear about it."
-            />
           </div>
         </Reveal>
       </section>

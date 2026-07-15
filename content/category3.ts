@@ -58,7 +58,9 @@ export const CATEGORY3 = {
   },
   closing: {
     heading: "We Help Creatives Become Category 3.",
-    cta: "See the Partner Projects",
-    href: "/partner-projects",
+    ctas: [
+      { label: "See the Partner Projects", href: "/partner-projects" },
+      { label: "Explore the Revolutionary Cohort", href: "/revolutionary" },
+    ],
   },
 };

@@ -51,7 +51,7 @@ export const PARTNER = {
   closing: {
     kicker: "Currently Invite Only",
     heading: "Bring us your God dream.",
-    body: "A call is not a commitment. It is a place to give your vision a chance at becoming reality. Partner Projects are currently invite only, and the wait list is where the next one begins.",
+    body: "A call is not a commitment. It is a place to give your vision a chance at becoming reality.",
     bookCta: "Book a Call",
     emailCta: "Email Us",
   },

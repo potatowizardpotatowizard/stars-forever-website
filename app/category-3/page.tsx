@@ -142,8 +142,12 @@ export default function Category3Page() {
             <h2 className="mx-auto mt-8 max-w-2xl font-display text-4xl sm:text-5xl">
               {CATEGORY3.closing.heading}
             </h2>
-            <div className="mt-10">
-              <Cta href={CATEGORY3.closing.href}>{CATEGORY3.closing.cta}</Cta>
+            <div className="mt-10 flex flex-wrap justify-center gap-4">
+              {CATEGORY3.closing.ctas.map((cta) => (
+                <Cta key={cta.href} href={cta.href}>
+                  {cta.label}
+                </Cta>
+              ))}
             </div>
           </Reveal>
         </div>
