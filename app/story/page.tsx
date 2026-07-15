@@ -115,7 +115,7 @@ export default function StoryPage() {
             <GlitchText text={STORY.founders.heading} />
           </h2>
         </Reveal>
-        <div className="mt-14 grid gap-10 sm:grid-cols-3">
+        <div className="mt-14 grid max-w-4xl gap-10 sm:grid-cols-2">
           {FOUNDERS.map((f) => (
             <Reveal key={f.name}>
               <MediaSlot

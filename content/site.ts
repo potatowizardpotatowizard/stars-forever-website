@@ -52,21 +52,15 @@ export const SOCIAL = [
 
 export const FOUNDERS = [
   {
-    name: "Benjiman Schlegel",
-    line: "Digital missionary, storyteller, and creative strategist reaching souls on the mission field of the internet.",
-    href: "https://benjiman7.com",
-    imageSlot: "story-founder-benjiman",
-  },
-  {
-    name: "Ben Pierce",
-    line: "Leads Revolutionary with Steiger Ministries, calling artists to reach the global youth culture for Jesus.",
-    href: "https://steiger.org",
-    imageSlot: "story-founder-ben-pierce",
-  },
-  {
     name: "Auzi Films",
     line: "Creator of nearly a decade who saw God move on the biggest sets in the world and never looked back.",
     href: null,
     imageSlot: "story-founder-auzi",
+  },
+  {
+    name: "Benjiman Schlegel",
+    line: "Digital missionary, storyteller, and creative strategist reaching souls on the mission field of the internet.",
+    href: "https://benjiman7.com",
+    imageSlot: "story-founder-benjiman",
   },
 ];

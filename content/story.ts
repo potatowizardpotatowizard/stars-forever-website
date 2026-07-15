@@ -48,6 +48,6 @@ export const STORY = {
   },
   founders: {
     kicker: "The cofounders",
-    heading: "Three Cofounders",
+    heading: "Two Cofounders",
   },
 };
