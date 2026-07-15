@@ -22,9 +22,9 @@ export const GET_INVOLVED = {
         href: "/revolutionary",
       },
       {
-        title: "Book a call",
+        title: "Book a Call",
         body: "A call is not a commitment. It is a place to give your vision a chance at becoming reality. Tell us what God put on your heart.",
-        cta: "Book a call",
+        cta: "Book a Call",
         href: null, // resolved to CONTACT.bookingUrl in the page
       },
     ],

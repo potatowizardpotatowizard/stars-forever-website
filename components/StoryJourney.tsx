@@ -235,19 +235,20 @@ export default function StoryJourney({
         aria-label="Tribute"
         className="relative z-10 mx-auto max-w-lg px-1 pb-10 pt-24 sm:pt-32"
       >
-        <Reveal>
-          <div className="story-node hidden md:flex">
-            <div ref={endRef}>
-              <StoryConnector variant="d" />
-            </div>
-            <Image
-              src="/brand/star-sharp.png"
-              alt=""
-              width={20}
-              height={20}
-              className="story-star"
-            />
+        {/* The cross draws itself in as it scrolls into view, on every screen */}
+        <Reveal className="story-node flex">
+          <div ref={endRef}>
+            <StoryConnector variant="d" />
           </div>
+          <Image
+            src="/brand/star-sharp.png"
+            alt=""
+            width={20}
+            height={20}
+            className="story-star"
+          />
+        </Reveal>
+        <Reveal>
           <div className="tribute-glow overflow-hidden rounded-xl">
             <Image
               src={tribute.src}

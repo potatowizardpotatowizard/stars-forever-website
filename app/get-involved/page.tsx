@@ -143,7 +143,7 @@ export default function GetInvolvedPage() {
       {/* Primary giving CTA */}
       <section className="relative overflow-hidden border-y border-dust/15">
         <Image
-          src="/brand/bg-purple-2.jpg"
+          src="/brand/bg-orange-comet.jpg"
           alt=""
           fill
           sizes="100vw"
