@@ -391,6 +391,53 @@ h4 {
   }
 }
 
+/* A glowing star that orbits an element's border, its trail fading out
+   behind it. Painted as a sweeping conic ring masked to the border. */
+@property --sweep {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+.star-border {
+  position: relative;
+}
+.star-border::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 2px;
+  pointer-events: none;
+  background: conic-gradient(
+    from var(--sweep),
+    transparent 0deg,
+    transparent 250deg,
+    rgb(109 40 217 / 0.25) 285deg,
+    rgb(167 139 250 / 0.9) 340deg,
+    #ffffff 356deg,
+    transparent 360deg
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  filter: drop-shadow(0 0 6px rgb(167 139 250 / 0.8));
+}
+@media (prefers-reduced-motion: no-preference) {
+  .star-border::after {
+    animation: star-border-sweep 7s linear infinite;
+  }
+  @keyframes star-border-sweep {
+    to {
+      --sweep: 360deg;
+    }
+  }
+}
+
 /* A shooting star that periodically crosses the lower hero of The Story */
 .hero-meteor {
   position: absolute;

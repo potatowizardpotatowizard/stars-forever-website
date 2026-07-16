@@ -47,7 +47,7 @@ export default function PartnerProjectsPage() {
           <Reveal className="mt-16">
             <Link
               href={PARTNER.featured.href}
-              className="group grid items-center gap-8 rounded-xl border border-dust/20 bg-night/60 p-6 backdrop-blur-sm transition-colors hover:border-ember/60 sm:p-8 md:grid-cols-[2fr_3fr]"
+              className="star-border group grid items-center gap-8 rounded-xl border border-dust/20 bg-night/60 p-6 backdrop-blur-sm transition-colors hover:border-ember/60 sm:p-8 md:grid-cols-[2fr_3fr]"
             >
               <MediaSlot
                 name={PARTNER.featured.imageSlot}
