@@ -167,8 +167,14 @@ export default function GetInvolvedPage() {
         </div>
       </section>
 
-      {/* Secondary, quieter: consulting */}
-      <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
+      {/* Secondary, quieter: consulting, under the giving section's orange
+          afterglow fading down into black */}
+      <section className="relative overflow-hidden">
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 top-0 h-[70vh] bg-[linear-gradient(to_bottom,rgb(194_65_12/0.3),rgb(194_65_12/0.1)_45%,transparent)]"
+        />
+        <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8">
         <Reveal className="max-w-2xl">
           <Kicker>{give.consulting.kicker}</Kicker>
           <h2 className="mt-6 font-display text-3xl font-bold">
@@ -194,6 +200,7 @@ export default function GetInvolvedPage() {
             ))}
           </ul>
         </Reveal>
+        </div>
       </section>
 
       {/* Contact block */}
