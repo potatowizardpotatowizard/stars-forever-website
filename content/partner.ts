@@ -2,6 +2,13 @@ export const PARTNER = {
   title: "Partner Project",
   definition:
     "We partner with a creator on a single project that shares Jesus with their secular audience, while helping them build a deeper daily process of seeking God.",
+  featured: {
+    kicker: "The Most Recent Project",
+    body: "Check out our most recent partner project where we boldly shared Jesus to a secular audience in a video about drifting in Japan.",
+    cta: "Explore Tokyo Drift",
+    href: "/partner-projects/tokyo-drift",
+    imageSlot: "home-proof-tokyo",
+  },
   metrics: {
     kicker: "Two success metrics",
     items: [
