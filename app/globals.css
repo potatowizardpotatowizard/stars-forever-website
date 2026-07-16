@@ -442,23 +442,29 @@ h4 {
    in a darkened hero, holding for a beat, then gliding home to its corner
    while the rest of the hero fades in behind it */
 .mission-intro {
-  animation: mission-intro 3.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --mscale: 1;
+  animation: mission-intro 4.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@media (min-width: 768px) {
+  .mission-intro {
+    --mscale: 1.7;
+  }
 }
 @keyframes mission-intro {
   0% {
-    transform: translate(var(--mx), var(--my));
+    transform: translate(var(--mx), var(--my)) scale(var(--mscale));
     opacity: 0;
     color: #ffffff;
     text-shadow: none;
   }
-  14% {
+  11% {
     opacity: 1;
     text-shadow:
       0 0 18px rgb(167 139 250 / 0.95),
       0 0 55px rgb(109 40 217 / 0.7);
   }
-  62% {
-    transform: translate(var(--mx), var(--my));
+  68% {
+    transform: translate(var(--mx), var(--my)) scale(var(--mscale));
     opacity: 1;
     color: #ffffff;
     text-shadow:
@@ -466,7 +472,7 @@ h4 {
       0 0 55px rgb(109 40 217 / 0.7);
   }
   100% {
-    transform: translate(0, 0);
+    transform: translate(0, 0) scale(1);
     color: rgb(239 236 247 / 0.75);
     text-shadow: none;
   }

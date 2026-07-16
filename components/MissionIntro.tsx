@@ -37,7 +37,7 @@ export default function MissionIntro({ text }: { text: string }) {
     // hero dark. The timer is harmless if the page is left early.
     window.setTimeout(() => {
       root.removeAttribute("data-mission-intro");
-    }, 2300);
+    }, 3100);
   }, []);
 
   return (
