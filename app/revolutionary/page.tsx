@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import Cta from "@/components/Cta";
 import GlitchText from "@/components/GlitchText";
 import Grain from "@/components/Grain";
@@ -63,6 +64,29 @@ export default function RevolutionaryPage() {
           className="absolute inset-x-0 top-0 h-[45vh] bg-[linear-gradient(to_bottom,rgb(22_101_52/0.35),rgb(22_101_52/0.12)_45%,transparent)]"
         />
         <div className="relative mx-auto max-w-7xl px-5 pt-12 sm:px-8">
+        {/* Featured: the most recent cohort, linked before the explainer */}
+        <Reveal className="mb-20">
+          <Link
+            href={REVOLUTIONARY.featured.href}
+            className="group grid items-center gap-8 rounded-xl border border-dust/20 bg-soot/40 p-6 transition-colors hover:border-ember/60 sm:p-8 md:grid-cols-[2fr_3fr]"
+          >
+            <MediaSlot
+              name={REVOLUTIONARY.featured.imageSlot}
+              sizes="(min-width: 768px) 40vw, 100vw"
+              showCaption={false}
+              className="overflow-hidden rounded-lg"
+            />
+            <div>
+              <Kicker>{REVOLUTIONARY.featured.kicker}</Kicker>
+              <p className="mt-5 font-display text-lg font-bold leading-snug sm:text-xl">
+                {REVOLUTIONARY.featured.body}
+              </p>
+              <p className="mono-link mt-7 text-sm font-bold text-ember">
+                {REVOLUTIONARY.featured.cta} →
+              </p>
+            </div>
+          </Link>
+        </Reveal>
         <Reveal className="max-w-3xl">
           <Kicker>Press play</Kicker>
           <h2 className="mt-6 font-display text-4xl sm:text-5xl">
