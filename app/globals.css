@@ -662,14 +662,14 @@ h4 {
       opacity: 1;
     }
     62% {
-      transform: translate(-50%, -50%) scale(1.12);
+      transform: translate(-50%, -50%) scale(1.06);
     }
     80% {
-      transform: translate(-50%, -50%) scale(1.9);
+      transform: translate(-50%, -50%) scale(1.32);
     }
     92%,
     100% {
-      transform: translate(-50%, calc(-50% + 42px)) scale(2);
+      transform: translate(-50%, calc(-50% + 36px)) scale(1.4);
       opacity: 1;
     }
   }

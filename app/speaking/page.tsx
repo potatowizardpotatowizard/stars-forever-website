@@ -63,6 +63,12 @@ export default function SpeakingPage() {
                   </span>
                 ))}
             </p>
+            <p
+              className="hero-beat font-display text-2xl leading-snug text-ember"
+              style={{ animationDelay: "4.6s" }}
+            >
+              {SPEAKING.opening.closer}
+            </p>
           </div>
         </div>
       </header>

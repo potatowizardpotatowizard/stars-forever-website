@@ -13,7 +13,7 @@ export default function DreamStars() {
       </div>
       <span className="dream-flash" />
       <div className="dream-big">
-        <Image src="/brand/star-sharp.png" alt="" width={88} height={88} />
+        <Image src="/brand/star-sharp.png" alt="" width={176} height={176} />
         <span className="dream-label dream-label-big">God&apos;s Dreams</span>
       </div>
       <span className="dream-arrow">↓</span>

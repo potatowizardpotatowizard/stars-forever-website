@@ -3,9 +3,10 @@ export const SPEAKING = {
   opening: {
     heading: "We are not pastors.",
     lines: [
-      "We are creators who have shared Jesus in places most ministries never reach.",
-      "On MrBeast's island. Across Europe with Red Bull. In a drift car in rural Japan.",
+      "We carry Jesus into rooms a pulpit could never reach.",
+      "MrBeast's island. Europe with Red Bull. A drift car in rural Japan.",
     ],
+    closer: "Your stage could be next.",
   },
   topics: {
     kicker: "What we speak on",
