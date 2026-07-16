@@ -438,6 +438,67 @@ h4 {
   }
 }
 
+/* A tiny shooting star periodically streaks beneath the text, its trail
+   underlining it before fading past the edge */
+.star-underline {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  padding-bottom: 7px;
+}
+.star-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 1px;
+  height: 1.5px;
+  width: 38%;
+  border-radius: 9999px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(167 139 250 / 0.95) 70%,
+    #ffffff
+  );
+  filter: drop-shadow(0 0 5px rgb(167 139 250 / 0.9));
+  opacity: 0;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .star-underline::after {
+    animation: star-underline 5s ease-in-out infinite;
+  }
+  @keyframes star-underline {
+    0% {
+      transform: translateX(-110%);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    48% {
+      transform: translateX(255%);
+      opacity: 1;
+    }
+    58%,
+    100% {
+      transform: translateX(300%);
+      opacity: 0;
+    }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .star-underline::after {
+    width: 100%;
+    opacity: 0.55;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgb(167 139 250 / 0.9),
+      transparent
+    );
+  }
+}
+
 /* Dream stars on the apply hero: "Your Dreams" arrives small, "God's
    Dreams" arrives bigger, swallows it, and settles massive above the form */
 .dream-stage {

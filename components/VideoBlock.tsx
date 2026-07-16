@@ -24,7 +24,9 @@ export default function VideoBlock({
           <source src={src} type="video/mp4" />
         </video>
       </div>
-      <figcaption className="meta-label mt-3">{title}</figcaption>
+      <figcaption className="meta-label mt-3">
+        <span className="star-underline">{title}</span>
+      </figcaption>
     </figure>
   );
 }
