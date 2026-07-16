@@ -67,7 +67,7 @@ export default function SpeakingPage() {
           >
             {SPEAKING.opening.line}
           </p>
-          <div className="mt-10 flex flex-wrap gap-x-8 gap-y-3">
+          <div className="mt-10 flex flex-col gap-y-3">
             {SPEAKING.opening.receipts.map((receipt, i) => (
               <span
                 key={receipt}
