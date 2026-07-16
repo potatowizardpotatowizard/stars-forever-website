@@ -224,11 +224,13 @@ export default function StoryJourney({
         </svg>
       ) : null}
 
-      {/* The origin star, descending out of the hero */}
+      {/* The origin star, descending out of the hero. Desktop only: on
+          phones there is no constellation path for it to join, so it would
+          drift over the headline connecting nothing. */}
       <div
         ref={originRef}
         aria-hidden="true"
-        className="pointer-events-none absolute left-0 top-0 z-20 opacity-0 transition-opacity duration-500"
+        className="pointer-events-none absolute left-0 top-0 z-20 hidden opacity-0 transition-opacity duration-500 md:block"
       >
         <Image
           src="/brand/star-sharp.png"
