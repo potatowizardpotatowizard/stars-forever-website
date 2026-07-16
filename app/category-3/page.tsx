@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import Cta from "@/components/Cta";
 import GlitchText from "@/components/GlitchText";
 import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import Reveal from "@/components/Reveal";
 import { CATEGORY3 } from "@/content/category3";
+import { resolveSlot } from "@/lib/media";
 
 export const metadata: Metadata = {
   title: "Category 1, 2, & 3 Explained",
@@ -31,7 +33,7 @@ export default function Category3Page() {
           className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night"
         />
         <Grain />
-        <div className="relative mx-auto max-w-7xl px-5 pb-20 pt-44 sm:px-8">
+        <div className="relative mx-auto max-w-7xl px-5 pt-44 sm:px-8">
           <Kicker>{CATEGORY3.burningQuestion.kicker}</Kicker>
           <h1 className="mt-8 max-w-4xl font-display text-3xl leading-tight sm:text-5xl sm:leading-tight">
             {CATEGORY3.burningQuestion.heading}
@@ -39,6 +41,33 @@ export default function Category3Page() {
           <p className="mt-8 max-w-2xl text-lg leading-relaxed text-starlight/80">
             {CATEGORY3.burningQuestion.body}
           </p>
+        </div>
+        {/* Filmstrip of real Category 3 moments drifting along the hero */}
+        <div className="relative mt-16 overflow-hidden pb-10">
+          <div className="film-marquee">
+            {[...CATEGORY3.filmstrip, ...CATEGORY3.filmstrip].map((frame, i) => {
+              const media = resolveSlot(frame.slot);
+              if (!media.src) return null;
+              return (
+                <Link
+                  key={`${frame.slot}-${i}`}
+                  href={frame.href}
+                  tabIndex={i >= CATEGORY3.filmstrip.length ? -1 : 0}
+                  aria-hidden={i >= CATEGORY3.filmstrip.length}
+                  className="block shrink-0 overflow-hidden rounded-md border border-dust/25 opacity-60 transition-opacity duration-300 hover:opacity-100"
+                >
+                  <Image
+                    src={media.src}
+                    alt={media.alt}
+                    width={320}
+                    height={192}
+                    sizes="14rem"
+                    className="h-24 w-40 object-cover sm:h-28 sm:w-48"
+                  />
+                </Link>
+              );
+            })}
+          </div>
         </div>
       </header>
 

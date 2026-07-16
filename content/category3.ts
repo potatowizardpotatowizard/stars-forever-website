@@ -6,6 +6,18 @@ export const CATEGORY3 = {
       "There is nearly unlimited quality Christian content online. And almost no quality Christian content that primarily reaches a secular audience.",
     body: "Throughout history, the most powerful evangelistic moves of God took place outside of a church. Yet we often expect to reach unbelievers with content made for believers. Category 3 is our answer to that gap.",
   },
+  // The drifting filmstrip along the bottom of the hero: real Category 3
+  // moments, each frame clicks through to its story
+  filmstrip: [
+    { slot: "tokyo-church", href: "/partner-projects/tokyo-drift" },
+    { slot: "joshua-candles", href: "/partner-projects/revolutionary-cohort" },
+    { slot: "beast-island-prayer", href: "/partner-projects/beast-games" },
+    { slot: "home-proof-tokyo", href: "/partner-projects/tokyo-drift" },
+    { slot: "joshua-meal", href: "/partner-projects/revolutionary-cohort" },
+    { slot: "beast-baptism", href: "/partner-projects/beast-games" },
+    { slot: "tokyo-seven", href: "/partner-projects/tokyo-drift" },
+    { slot: "joshua-desert", href: "/partner-projects/revolutionary-cohort" },
+  ],
   categories: [
     {
       number: "Category 1",
