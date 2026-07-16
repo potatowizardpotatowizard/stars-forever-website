@@ -50,32 +50,13 @@ export default function PodcastPage() {
         </div>
       </header>
 
-      {/* What the show is */}
-      <section className="relative overflow-hidden">
+      {/* Episodes with real thumbnails, under the hero's blue afterglow */}
+      <section className="relative overflow-hidden border-b border-dust/15">
         <div
           aria-hidden="true"
           className="absolute inset-x-0 top-0 h-[40vh] bg-[linear-gradient(to_bottom,rgb(30_64_175/0.3),rgb(30_64_175/0.1)_45%,transparent)]"
         />
-        <div className="relative mx-auto max-w-7xl px-5 py-16 sm:px-8">
-          <Reveal className="grid items-center gap-10 md:grid-cols-[1fr_20rem] md:gap-16">
-            <p className="max-w-2xl text-lg leading-relaxed text-starlight/85">
-              {PODCAST.intro}
-            </p>
-            <Image
-              src="/images/podcast-laugh.jpg"
-              alt="Auzi laughing behind the microphone"
-              width={640}
-              height={958}
-              sizes="20rem"
-              className="hidden rounded-xl md:block"
-            />
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Episodes with real thumbnails */}
-      <section className="border-y border-dust/15 bg-soot/40">
-        <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
+        <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8">
           <Reveal>
             <Kicker>{PODCAST.episodes.kicker}</Kicker>
             <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">

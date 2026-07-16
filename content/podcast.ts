@@ -3,8 +3,6 @@ export const PODCAST = {
   kicker: "The podcast",
   tagline:
     "Long form conversations with creators about what God is doing in secular spaces.",
-  intro:
-    "Hosted by Auzi, Respectfully Inspired sits down with creators, competitors, and friends to tell the stories the highlight reels leave out: faith on the biggest sets in the world, doubt, obedience, and what it actually costs to share Jesus in public.",
   channelUrl: "https://www.youtube.com/@RespectfullyInspired",
   channelCta: "Watch on YouTube",
   episodes: {
