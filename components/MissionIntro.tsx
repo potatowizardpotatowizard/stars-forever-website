@@ -40,12 +40,22 @@ export default function MissionIntro({ text }: { text: string }) {
     }, 3100);
   }, []);
 
+  // On desktop, "for Jesus" stays together on the final line
+  const match = text.match(/^(.*)\s(for Jesus\.?)$/i);
+
   return (
     <p
       ref={ref}
       className="max-w-md font-meta text-sm uppercase leading-relaxed tracking-[0.14em] text-starlight/75"
     >
-      {text}
+      {match ? (
+        <>
+          {match[1]}{" "}
+          <span className="md:whitespace-nowrap">{match[2]}</span>
+        </>
+      ) : (
+        text
+      )}
     </p>
   );
 }
