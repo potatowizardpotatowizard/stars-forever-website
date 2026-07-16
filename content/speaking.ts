@@ -14,9 +14,9 @@ export const SPEAKING = {
   topics: {
     kicker: "What we speak on",
     items: [
-      "Navigating social media as a Christ follower",
-      "Bringing Jesus into your creative process",
-      "Sharing God while existing in secular spaces",
+      "Navigating social media and AI as a Christ follower.",
+      "Bringing Jesus into your creative process and work environments.",
+      "Sharing God while existing in secular spaces.",
     ],
   },
   speakers: [

@@ -93,14 +93,14 @@ export default function SpeakingPage() {
           <Reveal>
             <Kicker>{SPEAKING.topics.kicker}</Kicker>
           </Reveal>
-          <ol className="mt-10 grid gap-8 md:grid-cols-3">
+          <ol className="mt-10 max-w-3xl space-y-8">
             {SPEAKING.topics.items.map((topic, i) => (
               <Reveal as="li" key={topic}>
                 <div className="border-t border-dust/20 pt-6">
                   <p className="meta-label text-ember">
                     {String(i + 1).padStart(2, "0")}
                   </p>
-                  <p className="mt-3 font-display text-xl leading-snug">
+                  <p className="mt-3 font-display text-2xl leading-snug">
                     {topic}
                   </p>
                 </div>
