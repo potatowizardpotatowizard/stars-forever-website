@@ -77,7 +77,12 @@ export default function PartnerProjectsPage() {
             </Link>
           </Reveal>
           <Reveal>
-            <Kicker>{PARTNER.metrics.kicker}</Kicker>
+            <h2 className="font-display text-4xl font-bold sm:text-5xl">
+              <GlitchText text="What Matters to Us" />
+            </h2>
+            <div className="mt-6">
+              <Kicker>{PARTNER.metrics.kicker}</Kicker>
+            </div>
           </Reveal>
           <div className="mt-10 grid gap-6 md:grid-cols-2">
             {PARTNER.metrics.items.map((m) => (
