@@ -67,7 +67,7 @@ export default function PartnerProjectsPage() {
               />
               <div>
                 <Kicker>{PARTNER.featured.kicker}</Kicker>
-                <p className="mt-5 font-display text-2xl font-bold leading-snug sm:text-3xl">
+                <p className="mt-5 font-display text-lg font-bold leading-snug sm:text-xl">
                   {PARTNER.featured.body}
                 </p>
                 <p className="mono-link mt-7 text-sm font-bold text-ember">

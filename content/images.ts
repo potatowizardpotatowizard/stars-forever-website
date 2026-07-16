@@ -36,6 +36,11 @@ export const IMAGES: Record<string, ImageSlot> = {
     caption: { where: "Japan", when: "Winter 2025" },
     ratio: "3 / 2",
   },
+  "tokyo-drift-car": {
+    file: "tokyo-drift-car.jpg",
+    alt: "Owen gripping the roll cage inside the drift car in Tokyo",
+    ratio: "16 / 9",
+  },
   "home-proof-joshua-tree": {
     file: "home-proof-joshua-tree.jpg",
     alt: "The first cohort gathered together at night in the desert",

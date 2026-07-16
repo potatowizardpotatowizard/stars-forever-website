@@ -7,7 +7,7 @@ export const PARTNER = {
     body: "Check out our most recent partner project where we boldly shared Jesus to a secular audience in a video about drifting in Japan.",
     cta: "Explore Tokyo Drift",
     href: "/partner-projects/tokyo-drift",
-    imageSlot: "home-proof-tokyo",
+    imageSlot: "tokyo-drift-car",
   },
   metrics: {
     kicker: "Two success metrics",
