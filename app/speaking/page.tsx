@@ -34,18 +34,35 @@ export default function SpeakingPage() {
         />
         <Grain />
         <div className="relative mx-auto max-w-7xl px-5 pb-24 pt-44 sm:px-8">
-          <h1 className="font-display text-5xl sm:text-6xl">
+          {/* The hero delivers its lines on beats: the claim, the answer,
+              then the receipts landing one by one */}
+          <h1
+            className="hero-beat font-display text-5xl sm:text-6xl"
+            style={{ animationDelay: "0.15s" }}
+          >
             {SPEAKING.opening.heading}
           </h1>
           <div className="mt-8 max-w-2xl space-y-3">
-            {SPEAKING.opening.lines.map((line) => (
-              <p
-                key={line}
-                className="font-display text-2xl leading-snug text-starlight/85"
-              >
-                {line}
-              </p>
-            ))}
+            <p
+              className="hero-beat font-display text-2xl leading-snug text-starlight/85"
+              style={{ animationDelay: "1.1s" }}
+            >
+              {SPEAKING.opening.lines[0]}
+            </p>
+            <p className="font-display text-2xl leading-snug text-starlight/85">
+              {SPEAKING.opening.lines[1]
+                .split(". ")
+                .map((fragment, i) => (
+                  <span
+                    key={fragment}
+                    className="hero-beat inline-block"
+                    style={{ animationDelay: `${2.2 + i * 0.7}s` }}
+                  >
+                    {fragment.endsWith(".") ? fragment : `${fragment}.`}
+                    {" "}
+                  </span>
+                ))}
+            </p>
           </div>
         </div>
       </header>
