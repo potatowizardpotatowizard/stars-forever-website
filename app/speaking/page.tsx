@@ -118,8 +118,10 @@ export default function SpeakingPage() {
             <div key={speaker.name}>
               <Reveal>
                 <div
-                  className={`grid items-start gap-10 md:grid-cols-[20rem_1fr] md:gap-16 ${
-                    i % 2 === 1 ? "md:grid-cols-[1fr_20rem]" : ""
+                  className={`grid items-start gap-10 md:gap-16 ${
+                    i % 2 === 1
+                      ? "md:grid-cols-[1fr_20rem]"
+                      : "md:grid-cols-[20rem_1fr]"
                   }`}
                 >
                   <MediaSlot
