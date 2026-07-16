@@ -1,10 +1,13 @@
 export const SPEAKING = {
   title: "Speaking",
   opening: {
+    kicker: "Speaking · Auzi Weber and Benjiman Schlegel",
     heading: "We are not pastors.",
-    lines: [
-      "We carry Jesus into rooms a pulpit could never reach.",
-      "MrBeast's island. Europe with Red Bull. A drift car in rural Japan.",
+    line: "We carry Jesus into rooms a pulpit could never reach.",
+    receipts: [
+      "MrBeast's island",
+      "Europe with Red Bull",
+      "A drift car in rural Japan",
     ],
     closer: "Your stage could be next.",
   },

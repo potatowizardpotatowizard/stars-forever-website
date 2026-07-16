@@ -33,43 +33,57 @@ export default function SpeakingPage() {
           className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/25 to-night"
         />
         <Grain />
+        {/* A star broadcasting its signal into space, off to the side */}
+        <div
+          aria-hidden="true"
+          className="broadcast right-4 top-40 scale-75 sm:scale-100 md:right-[10%] md:top-[30%]"
+        >
+          <span className="b-ring" />
+          <span className="b-ring" />
+          <span className="b-ring" />
+          <Image
+            src="/brand/star-sharp.png"
+            alt=""
+            width={54}
+            height={54}
+            className="broadcast-core"
+          />
+        </div>
         <div className="relative mx-auto max-w-7xl px-5 pb-24 pt-44 sm:px-8">
           {/* The hero delivers its lines on beats: the claim, the answer,
-              then the receipts landing one by one */}
+              the receipts pinging their stars alight, then the invitation */}
+          <p className="hero-beat meta-label" style={{ animationDelay: "0.1s" }}>
+            {SPEAKING.opening.kicker}
+          </p>
           <h1
-            className="hero-beat font-display text-5xl sm:text-6xl"
-            style={{ animationDelay: "0.15s" }}
+            className="hero-beat mt-6 font-display text-5xl sm:text-7xl"
+            style={{ animationDelay: "0.4s" }}
           >
             {SPEAKING.opening.heading}
           </h1>
-          <div className="mt-8 max-w-2xl space-y-3">
-            <p
-              className="hero-beat font-display text-2xl leading-snug text-starlight/85"
-              style={{ animationDelay: "1.1s" }}
-            >
-              {SPEAKING.opening.lines[0]}
-            </p>
-            <p className="font-display text-2xl leading-snug text-starlight/85">
-              {SPEAKING.opening.lines[1]
-                .split(". ")
-                .map((fragment, i) => (
-                  <span
-                    key={fragment}
-                    className="hero-beat inline-block"
-                    style={{ animationDelay: `${2.2 + i * 0.7}s` }}
-                  >
-                    {fragment.endsWith(".") ? fragment : `${fragment}.`}
-                    {" "}
-                  </span>
-                ))}
-            </p>
-            <p
-              className="hero-beat font-display text-2xl leading-snug text-ember"
-              style={{ animationDelay: "4.6s" }}
-            >
-              {SPEAKING.opening.closer}
-            </p>
+          <p
+            className="hero-beat mt-8 max-w-2xl font-display text-2xl leading-snug text-starlight/85 sm:text-3xl"
+            style={{ animationDelay: "1.3s" }}
+          >
+            {SPEAKING.opening.line}
+          </p>
+          <div className="mt-10 flex flex-wrap gap-x-8 gap-y-3">
+            {SPEAKING.opening.receipts.map((receipt, i) => (
+              <span
+                key={receipt}
+                className="hero-beat font-meta text-sm font-bold uppercase tracking-[0.14em] text-starlight/90"
+                style={{ animationDelay: `${2.4 + i * 0.7}s` }}
+              >
+                <span className="ping-star">✦</span> {receipt}
+              </span>
+            ))}
           </div>
+          <p
+            className="hero-beat mt-10 font-display text-2xl leading-snug text-ember"
+            style={{ animationDelay: "4.9s" }}
+          >
+            {SPEAKING.opening.closer}
+          </p>
         </div>
       </header>
 
