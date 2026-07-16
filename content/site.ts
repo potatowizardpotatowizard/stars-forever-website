@@ -36,7 +36,7 @@ export const HERO_MENU = [
   { label: "Partner Projects", href: "/partner-projects" },
   { label: "Find Your Creator Type", href: "/category-3" },
   { label: "Revolutionary Cohort", href: "/revolutionary" },
-  { label: "Contact", href: "/get-involved" },
+  { label: "Get Involved", href: "/get-involved" },
 ];
 
 // Secondary pages reachable from the footer.
