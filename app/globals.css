@@ -438,6 +438,189 @@ h4 {
   }
 }
 
+/* Dream stars on the apply hero: "Your Dreams" arrives small, "God's
+   Dreams" arrives bigger, swallows it, and settles massive above the form */
+.dream-stage {
+  position: relative;
+  height: 250px;
+}
+.dream-small,
+.dream-big {
+  position: absolute;
+  left: 50%;
+  top: 42%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  filter: drop-shadow(0 0 14px rgb(167 139 250 / 0.85));
+}
+.dream-label {
+  font-family: var(--font-meta);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-starlight);
+  white-space: nowrap;
+}
+.dream-flash {
+  position: absolute;
+  left: 50%;
+  top: 42%;
+  width: 200px;
+  height: 200px;
+  transform: translate(-50%, -50%);
+  border-radius: 9999px;
+  background: radial-gradient(
+    circle,
+    rgb(239 236 247 / 0.9),
+    rgb(167 139 250 / 0.5) 40%,
+    transparent 70%
+  );
+  opacity: 0;
+  pointer-events: none;
+}
+.dream-arrow {
+  position: absolute;
+  left: 50%;
+  bottom: -14px;
+  transform: translateX(-50%);
+  font-size: 1.25rem;
+  color: var(--color-dust);
+  opacity: 0;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .dream-small {
+    animation: dream-small 6.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  .dream-big {
+    animation:
+      dream-big 6.5s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+      dream-breathe 3.6s 6.5s ease-in-out infinite;
+  }
+  .dream-label-big {
+    animation: dream-label-big 6.5s linear forwards;
+  }
+  .dream-flash {
+    animation: dream-flash 6.5s linear forwards;
+  }
+  .dream-arrow {
+    animation:
+      dream-arrow-in 0.8s 6.8s ease forwards,
+      dream-arrow-bob 2s 6.8s ease-in-out infinite;
+  }
+  @keyframes dream-small {
+    0% {
+      transform: translate(calc(-50% - 55vw), -50%) scale(0.9);
+      opacity: 0;
+    }
+    12% {
+      opacity: 1;
+    }
+    22%,
+    48% {
+      transform: translate(calc(-50% - 120px), -50%) scale(1);
+      opacity: 1;
+    }
+    60%,
+    100% {
+      transform: translate(-50%, -50%) scale(0.05);
+      opacity: 0;
+    }
+  }
+  @keyframes dream-big {
+    0%,
+    16% {
+      transform: translate(calc(-50% + 55vw), -50%) scale(1);
+      opacity: 0;
+    }
+    28% {
+      opacity: 1;
+    }
+    38%,
+    50% {
+      transform: translate(calc(-50% + 120px), -50%) scale(1);
+      opacity: 1;
+    }
+    62% {
+      transform: translate(-50%, -50%) scale(1.12);
+    }
+    80% {
+      transform: translate(-50%, -50%) scale(1.9);
+    }
+    92%,
+    100% {
+      transform: translate(-50%, calc(-50% + 42px)) scale(2);
+      opacity: 1;
+    }
+  }
+  @keyframes dream-label-big {
+    0%,
+    26% {
+      opacity: 0;
+    }
+    36%,
+    56% {
+      opacity: 1;
+    }
+    66%,
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes dream-flash {
+    0%,
+    58% {
+      opacity: 0;
+    }
+    64% {
+      opacity: 0.95;
+    }
+    74%,
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes dream-breathe {
+    0%,
+    100% {
+      filter: drop-shadow(0 0 14px rgb(167 139 250 / 0.85));
+    }
+    50% {
+      filter: drop-shadow(0 0 30px rgb(239 236 247 / 0.95))
+        drop-shadow(0 0 60px rgb(109 40 217 / 0.7));
+    }
+  }
+  @keyframes dream-arrow-in {
+    to {
+      opacity: 0.9;
+    }
+  }
+  @keyframes dream-arrow-bob {
+    0%,
+    100% {
+      transform: translate(-50%, 0);
+    }
+    50% {
+      transform: translate(-50%, 7px);
+    }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dream-small {
+    display: none;
+  }
+  .dream-big {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.6);
+  }
+  .dream-arrow {
+    opacity: 0.9;
+  }
+}
+
 /* The origin star in The Story hero: a huge breathing glow that descends
    into the small guiding star as the journey begins */
 .origin-star-glow {

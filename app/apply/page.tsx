@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import ApplyForm from "@/components/ApplyForm";
+import DreamStars from "@/components/DreamStars";
 import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import { CONTACT } from "@/content/site";
@@ -47,6 +48,7 @@ export default function ApplyPage() {
             </a>
             .
           </p>
+          <DreamStars />
         </div>
       </header>
 

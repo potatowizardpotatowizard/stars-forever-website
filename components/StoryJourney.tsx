@@ -159,7 +159,11 @@ export default function StoryJourney({
     let raf = 0;
     const update = () => {
       const vh = window.innerHeight;
-      const heroH = Math.max(1, container.offsetTop);
+      // Distance from the document top to the journey: the hero above it
+      const heroH = Math.max(
+        1,
+        container.getBoundingClientRect().top + window.scrollY,
+      );
       const t = Math.min(1, Math.max(0, window.scrollY / (heroH * 0.85)));
       const ease = t * t * (3 - 2 * t);
       const w = container.clientWidth;
