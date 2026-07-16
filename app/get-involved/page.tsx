@@ -76,54 +76,27 @@ export default function GetInvolvedPage() {
         </div>
       </header>
 
-      {/* For creators, under the hero's orange afterglow */}
+      {/* For supporters: why giving matters, under the hero's orange afterglow */}
       <section className="relative overflow-hidden">
         <div
           aria-hidden="true"
           className="absolute inset-x-0 top-0 h-[45vh] bg-[linear-gradient(to_bottom,rgb(194_65_12/0.3),rgb(194_65_12/0.1)_45%,transparent)]"
         />
-        <div className="relative mx-auto max-w-7xl px-5 py-12 sm:px-8">
-        <Reveal>
-          <Kicker>{GET_INVOLVED.creators.kicker}</Kicker>
-          <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
-            <GlitchText text={GET_INVOLVED.creators.heading} />
-          </h2>
-        </Reveal>
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {GET_INVOLVED.creators.paths.map((path) => (
-            <Reveal key={path.title}>
-              <div className="flex h-full flex-col rounded-lg border border-dust/20 bg-soot/40 p-8">
-                <h3 className="font-display text-2xl font-bold">{path.title}</h3>
-                <p className="mt-4 flex-1 text-sm leading-relaxed text-starlight/75">
-                  {path.body}
+        <div className="relative mx-auto max-w-7xl px-5 pt-12 sm:px-8">
+          <Reveal className="max-w-3xl">
+            <Kicker>{give.frame.kicker}</Kicker>
+            <h2 className="mt-6 font-display text-4xl font-bold leading-tight sm:text-5xl">
+              {give.frame.heading}
+            </h2>
+            <div className="mt-8 space-y-5">
+              {give.frame.paragraphs.map((p) => (
+                <p key={p} className="text-lg leading-relaxed text-starlight/80">
+                  {p}
                 </p>
-                <div className="mt-7">
-                  <Cta href={path.href ?? CONTACT.bookingUrl} variant="ghost">
-                    {path.cta}
-                  </Cta>
-                </div>
-              </div>
-            </Reveal>
-          ))}
+              ))}
+            </div>
+          </Reveal>
         </div>
-        </div>
-      </section>
-
-      {/* For supporters: why giving matters */}
-      <section className="mx-auto max-w-7xl px-5 pt-24 sm:px-8">
-        <Reveal className="max-w-3xl">
-          <Kicker>{give.frame.kicker}</Kicker>
-          <h2 className="mt-6 font-display text-4xl font-bold leading-tight sm:text-5xl">
-            {give.frame.heading}
-          </h2>
-          <div className="mt-8 space-y-5">
-            {give.frame.paragraphs.map((p) => (
-              <p key={p} className="text-lg leading-relaxed text-starlight/80">
-                {p}
-              </p>
-            ))}
-          </div>
-        </Reveal>
       </section>
 
       {/* What giving produces */}
@@ -228,6 +201,54 @@ export default function GetInvolvedPage() {
           </ul>
         </Reveal>
         </div>
+      </section>
+
+      {/* For creators */}
+      <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
+        <Reveal>
+          <Kicker>{GET_INVOLVED.creators.kicker}</Kicker>
+          <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
+            <GlitchText text={GET_INVOLVED.creators.heading} />
+          </h2>
+        </Reveal>
+        <div className="mt-12 grid gap-6 md:grid-cols-3">
+          {GET_INVOLVED.creators.paths.map((path) => (
+            <Reveal key={path.title}>
+              <div className="flex h-full flex-col rounded-lg border border-dust/20 bg-soot/40 p-8">
+                <h3 className="font-display text-2xl font-bold">{path.title}</h3>
+                <p className="mt-4 flex-1 text-sm leading-relaxed text-starlight/75">
+                  {path.body}
+                </p>
+                <div className="mt-7">
+                  <Cta href={path.href ?? CONTACT.bookingUrl} variant="ghost">
+                    {path.cta}
+                  </Cta>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+        {/* Churches and events: the speaking page lives in the footer,
+            so give it a doorway here too */}
+        <Reveal className="mt-10">
+          <Link
+            href="/speaking"
+            className="group flex flex-col items-start justify-between gap-4 rounded-lg border border-dust/20 bg-soot/40 p-8 transition-colors hover:border-ember/60 sm:flex-row sm:items-center"
+          >
+            <div>
+              <h3 className="font-display text-2xl font-bold transition-colors group-hover:text-ember">
+                Invite Us to Speak
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-starlight/75">
+                For churches, conferences, and events. We are not pastors, but
+                we have shared Jesus in places most ministries never reach.
+              </p>
+            </div>
+            <span className="mono-link shrink-0 text-sm font-bold text-ember">
+              About Speaking →
+            </span>
+          </Link>
+        </Reveal>
       </section>
 
       {/* Contact block */}

@@ -3,8 +3,8 @@ export const SPEAKING = {
   opening: {
     heading: "We are not pastors.",
     lines: [
-      "But we have shared Jesus creatively across the world.",
-      "On MrBeast's island. With Red Bull across Europe. At a college in Tokyo.",
+      "We are creators who have shared Jesus in places most ministries never reach.",
+      "On MrBeast's island. Across Europe with Red Bull. In a drift car in rural Japan.",
     ],
   },
   topics: {
@@ -21,23 +21,49 @@ export const SPEAKING = {
       imageSlot: "speak-auzi",
       email: "flixforauzi@gmail.com",
       bio: [
-        "Auzi was raised on the lie that social media fame brings fulfillment. A close friend's life or death situation led him to open a Bible on his own for the first time.",
-        "Years of seeking God and sharing Jesus followed: walking across Spain, traveling Europe homeless for a Red Bull challenge, competing on MrBeast's Amazon Prime show, and drifting in rural Japan. He is passionate about discipling creators and teaching people to live an evangelistic life in whatever they do.",
+        "Auzi grew up on the lie every young creator is sold: get famous and you will finally be full. Then a close friend came face to face with death, and he opened a Bible on his own for the first time.",
+        "What followed was nearly a decade of seeking God in public. He walked across Spain. He crossed Europe homeless for a Red Bull challenge. He competed on MrBeast's Beast Games, where, seven days after losing his brother, he prayed the prayer that became Stars Forever. Then he helped a creator turn a drift video in rural Japan into a gospel proclamation.",
+        "He speaks on what he lives: treating every platform, every set, and every room as a mission field.",
       ],
+      journey: {
+        kicker: "The road so far",
+        stops: [
+          { label: "Spain", note: "Walked the country seeking God" },
+          { label: "Red Bull Europe", note: "Crossed a continent homeless" },
+          { label: "Beast Games", note: "Saw God move on the biggest set on earth" },
+          { label: "Tokyo Drift", note: "A gospel video for a secular audience" },
+          { label: "Stars Forever", note: "The prayer that became a ministry" },
+        ],
+      },
     },
     {
       name: "Benjiman Schlegel",
       imageSlot: "speak-benjiman",
       email: "benjimanschleg@gmail.com",
       bio: [
-        "Benjiman is a digital missionary, storyteller, and creative strategist. He gave his life to Christ at sixteen and redirected his passion for gaming and digital media toward reaching souls on the mission field of the internet. By eighteen he launched a faith driven social media initiative that reached millions.",
-        "He graduated at twenty with a B.S. in Entrepreneurship and Innovation while running a social media company, and is now pursuing a Master of Divinity while serving as a Media and Production Director at a local church.",
+        "Benjiman gave his life to Christ at sixteen and asked one question that never let him go: what if the internet is the largest mission field in history?",
+        "He redirected a childhood spent in gaming and digital media toward reaching people who would never walk into a church. By eighteen he had launched a faith driven social media initiative that reached millions. By twenty he held a degree in Entrepreneurship and Innovation and was running his own social media company.",
+        "Today he is pursuing a Master of Divinity, serving as a Media and Production Director at his church, and building Stars Forever alongside Auzi.",
       ],
+      journey: {
+        kicker: "The road so far",
+        stops: [
+          { label: "Sixteen", note: "Gave his life to Christ" },
+          { label: "Eighteen", note: "Faith driven content reaching millions" },
+          { label: "Twenty", note: "Degree earned, company running" },
+          { label: "Now", note: "Master of Divinity and Stars Forever" },
+        ],
+      },
     },
   ],
+  onePager: {
+    label: "Download the Speaker One Pager",
+    href: "/brand/stars-forever-speakers.pdf",
+  },
   closing: {
-    heading: "Book us for your church, event, or engagement.",
-    bookCta: "Book a call",
-    emailCta: "Email us",
+    heading: "Bring us to your church, event, or stage.",
+    body: "Tell us about your event below, or grab a time on the calendar and let us plan it together.",
+    bookCta: "Book a Call",
+    emailCta: "Email Us",
   },
 };

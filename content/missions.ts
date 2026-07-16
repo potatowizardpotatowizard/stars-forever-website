@@ -123,8 +123,8 @@ export const MISSIONS: Mission[] = [
       {
         kicker: "The gathering",
         paragraphs: [
-          "The first cohort brought roughly ten creators from different niches to a shared house in the desert. No stage, no audience, no networking. A think tank, not a conference.",
-          "The weekend opened in darkness. Each creator walked into an unlit room and was handed a lit candle. Then came the story of Beast Games, the Category 3 framework, and the four goals of the weekend: a deeper love for Jesus, challenged paradigms, real community, and a target to aim at.",
+          "The first cohort brought ten creators from different niches to a shared house in the desert. No stage, no audience, no networking. A think tank, not a conference.",
+          "The weekend opened with a Beast Games personal testimony, the Category 3 framework, and the four goals of the event: a deeper love for Jesus, challenged paradigms, real community, and a target to aim at.",
         ],
         imageSlots: ["joshua-candles", "joshua-teaching"],
       },
