@@ -47,8 +47,8 @@ export default function GetInvolvedPage() {
           <p className="mt-8 max-w-3xl font-display text-2xl leading-snug text-starlight/90 sm:text-3xl">
             {GET_INVOLVED.intro}
           </p>
-          {/* Quick actions under the shooting star */}
-          <div className="mt-12 flex flex-wrap gap-3">
+          {/* Quick actions as glowing meteors under the shooting star */}
+          <div className="mt-12 flex flex-wrap gap-x-12 gap-y-5">
             {GET_INVOLVED.quickActions.map((action) => {
               const href =
                 action.href ??
@@ -62,12 +62,12 @@ export default function GetInvolvedPage() {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hero-chip"
+                  className="meteor-cta"
                 >
                   {action.label}
                 </a>
               ) : (
-                <Link key={action.label} href={href} className="hero-chip">
+                <Link key={action.label} href={href} className="meteor-cta">
                   {action.label}
                 </Link>
               );

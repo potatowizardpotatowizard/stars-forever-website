@@ -318,28 +318,77 @@ h4 {
   }
 }
 
-/* Quick action chips under a hero intro, typewriter styled */
-.hero-chip {
-  display: inline-block;
-  border: 1px solid rgb(151 139 173 / 0.35);
-  border-radius: 9999px;
-  padding: 0.65rem 1.4rem;
+/* Quick actions as glowing meteors: a comet tail and bright head streak
+   ahead of each label, drifting gently and flaring on hover */
+.meteor-cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.5rem 0;
   font-family: var(--font-meta);
   font-size: 0.8125rem;
-  letter-spacing: 0.12em;
+  font-weight: 700;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--color-starlight);
-  background: rgb(7 5 12 / 0.55);
-  backdrop-filter: blur(2px);
-  transition:
-    border-color 0.25s ease,
-    color 0.25s ease,
-    box-shadow 0.25s ease;
+  transition: color 0.25s ease;
 }
-.hero-chip:hover {
-  border-color: var(--color-ember);
+.meteor-cta::before {
+  content: "";
+  height: 12px;
+  width: 84px;
+  flex: none;
+  background:
+    radial-gradient(circle, #ffffff 0%, rgb(167 139 250 / 0.95) 45%, transparent 70%)
+      right center / 12px 12px no-repeat,
+    linear-gradient(90deg, transparent, rgb(167 139 250 / 0.9)) left center /
+      calc(100% - 7px) 2px no-repeat;
+  filter: drop-shadow(0 0 8px rgb(167 139 250 / 0.8));
+  transition:
+    width 0.35s ease,
+    filter 0.35s ease;
+}
+.meteor-cta:hover {
   color: #ffffff;
-  box-shadow: 0 0 18px rgb(167 139 250 / 0.45);
+  text-shadow: 0 0 14px rgb(167 139 250 / 0.9);
+}
+.meteor-cta:hover::before {
+  width: 132px;
+  filter: drop-shadow(0 0 14px rgb(167 139 250 / 1)) brightness(1.25);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .meteor-cta {
+    animation: meteor-drift 5.5s ease-in-out infinite;
+  }
+  .meteor-cta:nth-child(2) {
+    animation-delay: 1.8s;
+  }
+  .meteor-cta:nth-child(3) {
+    animation-delay: 3.6s;
+  }
+  .meteor-cta::before {
+    animation: meteor-flicker 5.5s ease-in-out infinite;
+    animation-delay: inherit;
+  }
+  @keyframes meteor-drift {
+    0%,
+    100% {
+      transform: translate(0, 0);
+    }
+    50% {
+      transform: translate(7px, -6px);
+    }
+  }
+  @keyframes meteor-flicker {
+    0%,
+    100% {
+      opacity: 0.75;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
 }
 
 /* A shooting star that periodically crosses the lower hero of The Story */
