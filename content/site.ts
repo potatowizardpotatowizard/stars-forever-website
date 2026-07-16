@@ -46,16 +46,16 @@ export const FOOTER_NAV = [
 ];
 
 export const SOCIAL = [
-  { label: "Instagram", href: "https://instagram.com" },
-  { label: "YouTube", href: "https://youtube.com" },
-  { label: "Podcast", href: "https://www.youtube.com/@RespectfullyInspired" },
+  { label: "Instagram", href: "https://www.instagram.com/auzi.films/" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/auzifilms/" },
+  { label: "YouTube", href: "https://www.youtube.com/@RespectfullyInspired" },
 ];
 
 export const FOUNDERS = [
   {
     name: "Auzi Films",
     line: "Creator of nearly a decade who saw God move on the biggest sets in the world and never looked back.",
-    href: null,
+    href: "https://www.linkedin.com/in/auzifilms/",
     imageSlot: "story-founder-auzi",
   },
   {

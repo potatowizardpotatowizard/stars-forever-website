@@ -10,6 +10,9 @@ import { PODCAST } from "@/content/podcast";
 export const metadata: Metadata = {
   title: "Respectfully Inspired Podcast",
   description: PODCAST.tagline,
+  openGraph: {
+    images: [{ url: "/brand/og-podcast.jpg", width: 1200, height: 630 }],
+  },
 };
 
 // Pull the YouTube id out of an href so episodes show real thumbnails
