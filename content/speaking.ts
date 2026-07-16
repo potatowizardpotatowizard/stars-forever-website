@@ -24,6 +24,7 @@ export const SPEAKING = {
       name: "Auzi Weber",
       imageSlot: "speak-auzi",
       email: "flixforauzi@gmail.com",
+      link: { label: "Host of the Respectfully Inspired Podcast", href: "/podcast" },
       bio: [
         "Auzi grew up on the lie every young creator is sold: get famous and you will finally be full. Then a close friend came face to face with death, and he opened a Bible on his own for the first time.",
         "What followed was nearly a decade of seeking God in public. He walked across Spain. He crossed Europe homeless for a Red Bull challenge. He competed on MrBeast's Beast Games, where, seven days after losing his brother, he prayed the prayer that became Stars Forever. Then he helped a creator turn a drift video in rural Japan into a gospel proclamation.",

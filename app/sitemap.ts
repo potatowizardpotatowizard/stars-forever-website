@@ -14,6 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/get-involved",
     "/apply",
     "/speaking",
+    "/podcast",
     ...MISSIONS.map((m) => `/partner-projects/${m.slug}`),
   ];
   return routes.map((route) => ({

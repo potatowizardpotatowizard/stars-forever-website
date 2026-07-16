@@ -220,6 +220,7 @@ export const MISSIONS: Mission[] = [
         href: "https://youtu.be/FKqkqQt5CsY",
       },
       { label: "Read How Beast Games Inspired Stars Forever", href: "/story" },
+      { label: "More on the Respectfully Inspired Podcast", href: "/podcast" },
     ],
   },
 ];

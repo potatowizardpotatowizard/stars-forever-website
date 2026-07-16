@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import Cta from "@/components/Cta";
 import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
@@ -142,6 +143,16 @@ export default function SpeakingPage() {
                     >
                       {speaker.email}
                     </a>
+                    {"link" in speaker && speaker.link ? (
+                      <p className="mt-3">
+                        <Link
+                          href={speaker.link.href}
+                          className="meta-label inline-block text-ember transition-colors hover:text-starlight"
+                        >
+                          {speaker.link.label} →
+                        </Link>
+                      </p>
+                    ) : null}
                   </div>
                 </div>
               </Reveal>
