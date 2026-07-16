@@ -11,7 +11,13 @@ import StarField from "@/components/StarField";
 import VideoBlock from "@/components/VideoBlock";
 import YouTubeEmbed from "@/components/YouTubeEmbed";
 import { HOME } from "@/content/home";
-import { ANCHOR_VERSE, CONTACT, HERO_MENU, SITE_NAME } from "@/content/site";
+import {
+  ANCHOR_VERSE,
+  CONTACT,
+  GIVING_URL,
+  HERO_MENU,
+  SITE_NAME,
+} from "@/content/site";
 
 export default function HomePage() {
   return (
@@ -300,6 +306,11 @@ export default function HomePage() {
             </p>
             <div className="mt-10 flex flex-wrap justify-center gap-4">
               <Cta href={CONTACT.bookingUrl}>{HOME.closing.bookCta}</Cta>
+              {GIVING_URL ? (
+                <Cta href={GIVING_URL} variant="ghost">
+                  {HOME.closing.giveCta}
+                </Cta>
+              ) : null}
               <Cta href={`mailto:${CONTACT.primaryEmail}`} variant="ghost">
                 {HOME.closing.emailCta}
               </Cta>

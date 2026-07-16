@@ -50,4 +50,9 @@ export const STORY = {
     kicker: "The cofounders",
     heading: "Two Cofounders",
   },
+  give: {
+    heading: "Help Write the Next Chapter",
+    body: "This story began with a prayer that one death would turn into other people's eternities. Giving is how many carry it forward.",
+    cta: "Give to the Mission",
+  },
 };

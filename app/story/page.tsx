@@ -7,8 +7,9 @@ import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
 import Reveal from "@/components/Reveal";
 import StoryJourney from "@/components/StoryJourney";
+import Cta from "@/components/Cta";
 import { STORY } from "@/content/story";
-import { FOUNDERS } from "@/content/site";
+import { FOUNDERS, GIVING_URL } from "@/content/site";
 import { resolveSlot } from "@/lib/media";
 
 export const metadata: Metadata = {
@@ -108,7 +109,7 @@ export default function StoryPage() {
         </div>
       </section>
 
-      {/* The three cofounders */}
+      {/* The two cofounders */}
       <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
         <Reveal>
           <Kicker>{STORY.founders.kicker}</Kicker>
@@ -143,6 +144,23 @@ export default function StoryPage() {
               </p>
             </Reveal>
           ))}
+        </div>
+      </section>
+
+      {/* Help write the next chapter */}
+      <section className="border-t border-dust/15 bg-soot/40">
+        <div className="mx-auto max-w-7xl px-5 py-24 text-center sm:px-8">
+          <Reveal>
+            <h2 className="mx-auto max-w-2xl font-display text-3xl sm:text-4xl">
+              {STORY.give.heading}
+            </h2>
+            <p className="mx-auto mt-5 max-w-xl text-starlight/75">
+              {STORY.give.body}
+            </p>
+            <div className="mt-9">
+              <Cta href={GIVING_URL ?? "/get-involved"}>{STORY.give.cta}</Cta>
+            </div>
+          </Reveal>
         </div>
       </section>
     </article>

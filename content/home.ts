@@ -97,7 +97,8 @@ export const HOME = {
   closing: {
     heading: "The internet might be the biggest mission field in history.",
     body: "If something in you is resonating, do not let it pass. Book a call and tell us your God dream, or write to us directly.",
-    bookCta: "Book a call",
-    emailCta: "Email us",
+    bookCta: "Book a Call",
+    emailCta: "Email Us",
+    giveCta: "Give to the Mission",
   },
 };

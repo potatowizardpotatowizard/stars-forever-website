@@ -4,6 +4,7 @@ import {
   ANCHOR_VERSE,
   CONTACT,
   FOOTER_NAV,
+  GIVING_URL,
   NAV,
   SITE_NAME,
   SOCIAL,
@@ -75,9 +76,21 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="transition-colors hover:text-ember"
                 >
-                  Book a call
+                  Book a Call
                 </a>
               </li>
+              {GIVING_URL ? (
+                <li>
+                  <a
+                    href={GIVING_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-bold text-ember transition-colors hover:text-starlight"
+                  >
+                    Give to the Mission
+                  </a>
+                </li>
+              ) : null}
             </ul>
             <h2 className="meta-label mt-8">Follow</h2>
             <ul className="mt-4 space-y-2.5 text-sm text-starlight/85">
