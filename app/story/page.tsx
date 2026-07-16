@@ -49,8 +49,9 @@ export default function StoryPage() {
 
       {/* The journey: chapters scattered across the sky, a guiding star
           traveling the constellation between them, ending at the cross.
-          Opens under the hero's blue afterglow. */}
-      <div className="relative overflow-hidden">
+          Opens under the hero's blue afterglow. Not overflow clipped, so
+          the origin star can descend out of the hero above. */}
+      <div className="relative">
         <div
           aria-hidden="true"
           className="absolute inset-x-0 top-0 h-[45vh] bg-[linear-gradient(to_bottom,rgb(34_30_121/0.45),rgb(34_30_121/0.16)_45%,transparent)]"

@@ -35,8 +35,8 @@ export default function ApplyPage() {
             Bring Us Your God Dream
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-starlight/80">
-            One creator per month. It costs you nothing. Three short questions
-            and we will take it from there. Prefer to talk first?{" "}
+            Three short questions and we will take it from there. Prefer to
+            talk first?{" "}
             <a
               href={CONTACT.bookingUrl}
               target="_blank"

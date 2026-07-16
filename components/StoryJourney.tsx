@@ -36,6 +36,7 @@ export default function StoryJourney({
   const endRef = useRef<HTMLDivElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
   const starRef = useRef<HTMLDivElement>(null);
+  const originRef = useRef<HTMLDivElement>(null);
   const [geo, setGeo] = useState<{
     d: string;
     dots: [number, number][];
@@ -143,6 +144,56 @@ export default function StoryJourney({
     };
   }, [geo]);
 
+  // The origin star: born huge in the hero sky, it descends and shrinks
+  // into the guiding star as the journey begins.
+  useEffect(() => {
+    const origin = originRef.current;
+    const container = containerRef.current;
+    if (!origin || !container) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) {
+      origin.style.display = "none";
+      return;
+    }
+
+    let raf = 0;
+    const update = () => {
+      const vh = window.innerHeight;
+      const heroH = Math.max(1, container.offsetTop);
+      const t = Math.min(1, Math.max(0, window.scrollY / (heroH * 0.85)));
+      const ease = t * t * (3 - 2 * t);
+      const w = container.clientWidth;
+      // Start: high in the hero sky. End: the first point of the journey.
+      const x0 = w * 0.72;
+      const y0 = vh * 0.42 - heroH;
+      let x1 = x0;
+      let y1 = y0 + heroH * 0.85;
+      const path = pathRef.current;
+      if (path) {
+        const pt = path.getPointAtLength(0);
+        x1 = pt.x;
+        y1 = pt.y;
+      }
+      const x = x0 + (x1 - x0) * ease;
+      const y = y0 + (y1 - y0) * ease;
+      const scale = 1 - 0.79 * ease; // 140px down to the 30px guiding star
+      origin.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%) scale(${scale})`;
+      origin.style.opacity = t >= 1 ? "0" : "1";
+    };
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, [geo]);
+
   return (
     <div ref={containerRef} className="relative">
       {/* The path and its waypoint stars, behind everything */}
@@ -168,6 +219,21 @@ export default function StoryJourney({
           ))}
         </svg>
       ) : null}
+
+      {/* The origin star, descending out of the hero */}
+      <div
+        ref={originRef}
+        aria-hidden="true"
+        className="pointer-events-none absolute left-0 top-0 z-20 opacity-0 transition-opacity duration-500"
+      >
+        <Image
+          src="/brand/star-sharp.png"
+          alt=""
+          width={140}
+          height={140}
+          className="origin-star-glow"
+        />
+      </div>
 
       {/* The guiding star */}
       <div

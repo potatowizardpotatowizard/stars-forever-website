@@ -438,6 +438,29 @@ h4 {
   }
 }
 
+/* The origin star in The Story hero: a huge breathing glow that descends
+   into the small guiding star as the journey begins */
+.origin-star-glow {
+  filter: drop-shadow(0 0 18px rgb(167 139 250 / 0.95))
+    drop-shadow(0 0 55px rgb(109 40 217 / 0.65));
+}
+@media (prefers-reduced-motion: no-preference) {
+  .origin-star-glow {
+    animation: origin-pulse 3.8s ease-in-out infinite;
+  }
+  @keyframes origin-pulse {
+    0%,
+    100% {
+      filter: drop-shadow(0 0 18px rgb(167 139 250 / 0.95))
+        drop-shadow(0 0 55px rgb(109 40 217 / 0.65));
+    }
+    50% {
+      filter: drop-shadow(0 0 28px rgb(239 236 247 / 1))
+        drop-shadow(0 0 85px rgb(109 40 217 / 0.9));
+    }
+  }
+}
+
 /* A shooting star that periodically crosses the lower hero of The Story */
 .hero-meteor {
   position: absolute;
