@@ -473,14 +473,14 @@ h4 {
 }
 /* While the statement holds center stage, the rest of the hero waits
    in the dark and then fades back in */
-section#hero nav,
-section#hero > img {
+#hero nav,
+#hero > img {
   transition: opacity 1.3s ease;
 }
-section[data-mission-intro="1"] nav {
+html[data-mission-intro="1"] #hero nav {
   opacity: 0;
 }
-section[data-mission-intro="1"] > img {
+html[data-mission-intro="1"] #hero > img {
   opacity: 0.2;
 }
 

@@ -16,7 +16,7 @@ export default function MissionIntro({ text }: { text: string }) {
     if (sessionStorage.getItem("sf-mission")) return;
     sessionStorage.setItem("sf-mission", "1");
 
-    const section = el.closest("section");
+    const root = document.documentElement;
     const r = el.getBoundingClientRect();
     el.style.setProperty(
       "--mx",
@@ -27,13 +27,18 @@ export default function MissionIntro({ text }: { text: string }) {
       `${window.innerHeight / 2 - (r.top + r.height / 2)}px`,
     );
     el.classList.add("mission-intro");
-    section?.setAttribute("data-mission-intro", "1");
+    // The flag lives on <html>: React re-renders would strip it from
+    // elements it owns inside the page
+    root.setAttribute("data-mission-intro", "1");
 
     // Release the rest of the hero as the statement starts its flight home
     const t = setTimeout(() => {
-      section?.removeAttribute("data-mission-intro");
+      root.removeAttribute("data-mission-intro");
     }, 2300);
-    return () => clearTimeout(t);
+    return () => {
+      clearTimeout(t);
+      root.removeAttribute("data-mission-intro");
+    };
   }, []);
 
   return (
