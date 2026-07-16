@@ -44,6 +44,11 @@ export const PODCAST = {
         guest: "Owen Tucker",
         href: "https://youtu.be/lmKsfZ4lbts",
       },
+      {
+        title: "How He Beat Stage 4 Cancer w/ 3 Months to Live!",
+        guest: "Chuck Keels",
+        href: "https://youtu.be/_yKRqdg86rc",
+      },
     ],
   },
   why: {
