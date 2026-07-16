@@ -19,7 +19,7 @@ export const GET_INVOLVED = {
     { slot: "joshua-candles", href: "/partner-projects/revolutionary-cohort" },
     { slot: "beast-island-prayer", href: "/partner-projects/beast-games" },
     { slot: "home-proof-tokyo", href: "/partner-projects/tokyo-drift" },
-    { slot: "joshua-stargazing", href: "/partner-projects/revolutionary-cohort" },
+    { slot: "joshua-meal", href: "/partner-projects/revolutionary-cohort" },
     { slot: "beast-baptism", href: "/partner-projects/beast-games" },
     { slot: "tokyo-seven", href: "/partner-projects/tokyo-drift" },
     { slot: "joshua-desert", href: "/partner-projects/revolutionary-cohort" },
