@@ -43,21 +43,11 @@ export default function PartnerProjectsPage() {
           <p className="mt-8 max-w-3xl font-display text-2xl leading-snug text-starlight/90 sm:text-3xl">
             {PARTNER.definition}
           </p>
-        </div>
-      </header>
-
-      {/* Success metrics, under the hero's purple afterglow */}
-      <section className="relative overflow-hidden">
-        <div
-          aria-hidden="true"
-          className="absolute inset-x-0 top-0 h-[45vh] bg-[linear-gradient(to_bottom,rgb(109_40_217/0.3),rgb(109_40_217/0.1)_45%,transparent)]"
-        />
-        <div className="relative mx-auto max-w-7xl px-5 py-12 sm:px-8">
-          {/* Featured: the most recent project, linked before the metrics */}
-          <Reveal className="mb-20">
+          {/* Featured: the most recent project, closing out the hero */}
+          <Reveal className="mt-16">
             <Link
               href={PARTNER.featured.href}
-              className="group grid items-center gap-8 rounded-xl border border-dust/20 bg-soot/40 p-6 transition-colors hover:border-ember/60 sm:p-8 md:grid-cols-[2fr_3fr]"
+              className="group grid items-center gap-8 rounded-xl border border-dust/20 bg-night/60 p-6 backdrop-blur-sm transition-colors hover:border-ember/60 sm:p-8 md:grid-cols-[2fr_3fr]"
             >
               <MediaSlot
                 name={PARTNER.featured.imageSlot}
@@ -76,6 +66,16 @@ export default function PartnerProjectsPage() {
               </div>
             </Link>
           </Reveal>
+        </div>
+      </header>
+
+      {/* Success metrics, under the hero's purple afterglow */}
+      <section className="relative overflow-hidden">
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 top-0 h-[45vh] bg-[linear-gradient(to_bottom,rgb(109_40_217/0.3),rgb(109_40_217/0.1)_45%,transparent)]"
+        />
+        <div className="relative mx-auto max-w-7xl px-5 py-12 sm:px-8">
           <Reveal>
             <h2 className="font-display text-4xl font-bold sm:text-5xl">
               <GlitchText text="What Matters to Us" />
