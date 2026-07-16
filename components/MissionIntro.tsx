@@ -31,14 +31,13 @@ export default function MissionIntro({ text }: { text: string }) {
     // elements it owns inside the page
     root.setAttribute("data-mission-intro", "1");
 
-    // Release the rest of the hero as the statement starts its flight home
-    const t = setTimeout(() => {
+    // Release the rest of the hero as the statement starts its flight
+    // home. Deliberately not cleaned up: the effect can re-run during
+    // hydration, and a cleanup would cancel the release and freeze the
+    // hero dark. The timer is harmless if the page is left early.
+    window.setTimeout(() => {
       root.removeAttribute("data-mission-intro");
     }, 2300);
-    return () => {
-      clearTimeout(t);
-      root.removeAttribute("data-mission-intro");
-    };
   }, []);
 
   return (
