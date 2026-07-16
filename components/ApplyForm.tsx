@@ -4,18 +4,16 @@ import { useState } from "react";
 import { track } from "@vercel/analytics";
 import { CONTACT } from "@/content/site";
 
-// The Partner Project application: three short steps, then submit.
-// Sends through the API when mail is configured; otherwise opens a
-// prefilled email so nothing is ever lost.
-
-const STEPS = ["Who you are", "Your platform", "Your God dream"] as const;
+// The Partner Project application: all three sections on one page, each
+// with real space to answer. Sends through the API when mail is
+// configured; otherwise opens a prefilled email so nothing is ever lost.
 
 const field =
   "w-full rounded-md border border-dust/30 bg-soot/60 px-4 py-3 text-starlight placeholder:text-dust/60 focus:border-ember focus:outline-none";
 const label = "meta-label mb-2 block";
+const section = "meta-label text-ember";
 
 export default function ApplyForm() {
-  const [step, setStep] = useState(0);
   const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">(
     "idle",
   );
@@ -33,14 +31,14 @@ export default function ApplyForm() {
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
       setForm((f) => ({ ...f, [key]: e.target.value }));
 
-  const canNext =
-    step === 0
-      ? form.name.trim().length > 1 && form.email.includes("@")
-      : step === 1
-        ? form.platform.trim().length > 1
-        : form.dream.trim().length > 10;
+  const canSubmit =
+    form.name.trim().length > 1 &&
+    form.email.includes("@") &&
+    form.platform.trim().length > 1 &&
+    form.dream.trim().length > 10;
 
-  const submit = async () => {
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
     setStatus("sending");
     setError("");
     try {
@@ -84,111 +82,102 @@ export default function ApplyForm() {
   }
 
   return (
-    <div className="rounded-lg border border-dust/25 bg-night/60 p-7 sm:p-10">
-      {/* Step markers */}
-      <ol className="flex flex-wrap gap-x-6 gap-y-2">
-        {STEPS.map((s, i) => (
-          <li
-            key={s}
-            className={`meta-label ${
-              i === step ? "text-ember" : i < step ? "text-starlight/70" : ""
-            }`}
-          >
-            {String(i + 1).padStart(2, "0")} {s}
-          </li>
-        ))}
-      </ol>
+    <form
+      onSubmit={submit}
+      className="rounded-lg border border-dust/25 bg-night/60 p-7 sm:p-10"
+    >
+      {/* 01 Who you are */}
+      <p className={section}>01 Who You Are</p>
+      <div className="mt-6 space-y-6">
+        <div>
+          <label htmlFor="apply-name" className={label}>
+            Your name
+          </label>
+          <input
+            id="apply-name"
+            type="text"
+            required
+            autoComplete="name"
+            className={field}
+            value={form.name}
+            onChange={set("name")}
+          />
+        </div>
+        <div>
+          <label htmlFor="apply-email" className={label}>
+            Email
+          </label>
+          <input
+            id="apply-email"
+            type="email"
+            required
+            autoComplete="email"
+            className={field}
+            value={form.email}
+            onChange={set("email")}
+          />
+        </div>
+        {/* Honeypot, hidden from people */}
+        <div className="hidden" aria-hidden="true">
+          <label htmlFor="apply-website">Website</label>
+          <input
+            id="apply-website"
+            type="text"
+            tabIndex={-1}
+            autoComplete="off"
+            value={form.website}
+            onChange={set("website")}
+          />
+        </div>
+      </div>
 
-      <div className="mt-8 space-y-6">
-        {step === 0 ? (
-          <>
-            <div>
-              <label htmlFor="apply-name" className={label}>
-                Your name
-              </label>
-              <input
-                id="apply-name"
-                type="text"
-                autoComplete="name"
-                className={field}
-                value={form.name}
-                onChange={set("name")}
-              />
-            </div>
-            <div>
-              <label htmlFor="apply-email" className={label}>
-                Email
-              </label>
-              <input
-                id="apply-email"
-                type="email"
-                autoComplete="email"
-                className={field}
-                value={form.email}
-                onChange={set("email")}
-              />
-            </div>
-            {/* Honeypot, hidden from people */}
-            <div className="hidden" aria-hidden="true">
-              <label htmlFor="apply-website">Website</label>
-              <input
-                id="apply-website"
-                type="text"
-                tabIndex={-1}
-                autoComplete="off"
-                value={form.website}
-                onChange={set("website")}
-              />
-            </div>
-          </>
-        ) : null}
+      {/* 02 Your platform */}
+      <p className={`${section} mt-12`}>02 Your Platform</p>
+      <div className="mt-6 space-y-6">
+        <div>
+          <label htmlFor="apply-platform" className={label}>
+            Where do you create? Links to your channels
+          </label>
+          <input
+            id="apply-platform"
+            type="text"
+            required
+            placeholder="youtube.com/@you, instagram.com/you"
+            className={field}
+            value={form.platform}
+            onChange={set("platform")}
+          />
+        </div>
+        <div>
+          <label htmlFor="apply-audience" className={label}>
+            Who watches you? Optional
+          </label>
+          <textarea
+            id="apply-audience"
+            rows={3}
+            placeholder="Size and kind of audience, in your own words"
+            className={field}
+            value={form.audience}
+            onChange={set("audience")}
+          />
+        </div>
+      </div>
 
-        {step === 1 ? (
-          <>
-            <div>
-              <label htmlFor="apply-platform" className={label}>
-                Where do you create? Links to your channels
-              </label>
-              <input
-                id="apply-platform"
-                type="text"
-                placeholder="youtube.com/@you, instagram.com/you"
-                className={field}
-                value={form.platform}
-                onChange={set("platform")}
-              />
-            </div>
-            <div>
-              <label htmlFor="apply-audience" className={label}>
-                Who watches you? Optional
-              </label>
-              <input
-                id="apply-audience"
-                type="text"
-                placeholder="Size and kind of audience, in your own words"
-                className={field}
-                value={form.audience}
-                onChange={set("audience")}
-              />
-            </div>
-          </>
-        ) : null}
-
-        {step === 2 ? (
-          <div>
-            <label htmlFor="apply-dream" className={label}>
-              Your most audacious God dream
-            </label>
-            <textarea
-              id="apply-dream"
-              rows={7}
-              placeholder="The project you would make if money and fear were not factors."
-              className={field}
-              value={form.dream}
-              onChange={set("dream")}
-            />
-          </div>
-        ) : null}
+      {/* 03 Your God dream */}
+      <p className={`${section} mt-12`}>03 Your God Dream</p>
+      <div className="mt-6">
+        <label htmlFor="apply-dream" className={label}>
+          Your most audacious God dream
+        </label>
+        <textarea
+          id="apply-dream"
+          rows={8}
+          required
+          placeholder="The project you would make if money and fear were not factors."
+          className={field}
+          value={form.dream}
+          onChange={set("dream")}
+        />
       </div>
 
       {error ? (
@@ -197,38 +186,15 @@ export default function ApplyForm() {
         </p>
       ) : null}
 
-      <div className="mt-8 flex items-center justify-between gap-4">
-        {step > 0 ? (
-          <button
-            type="button"
-            onClick={() => setStep((s) => s - 1)}
-            className="mono-link text-xs"
-          >
-            ← Back
-          </button>
-        ) : (
-          <span />
-        )}
-        {step < 2 ? (
-          <button
-            type="button"
-            disabled={!canNext}
-            onClick={() => setStep((s) => s + 1)}
-            className="bg-ember px-7 py-3.5 font-meta text-xs font-bold uppercase tracking-[0.14em] text-night transition-colors hover:bg-starlight disabled:cursor-not-allowed disabled:opacity-40"
-          >
-            Next
-          </button>
-        ) : (
-          <button
-            type="button"
-            disabled={!canNext || status === "sending"}
-            onClick={submit}
-            className="bg-ember px-7 py-3.5 font-meta text-xs font-bold uppercase tracking-[0.14em] text-night transition-colors hover:bg-starlight disabled:cursor-not-allowed disabled:opacity-40"
-          >
-            {status === "sending" ? "Sending…" : "Submit application"}
-          </button>
-        )}
+      <div className="mt-10">
+        <button
+          type="submit"
+          disabled={!canSubmit || status === "sending"}
+          className="w-full bg-ember px-7 py-3.5 font-meta text-xs font-bold uppercase tracking-[0.14em] text-night transition-colors hover:bg-starlight disabled:cursor-not-allowed disabled:opacity-40 sm:w-auto"
+        >
+          {status === "sending" ? "Sending…" : "Submit Application"}
+        </button>
       </div>
-    </div>
+    </form>
   );
 }
