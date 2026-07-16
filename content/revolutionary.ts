@@ -26,7 +26,7 @@ export const REVOLUTIONARY = {
   },
   featured: {
     kicker: "The Most Recent Cohort",
-    body: "Check out our most recent Revolutionary Cohort where ten creators sought God together in the Joshua Tree desert.",
+    body: "Check out our most recent Revolutionary Cohort where ten creators sought God together.",
     cta: "Explore Revolutionary Cohort 1",
     href: "/partner-projects/revolutionary-cohort",
     imageSlot: "home-proof-joshua-tree",

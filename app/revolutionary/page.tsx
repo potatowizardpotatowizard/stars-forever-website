@@ -54,21 +54,11 @@ export default function RevolutionaryPage() {
             {REVOLUTIONARY.attribution.linkLabel}
           </a>
         </p>
-        </div>
-      </header>
-
-      {/* Two minute explainer, under the hero's green afterglow */}
-      <section className="relative overflow-hidden">
-        <div
-          aria-hidden="true"
-          className="absolute inset-x-0 top-0 h-[45vh] bg-[linear-gradient(to_bottom,rgb(22_101_52/0.35),rgb(22_101_52/0.12)_45%,transparent)]"
-        />
-        <div className="relative mx-auto max-w-7xl px-5 pt-12 sm:px-8">
-        {/* Featured: the most recent cohort, linked before the explainer */}
-        <Reveal className="mb-20">
+        {/* Featured: the most recent cohort, closing out the hero */}
+        <Reveal className="mt-16">
           <Link
             href={REVOLUTIONARY.featured.href}
-            className="group grid items-center gap-8 rounded-xl border border-dust/20 bg-soot/40 p-6 transition-colors hover:border-ember/60 sm:p-8 md:grid-cols-[2fr_3fr]"
+            className="group grid items-center gap-8 rounded-xl border border-dust/20 bg-night/60 p-6 backdrop-blur-sm transition-colors hover:border-ember/60 sm:p-8 md:grid-cols-[2fr_3fr]"
           >
             <MediaSlot
               name={REVOLUTIONARY.featured.imageSlot}
@@ -87,6 +77,16 @@ export default function RevolutionaryPage() {
             </div>
           </Link>
         </Reveal>
+        </div>
+      </header>
+
+      {/* Two minute explainer, under the hero's green afterglow */}
+      <section className="relative overflow-hidden">
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 top-0 h-[45vh] bg-[linear-gradient(to_bottom,rgb(22_101_52/0.35),rgb(22_101_52/0.12)_45%,transparent)]"
+        />
+        <div className="relative mx-auto max-w-7xl px-5 pt-12 sm:px-8">
         <Reveal className="max-w-3xl">
           <Kicker>Press play</Kicker>
           <h2 className="mt-6 font-display text-4xl sm:text-5xl">
