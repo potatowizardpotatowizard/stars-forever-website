@@ -30,6 +30,11 @@ export const PODCAST = {
         href: "https://youtu.be/iLmdLG0fWIU",
       },
       {
+        title: "Sharing His Testimony After 20 Years of Non-Speaking Autism",
+        guest: "Joe Infranco and Cody",
+        href: "https://youtu.be/L6Y8thc4YjA",
+      },
+      {
         title: "Courtney 424 Opens Up About Getting Baptized on Beast Games!",
         guest: "Courtney 424",
         href: "https://youtu.be/FKqkqQt5CsY",
