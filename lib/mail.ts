@@ -13,7 +13,7 @@ export async function sendMail({
 }): Promise<boolean> {
   const key = process.env.RESEND_API_KEY;
   if (!key) return false;
-  const to = process.env.CONTACT_EMAIL ?? "flixforauzi@gmail.com";
+  const to = process.env.CONTACT_EMAIL ?? "auzi@starsforever.co";
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {

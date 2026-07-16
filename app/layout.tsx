@@ -49,7 +49,7 @@ const ORG_JSON_LD = {
   description: SITE_DESCRIPTION,
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://stars-forever.vercel.app",
   logo: `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://stars-forever.vercel.app"}/brand/icon-512.png`,
-  email: "flixforauzi@gmail.com",
+  email: "auzi@starsforever.co",
 };
 
 export default function RootLayout({

@@ -23,7 +23,7 @@ export const SPEAKING = {
     {
       name: "Auzi Weber",
       imageSlot: "speak-auzi",
-      email: "flixforauzi@gmail.com",
+      email: "auzi@starsforever.co",
       link: { label: "Host of the Respectfully Inspired Podcast", href: "/podcast" },
       bio: [
         "Auzi grew up on the lie every young creator is sold: get famous and you will finally be full. Then a close friend came face to face with death, and he opened a Bible on his own for the first time.",

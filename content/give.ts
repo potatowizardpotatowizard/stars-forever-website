@@ -39,7 +39,7 @@ export const GIVE = {
       {
         title: "Long Form YouTube Strategy",
         person: "Auzi",
-        email: "flixforauzi@gmail.com",
+        email: "auzi@starsforever.co",
       },
       {
         title: "Short Form and Clipping",

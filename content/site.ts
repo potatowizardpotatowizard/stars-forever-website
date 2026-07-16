@@ -13,7 +13,7 @@ export const ANCHOR_VERSE = {
 };
 
 export const CONTACT = {
-  primaryEmail: "flixforauzi@gmail.com",
+  primaryEmail: "auzi@starsforever.co",
   speakingEmail: "benjimanschleg@gmail.com",
   bookingUrl: "https://calendar.app.google/RctCvj7JcxaCzEMv5",
 };
@@ -34,7 +34,7 @@ export const NAV = [
 export const HERO_MENU = [
   { label: "The Story", href: "/story" },
   { label: "Partner Projects", href: "/partner-projects" },
-  { label: "Category 3 Explained", href: "/category-3" },
+  { label: "Find Your Creator Type", href: "/category-3" },
   { label: "Revolutionary Cohort", href: "/revolutionary" },
   { label: "Contact", href: "/get-involved" },
 ];
