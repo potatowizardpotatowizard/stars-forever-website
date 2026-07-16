@@ -11,7 +11,7 @@ const field =
   "w-full rounded-md border border-dust/30 bg-soot/60 px-4 py-3 text-starlight placeholder:text-dust/60 focus:border-ember focus:outline-none";
 const label = "meta-label mb-2 block";
 
-const FORMATS = ["Sermon", "Workshop", "Panel or Q&A", "Other"];
+const FORMATS = ["Talk", "Workshop", "Panel or Q&A", "Other"];
 
 export default function SpeakingForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">(
