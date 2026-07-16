@@ -47,8 +47,13 @@ export default function PodcastPage() {
           <p className="mt-8 max-w-2xl font-display text-2xl leading-snug text-starlight/90 sm:text-3xl">
             {PODCAST.tagline}
           </p>
-          <div className="mt-10">
+          <div className="mt-10 flex flex-wrap gap-4">
             <Cta href={PODCAST.channelUrl}>{PODCAST.channelCta}</Cta>
+            {PODCAST.listen.map((p) => (
+              <Cta key={p.href} href={p.href} variant="ghost">
+                {p.label}
+              </Cta>
+            ))}
           </div>
         </div>
       </header>

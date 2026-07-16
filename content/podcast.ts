@@ -5,6 +5,16 @@ export const PODCAST = {
     "Long form conversations with creators about what God is doing in secular spaces.",
   channelUrl: "https://www.youtube.com/@RespectfullyInspired",
   channelCta: "Watch on YouTube",
+  listen: [
+    {
+      label: "Spotify",
+      href: "https://open.spotify.com/show/4RpCRFq87EI6sUDjGLpigA",
+    },
+    {
+      label: "Apple Podcasts",
+      href: "https://podcasts.apple.com/us/podcast/respectfully-inspired/id1687736384",
+    },
+  ],
   episodes: {
     kicker: "Start here",
     heading: "Episodes Worth Your Commute",
