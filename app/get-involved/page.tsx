@@ -9,6 +9,7 @@ import MediaSlot from "@/components/MediaSlot";
 import Reveal from "@/components/Reveal";
 import { GET_INVOLVED } from "@/content/getInvolved";
 import { CONTACT, GIVING_URL } from "@/content/site";
+import { resolveSlot } from "@/lib/media";
 
 export const metadata: Metadata = {
   title: "Get Involved",
@@ -39,13 +40,69 @@ export default function GetInvolvedPage() {
           className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night"
         />
         <Grain />
-        <div className="relative mx-auto max-w-7xl px-5 pb-20 pt-44 sm:px-8">
+        <span aria-hidden="true" className="hero-meteor" />
+        <div className="relative mx-auto max-w-7xl px-5 pt-44 sm:px-8">
           <h1 className="font-display text-5xl font-bold sm:text-6xl">
             {GET_INVOLVED.title}
           </h1>
           <p className="mt-8 max-w-3xl font-display text-2xl leading-snug text-starlight/90 sm:text-3xl">
             {GET_INVOLVED.intro}
           </p>
+          {/* Quick actions under the shooting star */}
+          <div className="mt-12 flex flex-wrap gap-3">
+            {GET_INVOLVED.quickActions.map((action) => {
+              const href =
+                action.href ??
+                (action.label === "Give to the Mission"
+                  ? donateHref
+                  : CONTACT.bookingUrl);
+              const external = href.startsWith("http") || href.startsWith("mailto:");
+              return external ? (
+                <a
+                  key={action.label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hero-chip"
+                >
+                  {action.label}
+                </a>
+              ) : (
+                <Link key={action.label} href={href} className="hero-chip">
+                  {action.label}
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+        {/* Filmstrip of real moments drifting along the hero's bottom edge */}
+        <div className="relative mt-16 overflow-hidden pb-10">
+          <div className="film-marquee">
+            {[...GET_INVOLVED.filmstrip, ...GET_INVOLVED.filmstrip].map(
+              (frame, i) => {
+                const media = resolveSlot(frame.slot);
+                if (!media.src) return null;
+                return (
+                  <Link
+                    key={`${frame.slot}-${i}`}
+                    href={frame.href}
+                    tabIndex={i >= GET_INVOLVED.filmstrip.length ? -1 : 0}
+                    aria-hidden={i >= GET_INVOLVED.filmstrip.length}
+                    className="block shrink-0 overflow-hidden rounded-md border border-dust/25 opacity-60 transition-opacity duration-300 hover:opacity-100"
+                  >
+                    <Image
+                      src={media.src}
+                      alt={media.alt}
+                      width={320}
+                      height={192}
+                      sizes="14rem"
+                      className="h-24 w-40 object-cover sm:h-28 sm:w-48"
+                    />
+                  </Link>
+                );
+              },
+            )}
+          </div>
         </div>
       </header>
 

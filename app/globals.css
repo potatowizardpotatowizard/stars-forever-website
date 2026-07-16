@@ -300,6 +300,48 @@ h4 {
   }
 }
 
+/* A slow filmstrip drifting along the bottom of a hero. Content is
+   rendered twice; the track slides half its width for a seamless loop. */
+.film-marquee {
+  display: flex;
+  width: max-content;
+  gap: 0.75rem;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .film-marquee {
+    animation: film-marquee 55s linear infinite;
+  }
+  @keyframes film-marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+/* Quick action chips under a hero intro, typewriter styled */
+.hero-chip {
+  display: inline-block;
+  border: 1px solid rgb(151 139 173 / 0.35);
+  border-radius: 9999px;
+  padding: 0.65rem 1.4rem;
+  font-family: var(--font-meta);
+  font-size: 0.8125rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-starlight);
+  background: rgb(7 5 12 / 0.55);
+  backdrop-filter: blur(2px);
+  transition:
+    border-color 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+.hero-chip:hover {
+  border-color: var(--color-ember);
+  color: #ffffff;
+  box-shadow: 0 0 18px rgb(167 139 250 / 0.45);
+}
+
 /* A shooting star that periodically crosses the lower hero of The Story */
 .hero-meteor {
   position: absolute;

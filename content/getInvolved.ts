@@ -5,6 +5,26 @@ export const GET_INVOLVED = {
   intro:
     "Everything we do runs on two kinds of people: creators who bring their God dreams, and supporters who fuel the missions. Both are ministry.",
 
+  // Quick actions under the hero intro; Give resolves to GIVING_URL in the page
+  quickActions: [
+    { label: "Apply as a Creator", href: "/apply" },
+    { label: "Give to the Mission", href: null },
+    { label: "Book a Call", href: null },
+  ],
+
+  // The drifting filmstrip along the bottom of the hero: real moments,
+  // each frame clicks through to its story
+  filmstrip: [
+    { slot: "tokyo-church", href: "/partner-projects/tokyo-drift" },
+    { slot: "joshua-candles", href: "/partner-projects/revolutionary-cohort" },
+    { slot: "beast-island-prayer", href: "/partner-projects/beast-games" },
+    { slot: "home-proof-tokyo", href: "/partner-projects/tokyo-drift" },
+    { slot: "joshua-stargazing", href: "/partner-projects/revolutionary-cohort" },
+    { slot: "beast-baptism", href: "/partner-projects/beast-games" },
+    { slot: "tokyo-seven", href: "/partner-projects/tokyo-drift" },
+    { slot: "joshua-desert", href: "/partner-projects/revolutionary-cohort" },
+  ],
+
   creators: {
     kicker: "For creators",
     heading: "Bring Us Your God Dream",
