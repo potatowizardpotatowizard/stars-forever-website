@@ -438,6 +438,52 @@ h4 {
   }
 }
 
+/* The mission statement opens the home page alone: centered and glowing
+   in a darkened hero, holding for a beat, then gliding home to its corner
+   while the rest of the hero fades in behind it */
+.mission-intro {
+  animation: mission-intro 3.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes mission-intro {
+  0% {
+    transform: translate(var(--mx), var(--my));
+    opacity: 0;
+    color: #ffffff;
+    text-shadow: none;
+  }
+  14% {
+    opacity: 1;
+    text-shadow:
+      0 0 18px rgb(167 139 250 / 0.95),
+      0 0 55px rgb(109 40 217 / 0.7);
+  }
+  62% {
+    transform: translate(var(--mx), var(--my));
+    opacity: 1;
+    color: #ffffff;
+    text-shadow:
+      0 0 18px rgb(167 139 250 / 0.95),
+      0 0 55px rgb(109 40 217 / 0.7);
+  }
+  100% {
+    transform: translate(0, 0);
+    color: rgb(239 236 247 / 0.75);
+    text-shadow: none;
+  }
+}
+/* While the statement holds center stage, the rest of the hero waits
+   in the dark and then fades back in */
+section#hero nav,
+section#hero > img {
+  transition: opacity 1.3s ease;
+}
+section[data-mission-intro="1"] nav {
+  opacity: 0;
+}
+section[data-mission-intro="1"] > img {
+  opacity: 0.2;
+}
+
 /* A broadcasting star: a glowing star sending slow signal rings into
    space, like a voice carrying */
 .broadcast {

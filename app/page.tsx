@@ -5,6 +5,7 @@ import GlitchText from "@/components/GlitchText";
 import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
+import MissionIntro from "@/components/MissionIntro";
 import Reveal from "@/components/Reveal";
 import StarField from "@/components/StarField";
 import VideoBlock from "@/components/VideoBlock";
@@ -17,7 +18,10 @@ export default function HomePage() {
     <>
       {/* Hero: the brand page. Analog black, purple nebula, typewriter menu,
           glowing wordmark. The menu IS the navigation on this page. */}
-      <section className="relative flex min-h-svh flex-col overflow-hidden bg-night">
+      <section
+        id="hero"
+        className="relative flex min-h-svh flex-col overflow-hidden bg-night"
+      >
         <Image
           src="/brand/bg-purple-hero.jpg"
           alt=""
@@ -62,14 +66,10 @@ export default function HomePage() {
           </div>
         </nav>
 
-        {/* One liner, lower left of the hero */}
-        <div className="relative mx-auto w-full max-w-7xl px-5 pb-10 sm:px-8">
-          <p
-            className="hero-rise max-w-md font-meta text-sm uppercase leading-relaxed tracking-[0.14em] text-starlight/75"
-            style={{ animationDelay: "0.5s" }}
-          >
-            {HOME.hero.missionLine}
-          </p>
+        {/* One liner, lower left of the hero. On first load it opens the
+            site alone, centered and glowing, then glides home. */}
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-5 pb-10 sm:px-8">
+          <MissionIntro text={HOME.hero.missionLine} />
         </div>
       </section>
 
