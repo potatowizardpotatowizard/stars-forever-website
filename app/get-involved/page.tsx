@@ -46,22 +46,6 @@ export default function GetInvolvedPage() {
           <p className="mt-8 max-w-3xl font-display text-2xl leading-snug text-starlight/90 sm:text-3xl">
             {GET_INVOLVED.intro}
           </p>
-          {/* Giving CTA, closing out the hero */}
-          <Reveal className="mt-16">
-            <div className="flex flex-col items-start justify-between gap-6 rounded-xl border border-dust/20 bg-night/60 p-6 backdrop-blur-sm sm:p-8 md:flex-row md:items-center">
-              <div>
-                <h2 className="font-display text-3xl font-bold sm:text-4xl">
-                  <GlitchText text={give.donate.heading} />
-                </h2>
-                {GIVING_URL ? null : (
-                  <p className="mt-3 max-w-xl text-sm text-starlight/75">
-                    {give.donate.body}
-                  </p>
-                )}
-              </div>
-              <Cta href={donateHref}>{give.donate.cta}</Cta>
-            </div>
-          </Reveal>
         </div>
       </header>
 
@@ -156,8 +140,35 @@ export default function GetInvolvedPage() {
         </div>
       </section>
 
-      {/* Secondary, quieter: consulting, under an orange afterglow
-          fading down into black */}
+      {/* Primary giving CTA */}
+      <section className="relative overflow-hidden border-y border-dust/15">
+        <Image
+          src="/brand/bg-orange-comet.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover opacity-50"
+        />
+        <Grain />
+        <div className="relative mx-auto max-w-7xl px-5 py-28 text-center sm:px-8 sm:py-36">
+          <Reveal>
+            <h2 className="mx-auto max-w-2xl font-display text-4xl font-bold sm:text-5xl">
+              <GlitchText text={give.donate.heading} />
+            </h2>
+            {GIVING_URL ? null : (
+              <p className="mx-auto mt-6 max-w-xl text-starlight/75">
+                {give.donate.body}
+              </p>
+            )}
+            <div className="mt-10">
+              <Cta href={donateHref}>{give.donate.cta}</Cta>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Secondary, quieter: consulting, under the giving section's orange
+          afterglow fading down into black */}
       <section className="relative overflow-hidden">
         <div
           aria-hidden="true"
