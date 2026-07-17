@@ -45,14 +45,34 @@ export default function StrategyPage() {
             {STRATEGY.intro}
           </p>
           <ul className="mt-10 space-y-2">
-            {STRATEGY.credibility.map((line) => (
-              <li
-                key={line}
-                className="font-meta text-xs uppercase tracking-[0.14em] text-starlight/70"
-              >
-                <span className={RED}>▸</span> {line}
-              </li>
-            ))}
+            {STRATEGY.credibility.map((line) => {
+              const name = "Aprilynne Alter's";
+              const idx = line.indexOf(name);
+              return (
+                <li
+                  key={line}
+                  className="font-meta text-xs uppercase tracking-[0.14em] text-starlight/70"
+                >
+                  <span className={RED}>▸</span>{" "}
+                  {idx === -1 ? (
+                    line
+                  ) : (
+                    <>
+                      {line.slice(0, idx)}
+                      <a
+                        href="https://www.youtube.com/@AprilynneAlter"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`${RED} transition-colors hover:text-starlight`}
+                      >
+                        {name}
+                      </a>
+                      {line.slice(idx + name.length)}
+                    </>
+                  )}
+                </li>
+              );
+            })}
           </ul>
           <div className="mt-12 flex flex-wrap gap-4">
             <a

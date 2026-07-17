@@ -8,7 +8,7 @@ export const STRATEGY = {
     "I help creators find the ideas worth making and package them so they get watched. Strategy, not luck.",
   credibility: [
     "Content Strategist for Aprilynne Alter's 90 Day Breakthrough",
-    "The strategy behind Tokyo Drift",
+    "The strategy behind countless YouTube videos",
     "A decade of making videos, not just talking about them",
   ],
   ctas: {
