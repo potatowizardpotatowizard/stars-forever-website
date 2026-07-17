@@ -95,6 +95,21 @@ export default function StrategyPage() {
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-starlight/70">
                   {item.body}
                 </p>
+                {"links" in item && item.links ? (
+                  <p className="mt-5 flex flex-wrap gap-x-6 gap-y-1">
+                    {item.links.map((l) => (
+                      <a
+                        key={l.href}
+                        href={l.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`font-meta text-[0.65rem] font-bold uppercase tracking-[0.2em] ${RED} transition-colors hover:text-starlight`}
+                      >
+                        {l.label} ↗
+                      </a>
+                    ))}
+                  </p>
+                ) : null}
               </div>
             );
             if (!item.href) return <div key={item.name}>{inner}</div>;

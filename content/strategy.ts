@@ -24,7 +24,11 @@ export const STRATEGY = {
         name: "Aprilynne Alter · 90 Day Breakthrough",
         role: "Content Strategist",
         body: "Weekly video feedback for a cohort of fifteen creators: ideas, titles, thumbnails, intros, and storytelling, with structured feedback systems for every stage.",
-        href: "https://www.youtube.com/@AprilynneAlter",
+        href: null,
+        links: [
+          { label: "90dbt.com", href: "https://90dbt.com/" },
+          { label: "YouTube", href: "https://www.youtube.com/@AprilynneAlter" },
+        ],
       },
       {
         name: "Owen Tucker",
