@@ -142,6 +142,16 @@ export default function StoryPage() {
               <p className="mt-3 text-sm leading-relaxed text-starlight/70">
                 {f.line}
               </p>
+              {"instagram" in f && f.instagram ? (
+                <a
+                  href={f.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="meta-label mt-3 inline-block text-ember transition-colors hover:text-starlight"
+                >
+                  Instagram ↗
+                </a>
+              ) : null}
             </Reveal>
           ))}
         </div>

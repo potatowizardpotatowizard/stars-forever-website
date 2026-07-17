@@ -155,6 +155,18 @@ export default function SpeakingPage() {
                         </Link>
                       </p>
                     ) : null}
+                    {"instagram" in speaker && speaker.instagram ? (
+                      <p className="mt-3">
+                        <a
+                          href={speaker.instagram}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="meta-label inline-block text-ember transition-colors hover:text-starlight"
+                        >
+                          Instagram ↗
+                        </a>
+                      </p>
+                    ) : null}
                   </div>
                 </div>
               </Reveal>

@@ -58,6 +58,7 @@ export const FOUNDERS = [
     name: "Auzi Films",
     line: "Creator of nearly a decade who saw God move on the biggest sets in the world and never looked back.",
     href: "https://www.linkedin.com/in/auzifilms/",
+    instagram: "https://www.instagram.com/auzi.films/",
     imageSlot: "story-founder-auzi",
   },
   {
