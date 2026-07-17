@@ -40,6 +40,8 @@ export const GIVE = {
         title: "Long Form YouTube Strategy",
         person: "Auzi",
         email: "auzi@starsforever.co",
+        href: "/strategy",
+        linkLabel: "See the Strategy Portfolio",
       },
       {
         title: "Short Form and Clipping",

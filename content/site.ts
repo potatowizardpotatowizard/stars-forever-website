@@ -43,6 +43,7 @@ export const HERO_MENU = [
 export const FOOTER_NAV = [
   { label: "Speaking", href: "/speaking" },
   { label: "Podcast", href: "/podcast" },
+  { label: "YouTube Strategy", href: "/strategy" },
 ];
 
 export const SOCIAL = [

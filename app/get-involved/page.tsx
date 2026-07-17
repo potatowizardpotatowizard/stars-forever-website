@@ -196,6 +196,16 @@ export default function GetInvolvedPage() {
                     {offer.email}
                   </a>
                 </p>
+                {"href" in offer && offer.href ? (
+                  <p className="mt-2">
+                    <Link
+                      href={offer.href}
+                      className="meta-label inline-block text-ember transition-colors hover:text-starlight"
+                    >
+                      {offer.linkLabel} →
+                    </Link>
+                  </p>
+                ) : null}
               </li>
             ))}
           </ul>
