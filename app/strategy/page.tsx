@@ -8,7 +8,7 @@ import { CONTACT } from "@/content/site";
 export const metadata: Metadata = {
   title: "YouTube Strategy Consulting",
   description:
-    "Auzi Weber helps creators find the ideas worth making and package them so they get watched. Content Strategist for Aprilynne Alter's 90 Day Breakthrough.",
+    "Auzi Films helps creators find the ideas worth making and package them so they get watched. Content Strategist for Aprilynne Alter's 90 Day Breakthrough.",
 };
 
 // This page is its own product: same night sky, different signal.
@@ -302,6 +302,11 @@ export default function StrategyPage() {
                     >
                       {offer.cta} →
                     </a>
+                    {"ctaNote" in offer && offer.ctaNote ? (
+                      <span className="ml-5 font-meta text-xs font-bold uppercase tracking-[0.14em] text-[#f5c542]">
+                        {offer.ctaNote}
+                      </span>
+                    ) : null}
                   </p>
                 </div>
               </Reveal>

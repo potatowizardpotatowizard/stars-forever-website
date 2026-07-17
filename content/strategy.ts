@@ -2,7 +2,7 @@
 // look, linked from the ministry site. Everything here is sourced from
 // Auzi's strategy Notion (clients, systems, endorsements).
 export const STRATEGY = {
-  kicker: "Auzi Weber · YouTube Strategy",
+  kicker: "Auzi Films · YouTube Strategy",
   heading: "Videos People Actually Click.",
   intro:
     "I help creators find the ideas worth making and package them so they get watched. Strategy, not luck.",
@@ -185,7 +185,8 @@ export const STRATEGY = {
       },
       {
         title: "Strategy Partner",
-        price: "$1,250 per month · $3,000 for 3 months · 3 Seats Max",
+        price: "$1,250 per month · $3,000 for 3 months",
+        ctaNote: "3 Seats Max",
         body: "Working side by side on everything: we audit your channel, build your ideation and video systems, then make videos inside them with weekly feedback until the machine runs without me. Three months is where the real change happens.",
         cta: "Apply for a Seat",
         featured: true,

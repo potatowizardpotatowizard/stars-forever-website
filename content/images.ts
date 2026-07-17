@@ -308,7 +308,7 @@ export const IMAGES: Record<string, ImageSlot> = {
   // ---- Speaking ---------------------------------------------------------------
   "speak-auzi": {
     file: "speak-auzi.jpg",
-    alt: "Portrait of Auzi Weber",
+    alt: "Portrait of Auzi Films",
     ratio: "4 / 5",
   },
   "speak-benjiman": {

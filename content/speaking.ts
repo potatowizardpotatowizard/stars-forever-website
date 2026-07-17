@@ -1,7 +1,7 @@
 export const SPEAKING = {
   title: "Speaking",
   opening: {
-    kicker: "Speaking · Auzi Weber and Benjiman Schlegel",
+    kicker: "Speaking · Auzi Films and Benjiman Schlegel",
     heading: "We Are Not Pastors…",
     line: "But we carry Jesus into rooms a pulpit could never reach:",
     receipts: [
@@ -21,7 +21,7 @@ export const SPEAKING = {
   },
   speakers: [
     {
-      name: "Auzi Weber",
+      name: "Auzi Films",
       imageSlot: "speak-auzi",
       email: "auzi@starsforever.co",
       link: { label: "Host of the Respectfully Inspired Podcast", href: "/podcast" },
