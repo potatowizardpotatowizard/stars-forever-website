@@ -72,7 +72,6 @@ export default function HomePage() {
                     <GlitchText
                       text={item.label.toUpperCase()}
                       delay={300 + i * 140}
-                      speed={42}
                     />
                   </Link>
                 </li>

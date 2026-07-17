@@ -11,7 +11,7 @@ export default function GlitchText({
   text,
   className = "",
   delay = 0,
-  speed = 34,
+  speed = 42,
 }: {
   text: string;
   className?: string;
