@@ -34,7 +34,7 @@ export const GIVE = {
   consulting: {
     kicker: "Another way to support",
     heading: "Social Strategy Consulting",
-    body: "Team members fund the ministry through creative consulting: YouTube strategy calls, video feedback, and short form clipping. Every engagement supports the mission, and if you are not satisfied with a call, say so at the end and receive an immediate refund.",
+    body: "One way team members fund the ministry is through creative consulting: YouTube strategy calls, video feedback, short form clipping, and more. Every engagement supports the mission, and if you are not satisfied with what you paid for, just say so within 3 days and receive an immediate refund.",
     offers: [
       {
         title: "Long Form YouTube Strategy",
