@@ -1,7 +1,7 @@
 export const PARTNER = {
   title: "Partner Project",
   definition:
-    "We help a creator make the boldest project of their life: one that puts Jesus in front of their secular audience and leaves them seeking God more deeply than when they started.",
+    "We help creators make the boldest project of their lives: one that puts Jesus in front of their secular audience and leaves them seeking God more deeply than when they started.",
   whoWeWorkWith: {
     heading: "Who Do We Work With?",
     line: "Creators, Artists, and Entrepreneurs.",
