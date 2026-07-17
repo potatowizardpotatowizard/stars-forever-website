@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   ANCHOR_VERSE,
   CONTACT,
@@ -14,6 +17,10 @@ import NewsletterForm from "@/components/NewsletterForm";
 import Reveal from "@/components/Reveal";
 
 export default function Footer() {
+  // The strategy page is its own product: no mission updates, explore,
+  // or contact columns there. Everywhere else, the full footer.
+  const minimal = usePathname() === "/strategy";
+
   return (
     <footer className="relative border-t border-dust/15">
       <Grain />
@@ -33,15 +40,21 @@ export default function Footer() {
               {ANCHOR_VERSE.text}
             </p>
             <p className="meta-label mt-3">{ANCHOR_VERSE.reference}</p>
-            <h2 className="meta-label mt-8">Mission updates</h2>
-            <p className="mt-2 max-w-sm text-sm text-starlight/70">
-              Field notes from the mission, straight to your inbox. No noise.
-            </p>
-            <div className="mt-4">
-              <NewsletterForm />
-            </div>
+            {minimal ? null : (
+              <>
+                <h2 className="meta-label mt-8">Mission updates</h2>
+                <p className="mt-2 max-w-sm text-sm text-starlight/70">
+                  Field notes from the mission, straight to your inbox. No
+                  noise.
+                </p>
+                <div className="mt-4">
+                  <NewsletterForm />
+                </div>
+              </>
+            )}
           </div>
 
+          {minimal ? null : (
           <div>
             <h2 className="meta-label">Explore</h2>
             <ul className="mt-4 space-y-2.5 text-sm text-starlight/85">
@@ -57,8 +70,11 @@ export default function Footer() {
               ))}
             </ul>
           </div>
+          )}
 
           <div>
+            {minimal ? null : (
+            <>
             <h2 className="meta-label">Contact</h2>
             <ul className="mt-4 space-y-2.5 text-sm text-starlight/85">
               <li>
@@ -92,7 +108,9 @@ export default function Footer() {
                 </li>
               ) : null}
             </ul>
-            <h2 className="meta-label mt-8">Follow</h2>
+            </>
+            )}
+            <h2 className={minimal ? "meta-label" : "meta-label mt-8"}>Follow</h2>
             <ul className="mt-4 space-y-2.5 text-sm text-starlight/85">
               {SOCIAL.map((s) => (
                 <li key={s.label}>
