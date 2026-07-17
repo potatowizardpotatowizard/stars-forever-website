@@ -24,6 +24,26 @@ export type JourneyTribute = {
   lines: string[];
 };
 
+// The prayer at the heart of the story is set apart: bold, with
+// "eternities" glowing
+const PRAYER =
+  "Jesus, I want my brother's death to turn into other people's eternities.";
+
+function formatBeat(p: string): React.ReactNode {
+  const idx = p.indexOf(PRAYER);
+  if (idx === -1) return p;
+  return (
+    <>
+      {p.slice(0, idx)}
+      <strong className="font-bold text-starlight">
+        Jesus, I want my brother's death to turn into other people's{" "}
+        <span className="glow-word">eternities</span>.
+      </strong>
+      {p.slice(idx + PRAYER.length)}
+    </>
+  );
+}
+
 export default function StoryJourney({
   beats,
   tribute,
@@ -294,7 +314,7 @@ export default function StoryJourney({
             >
               {beat.paragraphs.map((p) => (
                 <p key={p} className="text-lg leading-relaxed text-starlight/85">
-                  {p}
+                  {formatBeat(p)}
                 </p>
               ))}
             </div>

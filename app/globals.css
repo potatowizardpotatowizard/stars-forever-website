@@ -865,6 +865,32 @@ html[data-mission-intro="1"] #hero > img {
   }
 }
 
+/* A single word that burns bright within a sentence */
+.glow-word {
+  color: #ffffff;
+  text-shadow:
+    0 0 10px rgb(167 139 250 / 0.95),
+    0 0 30px rgb(109 40 217 / 0.75);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .glow-word {
+    animation: glow-word 3.5s ease-in-out infinite;
+  }
+  @keyframes glow-word {
+    0%,
+    100% {
+      text-shadow:
+        0 0 10px rgb(167 139 250 / 0.95),
+        0 0 30px rgb(109 40 217 / 0.75);
+    }
+    50% {
+      text-shadow:
+        0 0 16px rgb(239 236 247 / 1),
+        0 0 45px rgb(109 40 217 / 0.95);
+    }
+  }
+}
+
 /* The origin star in The Story hero: a huge breathing glow that descends
    into the small guiding star as the journey begins */
 .origin-star-glow {
