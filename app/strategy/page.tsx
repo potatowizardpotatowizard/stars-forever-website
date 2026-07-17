@@ -208,7 +208,19 @@ export default function StrategyPage() {
                   >
                     {v.name} ↗
                   </a>{" "}
-                  · <span className={RED}>{v.role}</span>
+                  ·{" "}
+                  {"roleHref" in v && v.roleHref ? (
+                    <a
+                      href={v.roleHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`${RED} transition-colors hover:text-starlight`}
+                    >
+                      {v.role} ↗
+                    </a>
+                  ) : (
+                    <span className={RED}>{v.role}</span>
+                  )}
                 </figcaption>
               </figure>
             </Reveal>
@@ -249,15 +261,25 @@ export default function StrategyPage() {
             </h2>
           </Reveal>
           <div className="mt-12 grid gap-6 md:grid-cols-2">
-            {STRATEGY.offers.items.map((offer) => (
+            {STRATEGY.offers.items.map((offer) => {
+              const featured = "featured" in offer && offer.featured;
+              return (
               <Reveal key={offer.title}>
-                <div className="flex h-full flex-col rounded-lg border border-white/10 bg-[#0a0507] p-8">
+                <div
+                  className={`flex h-full flex-col rounded-lg border bg-[#0a0507] p-8 ${
+                    featured
+                      ? "border-[#f5c542]/70 shadow-[0_0_28px_rgb(245_197_66/0.25),inset_0_0_18px_rgb(245_197_66/0.06)]"
+                      : "border-white/10"
+                  }`}
+                >
                   <div className="flex items-baseline justify-between gap-4">
                     <h3 className="font-display text-2xl font-bold">
                       {offer.title}
                     </h3>
                     <p
-                      className={`font-meta text-xs font-bold uppercase tracking-[0.14em] ${RED}`}
+                      className={`text-right font-meta text-xs font-bold uppercase tracking-[0.14em] ${
+                        featured ? "text-[#f5c542]" : RED
+                      }`}
                     >
                       {offer.price}
                     </p>
@@ -283,7 +305,8 @@ export default function StrategyPage() {
                   </p>
                 </div>
               </Reveal>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

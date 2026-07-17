@@ -92,7 +92,8 @@ export const STRATEGY = {
     items: [
       {
         name: "Jon Dorman",
-        role: "YouTube Consultant",
+        role: "Founder of Studio Forge",
+        roleHref: "https://studioforge.io",
         src: "/brand/video/testimonial-jon-dorman.mp4",
         poster: "/brand/poster-testimonial-jon-dorman.jpg",
         channel: "https://www.youtube.com/@jondorman",
@@ -184,9 +185,10 @@ export const STRATEGY = {
       },
       {
         title: "Strategy Partner",
-        price: "$1,250 per month · $3,000 for 3 months",
-        body: "Working side by side on everything: we audit your channel, build your ideation and video systems, then make videos inside them with weekly feedback until the machine runs without me. Three seats at a time, and three months is where the real change happens.",
+        price: "$1,250 per month · $3,000 for 3 months · 3 Seats Max",
+        body: "Working side by side on everything: we audit your channel, build your ideation and video systems, then make videos inside them with weekly feedback until the machine runs without me. Three months is where the real change happens.",
         cta: "Apply for a Seat",
+        featured: true,
       },
     ],
   },
