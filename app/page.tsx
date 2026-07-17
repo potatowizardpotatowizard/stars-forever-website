@@ -66,7 +66,11 @@ export default function HomePage() {
               {HERO_MENU.map((item, i) => (
                 <li key={item.href}>
                   <Link href={item.href} className="hero-menu-link">
-                    <GlitchText text={item.label.toUpperCase()} delay={300 + i * 140} />
+                    <GlitchText
+                      text={item.label.toUpperCase()}
+                      delay={300 + i * 140}
+                      speed={42}
+                    />
                   </Link>
                 </li>
               ))}

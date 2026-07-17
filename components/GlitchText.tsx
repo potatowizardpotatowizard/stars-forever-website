@@ -11,10 +11,12 @@ export default function GlitchText({
   text,
   className = "",
   delay = 0,
+  speed = 34,
 }: {
   text: string;
   className?: string;
   delay?: number;
+  speed?: number;
 }) {
   const [display, setDisplay] = useState(text);
   const timer = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -44,8 +46,8 @@ export default function GlitchText({
           })
           .join(""),
       );
-    }, 42);
-  }, [text]);
+    }, speed);
+  }, [text, speed]);
 
   useEffect(() => {
     const el = ref.current;
