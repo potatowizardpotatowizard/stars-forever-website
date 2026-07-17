@@ -71,50 +71,50 @@ export default function PartnerProjectsPage() {
         </div>
       </header>
 
-      {/* Success metrics, under the hero's purple afterglow */}
+      {/* Two minute explainer, under the hero's purple afterglow */}
       <section className="relative overflow-hidden">
         <div
           aria-hidden="true"
           className="absolute inset-x-0 top-0 h-[45vh] bg-[linear-gradient(to_bottom,rgb(109_40_217/0.3),rgb(109_40_217/0.1)_45%,transparent)]"
         />
-        <div className="relative mx-auto max-w-7xl px-5 py-12 sm:px-8">
-          <Reveal>
-            <h2 className="font-display text-4xl font-bold sm:text-5xl">
-              <GlitchText text="What Matters to Us" />
+        <div className="relative mx-auto max-w-7xl px-5 pb-12 pt-16 sm:px-8">
+          <Reveal className="max-w-3xl">
+            <Kicker>Press play</Kicker>
+            <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
+              <GlitchText text="Partner Projects" />
             </h2>
-            <div className="mt-6">
-              <Kicker>{PARTNER.metrics.kicker}</Kicker>
-            </div>
+            <VideoBlock
+              src="/brand/video/partner-project-explainer.mp4"
+              poster="/brand/poster-partner-project-explainer.jpg"
+              title="explained in two minutes"
+              className="mt-10"
+            />
           </Reveal>
-          <div className="mt-10 grid gap-6 md:grid-cols-2">
-            {PARTNER.metrics.items.map((m) => (
-              <Reveal key={m.title}>
-                <div className="h-full rounded-lg border border-dust/20 bg-soot/40 p-8">
-                  <h2 className="meta-label text-ember">{m.title}</h2>
-                  <p className="mt-4 font-display text-xl font-bold leading-snug">
-                    {m.body}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
         </div>
       </section>
 
-      {/* Two minute explainer */}
-      <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
-        <Reveal className="max-w-3xl">
-          <Kicker>Press play</Kicker>
-          <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
-            <GlitchText text="Partner Projects" />
+      {/* Success metrics */}
+      <section className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
+        <Reveal>
+          <h2 className="font-display text-4xl font-bold sm:text-5xl">
+            <GlitchText text="What Matters to Us" />
           </h2>
-          <VideoBlock
-            src="/brand/video/partner-project-explainer.mp4"
-            poster="/brand/poster-partner-project-explainer.jpg"
-            title="explained in two minutes"
-            className="mt-10"
-          />
+          <div className="mt-6">
+            <Kicker>{PARTNER.metrics.kicker}</Kicker>
+          </div>
         </Reveal>
+        <div className="mt-10 grid gap-6 md:grid-cols-2">
+          {PARTNER.metrics.items.map((m) => (
+            <Reveal key={m.title}>
+              <div className="h-full rounded-lg border border-dust/20 bg-soot/40 p-8">
+                <h2 className="meta-label text-ember">{m.title}</h2>
+                <p className="mt-4 font-display text-xl font-bold leading-snug">
+                  {m.body}
+                </p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
       </section>
 
       {/* Project showcase */}
