@@ -29,14 +29,14 @@ export const CATEGORY3 = {
     {
       number: "Category 2",
       name: "Secular Facing Creators",
-      body: "Christians making mainstream content that reaches a secular audience but rarely engages the Gospel.",
+      body: "Christians making mainstream content that reaches a secular audience but rarely engages their faith.",
       example: "Ryan Trahan",
       exampleHref: "https://www.youtube.com/@ryan",
     },
     {
       number: "Category 3",
       name: "Culture Shaping Creators",
-      body: "Christians whose work clearly connects with a secular audience while intentionally weaving in the Gospel.",
+      body: "Christians whose work clearly connects with a secular audience while intentionally weaving in the story of Jesus.",
       example: "George Janko",
       exampleHref: "https://www.youtube.com/@GeorgeJanko",
     },
