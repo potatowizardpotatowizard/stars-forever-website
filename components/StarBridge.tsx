@@ -105,16 +105,17 @@ export default function StarBridge() {
         gap <= 0 ? 0 : Math.max(0, Math.min(1, (vh * 0.6 - p0.y) / gap));
 
       // Ease the displayed progress toward the target: smooth on any device
-      dp += (target - dp) * 0.14;
+      dp += (target - dp) * 0.085;
       if (Math.abs(target - dp) < 0.001) dp = target;
 
       ctx.clearRect(0, 0, vw, vh);
 
       const active = dp > 0.01 && !arrived;
       if (active) {
+        ctx.globalCompositeOperation = "lighter";
         // Tapered comet tail along the arc
-        const tailStart = Math.max(0, dp - 0.3);
-        const steps = 26;
+        const tailStart = Math.max(0, dp - 0.34);
+        const steps = 40;
         for (let i = 0; i < steps; i++) {
           const t1 = tailStart + ((dp - tailStart) * i) / steps;
           const t2 = tailStart + ((dp - tailStart) * (i + 1)) / steps;
@@ -137,22 +138,57 @@ export default function StarBridge() {
           ctx.lineTo(b.x, b.y);
           ctx.stroke();
         }
+        ctx.globalCompositeOperation = "source-over";
 
-        // The comet head: layered glow
+        // The head: a four point star of light, twinkling as it flies
         const h = bezier(dp, p0, p1, p2);
-        const glow = ctx.createRadialGradient(h.x, h.y, 0, h.x, h.y, 16);
-        glow.addColorStop(0, "rgba(255,255,255,0.95)");
-        glow.addColorStop(0.35, "rgba(239,236,247,0.7)");
-        glow.addColorStop(0.7, "rgba(167,139,250,0.35)");
-        glow.addColorStop(1, "rgba(167,139,250,0)");
-        ctx.fillStyle = glow;
+        const now = performance.now();
+        const pulse = 1 + 0.09 * Math.sin(now / 260);
+        const rot = Math.sin(now / 850) * 0.18;
+        ctx.save();
+        ctx.translate(h.x, h.y);
+        ctx.rotate(rot);
+        ctx.scale(pulse, pulse);
+        ctx.globalCompositeOperation = "lighter";
+
+        const R = 40;
+        const halo = ctx.createRadialGradient(0, 0, 0, 0, 0, R);
+        halo.addColorStop(0, "rgba(255,255,255,0.9)");
+        halo.addColorStop(0.3, "rgba(196,181,253,0.5)");
+        halo.addColorStop(1, "rgba(167,139,250,0)");
+        ctx.fillStyle = halo;
         ctx.beginPath();
-        ctx.arc(h.x, h.y, 16, 0, Math.PI * 2);
+        ctx.arc(0, 0, R, 0, Math.PI * 2);
         ctx.fill();
+
+        const flare = (len: number, w: number, alpha: number) => {
+          const g = ctx.createLinearGradient(0, -len, 0, len);
+          g.addColorStop(0, "rgba(255,255,255,0)");
+          g.addColorStop(0.5, `rgba(255,255,255,${alpha})`);
+          g.addColorStop(1, "rgba(255,255,255,0)");
+          ctx.fillStyle = g;
+          ctx.beginPath();
+          ctx.moveTo(0, -len);
+          ctx.quadraticCurveTo(w, 0, 0, len);
+          ctx.quadraticCurveTo(-w, 0, 0, -len);
+          ctx.fill();
+        };
+        // long vertical and horizontal flares
+        flare(R * 1.5, 4.5, 0.95);
+        ctx.rotate(Math.PI / 2);
+        flare(R * 1.5, 4.5, 0.95);
+        // shorter diagonal flares
+        ctx.rotate(Math.PI / 4);
+        flare(R * 0.75, 3, 0.7);
+        ctx.rotate(Math.PI / 2);
+        flare(R * 0.75, 3, 0.7);
+
+        ctx.globalCompositeOperation = "source-over";
         ctx.fillStyle = "rgba(255,255,255,1)";
         ctx.beginPath();
-        ctx.arc(h.x, h.y, 2.6, 0, Math.PI * 2);
+        ctx.arc(0, 0, 4, 0, Math.PI * 2);
         ctx.fill();
+        ctx.restore();
 
         // Sparks shed behind the head while moving
         if (Math.random() < 0.5 && dp > 0.03 && dp < 0.97) {
