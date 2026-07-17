@@ -182,6 +182,12 @@ export const STRATEGY = {
         body: "We take one video from idea to published together: the premise, the packaging, a full video recipe, and edit feedback until it is ready. You make the video. I strategize beside you the whole way. One workshop at a time, so not every request gets a slot.",
         cta: "Workshop a Video",
       },
+      {
+        title: "Strategy Partner",
+        price: "$1,250 per month · $3,000 for 3 months",
+        body: "Working side by side on everything: we audit your channel, build your ideation and video systems, then make videos inside them with weekly feedback until the machine runs without me. Three seats at a time, and three months is where the real change happens.",
+        cta: "Apply for a Seat",
+      },
     ],
   },
 
