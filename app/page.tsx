@@ -24,9 +24,6 @@ import {
 export default function HomePage() {
   return (
     <>
-      {/* Ambient purple nebula drifting through the whole page */}
-      <div aria-hidden="true" className="home-drift" />
-
       {/* Hero: the brand page. Analog black, purple nebula, typewriter menu,
           glowing wordmark. The menu IS the navigation on this page. */}
       <section
