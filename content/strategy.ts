@@ -60,18 +60,6 @@ export const STRATEGY = {
         body: "Idea engines plus full pitch decks, including a seven continent art project built to be a channel defining series.",
         href: null,
       },
-      {
-        name: "Nelly Crux",
-        role: "Video Workshop",
-        body: "Workshopped a single swing for the fences video: helping a no name magician preach Jesus on America's Got Talent.",
-        href: "http://johnelcruxmagic.com/",
-      },
-      {
-        name: "Rodereck Blassingame",
-        role: "Idea Engine Setup",
-        body: "Built the engine versus experiment system for his channel: which ideas to repeat, which to test, and how to tell the difference.",
-        href: null,
-      },
     ],
   },
 
