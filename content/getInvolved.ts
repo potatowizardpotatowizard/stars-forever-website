@@ -29,16 +29,16 @@ export const GET_INVOLVED = {
         href: "/revolutionary",
       },
       {
-        title: "Book a Call",
-        body: "A call is not a commitment. It is a place to give your vision a chance at becoming reality. Tell us what God put on your heart.",
-        cta: "Book a Call",
-        href: null, // resolved to CONTACT.bookingUrl in the page
-      },
-      {
         title: "Join the Constellation",
         body: "A worldwide map and community of creators who love Jesus. Put your star on the map and find the ones near you wherever you travel.",
         cta: "See the Map",
         href: "/constellation",
+      },
+      {
+        title: "Book a Call",
+        body: "A call is not a commitment. It is a place to give your vision a chance at becoming reality. Tell us what God put on your heart.",
+        cta: "Book a Call",
+        href: null, // resolved to CONTACT.bookingUrl in the page
       },
     ],
   },
