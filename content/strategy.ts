@@ -45,7 +45,7 @@ export const STRATEGY = {
       {
         name: "Provoke & Inspire",
         role: "Channel Audit",
-        body: "A full channel audit and ideation systems for Steiger's global podcast, sharpening how a missions organization shows up on YouTube.",
+        body: "A full channel audit and ideation systems for Steiger's global podcast, sharpening how an established show holds up on YouTube.",
         href: "https://steiger.org",
       },
       {
@@ -167,8 +167,4 @@ export const STRATEGY = {
     ],
   },
 
-  ministry: {
-    note: "Strategy consulting funds the ministry. Every engagement helps Stars Forever reach creators for Jesus.",
-    linkLabel: "About Stars Forever",
-  },
 };

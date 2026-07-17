@@ -268,20 +268,6 @@ export default function StrategyPage() {
         </div>
       </section>
 
-      {/* Bridge back to the ministry */}
-      <section className="mx-auto max-w-6xl px-5 py-16 text-center sm:px-8">
-        <Reveal>
-          <p className="mx-auto max-w-xl text-sm leading-relaxed text-starlight/60">
-            {STRATEGY.ministry.note}{" "}
-            <Link
-              href="/story"
-              className={`${RED} transition-colors hover:text-starlight`}
-            >
-              {STRATEGY.ministry.linkLabel} →
-            </Link>
-          </p>
-        </Reveal>
-      </section>
     </article>
   );
 }
