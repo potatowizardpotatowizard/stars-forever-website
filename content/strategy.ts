@@ -92,7 +92,7 @@ export const STRATEGY = {
     items: [
       {
         name: "Jon Dorman",
-        role: "Founder of Studio Forge",
+        role: "YouTube Strategy Creator · Founder of Studio Forge",
         roleHref: "https://studioforge.io",
         src: "/brand/video/testimonial-jon-dorman.mp4",
         poster: "/brand/poster-testimonial-jon-dorman.jpg",
