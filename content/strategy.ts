@@ -3,7 +3,7 @@
 // Auzi's strategy Notion (clients, systems, endorsements).
 export const STRATEGY = {
   kicker: "Auzi Weber · YouTube Strategy",
-  heading: "Videos people actually click.",
+  heading: "Videos People Actually Click.",
   intro:
     "I help creators find the ideas worth making and package them so they get watched. Strategy, not luck.",
   credibility: [
@@ -107,30 +107,35 @@ export const STRATEGY = {
         role: "YouTube Consultant",
         src: "/brand/video/testimonial-jon-dorman.mp4",
         poster: "/brand/poster-testimonial-jon-dorman.jpg",
+        channel: "https://www.youtube.com/@jondorman",
       },
       {
         name: "Owen Tucker",
         role: "Creator · A Decade on YouTube's Biggest Sets",
         src: "/brand/video/testimonial-owen.mp4",
         poster: "/brand/poster-testimonial-owen.jpg",
+        channel: "https://www.youtube.com/@owenkeilyntucker",
       },
       {
         name: "Ben Pierce",
         role: "Steiger · Provoke & Inspire",
         src: "/brand/video/testimonial-ben-pierce.mp4",
         poster: "/brand/poster-testimonial-ben-pierce.jpg",
+        channel: "https://www.youtube.com/@ProvokeInspire",
       },
       {
         name: "Japhet Samuel",
         role: "Creator",
         src: "/brand/video/testimonial-japhet.mp4",
         poster: "/brand/poster-testimonial-japhet.jpg",
+        channel: "https://www.youtube.com/@japhetsamuel",
       },
       {
         name: "Lucas Mayfield",
         role: "Creator",
         src: "/brand/video/testimonial-lucas.mp4",
         poster: "/brand/poster-testimonial-lucas.jpg",
+        channel: "https://www.instagram.com/lucas.mayfield/",
       },
     ],
   },

@@ -180,7 +180,15 @@ export default function StrategyPage() {
                   <source src={v.src} type="video/mp4" />
                 </video>
                 <figcaption className="mt-3 font-meta text-[0.65rem] font-bold uppercase tracking-[0.2em] text-starlight/50">
-                  {v.name} · <span className={RED}>{v.role}</span>
+                  <a
+                    href={v.channel}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-starlight/80 transition-colors hover:text-starlight"
+                  >
+                    {v.name} ↗
+                  </a>{" "}
+                  · <span className={RED}>{v.role}</span>
                 </figcaption>
               </figure>
             </Reveal>
