@@ -165,6 +165,12 @@ export const STRATEGY = {
         cta: "Book a Call",
       },
       {
+        title: "Channel Audit",
+        price: "$350 flat",
+        body: "A full teardown of your channel: positioning, audience, formats, titles, and thumbnails. You get a written Notion action plan, a recorded Loom walkthrough of everything I found, and a call to decide your next three moves.",
+        cta: "Request an Audit",
+      },
+      {
         title: "Video Feedback",
         price: "$75 per video · $500 for 10",
         body: "Send a video, published or unlisted, and get back a recorded Loom breakdown plus a written Notion feedback document: what worked, what lost people, and exactly what to change on the next one. The same feedback loop creators get inside the 90 Day Breakthrough.",
