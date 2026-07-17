@@ -48,7 +48,7 @@ export const FOOTER_NAV = [
 ];
 
 export const SOCIAL = [
-  { label: "Instagram", href: "https://www.instagram.com/auzi.films/" },
+  { label: "Instagram", href: "https://www.instagram.com/starsforever.co/" },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/auzifilms/" },
   { label: "YouTube", href: "https://www.youtube.com/@RespectfullyInspired" },
 ];
