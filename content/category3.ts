@@ -3,7 +3,7 @@ export const CATEGORY3 = {
   burningQuestion: {
     kicker: "The burning question",
     heading:
-      "There is nearly unlimited quality Christian content online. And almost no quality Christian content that primarily reaches a secular audience.",
+      "There is more Christian content online than ever before. And almost none of it reaches a secular audience.",
     body: "Throughout history, the most powerful evangelistic moves of God took place outside of a church. Yet we often expect to reach unbelievers with content made for believers. Category 3 is our answer to that gap.",
   },
   // The drifting filmstrip along the bottom of the hero: real Category 3
