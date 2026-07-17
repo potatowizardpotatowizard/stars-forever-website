@@ -100,21 +100,6 @@ export default function PartnerProjectsPage() {
         </div>
       </section>
 
-      {/* Who we work with */}
-      <section className="mx-auto max-w-7xl px-5 pt-24 sm:px-8">
-        <Reveal className="max-w-3xl">
-          <h2 className="font-display text-4xl font-bold sm:text-5xl">
-            <GlitchText text={PARTNER.whoWeWorkWith.heading} />
-          </h2>
-          <p className="mt-8 font-display text-2xl leading-snug text-starlight/90 sm:text-3xl">
-            {PARTNER.whoWeWorkWith.line}
-          </p>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-starlight/80">
-            {PARTNER.whoWeWorkWith.body}
-          </p>
-        </Reveal>
-      </section>
-
       {/* Two minute explainer */}
       <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
         <Reveal className="max-w-3xl">

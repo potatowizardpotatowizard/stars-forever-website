@@ -2,11 +2,6 @@ export const PARTNER = {
   title: "Partner Project",
   definition:
     "We help creators make the boldest project of their lives: one that puts Jesus in front of their secular audience and leaves them seeking God more deeply than when they started.",
-  whoWeWorkWith: {
-    heading: "Who Do We Work With?",
-    line: "Creators, Artists, and Entrepreneurs.",
-    body: "We are very limited in our partner project capacity so not everyone gets accepted. Bring your most audacious God dream. As Jesus said, “With men this is impossible, but with God all things are possible” (Matthew 19:26).",
-  },
   featured: {
     kicker: "The Most Recent Project",
     body: "Check out our most recent partner project where we boldly shared Jesus to a secular audience.",
@@ -46,7 +41,7 @@ export const PARTNER = {
       {
         question: "Who do we work with?",
         answer:
-          "Creators, artists, and entrepreneurs. We do one partner project per month, so not everyone gets accepted. Bring your most audacious God dream. As Jesus said, with man this is impossible, but with God all things are possible (Matthew 19:26).",
+          "Creators, artists, and entrepreneurs. We are very limited in our partner project capacity so not everyone gets accepted. Bring your most audacious God dream. As Jesus said, “With men this is impossible, but with God all things are possible” (Matthew 19:26).",
       },
       {
         question: "What commitment does this entail?",
