@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -9,6 +9,12 @@ import { NAV, SITE_NAME } from "@/content/site";
 export default function Header() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+
+  // Belt and braces: the menu is never left hanging over a freshly
+  // loaded page, no matter how the navigation happened.
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   // The home page hero carries its own menu, like the brand page.
   if (pathname === "/") return null;

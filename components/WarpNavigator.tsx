@@ -111,8 +111,10 @@ export default function WarpNavigator() {
       }
       if (path === window.location.pathname) return;
 
+      // preventDefault stops the Link's own navigation; propagation is
+      // left alone so UI like the mobile menu still hears the click and
+      // can close itself while the warp plays.
       e.preventDefault();
-      e.stopPropagation();
       jumping.current = true;
       setPhaseBoth("warping");
       runWarp(() => {

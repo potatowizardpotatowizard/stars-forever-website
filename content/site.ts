@@ -25,9 +25,9 @@ export const GIVING_URL: string | null =
 export const NAV = [
   { label: "The Story", href: "/story" },
   { label: "Partner Projects", href: "/partner-projects" },
-  { label: "Category 3 Explained", href: "/category-3" },
+  { label: "Find Your Creator Type", href: "/category-3" },
   { label: "Revolutionary Cohort", href: "/revolutionary" },
-  { label: "Contact", href: "/get-involved" },
+  { label: "Get Involved", href: "/get-involved" },
 ];
 
 // The hero menu on the home page: the site itself, presented like a tape menu.
