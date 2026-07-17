@@ -43,17 +43,29 @@ export default function RevolutionaryPage() {
         <p className="mt-8 max-w-3xl font-display text-2xl leading-snug text-starlight/90 sm:text-3xl">
           {REVOLUTIONARY.definition}
         </p>
-        {/* Attribution, near the top as required */}
+        {/* Attribution, near the top as required. Steiger Ministries is
+            the link itself. */}
         <p className="mt-8 max-w-2xl text-sm leading-relaxed text-dust">
-          {REVOLUTIONARY.attribution.body}{" "}
-          <a
-            href={REVOLUTIONARY.attribution.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-ember transition-colors hover:text-starlight"
-          >
-            {REVOLUTIONARY.attribution.linkLabel}
-          </a>
+          {(() => {
+            const name = "Steiger Ministries";
+            const body = REVOLUTIONARY.attribution.body;
+            const idx = body.indexOf(name);
+            if (idx === -1) return body;
+            return (
+              <>
+                {body.slice(0, idx)}
+                <a
+                  href={REVOLUTIONARY.attribution.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-ember transition-colors hover:text-starlight"
+                >
+                  {name}
+                </a>
+                {body.slice(idx + name.length)}
+              </>
+            );
+          })()}
         </p>
         {/* Featured: the most recent cohort, closing out the hero */}
         <Reveal className="mt-16">
