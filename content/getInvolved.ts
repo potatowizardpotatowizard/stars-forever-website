@@ -34,6 +34,12 @@ export const GET_INVOLVED = {
         cta: "Book a Call",
         href: null, // resolved to CONTACT.bookingUrl in the page
       },
+      {
+        title: "Join the Constellation",
+        body: "A worldwide map and community of creators who love Jesus. Put your star on the map and find the ones near you wherever you travel.",
+        cta: "See the Map",
+        href: "/constellation",
+      },
     ],
   },
 

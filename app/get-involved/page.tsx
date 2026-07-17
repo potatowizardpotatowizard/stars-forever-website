@@ -233,7 +233,7 @@ export default function GetInvolvedPage() {
             <GlitchText text={GET_INVOLVED.creators.heading} />
           </h2>
         </Reveal>
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
+        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {GET_INVOLVED.creators.paths.map((path) => (
             <Reveal key={path.title}>
               <div className="flex h-full flex-col rounded-lg border border-dust/20 bg-soot/40 p-8">

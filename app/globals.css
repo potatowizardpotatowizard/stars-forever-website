@@ -865,6 +865,31 @@ html[data-mission-intro="1"] #hero > img {
   }
 }
 
+/* A creator's star on the Constellation map */
+.constellation-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 9999px;
+  background: radial-gradient(circle, #ffffff 0%, #a78bfa 55%, transparent 75%);
+  filter: drop-shadow(0 0 6px rgb(167 139 250 / 0.95));
+}
+@media (prefers-reduced-motion: no-preference) {
+  .constellation-dot {
+    animation: constellation-dot 3s ease-in-out infinite;
+  }
+  @keyframes constellation-dot {
+    0%,
+    100% {
+      transform: scale(1);
+      filter: drop-shadow(0 0 6px rgb(167 139 250 / 0.95));
+    }
+    50% {
+      transform: scale(1.35);
+      filter: drop-shadow(0 0 12px rgb(239 236 247 / 1));
+    }
+  }
+}
+
 /* A single word that burns bright within a sentence */
 .glow-word {
   color: #ffffff;
