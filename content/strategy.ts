@@ -176,6 +176,12 @@ export const STRATEGY = {
         body: "A full teardown of your channel: positioning, audience, formats, titles, and thumbnails. You get a written Notion action plan, a recorded Loom walkthrough of everything I found, and a call to decide your next three moves.",
         cta: "Request an Audit",
       },
+      {
+        title: "Video Workshop",
+        price: "$750 per video",
+        body: "We take one video from idea to published together: the premise, the packaging, a full video recipe, and edit feedback until it is ready. You make the video. I strategize beside you the whole way.",
+        cta: "Workshop a Video",
+      },
     ],
   },
 
