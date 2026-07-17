@@ -3,7 +3,7 @@ export const PARTNER = {
   definition:
     "We partner with a creator on a single project that shares Jesus with their secular audience, while helping them build a deeper daily process of seeking God.",
   whoWeWorkWith: {
-    heading: "Who Do We Work With",
+    heading: "Who Do We Work With?",
     line: "Creators, Artists, and Entrepreneurs.",
     body: "We are very limited in our partner project capacity so not everyone gets accepted. Bring your most audacious God dream. As Jesus said, “With men this is impossible, but with God all things are possible” (Matthew 19:26).",
   },
