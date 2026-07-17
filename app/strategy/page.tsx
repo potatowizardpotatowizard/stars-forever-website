@@ -303,7 +303,9 @@ export default function StrategyPage() {
                       {offer.cta} →
                     </a>
                     {"ctaNote" in offer && offer.ctaNote ? (
-                      <span className="ml-5 font-meta text-xs font-bold uppercase tracking-[0.14em] text-[#f5c542]">
+                      <span
+                        className={`ml-5 font-meta text-xs font-bold uppercase tracking-[0.14em] ${RED}`}
+                      >
                         {offer.ctaNote}
                       </span>
                     ) : null}
