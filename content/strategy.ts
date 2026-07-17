@@ -130,24 +130,6 @@ export const STRATEGY = {
         body: "One hour, your channel, direct answers. Ideas, packaging, positioning, whatever is in the way. If you are not satisfied, say so at the end and receive an immediate refund.",
         cta: "Book a Call",
       },
-      {
-        title: "Channel Audit",
-        price: "Custom quote",
-        body: "A full teardown of your channel: positioning, formats, titles, and thumbnails, delivered as a written action plan plus a call to walk through it.",
-        cta: "Request an Audit",
-      },
-      {
-        title: "Video Workshop",
-        price: "Custom quote",
-        body: "One video, start to finish, together: concept, recipe, title, thumbnail, and edit feedback. The same process behind Tokyo Drift and the AGT video.",
-        cta: "Workshop a Video",
-      },
-      {
-        title: "Strategy Partner",
-        price: "Monthly · limited seats",
-        body: "Ongoing partnership: weekly feedback, ideation systems, pitch decks, schedules, and budgets. The full Owen Tucker treatment for a small number of creators at a time.",
-        cta: "Apply for a Seat",
-      },
     ],
   },
 
