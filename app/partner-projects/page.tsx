@@ -43,6 +43,9 @@ export default function PartnerProjectsPage() {
           <p className="mt-8 max-w-3xl font-display text-2xl leading-snug text-starlight/90 sm:text-3xl">
             {PARTNER.definition}
           </p>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-starlight/80">
+            {PARTNER.definitionBody}
+          </p>
           {/* Featured: the most recent project, closing out the hero */}
           <Reveal className="mt-16">
             <Link
