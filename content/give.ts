@@ -47,6 +47,8 @@ export const GIVE = {
         title: "Short Form and Clipping",
         person: "Ben",
         email: "benjimanschleg@gmail.com",
+        href: "https://vanguardproclamationstudios.com/",
+        linkLabel: "See the Clipping Portfolio",
       },
     ],
   },

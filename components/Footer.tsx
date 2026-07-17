@@ -110,7 +110,20 @@ export default function Footer() {
             </ul>
             </>
             )}
-            <h2 className={minimal ? "meta-label" : "meta-label mt-8"}>Follow</h2>
+            {minimal ? (
+              <>
+                <h2 className="meta-label">Email</h2>
+                <p className="mt-4 text-sm text-starlight/85">
+                  <a
+                    href="mailto:flixforauzi@gmail.com"
+                    className="transition-colors hover:text-ember"
+                  >
+                    flixforauzi@gmail.com
+                  </a>
+                </p>
+              </>
+            ) : null}
+            <h2 className="meta-label mt-8">Follow</h2>
             <ul className="mt-4 space-y-2.5 text-sm text-starlight/85">
               {SOCIAL.map((s) => (
                 <li key={s.label}>

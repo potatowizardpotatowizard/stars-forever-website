@@ -198,12 +198,23 @@ export default function GetInvolvedPage() {
                 </p>
                 {"href" in offer && offer.href ? (
                   <p className="mt-2">
-                    <Link
-                      href={offer.href}
-                      className="meta-label inline-block text-ember transition-colors hover:text-starlight"
-                    >
-                      {offer.linkLabel} →
-                    </Link>
+                    {offer.href.startsWith("http") ? (
+                      <a
+                        href={offer.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="meta-label inline-block text-ember transition-colors hover:text-starlight"
+                      >
+                        {offer.linkLabel} →
+                      </a>
+                    ) : (
+                      <Link
+                        href={offer.href}
+                        className="meta-label inline-block text-ember transition-colors hover:text-starlight"
+                      >
+                        {offer.linkLabel} →
+                      </Link>
+                    )}
                   </p>
                 ) : null}
               </li>
