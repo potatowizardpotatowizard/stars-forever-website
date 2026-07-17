@@ -161,7 +161,7 @@ export const STRATEGY = {
       {
         title: "Strategy Call",
         price: "$100 per hour",
-        body: "One hour, your channel, direct answers. Ideas, packaging, positioning, whatever is in the way. If you are not satisfied, say so at the end and receive an immediate refund.",
+        body: "One hour, your channel, direct answers. Ideas, packaging, positioning, whatever is in the way. If you are not satisfied, just say so within 3 days and receive an immediate refund.",
         cta: "Book a Call",
       },
       {
