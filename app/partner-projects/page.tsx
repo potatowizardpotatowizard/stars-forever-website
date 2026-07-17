@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import ConstellationWhisper from "@/components/ConstellationWhisper";
 import { linkCategory3 } from "@/components/Category3Link";
 import Image from "next/image";
 import Link from "next/link";
@@ -236,6 +237,7 @@ export default function PartnerProjectsPage() {
               {PARTNER.closing.emailCta}
             </Cta>
           </div>
+          <ConstellationWhisper className="mt-16" />
         </Reveal>
       </section>
     </article>

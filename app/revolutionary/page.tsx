@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import ConstellationWhisper from "@/components/ConstellationWhisper";
 import { linkCategory3 } from "@/components/Category3Link";
 import Image from "next/image";
 import Link from "next/link";
@@ -211,6 +212,7 @@ export default function RevolutionaryPage() {
           <div className="mt-14">
             <WaitlistForm />
           </div>
+          <ConstellationWhisper className="mt-16" />
         </Reveal>
       </section>
     </article>

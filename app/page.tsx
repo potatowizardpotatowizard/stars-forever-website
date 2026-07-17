@@ -1,4 +1,5 @@
 import Image from "next/image";
+import ConstellationWhisper from "@/components/ConstellationWhisper";
 import Link from "next/link";
 import { linkCategory3 } from "@/components/Category3Link";
 import Cta from "@/components/Cta";
@@ -316,6 +317,7 @@ export default function HomePage() {
                 {HOME.closing.emailCta}
               </Cta>
             </div>
+            <ConstellationWhisper className="mt-16" />
           </Reveal>
         </div>
       </section>
