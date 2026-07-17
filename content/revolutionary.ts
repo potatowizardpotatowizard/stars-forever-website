@@ -1,7 +1,7 @@
 export const REVOLUTIONARY = {
   title: "Revolutionary Cohort",
   definition:
-    "Revolutionary is a catalytic experience designed to equip and activate creators to boldly share Jesus with a secular audience.",
+    "The Revolutionary Cohort is a catalytic experience designed to introduce creators to a missionary lifestyle, helping them boldly share Jesus with a secular audience.",
   attribution: {
     body: "Revolutionary is a mission led by Ben Pierce of Steiger Ministries in collaboration with Stars Forever.",
     linkLabel: "steiger.org",
