@@ -865,6 +865,41 @@ html[data-mission-intro="1"] #hero > img {
   }
 }
 
+/* An ambient purple nebula that slowly drifts across the whole home
+   page, tinting the shadows without washing the text */
+.home-drift {
+  position: fixed;
+  inset: -20%;
+  z-index: 5;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      50% 42% at 28% 22%,
+      rgb(109 40 217 / 0.22),
+      transparent 70%
+    ),
+    radial-gradient(
+      46% 40% at 78% 78%,
+      rgb(167 139 250 / 0.16),
+      transparent 70%
+    );
+  mix-blend-mode: soft-light;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .home-drift {
+    animation: home-drift 36s ease-in-out infinite alternate;
+  }
+  @keyframes home-drift {
+    0% {
+      transform: translate3d(-3%, -2%, 0) scale(1.05) rotate(-2deg);
+    }
+    100% {
+      transform: translate3d(3%, 2%, 0) scale(1.2) rotate(2deg);
+    }
+  }
+}
+
 /* A creator's star on the Constellation map */
 .constellation-dot {
   width: 9px;
