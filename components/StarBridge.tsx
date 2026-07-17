@@ -33,7 +33,7 @@ export default function StarBridge() {
       const ex = er.left + Math.min(er.width, 40);
       const ey = er.top + er.height / 2;
 
-      const vh = window.innerHeight;
+      const vh = window.innerHeight || document.documentElement.clientHeight;
       const line = vh * 0.6; // the trigger line down the viewport
       const gap = ey - sy; // layout distance, scroll independent
       const p = gap <= 0 ? 0 : clamp01((line - sy) / gap);
