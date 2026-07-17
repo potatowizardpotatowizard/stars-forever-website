@@ -74,7 +74,7 @@ export const HOME = {
       {
         title: "Revolutionary Cohort",
         meta: "Joshua Tree, 2026",
-        body: "Ten creators in the desert for a weekend of teaching, prayer, shared meals, and a digital media fast. It began in darkness with candles and ended under the stars.",
+        body: "Ten creators in the desert for a weekend of teaching, prayer, shared meals, and collaboration. It began at a house together and ended under the stars.",
         href: "/partner-projects/revolutionary-cohort",
         imageSlot: "home-proof-joshua-tree",
       },
