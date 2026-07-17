@@ -52,7 +52,7 @@ export const STORY = {
   },
   give: {
     heading: "Help Write the Next Chapter",
-    body: "This story began with a prayer that one death would turn into other people's eternities. Giving is how many carry it forward.",
+    body: "This story began with a prayer that one death would turn into other people's eternities. Giving is how you can join the mission and carry it forward.",
     cta: "Give to the Mission",
   },
 };
