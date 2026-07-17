@@ -98,6 +98,43 @@ export const STRATEGY = {
     ],
   },
 
+  videos: {
+    kicker: "In their words",
+    heading: "Hear It From Them",
+    items: [
+      {
+        name: "Jon Dorman",
+        role: "YouTube Consultant",
+        src: "/brand/video/testimonial-jon-dorman.mp4",
+        poster: "/brand/poster-testimonial-jon-dorman.jpg",
+      },
+      {
+        name: "Owen Tucker",
+        role: "Creator · A Decade on YouTube's Biggest Sets",
+        src: "/brand/video/testimonial-owen.mp4",
+        poster: "/brand/poster-testimonial-owen.jpg",
+      },
+      {
+        name: "Ben Pierce",
+        role: "Steiger · Provoke & Inspire",
+        src: "/brand/video/testimonial-ben-pierce.mp4",
+        poster: "/brand/poster-testimonial-ben-pierce.jpg",
+      },
+      {
+        name: "Japhet Samuel",
+        role: "Creator",
+        src: "/brand/video/testimonial-japhet.mp4",
+        poster: "/brand/poster-testimonial-japhet.jpg",
+      },
+      {
+        name: "Lucas Mayfield",
+        role: "Creator",
+        src: "/brand/video/testimonial-lucas.mp4",
+        poster: "/brand/poster-testimonial-lucas.jpg",
+      },
+    ],
+  },
+
   quotes: {
     kicker: "What creators say",
     items: [

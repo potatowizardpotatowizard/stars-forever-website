@@ -158,8 +158,39 @@ export default function StrategyPage() {
         </div>
       </section>
 
-      {/* Quotes */}
+      {/* Video testimonials */}
       <section className="mx-auto max-w-6xl px-5 py-24 sm:px-8">
+        <Reveal>
+          <StratLabel>{STRATEGY.videos.kicker}</StratLabel>
+          <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
+            {STRATEGY.videos.heading}
+          </h2>
+        </Reveal>
+        <div className="mt-12 grid items-start gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {STRATEGY.videos.items.map((v) => (
+            <Reveal key={v.src}>
+              <figure>
+                <video
+                  controls
+                  preload="metadata"
+                  playsInline
+                  poster={v.poster}
+                  className="block w-full rounded-lg border border-white/10"
+                >
+                  <source src={v.src} type="video/mp4" />
+                </video>
+                <figcaption className="mt-3 font-meta text-[0.65rem] font-bold uppercase tracking-[0.2em] text-starlight/50">
+                  {v.name} · <span className={RED}>{v.role}</span>
+                </figcaption>
+              </figure>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* Quotes */}
+      <section className="border-t border-white/10">
+        <div className="mx-auto max-w-6xl px-5 py-24 sm:px-8">
         <Reveal>
           <StratLabel>{STRATEGY.quotes.kicker}</StratLabel>
         </Reveal>
@@ -176,6 +207,7 @@ export default function StrategyPage() {
               </figure>
             </Reveal>
           ))}
+        </div>
         </div>
       </section>
 
