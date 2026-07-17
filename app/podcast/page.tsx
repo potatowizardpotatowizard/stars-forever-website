@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { linkCategory3 } from "@/components/Category3Link";
 import Image from "next/image";
 import Cta from "@/components/Cta";
 import GlitchText from "@/components/GlitchText";
@@ -130,7 +131,7 @@ export default function PodcastPage() {
             <div className="mt-8 space-y-5">
               {PODCAST.why.paragraphs.map((p) => (
                 <p key={p} className="text-lg leading-relaxed text-starlight/85">
-                  {p}
+                  {linkCategory3(p)}
                 </p>
               ))}
             </div>

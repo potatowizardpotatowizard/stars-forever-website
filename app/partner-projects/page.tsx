@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { linkCategory3 } from "@/components/Category3Link";
 import Image from "next/image";
 import Link from "next/link";
 import Cta from "@/components/Cta";
@@ -42,9 +43,6 @@ export default function PartnerProjectsPage() {
           </h1>
           <p className="mt-8 max-w-3xl font-display text-2xl leading-snug text-starlight/90 sm:text-3xl">
             {PARTNER.definition}
-          </p>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-starlight/80">
-            {PARTNER.definitionBody}
           </p>
           {/* Featured: the most recent project, closing out the hero */}
           <Reveal className="mt-16">
@@ -100,6 +98,21 @@ export default function PartnerProjectsPage() {
             ))}
           </div>
         </div>
+      </section>
+
+      {/* Who we work with */}
+      <section className="mx-auto max-w-7xl px-5 pt-24 sm:px-8">
+        <Reveal className="max-w-3xl">
+          <h2 className="font-display text-4xl font-bold sm:text-5xl">
+            <GlitchText text={PARTNER.whoWeWorkWith.heading} />
+          </h2>
+          <p className="mt-8 font-display text-2xl leading-snug text-starlight/90 sm:text-3xl">
+            {PARTNER.whoWeWorkWith.line}
+          </p>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-starlight/80">
+            {PARTNER.whoWeWorkWith.body}
+          </p>
+        </Reveal>
       </section>
 
       {/* Two minute explainer */}
@@ -175,7 +188,7 @@ export default function PartnerProjectsPage() {
                 <span className="meta-label pt-1 text-ember">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <p className="text-lg text-starlight/85">{step}</p>
+                <p className="text-lg text-starlight/85">{linkCategory3(step)}</p>
               </div>
             </Reveal>
           ))}

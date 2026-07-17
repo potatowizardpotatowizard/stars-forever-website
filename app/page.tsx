@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { linkCategory3 } from "@/components/Category3Link";
 import Cta from "@/components/Cta";
 import GlitchText from "@/components/GlitchText";
 import Grain from "@/components/Grain";
@@ -232,7 +233,7 @@ export default function HomePage() {
             <GlitchText text={HOME.feature.heading} />
           </h2>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-starlight/80">
-            {HOME.feature.body}
+            {linkCategory3(HOME.feature.body)}
           </p>
           <YouTubeEmbed
             youtubeId={HOME.feature.youtubeId}

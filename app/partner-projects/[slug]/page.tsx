@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { linkCategory3 } from "@/components/Category3Link";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -187,7 +188,7 @@ export default async function MissionPage({
             <div className="mt-8 max-w-2xl space-y-6">
               {section.paragraphs.map((p) => (
                 <p key={p} className="text-lg leading-relaxed text-starlight/85">
-                  {p}
+                  {linkCategory3(p)}
                 </p>
               ))}
               {section.link ? (

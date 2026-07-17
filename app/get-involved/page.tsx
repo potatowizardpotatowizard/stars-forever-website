@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { linkCategory3 } from "@/components/Category3Link";
 import Image from "next/image";
 import Link from "next/link";
 import Cta from "@/components/Cta";
@@ -133,7 +134,7 @@ export default function GetInvolvedPage() {
                 {item.title}
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-starlight/70">
-                {item.body}
+                {linkCategory3(item.body)}
               </p>
             </Reveal>
           ))}
