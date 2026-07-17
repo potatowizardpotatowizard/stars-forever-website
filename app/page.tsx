@@ -140,7 +140,9 @@ export default function HomePage() {
       </section>
 
       {/* Featured: the Tokyo Drift video */}
-      <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
+      <section className="relative overflow-hidden border-y border-dust/10 bg-soot/40">
+        <Grain />
+        <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
         <Reveal className="mx-auto max-w-4xl">
           <Kicker>{HOME.feature.kicker}</Kicker>
           <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
@@ -161,14 +163,14 @@ export default function HomePage() {
             </Cta>
           </div>
         </Reveal>
+        </div>
       </section>
 
       {/* The two creator programs */}
       <section
         aria-label={HOME.programs.heading}
-        className="relative overflow-hidden border-y border-dust/10 bg-soot/40"
+        className="relative overflow-hidden"
       >
-        <Grain />
         <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
           <Reveal>
             <Kicker>{HOME.programs.kicker}</Kicker>
@@ -251,7 +253,9 @@ export default function HomePage() {
       </section>
 
       {/* Proof strip */}
-      <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
+      <section className="relative overflow-hidden border-y border-dust/10 bg-soot/40">
+        <Grain />
+        <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
         <Reveal>
           <Kicker>{HOME.proof.kicker}</Kicker>
           <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
@@ -278,6 +282,7 @@ export default function HomePage() {
               </Link>
             </Reveal>
           ))}
+        </div>
         </div>
       </section>
 
