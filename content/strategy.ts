@@ -178,8 +178,8 @@ export const STRATEGY = {
       },
       {
         title: "Video Workshop",
-        price: "$750 per video",
-        body: "We take one video from idea to published together: the premise, the packaging, a full video recipe, and edit feedback until it is ready. You make the video. I strategize beside you the whole way.",
+        price: "$750 per video · Limited capacity",
+        body: "We take one video from idea to published together: the premise, the packaging, a full video recipe, and edit feedback until it is ready. You make the video. I strategize beside you the whole way. One workshop at a time, so not every request gets a slot.",
         cta: "Workshop a Video",
       },
     ],
