@@ -5,7 +5,7 @@ export const STRATEGY = {
   kicker: "Auzi Films · YouTube Strategy",
   heading: "Videos People Actually Click.",
   intro:
-    "I help creators find the ideas worth making and package them so they get watched. Strategy, not luck.",
+    "From a single video review to a full channel partnership, I help creators find the ideas worth making, package them so they get watched, and build the systems that make it repeatable. Strategy, not luck.",
   credibility: [
     "Content Strategist for Aprilynne Alter's 90 Day Breakthrough",
     "The strategy behind countless YouTube videos",
