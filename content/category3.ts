@@ -61,7 +61,7 @@ export const CATEGORY3 = {
       },
       {
         title: "Collaborate So a Secular Audience Meets a Jesus Conversation",
-        body: "George Janko sits down with Adam22, one of the most secular voices in podcasting, and spends two hours asking about his life, his industry, and God. Adam22's audience is secular, so every fan who watches hears a real Jesus conversation.",
+        body: "George Janko sits down with Adam22, an adult film star, and spends two hours asking him about his life, his industry, and God. Adam22's audience is primarily secular, so every fan who watches likely represents someone hearing a real Jesus conversation for the first time.",
         videoLabel: "Watch: An Adult Film Star and a Christian Walk Into a Podcast",
         videoUrl: "https://youtu.be/WG5F7lh65ns",
       },
