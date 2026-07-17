@@ -25,7 +25,7 @@ export const STORY = {
       polaroidCaption: "the remote island",
       paragraphs: [
         "On a remote island, they baptized two girls.",
-        "It was the most he had ever seen God move. And it happened outside a church. Despite the fresh grief, he had certainty that he was living exactly what God had designed for him, and he did not want it to end with the show. From that moment he knew he wanted to spend the rest of his life preaching Jesus through creators and creator environments.",
+        "It was the most he had ever seen God move. And it happened outside a church. Despite the fresh grief, he had certainty that he was living exactly what God had designed for him, and he did not want it to end with the show. From that moment on, he knew he wanted to spend the rest of his life preaching Jesus through creators and creator environments.",
         "Shortly after, Stars Forever was born.",
       ],
     },

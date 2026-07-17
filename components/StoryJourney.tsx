@@ -29,19 +29,35 @@ export type JourneyTribute = {
 const PRAYER =
   "Jesus, I want my brother's death to turn into other people's eternities.";
 
+const BIRTH = "Stars Forever was born.";
+
 function formatBeat(p: string): React.ReactNode {
-  const idx = p.indexOf(PRAYER);
-  if (idx === -1) return p;
-  return (
-    <>
-      {p.slice(0, idx)}
-      <strong className="font-bold text-starlight">
-        Jesus, I want my brother's death to turn into other people's{" "}
-        <span className="glow-word">eternities</span>.
-      </strong>
-      {p.slice(idx + PRAYER.length)}
-    </>
-  );
+  const prayerIdx = p.indexOf(PRAYER);
+  if (prayerIdx !== -1) {
+    return (
+      <>
+        {p.slice(0, prayerIdx)}
+        <strong className="font-bold text-starlight">
+          Jesus, I want my brother's death to turn into other people's{" "}
+          <span className="glow-word">eternities</span>.
+        </strong>
+        {p.slice(prayerIdx + PRAYER.length)}
+      </>
+    );
+  }
+  const birthIdx = p.indexOf(BIRTH);
+  if (birthIdx !== -1) {
+    return (
+      <>
+        {p.slice(0, birthIdx)}
+        <strong className="font-bold text-starlight">
+          <span className="glow-word">Stars Forever</span> was born.
+        </strong>
+        {p.slice(birthIdx + BIRTH.length)}
+      </>
+    );
+  }
+  return p;
 }
 
 export default function StoryJourney({
