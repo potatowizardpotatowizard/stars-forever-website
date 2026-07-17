@@ -8,6 +8,7 @@ import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
 import MissionIntro from "@/components/MissionIntro";
+import StarBridge from "@/components/StarBridge";
 import Reveal from "@/components/Reveal";
 import StarField from "@/components/StarField";
 import VideoBlock from "@/components/VideoBlock";
@@ -24,6 +25,9 @@ import {
 export default function HomePage() {
   return (
     <>
+      {/* A shooting star bridges the reframe line into the Tokyo Drift header */}
+      <StarBridge />
+
       {/* Hero: the brand page. Analog black, purple nebula, typewriter menu,
           glowing wordmark. The menu IS the navigation on this page. */}
       <section
@@ -125,18 +129,22 @@ export default function HomePage() {
           <Reveal className="mt-24 max-w-3xl sm:mt-32">
             <Kicker>{HOME.reframe.kicker}</Kicker>
             <div className="mt-8 space-y-6">
-              {HOME.reframe.lines.map((line, i) => (
-                <p
-                  key={line}
-                  className={
-                    i === HOME.reframe.lines.length - 1
-                      ? "font-display text-3xl font-bold text-ember sm:text-4xl"
-                      : "font-display text-3xl font-bold text-starlight sm:text-4xl"
-                  }
-                >
-                  {line}
-                </p>
-              ))}
+              {HOME.reframe.lines.map((line, i) => {
+                const last = i === HOME.reframe.lines.length - 1;
+                return (
+                  <p
+                    key={line}
+                    className={
+                      last
+                        ? "font-display text-3xl font-bold text-ember sm:text-4xl"
+                        : "font-display text-3xl font-bold text-starlight sm:text-4xl"
+                    }
+                  >
+                    {line}
+                    {last ? <span id="star-anchor" className="inline-block w-0" /> : null}
+                  </p>
+                );
+              })}
             </div>
           </Reveal>
         </div>
@@ -148,7 +156,10 @@ export default function HomePage() {
         <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
         <Reveal className="mx-auto max-w-4xl">
           <Kicker>{HOME.feature.kicker}</Kicker>
-          <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
+          <h2
+            id="tokyo-anchor"
+            className="mt-6 inline-block font-display text-4xl font-bold sm:text-5xl"
+          >
             <GlitchText text={HOME.feature.heading} />
           </h2>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-starlight/80">
