@@ -164,6 +164,12 @@ export const STRATEGY = {
         body: "One hour, your channel, direct answers. Ideas, packaging, positioning, whatever is in the way. If you are not satisfied, say so at the end and receive an immediate refund.",
         cta: "Book a Call",
       },
+      {
+        title: "Video Feedback",
+        price: "$75 per video · $500 for 10",
+        body: "Send a video, published or unlisted, and get back a recorded Loom breakdown plus a written Notion feedback document: what worked, what lost people, and exactly what to change on the next one. The same feedback loop creators get inside the 90 Day Breakthrough.",
+        cta: "Send a Video",
+      },
     ],
   },
 
