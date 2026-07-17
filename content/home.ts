@@ -88,7 +88,7 @@ export const HOME = {
       {
         title: "Beast Games",
         meta: "July 2024 to February 2025",
-        body: "Prayer before every challenge, a church service on set, two baptisms off a remote island, and ten plus podcasts carrying Jesus conversations to a secular audience.",
+        body: "Prayer before every challenge, a church service on set, two baptisms on a remote island, and ten plus podcasts carrying Jesus conversations to a secular audience.",
         href: "/partner-projects/beast-games",
         imageSlot: "home-proof-beast-games",
       },
