@@ -139,6 +139,30 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Featured: the Tokyo Drift video */}
+      <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
+        <Reveal className="mx-auto max-w-4xl">
+          <Kicker>{HOME.feature.kicker}</Kicker>
+          <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
+            <GlitchText text={HOME.feature.heading} />
+          </h2>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-starlight/80">
+            {linkCategory3(HOME.feature.body)}
+          </p>
+          <YouTubeEmbed
+            youtubeId={HOME.feature.youtubeId}
+            title={HOME.feature.heading}
+            caption={HOME.feature.caption}
+            className="mt-10"
+          />
+          <div className="mt-8">
+            <Cta href={HOME.feature.href} variant="ghost">
+              {HOME.feature.cta}
+            </Cta>
+          </div>
+        </Reveal>
+      </section>
+
       {/* The two creator programs */}
       <section
         aria-label={HOME.programs.heading}
@@ -224,30 +248,6 @@ export default function HomePage() {
             ))}
           </div>
         </div>
-      </section>
-
-      {/* Featured: the Tokyo Drift video */}
-      <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
-        <Reveal className="mx-auto max-w-4xl">
-          <Kicker>{HOME.feature.kicker}</Kicker>
-          <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
-            <GlitchText text={HOME.feature.heading} />
-          </h2>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-starlight/80">
-            {linkCategory3(HOME.feature.body)}
-          </p>
-          <YouTubeEmbed
-            youtubeId={HOME.feature.youtubeId}
-            title={HOME.feature.heading}
-            caption={HOME.feature.caption}
-            className="mt-10"
-          />
-          <div className="mt-8">
-            <Cta href={HOME.feature.href} variant="ghost">
-              {HOME.feature.cta}
-            </Cta>
-          </div>
-        </Reveal>
       </section>
 
       {/* Proof strip */}
