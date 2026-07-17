@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 // A shooting star that rides the scroll from the end of one sentence
 // (#star-anchor) down into a target header (#tokyo-anchor), trailing a
@@ -9,8 +9,6 @@ import { useEffect, useRef, useState } from "react";
 export default function StarBridge() {
   const starRef = useRef<HTMLDivElement>(null);
   const trailRef = useRef<SVGLineElement>(null);
-  const svgRef = useRef<SVGSVGElement>(null);
-  const [active, setActive] = useState(false);
   const arrived = useRef(false);
 
   useEffect(() => {
@@ -18,10 +16,8 @@ export default function StarBridge() {
 
     const star = starRef.current;
     const trail = trailRef.current;
-    const svg = svgRef.current;
-    if (!star || !trail || !svg) return;
+    if (!star || !trail) return;
 
-    setActive(true);
     let raf = 0;
 
     const clamp01 = (v: number) => Math.max(0, Math.min(1, v));
@@ -80,11 +76,9 @@ export default function StarBridge() {
     };
   }, []);
 
-  if (!active) return null;
-
   return (
     <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-30">
-      <svg ref={svgRef} className="h-full w-full">
+      <svg className="h-full w-full">
         <defs>
           <linearGradient id="star-trail" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%" stopColor="rgb(167 139 250 / 0)" />
