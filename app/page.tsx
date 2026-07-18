@@ -140,7 +140,14 @@ export default function HomePage() {
                         : "font-display text-3xl font-bold text-starlight sm:text-4xl"
                     }
                   >
-                    {line}
+                    {last && line.endsWith("star.") ? (
+                      <>
+                        {line.slice(0, -"star.".length)}
+                        <span className="glow-word">star.</span>
+                      </>
+                    ) : (
+                      line
+                    )}
                     {last ? <span id="star-anchor" className="inline-block w-0" /> : null}
                   </p>
                 );

@@ -129,7 +129,7 @@ export default function StarBridge() {
 
       const p0 = { x: sr.right + 6, y: sr.top + sr.height / 2 };
       const p2 = {
-        x: er.left + Math.min(er.width * 0.4, 70),
+        x: er.left + Math.min(er.width * 0.55, 112),
         y: er.top + er.height * 0.45,
       };
       const p1 = {
@@ -184,7 +184,7 @@ export default function StarBridge() {
         ctx.scale(pulse, pulse);
         ctx.globalCompositeOperation = "lighter";
 
-        const R = 40;
+        const R = 29;
         const halo = ctx.createRadialGradient(0, 0, 0, 0, 0, R);
         halo.addColorStop(0, "rgba(255,255,255,0.9)");
         halo.addColorStop(0.3, "rgba(196,181,253,0.5)");
@@ -217,7 +217,7 @@ export default function StarBridge() {
         ctx.globalCompositeOperation = "source-over";
         ctx.fillStyle = "rgba(255,255,255,1)";
         ctx.beginPath();
-        ctx.arc(0, 0, 4, 0, Math.PI * 2);
+        ctx.arc(0, 0, 3.2, 0, Math.PI * 2);
         ctx.fill();
         ctx.restore();
 
