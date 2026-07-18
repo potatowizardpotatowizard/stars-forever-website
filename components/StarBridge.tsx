@@ -4,10 +4,9 @@ import { useEffect, useRef } from "react";
 
 // A star of light rides the scroll from the end of the reframe line
 // (#star-anchor) along a curved arc into the Tokyo Drift header
-// (#tokyo-anchor), then goes supernova: impact flash, expanding shockwave
-// rings, radial light streaks, and twinkling embers, as the header
-// ignites. Canvas rendered, motion eased independently of scroll events
-// so it stays smooth on phones. Reduced motion sees nothing.
+// (#tokyo-anchor). On impact the header itself ignites with a glow.
+// Canvas rendered, motion eased independently of scroll events so it
+// stays smooth on phones. Reduced motion sees nothing.
 
 type Streak = {
   x: number;
@@ -20,7 +19,6 @@ type Streak = {
 
 type Ember = Streak & { size: number; phase: number; white: boolean };
 
-type Ring = { r: number; v: number; alpha: number };
 
 export default function StarBridge() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -34,11 +32,6 @@ export default function StarBridge() {
     let raf = 0;
     let dp = 0; // displayed progress, eased toward the scroll target
     let arrived = false;
-    let flash = 0; // impact flash intensity
-    let flashAt = { x: 0, y: 0 };
-    let streaks: Streak[] = [];
-    let embers: Ember[] = [];
-    let rings: Ring[] = [];
     let sparks: Ember[] = []; // shed while flying
     let dpr = 1;
 
@@ -64,45 +57,6 @@ export default function StarBridge() {
       };
     };
 
-    const supernova = (x: number, y: number) => {
-      flash = 1;
-      flashAt = { x, y };
-      rings = [
-        { r: 6, v: 7.5, alpha: 0.85 },
-        { r: 2, v: 5.2, alpha: 0.6 },
-      ];
-      streaks = [];
-      const spokes = 12;
-      for (let i = 0; i < spokes; i++) {
-        const angle = (i / spokes) * Math.PI * 2 + (Math.random() - 0.5) * 0.3;
-        const speed = 5 + Math.random() * 5;
-        streaks.push({
-          x,
-          y,
-          vx: Math.cos(angle) * speed,
-          vy: Math.sin(angle) * speed,
-          life: 1,
-          decay: 0.032 + Math.random() * 0.02,
-        });
-      }
-      embers = [];
-      for (let i = 0; i < 22; i++) {
-        const angle = Math.random() * Math.PI * 2;
-        const speed = 0.6 + Math.random() * 2.6;
-        embers.push({
-          x,
-          y,
-          vx: Math.cos(angle) * speed,
-          vy: Math.sin(angle) * speed - 0.6,
-          life: 1,
-          decay: 0.006 + Math.random() * 0.01,
-          size: 1.2 + Math.random() * 2,
-          phase: Math.random() * Math.PI * 2,
-          white: Math.random() > 0.4,
-        });
-      }
-    };
-
     const frame = () => {
       raf = requestAnimationFrame(frame);
       const vw = window.innerWidth;
@@ -115,13 +69,7 @@ export default function StarBridge() {
       const sr = startEl.getBoundingClientRect();
       const er = endEl.getBoundingClientRect();
 
-      const idle =
-        flash <= 0 &&
-        rings.length === 0 &&
-        streaks.length === 0 &&
-        embers.length === 0 &&
-        sparks.length === 0 &&
-        dp < 0.01;
+      const idle = sparks.length === 0 && dp < 0.01;
       if ((sr.top > vh * 1.6 || er.bottom < -vh * 0.6) && idle) {
         ctx.clearRect(0, 0, vw, vh);
         return;
@@ -237,10 +185,9 @@ export default function StarBridge() {
         }
       }
 
-      // Arrival: supernova and ignite the header
+      // Arrival: the header simply ignites
       if (dp >= 0.975 && !arrived) {
         arrived = true;
-        supernova(p2.x, p2.y);
         endEl.classList.add("tokyo-ignite");
       } else if (target < 0.5 && arrived) {
         arrived = false;
@@ -249,67 +196,7 @@ export default function StarBridge() {
 
       ctx.globalCompositeOperation = "lighter";
 
-      // Impact flash: a burst of light that swells and dies fast
-      if (flash > 0) {
-        const fr = 90 * (1 - flash) + 30;
-        const g = ctx.createRadialGradient(
-          flashAt.x,
-          flashAt.y,
-          0,
-          flashAt.x,
-          flashAt.y,
-          fr,
-        );
-        g.addColorStop(0, `rgba(255,255,255,${0.9 * flash})`);
-        g.addColorStop(0.4, `rgba(196,181,253,${0.5 * flash})`);
-        g.addColorStop(1, "rgba(167,139,250,0)");
-        ctx.fillStyle = g;
-        ctx.beginPath();
-        ctx.arc(flashAt.x, flashAt.y, fr, 0, Math.PI * 2);
-        ctx.fill();
-        flash -= 0.07;
-      }
-
-      // Shockwave rings expanding outward
-      rings = rings.filter((r) => r.alpha > 0.02);
-      for (const r of rings) {
-        r.r += r.v;
-        r.v *= 0.965;
-        r.alpha *= 0.93;
-        ctx.strokeStyle = `rgba(196, 181, 253, ${r.alpha})`;
-        ctx.lineWidth = 2.2;
-        ctx.beginPath();
-        ctx.arc(flashAt.x, flashAt.y, r.r, 0, Math.PI * 2);
-        ctx.stroke();
-      }
-
-      // Radial light streaks, like a firework starburst
-      streaks = streaks.filter((s) => s.life > 0);
-      for (const s of streaks) {
-        s.x += s.vx;
-        s.y += s.vy;
-        s.vx *= 0.92;
-        s.vy *= 0.92;
-        s.life -= s.decay;
-        const a = Math.max(0, s.life);
-        const g = ctx.createLinearGradient(
-          s.x - s.vx * 4,
-          s.y - s.vy * 4,
-          s.x,
-          s.y,
-        );
-        g.addColorStop(0, "rgba(167,139,250,0)");
-        g.addColorStop(1, `rgba(239,236,247,${a})`);
-        ctx.strokeStyle = g;
-        ctx.lineWidth = 2;
-        ctx.lineCap = "round";
-        ctx.beginPath();
-        ctx.moveTo(s.x - s.vx * 4, s.y - s.vy * 4);
-        ctx.lineTo(s.x, s.y);
-        ctx.stroke();
-      }
-
-      // Twinkling embers drifting down after the burst, plus flight sparks
+      // Twinkling sparks shed in flight
       const drawEmber = (s: Ember) => {
         s.x += s.vx;
         s.y += s.vy;
@@ -331,9 +218,7 @@ export default function StarBridge() {
         ctx.lineTo(s.x, s.y + r);
         ctx.stroke();
       };
-      embers = embers.filter((s) => s.life > 0);
       sparks = sparks.filter((s) => s.life > 0);
-      embers.forEach(drawEmber);
       sparks.forEach(drawEmber);
 
       ctx.globalCompositeOperation = "source-over";
