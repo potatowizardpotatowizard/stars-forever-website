@@ -39,24 +39,35 @@ export default function LetterFall() {
       }[] = [];
       let longestFall = 0;
 
-      // The logo explodes with the first blast so nothing stands
-      // where the cross is about to appear.
+      // The logo escapes the blast as a shooting star, streaking off
+      // the top of the screen so nothing stands where the cross is
+      // about to appear. It comes home the same way at the end.
       const logo = hero.querySelector<HTMLElement>("nav button");
       if (logo) {
+        const ox = innerWidth * 0.62;
+        const oy = -innerHeight * 0.75;
+        logo.style.setProperty(
+          "--trail-angle",
+          `${(Math.atan2(-oy, -ox) * 180) / Math.PI}deg`,
+        );
+        logo.classList.add("logo-star-trail");
         logo.animate(
           [
-            { transform: "scale(1) rotate(0deg)", opacity: 1, filter: "brightness(1)" },
+            { transform: "translate(0,0) scale(1)", filter: "brightness(1)" },
             {
-              transform: "scale(2.4) rotate(30deg)",
-              opacity: 0.9,
-              filter: "brightness(3)",
-              offset: 0.4,
+              transform: `translate(${ox * 0.25}px, ${oy * 0.25}px) scale(0.9)`,
+              filter: "brightness(2.2)",
+              offset: 0.35,
             },
-            { transform: "scale(3.4) rotate(50deg)", opacity: 0, filter: "brightness(4)" },
+            {
+              transform: `translate(${ox}px, ${oy}px) scale(0.45)`,
+              filter: "brightness(3)",
+            },
           ],
-          { duration: 520, easing: "ease-out", fill: "forwards" },
+          { duration: 750, easing: "cubic-bezier(.5,0,1,.4)", fill: "forwards" },
         ).onfinish = () => {
           logo.style.visibility = "hidden";
+          logo.classList.remove("logo-star-trail");
         };
       }
 
@@ -142,19 +153,12 @@ export default function LetterFall() {
         // At the cross's full light, the resurrection begins.
         setTimeout(() => {
           let longestRise = 0;
+          const riseGlow = [
+            "0 0 0 rgb(196 181 253 / 0)",
+            "0 0 18px rgb(255 255 255 / 0.95), 0 0 46px rgb(167 139 250 / 0.8)",
+          ];
           for (const l of letters) {
-            if (!l.rises) {
-              // The mission line's old letters dissolve where they
-              // fell; its place is taken by the promise.
-              l.span.animate(
-                [
-                  { opacity: 1 },
-                  { opacity: 0, filter: "blur(3px)" },
-                ],
-                { duration: 700, delay: Math.random() * 250, fill: "forwards" },
-              );
-              continue;
-            }
+            if (!l.rises) continue; // the mission letters rise reborn below
             const delay = Math.random() * 450;
             const dur = 950 + Math.random() * 500;
             longestRise = Math.max(longestRise, delay + dur);
@@ -162,13 +166,9 @@ export default function LetterFall() {
               [
                 {
                   transform: `translate(${l.dx * 1.06}px, ${l.drop}px) rotate(${l.rot * 1.12}deg)`,
-                  textShadow: "0 0 0 rgb(196 181 253 / 0)",
+                  textShadow: riseGlow[0],
                 },
-                {
-                  transform: "translate(0,0) rotate(0deg)",
-                  textShadow:
-                    "0 0 18px rgb(255 255 255 / 0.95), 0 0 46px rgb(167 139 250 / 0.8)",
-                },
+                { transform: "translate(0,0) rotate(0deg)", textShadow: riseGlow[1] },
               ],
               {
                 duration: dur,
@@ -179,10 +179,89 @@ export default function LetterFall() {
             );
           }
 
-          // The mission line is reborn as the resurrection promise.
+          // The mission line is not restored: it is resurrected. Its
+          // fallen letters rise from the pile and reassemble as the
+          // promise, each glyph transformed mid-flight.
           if (missionEl) {
-            missionEl.textContent =
+            const missionLetters = letters.filter((l) => !l.rises);
+            const promise =
               "Jesus said “I am the resurrection and the life” -John 11:25";
+            missionEl.textContent = promise;
+            const textNode = missionEl.firstChild as Text | null;
+            const cs = getComputedStyle(missionEl);
+            const targets: { ch: string; left: number; top: number }[] = [];
+            if (textNode) {
+              for (let i = 0; i < promise.length; i++) {
+                if (!promise[i].trim()) continue;
+                const range = document.createRange();
+                range.setStart(textNode, i);
+                range.setEnd(textNode, i + 1);
+                const r = range.getBoundingClientRect();
+                if (r.width) {
+                  targets.push({ ch: promise[i], left: r.left, top: r.top });
+                }
+              }
+            }
+            targets.forEach((tgt, idx) => {
+              const old = missionLetters[idx % Math.max(1, missionLetters.length)];
+              let span: HTMLElement;
+              let fromX: number;
+              let fromY: number;
+              let rot = 0;
+              if (old && idx < missionLetters.length) {
+                span = old.span;
+                fromX =
+                  parseFloat(span.style.left) + old.dx * 1.06 - tgt.left;
+                fromY = parseFloat(span.style.top) + old.drop - tgt.top;
+                rot = old.rot * 1.12;
+              } else {
+                // More letters in the promise than fell: the extras
+                // rise out of the same pile at the bottom.
+                span = document.createElement("span");
+                span.style.cssText =
+                  `position:fixed;font-family:${cs.fontFamily};` +
+                  `font-size:${cs.fontSize};font-weight:${cs.fontWeight};` +
+                  `letter-spacing:${cs.letterSpacing};color:${cs.color};` +
+                  `text-transform:${cs.textTransform};line-height:1;will-change:transform;`;
+                overlay.appendChild(span);
+                fromX = innerWidth * (0.25 + Math.random() * 0.5) - tgt.left;
+                fromY = innerHeight - 24 - Math.random() * 30 - tgt.top;
+                rot = (Math.random() - 0.5) * 260;
+              }
+              span.textContent = tgt.ch;
+              span.style.left = `${tgt.left}px`;
+              span.style.top = `${tgt.top}px`;
+              const delay = 250 + Math.random() * 500;
+              const dur = 1050 + Math.random() * 550;
+              longestRise = Math.max(longestRise, delay + dur);
+              span.animate(
+                [
+                  {
+                    transform: `translate(${fromX}px, ${fromY}px) rotate(${rot}deg)`,
+                    textShadow: riseGlow[0],
+                  },
+                  {
+                    transform: "translate(0,0) rotate(0deg)",
+                    textShadow: riseGlow[1],
+                  },
+                ],
+                {
+                  duration: dur,
+                  delay,
+                  easing: "cubic-bezier(.22,1,.36,1)",
+                  fill: "forwards",
+                },
+              );
+            });
+            // Fallen letters beyond the promise's length stay down,
+            // dissolving into the dark.
+            missionLetters.slice(targets.length).forEach((l) => {
+              l.span.animate([{ opacity: 1 }, { opacity: 0, filter: "blur(3px)" }], {
+                duration: 800,
+                delay: Math.random() * 300,
+                fill: "forwards",
+              });
+            });
           }
 
           // Every letter home again: reveal the originals glowing
@@ -193,14 +272,29 @@ export default function LetterFall() {
               el.classList.add("resurrected");
             }
             if (logo) {
+              // Home again as a shooting star: in from the far sky,
+              // decelerating into its old place, trail dissolving.
+              const ix = -innerWidth * 0.55;
+              const iy = -innerHeight * 0.7;
               logo.style.visibility = "";
+              logo.style.setProperty(
+                "--trail-angle",
+                `${(Math.atan2(iy, ix) * 180) / Math.PI}deg`,
+              );
+              logo.classList.add("logo-star-trail");
               logo.animate(
                 [
-                  { opacity: 0, transform: "scale(0.5)", filter: "brightness(2.4)" },
-                  { opacity: 1, transform: "scale(1)", filter: "brightness(1)" },
+                  {
+                    transform: `translate(${ix}px, ${iy}px) scale(0.45)`,
+                    filter: "brightness(3)",
+                  },
+                  {
+                    transform: "translate(0,0) scale(1)",
+                    filter: "brightness(1.2)",
+                  },
                 ],
-                { duration: 900, easing: "cubic-bezier(.22,1,.36,1)" },
-              );
+                { duration: 1000, easing: "cubic-bezier(.22,1,.36,1)" },
+              ).onfinish = () => logo.classList.remove("logo-star-trail");
             }
             overlay
               .animate([{ opacity: 1 }, { opacity: 0 }], {

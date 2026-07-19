@@ -1394,3 +1394,28 @@ html.easter-sunday body::before {
       0 0 0 rgb(167 139 250 / 0);
   }
 }
+
+/* The logo in flight: a comet trail streams behind it while it
+   escapes the blast and again when it comes home */
+.logo-star-trail {
+  position: relative;
+}
+.logo-star-trail::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 220px;
+  height: 3px;
+  transform-origin: left center;
+  transform: rotate(var(--trail-angle, 140deg));
+  background: linear-gradient(
+    90deg,
+    rgb(239 236 247 / 0.95),
+    rgb(167 139 250 / 0.5) 40%,
+    transparent
+  );
+  border-radius: 999px;
+  box-shadow: 0 0 12px rgb(167 139 250 / 0.7);
+  pointer-events: none;
+}
