@@ -38,7 +38,7 @@ export default function CodeRain() {
       canvas.width = Math.round(window.innerWidth * dpr);
       canvas.height = Math.round(window.innerHeight * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.fillStyle = "#000";
+      ctx.fillStyle = "#16092e";
       ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
       cols = Math.ceil(window.innerWidth / FS);
       drops = Array.from(
@@ -54,7 +54,7 @@ export default function CodeRain() {
       raf = requestAnimationFrame(draw);
       if (t - last < 50) return; // classic rain cadence
       last = t;
-      ctx.fillStyle = "rgba(0, 0, 0, 0.08)";
+      ctx.fillStyle = "rgba(22, 9, 46, 0.08)";
       ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
       ctx.font = `${FS}px "Fragment Mono", monospace`;
       for (let i = 0; i < cols; i++) {
@@ -98,7 +98,7 @@ export default function CodeRain() {
       role="dialog"
       aria-label="You found the secret"
       onClick={() => setOpen(false)}
-      className="fixed inset-0 z-[150] cursor-pointer bg-black"
+      className="fixed inset-0 z-[150] cursor-pointer bg-[#16092e]"
     >
       <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
       <div className="relative flex h-full flex-col items-center justify-center gap-8 px-6 text-center">
