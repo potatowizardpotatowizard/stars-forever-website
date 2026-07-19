@@ -107,9 +107,8 @@ export default function StarCursor() {
 
         // One seamless tapered ribbon through the chain: each segment
         // is a filled quad sharing exact edges with its neighbors, so
-        // nothing can bead or bulge at the joints. Slightly slimmer
-        // than the spark tail (5px at the head to 1px at the tip) but
-        // the same length, colors, and fade.
+        // nothing can bead or bulge at the joints. 7px at the head
+        // tapering to a fine tip, with the spark tail's colors and fade.
         ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
         const pts = [{ x, y }, ...tail];
         const half: number[] = [];
@@ -123,7 +122,7 @@ export default function StarCursor() {
           const len = Math.hypot(dx, dy) || 1;
           nx[i] = -dy / len;
           ny[i] = dx / len;
-          half[i] = Math.max(0.5, (5 - i * 0.35) / 2);
+          half[i] = Math.max(0.75, (7 - i * 0.5) / 2);
         }
         const quad = (i: number, grow: number) => {
           const a = pts[i];
