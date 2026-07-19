@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { track } from "@vercel/analytics";
-import { CONTACT } from "@/content/site";
+import { CONTACT, WHATSAPP_INVITE } from "@/content/site";
 
 // Join the Constellation. Sends through the API when mail is configured;
 // otherwise opens a prefilled email so no request is lost.
@@ -71,9 +71,18 @@ export default function ConstellationForm() {
       <div className="rounded-lg border border-ember/40 bg-soot/50 p-8 text-center">
         <p className="font-display text-2xl font-bold">Request received.</p>
         <p className="mx-auto mt-3 max-w-md text-sm text-starlight/75">
-          Every request is personally reviewed. Once approved, your star goes
-          on the map and the community invite follows.
+          Every request is personally reviewed before your star goes on the
+          map. In the meantime, come say hello:
         </p>
+        <a
+          href={WHATSAPP_INVITE}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => track("whatsapp_invite_click")}
+          className="mt-6 inline-block bg-ember px-7 py-3.5 font-meta text-xs font-bold uppercase tracking-[0.14em] text-night transition-colors hover:bg-starlight"
+        >
+          Join the WhatsApp Community →
+        </a>
       </div>
     );
   }

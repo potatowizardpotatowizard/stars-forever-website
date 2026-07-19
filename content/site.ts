@@ -18,6 +18,9 @@ export const SUMMON_VERSE = {
   reference: "John 5:24",
 };
 
+// Shown to people right after they submit a Constellation request.
+export const WHATSAPP_INVITE = "https://chat.whatsapp.com/FgJbeSdVcxDGI411fuFhlp";
+
 export const CONTACT = {
   primaryEmail: "auzi@starsforever.co",
   speakingEmail: "benjimanschleg@gmail.com",
