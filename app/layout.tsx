@@ -3,6 +3,7 @@ import { Archivo, Figtree, Fragment_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ConstellationTrail from "@/components/ConstellationTrail";
 import ShootingStar from "@/components/ShootingStar";
 import StarCursor from "@/components/StarCursor";
 import TapeIntro from "@/components/TapeIntro";
@@ -78,6 +79,7 @@ export default function RootLayout({
         <main id="main">{children}</main>
         <Footer />
         <WarpNavigator />
+        <ConstellationTrail />
         <StarCursor />
         <Analytics />
       </body>
