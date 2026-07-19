@@ -1,8 +1,13 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 
 const TRAIL_COUNT = 13;
+
+// On the Constellation page only, the star also leaves a lingering
+// ribbon along its path that fades after this many milliseconds.
+const RIBBON_LIFE = 1300;
 
 // The pointer becomes the signature four point star on fine-pointer
 // devices, flying like a shooting star: a smooth comet tail chases
@@ -15,6 +20,7 @@ export default function StarCursor() {
   const wrapRef = useRef<HTMLDivElement>(null);
   const starRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const ribbonHere = usePathname() === "/constellation";
 
   useEffect(() => {
     if (!window.matchMedia("(pointer: fine)").matches) return;
@@ -41,6 +47,7 @@ export default function StarCursor() {
     let pressed = false;
     let shown = false;
     const tail = Array.from({ length: TRAIL_COUNT }, () => ({ x: 0, y: 0 }));
+    const ribbon: { x: number; y: number; t: number }[] = [];
 
     const resize = () => {
       const dpr = Math.min(2, window.devicePixelRatio || 1);
@@ -105,11 +112,45 @@ export default function StarCursor() {
           py = p.y;
         });
 
-        // Drawn as one continuous tapered streak: a soft violet halo
-        // under a bright core that fades white to violet down the tail.
         ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
         ctx.lineCap = "round";
         ctx.lineJoin = "round";
+
+        // The Constellation chemtrail: the traveled path lingers as a
+        // fading ribbon, painted beneath the comet tail. Points are
+        // only laid down on that page but always aged out, so the
+        // ribbon finishes fading even after warping away.
+        const last = ribbon[ribbon.length - 1];
+        if (
+          shown &&
+          ribbonHere &&
+          (!last || Math.hypot(x - last.x, y - last.y) > 1)
+        ) {
+          ribbon.push({ x, y, t: now });
+        }
+        while (ribbon.length && now - ribbon[0].t > RIBBON_LIFE) {
+          ribbon.shift();
+        }
+        for (let i = 1; i < ribbon.length; i++) {
+          const a = ribbon[i - 1];
+          const b = ribbon[i];
+          if (now - b.t > 250 && Math.hypot(b.x - a.x, b.y - a.y) > 80) {
+            continue; // don't bridge jumps across the screen
+          }
+          const life = 1 - (now - b.t) / RIBBON_LIFE;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.strokeStyle = `rgb(109 40 217 / ${0.28 * life})`;
+          ctx.lineWidth = 7 * life + 1;
+          ctx.stroke();
+          ctx.strokeStyle = `rgb(196 181 253 / ${0.75 * life})`;
+          ctx.lineWidth = 2.2 * life + 0.4;
+          ctx.stroke();
+        }
+
+        // The comet tail, drawn as one continuous tapered streak: a
+        // soft violet halo under a bright core fading white to violet.
         let ax = x;
         let ay = y;
         for (let i = 0; i < TRAIL_COUNT; i++) {
@@ -150,7 +191,7 @@ export default function StarCursor() {
       document.removeEventListener("mouseout", out);
       document.documentElement.classList.remove("star-cursor-active");
     };
-  }, []);
+  }, [ribbonHere]);
 
   return (
     <div
