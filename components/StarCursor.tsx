@@ -105,34 +105,51 @@ export default function StarCursor() {
           py = p.y;
         });
 
-        // One smooth streak through the chain. Per segment, the core
-        // width equals the old spark's diameter (7px tapering to 2),
-        // the color is the same white-then-violet with the same
-        // opacities, and a soft violet underlay stands in for the
-        // sparks' glow halo.
+        // One seamless tapered ribbon through the chain: each segment
+        // is a filled quad sharing exact edges with its neighbors, so
+        // nothing can bead or bulge at the joints. Slightly slimmer
+        // than the spark tail (5px at the head to 1px at the tip) but
+        // the same length, colors, and fade.
         ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-        ctx.lineCap = "round";
-        ctx.lineJoin = "round";
-        let ax = x;
-        let ay = y;
-        for (let i = 0; i < TRAIL_COUNT; i++) {
-          const b = tail[i];
-          const width = Math.max(2, 7 - i * 0.6);
-          const fade = glow * (1 - i / TRAIL_COUNT) * 0.65;
+        const pts = [{ x, y }, ...tail];
+        const half: number[] = [];
+        const nx: number[] = [];
+        const ny: number[] = [];
+        for (let i = 0; i < pts.length; i++) {
+          const prev = pts[Math.max(0, i - 1)];
+          const next = pts[Math.min(pts.length - 1, i + 1)];
+          const dx = next.x - prev.x;
+          const dy = next.y - prev.y;
+          const len = Math.hypot(dx, dy) || 1;
+          nx[i] = -dy / len;
+          ny[i] = dx / len;
+          half[i] = Math.max(0.5, (5 - i * 0.35) / 2);
+        }
+        const quad = (i: number, grow: number) => {
+          const a = pts[i];
+          const b = pts[i + 1];
+          const ha = half[i] + grow;
+          const hb = half[i + 1] + grow;
           ctx.beginPath();
-          ctx.moveTo(ax, ay);
-          ctx.lineTo(b.x, b.y);
-          ctx.strokeStyle = `rgb(167 139 250 / ${0.8 * fade * 0.35})`;
-          ctx.lineWidth = width + 8;
-          ctx.stroke();
-          ctx.strokeStyle =
+          ctx.moveTo(a.x + nx[i] * ha, a.y + ny[i] * ha);
+          ctx.lineTo(b.x + nx[i + 1] * hb, b.y + ny[i + 1] * hb);
+          ctx.lineTo(b.x - nx[i + 1] * hb, b.y - ny[i + 1] * hb);
+          ctx.lineTo(a.x - nx[i] * ha, a.y - ny[i] * ha);
+          ctx.closePath();
+          ctx.fill();
+        };
+        for (let i = 0; i < pts.length - 1; i++) {
+          const fade = glow * (1 - i / TRAIL_COUNT) * 0.65;
+          ctx.fillStyle = `rgb(167 139 250 / ${0.28 * fade})`;
+          quad(i, 4);
+        }
+        for (let i = 0; i < pts.length - 1; i++) {
+          const fade = glow * (1 - i / TRAIL_COUNT) * 0.65;
+          ctx.fillStyle =
             i < 3
               ? `rgb(239 236 247 / ${0.95 * fade})`
               : `rgb(167 139 250 / ${0.9 * fade})`;
-          ctx.lineWidth = width;
-          ctx.stroke();
-          ax = b.x;
-          ay = b.y;
+          quad(i, 0);
         }
       }
       raf = requestAnimationFrame(tick);
