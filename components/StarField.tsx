@@ -62,8 +62,15 @@ export default function StarField() {
       y: Math.random() * 2 - 1,
       z: initial ? NEAR + Math.random() * (FAR - NEAR) : FAR,
       speed: 0.055 + Math.random() * 0.1, // depth per second: a steady jump
-      gold: !initial && Math.random() < 0.004,
+      gold: !initial && Math.random() < 0.0009,
     });
+
+    // The gold star is singular: a fresh gold spawn is demoted if one
+    // is already in the sky.
+    const recycle = (s: (typeof stars)[number]) => {
+      Object.assign(s, spawnStar(false));
+      if (s.gold && stars.some((o) => o !== s && o.gold)) s.gold = false;
+    };
 
     const seed = (w: number, h: number, deep = false) => {
       const count = Math.min(240, Math.floor((w * h) / 4800));
@@ -213,11 +220,11 @@ export default function StarField() {
       for (const s of stars) {
         if (!reduceMotion) {
           s.z -= s.speed * burst * dt;
-          if (s.z <= NEAR) Object.assign(s, spawnStar(false));
+          if (s.z <= NEAR) recycle(s);
         }
         let { px, py } = project(s);
         if (px < -40 || px > width + 40 || py < -40 || py > height + 40) {
-          Object.assign(s, spawnStar(false));
+          recycle(s);
           continue;
         }
         if (pull > 0) {
@@ -254,7 +261,7 @@ export default function StarField() {
         if (s.gold) {
           // THE gold star: a large four point star, twinkling, ringed
           // in a warm halo. Nothing else in the sky looks like it.
-          const R = (6 + depth * 12) * (1 + 0.16 * Math.sin(t / 170));
+          const R = (4 + depth * 8) * (1 + 0.16 * Math.sin(t / 170));
           const rot = t / 900;
           ctx.save();
           ctx.translate(px, py);
@@ -318,14 +325,17 @@ export default function StarField() {
     // Catch the gold star: clicks anywhere over the field are hit-tested
     // against gold stars only, so normal links are never intercepted.
     const catchStar = (e: MouseEvent) => {
+      // Map the click into canvas drawing space: the canvas is CSS
+      // scaled (1.06 plus tilt), so raw client offsets miss near the
+      // edges. Without this, clicks on a visibly-hit star can fail.
       const rect = canvas.getBoundingClientRect();
-      const cx = e.clientX - rect.left;
-      const cy = e.clientY - rect.top;
-      if (cx < 0 || cy < 0 || cx > rect.width || cy > rect.height) return;
+      const cx = (e.clientX - rect.left) * (width / rect.width);
+      const cy = (e.clientY - rect.top) * (height / rect.height);
+      if (cx < 0 || cy < 0 || cx > width || cy > height) return;
       for (const s of stars) {
         if (!s.gold) continue;
         const { px, py } = project(s);
-        if (Math.hypot(px - cx, py - cy) < 30) {
+        if (Math.hypot(px - cx, py - cy) < 36) {
           s.gold = false;
           window.dispatchEvent(new Event("sf-goldstar"));
           return;
