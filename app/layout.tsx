@@ -10,7 +10,6 @@ import LetterFall from "@/components/LetterFall";
 import MotionMagic from "@/components/MotionMagic";
 import ShootingStar from "@/components/ShootingStar";
 import StarCursor from "@/components/StarCursor";
-import TouchComet from "@/components/TouchComet";
 import VerseSummon from "@/components/VerseSummon";
 import WarpScroll from "@/components/WarpScroll";
 import TapeIntro from "@/components/TapeIntro";
@@ -88,7 +87,6 @@ export default function RootLayout({
         <WarpNavigator />
         <ConstellationTrail />
         <StarCursor />
-        <TouchComet />
         <WarpScroll />
         <VerseSummon />
         <MotionMagic />
