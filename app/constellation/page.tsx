@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import Image from "next/image";
 import ConstellationForm from "@/components/ConstellationForm";
 import ConstellationMap from "@/components/ConstellationMap";
+import SendStar from "@/components/SendStar";
 import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import Reveal from "@/components/Reveal";
@@ -51,6 +53,9 @@ export default async function ConstellationPage() {
         <Reveal>
           <ConstellationMap members={members} />
         </Reveal>
+        <Suspense>
+          <SendStar />
+        </Suspense>
       </section>
 
       {/* How it works */}

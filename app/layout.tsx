@@ -4,8 +4,14 @@ import { Analytics } from "@vercel/analytics/next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ConstellationTrail from "@/components/ConstellationTrail";
+import GoodFriday from "@/components/GoodFriday";
+import MotionMagic from "@/components/MotionMagic";
 import ShootingStar from "@/components/ShootingStar";
 import StarCursor from "@/components/StarCursor";
+import TapeShelf from "@/components/TapeShelf";
+import TouchComet from "@/components/TouchComet";
+import VerseSummon from "@/components/VerseSummon";
+import WarpScroll from "@/components/WarpScroll";
 import TapeIntro from "@/components/TapeIntro";
 import WarpNavigator from "@/components/WarpNavigator";
 import { SITE_NAME, SITE_DESCRIPTION } from "@/content/site";
@@ -81,6 +87,12 @@ export default function RootLayout({
         <WarpNavigator />
         <ConstellationTrail />
         <StarCursor />
+        <TouchComet />
+        <WarpScroll />
+        <TapeShelf />
+        <VerseSummon />
+        <MotionMagic />
+        <GoodFriday />
         <Analytics />
       </body>
     </html>

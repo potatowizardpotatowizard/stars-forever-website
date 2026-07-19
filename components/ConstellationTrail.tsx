@@ -44,6 +44,24 @@ export default function ConstellationTrail() {
     resize();
     window.addEventListener("resize", resize);
 
+    // The member stars on the map, for the draw-a-constellation game:
+    // pass your light near two or more stars and the site connects
+    // them into a named constellation for a moment.
+    let dots: { el: Element; label: string }[] = [];
+    const findDots = () => {
+      dots = Array.from(document.querySelectorAll(".constellation-dot")).map(
+        (el) => {
+          const meta = el.parentElement?.querySelector(".meta-label");
+          const city = (meta?.textContent ?? "").split(",")[0].trim();
+          return { el, label: city || "a star" };
+        },
+      );
+    };
+    const findTimer = setTimeout(findDots, 600);
+
+    const hits: { el: Element; label: string; t: number }[] = [];
+    const HIT_LIFE = 3500;
+
     const move = (e: PointerEvent) => {
       tx = e.clientX;
       ty = e.clientY;
@@ -83,6 +101,55 @@ export default function ConstellationTrail() {
         ctx.lineWidth = 2.2 * life + 0.4;
         ctx.stroke();
       }
+
+      // Constellation game: hit-test the ribbon's head against the
+      // member stars, connect the recent ones, and name the line.
+      if (shown && dots.length) {
+        for (const d of dots) {
+          if (hits.some((h) => h.el === d.el && now - h.t < HIT_LIFE)) {
+            continue;
+          }
+          const r = d.el.getBoundingClientRect();
+          const cx = r.left + r.width / 2;
+          const cy = r.top + r.height / 2;
+          if (Math.hypot(x - cx, y - cy) < 30) {
+            hits.push({ el: d.el, label: d.label, t: now });
+          }
+        }
+        while (hits.length && now - hits[0].t > HIT_LIFE) hits.shift();
+
+        if (hits.length >= 2) {
+          const freshest = Math.max(...hits.map((h) => h.t));
+          const fade = Math.min(1, 1.4 - (now - freshest) / HIT_LIFE);
+          const pts = hits.map((h) => {
+            const r = h.el.getBoundingClientRect();
+            return { x: r.left + r.width / 2, y: r.top + r.height / 2 };
+          });
+          ctx.beginPath();
+          ctx.moveTo(pts[0].x, pts[0].y);
+          for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i].x, pts[i].y);
+          ctx.strokeStyle = `rgb(251 191 36 / ${0.55 * fade})`;
+          ctx.lineWidth = 1.2;
+          ctx.setLineDash([2, 6]);
+          ctx.stroke();
+          ctx.setLineDash([]);
+          for (const p of pts) {
+            ctx.fillStyle = `rgb(251 191 36 / ${0.9 * fade})`;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          const name = hits.map((h) => h.label).join("–");
+          ctx.font = "700 11px 'Fragment Mono', monospace";
+          ctx.fillStyle = `rgb(239 236 247 / ${0.85 * fade})`;
+          const lastPt = pts[pts.length - 1];
+          ctx.fillText(
+            `You drew the ${name} line`,
+            Math.min(lastPt.x + 14, window.innerWidth - 220),
+            lastPt.y - 12,
+          );
+        }
+      }
       raf = requestAnimationFrame(tick);
     };
 
@@ -90,6 +157,7 @@ export default function ConstellationTrail() {
     raf = requestAnimationFrame(tick);
     return () => {
       cancelAnimationFrame(raf);
+      clearTimeout(findTimer);
       window.removeEventListener("resize", resize);
       window.removeEventListener("pointermove", move);
     };

@@ -69,6 +69,72 @@ async function geocode(
   }
 }
 
+// The Wall of Light: every anonymous tap on /lights becomes a row.
+// Coordinates are 0..1 fractions of the sky.
+export async function addLight(x: number, y: number): Promise<boolean> {
+  const token = process.env.NOTION_TOKEN;
+  const databaseId = process.env.NOTION_LIGHTS_DB_ID;
+  if (!token || !databaseId) return false;
+  const res = await fetch("https://api.notion.com/v1/pages", {
+    method: "POST",
+    headers: NOTION_HEADERS(token),
+    body: JSON.stringify({
+      parent: { database_id: databaseId },
+      properties: {
+        Light: { title: [{ text: { content: "light" } }] },
+        X: { number: Math.round(x * 1000) / 1000 },
+        Y: { number: Math.round(y * 1000) / 1000 },
+      },
+    }),
+  });
+  return res.ok;
+}
+
+export async function getLights(): Promise<{
+  points: { x: number; y: number }[];
+  count: number;
+  capped: boolean;
+}> {
+  const token = process.env.NOTION_TOKEN;
+  const databaseId = process.env.NOTION_LIGHTS_DB_ID;
+  if (!token || !databaseId) return { points: [], count: 0, capped: false };
+  const points: { x: number; y: number }[] = [];
+  let cursor: string | undefined;
+  let pages = 0;
+  try {
+    // Paginate up to 1,000 lights; beyond that the count shows as "+".
+    while (pages < 10) {
+      const res = await fetch(
+        `https://api.notion.com/v1/databases/${databaseId}/query`,
+        {
+          method: "POST",
+          headers: NOTION_HEADERS(token),
+          body: JSON.stringify({
+            page_size: 100,
+            ...(cursor ? { start_cursor: cursor } : {}),
+          }),
+          cache: "no-store",
+        },
+      );
+      if (!res.ok) break;
+      const data = await res.json();
+      for (const row of data.results ?? []) {
+        const x = row.properties?.X?.number;
+        const y = row.properties?.Y?.number;
+        if (typeof x === "number" && typeof y === "number") {
+          points.push({ x, y });
+        }
+      }
+      pages += 1;
+      if (!data.has_more) return { points, count: points.length, capped: false };
+      cursor = data.next_cursor;
+    }
+    return { points, count: points.length, capped: true };
+  } catch {
+    return { points, count: points.length, capped: false };
+  }
+}
+
 export async function getAcceptedMembers(): Promise<AcceptedMember[]> {
   const token = process.env.NOTION_TOKEN;
   const databaseId = process.env.NOTION_DATABASE_ID;

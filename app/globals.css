@@ -1161,3 +1161,99 @@ html.star-cursor-active textarea,
 html.star-cursor-active select {
   cursor: auto !important;
 }
+
+/* ---- Wonders and secrets ------------------------------------------- */
+
+/* Tilt parallax (phones): the star layers drift with the device angle */
+body::before {
+  transform: translate3d(var(--tilt-x, 0px), var(--tilt-y, 0px), 0)
+    scale(1.05);
+  transition: transform 0.05s linear;
+}
+
+/* The hero logo flares on every click */
+@keyframes logo-flare {
+  0% {
+    filter: brightness(1) drop-shadow(0 0 0 rgb(167 139 250 / 0));
+    transform: scale(1);
+  }
+  35% {
+    filter: brightness(2.2) drop-shadow(0 0 22px rgb(196 181 253 / 0.9));
+    transform: scale(1.12);
+  }
+  100% {
+    filter: brightness(1) drop-shadow(0 0 0 rgb(167 139 250 / 0));
+    transform: scale(1);
+  }
+}
+.logo-flare {
+  animation: logo-flare 0.55s ease-out;
+}
+
+/* The summoned verse rises word by word out of the dark */
+.verse-summon {
+  animation: verse-backdrop 0.6s ease-out;
+}
+@keyframes verse-backdrop {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.verse-word {
+  opacity: 0;
+  animation: verse-word 0.9s ease-out forwards;
+}
+@keyframes verse-word {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* A sent star falls out of the sky into the map */
+.sent-star {
+  animation: sent-star-fall 2.2s cubic-bezier(0.22, 0.9, 0.32, 1) forwards;
+}
+@keyframes sent-star-fall {
+  0% {
+    transform: translate(-50%, -20vh) scale(1.6);
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  80% {
+    transform: translate(-50%, 48vh) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, 52vh) scale(0.9);
+    opacity: 0;
+  }
+}
+
+/* Good Friday: the sky grieves in ember red. Easter Sunday: it returns
+   brighter. Both computed client side in the visitor's own timezone. */
+html.good-friday {
+  --color-ember: #ef4444;
+}
+html.good-friday body::before {
+  filter: sepia(1) hue-rotate(-30deg) saturate(3.2) brightness(0.72);
+}
+html.good-friday #hero canvas,
+html.good-friday .vhs-glow {
+  filter: sepia(0.9) hue-rotate(-30deg) saturate(2.6) brightness(0.85);
+}
+html.easter-sunday body::before {
+  opacity: 0.42;
+  filter: brightness(1.3);
+}

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { linkCategory3 } from "@/components/Category3Link";
 import Cta from "@/components/Cta";
 import GlitchText from "@/components/GlitchText";
+import HeroStarLogo from "@/components/HeroStarLogo";
 import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
@@ -59,13 +60,7 @@ export default function HomePage() {
           className="relative flex flex-1 items-center justify-center px-5"
         >
           <div className="hero-rise text-center">
-            <Image
-              src="/brand/star-smeared.png"
-              alt=""
-              width={64}
-              height={64}
-              className="vhs-glow mx-auto mb-8"
-            />
+            <HeroStarLogo />
             <ul className="space-y-4">
               {HERO_MENU.map((item, i) => (
                 <li key={item.href}>
