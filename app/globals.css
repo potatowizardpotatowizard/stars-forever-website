@@ -1294,3 +1294,103 @@ html.easter-sunday body::before {
 .hero-quake {
   animation: hero-quake 0.95s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 }
+
+/* The cross that raises the fallen letters: pure light, centered,
+   blooming out of the dark and pulsing gently until it fades */
+.nova-cross {
+  position: fixed;
+  left: 50%;
+  top: 44%;
+  transform: translate(-50%, -50%);
+  animation: cross-bloom 1.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes cross-bloom {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.55);
+    filter: blur(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    filter: blur(0);
+  }
+}
+.nova-cross-v,
+.nova-cross-h {
+  position: absolute;
+  border-radius: 999px;
+  background: linear-gradient(
+    to bottom,
+    rgb(255 255 255 / 0.98),
+    rgb(196 181 253 / 0.9)
+  );
+  box-shadow:
+    0 0 18px rgb(255 255 255 / 0.9),
+    0 0 60px rgb(167 139 250 / 0.8),
+    0 0 140px rgb(109 40 217 / 0.6);
+  animation: cross-pulse 1.6s ease-in-out infinite;
+}
+.nova-cross-v {
+  left: 50%;
+  top: 50%;
+  width: 9px;
+  height: 44vh;
+  transform: translate(-50%, -50%);
+}
+.nova-cross-h {
+  left: 50%;
+  top: calc(50% - 22vh + 13vh);
+  width: 26vh;
+  height: 9px;
+  transform: translate(-50%, -50%);
+}
+@keyframes cross-pulse {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.35);
+  }
+}
+.nova-cross-aura {
+  position: absolute;
+  left: 50%;
+  top: calc(50% - 9vh);
+  width: 70vh;
+  height: 70vh;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgb(196 181 253 / 0.28),
+    rgb(109 40 217 / 0.12) 45%,
+    transparent 70%
+  );
+}
+
+/* Resurrected words burn brighter than before, the glow slowly
+   releasing them over several seconds */
+.resurrected,
+.resurrected * {
+  animation: resurrect-glow 9s ease-out both;
+}
+@keyframes resurrect-glow {
+  0% {
+    text-shadow:
+      0 0 16px rgb(255 255 255 / 0.95),
+      0 0 44px rgb(167 139 250 / 0.85),
+      0 0 90px rgb(109 40 217 / 0.5);
+  }
+  55% {
+    text-shadow:
+      0 0 10px rgb(255 255 255 / 0.55),
+      0 0 30px rgb(167 139 250 / 0.45);
+  }
+  100% {
+    text-shadow:
+      0 0 0 rgb(255 255 255 / 0),
+      0 0 0 rgb(167 139 250 / 0);
+  }
+}
