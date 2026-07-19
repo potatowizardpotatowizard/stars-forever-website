@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ConstellationTrail from "@/components/ConstellationTrail";
 import GoodFriday from "@/components/GoodFriday";
+import LetterFall from "@/components/LetterFall";
 import MotionMagic from "@/components/MotionMagic";
 import ShootingStar from "@/components/ShootingStar";
 import StarCursor from "@/components/StarCursor";
@@ -91,6 +92,7 @@ export default function RootLayout({
         <VerseSummon />
         <MotionMagic />
         <GoodFriday />
+        <LetterFall />
         <Analytics />
       </body>
     </html>

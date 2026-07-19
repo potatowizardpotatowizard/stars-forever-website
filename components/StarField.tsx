@@ -55,6 +55,15 @@ export default function StarField() {
       color: string;
     }[] = [];
     let rings: { born: number; speed: number; width: number }[] = [];
+    let meteors: {
+      born: number;
+      x0: number;
+      y0: number;
+      vx: number;
+      vy: number;
+      size: number;
+      len: number;
+    }[] = [];
 
     const spawnStar = (initial: boolean) => ({
       // Unit-square offsets from the sky's center; z gives depth.
@@ -132,6 +141,23 @@ export default function StarField() {
             { born: t + 120, speed: 1050, width: 2 },
             { born: t + 260, speed: 720, width: 1.4 },
           ];
+          // Mega meteorites: huge burning rocks raking the whole
+          // screen from both sides while the debris storm rages.
+          meteors = Array.from({ length: 7 }, (_, i) => {
+            const fromLeft = Math.random() < 0.5;
+            const speed = 1700 + Math.random() * 1100;
+            const angle = (8 + Math.random() * 22) * (Math.PI / 180);
+            return {
+              born: t + 150 + i * 220 + Math.random() * 120,
+              x0: fromLeft ? -160 : width + 160,
+              y0: height * (0.05 + Math.random() * 0.6),
+              vx: (fromLeft ? 1 : -1) * speed * Math.cos(angle),
+              vy: speed * Math.sin(angle),
+              size: 2.5 + Math.random() * 2.5,
+              len: 260 + Math.random() * 220,
+            };
+          });
+          window.dispatchEvent(new Event("sf-detonate"));
           const hero = document.getElementById("hero");
           if (hero) {
             hero.classList.remove("hero-quake");
@@ -201,10 +227,48 @@ export default function StarField() {
           ctx.stroke();
         }
 
-        if (flash <= 0 && debris.every((d) => d.life <= 0)) {
+        // The mega meteorites: blazing heads with long violet-white
+        // tails, crossing the entire sky.
+        let meteorsAlive = false;
+        for (const m of meteors) {
+          const mt = (t - m.born) / 1000;
+          if (mt <= 0) {
+            meteorsAlive = true;
+            continue;
+          }
+          const mx = m.x0 + m.vx * mt;
+          const my = m.y0 + m.vy * mt;
+          if (mx < -400 || mx > width + 400 || my > height + 400) continue;
+          meteorsAlive = true;
+          const sp = Math.hypot(m.vx, m.vy);
+          const tx = mx - (m.vx / sp) * m.len;
+          const ty = my - (m.vy / sp) * m.len;
+          const grad = ctx.createLinearGradient(tx, ty, mx, my);
+          grad.addColorStop(0, "rgba(109, 40, 217, 0)");
+          grad.addColorStop(0.55, "rgba(167, 139, 250, 0.4)");
+          grad.addColorStop(1, "rgba(255, 255, 255, 0.95)");
+          ctx.strokeStyle = grad;
+          ctx.lineWidth = m.size;
+          ctx.lineCap = "round";
+          ctx.beginPath();
+          ctx.moveTo(tx, ty);
+          ctx.lineTo(mx, my);
+          ctx.stroke();
+          const halo = ctx.createRadialGradient(mx, my, 0, mx, my, m.size * 6);
+          halo.addColorStop(0, "rgba(255,255,255,0.95)");
+          halo.addColorStop(0.4, "rgba(196,181,253,0.5)");
+          halo.addColorStop(1, "rgba(167,139,250,0)");
+          ctx.fillStyle = halo;
+          ctx.beginPath();
+          ctx.arc(mx, my, m.size * 6, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        if (flash <= 0 && !meteorsAlive && debris.every((d) => d.life <= 0)) {
           nova = 0;
           debris = [];
           rings = [];
+          meteors = [];
         }
       }
       burst += (1 - burst) * Math.min(1, dt * 2.2);
