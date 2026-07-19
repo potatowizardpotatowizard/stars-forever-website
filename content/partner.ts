@@ -14,7 +14,7 @@ export const PARTNER = {
     items: [
       {
         title: "Internal",
-        body: "The creator has a deeper daily process of seeking God after working with us than before.",
+        body: "The creator has a deeper daily process of seeking God after working with us.",
       },
       {
         title: "External",
