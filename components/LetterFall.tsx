@@ -221,40 +221,38 @@ export default function LetterFall() {
                 }
               }
             }
-            targets.forEach((tgt, idx) => {
-              const old = missionLetters[idx % Math.max(1, missionLetters.length)];
-              let span: HTMLElement;
-              let pileX: number;
-              let pileY: number;
-              let rot = 0;
-              if (old && idx < missionLetters.length) {
-                span = old.span;
-                // Where the letter visually lies in the pile right
-                // now: its base position plus the held fall offset.
-                pileX = parseFloat(span.style.left) + old.dx * 1.06;
-                pileY = parseFloat(span.style.top) + old.drop;
-                rot = old.rot * 1.12;
-                // Clear the held fall transform BEFORE re-measuring,
-                // or the correction data is contaminated by it.
-                span.getAnimations().forEach((a) => a.cancel());
-              } else {
-                // More letters in the promise than fell: the extras
-                // rise out of the same pile at the bottom.
-                span = document.createElement("span");
-                span.style.cssText =
-                  `position:fixed;font-family:${cs.fontFamily};` +
-                  `font-size:${cs.fontSize};font-weight:${cs.fontWeight};` +
-                  `letter-spacing:${cs.letterSpacing};color:${cs.color};` +
-                  `text-transform:${cs.textTransform};line-height:1;will-change:transform;`;
-                overlay.appendChild(span);
-                pileX = innerWidth * (0.25 + Math.random() * 0.5);
-                pileY = innerHeight - 24 - Math.random() * 30;
-                rot = (Math.random() - 0.5) * 260;
-              }
+            // The fallen mission letters dissolve where they lie: the
+            // promise is not the old sentence patched up, it is new.
+            missionLetters.forEach((l) => {
+              l.span.animate(
+                [{ opacity: 1 }, { opacity: 0, filter: "blur(3px)" }],
+                {
+                  duration: 800,
+                  delay: Math.random() * 300,
+                  fill: "forwards",
+                },
+              );
+            });
+            // Fresh letters rise out of the same pile and assemble
+            // into the promise. Fresh spans only: no reused elements,
+            // no animation history, nothing to fight.
+            targets.forEach((tgt) => {
+              const span = document.createElement("span");
+              span.style.cssText =
+                `position:fixed;font-family:${cs.fontFamily};` +
+                `font-size:${cs.fontSize};font-weight:${cs.fontWeight};` +
+                `letter-spacing:${cs.letterSpacing};color:${cs.color};` +
+                `text-transform:${cs.textTransform};line-height:1;will-change:transform;`;
               span.textContent = tgt.ch;
+              overlay.appendChild(span);
               place(span, tgt.left, tgt.top);
-              const fromX = pileX - parseFloat(span.style.left);
-              const fromY = pileY - parseFloat(span.style.top);
+              const fromX =
+                innerWidth * (0.2 + Math.random() * 0.6) -
+                parseFloat(span.style.left);
+              const fromY =
+                innerHeight - 20 - Math.random() * 36 -
+                parseFloat(span.style.top);
+              const rot = (Math.random() - 0.5) * 260;
               const delay = 250 + Math.random() * 500;
               const dur = 1050 + Math.random() * 550;
               longestRise = Math.max(longestRise, delay + dur);
@@ -276,15 +274,6 @@ export default function LetterFall() {
                   fill: "both",
                 },
               );
-            });
-            // Fallen letters beyond the promise's length stay down,
-            // dissolving into the dark.
-            missionLetters.slice(targets.length).forEach((l) => {
-              l.span.animate([{ opacity: 1 }, { opacity: 0, filter: "blur(3px)" }], {
-                duration: 800,
-                delay: Math.random() * 300,
-                fill: "forwards",
-              });
             });
           }
 
