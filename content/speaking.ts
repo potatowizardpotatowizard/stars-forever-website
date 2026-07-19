@@ -49,7 +49,7 @@ export const SPEAKING = {
       bio: [
         "Benjiman gave his life to Christ at sixteen and asked one question that never let him go: what if the internet is the largest mission field in history?",
         "He redirected a childhood spent in gaming and digital media toward reaching people who would never walk into a church. By eighteen he had launched a faith driven social media initiative that reached millions. By twenty he held a degree in Entrepreneurship and Innovation and was running his own social media company.",
-        "Today he is pursuing a Master of Divinity, serving as a Media and Production Director at his church, and building Stars Forever alongside Auzi.",
+        "Today he is pursuing a Master of Divinity, working at Thinq Media, and building Stars Forever alongside Auzi.",
       ],
       journey: {
         kicker: "The road so far",
