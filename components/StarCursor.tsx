@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 
 const TRAIL_COUNT = 11;
 
@@ -15,6 +16,9 @@ export default function StarCursor() {
   const wrapRef = useRef<HTMLDivElement>(null);
   const starRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  // The Constellation page has its own lingering chemtrail; the comet
+  // tail stands down there so the two streaks never double up.
+  const tailHere = usePathname() !== "/constellation";
 
   useEffect(() => {
     if (!window.matchMedia("(pointer: fine)").matches) return;
@@ -90,7 +94,7 @@ export default function StarCursor() {
       const spin = reduced ? 0 : (now / 40) % 360;
       star.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%) rotate(${spin}deg) scale(${scale})`;
 
-      if (!reduced) {
+      if (!reduced && tailHere) {
         // The tail: each point chases the one ahead of it, and the
         // whole streak only lights up while the star is in flight.
         // Identical to the spark tail; the points just aren't shown.
@@ -169,7 +173,7 @@ export default function StarCursor() {
       document.removeEventListener("mouseout", out);
       document.documentElement.classList.remove("star-cursor-active");
     };
-  }, []);
+  }, [tailHere]);
 
   return (
     <div
