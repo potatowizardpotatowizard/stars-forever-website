@@ -5,10 +5,13 @@ export const SPEAKING = {
     heading: "We Are Not Pastors…",
     line: "But we carry Jesus into rooms a pulpit could never reach:",
     receipts: [
-      "MrBeast's island",
-      "Europe with Red Bull",
-      "A drift car in rural Japan",
-    ],
+      { label: "MrBeast's island", href: "/partner-projects/beast-games" },
+      { label: "Europe with Red Bull" },
+      {
+        label: "A drift car in rural Japan",
+        href: "/partner-projects/tokyo-drift",
+      },
+    ] as { label: string; href?: string }[],
     closer: "Your space could be next.",
   },
   topics: {

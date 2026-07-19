@@ -71,11 +71,21 @@ export default function SpeakingPage() {
           <div className="mt-10 flex flex-col gap-y-3">
             {SPEAKING.opening.receipts.map((receipt, i) => (
               <span
-                key={receipt}
+                key={receipt.label}
                 className="hero-beat font-meta text-sm font-bold uppercase tracking-[0.14em] text-starlight/90"
                 style={{ animationDelay: `${2.4 + i * 0.7}s` }}
               >
-                <span className="ping-star">✦</span> {receipt}
+                <span className="ping-star">✦</span>{" "}
+                {receipt.href ? (
+                  <Link
+                    href={receipt.href}
+                    className="underline decoration-dust/40 underline-offset-4 transition-colors hover:text-ember hover:decoration-ember"
+                  >
+                    {receipt.label}
+                  </Link>
+                ) : (
+                  receipt.label
+                )}
               </span>
             ))}
           </div>
