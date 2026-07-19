@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { sendMail } from "@/lib/mail";
+import { addConstellationRequest } from "@/lib/notion";
 
 export async function POST(request: Request) {
   let body: Record<string, string>;
@@ -39,11 +40,21 @@ export async function POST(request: Request) {
     note?.trim() || "",
   ].join("\n");
 
-  const sent = await sendMail({
-    subject: `Constellation request: ${name.trim()} (${city.trim()})`,
-    text,
-    replyTo: email.trim(),
-  });
+  const [sent] = await Promise.all([
+    sendMail({
+      subject: `Constellation request: ${name.trim()} (${city.trim()})`,
+      text,
+      replyTo: email.trim(),
+    }),
+    addConstellationRequest({
+      name: name.trim(),
+      email: email.trim(),
+      handle: handle?.trim() || undefined,
+      city: city.trim(),
+      country: country?.trim() || undefined,
+      note: note?.trim() || undefined,
+    }),
+  ]);
 
   return NextResponse.json({ sent, body: text });
 }
