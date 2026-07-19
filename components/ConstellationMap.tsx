@@ -29,7 +29,10 @@ export default function ConstellationMap({
     return true;
   });
   return (
-    <div className="relative overflow-hidden rounded-xl border border-dust/20 bg-night/60">
+    <div
+      id="constellation-map"
+      className="relative overflow-hidden rounded-xl border border-dust/20 bg-night/60"
+    >
       <img
         src="/brand/world-map.svg"
         alt="World map of the Constellation"

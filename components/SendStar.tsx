@@ -1,53 +1,159 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import Kicker from "@/components/Kicker";
 
-// Send a star: mint a personal link to the Constellation. When a
-// friend opens it, a star bearing the sender's name falls out of the
-// sky into the map before the page settles, then invites them to add
-// their own. Growth loop disguised as a gift. The form itself uses no
-// URL state, so it server-renders and is always visible; only the
-// arrival animation reads the ?star= param behind Suspense.
+// Send a star: mint a personal link to the Constellation. Opening a
+// sent link takes over the whole screen: the night closes in, the
+// star blooms with its sender's name, and then it descends out of
+// the takeover into the map itself, landing with a ripple of light.
+// Growth loop disguised as a gift. The form uses no URL state, so it
+// server-renders and is always visible; only the arrival reads the
+// ?star= param behind Suspense. Reduced motion skips to the greeting.
 function StarArrival() {
   const params = useSearchParams();
   const from = (params.get("star") ?? "")
     .replace(/[^\p{L}\p{N} .'-]/gu, "")
     .slice(0, 30)
     .trim();
-  const [falling, setFalling] = useState(false);
+  const [showOverlay, setShowOverlay] = useState(false);
+  const [landed, setLanded] = useState(false);
+  const bgRef = useRef<HTMLDivElement>(null);
+  const starRef = useRef<HTMLDivElement>(null);
+  const labelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (from) setFalling(true);
+    if (!from) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setLanded(true);
+      return;
+    }
+    setShowOverlay(true);
+    const timers: ReturnType<typeof setTimeout>[] = [];
+
+    // Beat two: bring the map into view beneath the takeover.
+    timers.push(
+      setTimeout(() => {
+        document
+          .getElementById("constellation-map")
+          ?.scrollIntoView({ behavior: "smooth", block: "center" });
+      }, 2600),
+    );
+
+    // Beat three: the night lifts and the star descends into the map.
+    timers.push(
+      setTimeout(() => {
+        const bg = bgRef.current;
+        const star = starRef.current;
+        const label = labelRef.current;
+        const map = document.getElementById("constellation-map");
+        if (bg) {
+          bg.animate([{ opacity: 1 }, { opacity: 0 }], {
+            duration: 900,
+            fill: "forwards",
+          });
+        }
+        label?.animate([{ opacity: 1 }, { opacity: 0 }], {
+          duration: 500,
+          fill: "forwards",
+        });
+        if (star && map) {
+          const r = map.getBoundingClientRect();
+          const s = star.getBoundingClientRect();
+          const dx = r.left + r.width / 2 - (s.left + s.width / 2);
+          const dy = r.top + r.height / 2 - (s.top + s.height / 2);
+          star.animate(
+            [
+              { transform: "translate(0,0) scale(1)" },
+              {
+                transform: `translate(${dx}px, ${dy}px) scale(0.34)`,
+                offset: 0.9,
+              },
+              { transform: `translate(${dx}px, ${dy}px) scale(0.4)` },
+            ],
+            {
+              duration: 1500,
+              easing: "cubic-bezier(.45,0,.25,1)",
+              fill: "forwards",
+            },
+          );
+          // Landing ripple on the map itself.
+          timers.push(
+            setTimeout(() => {
+              const ring = document.createElement("span");
+              ring.style.cssText =
+                `position:fixed;left:${r.left + r.width / 2}px;` +
+                `top:${r.top + r.height / 2}px;width:12px;height:12px;` +
+                "margin:-6px 0 0 -6px;border-radius:50%;" +
+                "border:2px solid rgb(196 181 253 / 0.9);" +
+                "pointer-events:none;z-index:121;";
+              document.body.appendChild(ring);
+              ring.animate(
+                [
+                  { transform: "scale(1)", opacity: 1 },
+                  { transform: "scale(9)", opacity: 0 },
+                ],
+                { duration: 900, easing: "ease-out" },
+              ).onfinish = () => ring.remove();
+            }, 1350),
+          );
+        }
+      }, 3400),
+    );
+
+    // Curtain call.
+    timers.push(
+      setTimeout(() => {
+        setShowOverlay(false);
+        setLanded(true);
+      }, 5200),
+    );
+    return () => timers.forEach(clearTimeout);
   }, [from]);
 
   if (!from) return null;
   return (
     <>
-      {falling ? (
-        <div
-          aria-hidden="true"
-          className="sent-star pointer-events-none fixed left-1/2 top-0 z-[90]"
-          onAnimationEnd={() => setFalling(false)}
-        >
-          <Image
-            src="/brand/star-sharp.png"
-            alt=""
-            width={56}
-            height={56}
-            className="vhs-glow mx-auto"
-          />
-          <p className="meta-label mt-3 whitespace-nowrap text-center text-starlight">
-            {from}&apos;s star
-          </p>
+      {showOverlay ? (
+        <div className="pointer-events-none fixed inset-0 z-[120]">
+          <div ref={bgRef} className="arrival-bg absolute inset-0" />
+          <div
+            ref={starRef}
+            className="absolute left-1/2 top-[40%]"
+            style={{ margin: "-55px 0 0 -55px" }}
+          >
+            <Image
+              src="/brand/star-sharp.png"
+              alt=""
+              width={110}
+              height={110}
+              className="arrival-star mx-auto"
+            />
+          </div>
+          <div
+            ref={labelRef}
+            className="absolute inset-x-0 top-[54%] px-6 text-center"
+          >
+            <p className="arrival-line meta-label text-ember">
+              A star has been sent to you
+            </p>
+            <p
+              className="arrival-line mt-4 font-display text-4xl font-bold text-starlight sm:text-5xl"
+              style={{ animationDelay: "0.9s" }}
+            >
+              From {from}
+            </p>
+          </div>
         </div>
       ) : null}
-      <p className="mt-8 text-center font-display text-lg text-starlight/90">
-        <span className="text-ember">{from}</span> sent you a star. Put yours
-        on the map below.
-      </p>
+      {landed ? (
+        <p className="mt-8 text-center font-display text-lg text-starlight/90">
+          <span className="text-ember">{from}</span> sent you a star. Put
+          yours on the map below.
+        </p>
+      ) : null}
     </>
   );
 }
