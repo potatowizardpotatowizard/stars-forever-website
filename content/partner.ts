@@ -18,7 +18,7 @@ export const PARTNER = {
       },
       {
         title: "External",
-        body: "There now exists a new example of Jesus being shared in a powerful and relevant way to a secular audience.",
+        body: "The creator shares Jesus in a powerful and relevant way to a secular audience.",
       },
     ],
   },
