@@ -1419,3 +1419,23 @@ html.easter-sunday body::before {
   box-shadow: 0 0 12px rgb(167 139 250 / 0.7);
   pointer-events: none;
 }
+
+/* The promise never stops glowing: a steady light with a slow breath */
+.resurrected-forever {
+  animation: promise-breathe 3.6s ease-in-out infinite;
+}
+@keyframes promise-breathe {
+  0%,
+  100% {
+    text-shadow:
+      0 0 10px rgb(255 255 255 / 0.55),
+      0 0 30px rgb(167 139 250 / 0.5),
+      0 0 60px rgb(109 40 217 / 0.3);
+  }
+  50% {
+    text-shadow:
+      0 0 14px rgb(255 255 255 / 0.8),
+      0 0 44px rgb(167 139 250 / 0.7),
+      0 0 80px rgb(109 40 217 / 0.45);
+  }
+}

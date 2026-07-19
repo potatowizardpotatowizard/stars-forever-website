@@ -43,6 +43,7 @@ export default function LetterFall() {
       // the top of the screen so nothing stands where the cross is
       // about to appear. It comes home the same way at the end.
       const logo = hero.querySelector<HTMLElement>("nav button");
+      let flyOut: Animation | null = null;
       if (logo) {
         const ox = innerWidth * 0.62;
         const oy = -innerHeight * 0.75;
@@ -51,7 +52,7 @@ export default function LetterFall() {
           `${(Math.atan2(-oy, -ox) * 180) / Math.PI}deg`,
         );
         logo.classList.add("logo-star-trail");
-        logo.animate(
+        flyOut = logo.animate(
           [
             { transform: "translate(0,0) scale(1)", filter: "brightness(1)" },
             {
@@ -65,7 +66,8 @@ export default function LetterFall() {
             },
           ],
           { duration: 750, easing: "cubic-bezier(.5,0,1,.4)", fill: "forwards" },
-        ).onfinish = () => {
+        );
+        flyOut.onfinish = () => {
           logo.style.visibility = "hidden";
           logo.classList.remove("logo-star-trail");
         };
@@ -269,11 +271,18 @@ export default function LetterFall() {
           setTimeout(() => {
             for (const el of hidden) {
               el.style.visibility = "";
-              el.classList.add("resurrected");
+              // The promise keeps its glow for good; everything else
+              // burns bright and slowly lets go.
+              el.classList.add(
+                el === missionEl ? "resurrected-forever" : "resurrected",
+              );
             }
             if (logo) {
               // Home again as a shooting star: in from the far sky,
               // decelerating into its old place, trail dissolving.
+              // The outbound animation must be cancelled first or its
+              // held end-state yanks the logo back off screen.
+              flyOut?.cancel();
               const ix = -innerWidth * 0.55;
               const iy = -innerHeight * 0.7;
               logo.style.visibility = "";
