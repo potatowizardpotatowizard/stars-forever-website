@@ -69,7 +69,6 @@ export default function StoryJourney({
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const anchorRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const endRef = useRef<HTMLDivElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
   const starRef = useRef<HTMLDivElement>(null);
   const originRef = useRef<HTMLDivElement>(null);
@@ -100,14 +99,9 @@ export default function StoryJourney({
           r.top - crect.top + r.height / 2,
         ]);
       }
-      const end = endRef.current;
-      if (end) {
-        const r = end.getBoundingClientRect();
-        anchors.push([
-          r.left - crect.left + r.width / 2,
-          r.top - crect.top + r.height / 2,
-        ]);
-      }
+      // The journey ends at the last photo. The cross below draws
+      // itself in on its own; sending the star there too read as
+      // confusing, so the constellation stops with the chapters.
       if (anchors.length < 2) return;
 
       let d = `M ${anchors[0][0]} ${anchors[0][1]}`;
@@ -357,7 +351,7 @@ export default function StoryJourney({
       >
         {/* The cross draws itself in as it scrolls into view, on every screen */}
         <Reveal className="story-node flex">
-          <div ref={endRef}>
+          <div>
             <StoryConnector variant="d" />
           </div>
           <Image
