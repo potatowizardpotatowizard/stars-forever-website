@@ -15,12 +15,15 @@ export default function ShootingStar() {
     let timer: ReturnType<typeof setTimeout>;
     const showerTimers: ReturnType<typeof setTimeout>[] = [];
 
-    const shoot = () => {
+    // Ambient meteors drift behind the page; summoned ones (a phone
+    // shake) fly above it, or they would hide behind the hero art.
+    const shoot = (front = false) => {
       const host = ref.current;
       if (!host) return;
       const el = document.createElement("div");
       el.style.cssText =
-        "position:fixed;height:1px;width:240px;pointer-events:none;z-index:-1;" +
+        `position:fixed;height:${front ? 2 : 1}px;width:240px;pointer-events:none;` +
+        `z-index:${front ? 45 : -1};` +
         "background:linear-gradient(90deg, transparent, rgb(239 236 247 / 0.9));" +
         "box-shadow:0 0 6px rgb(167 139 250 / 0.6);";
       const fromTop = 5 + Math.random() * 55; // vh
@@ -53,10 +56,12 @@ export default function ShootingStar() {
     };
     schedule();
 
-    const onShoot = () => shoot();
+    const onShoot = () => shoot(true);
     const onShower = () => {
       for (let i = 0; i < 10; i++) {
-        showerTimers.push(setTimeout(shoot, i * 160 + Math.random() * 120));
+        showerTimers.push(
+          setTimeout(() => shoot(true), i * 160 + Math.random() * 120),
+        );
       }
     };
     window.addEventListener("sf-shoot", onShoot);

@@ -364,10 +364,6 @@ export default function StarField() {
       ref={canvasRef}
       aria-hidden="true"
       className="pointer-events-none absolute inset-0 h-full w-full"
-      style={{
-        transform:
-          "translate3d(var(--tilt-x, 0px), var(--tilt-y, 0px), 0) scale(1.06)",
-      }}
     />
   );
 }

@@ -1164,13 +1164,6 @@ html.star-cursor-active select {
 
 /* ---- Wonders and secrets ------------------------------------------- */
 
-/* Tilt parallax (phones): the star layers drift with the device angle */
-body::before {
-  transform: translate3d(var(--tilt-x, 0px), var(--tilt-y, 0px), 0)
-    scale(1.05);
-  transition: transform 0.05s linear;
-}
-
 /* The hero logo flares on every click */
 @keyframes logo-flare {
   0% {
