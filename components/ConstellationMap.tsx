@@ -18,7 +18,7 @@ export default function ConstellationMap() {
       <img
         src="/brand/world-map.svg"
         alt="World map of the Constellation"
-        className="block w-full opacity-90"
+        className="block w-full"
       />
       {members.map((m) => {
         const pos = project(m.lat, m.lng);
