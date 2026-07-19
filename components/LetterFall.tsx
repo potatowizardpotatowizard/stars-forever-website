@@ -177,19 +177,23 @@ export default function LetterFall() {
             const delay = Math.random() * 450;
             const dur = 950 + Math.random() * 500;
             longestRise = Math.max(longestRise, delay + dur);
+            // Glow is a static style, not a keyframe: keyframing
+            // text-shadow forces the whole flight onto the main
+            // thread, where 150 glowing letters stutter and lag.
+            // A transform-only animation stays on the GPU.
+            l.span.style.textShadow = riseGlow[1];
             l.span.animate(
               [
                 {
                   transform: `translate(${l.dx * 1.06}px, ${l.drop}px) rotate(${l.rot * 1.12}deg)`,
-                  textShadow: riseGlow[0],
                 },
-                { transform: "translate(0,0) rotate(0deg)", textShadow: riseGlow[1] },
+                { transform: "translate(0,0) rotate(0deg)" },
               ],
               {
                 duration: dur,
                 delay,
                 easing: "cubic-bezier(.22,1,.36,1)",
-                fill: "forwards",
+                fill: "both",
               },
             );
           }
@@ -254,18 +258,16 @@ export default function LetterFall() {
               const delay = 250 + Math.random() * 500;
               const dur = 1050 + Math.random() * 550;
               longestRise = Math.max(longestRise, delay + dur);
+              // Static glow + transform-only animation (GPU), and
               // fill "both" keeps each letter waiting in the pile
               // through its stagger delay instead of teleporting.
+              span.style.textShadow = riseGlow[1];
               span.animate(
                 [
                   {
                     transform: `translate(${fromX}px, ${fromY}px) rotate(${rot}deg)`,
-                    textShadow: riseGlow[0],
                   },
-                  {
-                    transform: "translate(0,0) rotate(0deg)",
-                    textShadow: riseGlow[1],
-                  },
+                  { transform: "translate(0,0) rotate(0deg)" },
                 ],
                 {
                   duration: dur,
@@ -289,6 +291,16 @@ export default function LetterFall() {
           // Every letter home again: reveal the originals glowing
           // brighter than before, let the glow linger, fade the cross.
           setTimeout(() => {
+            // Belt and braces: snap every letter to its final resting
+            // state before the reveal, so nothing is ever caught
+            // mid-flight when the real text appears beneath.
+            overlay.getAnimations({ subtree: true }).forEach((a) => {
+              try {
+                a.finish();
+              } catch {
+                a.cancel();
+              }
+            });
             for (const el of hidden) {
               el.style.visibility = "";
               // The promise keeps its glow for good; everything else
