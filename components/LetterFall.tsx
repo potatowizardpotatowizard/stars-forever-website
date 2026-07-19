@@ -220,15 +220,19 @@ export default function LetterFall() {
             targets.forEach((tgt, idx) => {
               const old = missionLetters[idx % Math.max(1, missionLetters.length)];
               let span: HTMLElement;
-              let fromX: number;
-              let fromY: number;
+              let pileX: number;
+              let pileY: number;
               let rot = 0;
               if (old && idx < missionLetters.length) {
                 span = old.span;
-                fromX =
-                  parseFloat(span.style.left) + old.dx * 1.06 - tgt.left;
-                fromY = parseFloat(span.style.top) + old.drop - tgt.top;
+                // Where the letter visually lies in the pile right
+                // now: its base position plus the held fall offset.
+                pileX = parseFloat(span.style.left) + old.dx * 1.06;
+                pileY = parseFloat(span.style.top) + old.drop;
                 rot = old.rot * 1.12;
+                // Clear the held fall transform BEFORE re-measuring,
+                // or the correction data is contaminated by it.
+                span.getAnimations().forEach((a) => a.cancel());
               } else {
                 // More letters in the promise than fell: the extras
                 // rise out of the same pile at the bottom.
@@ -239,15 +243,19 @@ export default function LetterFall() {
                   `letter-spacing:${cs.letterSpacing};color:${cs.color};` +
                   `text-transform:${cs.textTransform};line-height:1;will-change:transform;`;
                 overlay.appendChild(span);
-                fromX = innerWidth * (0.25 + Math.random() * 0.5) - tgt.left;
-                fromY = innerHeight - 24 - Math.random() * 30 - tgt.top;
+                pileX = innerWidth * (0.25 + Math.random() * 0.5);
+                pileY = innerHeight - 24 - Math.random() * 30;
                 rot = (Math.random() - 0.5) * 260;
               }
               span.textContent = tgt.ch;
               place(span, tgt.left, tgt.top);
+              const fromX = pileX - parseFloat(span.style.left);
+              const fromY = pileY - parseFloat(span.style.top);
               const delay = 250 + Math.random() * 500;
               const dur = 1050 + Math.random() * 550;
               longestRise = Math.max(longestRise, delay + dur);
+              // fill "both" keeps each letter waiting in the pile
+              // through its stagger delay instead of teleporting.
               span.animate(
                 [
                   {
@@ -263,7 +271,7 @@ export default function LetterFall() {
                   duration: dur,
                   delay,
                   easing: "cubic-bezier(.22,1,.36,1)",
-                  fill: "forwards",
+                  fill: "both",
                 },
               );
             });
