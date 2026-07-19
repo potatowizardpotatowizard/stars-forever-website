@@ -89,13 +89,12 @@ export default async function ConstellationPage() {
         </div>
       </section>
 
-      {/* Send a star */}
+      {/* Send a star. NOT inside a Reveal: the arrival takeover uses
+          position fixed, which a transformed ancestor would capture. */}
       <section className="mx-auto max-w-7xl px-5 pb-24 sm:px-8">
-        <Reveal>
-          <Suspense>
-            <SendStar />
-          </Suspense>
-        </Reveal>
+        <Suspense>
+          <SendStar />
+        </Suspense>
       </section>
     </article>
   );

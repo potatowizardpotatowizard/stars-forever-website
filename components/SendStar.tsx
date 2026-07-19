@@ -160,16 +160,18 @@ function StarArrival() {
       ) : null}
       {landed && typeof document !== "undefined"
         ? (() => {
-            const map = document.getElementById("constellation-map");
-            if (!map) return null;
-            // The greeting lives on the map itself, resting along its
-            // lower edge where the star came down.
+            // The greeting sits right below the map, whatever section
+            // this component itself lives in.
+            const host = document.getElementById(
+              "constellation-map",
+            )?.parentElement;
+            if (!host) return null;
             return createPortal(
-              <p className="pointer-events-none absolute inset-x-0 bottom-4 z-10 px-6 text-center font-display text-lg text-starlight drop-shadow-[0_1px_8px_rgba(7,5,12,0.9)]">
+              <p className="mt-6 text-center font-display text-lg text-starlight/90">
                 <span className="text-ember">{from}</span> sent you a star,
                 fill out the form below to be on the map!
               </p>,
-              map,
+              host,
             );
           })()
         : null}
