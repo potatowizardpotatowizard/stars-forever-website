@@ -309,7 +309,7 @@ export default function HomePage() {
             href="/podcast"
             className="meta-label inline-block text-dust transition-colors hover:text-ember"
           >
-            These stories are told in full on the Respectfully Inspired Podcast →
+            Respectfully Inspired Podcast →
           </Link>
         </Reveal>
         </div>
