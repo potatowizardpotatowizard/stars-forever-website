@@ -93,7 +93,7 @@ export default function StoryPage() {
               href="/podcast"
               className="meta-label mt-10 inline-block text-dust transition-colors hover:text-ember"
             >
-              Hear this story in Auzi&apos;s own voice on the podcast →
+              Respectfully Inspired Podcast →
             </Link>
           </Reveal>
           <Reveal className="mt-16">

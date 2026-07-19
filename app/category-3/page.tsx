@@ -160,7 +160,7 @@ export default function Category3Page() {
             href="/podcast"
             className="meta-label inline-block text-dust transition-colors hover:text-ember"
           >
-            Hear Category 3 in action on the Respectfully Inspired Podcast →
+            Respectfully Inspired Podcast →
           </Link>
         </Reveal>
       </section>
