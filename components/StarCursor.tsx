@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 
 const TRAIL_COUNT = 13;
 
@@ -11,7 +12,7 @@ const RIBBON_LIFE = 1300;
 // The pointer becomes the signature four point star on fine-pointer
 // devices, flying like a shooting star: a comet tail of fading
 // stardust chases it while it moves and melts away when it rests.
-// Over the home hero (#hero) only, the star also writes in light —
+// On the Constellation page only, the star also writes in light —
 // its path stays painted as a glowing ribbon that fades on its own.
 // The native cursor is hidden sitewide (text fields keep their
 // caret), and the star grows over anything clickable.
@@ -20,6 +21,7 @@ export default function StarCursor() {
   const starRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const trailRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const ribbonHere = usePathname() === "/constellation";
 
   useEffect(() => {
     if (!window.matchMedia("(pointer: fine)").matches) return;
@@ -45,7 +47,6 @@ export default function StarCursor() {
     let glow = 0;
     let pressed = false;
     let shown = false;
-    let overHero = false;
     const tail = Array.from({ length: TRAIL_COUNT }, () => ({ x: 0, y: 0 }));
     const ribbon: { x: number; y: number; t: number }[] = [];
 
@@ -71,7 +72,6 @@ export default function StarCursor() {
         });
       }
       const target = e.target as Element | null;
-      overHero = !!target?.closest("#hero");
       const overText = !!target?.closest("input, textarea, select");
       const overLink = !!target?.closest(
         "a, button, [role='button'], label, summary",
@@ -117,12 +117,12 @@ export default function StarCursor() {
           py = p.y;
         });
 
-        // The hero ribbon: only laid down inside #hero, but always
-        // aged and repainted so it finishes fading after you leave.
+        // The ribbon: only laid down on the Constellation page, but
+        // always aged and repainted so it finishes fading naturally.
         const last = ribbon[ribbon.length - 1];
         if (
           shown &&
-          overHero &&
+          ribbonHere &&
           (!last || Math.hypot(x - last.x, y - last.y) > 1)
         ) {
           ribbon.push({ x, y, t: now });
@@ -170,7 +170,7 @@ export default function StarCursor() {
       document.removeEventListener("mouseout", out);
       document.documentElement.classList.remove("star-cursor-active");
     };
-  }, []);
+  }, [ribbonHere]);
 
   return (
     <div
