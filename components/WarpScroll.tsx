@@ -60,13 +60,13 @@ export default function WarpScroll() {
           streaks.push({
             x: Math.random() * window.innerWidth,
             y: Math.random() * window.innerHeight,
-            len: 90 + Math.random() * 320 * Math.max(0.5, intensity),
+            len: 70 + Math.random() * 220 * Math.max(0.5, intensity),
             speed:
               (velocity > 0 ? -1 : 1) *
-              (1300 + Math.random() * 2200) *
+              (1100 + Math.random() * 1800) *
               Math.max(0.5, intensity),
-            alpha: 0.3 + Math.random() * 0.35,
-            width: 1.6 + Math.random() * 1.6,
+            alpha: 0.12 + Math.random() * 0.16,
+            width: 1.1 + Math.random() * 0.9,
             violet: Math.random() < 0.35,
           });
         }
