@@ -53,9 +53,6 @@ export default async function ConstellationPage() {
         <Reveal>
           <ConstellationMap members={members} />
         </Reveal>
-        <Suspense>
-          <SendStar />
-        </Suspense>
       </section>
 
       {/* How it works */}
@@ -90,6 +87,15 @@ export default async function ConstellationPage() {
             </div>
           </Reveal>
         </div>
+      </section>
+
+      {/* Send a star */}
+      <section className="mx-auto max-w-7xl px-5 pb-24 sm:px-8">
+        <Reveal>
+          <Suspense>
+            <SendStar />
+          </Suspense>
+        </Reveal>
       </section>
     </article>
   );

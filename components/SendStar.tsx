@@ -104,12 +104,21 @@ function StarArrival() {
       }, 3400),
     );
 
+    // The landed star lingers on the map a while, then breathes out.
+    timers.push(
+      setTimeout(() => {
+        setLanded(true);
+        starRef.current?.animate([{ opacity: 1 }, { opacity: 0 }], {
+          duration: 900,
+          fill: "forwards",
+        });
+      }, 7600),
+    );
     // Curtain call.
     timers.push(
       setTimeout(() => {
         setShowOverlay(false);
-        setLanded(true);
-      }, 5200),
+      }, 8600),
     );
     return () => timers.forEach(clearTimeout);
   }, [from]);
@@ -158,7 +167,7 @@ function StarArrival() {
             return createPortal(
               <p className="pointer-events-none absolute inset-x-0 bottom-4 z-10 px-6 text-center font-display text-lg text-starlight drop-shadow-[0_1px_8px_rgba(7,5,12,0.9)]">
                 <span className="text-ember">{from}</span> sent you a star,
-                fill out the form below to be on the map
+                fill out the form below to be on the map!
               </p>,
               map,
             );
