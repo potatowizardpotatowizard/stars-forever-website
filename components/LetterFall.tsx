@@ -277,40 +277,44 @@ export default function LetterFall() {
                 el === missionEl ? "resurrected-forever" : "resurrected",
               );
             }
-            if (logo) {
-              // Home again as a shooting star: in from the far sky,
-              // decelerating into its old place, trail dissolving.
-              // The outbound animation must be cancelled first or its
-              // held end-state yanks the logo back off screen.
-              flyOut?.cancel();
-              const ix = -innerWidth * 0.55;
-              const iy = -innerHeight * 0.7;
-              logo.style.visibility = "";
-              logo.style.setProperty(
-                "--trail-angle",
-                `${(Math.atan2(iy, ix) * 180) / Math.PI}deg`,
-              );
-              logo.classList.add("logo-star-trail");
-              logo.animate(
-                [
-                  {
-                    transform: `translate(${ix}px, ${iy}px) scale(0.45)`,
-                    filter: "brightness(3)",
-                  },
-                  {
-                    transform: "translate(0,0) scale(1)",
-                    filter: "brightness(1.2)",
-                  },
-                ],
-                { duration: 1000, easing: "cubic-bezier(.22,1,.36,1)" },
-              ).onfinish = () => logo.classList.remove("logo-star-trail");
-            }
+            // The cross departs first: only once it is completely
+            // gone does the star come home.
             overlay
               .animate([{ opacity: 1 }, { opacity: 0 }], {
                 duration: 900,
                 fill: "forwards",
               })
-              .onfinish = () => overlay.remove();
+              .onfinish = () => {
+              overlay.remove();
+              if (logo) {
+                // Home again as a shooting star: in from the far sky,
+                // decelerating into its old place, trail dissolving.
+                // The outbound animation must be cancelled first or
+                // its held end-state yanks the logo back off screen.
+                flyOut?.cancel();
+                const ix = -innerWidth * 0.55;
+                const iy = -innerHeight * 0.7;
+                logo.style.visibility = "";
+                logo.style.setProperty(
+                  "--trail-angle",
+                  `${(Math.atan2(iy, ix) * 180) / Math.PI}deg`,
+                );
+                logo.classList.add("logo-star-trail");
+                logo.animate(
+                  [
+                    {
+                      transform: `translate(${ix}px, ${iy}px) scale(0.45)`,
+                      filter: "brightness(3)",
+                    },
+                    {
+                      transform: "translate(0,0) scale(1)",
+                      filter: "brightness(1.2)",
+                    },
+                  ],
+                  { duration: 1000, easing: "cubic-bezier(.22,1,.36,1)" },
+                ).onfinish = () => logo.classList.remove("logo-star-trail");
+              }
+            };
             setTimeout(() => {
               for (const el of hidden) el.classList.remove("resurrected");
               busy = false;
