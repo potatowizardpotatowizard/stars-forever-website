@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-const TRAIL_COUNT = 13;
+const TRAIL_COUNT = 11;
 
 // The pointer becomes the signature four point star on fine-pointer
 // devices, flying like a shooting star: a comet tail of fading
