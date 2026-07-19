@@ -7,18 +7,23 @@ const TRAIL_COUNT = 13;
 // The pointer becomes the signature four point star on fine-pointer
 // devices, flying like a shooting star: a comet tail of fading
 // stardust chases it while it moves and melts away when it rests.
+// The tail keeps the exact chase physics, length, widths, and colors
+// of the spark version, but is drawn as one smooth continuous streak.
 // The native cursor is hidden sitewide (text fields keep their
 // caret), and the star grows over anything clickable.
 export default function StarCursor() {
   const wrapRef = useRef<HTMLDivElement>(null);
   const starRef = useRef<HTMLDivElement>(null);
-  const trailRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     if (!window.matchMedia("(pointer: fine)").matches) return;
     const wrap = wrapRef.current;
     const star = starRef.current;
-    if (!wrap || !star) return;
+    const canvas = canvasRef.current;
+    if (!wrap || !star || !canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
     const reduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
@@ -36,6 +41,15 @@ export default function StarCursor() {
     let pressed = false;
     let shown = false;
     const tail = Array.from({ length: TRAIL_COUNT }, () => ({ x: 0, y: 0 }));
+
+    const resize = () => {
+      const dpr = Math.min(2, window.devicePixelRatio || 1);
+      canvas.width = Math.round(window.innerWidth * dpr);
+      canvas.height = Math.round(window.innerHeight * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+    resize();
+    window.addEventListener("resize", resize);
 
     const move = (e: PointerEvent) => {
       tx = e.clientX;
@@ -77,25 +91,49 @@ export default function StarCursor() {
       star.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%) rotate(${spin}deg) scale(${scale})`;
 
       if (!reduced) {
-        // The tail: each mote chases the one ahead of it, and the
+        // The tail: each point chases the one ahead of it, and the
         // whole streak only lights up while the star is in flight.
+        // Identical to the spark tail; the points just aren't shown.
         const speed = Math.hypot(tx - x, ty - y);
         glow += (Math.min(1, speed / 14) - glow) * 0.12;
         let px = x;
         let py = y;
-        tail.forEach((p, i) => {
+        tail.forEach((p) => {
           p.x += (px - p.x) * 0.38;
           p.y += (py - p.y) * 0.38;
-          const el = trailRefs.current[i];
-          if (el) {
-            el.style.transform = `translate3d(${p.x}px, ${p.y}px, 0) translate(-50%, -50%)`;
-            el.style.opacity = String(
-              glow * (1 - i / TRAIL_COUNT) * 0.65,
-            );
-          }
           px = p.x;
           py = p.y;
         });
+
+        // One smooth streak through the chain. Per segment, the core
+        // width equals the old spark's diameter (7px tapering to 2),
+        // the color is the same white-then-violet with the same
+        // opacities, and a soft violet underlay stands in for the
+        // sparks' glow halo.
+        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+        let ax = x;
+        let ay = y;
+        for (let i = 0; i < TRAIL_COUNT; i++) {
+          const b = tail[i];
+          const width = Math.max(2, 7 - i * 0.6);
+          const fade = glow * (1 - i / TRAIL_COUNT) * 0.65;
+          ctx.beginPath();
+          ctx.moveTo(ax, ay);
+          ctx.lineTo(b.x, b.y);
+          ctx.strokeStyle = `rgb(167 139 250 / ${0.8 * fade * 0.35})`;
+          ctx.lineWidth = width + 8;
+          ctx.stroke();
+          ctx.strokeStyle =
+            i < 3
+              ? `rgb(239 236 247 / ${0.95 * fade})`
+              : `rgb(167 139 250 / ${0.9 * fade})`;
+          ctx.lineWidth = width;
+          ctx.stroke();
+          ax = b.x;
+          ay = b.y;
+        }
       }
       raf = requestAnimationFrame(tick);
     };
@@ -108,6 +146,7 @@ export default function StarCursor() {
 
     return () => {
       cancelAnimationFrame(raf);
+      window.removeEventListener("resize", resize);
       window.removeEventListener("pointermove", move);
       window.removeEventListener("pointerdown", down);
       window.removeEventListener("pointerup", up);
@@ -122,23 +161,7 @@ export default function StarCursor() {
       aria-hidden="true"
       className="pointer-events-none fixed inset-0 z-[130] opacity-0"
     >
-      {Array.from({ length: TRAIL_COUNT }, (_, i) => (
-        <span
-          key={i}
-          ref={(el) => {
-            trailRefs.current[i] = el;
-          }}
-          className="absolute left-0 top-0 rounded-full opacity-0"
-          style={{
-            width: `${Math.max(2, 7 - i * 0.6)}px`,
-            height: `${Math.max(2, 7 - i * 0.6)}px`,
-            background:
-              i < 3 ? "rgb(239 236 247 / 0.95)" : "rgb(167 139 250 / 0.9)",
-            boxShadow: "0 0 8px rgb(167 139 250 / 0.8)",
-            willChange: "transform",
-          }}
-        />
-      ))}
+      <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
       <div
         ref={starRef}
         className="absolute left-0 top-0 h-5 w-5"
