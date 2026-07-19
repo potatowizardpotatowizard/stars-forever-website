@@ -40,10 +40,21 @@ export default function StarField() {
     let raf = 0;
     let start = 0;
     let last = 0;
-    // Supernova phases: 0 idle, 1 collapsing, 2 flash and reburst.
+    // Supernova phases: 0 idle, 1 collapsing, 2 detonation.
     let nova = 0;
     let novaT = 0;
     let burst = 1; // speed multiplier decaying back to 1 after the burst
+    let debris: {
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+      life: number;
+      decay: number;
+      size: number;
+      color: string;
+    }[] = [];
+    let rings: { born: number; speed: number; width: number }[] = [];
 
     const spawnStar = (initial: boolean) => ({
       // Unit-square offsets from the sky's center; z gives depth.
@@ -80,23 +91,64 @@ export default function StarField() {
       const resolve = Math.min(1, elapsed / 3.5);
       ctx.clearRect(0, 0, width, height);
 
-      // Supernova: pull every star into the heart of the sky...
+      // Supernova phase one: every star spirals into the heart of the
+      // sky, faster and tighter, while the world dims around them.
       let pull = 0;
+      let swirl = 0;
       if (nova === 1) {
-        pull = Math.min(1, (t - novaT) / 650);
-        pull = pull * pull;
-        if (pull >= 1) {
+        const p = Math.min(1, (t - novaT) / 800);
+        pull = p * p * p;
+        swirl = p * p * 3.2;
+        ctx.fillStyle = `rgba(7, 5, 12, ${0.55 * pull})`;
+        ctx.fillRect(0, 0, width, height);
+        if (p >= 1) {
+          // DETONATION. Debris storm, shockwaves, quake, rebirth.
           nova = 2;
           novaT = t;
           seed(width, height, true);
-          burst = 7;
+          burst = 9;
+          debris = Array.from({ length: 260 }, () => {
+            const ang = Math.random() * Math.PI * 2;
+            const sp = 120 + Math.random() ** 2 * 1100;
+            const roll = Math.random();
+            return {
+              x: width / 2,
+              y: height / 2,
+              vx: Math.cos(ang) * sp,
+              vy: Math.sin(ang) * sp,
+              life: 1,
+              decay: 0.35 + Math.random() * 0.6,
+              size: 0.6 + Math.random() * 2.2,
+              color:
+                roll < 0.5
+                  ? "239 236 247"
+                  : roll < 0.85
+                    ? "167 139 250"
+                    : "251 191 36",
+            };
+          });
+          rings = [
+            { born: t, speed: 1500, width: 3 },
+            { born: t + 120, speed: 1050, width: 2 },
+            { born: t + 260, speed: 720, width: 1.4 },
+          ];
+          const hero = document.getElementById("hero");
+          if (hero) {
+            hero.classList.remove("hero-quake");
+            void hero.offsetWidth;
+            hero.classList.add("hero-quake");
+            setTimeout(() => hero.classList.remove("hero-quake"), 1000);
+          }
         }
       }
-      // ...one white beat of stillness, then everything is born again.
+
+      // Supernova phase two: the flash, the shockwaves, and a storm of
+      // glowing debris raking the whole screen while the sky is reborn.
       if (nova === 2) {
-        const flash = 1 - Math.min(1, (t - novaT) / 450);
+        const age = (t - novaT) / 1000;
+        const flash = Math.max(0, 1 - age / 0.5);
         if (flash > 0) {
-          const r = Math.max(width, height) * 0.5 * (1 - flash * 0.6);
+          const r = Math.max(width, height) * (0.55 + (1 - flash) * 0.6);
           const g = ctx.createRadialGradient(
             width / 2,
             height / 2,
@@ -105,13 +157,54 @@ export default function StarField() {
             height / 2,
             r,
           );
-          g.addColorStop(0, `rgba(255,255,255,${0.9 * flash})`);
-          g.addColorStop(0.4, `rgba(196,181,253,${0.5 * flash})`);
+          g.addColorStop(0, `rgba(255,255,255,${0.95 * flash})`);
+          g.addColorStop(0.35, `rgba(196,181,253,${0.6 * flash})`);
           g.addColorStop(1, "rgba(167,139,250,0)");
           ctx.fillStyle = g;
           ctx.fillRect(0, 0, width, height);
-        } else {
+        }
+
+        const maxR = Math.hypot(width, height) * 0.75;
+        for (const ring of rings) {
+          const rt = (t - ring.born) / 1000;
+          if (rt <= 0) continue;
+          const r = rt * ring.speed;
+          if (r > maxR) continue;
+          const a = Math.max(0, 1 - r / maxR);
+          ctx.strokeStyle = `rgba(196, 181, 253, ${0.55 * a})`;
+          ctx.lineWidth = ring.width + 10 * a;
+          ctx.beginPath();
+          ctx.arc(width / 2, height / 2, r, 0, Math.PI * 2);
+          ctx.stroke();
+          ctx.strokeStyle = `rgba(255, 255, 255, ${0.35 * a})`;
+          ctx.lineWidth = ring.width * 0.5;
+          ctx.beginPath();
+          ctx.arc(width / 2, height / 2, r, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+
+        ctx.lineCap = "round";
+        for (const d of debris) {
+          if (d.life <= 0) continue;
+          d.x += d.vx * dt;
+          d.y += d.vy * dt;
+          d.vx *= 0.985;
+          d.vy *= 0.985;
+          d.life -= d.decay * dt;
+          const a = Math.max(0, d.life);
+          const trail = 0.045 + d.size * 0.01;
+          ctx.strokeStyle = `rgb(${d.color} / ${0.9 * a})`;
+          ctx.lineWidth = d.size;
+          ctx.beginPath();
+          ctx.moveTo(d.x - d.vx * trail, d.y - d.vy * trail);
+          ctx.lineTo(d.x, d.y);
+          ctx.stroke();
+        }
+
+        if (flash <= 0 && debris.every((d) => d.life <= 0)) {
           nova = 0;
+          debris = [];
+          rings = [];
         }
       }
       burst += (1 - burst) * Math.min(1, dt * 2.2);
@@ -127,8 +220,15 @@ export default function StarField() {
           continue;
         }
         if (pull > 0) {
-          px = px + (width / 2 - px) * pull;
-          py = py + (height / 2 - py) * pull;
+          // Spiral: rotate each star around the center as it falls in.
+          const dx = px - width / 2;
+          const dy = py - height / 2;
+          const cos = Math.cos(swirl);
+          const sin = Math.sin(swirl);
+          const rx = dx * cos - dy * sin;
+          const ry = dx * sin + dy * cos;
+          px = width / 2 + rx * (1 - pull);
+          py = height / 2 + ry * (1 - pull);
         }
 
         // Approaching stars grow from a distant speck to a bright point.

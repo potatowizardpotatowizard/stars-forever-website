@@ -1257,3 +1257,40 @@ html.easter-sunday body::before {
   opacity: 0.42;
   filter: brightness(1.3);
 }
+
+/* Supernova detonation: the whole hero convulses and its colors tear
+   for a beat while the shockwaves cross the screen */
+@keyframes hero-quake {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+    filter: none;
+  }
+  8% {
+    transform: translate(-16px, 10px) rotate(-0.6deg);
+    filter: hue-rotate(40deg) saturate(2);
+  }
+  18% {
+    transform: translate(14px, -12px) rotate(0.7deg);
+    filter: invert(0.08) hue-rotate(-30deg);
+  }
+  30% {
+    transform: translate(-11px, -8px) rotate(-0.5deg);
+    filter: saturate(2.4) brightness(1.3);
+  }
+  44% {
+    transform: translate(9px, 9px) rotate(0.4deg);
+    filter: hue-rotate(25deg);
+  }
+  60% {
+    transform: translate(-6px, 4px) rotate(-0.2deg);
+    filter: brightness(1.15);
+  }
+  78% {
+    transform: translate(3px, -3px) rotate(0.1deg);
+    filter: none;
+  }
+}
+.hero-quake {
+  animation: hero-quake 0.95s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}

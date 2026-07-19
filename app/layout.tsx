@@ -8,7 +8,6 @@ import GoodFriday from "@/components/GoodFriday";
 import MotionMagic from "@/components/MotionMagic";
 import ShootingStar from "@/components/ShootingStar";
 import StarCursor from "@/components/StarCursor";
-import TapeShelf from "@/components/TapeShelf";
 import TouchComet from "@/components/TouchComet";
 import VerseSummon from "@/components/VerseSummon";
 import WarpScroll from "@/components/WarpScroll";
@@ -89,7 +88,6 @@ export default function RootLayout({
         <StarCursor />
         <TouchComet />
         <WarpScroll />
-        <TapeShelf />
         <VerseSummon />
         <MotionMagic />
         <GoodFriday />
