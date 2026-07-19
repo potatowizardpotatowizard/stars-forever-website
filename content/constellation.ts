@@ -16,7 +16,7 @@ export const CONSTELLATION = {
   title: "The Constellation",
   kicker: "Creators across the earth",
   intro:
-    "A global family of creators who love Jesus. Put your star on the map, get exclusive access to the private group chat, connect with likeminded creators near you, and find a friend in every city you travel through.",
+    "A map of creators who love Jesus and share the Stars Forever vision. Put your star on the map, get exclusive access to the private group chat, connect with likeminded creators near you, and find a friend in every city you travel through.",
   how: {
     kicker: "How it works",
     items: [
