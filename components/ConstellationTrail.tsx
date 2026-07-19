@@ -25,6 +25,14 @@ export default function ConstellationTrail() {
     if (!canvas || !ctx) return;
 
     let raf = 0;
+    // The ribbon's head glides with the same easing as the star
+    // cursor (0.3 pursuit), so the trail pours out of the star
+    // instead of racing ahead to the raw pointer.
+    let x = 0;
+    let y = 0;
+    let tx = 0;
+    let ty = 0;
+    let shown = false;
     const ribbon: { x: number; y: number; t: number }[] = [];
 
     const resize = () => {
@@ -37,13 +45,22 @@ export default function ConstellationTrail() {
     window.addEventListener("resize", resize);
 
     const move = (e: PointerEvent) => {
-      const last = ribbon[ribbon.length - 1];
-      if (!last || Math.hypot(e.clientX - last.x, e.clientY - last.y) > 1) {
-        ribbon.push({ x: e.clientX, y: e.clientY, t: performance.now() });
+      tx = e.clientX;
+      ty = e.clientY;
+      if (!shown) {
+        shown = true;
+        x = tx;
+        y = ty;
       }
     };
 
     const tick = (now: number) => {
+      x += (tx - x) * 0.3;
+      y += (ty - y) * 0.3;
+      const last = ribbon[ribbon.length - 1];
+      if (shown && (!last || Math.hypot(x - last.x, y - last.y) > 1)) {
+        ribbon.push({ x, y, t: now });
+      }
       while (ribbon.length && now - ribbon[0].t > RIBBON_LIFE) ribbon.shift();
       ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
       ctx.lineCap = "round";
