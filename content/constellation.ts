@@ -29,6 +29,7 @@ export const CONSTELLATION = {
   form: {
     kicker: "Join the Constellation",
     heading: "Put Your Star on the Map",
+    sub: "Get exclusive access to the constellation group chat",
   },
   members: [] as ConstellationMember[],
 };

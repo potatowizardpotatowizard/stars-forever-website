@@ -82,6 +82,9 @@ export default async function ConstellationPage() {
             <h2 className="mx-auto mt-6 max-w-2xl font-display text-4xl font-bold">
               {CONSTELLATION.form.heading}
             </h2>
+            <p className="mx-auto mt-4 max-w-md text-starlight/70">
+              {CONSTELLATION.form.sub}
+            </p>
             <div className="mt-12">
               <ConstellationForm />
             </div>
