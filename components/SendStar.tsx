@@ -104,10 +104,11 @@ function StarArrival() {
       }, 3400),
     );
 
-    // The landed star lingers on the map a while, then breathes out.
+    // The greeting appears as soon as the star has touched down...
+    timers.push(setTimeout(() => setLanded(true), 5100));
+    // ...while the landed star lingers a while longer, then breathes out.
     timers.push(
       setTimeout(() => {
-        setLanded(true);
         starRef.current?.animate([{ opacity: 1 }, { opacity: 0 }], {
           duration: 900,
           fill: "forwards",
