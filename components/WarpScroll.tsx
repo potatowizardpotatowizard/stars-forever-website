@@ -50,23 +50,25 @@ export default function WarpScroll() {
 
       const intensity = Math.min(
         1,
-        Math.max(0, (Math.abs(velocity) - 650) / 2200),
+        Math.max(0, (Math.abs(velocity) - 500) / 1500),
       );
-      if (intensity > 0 && streaks.length < 60) {
+      if (intensity > 0 && streaks.length < 110) {
         const spawns =
-          (Math.random() < intensity * 2.4 ? 1 : 0) +
-          (intensity > 0.55 && Math.random() < 0.6 ? 1 : 0);
+          (Math.random() < intensity * 3.2 ? 1 : 0) +
+          (Math.random() < intensity * 1.6 ? 1 : 0) +
+          (intensity > 0.5 && Math.random() < 0.8 ? 1 : 0) +
+          (intensity > 0.8 && Math.random() < 0.8 ? 1 : 0);
         for (let s = 0; s < spawns; s++) {
           streaks.push({
             x: Math.random() * window.innerWidth,
             y: Math.random() * window.innerHeight,
-            len: 60 + Math.random() * 200 * Math.max(0.4, intensity),
+            len: 90 + Math.random() * 320 * Math.max(0.5, intensity),
             speed:
               (velocity > 0 ? -1 : 1) *
-              (900 + Math.random() * 1600) *
-              Math.max(0.4, intensity),
-            alpha: 0.22 + Math.random() * 0.26,
-            width: 1.4 + Math.random() * 1.1,
+              (1300 + Math.random() * 2200) *
+              Math.max(0.5, intensity),
+            alpha: 0.3 + Math.random() * 0.35,
+            width: 1.6 + Math.random() * 1.6,
             violet: Math.random() < 0.35,
           });
         }
