@@ -62,7 +62,7 @@ export default function StarField() {
       y: Math.random() * 2 - 1,
       z: initial ? NEAR + Math.random() * (FAR - NEAR) : FAR,
       speed: 0.055 + Math.random() * 0.1, // depth per second: a steady jump
-      gold: !initial && Math.random() < 0.0009,
+      gold: !initial && Math.random() < 0.00015,
     });
 
     // The gold star is singular: a fresh gold spawn is demoted if one
