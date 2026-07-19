@@ -132,10 +132,12 @@ export default function WarpScroll() {
   }, []);
 
   return (
+    // Behind the page (z -1, above only the body background): streaks
+    // pass beneath buttons, images, videos, and text, never over them.
     <canvas
       ref={canvasRef}
       aria-hidden="true"
-      className="pointer-events-none fixed inset-0 z-[2] h-full w-full"
+      className="pointer-events-none fixed inset-0 z-[-1] h-full w-full"
     />
   );
 }
