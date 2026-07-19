@@ -1,6 +1,7 @@
 "use client";
 
 import { Suspense, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import Kicker from "@/components/Kicker";
@@ -148,12 +149,21 @@ function StarArrival() {
           </div>
         </div>
       ) : null}
-      {landed ? (
-        <p className="mt-8 text-center font-display text-lg text-starlight/90">
-          <span className="text-ember">{from}</span> sent you a star. Put
-          yours on the map below.
-        </p>
-      ) : null}
+      {landed && typeof document !== "undefined"
+        ? (() => {
+            const map = document.getElementById("constellation-map");
+            if (!map) return null;
+            // The greeting lives on the map itself, resting along its
+            // lower edge where the star came down.
+            return createPortal(
+              <p className="pointer-events-none absolute inset-x-0 bottom-4 z-10 px-6 text-center font-display text-lg text-starlight drop-shadow-[0_1px_8px_rgba(7,5,12,0.9)]">
+                <span className="text-ember">{from}</span> sent you a star.
+                Put yours on the map below.
+              </p>,
+              map,
+            );
+          })()
+        : null}
     </>
   );
 }
@@ -184,11 +194,11 @@ export default function SendStar() {
         <Kicker>Send a star</Kicker>
       </div>
       <h2 className="mt-5 font-display text-3xl font-bold sm:text-4xl">
-        Drop a Star in a Friend&apos;s Sky
+        Send a Star to a Friend
       </h2>
       <p className="mx-auto mt-4 max-w-md text-starlight/70">
-        Your link makes a star carrying your name fall into their map the
-        moment they open it.
+        Your link sends a cool surprise which encourages them to join the
+        constellation.
       </p>
       <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
         <label htmlFor="send-star-name" className="sr-only">
