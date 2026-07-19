@@ -6,13 +6,19 @@ import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import Reveal from "@/components/Reveal";
 import { CONSTELLATION } from "@/content/constellation";
+import { getAcceptedMembers } from "@/lib/notion";
 
 export const metadata: Metadata = {
   title: "The Constellation",
   description: CONSTELLATION.intro,
 };
 
-export default function ConstellationPage() {
+// Refresh from Notion every 5 minutes: flipping a request to
+// "Accepted" there places its star on the map with no code change.
+export const revalidate = 300;
+
+export default async function ConstellationPage() {
+  const members = await getAcceptedMembers();
   return (
     <article>
       <header className="relative overflow-hidden">
@@ -43,7 +49,7 @@ export default function ConstellationPage() {
       {/* The map */}
       <section className="mx-auto max-w-7xl px-5 pt-8 sm:px-8">
         <Reveal>
-          <ConstellationMap />
+          <ConstellationMap members={members} />
         </Reveal>
       </section>
 

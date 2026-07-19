@@ -1,8 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
-import { CONSTELLATION } from "@/content/constellation";
+import {
+  CONSTELLATION,
+  type ConstellationMember,
+} from "@/content/constellation";
 
 // The Constellation map: a dark equirectangular world with a glowing star
-// for every approved creator. Star positions use the same projection the
+// for every approved creator. Members come from the Notion database
+// (rows flipped to Accepted), merged with any hand-placed entries in
+// content/constellation.ts. Star positions use the same projection the
 // map was generated with, so placement is exact.
 function project(lat: number, lng: number) {
   return {
@@ -11,8 +16,18 @@ function project(lat: number, lng: number) {
   };
 }
 
-export default function ConstellationMap() {
-  const members = CONSTELLATION.members;
+export default function ConstellationMap({
+  members: notionMembers = [],
+}: {
+  members?: ConstellationMember[];
+}) {
+  const seen = new Set<string>();
+  const members = [...CONSTELLATION.members, ...notionMembers].filter((m) => {
+    const key = `${m.name}|${m.city}`.toLowerCase();
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
   return (
     <div className="relative overflow-hidden rounded-xl border border-dust/20 bg-night/60">
       <img
