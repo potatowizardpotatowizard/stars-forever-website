@@ -249,7 +249,7 @@ export default function StarField() {
         if (!reduceMotion && depth > 0.15 && pull === 0) {
           const back = project({ x: s.x, y: s.y, z: s.z + 0.07 + 0.07 * depth });
           ctx.globalAlpha = alpha * 0.55;
-          ctx.strokeStyle = s.gold ? "#fbbf24" : "#efecf7";
+          ctx.strokeStyle = s.gold ? "#a78bfa" : "#efecf7";
           ctx.lineWidth = Math.max(0.4, radius * 0.7);
           ctx.lineCap = "round";
           ctx.beginPath();
@@ -259,24 +259,25 @@ export default function StarField() {
         }
 
         if (s.gold) {
-          // THE gold star: a large four point star, twinkling, ringed
-          // in a warm halo. Nothing else in the sky looks like it.
+          // THE hidden star: a large four point star in deep purple,
+          // twinkling, ringed in a violet halo. Nothing else in the
+          // sky looks like it.
           const R = (4 + depth * 8) * (1 + 0.16 * Math.sin(t / 170));
           const rot = t / 900;
           ctx.save();
           ctx.translate(px, py);
           ctx.rotate(rot);
           const halo = ctx.createRadialGradient(0, 0, 0, 0, 0, R * 2.6);
-          halo.addColorStop(0, `rgba(253, 224, 71, ${0.55 * resolve})`);
-          halo.addColorStop(0.5, `rgba(251, 191, 36, ${0.25 * resolve})`);
-          halo.addColorStop(1, "rgba(251, 191, 36, 0)");
+          halo.addColorStop(0, `rgba(196, 181, 253, ${0.55 * resolve})`);
+          halo.addColorStop(0.5, `rgba(139, 92, 246, ${0.28 * resolve})`);
+          halo.addColorStop(1, "rgba(109, 40, 217, 0)");
           ctx.globalAlpha = 1;
           ctx.fillStyle = halo;
           ctx.beginPath();
           ctx.arc(0, 0, R * 2.6, 0, Math.PI * 2);
           ctx.fill();
           const w = R * 0.16;
-          ctx.fillStyle = "#fbbf24";
+          ctx.fillStyle = "#a78bfa";
           ctx.globalAlpha = Math.min(1, (0.55 + 0.45 * depth) * resolve);
           ctx.beginPath();
           ctx.moveTo(0, -R);
@@ -285,7 +286,7 @@ export default function StarField() {
           ctx.quadraticCurveTo(-w, w, -R, 0);
           ctx.quadraticCurveTo(-w, -w, 0, -R);
           ctx.fill();
-          ctx.fillStyle = "rgba(255, 251, 235, 0.95)";
+          ctx.fillStyle = "rgba(245, 243, 255, 0.95)";
           ctx.beginPath();
           ctx.arc(0, 0, Math.max(1.2, R * 0.14), 0, Math.PI * 2);
           ctx.fill();

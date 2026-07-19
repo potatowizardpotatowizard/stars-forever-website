@@ -2,10 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 
-// The gold star's secret. When "sf-goldstar" fires, the whole screen
-// cuts to black and green code rains down it. Out of the rain, the
-// message: MYSTERY MAKES HISTORY, and then the invitation to reach
-// out. Click or Escape closes it once the secret has been delivered.
+// The hidden star's secret. When "sf-goldstar" fires, the whole
+// screen cuts to black and purple code rains down it. Out of the
+// rain, the message: MYSTERY MAKES HISTORY, and then the invitation
+// to reach out. Click or Escape closes it once delivered.
 const GLYPHS =
   "アイウエオカキクケコサシスセソタチツテトナニヌネノ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ#$+*<>/";
 
@@ -62,9 +62,9 @@ export default function CodeRain() {
         const y = drops[i] * FS;
         if (y > 0) {
           // bright head, dimmer body left behind by the trail fade
-          ctx.fillStyle = "rgba(190, 255, 200, 0.9)";
+          ctx.fillStyle = "rgba(237, 233, 254, 0.95)";
           ctx.fillText(ch, i * FS, y);
-          ctx.fillStyle = "rgba(0, 255, 65, 0.75)";
+          ctx.fillStyle = "rgba(167, 139, 250, 0.8)";
           ctx.fillText(ch, i * FS, y - FS);
         }
         if (y > window.innerHeight && Math.random() > 0.975) {
