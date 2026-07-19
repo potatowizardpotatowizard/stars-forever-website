@@ -304,6 +304,14 @@ export default function HomePage() {
             </Reveal>
           ))}
         </div>
+        <Reveal className="mt-14">
+          <Link
+            href="/podcast"
+            className="meta-label inline-block text-dust transition-colors hover:text-ember"
+          >
+            These stories are told in full on the Respectfully Inspired Podcast →
+          </Link>
+        </Reveal>
         </div>
       </section>
 

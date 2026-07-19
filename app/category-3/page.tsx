@@ -155,6 +155,14 @@ export default function Category3Page() {
             </Reveal>
           ))}
         </div>
+        <Reveal className="mt-14">
+          <Link
+            href="/podcast"
+            className="meta-label inline-block text-dust transition-colors hover:text-ember"
+          >
+            Hear Category 3 in action on the Respectfully Inspired Podcast →
+          </Link>
+        </Reveal>
       </section>
 
       {/* Close */}

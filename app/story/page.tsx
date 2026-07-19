@@ -89,6 +89,12 @@ export default function StoryPage() {
                 </p>
               ))}
             </div>
+            <Link
+              href="/podcast"
+              className="meta-label mt-10 inline-block text-dust transition-colors hover:text-ember"
+            >
+              Hear this story in Auzi&apos;s own voice on the podcast →
+            </Link>
           </Reveal>
           <Reveal className="mt-16">
             <Link

@@ -44,11 +44,11 @@ export default function RevolutionaryPage() {
         <p className="mt-8 max-w-3xl font-display text-2xl leading-snug text-starlight/90 sm:text-3xl">
           {REVOLUTIONARY.definition}
         </p>
-        {/* Attribution, near the top as required. Steiger Ministries is
-            the link itself. */}
+        {/* Attribution, near the top as required. Steiger is the link
+            itself. */}
         <p className="mt-8 max-w-2xl text-sm leading-relaxed text-dust">
           {(() => {
-            const name = "Steiger Ministries";
+            const name = "Steiger";
             const body = REVOLUTIONARY.attribution.body;
             const idx = body.indexOf(name);
             if (idx === -1) return body;
