@@ -205,6 +205,11 @@ export default function LetterFall() {
             const missionLetters = letters.filter((l) => !l.rises);
             const promise =
               "Jesus said “I am the resurrection and the life” -John 11:25";
+            // The promise is shorter than the mission line. Freeze the
+            // element's height before swapping, or the vertically
+            // centered menu re-centers itself a half inch lower at the
+            // reveal and every landed letter is suddenly wrong.
+            missionEl.style.minHeight = `${missionEl.getBoundingClientRect().height}px`;
             missionEl.textContent = promise;
             const textNode = missionEl.firstChild as Text | null;
             const cs = getComputedStyle(missionEl);
