@@ -175,6 +175,10 @@ export const MISSIONS: Mission[] = [
         href: "https://youtu.be/Lav88YGfIIo",
         label: "Listen to Auzi's personal Beast Games testimony ▶",
       },
+      "beast-podcast-jeff": {
+        href: "https://youtu.be/sPe7gaYb1M8",
+        label: "Watch The Podcast ▶",
+      },
     },
     sections: [
       {
