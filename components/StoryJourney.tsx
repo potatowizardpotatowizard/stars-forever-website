@@ -157,9 +157,16 @@ export default function StoryJourney({
     const update = () => {
       const rect = container.getBoundingClientRect();
       const probe = window.innerHeight * 0.55;
+      // The origin star finishes its descent when the page has
+      // scrolled 85% of the hero height. Hold the guiding star (and
+      // the path drawing) at the first photo until that moment, then
+      // let the journey continue from there.
+      const heroTop = rect.top + window.scrollY;
+      const dArrive = Math.max(0, probe - heroTop * 0.15);
+      const span = Math.max(1, rect.height - dArrive);
       const progress = Math.min(
         1,
-        Math.max(0, (probe - rect.top) / rect.height),
+        Math.max(0, (probe - rect.top - dArrive) / span),
       );
       path.style.strokeDashoffset = `${len * (1 - progress)}`;
       const pt = path.getPointAtLength(len * progress);

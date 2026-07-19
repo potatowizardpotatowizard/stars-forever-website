@@ -2,19 +2,24 @@
 
 import { useEffect, useRef } from "react";
 
-// How long a point of the trail stays on screen before it has
+const TRAIL_COUNT = 13;
+
+// How long a point of the hero ribbon stays on screen before it has
 // fully faded, in milliseconds.
-const TRAIL_LIFE = 1300;
+const RIBBON_LIFE = 1300;
 
 // The pointer becomes the signature four point star on fine-pointer
-// devices, and it flies like a shooting star: the path it travels
-// stays painted on screen as a glowing ribbon that fades away on
-// its own. The native cursor is hidden sitewide (text fields keep
-// their caret), and the star grows over anything clickable.
+// devices, flying like a shooting star: a comet tail of fading
+// stardust chases it while it moves and melts away when it rests.
+// Over the home hero (#hero) only, the star also writes in light —
+// its path stays painted as a glowing ribbon that fades on its own.
+// The native cursor is hidden sitewide (text fields keep their
+// caret), and the star grows over anything clickable.
 export default function StarCursor() {
   const wrapRef = useRef<HTMLDivElement>(null);
   const starRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const trailRefs = useRef<(HTMLSpanElement | null)[]>([]);
 
   useEffect(() => {
     if (!window.matchMedia("(pointer: fine)").matches) return;
@@ -37,9 +42,12 @@ export default function StarCursor() {
     let ty = 0;
     let scale = 1;
     let targetScale = 1;
+    let glow = 0;
     let pressed = false;
     let shown = false;
-    const trail: { x: number; y: number; t: number }[] = [];
+    let overHero = false;
+    const tail = Array.from({ length: TRAIL_COUNT }, () => ({ x: 0, y: 0 }));
+    const ribbon: { x: number; y: number; t: number }[] = [];
 
     const resize = () => {
       const dpr = Math.min(2, window.devicePixelRatio || 1);
@@ -57,8 +65,13 @@ export default function StarCursor() {
         shown = true;
         x = tx;
         y = ty;
+        tail.forEach((p) => {
+          p.x = tx;
+          p.y = ty;
+        });
       }
       const target = e.target as Element | null;
+      overHero = !!target?.closest("#hero");
       const overText = !!target?.closest("input, textarea, select");
       const overLink = !!target?.closest(
         "a, button, [role='button'], label, summary",
@@ -86,25 +99,47 @@ export default function StarCursor() {
       star.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%) rotate(${spin}deg) scale(${scale})`;
 
       if (!reduced) {
-        // Lay down the ribbon: remember where the star has been,
-        // let each remembered point age out, and repaint the whole
-        // streak every frame so it dissolves smoothly behind it.
-        const last = trail[trail.length - 1];
-        if (shown && (!last || Math.hypot(x - last.x, y - last.y) > 1)) {
-          trail.push({ x, y, t: now });
-        }
-        while (trail.length && now - trail[0].t > TRAIL_LIFE) trail.shift();
+        // The comet tail: each mote chases the one ahead of it, and
+        // the streak only lights up while the star is in flight.
+        const speed = Math.hypot(tx - x, ty - y);
+        glow += (Math.min(1, speed / 14) - glow) * 0.12;
+        let px = x;
+        let py = y;
+        tail.forEach((p, i) => {
+          p.x += (px - p.x) * 0.38;
+          p.y += (py - p.y) * 0.38;
+          const el = trailRefs.current[i];
+          if (el) {
+            el.style.transform = `translate3d(${p.x}px, ${p.y}px, 0) translate(-50%, -50%)`;
+            el.style.opacity = String(glow * (1 - i / TRAIL_COUNT) * 0.65);
+          }
+          px = p.x;
+          py = p.y;
+        });
 
+        // The hero ribbon: only laid down inside #hero, but always
+        // aged and repainted so it finishes fading after you leave.
+        const last = ribbon[ribbon.length - 1];
+        if (
+          shown &&
+          overHero &&
+          (!last || Math.hypot(x - last.x, y - last.y) > 1)
+        ) {
+          ribbon.push({ x, y, t: now });
+        }
+        while (ribbon.length && now - ribbon[0].t > RIBBON_LIFE) {
+          ribbon.shift();
+        }
         ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
         ctx.lineCap = "round";
         ctx.lineJoin = "round";
-        for (let i = 1; i < trail.length; i++) {
-          const a = trail[i - 1];
-          const b = trail[i];
+        for (let i = 1; i < ribbon.length; i++) {
+          const a = ribbon[i - 1];
+          const b = ribbon[i];
           if (now - b.t > 250 && Math.hypot(b.x - a.x, b.y - a.y) > 80) {
             continue; // don't bridge jumps across the screen
           }
-          const life = 1 - (now - b.t) / TRAIL_LIFE;
+          const life = 1 - (now - b.t) / RIBBON_LIFE;
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
           ctx.lineTo(b.x, b.y);
@@ -144,6 +179,23 @@ export default function StarCursor() {
       className="pointer-events-none fixed inset-0 z-[130] opacity-0"
     >
       <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
+      {Array.from({ length: TRAIL_COUNT }, (_, i) => (
+        <span
+          key={i}
+          ref={(el) => {
+            trailRefs.current[i] = el;
+          }}
+          className="absolute left-0 top-0 rounded-full opacity-0"
+          style={{
+            width: `${Math.max(2, 7 - i * 0.6)}px`,
+            height: `${Math.max(2, 7 - i * 0.6)}px`,
+            background:
+              i < 3 ? "rgb(239 236 247 / 0.95)" : "rgb(167 139 250 / 0.9)",
+            boxShadow: "0 0 8px rgb(167 139 250 / 0.8)",
+            willChange: "transform",
+          }}
+        />
+      ))}
       <div
         ref={starRef}
         className="absolute left-0 top-0 h-5 w-5"
