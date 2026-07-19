@@ -30,14 +30,5 @@ export const CONSTELLATION = {
     kicker: "Join the Constellation",
     heading: "Put Your Star on the Map",
   },
-  members: [
-    {
-      name: "Auzi Films",
-      href: "https://hoo.be/auzi",
-      city: "Los Angeles",
-      country: "USA",
-      lat: 34.05,
-      lng: -118.24,
-    },
-  ] as ConstellationMember[],
+  members: [] as ConstellationMember[],
 };
