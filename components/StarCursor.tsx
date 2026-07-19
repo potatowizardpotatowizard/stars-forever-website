@@ -2,17 +2,23 @@
 
 import { useEffect, useRef } from "react";
 
+const TRAIL_COUNT = 9;
+
 // The pointer becomes the signature four point star on fine-pointer
-// devices. The native cursor is hidden sitewide (text fields keep
-// their caret), and the star eases toward the pointer with a soft
-// lag, spinning slowly and growing over anything clickable.
+// devices, flying like a shooting star: a comet tail of fading
+// stardust chases it while it moves and melts away when it rests.
+// The native cursor is hidden sitewide (text fields keep their
+// caret), and the star grows over anything clickable.
 export default function StarCursor() {
-  const ref = useRef<HTMLDivElement>(null);
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const starRef = useRef<HTMLDivElement>(null);
+  const trailRefs = useRef<(HTMLSpanElement | null)[]>([]);
 
   useEffect(() => {
     if (!window.matchMedia("(pointer: fine)").matches) return;
-    const el = ref.current;
-    if (!el) return;
+    const wrap = wrapRef.current;
+    const star = starRef.current;
+    if (!wrap || !star) return;
     const reduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
@@ -26,8 +32,10 @@ export default function StarCursor() {
     let ty = 0;
     let scale = 1;
     let targetScale = 1;
+    let glow = 0;
     let pressed = false;
     let shown = false;
+    const tail = Array.from({ length: TRAIL_COUNT }, () => ({ x: 0, y: 0 }));
 
     const move = (e: PointerEvent) => {
       tx = e.clientX;
@@ -36,6 +44,10 @@ export default function StarCursor() {
         shown = true;
         x = tx;
         y = ty;
+        tail.forEach((p) => {
+          p.x = tx;
+          p.y = ty;
+        });
       }
       const target = e.target as Element | null;
       const overText = !!target?.closest("input, textarea, select");
@@ -43,7 +55,7 @@ export default function StarCursor() {
         "a, button, [role='button'], label, summary",
       );
       targetScale = overLink ? 1.6 : 1;
-      el.style.opacity = overText ? "0" : "1";
+      wrap.style.opacity = overText ? "0" : "1";
     };
     const down = () => {
       pressed = true;
@@ -52,7 +64,7 @@ export default function StarCursor() {
       pressed = false;
     };
     const out = (e: MouseEvent) => {
-      if (!e.relatedTarget) el.style.opacity = "0";
+      if (!e.relatedTarget) wrap.style.opacity = "0";
     };
 
     const tick = (now: number) => {
@@ -62,7 +74,29 @@ export default function StarCursor() {
       const goal = pressed ? targetScale * 0.72 : targetScale;
       scale += (goal - scale) * (reduced ? 1 : 0.25);
       const spin = reduced ? 0 : (now / 40) % 360;
-      el.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%) rotate(${spin}deg) scale(${scale})`;
+      star.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%) rotate(${spin}deg) scale(${scale})`;
+
+      if (!reduced) {
+        // The tail: each mote chases the one ahead of it, and the
+        // whole streak only lights up while the star is in flight.
+        const speed = Math.hypot(tx - x, ty - y);
+        glow += (Math.min(1, speed / 14) - glow) * 0.12;
+        let px = x;
+        let py = y;
+        tail.forEach((p, i) => {
+          p.x += (px - p.x) * 0.42;
+          p.y += (py - p.y) * 0.42;
+          const el = trailRefs.current[i];
+          if (el) {
+            el.style.transform = `translate3d(${p.x}px, ${p.y}px, 0) translate(-50%, -50%)`;
+            el.style.opacity = String(
+              glow * (1 - i / TRAIL_COUNT) * 0.65,
+            );
+          }
+          px = p.x;
+          py = p.y;
+        });
+      }
       raf = requestAnimationFrame(tick);
     };
 
@@ -84,22 +118,44 @@ export default function StarCursor() {
 
   return (
     <div
-      ref={ref}
+      ref={wrapRef}
       aria-hidden="true"
-      className="pointer-events-none fixed left-0 top-0 z-[130] h-5 w-5 opacity-0"
-      style={{ willChange: "transform" }}
+      className="pointer-events-none fixed inset-0 z-[130] opacity-0"
     >
-      <svg
-        viewBox="0 0 24 24"
-        className="h-full w-full text-starlight"
-        fill="currentColor"
-        style={{
-          filter:
-            "drop-shadow(0 0 5px rgb(167 139 250 / 0.9)) drop-shadow(0 0 14px rgb(109 40 217 / 0.6))",
-        }}
+      {Array.from({ length: TRAIL_COUNT }, (_, i) => (
+        <span
+          key={i}
+          ref={(el) => {
+            trailRefs.current[i] = el;
+          }}
+          className="absolute left-0 top-0 rounded-full opacity-0"
+          style={{
+            width: `${Math.max(2, 7 - i * 0.6)}px`,
+            height: `${Math.max(2, 7 - i * 0.6)}px`,
+            background:
+              i < 3 ? "rgb(239 236 247 / 0.95)" : "rgb(167 139 250 / 0.9)",
+            boxShadow: "0 0 8px rgb(167 139 250 / 0.8)",
+            willChange: "transform",
+          }}
+        />
+      ))}
+      <div
+        ref={starRef}
+        className="absolute left-0 top-0 h-5 w-5"
+        style={{ willChange: "transform" }}
       >
-        <path d="M12 0c.9 6.8 4.2 10.1 12 12c-7.8 1.9-11.1 5.2-12 12c-.9-6.8-4.2-10.1-12-12C7.8 10.1 11.1 6.8 12 0Z" />
-      </svg>
+        <svg
+          viewBox="0 0 24 24"
+          className="h-full w-full text-starlight"
+          fill="currentColor"
+          style={{
+            filter:
+              "drop-shadow(0 0 5px rgb(167 139 250 / 0.9)) drop-shadow(0 0 14px rgb(109 40 217 / 0.6))",
+          }}
+        >
+          <path d="M12 0c.9 6.8 4.2 10.1 12 12c-7.8 1.9-11.1 5.2-12 12c-.9-6.8-4.2-10.1-12-12C7.8 10.1 11.1 6.8 12 0Z" />
+        </svg>
+      </div>
     </div>
   );
 }

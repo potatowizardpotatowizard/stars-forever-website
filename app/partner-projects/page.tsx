@@ -117,68 +117,68 @@ export default function PartnerProjectsPage() {
         </div>
       </section>
 
-      {/* Project showcase */}
+      {/* The process */}
       <section className="relative overflow-hidden border-y border-dust/10 bg-soot/40">
         <Grain />
         <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
           <Reveal>
-            <Kicker>{MISSIONS_INDEX.kicker}</Kicker>
+            <Kicker>{PARTNER.process.kicker}</Kicker>
             <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
-              <GlitchText text="The Projects So Far" />
+              <GlitchText text={PARTNER.process.heading} />
             </h2>
-            <p className="mt-6 max-w-2xl text-lg text-starlight/80">
-              {MISSIONS_INDEX.intro}
-            </p>
           </Reveal>
-          <div className="mt-14 grid gap-10 md:grid-cols-3">
-            {MISSIONS.filter((m) => m.slug !== "revolutionary-cohort").map((mission) => (
-              <Reveal key={mission.slug}>
-                <Link
-                  href={`/partner-projects/${mission.slug}`}
-                  className="group block"
-                >
-                  <MediaSlot
-                    name={mission.cardImageSlot}
-                    sizes="(min-width: 768px) 33vw, 100vw"
-                    showCaption={false}
-                    className="overflow-hidden rounded-lg"
-                  />
-                  <p className="meta-label mt-6">
-                    {mission.location} · {mission.date}
-                  </p>
-                  <h3 className="mt-2 font-display text-2xl font-bold transition-colors group-hover:text-ember">
-                    {mission.name}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-starlight/70">
-                    {mission.summary}
-                  </p>
-                </Link>
+          <ol className="mt-14 max-w-3xl">
+            {PARTNER.process.steps.map((step, i) => (
+              <Reveal as="li" key={step}>
+                <div className="flex gap-8 border-t border-dust/15 py-7">
+                  <span className="meta-label pt-1 text-ember">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <p className="text-lg text-starlight/85">{linkCategory3(step)}</p>
+                </div>
               </Reveal>
             ))}
-          </div>
+          </ol>
         </div>
       </section>
 
-      {/* The process */}
+      {/* Project showcase */}
       <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
         <Reveal>
-          <Kicker>{PARTNER.process.kicker}</Kicker>
+          <Kicker>{MISSIONS_INDEX.kicker}</Kicker>
           <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
-            <GlitchText text={PARTNER.process.heading} />
+            <GlitchText text="The Projects So Far" />
           </h2>
+          <p className="mt-6 max-w-2xl text-lg text-starlight/80">
+            {MISSIONS_INDEX.intro}
+          </p>
         </Reveal>
-        <ol className="mt-14 max-w-3xl">
-          {PARTNER.process.steps.map((step, i) => (
-            <Reveal as="li" key={step}>
-              <div className="flex gap-8 border-t border-dust/15 py-7">
-                <span className="meta-label pt-1 text-ember">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <p className="text-lg text-starlight/85">{linkCategory3(step)}</p>
-              </div>
+        <div className="mt-14 grid gap-10 md:grid-cols-3">
+          {MISSIONS.filter((m) => m.slug !== "revolutionary-cohort").map((mission) => (
+            <Reveal key={mission.slug}>
+              <Link
+                href={`/partner-projects/${mission.slug}`}
+                className="group block"
+              >
+                <MediaSlot
+                  name={mission.cardImageSlot}
+                  sizes="(min-width: 768px) 33vw, 100vw"
+                  showCaption={false}
+                  className="overflow-hidden rounded-lg"
+                />
+                <p className="meta-label mt-6">
+                  {mission.location} · {mission.date}
+                </p>
+                <h3 className="mt-2 font-display text-2xl font-bold transition-colors group-hover:text-ember">
+                  {mission.name}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-starlight/70">
+                  {mission.summary}
+                </p>
+              </Link>
             </Reveal>
           ))}
-        </ol>
+        </div>
       </section>
 
       {/* FAQ */}
