@@ -65,6 +65,7 @@ export const FOUNDERS = [
     name: "Benjiman Schlegel",
     line: "Digital missionary, storyteller, and creative strategist reaching souls on the mission field of the internet.",
     href: "https://benjiman7.com",
+    instagram: "https://www.instagram.com/benjiman/",
     imageSlot: "story-founder-benjiman",
   },
 ];
