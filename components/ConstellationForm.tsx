@@ -54,7 +54,10 @@ export default function ConstellationForm() {
         return;
       }
       track("constellation_request");
-      if (!data.sent) {
+      // The request lands in Notion; email is a bonus. Only if BOTH
+      // channels failed does the visitor's own mail app step in so no
+      // request is ever lost.
+      if (!data.sent && !data.stored) {
         window.location.href = `mailto:${CONTACT.primaryEmail}?subject=${encodeURIComponent(
           `Constellation request: ${form.name}`,
         )}&body=${encodeURIComponent(data.body)}`;

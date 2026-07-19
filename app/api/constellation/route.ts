@@ -40,7 +40,7 @@ export async function POST(request: Request) {
     note?.trim() || "",
   ].join("\n");
 
-  const [sent] = await Promise.all([
+  const [sent, stored] = await Promise.all([
     sendMail({
       subject: `Constellation request: ${name.trim()} (${city.trim()})`,
       text,
@@ -56,5 +56,5 @@ export async function POST(request: Request) {
     }),
   ]);
 
-  return NextResponse.json({ sent, body: text });
+  return NextResponse.json({ sent, stored, body: text });
 }
