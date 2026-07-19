@@ -197,8 +197,8 @@ export default function SendStar() {
         Send a Star to a Friend
       </h2>
       <p className="mx-auto mt-4 max-w-md text-starlight/70">
-        Your link sends a cool surprise which encourages them to join the
-        constellation.
+        Your link sends a secret surprise which encourages them to join the
+        constellation map.
       </p>
       <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
         <label htmlFor="send-star-name" className="sr-only">
