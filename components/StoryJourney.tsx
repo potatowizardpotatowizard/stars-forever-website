@@ -163,7 +163,12 @@ export default function StoryJourney({
       // let the journey continue from there.
       const heroTop = rect.top + window.scrollY;
       const dArrive = Math.max(0, probe - heroTop * 0.15);
-      const span = Math.max(1, rect.height - dArrive);
+      // Finish when the probe line reaches the path's actual end (the
+      // cross above the tribute), not the container's bottom: the
+      // tribute section below the cross would otherwise make the star
+      // lag a full section behind the scroll.
+      const endY = path.getPointAtLength(len).y;
+      const span = Math.max(1, endY - dArrive);
       const progress = Math.min(
         1,
         Math.max(0, (probe - rect.top - dArrive) / span),
