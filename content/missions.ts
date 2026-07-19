@@ -193,6 +193,7 @@ export const MISSIONS: Mission[] = [
           "beast-podcast-jeremy",
           "beast-podcast-courtney",
           "beast-podcast-auzi",
+          "beast-podcast-jeff",
         ],
       },
       {

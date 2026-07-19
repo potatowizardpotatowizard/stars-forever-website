@@ -255,6 +255,12 @@ export const IMAGES: Record<string, ImageSlot> = {
     caption: { who: "Auzi Films" },
     ratio: "3 / 2",
   },
+  "beast-podcast-jeff": {
+    file: "beast-podcast-jeff.jpg",
+    alt: "Jeff recording a Beast Games podcast episode",
+    caption: { who: "Jeff" },
+    ratio: "3 / 2",
+  },
   "beast-set-life": {
     file: "beast-set-life.jpg",
     alt: "Life between challenges on the Beast Games set",
