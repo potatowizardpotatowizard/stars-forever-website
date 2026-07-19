@@ -26,6 +26,18 @@ export default function LetterFall() {
         "position:fixed;inset:0;z-index:60;pointer-events:none;overflow:hidden;";
       document.body.appendChild(overlay);
 
+      // A clone span's glyph renders a few pixels off from the
+      // measured character rect (line-height metrics differ). Place,
+      // measure the real rendering, and self-correct so every clone
+      // sits pixel-perfect on its original.
+      const place = (span: HTMLElement, left: number, top: number) => {
+        span.style.left = `${left}px`;
+        span.style.top = `${top}px`;
+        const sr = span.getBoundingClientRect();
+        span.style.left = `${left + (left - sr.left)}px`;
+        span.style.top = `${top + (top - sr.top)}px`;
+      };
+
       const targets = Array.from(
         hero.querySelectorAll<HTMLElement>("a, p:not(.sr-only)"),
       ).filter((el) => el.offsetParent !== null);
@@ -103,12 +115,13 @@ export default function LetterFall() {
             const span = document.createElement("span");
             span.textContent = text[i];
             span.style.cssText =
-              `position:fixed;left:${rect.left}px;top:${rect.top}px;` +
+              `position:fixed;` +
               `font-family:${cs.fontFamily};font-size:${cs.fontSize};` +
               `font-weight:${cs.fontWeight};font-style:${cs.fontStyle};` +
               `letter-spacing:${cs.letterSpacing};color:${cs.color};` +
               `text-transform:${cs.textTransform};line-height:1;will-change:transform;`;
             overlay.appendChild(span);
+            place(span, rect.left, rect.top);
 
             const drop = innerHeight - rect.bottom - 4 - Math.random() * 30;
             const dx = (Math.random() - 0.5) * 140;
@@ -231,8 +244,7 @@ export default function LetterFall() {
                 rot = (Math.random() - 0.5) * 260;
               }
               span.textContent = tgt.ch;
-              span.style.left = `${tgt.left}px`;
-              span.style.top = `${tgt.top}px`;
+              place(span, tgt.left, tgt.top);
               const delay = 250 + Math.random() * 500;
               const dur = 1050 + Math.random() * 550;
               longestRise = Math.max(longestRise, delay + dur);
