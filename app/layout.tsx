@@ -3,6 +3,7 @@ import { Archivo, Figtree, Fragment_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import CodeRain from "@/components/CodeRain";
 import ConstellationTrail from "@/components/ConstellationTrail";
 import GoodFriday from "@/components/GoodFriday";
 import LetterFall from "@/components/LetterFall";
@@ -92,6 +93,7 @@ export default function RootLayout({
         <VerseSummon />
         <MotionMagic />
         <GoodFriday />
+        <CodeRain />
         <LetterFall />
         <Analytics />
       </body>

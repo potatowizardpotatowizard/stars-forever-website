@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 // Stars flying in from deep space toward the viewer: each star starts far
 // back near the center of the sky and drifts outward, growing brighter as
@@ -8,12 +8,12 @@ import { useEffect, useRef, useState } from "react";
 //
 // Hidden wonders: a "sf-supernova" window event collapses the whole sky
 // into the center and detonates it into a fresh burst (the hero logo
-// fires it after seven clicks). And roughly one respawn in 250 is a gold
-// star; catch it with a click before it drifts away and a whispered
-// reward appears.
+// fires it after seven clicks). And roughly one respawn in 250 is THE
+// gold star: a large four point star of gold, unmistakably different.
+// Click it before it drifts away and the "sf-goldstar" event opens the
+// code rain secret (see CodeRain).
 export default function StarField() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [caught, setCaught] = useState(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -252,15 +252,37 @@ export default function StarField() {
         }
 
         if (s.gold) {
-          ctx.globalAlpha = Math.min(1, alpha * 1.6);
+          // THE gold star: a large four point star, twinkling, ringed
+          // in a warm halo. Nothing else in the sky looks like it.
+          const R = (6 + depth * 12) * (1 + 0.16 * Math.sin(t / 170));
+          const rot = t / 900;
+          ctx.save();
+          ctx.translate(px, py);
+          ctx.rotate(rot);
+          const halo = ctx.createRadialGradient(0, 0, 0, 0, 0, R * 2.6);
+          halo.addColorStop(0, `rgba(253, 224, 71, ${0.55 * resolve})`);
+          halo.addColorStop(0.5, `rgba(251, 191, 36, ${0.25 * resolve})`);
+          halo.addColorStop(1, "rgba(251, 191, 36, 0)");
+          ctx.globalAlpha = 1;
+          ctx.fillStyle = halo;
+          ctx.beginPath();
+          ctx.arc(0, 0, R * 2.6, 0, Math.PI * 2);
+          ctx.fill();
+          const w = R * 0.16;
           ctx.fillStyle = "#fbbf24";
+          ctx.globalAlpha = Math.min(1, (0.55 + 0.45 * depth) * resolve);
           ctx.beginPath();
-          ctx.arc(px, py, radius * 1.6, 0, Math.PI * 2);
+          ctx.moveTo(0, -R);
+          ctx.quadraticCurveTo(w, -w, R, 0);
+          ctx.quadraticCurveTo(w, w, 0, R);
+          ctx.quadraticCurveTo(-w, w, -R, 0);
+          ctx.quadraticCurveTo(-w, -w, 0, -R);
           ctx.fill();
-          ctx.globalAlpha = alpha * 0.35;
+          ctx.fillStyle = "rgba(255, 251, 235, 0.95)";
           ctx.beginPath();
-          ctx.arc(px, py, radius * 4, 0, Math.PI * 2);
+          ctx.arc(0, 0, Math.max(1.2, R * 0.14), 0, Math.PI * 2);
           ctx.fill();
+          ctx.restore();
         } else {
           ctx.globalAlpha = alpha;
           ctx.fillStyle = "#efecf7";
@@ -303,10 +325,9 @@ export default function StarField() {
       for (const s of stars) {
         if (!s.gold) continue;
         const { px, py } = project(s);
-        if (Math.hypot(px - cx, py - cy) < 18) {
+        if (Math.hypot(px - cx, py - cy) < 30) {
           s.gold = false;
-          setCaught(true);
-          setTimeout(() => setCaught(false), 9000);
+          window.dispatchEvent(new Event("sf-goldstar"));
           return;
         }
       }
@@ -326,25 +347,14 @@ export default function StarField() {
   }, []);
 
   return (
-    <>
-      <canvas
-        ref={canvasRef}
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 h-full w-full"
-        style={{
-          transform:
-            "translate3d(var(--tilt-x, 0px), var(--tilt-y, 0px), 0) scale(1.06)",
-        }}
-      />
-      {caught ? (
-        <p
-          role="status"
-          className="meta-label absolute inset-x-0 bottom-24 z-20 px-6 text-center text-[#fbbf24] drop-shadow-[0_0_8px_rgba(251,191,36,0.5)]"
-        >
-          You caught the gold star. Tell Auzi the word “tapelight” for a
-          surprise.
-        </p>
-      ) : null}
-    </>
+    <canvas
+      ref={canvasRef}
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-0 h-full w-full"
+      style={{
+        transform:
+          "translate3d(var(--tilt-x, 0px), var(--tilt-y, 0px), 0) scale(1.06)",
+      }}
+    />
   );
 }

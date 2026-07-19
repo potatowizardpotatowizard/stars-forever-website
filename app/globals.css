@@ -1439,3 +1439,30 @@ html.easter-sunday body::before {
       0 0 80px rgb(109 40 217 / 0.45);
   }
 }
+
+/* The code rain's messages surface out of the green static */
+.code-msg {
+  opacity: 0;
+  color: #00ff41;
+  text-shadow:
+    0 0 12px rgb(0 255 65 / 0.8),
+    0 0 40px rgb(0 255 65 / 0.4);
+  animation: code-msg-in 1.4s ease-out forwards;
+}
+.code-msg-1 {
+  animation-delay: 2.4s;
+}
+.code-msg-2 {
+  animation-delay: 4.6s;
+}
+@keyframes code-msg-in {
+  0% {
+    opacity: 0;
+    filter: blur(10px);
+    letter-spacing: 0.6em;
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
