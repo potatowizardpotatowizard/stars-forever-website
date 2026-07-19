@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-const TRAIL_COUNT = 9;
+const TRAIL_COUNT = 13;
 
 // The pointer becomes the signature four point star on fine-pointer
 // devices, flying like a shooting star: a comet tail of fading
@@ -84,8 +84,8 @@ export default function StarCursor() {
         let px = x;
         let py = y;
         tail.forEach((p, i) => {
-          p.x += (px - p.x) * 0.42;
-          p.y += (py - p.y) * 0.42;
+          p.x += (px - p.x) * 0.38;
+          p.y += (py - p.y) * 0.38;
           const el = trailRefs.current[i];
           if (el) {
             el.style.transform = `translate3d(${p.x}px, ${p.y}px, 0) translate(-50%, -50%)`;
