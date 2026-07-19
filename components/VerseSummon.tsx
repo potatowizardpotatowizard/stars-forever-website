@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ANCHOR_VERSE } from "@/content/site";
+import { SUMMON_VERSE } from "@/content/site";
 
 const SUMMON = "jesus";
 
@@ -37,7 +37,11 @@ export default function VerseSummon() {
   useEffect(() => {
     if (!open) return;
     const close = () => setOpen(false);
-    const t = setTimeout(close, 11000);
+    // Stay up long enough to finish appearing, then breathe.
+    const t = setTimeout(
+      close,
+      SUMMON_VERSE.text.split(" ").length * 170 + 7000,
+    );
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") close();
     };
@@ -50,7 +54,7 @@ export default function VerseSummon() {
 
   if (!open) return null;
 
-  const words = ANCHOR_VERSE.text.split(" ");
+  const words = SUMMON_VERSE.text.split(" ");
   return (
     <div
       aria-live="polite"
@@ -74,7 +78,7 @@ export default function VerseSummon() {
           className="verse-word meta-label mt-8 text-ember"
           style={{ animationDelay: `${words.length * 170 + 400}ms` }}
         >
-          {ANCHOR_VERSE.reference}
+          {SUMMON_VERSE.reference}
         </p>
       </div>
     </div>

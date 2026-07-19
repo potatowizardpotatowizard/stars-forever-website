@@ -12,6 +12,12 @@ export const ANCHOR_VERSE = {
   reference: "Daniel 12:3",
 };
 
+// The verse summoned by typing the Name anywhere on the site.
+export const SUMMON_VERSE = {
+  text: "“Most assuredly, I say to you, he who hears My word and believes in Him who sent Me has everlasting life, and shall not come into judgment, but has passed from death into life.”",
+  reference: "John 5:24",
+};
+
 export const CONTACT = {
   primaryEmail: "auzi@starsforever.co",
   speakingEmail: "benjimanschleg@gmail.com",
