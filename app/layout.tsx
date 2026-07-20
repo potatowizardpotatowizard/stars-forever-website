@@ -7,7 +7,6 @@ import CodeRain from "@/components/CodeRain";
 import ConstellationTrail from "@/components/ConstellationTrail";
 import GoodFriday from "@/components/GoodFriday";
 import LetterFall from "@/components/LetterFall";
-import MotionMagic from "@/components/MotionMagic";
 import ShootingStar from "@/components/ShootingStar";
 import StarCursor from "@/components/StarCursor";
 import VerseSummon from "@/components/VerseSummon";
@@ -89,7 +88,6 @@ export default function RootLayout({
         <StarCursor />
         <WarpScroll />
         <VerseSummon />
-        <MotionMagic />
         <GoodFriday />
         <CodeRain />
         <LetterFall />
