@@ -12,11 +12,16 @@ export async function pageOg({
   image,
   title,
   line,
+  crop,
 }: {
   /** path inside /public, e.g. "images/story-set.jpg" */
   image: string;
   title: string;
   line: string;
+  /** Manual vertical crop for portrait photos: the renderer ignores
+      object-position, so pass the image's aspect (height/width) and
+      the fraction of the image to shave off the top. */
+  crop?: { aspect: number; top: number };
 }) {
   const data = await readFile(path.join(process.cwd(), "public", image));
   const src = `data:image/jpeg;base64,${data.toString("base64")}`;
@@ -37,12 +42,13 @@ export async function pageOg({
           src={src}
           alt=""
           width={1200}
-          height={630}
+          height={crop ? Math.round(1200 * crop.aspect) : 630}
           style={{
             position: "absolute",
+            left: 0,
+            top: crop ? -Math.round(1200 * crop.aspect * crop.top) : 0,
             width: "100%",
-            height: "100%",
-            objectFit: "cover",
+            ...(crop ? {} : { height: "100%", objectFit: "cover" }),
           }}
         />
         <div
