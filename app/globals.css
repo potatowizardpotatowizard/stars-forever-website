@@ -1491,3 +1491,70 @@ html.easter-sunday body::before {
     filter: blur(0);
   }
 }
+
+/* The anchor verse beneath the cross: every word is born as a star,
+   flares into text, and the assembled promise twinkles like a
+   constellation until it ascends into stardust */
+.nova-verse {
+  position: fixed;
+  left: 50%;
+  top: 67%;
+  transform: translateX(-50%);
+  width: min(920px, 92vw);
+  text-align: center;
+  font-size: clamp(15px, 2.1vw, 24px);
+  line-height: 1.75;
+  letter-spacing: 0.05em;
+  color: #efecf7;
+}
+.nova-verse-word {
+  display: inline-block;
+  opacity: 0;
+  animation:
+    nova-word-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+    nova-word-twinkle 2.8s ease-in-out infinite;
+}
+@keyframes nova-word-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.1) translateY(16px);
+    filter: blur(10px);
+    text-shadow:
+      0 0 34px rgb(255 255 255 / 1),
+      0 0 70px rgb(167 139 250 / 0.95);
+  }
+  45% {
+    opacity: 1;
+    transform: scale(1.28) translateY(0);
+    filter: blur(0);
+    text-shadow:
+      0 0 26px rgb(255 255 255 / 0.95),
+      0 0 60px rgb(167 139 250 / 0.85);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    text-shadow:
+      0 0 10px rgb(255 255 255 / 0.5),
+      0 0 26px rgb(167 139 250 / 0.45);
+  }
+}
+@keyframes nova-word-twinkle {
+  0%,
+  100% {
+    text-shadow:
+      0 0 10px rgb(255 255 255 / 0.5),
+      0 0 26px rgb(167 139 250 / 0.45);
+  }
+  50% {
+    text-shadow:
+      0 0 16px rgb(255 255 255 / 0.85),
+      0 0 44px rgb(167 139 250 / 0.7);
+  }
+}
+.nova-verse-ref {
+  opacity: 0;
+  margin-top: 20px;
+  color: var(--color-ember);
+  animation: nova-word-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
