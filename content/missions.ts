@@ -217,7 +217,10 @@ export const MISSIONS: Mission[] = [
           tag: "Lived like a monk, shared the gospel",
           line: "Lived like a monk for a video on his new channel, and shares Jesus right there in it.",
           links: [
-            { label: "Watch on YouTube", href: "https://youtu.be/IpfF1SrzAvA" },
+            {
+              label: "Watch on YouTube",
+              href: "https://youtu.be/IpfF1SrzAvA?t=1010",
+            },
           ],
         },
         {
