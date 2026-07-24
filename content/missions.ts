@@ -214,8 +214,8 @@ export const MISSIONS: Mission[] = [
         },
         {
           name: "Jordan Orme",
-          tag: "The gospel on a brand new channel",
-          line: "Started a new channel and posted a video about monks where he shares the gospel.",
+          tag: "Lived like a monk, shared the gospel",
+          line: "Lived like a monk for a video on his new channel, and shares Jesus right there in it.",
           links: [
             { label: "Watch on YouTube", href: "https://youtu.be/IpfF1SrzAvA" },
           ],
