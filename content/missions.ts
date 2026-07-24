@@ -209,7 +209,14 @@ export const MISSIONS: Mission[] = [
           tag: "Jesus stays in the cut",
           line: "Runs a secular sports channel and leaves in the moments where people share Jesus.",
           links: [
-            { label: "Watch on YouTube", href: "https://youtu.be/1i2UbRb0gIE" },
+            {
+              label: "Watch on YouTube",
+              href: "https://youtu.be/1i2UbRb0gIE?t=241",
+            },
+            {
+              label: "One more on YouTube",
+              href: "https://youtu.be/yqbhroqIi_I?t=371",
+            },
           ],
         },
         {
