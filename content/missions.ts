@@ -225,7 +225,10 @@ export const MISSIONS: Mission[] = [
           tag: "A grandma, a skydive, the gospel",
           line: "Took a grandma skydiving, reaching a secular audience, then shared Jesus with her.",
           links: [
-            { label: "Watch on YouTube", href: "https://youtu.be/HErdFjrQt1E" },
+            {
+              label: "Watch on YouTube",
+              href: "https://youtu.be/HErdFjrQt1E?t=527",
+            },
           ],
         },
       ],
