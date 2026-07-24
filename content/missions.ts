@@ -30,6 +30,19 @@ export type Mission = {
   };
   sections: MissionSection[];
   links: { label: string; href: string }[];
+  /** What creators went on to do after the mission: collapsed rows
+      that open into the story and the receipts */
+  testimonies?: {
+    kicker: string;
+    heading: string;
+    intro: string;
+    creators: {
+      name: string;
+      tag: string;
+      line: string;
+      links: { label: string; href: string }[];
+    }[];
+  };
 };
 
 export const MISSIONS_INDEX = {
@@ -150,6 +163,73 @@ export const MISSIONS: Mission[] = [
       },
     ],
     links: [{ label: "Learn about Revolutionary", href: "/revolutionary" }],
+    testimonies: {
+      kicker: "Since the cohort",
+      heading: "Creator Testimonies",
+      intro:
+        "The weekend ended. The proclaiming did not. Open a name to see cohort creators carrying Jesus to secular audiences right now.",
+      creators: [
+        {
+          name: "Juicy Jacob",
+          tag: "Millions reached on stream",
+          line: "Sharing Jesus at Streamers University on a bunch of different creators' streams, reaching millions of viewers.",
+          links: [
+            {
+              label: "@noemiclips",
+              href: "https://www.tiktok.com/@noemiclips/video/7664056341266271502",
+            },
+            {
+              label: "@raeravenspam",
+              href: "https://www.tiktok.com/@raeravenspam/video/7663002731602332958",
+            },
+            {
+              label: "@strmclippered",
+              href: "https://www.tiktok.com/@strmclippered/video/7664519862319942925",
+            },
+            {
+              label: "@kickclipping__2",
+              href: "https://www.tiktok.com/@kickclipping__2/video/7664285603827125526",
+            },
+            {
+              label: "@lockinuzi",
+              href: "https://www.tiktok.com/@lockinuzi/video/7664155527299075358",
+            },
+            {
+              label: "@lockinuzi, again",
+              href: "https://www.tiktok.com/@lockinuzi/video/7664144481951812895",
+            },
+            {
+              label: "@spam7neymar",
+              href: "https://www.tiktok.com/@spam7neymar/video/7664090612018236703",
+            },
+          ],
+        },
+        {
+          name: "Justin Leusner",
+          tag: "Jesus stays in the cut",
+          line: "Runs a secular sports channel and leaves in the moments where people share Jesus.",
+          links: [
+            { label: "Watch on YouTube", href: "https://youtu.be/1i2UbRb0gIE" },
+          ],
+        },
+        {
+          name: "Jordan Orme",
+          tag: "The gospel on a brand new channel",
+          line: "Started a new channel and posted a video about monks where he shares the gospel.",
+          links: [
+            { label: "Watch on YouTube", href: "https://youtu.be/IpfF1SrzAvA" },
+          ],
+        },
+        {
+          name: "Lucas Mayfield",
+          tag: "A grandma, a skydive, the gospel",
+          line: "Took a grandma skydiving, reaching a secular audience, then shared Jesus with her.",
+          links: [
+            { label: "Watch on YouTube", href: "https://youtu.be/HErdFjrQt1E" },
+          ],
+        },
+      ],
+    },
   },
   {
     slug: "beast-games",

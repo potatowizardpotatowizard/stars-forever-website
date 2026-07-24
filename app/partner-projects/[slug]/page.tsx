@@ -242,6 +242,102 @@ export default async function MissionPage({
         ))}
       </div>
 
+      {/* Creator testimonies: collapsed rows that open into the story
+          and the receipts. YouTube receipts show their thumbnails;
+          everything else becomes a link pill. */}
+      {mission.testimonies ? (
+        <section className="mx-auto max-w-7xl px-5 pb-24 sm:px-8">
+          <Reveal>
+            <Kicker>{mission.testimonies.kicker}</Kicker>
+            <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
+              <GlitchText text={mission.testimonies.heading} />
+            </h2>
+            <p className="mt-6 max-w-2xl text-lg text-starlight/80">
+              {mission.testimonies.intro}
+            </p>
+            <div className="mt-12 max-w-3xl">
+              {mission.testimonies.creators.map((creator) => (
+                <details
+                  key={creator.name}
+                  className="group border-t border-dust/20 last:border-b"
+                >
+                  <summary className="flex cursor-pointer items-center justify-between gap-6 py-6 marker:content-none [&::-webkit-details-marker]:hidden">
+                    <span className="flex flex-col">
+                      <span className="font-display text-xl font-bold transition-colors group-hover:text-ember">
+                        {creator.name}
+                      </span>
+                      <span className="meta-label mt-1.5 text-dust">
+                        {creator.tag}
+                      </span>
+                    </span>
+                    <span
+                      aria-hidden="true"
+                      className="text-ember transition-transform group-open:rotate-45"
+                    >
+                      +
+                    </span>
+                  </summary>
+                  <div className="pb-9">
+                    <p className="max-w-2xl leading-relaxed text-starlight/80">
+                      {creator.line}
+                    </p>
+                    <div className="mt-6 flex flex-wrap items-start gap-3">
+                      {creator.links.map((link) => {
+                        const yt = youtubeId(link.href);
+                        if (yt) {
+                          return (
+                            <a
+                              key={link.href}
+                              href={link.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="group/yt block w-full max-w-sm"
+                            >
+                              <div className="relative overflow-hidden rounded-lg border border-dust/20">
+                                <Image
+                                  src={`https://i.ytimg.com/vi/${yt}/maxresdefault.jpg`}
+                                  alt=""
+                                  width={1280}
+                                  height={720}
+                                  sizes="24rem"
+                                  className="aspect-video w-full object-cover transition-transform duration-500 group-hover/yt:scale-[1.03]"
+                                />
+                                <span
+                                  aria-hidden="true"
+                                  className="absolute inset-0 flex items-center justify-center"
+                                >
+                                  <span className="flex h-12 w-12 items-center justify-center rounded-full bg-night/70 pl-1 text-lg text-starlight backdrop-blur-sm transition-colors group-hover/yt:bg-ember group-hover/yt:text-night">
+                                    ▶
+                                  </span>
+                                </span>
+                              </div>
+                              <span className="meta-label mt-2 inline-block text-ember">
+                                {link.label}
+                              </span>
+                            </a>
+                          );
+                        }
+                        return (
+                          <a
+                            key={link.href}
+                            href={link.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="meta-label rounded-full border border-dust/30 px-4 py-2.5 text-starlight/85 transition-colors hover:border-ember hover:text-ember"
+                          >
+                            {link.label} ↗
+                          </a>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </details>
+              ))}
+            </div>
+          </Reveal>
+        </section>
+      ) : null}
+
       {/* Linked media: YouTube links show their real thumbnails */}
       <section className="border-t border-dust/15 bg-soot/40">
         <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8">
