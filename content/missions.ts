@@ -241,6 +241,25 @@ export const MISSIONS: Mission[] = [
             },
           ],
         },
+        {
+          name: "Owen Tucker",
+          tag: "Jesus in every adventure",
+          line: "Has a travel adventure YouTube channel reaching a secular audience, always sharing Jesus.",
+          links: [
+            {
+              label: "Adventure one",
+              href: "https://youtu.be/Y3qLQOLS-3s?t=2084",
+            },
+            {
+              label: "Adventure two",
+              href: "https://youtu.be/lU4Y2rtBlRw?t=1997",
+            },
+            {
+              label: "Adventure three",
+              href: "https://youtu.be/POzthK7rIaE?t=1347",
+            },
+          ],
+        },
       ],
     },
   },
