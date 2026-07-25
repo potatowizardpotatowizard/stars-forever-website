@@ -157,7 +157,7 @@ export const MISSIONS: Mission[] = [
       {
         kicker: "What it proves",
         paragraphs: [
-          "Creators tend to make the content of the events they attend and the examples they have. The cohort exists to give them a new example: Jesus preached in every kind of context, secular or Christian forward. The first weekend proved the model works. The next one is the invitation.",
+          "Creators tend to make the content of the events they attend and the examples they have. The cohort exists to give them a new example: one like Jesus who intentionally used story to reach a non-believing audience. If you want to see the results, check out the creator testimonies below!",
         ],
         imageSlots: ["joshua-desert"],
       },
