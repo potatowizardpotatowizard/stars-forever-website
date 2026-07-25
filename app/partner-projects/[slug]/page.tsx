@@ -163,6 +163,31 @@ export default async function MissionPage({
                   </li>
                 );
               })}
+              {mission.testimonies ? (
+                <li className="h-full">
+                  <a
+                    href="#testimonies"
+                    className="group flex h-full flex-col rounded-lg border border-ember/40 bg-soot/40 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-ember hover:shadow-[0_0_24px_rgb(109_40_217/0.45)]"
+                  >
+                    <Image
+                      src="/brand/star-sharp.png"
+                      alt=""
+                      width={22}
+                      height={22}
+                      className="vhs-glow"
+                    />
+                    <span className="mt-4 font-display text-lg font-bold leading-snug text-ember transition-colors group-hover:text-starlight">
+                      And what came after…
+                    </span>
+                    <span className="meta-label mt-1.5">
+                      Content since the event
+                    </span>
+                    <span className="meta-label mt-5 flex-1 content-end text-ember">
+                      Creator testimonies ↓
+                    </span>
+                  </a>
+                </li>
+              ) : null}
             </ul>
           </Reveal>
         </section>
@@ -246,7 +271,10 @@ export default async function MissionPage({
           and the receipts. YouTube receipts show their thumbnails;
           everything else becomes a link pill. */}
       {mission.testimonies ? (
-        <section className="mx-auto max-w-7xl px-5 pb-24 sm:px-8">
+        <section
+          id="testimonies"
+          className="mx-auto max-w-7xl scroll-mt-24 px-5 pb-24 sm:px-8"
+        >
           <Reveal>
             <Kicker>{mission.testimonies.kicker}</Kicker>
             <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
