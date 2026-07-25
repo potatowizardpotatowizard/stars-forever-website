@@ -164,25 +164,15 @@ export default async function MissionPage({
                 );
               })}
               {mission.testimonies ? (
-                <li className="h-full">
+                <li className="flex items-center">
                   <a
                     href="#testimonies"
-                    className="group flex h-full flex-col rounded-lg border border-ember/40 bg-soot/40 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-ember hover:shadow-[0_0_24px_rgb(109_40_217/0.45)]"
+                    className="group w-full rounded-lg border border-ember/40 bg-soot/40 px-5 py-4 transition-all duration-300 hover:-translate-y-1 hover:border-ember hover:shadow-[0_0_24px_rgb(109_40_217/0.45)]"
                   >
-                    <Image
-                      src="/brand/star-sharp.png"
-                      alt=""
-                      width={22}
-                      height={22}
-                      className="vhs-glow"
-                    />
-                    <span className="mt-4 font-display text-lg font-bold leading-snug text-ember transition-colors group-hover:text-starlight">
+                    <span className="block font-display text-lg font-bold leading-snug text-ember transition-colors group-hover:text-starlight">
                       And what came after…
                     </span>
-                    <span className="meta-label mt-1.5">
-                      Content since the event
-                    </span>
-                    <span className="meta-label mt-5 flex-1 content-end text-ember">
+                    <span className="meta-label mt-2 block">
                       Creator testimonies ↓
                     </span>
                   </a>
