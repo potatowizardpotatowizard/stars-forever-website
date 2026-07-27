@@ -66,7 +66,7 @@ export const VISION = {
   },
   dream: {
     kicker: "The ten year dream",
-    heading: "Every Platform, Every Niche",
+    heading: "The Digital World, Evangelized",
     body: "Akin to the Biblical dream of seeing the whole world evangelized, all continents on earth having Jesus representatives preaching the Gospel, our dream is that in 10 years we would see the digital world evangelized, every platform and niche having creators who love Jesus reach them with the Gospel.",
     skyCaption: "Every niche, a mission field. Every light, a creator who loves Jesus.",
   },
