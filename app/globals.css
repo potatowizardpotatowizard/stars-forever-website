@@ -1492,23 +1492,6 @@ html.easter-sunday body::before {
   }
 }
 
-/* The year ticker flickers as each digit locks in */
-@keyframes year-tick {
-  0% {
-    opacity: 0.2;
-    filter: blur(2px);
-    transform: translateY(3px);
-  }
-  100% {
-    opacity: 1;
-    filter: blur(0);
-    transform: translateY(0);
-  }
-}
-.year-tick {
-  animation: year-tick 0.28s ease-out;
-}
-
 /* The vision hero's claim strip: two counter-drifting rows along the
    hero's base. Ghost feed cards ignite on a slow shared cycle. */
 .claim-marquee-left,

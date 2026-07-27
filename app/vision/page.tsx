@@ -5,7 +5,6 @@ import Cta from "@/components/Cta";
 import DigitalSky from "@/components/DigitalSky";
 import VisionClaimStrip from "@/components/VisionClaimStrip";
 import NicheCycler from "@/components/NicheCycler";
-import YearTicker from "@/components/YearTicker";
 import GlitchText from "@/components/GlitchText";
 import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
@@ -47,9 +46,6 @@ export default function VisionPage() {
             mission fields and fruit drifting the other */}
         <VisionClaimStrip />
       </header>
-
-      {/* 2026 climbs to 2036 as the reader descends toward the dream */}
-      <YearTicker />
 
       {/* The problem: life moved online, and lostness moved with it */}
       <section className="relative overflow-hidden">
