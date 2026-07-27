@@ -686,7 +686,12 @@ html[data-mission-intro="1"] #hero > img {
    Dreams" arrives bigger, swallows it, and settles massive above the form */
 .dream-stage {
   position: relative;
-  height: 250px;
+  height: 260px;
+}
+@media (min-width: 640px) {
+  .dream-stage {
+    height: 330px;
+  }
 }
 .dream-small,
 .dream-big {
@@ -757,7 +762,8 @@ html[data-mission-intro="1"] #hero > img {
   }
   @keyframes dream-small {
     0% {
-      transform: translate(calc(-50% - 55vw), -50%) scale(0.9);
+      transform: translate(calc(-50% - min(48vw, 600px)), -50%) scale(0.9)
+        rotate(-32deg);
       opacity: 0;
     }
     12% {
@@ -765,19 +771,20 @@ html[data-mission-intro="1"] #hero > img {
     }
     22%,
     48% {
-      transform: translate(calc(-50% - 120px), -50%) scale(1);
+      transform: translate(calc(-50% - 130px), -50%) scale(1) rotate(0deg);
       opacity: 1;
     }
     60%,
     100% {
-      transform: translate(-50%, -50%) scale(0.05);
+      transform: translate(-50%, -50%) scale(0.05) rotate(20deg);
       opacity: 0;
     }
   }
   @keyframes dream-big {
     0%,
     16% {
-      transform: translate(calc(-50% + 55vw), -50%) scale(1);
+      transform: translate(calc(-50% + min(48vw, 600px)), -50%) scale(1)
+        rotate(26deg);
       opacity: 0;
     }
     28% {
@@ -785,18 +792,18 @@ html[data-mission-intro="1"] #hero > img {
     }
     38%,
     50% {
-      transform: translate(calc(-50% + 120px), -50%) scale(1);
+      transform: translate(calc(-50% + 130px), -50%) scale(1) rotate(0deg);
       opacity: 1;
     }
     62% {
       transform: translate(-50%, -50%) scale(1.06);
     }
     80% {
-      transform: translate(-50%, -50%) scale(1.32);
+      transform: translate(-50%, -50%) scale(1.34);
     }
     92%,
     100% {
-      transform: translate(-50%, calc(-50% + 36px)) scale(1.4);
+      transform: translate(-50%, calc(-50% + 18px)) scale(1.26);
       opacity: 1;
     }
   }
@@ -1519,6 +1526,38 @@ html.easter-sunday body::before {
     }
     to {
       transform: translateX(0);
+    }
+  }
+}
+
+/* The God dream application card: a living ember glow around the
+   three questions, breathing slowly */
+.apply-glow {
+  border-color: rgb(167 139 250 / 0.5);
+  box-shadow:
+    0 0 26px rgb(109 40 217 / 0.35),
+    0 0 80px rgb(109 40 217 / 0.16),
+    inset 0 0 30px rgb(109 40 217 / 0.1);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .apply-glow {
+    animation: apply-glow 4.6s ease-in-out infinite;
+  }
+  @keyframes apply-glow {
+    0%,
+    100% {
+      border-color: rgb(167 139 250 / 0.4);
+      box-shadow:
+        0 0 26px rgb(109 40 217 / 0.3),
+        0 0 80px rgb(109 40 217 / 0.14),
+        inset 0 0 30px rgb(109 40 217 / 0.08);
+    }
+    50% {
+      border-color: rgb(196 181 253 / 0.75);
+      box-shadow:
+        0 0 34px rgb(109 40 217 / 0.5),
+        0 0 110px rgb(109 40 217 / 0.24),
+        inset 0 0 36px rgb(109 40 217 / 0.16);
     }
   }
 }

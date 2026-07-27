@@ -33,6 +33,7 @@ export const GIVING_URL: string | null =
 
 export const NAV = [
   { label: "The Vision", href: "/vision" },
+  { label: "The Story Behind Stars Forever", href: "/story" },
   { label: "Partner Projects", href: "/partner-projects" },
   { label: "Find Your Creator Type", href: "/category-3" },
   { label: "Revolutionary Cohort", href: "/revolutionary" },
@@ -42,6 +43,7 @@ export const NAV = [
 // The hero menu on the home page: the site itself, presented like a tape menu.
 export const HERO_MENU = [
   { label: "The Vision", href: "/vision" },
+  { label: "The Story Behind Stars Forever", href: "/story" },
   { label: "Partner Projects", href: "/partner-projects" },
   { label: "Find Your Creator Type", href: "/category-3" },
   { label: "Revolutionary Cohort", href: "/revolutionary" },

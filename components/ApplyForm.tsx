@@ -84,7 +84,7 @@ export default function ApplyForm() {
   return (
     <form
       onSubmit={submit}
-      className="rounded-lg border border-dust/25 bg-night/60 p-7 sm:p-10"
+      className="apply-glow rounded-lg border bg-night/60 p-7 sm:p-10"
     >
       {/* 01 Who you are */}
       <p className={section}>01 Who You Are</p>
