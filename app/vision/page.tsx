@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { linkCategory3 } from "@/components/Category3Link";
 import Cta from "@/components/Cta";
+import CursorConstellation from "@/components/CursorConstellation";
 import DigitalSky from "@/components/DigitalSky";
 import NicheCycler from "@/components/NicheCycler";
 import YearTicker from "@/components/YearTicker";
@@ -20,8 +21,8 @@ export const metadata: Metadata = {
 export default function VisionPage() {
   return (
     <article>
-      {/* Analog hero */}
-      <header className="relative overflow-hidden">
+      {/* Analog hero: tall enough to leave sky worth painting */}
+      <header className="relative flex min-h-[82svh] items-end overflow-hidden">
         <Image
           src="/brand/bg-greenpurple-star.jpg"
           alt=""
@@ -34,18 +35,18 @@ export default function VisionPage() {
           aria-hidden="true"
           className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night"
         />
-        {/* A whisper of the finale: the digital sky igniting slowly
-            behind the hero text */}
-        <DigitalSky
-          variant="teaser"
-          className="absolute inset-0 h-full w-full"
-        />
+        {/* The sky only the visitor can light: stars ignite wherever
+            the cursor travels and thread themselves into constellations */}
+        <CursorConstellation />
         <Grain />
-        <div className="relative mx-auto max-w-7xl px-5 pb-20 pt-44 sm:px-8">
+        <div className="pointer-events-none relative mx-auto w-full max-w-7xl px-5 pb-20 pt-44 sm:px-8">
           <Kicker>{VISION.hero.kicker}</Kicker>
           <h1 className="mt-6 font-display text-5xl font-bold sm:text-6xl">
             {VISION.hero.heading}
           </h1>
+          <p className="mt-8 max-w-3xl font-display text-2xl leading-snug text-starlight/90 sm:text-3xl">
+            {VISION.hero.line}
+          </p>
           <NicheCycler />
         </div>
       </header>
