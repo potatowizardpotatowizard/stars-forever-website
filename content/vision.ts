@@ -5,8 +5,7 @@ export const VISION = {
   title: "The Vision",
   hero: {
     kicker: "Where this is going",
-    heading: "The Vision",
-    line: "The digital world, evangelized.",
+    heading: "The Digital World, Evangelized",
   },
   missionary: {
     kicker: "Content missionaries",
@@ -18,7 +17,7 @@ export const VISION = {
   },
   parallel: {
     kicker: "The same calling",
-    heading: "Traditional vs Content Missionaries",
+    heading: "Traditional vs Content",
     thenLabel: "Traditional Missionary",
     nowLabel: "Content Missionary",
     pairs: [
@@ -50,7 +49,7 @@ export const VISION = {
   },
   programs: {
     kicker: "How we get there",
-    heading: "How We Create Content Missionaries",
+    heading: "Our Formation Process",
     body: "Both things we do at Stars Forever: Partner Projects and the Revolutionary Cohort serve to create content missionaries, or as we call them, Category 3 creators.",
     items: [
       {

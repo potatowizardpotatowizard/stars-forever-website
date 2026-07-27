@@ -38,12 +38,9 @@ export default function VisionPage() {
         <Grain />
         <div className="relative mx-auto w-full max-w-7xl px-5 pt-44 sm:px-8">
           <Kicker>{VISION.hero.kicker}</Kicker>
-          <h1 className="mt-6 font-display text-5xl font-bold sm:text-6xl">
+          <h1 className="mt-6 max-w-4xl font-display text-5xl font-bold sm:text-6xl">
             {VISION.hero.heading}
           </h1>
-          <p className="mt-8 max-w-3xl font-display text-2xl leading-snug text-starlight/90 sm:text-3xl">
-            {VISION.hero.line}
-          </p>
           <NicheCycler />
         </div>
         {/* The claiming of the feed: ghost cards igniting one way,
