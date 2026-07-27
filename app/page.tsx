@@ -148,12 +148,6 @@ export default function HomePage() {
                 );
               })}
             </div>
-            <Link
-              href="/story"
-              className="meta-label mt-10 inline-block text-dust transition-colors hover:text-ember"
-            >
-              The story behind Stars Forever →
-            </Link>
           </Reveal>
         </div>
       </section>
@@ -352,6 +346,12 @@ export default function HomePage() {
                 {HOME.closing.emailCta}
               </Cta>
             </div>
+            <Link
+              href="/story"
+              className="meta-label mt-10 inline-block text-dust transition-colors hover:text-ember"
+            >
+              The story behind Stars Forever →
+            </Link>
             <ConstellationWhisper className="mt-16" />
           </Reveal>
         </div>

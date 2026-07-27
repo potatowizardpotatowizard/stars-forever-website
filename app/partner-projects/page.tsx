@@ -115,14 +115,6 @@ export default function PartnerProjectsPage() {
             </Reveal>
           ))}
         </div>
-        <Reveal className="mt-12">
-          <Link
-            href="/story"
-            className="meta-label inline-block text-dust transition-colors hover:text-ember"
-          >
-            The story behind Stars Forever →
-          </Link>
-        </Reveal>
       </section>
 
       {/* The process */}
@@ -245,6 +237,12 @@ export default function PartnerProjectsPage() {
               {PARTNER.closing.emailCta}
             </Cta>
           </div>
+          <Link
+            href="/story"
+            className="meta-label mt-10 inline-block text-dust transition-colors hover:text-ember"
+          >
+            The story behind Stars Forever →
+          </Link>
           <ConstellationWhisper className="mt-16" />
         </Reveal>
       </section>
