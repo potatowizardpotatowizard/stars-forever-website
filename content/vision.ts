@@ -7,6 +7,15 @@ export const VISION = {
     kicker: "The vision",
     heading: "Create Content Missionaries Worldwide",
   },
+  problem: {
+    kicker: "Why this matters",
+    heading: "The Problem",
+    paragraphs: [
+      "Most people now exist online far more than they exist in person. The best hours of the day are spent inside feeds, streams, and comment sections. That is where life happens now, and that is where lostness lives too.",
+      "If a missionary approaches someone on the street, a good conversation might earn 30 minutes of relationship capital. Most young adults, meanwhile, have years of relationship capital with their favorite creators: thousands of hours of watching, trusting, and feeling known by someone they have never met.",
+      "With lostness and loneliness higher than ever, we should leverage every advantage a creator carries to meet people where they actually are.",
+    ],
+  },
   missionary: {
     kicker: "Content missionaries",
     heading: "Content Missionary Explained",

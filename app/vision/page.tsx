@@ -51,13 +51,35 @@ export default function VisionPage() {
       {/* 2026 climbs to 2036 as the reader descends toward the dream */}
       <YearTicker />
 
-      {/* A missionary to a niche */}
+      {/* The problem: life moved online, and lostness moved with it */}
       <section className="relative overflow-hidden">
         <div
           aria-hidden="true"
           className="absolute inset-x-0 top-0 h-[50vh] bg-[linear-gradient(to_bottom,rgb(34_197_94/0.26),rgb(34_197_94/0.1)_40%,rgb(109_40_217/0.08)_70%,transparent)]"
         />
         <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8">
+          <Reveal className="max-w-3xl">
+            <Kicker>{VISION.problem.kicker}</Kicker>
+            <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
+              <GlitchText text={VISION.problem.heading} />
+            </h2>
+            <div className="mt-8 space-y-6">
+              {VISION.problem.paragraphs.map((para) => (
+                <p
+                  key={para}
+                  className="text-lg leading-relaxed text-starlight/85"
+                >
+                  {para}
+                </p>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* A missionary to a niche */}
+      <section className="relative overflow-hidden">
+        <div className="relative mx-auto max-w-7xl px-5 pb-24 pt-4 sm:px-8">
           <Reveal className="max-w-3xl">
             <Kicker>{VISION.missionary.kicker}</Kicker>
             <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
