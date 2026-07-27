@@ -9,7 +9,15 @@ import { SKY_NODES as NODES } from "@/content/niches";
 // constellation threads reach from it to the nearby niche stars,
 // brightening them, and dissolve as it moves on. On touch screens a
 // finger drag does the same. Reduced motion sees the lit sky, still.
+//
+// On touch screens (no cursor to roam) the sky instead performs the
+// spreading dawn: ignition begins at Art in the heart of the chart
+// and radiates outward, every thread holding once born, then the
+// whole sky breathes out and begins again.
 const GLOW_REACH = 160; // px within which the web glows around the cursor
+const IGNITE = 620; // ms between ignitions (touch mode)
+const HOLD = 6500; // fully lit, twinkling (touch mode)
+const FADE = 1400; // dissolve before the cycle restarts (touch mode)
 
 // The chart, hand authored: one fixed constellation on every
 // screen, art directed line by line.
@@ -65,6 +73,8 @@ export default function DigitalSky({ className }: { className?: string }) {
     const reduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
+    const spreading =
+      !reduced && window.matchMedia("(pointer: coarse)").matches;
 
     let raf = 0;
     let width = 0;
@@ -72,6 +82,7 @@ export default function DigitalSky({ className }: { className?: string }) {
     let mx = -1;
     let my = -1;
     let inside = false;
+    let rank: number[] = [];
     const starPath = new Path2D(STAR);
     const dust = Array.from({ length: 70 }, () => ({
       x: Math.random(),
@@ -87,6 +98,16 @@ export default function DigitalSky({ className }: { className?: string }) {
       canvas.width = Math.round(width * dpr);
       canvas.height = Math.round(height * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      // Touch mode ignition order: distance from Art, outward.
+      const art = NODES.find((n) => n.label === "Art") ?? NODES[0];
+      const byDist = NODES.map((n, i) => ({
+        i,
+        d: Math.hypot((n.x - art.x) * width, (n.y - art.y) * height),
+      })).sort((a, b) => a.d - b.d);
+      rank = [];
+      byDist.forEach((e, r) => {
+        rank[e.i] = r;
+      });
     };
     resize();
     window.addEventListener("resize", resize);
@@ -130,6 +151,76 @@ export default function DigitalSky({ className }: { className?: string }) {
       ctx.fillStyle = `rgba(239, 236, 247, ${alpha})`;
       ctx.fill(starPath);
       ctx.restore();
+    };
+
+    const TOTAL = NODES.length * IGNITE + HOLD + FADE;
+
+    // Touch mode: the dawn that spreads from Art and starts over.
+    const drawSpreading = (t: number) => {
+      ctx.clearRect(0, 0, width, height);
+      const ct = t % TOTAL;
+      const fadeAge = ct - (NODES.length * IGNITE + HOLD);
+      const global = fadeAge > 0 ? Math.max(0, 1 - fadeAge / FADE) : 1;
+
+      for (const d of dust) {
+        const tw = 0.5 + 0.5 * Math.sin(t / 1600 + d.p);
+        ctx.globalAlpha = 0.25 * tw;
+        ctx.fillStyle = "#efecf7";
+        ctx.beginPath();
+        ctx.arc(d.x * width, d.y * height, d.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+
+      // threads appear when their later star ignites and hold on
+      ctx.lineWidth = 1.4;
+      ctx.lineCap = "round";
+      for (const [i, j] of WEB_EDGES) {
+        const born = Math.max(rank[i] ?? 0, rank[j] ?? 0) * IGNITE;
+        if (ct <= born) continue;
+        const k = Math.min(1, (ct - born) / 500);
+        const A = pos(NODES[i]);
+        const B = pos(NODES[j]);
+        ctx.strokeStyle = `rgba(196, 181, 253, ${0.45 * k * global})`;
+        ctx.beginPath();
+        ctx.moveTo(A.px, A.py);
+        ctx.lineTo(B.px, B.py);
+        ctx.stroke();
+      }
+
+      ctx.textAlign = "center";
+      NODES.forEach((n, i) => {
+        const { px, py } = pos(n);
+        const at = (rank[i] ?? 0) * IGNITE;
+        const age = ct - at;
+        if (age <= 0) {
+          ctx.fillStyle = "rgba(151, 139, 173, 0.4)";
+          ctx.beginPath();
+          ctx.arc(px, py, 2, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.font = "10px ui-monospace, monospace";
+          ctx.fillStyle = "rgba(151, 139, 173, 0.45)";
+          ctx.fillText(n.label.toUpperCase(), px, py + 20);
+          return;
+        }
+        if (age < 900) {
+          const k = age / 900;
+          ctx.strokeStyle = `rgba(196, 181, 253, ${(1 - k) * 0.8 * global})`;
+          ctx.lineWidth = 1.6;
+          ctx.beginPath();
+          ctx.arc(px, py, 4 + k * 34, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+        const tw = 0.82 + 0.18 * Math.sin(t / 420 + i * 1.7);
+        const size =
+          (5.5 + (i % 3)) * tw * (age < 500 ? 0.6 + 0.4 * (age / 500) : 1);
+        drawStar(px, py, size, global, t / 4000 + i);
+        ctx.font = "bold 10px ui-monospace, monospace";
+        ctx.fillStyle = `rgba(239, 236, 247, ${0.85 * global})`;
+        ctx.fillText(n.label.toUpperCase(), px, py + 22);
+      });
+
+      raf = requestAnimationFrame(drawSpreading);
     };
 
     const draw = (t: number) => {
@@ -225,7 +316,7 @@ export default function DigitalSky({ className }: { className?: string }) {
       if (!reduced) raf = requestAnimationFrame(draw);
     };
 
-    raf = requestAnimationFrame(draw);
+    raf = requestAnimationFrame(spreading ? drawSpreading : draw);
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("pointermove", move);
