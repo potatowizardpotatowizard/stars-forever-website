@@ -212,6 +212,12 @@ export default function RevolutionaryPage() {
           <div className="mt-14">
             <WaitlistForm />
           </div>
+          <Link
+            href="/story"
+            className="meta-label mt-12 inline-block text-dust transition-colors hover:text-ember"
+          >
+            The story behind Stars Forever →
+          </Link>
           <ConstellationWhisper className="mt-16" />
         </Reveal>
       </section>

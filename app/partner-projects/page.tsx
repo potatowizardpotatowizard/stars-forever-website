@@ -115,6 +115,14 @@ export default function PartnerProjectsPage() {
             </Reveal>
           ))}
         </div>
+        <Reveal className="mt-12">
+          <Link
+            href="/story"
+            className="meta-label inline-block text-dust transition-colors hover:text-ember"
+          >
+            The story behind Stars Forever →
+          </Link>
+        </Reveal>
       </section>
 
       {/* The process */}

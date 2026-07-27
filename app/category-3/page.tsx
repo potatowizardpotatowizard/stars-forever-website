@@ -158,9 +158,15 @@ export default function Category3Page() {
         <Reveal className="mt-14">
           <Link
             href="/podcast"
-            className="meta-label inline-block text-dust transition-colors hover:text-ember"
+            className="meta-label block text-dust transition-colors hover:text-ember"
           >
             Respectfully Inspired Podcast →
+          </Link>
+          <Link
+            href="/story"
+            className="meta-label mt-4 inline-block text-dust transition-colors hover:text-ember"
+          >
+            The story behind Stars Forever →
           </Link>
         </Reveal>
       </section>
