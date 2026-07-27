@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect } from "react";
-import { ANCHOR_VERSE } from "@/content/site";
 
 // When the supernova detonates ("sf-detonate"), the hero logo blows
 // apart and every letter on the hero rains to the bottom of the
@@ -166,55 +165,7 @@ export default function LetterFall() {
           '<span class="nova-cross-h"></span>';
         overlay.appendChild(cross);
 
-        // Beneath the cross, the anchor verse is born star by star:
-        // each word ignites as a point of light, flares, and settles
-        // into glowing text, the whole promise twinkling like a
-        // constellation once assembled.
-        const STAGGER = 110;
-        const words = ANCHOR_VERSE.text.split(" ");
-        const verse = document.createElement("div");
-        verse.className = "nova-verse font-meta";
-        words.forEach((w, i) => {
-          const s = document.createElement("span");
-          s.className = "nova-verse-word";
-          s.textContent = w;
-          s.style.animationDelay = `${800 + i * STAGGER}ms, ${800 + i * STAGGER + 1600}ms`;
-          verse.appendChild(s);
-          verse.appendChild(document.createTextNode(" "));
-        });
-        const ref = document.createElement("p");
-        ref.className = "nova-verse-ref meta-label";
-        ref.textContent = ANCHOR_VERSE.reference;
-        ref.style.animationDelay = `${800 + words.length * STAGGER + 400}ms`;
-        verse.appendChild(ref);
-        overlay.appendChild(verse);
-
-        // in-flight + settle + a moment to shine
-        const verseShown = 800 + words.length * STAGGER + 900 + 1700;
-
-        // Then the verse ascends, dissolving into stardust...
-        setTimeout(() => {
-          Array.from(verse.children).forEach((el, i) => {
-            (el as HTMLElement).animate(
-              [
-                { opacity: 1, transform: "translateY(0)", filter: "blur(0)" },
-                {
-                  opacity: 0,
-                  transform: "translateY(-36px)",
-                  filter: "blur(7px)",
-                },
-              ],
-              {
-                duration: 800,
-                delay: i * 22,
-                easing: "ease-in",
-                fill: "forwards",
-              },
-            );
-          });
-        }, verseShown);
-
-        // ...and at its ascent, the resurrection begins.
+        // At the cross's full light, the resurrection begins.
         setTimeout(() => {
           let longestRise = 0;
           const riseGlow = [
@@ -395,7 +346,7 @@ export default function LetterFall() {
               busy = false;
             }, 9000);
           }, longestRise + 150);
-        }, verseShown + 500);
+        }, 1300);
       }, longestFall + 1000);
     };
 
