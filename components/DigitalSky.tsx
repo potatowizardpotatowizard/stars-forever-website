@@ -10,9 +10,6 @@ import { SKY_NODES as NODES } from "@/content/niches";
 // shines. It holds, breathes, then begins again. Reduced motion
 // sees the finished sky, fully lit and still.
 
-// Ignition order: scattered across the sky, not a sweep.
-const ORDER = [9, 2, 14, 5, 7, 16, 0, 11, 3, 13, 6, 10, 1, 17, 4, 8, 12, 15];
-
 const STAR =
   "M12 0c.9 6.8 4.2 10.1 12 12c-7.8 1.9-11.1 5.2-12 12c-.9-6.8-4.2-10.1-12-12C7.8 10.1 11.1 6.8 12 0Z";
 
@@ -41,6 +38,9 @@ export default function DigitalSky({
     let raf = 0;
     let width = 0;
     let height = 0;
+    // Ignition ranks: Art sits at the heart of the sky, so the light
+    // starts there and spreads outward ring by ring.
+    let rank: number[] = [];
     const starPath = new Path2D(STAR);
     const dust = Array.from({ length: 70 }, () => ({
       x: Math.random(),
@@ -56,6 +56,17 @@ export default function DigitalSky({
       canvas.width = Math.round(width * dpr);
       canvas.height = Math.round(height * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const art = NODES.find((n) => n.label === "Art") ?? NODES[0];
+      const ax = art.x * width;
+      const ay = art.y * height;
+      const byDist = NODES.map((n, i) => ({
+        i,
+        d: Math.hypot(n.x * width - ax, n.y * height - ay),
+      })).sort((a, b) => a.d - b.d);
+      rank = [];
+      byDist.forEach((e, r) => {
+        rank[e.i] = r;
+      });
     };
     resize();
     window.addEventListener("resize", resize);
@@ -91,12 +102,12 @@ export default function DigitalSky({
       ctx.restore();
     };
 
-    const TOTAL = ORDER.length * IGNITE + HOLD + FADE;
+    const TOTAL = NODES.length * IGNITE + HOLD + FADE;
 
     const draw = (t: number) => {
       ctx.clearRect(0, 0, width, height);
-      const ct = reduced ? ORDER.length * IGNITE + 1000 : t % TOTAL;
-      const fadeAge = ct - (ORDER.length * IGNITE + HOLD);
+      const ct = reduced ? NODES.length * IGNITE + 1000 : t % TOTAL;
+      const fadeAge = ct - (NODES.length * IGNITE + HOLD);
       const global =
         (fadeAge > 0 ? Math.max(0, 1 - fadeAge / FADE) : 1) * dim;
 
@@ -113,12 +124,12 @@ export default function DigitalSky({
 
       const lit: number[] = [];
       NODES.forEach((_, i) => {
-        const at = ORDER.indexOf(i) * IGNITE;
+        const at = (rank[i] ?? 0) * IGNITE;
         if (ct > at) lit.push(i);
       });
 
-      // constellation lines between each lit node and its two nearest
-      // lit neighbors
+      // constellation lines: each lit node reaches for its three
+      // nearest lit neighbors, so the web connects at multiple points
       ctx.lineWidth = 1.4;
       for (const i of lit) {
         const a = pos(NODES[i]);
@@ -129,7 +140,7 @@ export default function DigitalSky({
             return { j, d: Math.hypot(b.px - a.px, b.py - a.py) };
           })
           .sort((x, y) => x.d - y.d)
-          .slice(0, 2);
+          .slice(0, 3);
         for (const { j } of near) {
           if (j < i) continue; // draw each pair once
           const b = pos(NODES[j]);
@@ -145,7 +156,7 @@ export default function DigitalSky({
       ctx.textAlign = "center";
       NODES.forEach((n, i) => {
         const { px, py } = pos(n);
-        const at = ORDER.indexOf(i) * IGNITE;
+        const at = (rank[i] ?? 0) * IGNITE;
         const age = ct - at;
         const isLit = age > 0;
 
