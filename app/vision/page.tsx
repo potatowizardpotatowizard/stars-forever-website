@@ -210,12 +210,10 @@ export default function VisionPage() {
             <p className="mx-auto mt-6 max-w-xl text-starlight/75">
               {VISION.closing.giveLine}
             </p>
-            {GIVING_URL ? (
-              <div className="mt-8">
+            <div className="mt-10 flex flex-wrap justify-center gap-4">
+              {GIVING_URL ? (
                 <Cta href={GIVING_URL}>{VISION.closing.giveCta}</Cta>
-              </div>
-            ) : null}
-            <div className="mt-12 flex flex-wrap justify-center gap-4 border-t border-dust/15 pt-10">
+              ) : null}
               {VISION.closing.ctas.map((cta) => (
                 <Cta key={cta.href} href={cta.href} variant="ghost">
                   {cta.label}
