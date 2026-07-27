@@ -13,11 +13,17 @@ function Row({ lit, hidden }: { lit?: boolean; hidden?: boolean }) {
           aria-hidden={hidden || undefined}
           className={`meta-label flex shrink-0 items-center gap-2.5 rounded-md border px-4 py-2.5 ${
             lit
-              ? "border-dust/25 bg-night/50 text-starlight/85"
-              : "border-dust/10 bg-night/30 text-starlight/35"
+              ? "border-ember/60 bg-soot/70 font-bold text-starlight shadow-[0_0_20px_rgb(109_40_217/0.45)] [text-shadow:0_0_10px_rgb(196_181_253/0.45)]"
+              : "border-dust/10 bg-night/30 text-starlight/30"
           }`}
         >
-          <span className={lit ? "text-ember" : "text-dust/40"}>
+          <span
+            className={
+              lit
+                ? "text-ember drop-shadow-[0_0_7px_rgba(167,139,250,0.95)]"
+                : "text-dust/35"
+            }
+          >
             {lit ? "\u2726" : "\u2727"}
           </span>
           {niche}
