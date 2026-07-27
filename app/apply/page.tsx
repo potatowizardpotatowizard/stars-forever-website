@@ -30,7 +30,7 @@ export default function ApplyPage() {
           className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/25 to-night"
         />
         <Grain />
-        <div className="relative mx-auto max-w-7xl px-5 pb-16 pt-44 sm:px-8">
+        <div className="relative mx-auto max-w-7xl px-5 pb-2 pt-44 sm:px-8">
           <Kicker>Partner Project</Kicker>
           <h1 className="mt-6 font-display text-5xl font-bold sm:text-6xl">
             Bring Us Your God Dream
@@ -52,7 +52,7 @@ export default function ApplyPage() {
         </div>
       </header>
 
-      <section className="mx-auto max-w-3xl px-5 py-16 sm:px-8 sm:py-20">
+      <section className="mx-auto max-w-3xl px-5 pb-16 pt-3 sm:px-8 sm:pb-20">
         <ApplyForm />
       </section>
     </article>
