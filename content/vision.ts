@@ -18,7 +18,8 @@ export const VISION = {
   },
   missionary: {
     kicker: "Content missionaries",
-    heading: "Content Missionary Explained",
+    heading: "The Solution",
+    lead: "Create Content Missionaries.",
     paragraphs: [
       "When a creator becomes Category 3, they essentially become a missionary to the content format and the niche they belong to. For example, a Category 3 food creator would create content around the topic of food, using their passion for food to bring food lovers around the world to Jesus.",
       "Similar to how someone who loves Jesus might move to Mexico, learn Spanish, and integrate into the relevant culture to reach the people for Jesus.",

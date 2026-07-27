@@ -85,7 +85,10 @@ export default function VisionPage() {
             <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
               <GlitchText text={VISION.missionary.heading} />
             </h2>
-            <div className="mt-8 space-y-6">
+            <p className="mt-8 font-display text-2xl font-bold text-starlight sm:text-3xl">
+              {VISION.missionary.lead}
+            </p>
+            <div className="mt-6 space-y-6">
               {VISION.missionary.paragraphs.map((p) => (
                 <p key={p} className="text-lg leading-relaxed text-starlight/85">
                   {linkCategory3(p)}
