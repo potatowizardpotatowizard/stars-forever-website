@@ -31,17 +31,27 @@ const NODES: { label: string; x: number; y: number }[] = [
 // Ignition order: scattered across the sky, not a sweep.
 const ORDER = [9, 2, 14, 5, 7, 16, 0, 11, 3, 13, 6, 10, 1, 17, 4, 8, 12, 15];
 
-const IGNITE = 620; // ms between ignitions
-const HOLD = 6500; // fully lit, twinkling
-const FADE = 1400; // dissolve before the cycle begins again
+// The hero teaser runs the same sky slower, fainter, and unlabeled.
+export const NICHES = NODES.map((n) => n.label);
 
 const STAR =
   "M12 0c.9 6.8 4.2 10.1 12 12c-7.8 1.9-11.1 5.2-12 12c-.9-6.8-4.2-10.1-12-12C7.8 10.1 11.1 6.8 12 0Z";
 
-export default function DigitalSky() {
+export default function DigitalSky({
+  variant = "full",
+  className,
+}: {
+  variant?: "full" | "teaser";
+  className?: string;
+}) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
+    const teaser = variant === "teaser";
+    const IGNITE = teaser ? 1500 : 620; // ms between ignitions
+    const HOLD = teaser ? 9000 : 6500; // fully lit, twinkling
+    const FADE = teaser ? 2600 : 1400; // dissolve before the cycle restarts
+    const dim = teaser ? 0.55 : 1;
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext("2d");
     if (!canvas || !ctx) return;
@@ -108,7 +118,8 @@ export default function DigitalSky() {
       ctx.clearRect(0, 0, width, height);
       const ct = reduced ? ORDER.length * IGNITE + 1000 : t % TOTAL;
       const fadeAge = ct - (ORDER.length * IGNITE + HOLD);
-      const global = fadeAge > 0 ? Math.max(0, 1 - fadeAge / FADE) : 1;
+      const global =
+        (fadeAge > 0 ? Math.max(0, 1 - fadeAge / FADE) : 1) * dim;
 
       // background dust
       for (const d of dust) {
@@ -161,13 +172,15 @@ export default function DigitalSky() {
 
         if (!isLit) {
           // waiting in the dark
-          ctx.fillStyle = "rgba(151, 139, 173, 0.4)";
+          ctx.fillStyle = `rgba(151, 139, 173, ${0.4 * dim})`;
           ctx.beginPath();
           ctx.arc(px, py, 2, 0, Math.PI * 2);
           ctx.fill();
-          ctx.font = "10px ui-monospace, monospace";
-          ctx.fillStyle = "rgba(151, 139, 173, 0.45)";
-          ctx.fillText(n.label.toUpperCase(), px, py + 20);
+          if (!teaser) {
+            ctx.font = "10px ui-monospace, monospace";
+            ctx.fillStyle = "rgba(151, 139, 173, 0.45)";
+            ctx.fillText(n.label.toUpperCase(), px, py + 20);
+          }
           return;
         }
 
@@ -184,9 +197,11 @@ export default function DigitalSky() {
         const tw = reduced ? 1 : 0.82 + 0.18 * Math.sin(t / 420 + i * 1.7);
         const size = (5.5 + (i % 3)) * (age < 500 ? 0.6 + 0.4 * (age / 500) : 1);
         drawStar(px, py, size * tw, global, reduced ? 0 : t / 4000 + i);
-        ctx.font = "bold 10px ui-monospace, monospace";
-        ctx.fillStyle = `rgba(239, 236, 247, ${0.85 * global})`;
-        ctx.fillText(n.label.toUpperCase(), px, py + 22);
+        if (!teaser) {
+          ctx.font = "bold 10px ui-monospace, monospace";
+          ctx.fillStyle = `rgba(239, 236, 247, ${0.85 * global})`;
+          ctx.fillText(n.label.toUpperCase(), px, py + 22);
+        }
       });
 
       if (!reduced) raf = requestAnimationFrame(draw);
@@ -197,13 +212,13 @@ export default function DigitalSky() {
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", resize);
     };
-  }, []);
+  }, [variant]);
 
   return (
     <canvas
       ref={canvasRef}
       aria-label="The digital world as a night sky: every niche lighting up with creators who love Jesus"
-      className="h-[62vh] min-h-[420px] w-full"
+      className={className ?? "h-[62vh] min-h-[420px] w-full"}
     />
   );
 }

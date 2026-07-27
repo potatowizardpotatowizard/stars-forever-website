@@ -3,6 +3,8 @@ import Image from "next/image";
 import { linkCategory3 } from "@/components/Category3Link";
 import Cta from "@/components/Cta";
 import DigitalSky from "@/components/DigitalSky";
+import NicheCycler from "@/components/NicheCycler";
+import YearTicker from "@/components/YearTicker";
 import GlitchText from "@/components/GlitchText";
 import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
@@ -32,17 +34,24 @@ export default function VisionPage() {
           aria-hidden="true"
           className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night"
         />
+        {/* A whisper of the finale: the digital sky igniting slowly
+            behind the hero text */}
+        <DigitalSky
+          variant="teaser"
+          className="absolute inset-0 h-full w-full"
+        />
         <Grain />
         <div className="relative mx-auto max-w-7xl px-5 pb-20 pt-44 sm:px-8">
           <Kicker>{VISION.hero.kicker}</Kicker>
           <h1 className="mt-6 font-display text-5xl font-bold sm:text-6xl">
             {VISION.hero.heading}
           </h1>
-          <p className="mt-8 max-w-3xl font-display text-2xl leading-snug text-starlight/90 sm:text-3xl">
-            {VISION.hero.line}
-          </p>
+          <NicheCycler />
         </div>
       </header>
+
+      {/* 2026 climbs to 2036 as the reader descends toward the dream */}
+      <YearTicker />
 
       {/* A missionary to a niche */}
       <section className="relative overflow-hidden">
@@ -163,7 +172,7 @@ export default function VisionPage() {
             </p>
           </Reveal>
         </div>
-        <div className="relative mt-10">
+        <div id="digital-sky" className="relative mt-10">
           <DigitalSky />
           <p className="meta-label pb-10 text-center text-dust">
             {VISION.dream.skyCaption}
