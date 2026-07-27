@@ -32,6 +32,9 @@ export default function DigitalSky({ className }: { className?: string }) {
     let my = -1;
     let inside = false;
     const starPath = new Path2D(STAR);
+    // The resting web: every star quietly joined to its two nearest
+    // neighbors, dull threads that simply exist.
+    let webEdges: [number, number][] = [];
     const dust = Array.from({ length: 70 }, () => ({
       x: Math.random(),
       y: Math.random(),
@@ -46,6 +49,23 @@ export default function DigitalSky({ className }: { className?: string }) {
       canvas.width = Math.round(width * dpr);
       canvas.height = Math.round(height * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const seen = new Set<string>();
+      webEdges = [];
+      NODES.forEach((n, i) => {
+        NODES.map((m, j) => ({
+          j,
+          d: Math.hypot((m.x - n.x) * width, (m.y - n.y) * height),
+        }))
+          .filter(({ j }) => j !== i)
+          .sort((a, b) => a.d - b.d)
+          .slice(0, 2)
+          .forEach(({ j }) => {
+            const key = i < j ? `${i}-${j}` : `${j}-${i}`;
+            if (seen.has(key)) return;
+            seen.add(key);
+            webEdges.push([i, j]);
+          });
+      });
     };
     resize();
     window.addEventListener("resize", resize);
@@ -105,19 +125,37 @@ export default function DigitalSky({ className }: { className?: string }) {
       }
       ctx.globalAlpha = 1;
 
-      // the cursor's constellation: threads from the pointer to every
-      // niche star within reach, strongest when closest
+      // the resting web: dull threads always joining the stars
+      ctx.lineWidth = 1;
+      ctx.lineCap = "round";
+      for (const [i, j] of webEdges) {
+        const A = pos(NODES[i]);
+        const B = pos(NODES[j]);
+        ctx.strokeStyle = "rgba(151, 139, 173, 0.18)";
+        ctx.beginPath();
+        ctx.moveTo(A.px, A.py);
+        ctx.lineTo(B.px, B.py);
+        ctx.stroke();
+      }
+
+      // the cursor's constellation: glowing threads from the pointer
+      // to every niche star within reach, strongest when closest
       const near: number[] = [];
       if (!reduced && inside) {
-        ctx.lineWidth = 1.3;
-        ctx.lineCap = "round";
         NODES.forEach((n, i) => {
           const { px, py } = pos(n);
           const d = Math.hypot(px - mx, py - my);
           if (d > REACH) return;
           near.push(i);
           const a = 1 - d / REACH;
-          ctx.strokeStyle = `rgba(196, 181, 253, ${0.55 * a})`;
+          ctx.strokeStyle = `rgba(109, 40, 217, ${0.35 * a})`;
+          ctx.lineWidth = 4.5;
+          ctx.beginPath();
+          ctx.moveTo(mx, my);
+          ctx.lineTo(px, py);
+          ctx.stroke();
+          ctx.strokeStyle = `rgba(196, 181, 253, ${0.7 * a})`;
+          ctx.lineWidth = 1.4;
           ctx.beginPath();
           ctx.moveTo(mx, my);
           ctx.lineTo(px, py);
