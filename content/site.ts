@@ -50,6 +50,7 @@ export const HERO_MENU = [
 
 // Secondary pages reachable from the footer.
 export const FOOTER_NAV = [
+  { label: "The Vision", href: "/vision" },
   { label: "The Constellation", href: "/constellation" },
   { label: "Speaking", href: "/speaking" },
   { label: "Podcast", href: "/podcast" },
