@@ -686,11 +686,11 @@ html[data-mission-intro="1"] #hero > img {
    Dreams" arrives bigger, swallows it, and settles massive above the form */
 .dream-stage {
   position: relative;
-  height: 260px;
+  height: 225px;
 }
 @media (min-width: 640px) {
   .dream-stage {
-    height: 330px;
+    height: 265px;
   }
 }
 .dream-small,
@@ -734,7 +734,7 @@ html[data-mission-intro="1"] #hero > img {
 .dream-arrow {
   position: absolute;
   left: 50%;
-  bottom: -14px;
+  bottom: 6px;
   transform: translateX(-50%);
   font-size: 1.25rem;
   color: var(--color-dust);

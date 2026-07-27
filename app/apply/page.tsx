@@ -30,12 +30,12 @@ export default function ApplyPage() {
           className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/25 to-night"
         />
         <Grain />
-        <div className="relative mx-auto max-w-7xl px-5 pb-2 pt-44 sm:px-8">
+        <div className="relative mx-auto max-w-7xl px-5 pb-2 pt-28 sm:px-8 sm:pt-32">
           <Kicker>Partner Project</Kicker>
           <h1 className="mt-6 font-display text-5xl font-bold sm:text-6xl">
             Bring Us Your God Dream
           </h1>
-          <p className="mt-6 max-w-2xl text-lg text-starlight/80">
+          <p className="mt-4 max-w-2xl text-lg text-starlight/80">
             Three short questions and we will take it from there. Prefer to
             talk first?{" "}
             <a
