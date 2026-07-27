@@ -10,7 +10,7 @@ export const VISION = {
   },
   missionary: {
     kicker: "Content missionaries",
-    heading: "A Missionary to a Niche",
+    heading: "Content Missionary Explained",
     paragraphs: [
       "When a creator becomes Category 3, they essentially become a missionary to the content format and the niche they belong to. For example, a Category 3 food creator would create content around the topic of food, using their passion for food to bring food lovers around the world to Jesus.",
       "Similar to how someone who loves Jesus might move to Mexico, learn Spanish, and integrate into the relevant culture to reach the people for Jesus.",
@@ -18,14 +18,34 @@ export const VISION = {
   },
   parallel: {
     kicker: "The same calling",
-    heading: "Then and Now",
-    thenLabel: "The missionary then",
-    nowLabel: "The content missionary now",
+    heading: "Traditional vs Content Missionaries",
+    thenLabel: "Traditional Missionary",
+    nowLabel: "Content Missionary",
     pairs: [
-      { then: "Moves to Mexico", now: "Moves into a niche" },
-      { then: "Learns Spanish", now: "Learns the format" },
-      { then: "Integrates into the culture", now: "Integrates into the feed" },
-      { then: "Reaches a people for Jesus", now: "Reaches an audience for Jesus" },
+      {
+        then: "Moves to Location",
+        thenEx: "Mexico",
+        now: "Creates Niche Content",
+        nowEx: "Food",
+      },
+      {
+        then: "Learns Language",
+        thenEx: "Spanish",
+        now: "Learns the Format",
+        nowEx: "Food Reviews",
+      },
+      {
+        then: "Integrates Into the Culture",
+        thenEx: "Salsa Classes",
+        now: "Integrates into the Feed",
+        nowEx: "Great Food Content Gets Views",
+      },
+      {
+        then: "Reaches Specific People for Jesus",
+        thenEx: "Artistic Mexican Locals",
+        now: "Reaches Specific Audience for Jesus",
+        nowEx: "Food Lovers",
+      },
     ],
   },
   programs: {
@@ -35,7 +55,7 @@ export const VISION = {
     items: [
       {
         title: "Partner Projects",
-        line: "One creator, one project that shares Jesus with their secular audience.",
+        line: "A specific project that shares Jesus with a secular audience.",
         href: "/partner-projects",
       },
       {

@@ -8,6 +8,6 @@ export default function OgImage() {
   return pageOg({
     image: "images/beast-set-life.jpg",
     title: "Start an Application",
-    line: "Apply for a Partner Project: one creator, one project that shares Jesus with their secular audience. It costs you nothing.",
+    line: "Apply for a Partner Project: a specific project that shares Jesus with a secular audience. It costs you nothing.",
   });
 }

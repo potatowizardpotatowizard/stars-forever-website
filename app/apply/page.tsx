@@ -9,7 +9,7 @@ import { CONTACT } from "@/content/site";
 export const metadata: Metadata = {
   title: "Apply",
   description:
-    "Apply for a Partner Project: one creator, one project that shares Jesus with their secular audience. It costs you nothing.",
+    "Apply for a Partner Project: a specific project that shares Jesus with a secular audience. It costs you nothing.",
   openGraph: { images: [{ url: "/brand/og-partner.jpg", width: 1200, height: 630 }] },
 };
 

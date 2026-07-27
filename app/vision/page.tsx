@@ -81,27 +81,35 @@ export default function VisionPage() {
               <p className="meta-label">{VISION.parallel.thenLabel}</p>
               <p className="meta-label text-ember">{VISION.parallel.nowLabel}</p>
             </div>
-            {VISION.parallel.pairs.map((pair, i) => (
+            {VISION.parallel.pairs.map((pair) => (
               <Reveal
                 key={pair.then}
-                className="grid grid-cols-2 items-center gap-6 border-b border-dust/15 py-6"
+                className="grid grid-cols-2 items-start gap-6 border-b border-dust/15 py-6"
               >
-                <p className="text-lg text-starlight/70">{pair.then}</p>
-                <p className="flex items-center gap-3 text-lg text-starlight">
-                  <svg
-                    width="12"
-                    height="12"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                    className={`shrink-0 text-ember vision-pulse-${i % 2}`}
-                  >
-                    <path
-                      fill="currentColor"
-                      d="M12 0c.9 6.8 4.2 10.1 12 12c-7.8 1.9-11.1 5.2-12 12c-.9-6.8-4.2-10.1-12-12C7.8 10.1 11.1 6.8 12 0Z"
-                    />
-                  </svg>
-                  {pair.now}
-                </p>
+                <div>
+                  <p className="text-lg text-starlight/70">{pair.then}</p>
+                  <p className="meta-label mt-1.5 text-dust">Ex: {pair.thenEx}</p>
+                </div>
+                <div>
+                  <p className="flex items-center gap-3 text-lg text-starlight">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                      className="shrink-0 text-ember"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M12 0c.9 6.8 4.2 10.1 12 12c-7.8 1.9-11.1 5.2-12 12c-.9-6.8-4.2-10.1-12-12C7.8 10.1 11.1 6.8 12 0Z"
+                      />
+                    </svg>
+                    {pair.now}
+                  </p>
+                  <p className="meta-label mt-1.5 pl-6 text-ember/80">
+                    Ex: {pair.nowEx}
+                  </p>
+                </div>
               </Reveal>
             ))}
           </div>
