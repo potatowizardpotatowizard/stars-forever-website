@@ -84,7 +84,8 @@ export default function DigitalSky() {
       rot: number,
     ) => {
       const halo = ctx.createRadialGradient(px, py, 0, px, py, size * 3.4);
-      halo.addColorStop(0, `rgba(196, 181, 253, ${0.5 * alpha})`);
+      halo.addColorStop(0, `rgba(220, 210, 255, ${0.8 * alpha})`);
+      halo.addColorStop(0.45, `rgba(167, 139, 250, ${0.35 * alpha})`);
       halo.addColorStop(1, "rgba(167, 139, 250, 0)");
       ctx.fillStyle = halo;
       ctx.beginPath();
@@ -128,7 +129,7 @@ export default function DigitalSky() {
 
       // constellation lines between each lit node and its two nearest
       // lit neighbors
-      ctx.lineWidth = 1;
+      ctx.lineWidth = 1.4;
       for (const i of lit) {
         const a = pos(NODES[i]);
         const near = lit
@@ -142,7 +143,7 @@ export default function DigitalSky() {
         for (const { j } of near) {
           if (j < i) continue; // draw each pair once
           const b = pos(NODES[j]);
-          ctx.strokeStyle = `rgba(167, 139, 250, ${0.22 * global})`;
+          ctx.strokeStyle = `rgba(196, 181, 253, ${0.45 * global})`;
           ctx.beginPath();
           ctx.moveTo(a.px, a.py);
           ctx.lineTo(b.px, b.py);

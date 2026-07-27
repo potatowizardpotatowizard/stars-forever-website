@@ -50,7 +50,7 @@ export const VISION = {
   },
   programs: {
     kicker: "How we get there",
-    heading: "Two Ways We Make Them",
+    heading: "How We Create Content Missionaries",
     body: "Both things we do at Stars Forever: Partner Projects and the Revolutionary Cohort serve to create content missionaries, or as we call them, Category 3 creators.",
     items: [
       {

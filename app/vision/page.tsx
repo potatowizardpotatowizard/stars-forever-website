@@ -48,7 +48,7 @@ export default function VisionPage() {
       <section className="relative overflow-hidden">
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 top-0 h-[45vh] bg-[linear-gradient(to_bottom,rgb(109_40_217/0.25),rgb(109_40_217/0.08)_45%,transparent)]"
+          className="absolute inset-x-0 top-0 h-[50vh] bg-[linear-gradient(to_bottom,rgb(34_197_94/0.26),rgb(34_197_94/0.1)_40%,rgb(109_40_217/0.08)_70%,transparent)]"
         />
         <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8">
           <Reveal className="max-w-3xl">
