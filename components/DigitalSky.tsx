@@ -49,23 +49,40 @@ export default function DigitalSky({ className }: { className?: string }) {
       canvas.width = Math.round(width * dpr);
       canvas.height = Math.round(height * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const seen = new Set<string>();
-      webEdges = [];
-      NODES.forEach((n, i) => {
-        NODES.map((m, j) => ({
-          j,
-          d: Math.hypot((m.x - n.x) * width, (m.y - n.y) * height),
-        }))
-          .filter(({ j }) => j !== i)
-          .sort((a, b) => a.d - b.d)
-          .slice(0, 3)
-          .forEach(({ j }) => {
-            const key = i < j ? `${i}-${j}` : `${j}-${i}`;
-            if (seen.has(key)) return;
-            seen.add(key);
-            webEdges.push([i, j]);
+      // Build the chart with no hub stars: candidate threads are all
+      // pairs sorted by length, accepted only while both endpoints
+      // still have fewer than three connections. A second pass makes
+      // sure nobody is left with less than two.
+      const pairs: { i: number; j: number; d: number }[] = [];
+      for (let i = 0; i < NODES.length; i++) {
+        for (let j = i + 1; j < NODES.length; j++) {
+          pairs.push({
+            i,
+            j,
+            d: Math.hypot(
+              (NODES[j].x - NODES[i].x) * width,
+              (NODES[j].y - NODES[i].y) * height,
+            ),
           });
-      });
+        }
+      }
+      pairs.sort((a, b) => a.d - b.d);
+      const degree = new Array(NODES.length).fill(0);
+      webEdges = [];
+      for (const { i, j } of pairs) {
+        if (degree[i] >= 3 || degree[j] >= 3) continue;
+        webEdges.push([i, j]);
+        degree[i] += 1;
+        degree[j] += 1;
+      }
+      for (const { i, j } of pairs) {
+        if (degree[i] >= 2 && degree[j] >= 2) continue;
+        if (degree[i] >= 4 || degree[j] >= 4) continue;
+        if (webEdges.some(([a, b]) => a === i && b === j)) continue;
+        webEdges.push([i, j]);
+        degree[i] += 1;
+        degree[j] += 1;
+      }
     };
     resize();
     window.addEventListener("resize", resize);
