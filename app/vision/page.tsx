@@ -73,7 +73,7 @@ export default function VisionPage() {
               href="/story"
               className="meta-label mt-10 inline-block text-dust transition-colors hover:text-ember"
             >
-              Where this conviction was born: The Story →
+              The story behind Stars Forever →
             </Link>
           </Reveal>
         </div>
