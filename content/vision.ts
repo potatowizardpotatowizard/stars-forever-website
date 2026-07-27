@@ -5,7 +5,7 @@ export const VISION = {
   title: "The Vision",
   hero: {
     kicker: "The vision",
-    heading: "The Digital World, Evangelized",
+    heading: "Create Content Missionaries Worldwide",
   },
   missionary: {
     kicker: "Content missionaries",
