@@ -11,7 +11,7 @@ export const VISION = {
     kicker: "Why this matters",
     heading: "The Problem",
     paragraphs: [
-      "Most people now exist online far more than they exist in person. The best hours of the day are spent inside feeds, streams, and comment sections. That is where life happens now, and that is where lostness lives too.",
+      "Most people now exist online far more than they exist in person. Unfortunately hours of the day are spent inside feeds, streams, and comment sections. That is where life happens now, and that is why so many are anxious and depressed. They need Jesus.",
       "If a missionary approaches someone on the street, a good conversation might earn 30 minutes of relationship capital. Most young adults, meanwhile, have years of relationship capital with their favorite creators: thousands of hours of watching, trusting, and feeling known by someone they have never met.",
       "With lostness and loneliness higher than ever, we should leverage every advantage a creator carries to meet people where they actually are.",
     ],
