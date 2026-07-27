@@ -117,6 +117,15 @@ export default function DigitalSky({ className }: { className?: string }) {
     }));
 
     const resize = () => {
+      // Mobile browsers fire resize as the URL bar collapses; skip
+      // unless the canvas truly changed size, or the sky flickers
+      // with every scroll.
+      if (
+        width === canvas.offsetWidth &&
+        Math.abs(height - canvas.offsetHeight) < 2
+      ) {
+        return;
+      }
       const dpr = Math.min(2, window.devicePixelRatio || 1);
       width = canvas.offsetWidth;
       height = canvas.offsetHeight;
@@ -353,7 +362,7 @@ export default function DigitalSky({ className }: { className?: string }) {
     <canvas
       ref={canvasRef}
       aria-label="The digital world as a night sky of lit niches; move the cursor to draw constellations between them"
-      className={className ?? "h-[62vh] min-h-[420px] w-full"}
+      className={className ?? "h-[62svh] min-h-[420px] w-full"}
     />
   );
 }

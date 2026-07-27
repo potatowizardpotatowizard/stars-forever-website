@@ -138,7 +138,7 @@ export default function VisionPage() {
       </section>
 
       {/* The two programs */}
-      <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
+      <section className="mx-auto max-w-7xl px-5 pb-24 pt-6 sm:px-8 sm:py-24">
         <Reveal className="max-w-3xl">
           <Kicker>{VISION.programs.kicker}</Kicker>
           <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
