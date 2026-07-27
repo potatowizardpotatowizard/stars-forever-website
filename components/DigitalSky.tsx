@@ -41,6 +41,10 @@ export default function DigitalSky({
     // Ignition ranks: Art sits at the heart of the sky, so the light
     // starts there and spreads outward ring by ring.
     let rank: number[] = [];
+    // The web, precomputed: each star, on igniting, ties itself to up
+    // to three stars that lit before it. Once made, a line holds
+    // until the whole sky breathes out at the cycle's end.
+    let edges: { a: number; b: number; at: number }[] = [];
     const starPath = new Path2D(STAR);
     const dust = Array.from({ length: 70 }, () => ({
       x: Math.random(),
@@ -66,6 +70,21 @@ export default function DigitalSky({
       rank = [];
       byDist.forEach((e, r) => {
         rank[e.i] = r;
+      });
+      edges = [];
+      NODES.forEach((n, i) => {
+        if (rank[i] === 0) return;
+        const elders = NODES.map((m, j) => ({ j, m }))
+          .filter(({ j }) => rank[j] < rank[i])
+          .map(({ j, m }) => ({
+            j,
+            d: Math.hypot((m.x - n.x) * width, (m.y - n.y) * height),
+          }))
+          .sort((x, y) => x.d - y.d)
+          .slice(0, 3);
+        for (const { j } of elders) {
+          edges.push({ a: i, b: j, at: rank[i] * IGNITE });
+        }
       });
     };
     resize();
@@ -122,34 +141,18 @@ export default function DigitalSky({
       }
       ctx.globalAlpha = 1;
 
-      const lit: number[] = [];
-      NODES.forEach((_, i) => {
-        const at = (rank[i] ?? 0) * IGNITE;
-        if (ct > at) lit.push(i);
-      });
-
-      // constellation lines: each lit node reaches for its three
-      // nearest lit neighbors, so the web connects at multiple points
+      // the web: every line born stays until the sky breathes out
       ctx.lineWidth = 1.4;
-      for (const i of lit) {
-        const a = pos(NODES[i]);
-        const near = lit
-          .filter((j) => j !== i)
-          .map((j) => {
-            const b = pos(NODES[j]);
-            return { j, d: Math.hypot(b.px - a.px, b.py - a.py) };
-          })
-          .sort((x, y) => x.d - y.d)
-          .slice(0, 3);
-        for (const { j } of near) {
-          if (j < i) continue; // draw each pair once
-          const b = pos(NODES[j]);
-          ctx.strokeStyle = `rgba(196, 181, 253, ${0.45 * global})`;
-          ctx.beginPath();
-          ctx.moveTo(a.px, a.py);
-          ctx.lineTo(b.px, b.py);
-          ctx.stroke();
-        }
+      for (const e of edges) {
+        if (ct <= e.at) continue;
+        const born = Math.min(1, (ct - e.at) / 500);
+        const A = pos(NODES[e.a]);
+        const B = pos(NODES[e.b]);
+        ctx.strokeStyle = `rgba(196, 181, 253, ${0.45 * born * global})`;
+        ctx.beginPath();
+        ctx.moveTo(A.px, A.py);
+        ctx.lineTo(B.px, B.py);
+        ctx.stroke();
       }
 
       // the niches themselves
