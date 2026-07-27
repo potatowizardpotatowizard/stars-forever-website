@@ -3,29 +3,29 @@
 
 export const STORY = {
   title: "The Story",
-  intro: "Seven days before Beast Games season one, Auzi's brother died.",
+  intro: "Seven days before Beast Games season one, my brother died.",
   meta: { where: "Beast Games", when: "July 2024 to February 2025" },
   beats: [
     {
       imageSlot: "story-set",
       polaroidCaption: "the set at night · july 2024",
       paragraphs: [
-        "He prayed a prayer that would change everything: Jesus, I want my brother's death to turn into other people's eternities.",
+        "As I entered the show a week later, I prayed a prayer that would change everything: Jesus, I want my brother's death to turn into other people's eternities.",
       ],
     },
     {
       imageSlot: "story-prayer",
       polaroidCaption: "prayer before the challenge",
       paragraphs: [
-        "On the set of MrBeast's Amazon Prime show, he met other Christians. Together they prayed before every challenge. They hosted a church service. They preached the gospel and did life with unbelievers, day after day, in the middle of the biggest competition show on earth.",
+        "That is when I met a few strong Christians on the set of MrBeast's Amazon Prime show. Together we prayed before every challenge. We preached the gospel. And we even hosted a church service with over 100+ contestants attending. But most importantly, we loved deeply, we did life with unbelievers, day after day, in the middle of the biggest competition show on earth.",
       ],
     },
     {
       imageSlot: "story-baptism-island",
       polaroidCaption: "the remote island",
       paragraphs: [
-        "On a remote island, they baptized two girls.",
-        "It was the most he had ever seen God move. And it happened outside a church. Despite the fresh grief, he had certainty that he was living exactly what God had designed for him, and he did not want it to end with the show. From that moment on, he knew he wanted to spend the rest of his life preaching Jesus through creators and creator environments.",
+        "The story gets crazier, because after making the top 60 out of 2000 contestants, we were invited to a remote island in the middle of nowhere, that’s when we baptized two girls, with numerous people watching: contestants, atheists, producers, cameraman, famous creators, etc.",
+        "It was the most I had ever seen God move. And it happened outside a church. Despite the fresh loss of my brother and the hidden grief, I had certainty that I was living the exact life that God had designed for me, and I did not want it to end with the show. From that moment on, I knew I wanted to spend the rest of my life preaching Jesus through creators and creator environments.",
         "Shortly after, Stars Forever was born.",
       ],
     },
