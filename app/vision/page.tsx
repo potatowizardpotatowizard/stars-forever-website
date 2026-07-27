@@ -52,7 +52,11 @@ export default function VisionPage() {
       <section className="relative overflow-hidden">
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 top-0 h-[50vh] bg-[linear-gradient(to_bottom,rgb(34_197_94/0.26),rgb(34_197_94/0.1)_40%,rgb(109_40_217/0.08)_70%,transparent)]"
+          className="absolute inset-x-0 top-0 h-[55vh]"
+          style={{
+            backgroundImage:
+              "radial-gradient(ellipse 55% 60% at 10% 0%, rgb(109 40 217 / 0.24), transparent 68%), radial-gradient(ellipse 80% 65% at 78% 0%, rgb(34 197 94 / 0.3), transparent 72%)",
+          }}
         />
         <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8">
           <Reveal className="max-w-3xl">
@@ -206,10 +210,12 @@ export default function VisionPage() {
             <p className="mx-auto mt-6 max-w-xl text-starlight/75">
               {VISION.closing.giveLine}
             </p>
-            <div className="mt-10 flex flex-wrap justify-center gap-4">
-              {GIVING_URL ? (
+            {GIVING_URL ? (
+              <div className="mt-8">
                 <Cta href={GIVING_URL}>{VISION.closing.giveCta}</Cta>
-              ) : null}
+              </div>
+            ) : null}
+            <div className="mt-12 flex flex-wrap justify-center gap-4 border-t border-dust/15 pt-10">
               {VISION.closing.ctas.map((cta) => (
                 <Cta key={cta.href} href={cta.href} variant="ghost">
                   {cta.label}
