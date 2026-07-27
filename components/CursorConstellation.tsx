@@ -1,6 +1,9 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+
+const STAR =
+  "M12 0c.9 6.8 4.2 10.1 12 12c-7.8 1.9-11.1 5.2-12 12c-.9-6.8-4.2-10.1-12-12C7.8 10.1 11.1 6.8 12 0Z";
 
 // A latent star field that only the visitor can light: dormant points
 // scattered across the hero ignite as the cursor passes over them,
@@ -19,6 +22,7 @@ export default function CursorConstellation({
   className?: string;
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [hint, setHint] = useState<"hidden" | "showing" | "fading">("hidden");
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -28,6 +32,8 @@ export default function CursorConstellation({
       "(prefers-reduced-motion: reduce)",
     ).matches;
     const coarse = window.matchMedia("(pointer: coarse)").matches;
+    if (!reduced && !coarse) setHint("showing");
+    const starPath = new Path2D(STAR);
 
     let raf = 0;
     let width = 0;
@@ -59,10 +65,18 @@ export default function CursorConstellation({
     resize();
     window.addEventListener("resize", resize);
 
+    let painted = false;
     const ignite = (px: number, py: number) => {
       const now = performance.now();
       for (const p of points) {
-        if (Math.hypot(p.x - px, p.y - py) < REACH) p.lit = now;
+        if (Math.hypot(p.x - px, p.y - py) < REACH) {
+          p.lit = now;
+          if (!painted) {
+            // The whisper has served its purpose: the sky is lit.
+            painted = true;
+            setHint("fading");
+          }
+        }
       }
     };
 
@@ -138,23 +152,24 @@ export default function CursorConstellation({
           ctx.arc(p.x, p.y, 3 + k * 22, 0, Math.PI * 2);
           ctx.stroke();
         }
-        const r = 4.5 * a + 1.5;
-        const halo = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r * 3);
-        halo.addColorStop(0, `rgba(196, 181, 253, ${0.5 * a})`);
+        // A true four point star, softly lit
+        const r = 5.5 * a + 2;
+        const halo = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r * 2.6);
+        halo.addColorStop(0, `rgba(196, 181, 253, ${0.3 * a})`);
         halo.addColorStop(1, "rgba(167, 139, 250, 0)");
         ctx.fillStyle = halo;
         ctx.beginPath();
-        ctx.arc(p.x, p.y, r * 3, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, r * 2.6, 0, Math.PI * 2);
         ctx.fill();
-        ctx.strokeStyle = `rgba(239, 236, 247, ${0.9 * a})`;
-        ctx.lineWidth = 1.1;
-        ctx.lineCap = "round";
-        ctx.beginPath();
-        ctx.moveTo(p.x - r, p.y);
-        ctx.lineTo(p.x + r, p.y);
-        ctx.moveTo(p.x, p.y - r);
-        ctx.lineTo(p.x, p.y + r);
-        ctx.stroke();
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.phase * 0.3);
+        const s = r / 12;
+        ctx.scale(s, s);
+        ctx.translate(-12, -12);
+        ctx.fillStyle = `rgba(239, 236, 247, ${0.62 * a})`;
+        ctx.fill(starPath);
+        ctx.restore();
       }
 
       raf = requestAnimationFrame(draw);
@@ -170,10 +185,22 @@ export default function CursorConstellation({
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      aria-hidden="true"
-      className={className ?? "absolute inset-0 h-full w-full"}
-    />
+    <>
+      <canvas
+        ref={canvasRef}
+        aria-hidden="true"
+        className={className ?? "absolute inset-0 h-full w-full"}
+      />
+      {hint !== "hidden" ? (
+        <span
+          aria-hidden="true"
+          className={`meta-label absolute right-6 top-[32%] flex items-center gap-2.5 text-dust transition-opacity duration-1000 sm:right-10 ${
+            hint === "fading" ? "opacity-0" : "opacity-100"
+          }`}
+        >
+          <span className="ping-star">✦</span> move your cursor
+        </span>
+      ) : null}
+    </>
   );
 }

@@ -48,6 +48,35 @@ export default function VisionPage() {
             {VISION.hero.line}
           </p>
           <NicheCycler />
+          <p
+            className="hero-beat mt-10 max-w-2xl font-display text-2xl font-bold leading-snug sm:text-3xl"
+            style={{ animationDelay: "1.1s" }}
+          >
+            {VISION.hero.manifesto}
+          </p>
+          <div
+            className="hero-beat mt-12 flex flex-wrap items-center gap-x-4 gap-y-2"
+            style={{ animationDelay: "1.7s" }}
+          >
+            {VISION.hero.timeline.map((stop, i) => (
+              <span key={stop} className="flex items-center gap-4">
+                {i > 0 ? (
+                  <span aria-hidden="true" className="text-dust/60">
+                    →
+                  </span>
+                ) : null}
+                <span
+                  className={`meta-label ${
+                    i === VISION.hero.timeline.length - 1
+                      ? "text-ember"
+                      : "text-starlight/70"
+                  }`}
+                >
+                  {stop}
+                </span>
+              </span>
+            ))}
+          </div>
         </div>
       </header>
 
