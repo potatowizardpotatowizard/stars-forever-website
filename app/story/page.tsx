@@ -40,7 +40,7 @@ export default function StoryPage() {
         <span aria-hidden="true" className="hero-meteor" />
         <div className="relative mx-auto max-w-7xl px-5 pb-20 pt-44 sm:px-8">
           <p className="meta-label">
-            {STORY.meta.where} · {STORY.meta.when}
+            {STORY.meta.who} · {STORY.meta.where} · {STORY.meta.when}
           </p>
           <h1 className="mt-8 max-w-4xl font-display text-4xl leading-tight sm:text-6xl sm:leading-tight">
             {STORY.intro}

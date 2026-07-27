@@ -210,8 +210,9 @@ export default function StoryJourney({
       const ease = t * t * (3 - 2 * t);
       const w = container.clientWidth;
       // Start: high in the hero sky. End: the first point of the journey.
-      const x0 = w * 0.72;
-      const y0 = vh * 0.42 - heroH;
+      // High and far right, clear of the headline's last words.
+      const x0 = w * 0.88;
+      const y0 = vh * 0.3 - heroH;
       let x1 = x0;
       let y1 = y0 + heroH * 0.85;
       const path = pathRef.current;
