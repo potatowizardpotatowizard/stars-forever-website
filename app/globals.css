@@ -1538,44 +1538,4 @@ html.easter-sunday body::before {
       transform: translateX(0);
     }
   }
-  .claim-card {
-    animation: claim-ignite 21.6s linear infinite;
-  }
-  .claim-card-star {
-    opacity: 0;
-    animation: claim-star 21.6s linear infinite;
-  }
-}
-@keyframes claim-ignite {
-  0%,
-  80%,
-  96%,
-  100% {
-    border-color: rgb(151 139 173 / 0.25);
-    background-color: rgb(7 5 12 / 0.4);
-    box-shadow: none;
-  }
-  84%,
-  92% {
-    border-color: rgb(167 139 250 / 0.75);
-    background-color: rgb(34 197 94 / 0.1);
-    box-shadow: 0 0 24px rgb(109 40 217 / 0.5);
-  }
-}
-@keyframes claim-star {
-  0%,
-  80%,
-  96%,
-  100% {
-    opacity: 0;
-    transform: scale(0.4);
-  }
-  84%,
-  92% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-.claim-card-star {
-  opacity: 0;
 }
