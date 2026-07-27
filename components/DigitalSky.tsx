@@ -11,6 +11,47 @@ import { SKY_NODES as NODES } from "@/content/niches";
 // finger drag does the same. Reduced motion sees the lit sky, still.
 const GLOW_REACH = 160; // px within which the web glows around the cursor
 
+// The chart, hand authored: one fixed constellation on every
+// screen, art directed line by line.
+const EDGE_NAMES: [string, string][] = [
+  ["Art", "Comedy"],
+  ["Art", "Family"],
+  ["Art", "Finance"],
+  ["Art", "Fitness"],
+  ["Art", "Music"],
+  ["Beauty", "Cars"],
+  ["Beauty", "Family"],
+  ["Beauty", "Finance"],
+  ["Beauty", "Travel"],
+  ["Cars", "Science"],
+  ["Cars", "Travel"],
+  ["Comedy", "Film"],
+  ["Comedy", "Music"],
+  ["Comedy", "Outdoors"],
+  ["Comedy", "Tech"],
+  ["Education", "Family"],
+  ["Education", "Fashion"],
+  ["Education", "Science"],
+  ["Family", "Finance"],
+  ["Fashion", "Science"],
+  ["Fashion", "Travel"],
+  ["Film", "Finance"],
+  ["Film", "Outdoors"],
+  ["Fitness", "Outdoors"],
+  ["Food", "Gaming"],
+  ["Food", "Sports"],
+  ["Food", "Tech"],
+  ["Gaming", "Music"],
+  ["Gaming", "Tech"],
+  ["Outdoors", "Sports"],
+  ["Sports", "Tech"],
+];
+const LABEL_INDEX = new Map(NODES.map((n, i) => [n.label, i]));
+const WEB_EDGES: [number, number][] = EDGE_NAMES.map(([a, b]) => [
+  LABEL_INDEX.get(a)!,
+  LABEL_INDEX.get(b)!,
+]);
+
 const STAR =
   "M12 0c.9 6.8 4.2 10.1 12 12c-7.8 1.9-11.1 5.2-12 12c-.9-6.8-4.2-10.1-12-12C7.8 10.1 11.1 6.8 12 0Z";
 
@@ -32,9 +73,6 @@ export default function DigitalSky({ className }: { className?: string }) {
     let my = -1;
     let inside = false;
     const starPath = new Path2D(STAR);
-    // The resting web: every star joined to its three nearest
-    // neighbors, the whole chart connected, dull until approached.
-    let webEdges: [number, number][] = [];
     const dust = Array.from({ length: 70 }, () => ({
       x: Math.random(),
       y: Math.random(),
@@ -49,23 +87,6 @@ export default function DigitalSky({ className }: { className?: string }) {
       canvas.width = Math.round(width * dpr);
       canvas.height = Math.round(height * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const seen = new Set<string>();
-      webEdges = [];
-      NODES.forEach((n, i) => {
-        NODES.map((m, j) => ({
-          j,
-          d: Math.hypot((m.x - n.x) * width, (m.y - n.y) * height),
-        }))
-          .filter(({ j }) => j !== i)
-          .sort((a, b) => a.d - b.d)
-          .slice(0, 3)
-          .forEach(({ j }) => {
-            const key = i < j ? `${i}-${j}` : `${j}-${i}`;
-            if (seen.has(key)) return;
-            seen.add(key);
-            webEdges.push([i, j]);
-          });
-      });
     };
     resize();
     window.addEventListener("resize", resize);
@@ -128,7 +149,7 @@ export default function DigitalSky({ className }: { className?: string }) {
       // the resting web: dull threads always joining the stars
       ctx.lineWidth = 1;
       ctx.lineCap = "round";
-      for (const [i, j] of webEdges) {
+      for (const [i, j] of WEB_EDGES) {
         const A = pos(NODES[i]);
         const B = pos(NODES[j]);
         ctx.strokeStyle = "rgba(151, 139, 173, 0.18)";
@@ -158,7 +179,7 @@ export default function DigitalSky({ className }: { className?: string }) {
           );
           return Math.hypot(mx - (x1 + vx * t2), my - (y1 + vy * t2));
         };
-        for (const [i, j] of webEdges) {
+        for (const [i, j] of WEB_EDGES) {
           const A = pos(NODES[i]);
           const B = pos(NODES[j]);
           const d2 = segDist(A.px, A.py, B.px, B.py);
