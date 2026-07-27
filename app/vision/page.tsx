@@ -85,7 +85,7 @@ export default function VisionPage() {
             <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
               <GlitchText text={VISION.missionary.heading} />
             </h2>
-            <p className="mt-8 font-display text-2xl font-bold text-starlight sm:text-3xl">
+            <p className="mt-8 text-lg font-bold leading-relaxed text-starlight">
               {VISION.missionary.lead}
             </p>
             <div className="mt-6 space-y-6">
@@ -95,20 +95,7 @@ export default function VisionPage() {
                 </p>
               ))}
             </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Then and now: the same calling, translated */}
-      <section className="border-y border-dust/10 bg-soot/40">
-        <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
-          <Reveal>
-            <Kicker>{VISION.parallel.kicker}</Kicker>
-            <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
-              <GlitchText text={VISION.parallel.heading} />
-            </h2>
-          </Reveal>
-          <div className="mt-14 max-w-3xl">
+            <div className="mt-12 max-w-3xl">
             <div className="grid grid-cols-2 gap-6 border-b border-dust/20 pb-4">
               <p className="meta-label">{VISION.parallel.thenLabel}</p>
               <p className="meta-label text-ember">{VISION.parallel.nowLabel}</p>
@@ -145,6 +132,7 @@ export default function VisionPage() {
               </Reveal>
             ))}
           </div>
+          </Reveal>
         </div>
       </section>
 

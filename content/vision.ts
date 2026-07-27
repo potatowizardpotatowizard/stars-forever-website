@@ -26,8 +26,6 @@ export const VISION = {
     ],
   },
   parallel: {
-    kicker: "The same calling",
-    heading: "Traditional vs Content",
     thenLabel: "Traditional Missionary",
     nowLabel: "Content Missionary",
     pairs: [
