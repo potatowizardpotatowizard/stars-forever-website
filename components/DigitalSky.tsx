@@ -9,7 +9,7 @@ import { SKY_NODES as NODES } from "@/content/niches";
 // constellation threads reach from it to the nearby niche stars,
 // brightening them, and dissolve as it moves on. On touch screens a
 // finger drag does the same. Reduced motion sees the lit sky, still.
-const REACH = 240; // px within which the cursor threads to a star
+const GLOW_REACH = 160; // px within which the web glows around the cursor
 
 const STAR =
   "M12 0c.9 6.8 4.2 10.1 12 12c-7.8 1.9-11.1 5.2-12 12c-.9-6.8-4.2-10.1-12-12C7.8 10.1 11.1 6.8 12 0Z";
@@ -32,8 +32,8 @@ export default function DigitalSky({ className }: { className?: string }) {
     let my = -1;
     let inside = false;
     const starPath = new Path2D(STAR);
-    // The resting web: every star quietly joined to its two nearest
-    // neighbors, dull threads that simply exist.
+    // The resting web: every star joined to its three nearest
+    // neighbors, the whole chart connected, dull until approached.
     let webEdges: [number, number][] = [];
     const dust = Array.from({ length: 70 }, () => ({
       x: Math.random(),
@@ -58,7 +58,7 @@ export default function DigitalSky({ className }: { className?: string }) {
         }))
           .filter(({ j }) => j !== i)
           .sort((a, b) => a.d - b.d)
-          .slice(0, 2)
+          .slice(0, 3)
           .forEach(({ j }) => {
             const key = i < j ? `${i}-${j}` : `${j}-${i}`;
             if (seen.has(key)) return;
@@ -138,60 +138,52 @@ export default function DigitalSky({ className }: { className?: string }) {
         ctx.stroke();
       }
 
-      // the cursor joins the chart like a star among stars: one thread
-      // to its nearest niche (two only when both are truly close), and
-      // the resting web around that star wakes and glows. Segments of
-      // constellation light up; no radial fans.
+      // the glow follows the cursor across the chart: any thread it
+      // passes near wakes with light, no lines of its own
       const near: number[] = [];
       const kin: number[] = [];
       if (!reduced && inside) {
-        const byDist = NODES.map((n, i) => {
-          const { px, py } = pos(n);
-          return { i, px, py, d: Math.hypot(px - mx, py - my) };
-        })
-          .filter(({ d }) => d < REACH)
-          .sort((a, b) => a.d - b.d)
-          .slice(0, 2);
-        const links =
-          byDist.length === 2 && byDist[1].d < REACH * 0.55
-            ? byDist
-            : byDist.slice(0, 1);
-
-        const glowLine = (
+        const segDist = (
           x1: number,
           y1: number,
           x2: number,
           y2: number,
-          a: number,
         ) => {
-          ctx.strokeStyle = `rgba(109, 40, 217, ${0.35 * a})`;
-          ctx.lineWidth = 4.5;
-          ctx.beginPath();
-          ctx.moveTo(x1, y1);
-          ctx.lineTo(x2, y2);
-          ctx.stroke();
-          ctx.strokeStyle = `rgba(196, 181, 253, ${0.7 * a})`;
-          ctx.lineWidth = 1.4;
-          ctx.beginPath();
-          ctx.moveTo(x1, y1);
-          ctx.lineTo(x2, y2);
-          ctx.stroke();
+          const vx = x2 - x1;
+          const vy = y2 - y1;
+          const len2 = vx * vx + vy * vy || 1;
+          const t2 = Math.max(
+            0,
+            Math.min(1, ((mx - x1) * vx + (my - y1) * vy) / len2),
+          );
+          return Math.hypot(mx - (x1 + vx * t2), my - (y1 + vy * t2));
         };
-
-        for (const s of links) {
-          near.push(s.i);
-          glowLine(mx, my, s.px, s.py, 1 - s.d / REACH);
-        }
-        // wake the chart: the web edges touching the joined stars glow
         for (const [i, j] of webEdges) {
-          const hitI = near.includes(i);
-          const hitJ = near.includes(j);
-          if (!hitI && !hitJ) continue;
           const A = pos(NODES[i]);
           const B = pos(NODES[j]);
-          glowLine(A.px, A.py, B.px, B.py, 0.75);
-          kin.push(hitI ? j : i);
+          const d2 = segDist(A.px, A.py, B.px, B.py);
+          if (d2 > GLOW_REACH) continue;
+          const a = 1 - d2 / GLOW_REACH;
+          ctx.strokeStyle = `rgba(109, 40, 217, ${0.4 * a})`;
+          ctx.lineWidth = 4.5;
+          ctx.beginPath();
+          ctx.moveTo(A.px, A.py);
+          ctx.lineTo(B.px, B.py);
+          ctx.stroke();
+          ctx.strokeStyle = `rgba(196, 181, 253, ${0.75 * a})`;
+          ctx.lineWidth = 1.4;
+          ctx.beginPath();
+          ctx.moveTo(A.px, A.py);
+          ctx.lineTo(B.px, B.py);
+          ctx.stroke();
+          if (a > 0.35) {
+            kin.push(i, j);
+          }
         }
+        NODES.forEach((n, i) => {
+          const { px, py } = pos(n);
+          if (Math.hypot(px - mx, py - my) < GLOW_REACH) near.push(i);
+        });
       }
 
       // the niches, all of them burning
