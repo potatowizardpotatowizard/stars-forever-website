@@ -81,6 +81,9 @@ export const VISION = {
   closing: {
     kicker: "Help write it",
     heading: "The sky has room for your star.",
+    giveLine:
+      "Every gift funds another content missionary reaching another niche with the Gospel.",
+    giveCta: "Give to the Vision",
     ctas: [
       { label: "Start an Application", href: "/apply" },
       { label: "Get Involved", href: "/get-involved" },

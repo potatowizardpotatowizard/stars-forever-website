@@ -11,6 +11,7 @@ import Kicker from "@/components/Kicker";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import { VISION } from "@/content/vision";
+import { GIVING_URL } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "The Vision",
@@ -202,9 +203,15 @@ export default function VisionPage() {
             <h2 className="mx-auto mt-6 max-w-2xl font-display text-4xl font-bold sm:text-5xl">
               {VISION.closing.heading}
             </h2>
+            <p className="mx-auto mt-6 max-w-xl text-starlight/75">
+              {VISION.closing.giveLine}
+            </p>
             <div className="mt-10 flex flex-wrap justify-center gap-4">
-              {VISION.closing.ctas.map((cta, i) => (
-                <Cta key={cta.href} href={cta.href} variant={i ? "ghost" : undefined}>
+              {GIVING_URL ? (
+                <Cta href={GIVING_URL}>{VISION.closing.giveCta}</Cta>
+              ) : null}
+              {VISION.closing.ctas.map((cta) => (
+                <Cta key={cta.href} href={cta.href} variant="ghost">
                   {cta.label}
                 </Cta>
               ))}
