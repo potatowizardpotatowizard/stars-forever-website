@@ -148,6 +148,12 @@ export default function HomePage() {
                 );
               })}
             </div>
+            <Link
+              href="/story"
+              className="meta-label mt-10 inline-block text-dust transition-colors hover:text-ember"
+            >
+              The story behind Stars Forever →
+            </Link>
           </Reveal>
         </div>
       </section>

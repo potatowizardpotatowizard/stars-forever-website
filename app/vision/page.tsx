@@ -69,6 +69,12 @@ export default function VisionPage() {
                 </p>
               ))}
             </div>
+            <Link
+              href="/story"
+              className="meta-label mt-10 inline-block text-dust transition-colors hover:text-ember"
+            >
+              Where this conviction was born: The Story →
+            </Link>
           </Reveal>
         </div>
       </section>

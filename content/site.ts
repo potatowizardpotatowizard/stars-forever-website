@@ -32,7 +32,7 @@ export const GIVING_URL: string | null =
   "https://www.equipnet.org/missionaries/aweber";
 
 export const NAV = [
-  { label: "The Story", href: "/story" },
+  { label: "The Vision", href: "/vision" },
   { label: "Partner Projects", href: "/partner-projects" },
   { label: "Find Your Creator Type", href: "/category-3" },
   { label: "Revolutionary Cohort", href: "/revolutionary" },
@@ -41,7 +41,7 @@ export const NAV = [
 
 // The hero menu on the home page: the site itself, presented like a tape menu.
 export const HERO_MENU = [
-  { label: "The Story", href: "/story" },
+  { label: "The Vision", href: "/vision" },
   { label: "Partner Projects", href: "/partner-projects" },
   { label: "Find Your Creator Type", href: "/category-3" },
   { label: "Revolutionary Cohort", href: "/revolutionary" },
@@ -50,7 +50,7 @@ export const HERO_MENU = [
 
 // Secondary pages reachable from the footer.
 export const FOOTER_NAV = [
-  { label: "The Vision", href: "/vision" },
+  { label: "The Story", href: "/story" },
   { label: "The Constellation", href: "/constellation" },
   { label: "Speaking", href: "/speaking" },
   { label: "Podcast", href: "/podcast" },
