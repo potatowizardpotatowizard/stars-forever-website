@@ -207,19 +207,21 @@ export default function VisionPage() {
             <h2 className="mx-auto mt-6 max-w-2xl font-display text-4xl font-bold sm:text-5xl">
               {VISION.closing.heading}
             </h2>
-            <p className="mx-auto mt-6 max-w-xl text-starlight/75">
-              {VISION.closing.giveLine}
-            </p>
             <div className="mt-10 flex flex-wrap justify-center gap-4">
-              {GIVING_URL ? (
-                <Cta href={GIVING_URL}>{VISION.closing.giveCta}</Cta>
-              ) : null}
-              {VISION.closing.ctas.map((cta) => (
-                <Cta key={cta.href} href={cta.href} variant="ghost">
+              {VISION.closing.ctas.map((cta, i) => (
+                <Cta key={cta.href} href={cta.href} variant={i ? "ghost" : undefined}>
                   {cta.label}
                 </Cta>
               ))}
+              {GIVING_URL ? (
+                <Cta href={GIVING_URL} variant="ghost">
+                  {VISION.closing.giveCta}
+                </Cta>
+              ) : null}
             </div>
+            <p className="mx-auto mt-6 max-w-xl text-sm text-starlight/60">
+              {VISION.closing.giveLine}
+            </p>
             <Link
               href="/story"
               className="meta-label mt-10 inline-block text-dust transition-colors hover:text-ember"

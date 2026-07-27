@@ -54,27 +54,29 @@ const EDGE_NAMES: [string, string][] = [
   ["Outdoors", "Sports"],
   ["Sports", "Tech"],
 ];
-// The phone chart is sparer: a clean tree of seventeen threads that
-// still reaches every star, so the spreading dawn reads uncluttered
-// on a small screen.
+// The phone chart is drawn as constellation figures: three zigzag
+// chains walking across the sky, tied by a few diagonal bridges, the
+// way real star charts read.
 const MOBILE_EDGE_NAMES: [string, string][] = [
-  ["Art", "Comedy"],
-  ["Art", "Family"],
-  ["Art", "Finance"],
-  ["Art", "Music"],
-  ["Art", "Fitness"],
-  ["Comedy", "Film"],
-  ["Comedy", "Tech"],
-  ["Film", "Outdoors"],
-  ["Outdoors", "Sports"],
-  ["Food", "Sports"],
   ["Food", "Gaming"],
-  ["Beauty", "Family"],
-  ["Beauty", "Travel"],
-  ["Cars", "Travel"],
+  ["Gaming", "Music"],
+  ["Music", "Fitness"],
+  ["Fitness", "Travel"],
+  ["Travel", "Fashion"],
+  ["Sports", "Tech"],
+  ["Tech", "Comedy"],
+  ["Comedy", "Art"],
+  ["Art", "Beauty"],
+  ["Beauty", "Cars"],
   ["Cars", "Science"],
-  ["Fashion", "Travel"],
-  ["Education", "Science"],
+  ["Outdoors", "Film"],
+  ["Film", "Finance"],
+  ["Finance", "Family"],
+  ["Family", "Education"],
+  ["Music", "Art"],
+  ["Travel", "Cars"],
+  ["Sports", "Outdoors"],
+  ["Beauty", "Family"],
 ];
 
 const LABEL_INDEX = new Map(NODES.map((n, i) => [n.label, i]));
