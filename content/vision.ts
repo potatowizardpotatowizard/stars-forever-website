@@ -4,7 +4,7 @@
 export const VISION = {
   title: "The Vision",
   hero: {
-    kicker: "Where this is going",
+    kicker: "The vision",
     heading: "The Digital World, Evangelized",
   },
   missionary: {
@@ -66,7 +66,7 @@ export const VISION = {
   },
   dream: {
     kicker: "The ten year dream",
-    heading: "The Digital World, Evangelized",
+    heading: "Every Platform, Every Niche",
     body: "Akin to the Biblical dream of seeing the whole world evangelized, all continents on earth having Jesus representatives preaching the Gospel, our dream is that in 10 years we would see the digital world evangelized, every platform and niche having creators who love Jesus reach them with the Gospel.",
     skyCaption: "Every niche, a mission field. Every light, a creator who loves Jesus.",
   },
