@@ -54,11 +54,34 @@ const EDGE_NAMES: [string, string][] = [
   ["Outdoors", "Sports"],
   ["Sports", "Tech"],
 ];
+// The phone chart is sparer: a clean tree of seventeen threads that
+// still reaches every star, so the spreading dawn reads uncluttered
+// on a small screen.
+const MOBILE_EDGE_NAMES: [string, string][] = [
+  ["Art", "Comedy"],
+  ["Art", "Family"],
+  ["Art", "Finance"],
+  ["Art", "Music"],
+  ["Art", "Fitness"],
+  ["Comedy", "Film"],
+  ["Comedy", "Tech"],
+  ["Film", "Outdoors"],
+  ["Outdoors", "Sports"],
+  ["Food", "Sports"],
+  ["Food", "Gaming"],
+  ["Beauty", "Family"],
+  ["Beauty", "Travel"],
+  ["Cars", "Travel"],
+  ["Cars", "Science"],
+  ["Fashion", "Travel"],
+  ["Education", "Science"],
+];
+
 const LABEL_INDEX = new Map(NODES.map((n, i) => [n.label, i]));
-const WEB_EDGES: [number, number][] = EDGE_NAMES.map(([a, b]) => [
-  LABEL_INDEX.get(a)!,
-  LABEL_INDEX.get(b)!,
-]);
+const toEdges = (names: [string, string][]): [number, number][] =>
+  names.map(([a, b]) => [LABEL_INDEX.get(a)!, LABEL_INDEX.get(b)!]);
+const WEB_EDGES = toEdges(EDGE_NAMES);
+const MOBILE_WEB_EDGES = toEdges(MOBILE_EDGE_NAMES);
 
 const STAR =
   "M12 0c.9 6.8 4.2 10.1 12 12c-7.8 1.9-11.1 5.2-12 12c-.9-6.8-4.2-10.1-12-12C7.8 10.1 11.1 6.8 12 0Z";
@@ -175,7 +198,7 @@ export default function DigitalSky({ className }: { className?: string }) {
       // threads appear when their later star ignites and hold on
       ctx.lineWidth = 1.4;
       ctx.lineCap = "round";
-      for (const [i, j] of WEB_EDGES) {
+      for (const [i, j] of MOBILE_WEB_EDGES) {
         const born = Math.max(rank[i] ?? 0, rank[j] ?? 0) * IGNITE;
         if (ct <= born) continue;
         const k = Math.min(1, (ct - born) / 500);
