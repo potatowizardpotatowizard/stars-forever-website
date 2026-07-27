@@ -7,8 +7,6 @@ export const VISION = {
     kicker: "Where this is going",
     heading: "The Vision",
     line: "The digital world, evangelized.",
-    manifesto: "Every niche is a nation. Every feed is a mission field.",
-    timeline: ["Beast Games '24", "Tokyo '25", "Joshua Tree '26", "2036"],
   },
   missionary: {
     kicker: "Content missionaries",
