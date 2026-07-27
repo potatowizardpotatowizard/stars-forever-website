@@ -138,29 +138,60 @@ export default function DigitalSky({ className }: { className?: string }) {
         ctx.stroke();
       }
 
-      // the cursor's constellation: glowing threads from the pointer
-      // to every niche star within reach, strongest when closest
+      // the cursor joins the chart like a star among stars: one thread
+      // to its nearest niche (two only when both are truly close), and
+      // the resting web around that star wakes and glows. Segments of
+      // constellation light up; no radial fans.
       const near: number[] = [];
+      const kin: number[] = [];
       if (!reduced && inside) {
-        NODES.forEach((n, i) => {
+        const byDist = NODES.map((n, i) => {
           const { px, py } = pos(n);
-          const d = Math.hypot(px - mx, py - my);
-          if (d > REACH) return;
-          near.push(i);
-          const a = 1 - d / REACH;
+          return { i, px, py, d: Math.hypot(px - mx, py - my) };
+        })
+          .filter(({ d }) => d < REACH)
+          .sort((a, b) => a.d - b.d)
+          .slice(0, 2);
+        const links =
+          byDist.length === 2 && byDist[1].d < REACH * 0.55
+            ? byDist
+            : byDist.slice(0, 1);
+
+        const glowLine = (
+          x1: number,
+          y1: number,
+          x2: number,
+          y2: number,
+          a: number,
+        ) => {
           ctx.strokeStyle = `rgba(109, 40, 217, ${0.35 * a})`;
           ctx.lineWidth = 4.5;
           ctx.beginPath();
-          ctx.moveTo(mx, my);
-          ctx.lineTo(px, py);
+          ctx.moveTo(x1, y1);
+          ctx.lineTo(x2, y2);
           ctx.stroke();
           ctx.strokeStyle = `rgba(196, 181, 253, ${0.7 * a})`;
           ctx.lineWidth = 1.4;
           ctx.beginPath();
-          ctx.moveTo(mx, my);
-          ctx.lineTo(px, py);
+          ctx.moveTo(x1, y1);
+          ctx.lineTo(x2, y2);
           ctx.stroke();
-        });
+        };
+
+        for (const s of links) {
+          near.push(s.i);
+          glowLine(mx, my, s.px, s.py, 1 - s.d / REACH);
+        }
+        // wake the chart: the web edges touching the joined stars glow
+        for (const [i, j] of webEdges) {
+          const hitI = near.includes(i);
+          const hitJ = near.includes(j);
+          if (!hitI && !hitJ) continue;
+          const A = pos(NODES[i]);
+          const B = pos(NODES[j]);
+          glowLine(A.px, A.py, B.px, B.py, 0.75);
+          kin.push(hitI ? j : i);
+        }
       }
 
       // the niches, all of them burning
@@ -168,11 +199,13 @@ export default function DigitalSky({ className }: { className?: string }) {
       NODES.forEach((n, i) => {
         const { px, py } = pos(n);
         const connected = near.includes(i);
+        const woken = kin.includes(i);
         const tw = reduced ? 1 : 0.82 + 0.18 * Math.sin(t / 420 + i * 1.7);
-        const size = (5.5 + (i % 3)) * tw * (connected ? 1.35 : 1);
+        const size =
+          (5.5 + (i % 3)) * tw * (connected ? 1.35 : woken ? 1.15 : 1);
         drawStar(px, py, size, connected ? 1 : 0.9, reduced ? 0 : t / 4000 + i);
         ctx.font = "bold 10px ui-monospace, monospace";
-        ctx.fillStyle = `rgba(239, 236, 247, ${connected ? 1 : 0.8})`;
+        ctx.fillStyle = `rgba(239, 236, 247, ${connected || woken ? 1 : 0.8})`;
         ctx.fillText(n.label.toUpperCase(), px, py + 22);
       });
 
