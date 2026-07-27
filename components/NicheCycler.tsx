@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { NICHES } from "@/components/DigitalSky";
+import { NICHES } from "@/content/niches";
 
 const POOL = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#[]<>/\\";
 

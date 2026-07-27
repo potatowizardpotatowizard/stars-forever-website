@@ -4,6 +4,7 @@ import { linkCategory3 } from "@/components/Category3Link";
 import Cta from "@/components/Cta";
 import CursorConstellation from "@/components/CursorConstellation";
 import DigitalSky from "@/components/DigitalSky";
+import VisionClaimStrip from "@/components/VisionClaimStrip";
 import NicheCycler from "@/components/NicheCycler";
 import YearTicker from "@/components/YearTicker";
 import GlitchText from "@/components/GlitchText";
@@ -22,7 +23,7 @@ export default function VisionPage() {
   return (
     <article>
       {/* Analog hero: tall enough to leave sky worth painting */}
-      <header className="relative flex min-h-[82svh] items-end overflow-hidden">
+      <header className="relative flex min-h-[88svh] flex-col justify-end overflow-hidden">
         <Image
           src="/brand/bg-greenpurple-star.jpg"
           alt=""
@@ -49,6 +50,9 @@ export default function VisionPage() {
           </p>
           <NicheCycler />
         </div>
+        {/* The claiming of the feed: ghost cards igniting one way,
+            mission fields and fruit drifting the other */}
+        <VisionClaimStrip />
       </header>
 
       {/* 2026 climbs to 2036 as the reader descends toward the dream */}

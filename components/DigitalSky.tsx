@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { SKY_NODES as NODES } from "@/content/niches";
 
 // The dream, drawn: the digital world as a night sky where every
 // niche is a dark point of space. One by one they ignite into
@@ -8,31 +9,9 @@ import { useEffect, useRef } from "react";
 // joining the lit ones into a constellation, until the whole sky
 // shines. It holds, breathes, then begins again. Reduced motion
 // sees the finished sky, fully lit and still.
-const NODES: { label: string; x: number; y: number }[] = [
-  { label: "Food", x: 0.1, y: 0.26 },
-  { label: "Gaming", x: 0.24, y: 0.14 },
-  { label: "Music", x: 0.4, y: 0.24 },
-  { label: "Fitness", x: 0.57, y: 0.12 },
-  { label: "Travel", x: 0.74, y: 0.22 },
-  { label: "Fashion", x: 0.9, y: 0.14 },
-  { label: "Sports", x: 0.07, y: 0.55 },
-  { label: "Tech", x: 0.2, y: 0.42 },
-  { label: "Comedy", x: 0.34, y: 0.52 },
-  { label: "Art", x: 0.48, y: 0.4 },
-  { label: "Beauty", x: 0.63, y: 0.48 },
-  { label: "Cars", x: 0.78, y: 0.42 },
-  { label: "Science", x: 0.9, y: 0.56 },
-  { label: "Outdoors", x: 0.12, y: 0.78 },
-  { label: "Film", x: 0.3, y: 0.72 },
-  { label: "Finance", x: 0.48, y: 0.68 },
-  { label: "Family", x: 0.66, y: 0.74 },
-  { label: "Education", x: 0.84, y: 0.78 },
-];
+
 // Ignition order: scattered across the sky, not a sweep.
 const ORDER = [9, 2, 14, 5, 7, 16, 0, 11, 3, 13, 6, 10, 1, 17, 4, 8, 12, 15];
-
-// The hero teaser runs the same sky slower, fainter, and unlabeled.
-export const NICHES = NODES.map((n) => n.label);
 
 const STAR =
   "M12 0c.9 6.8 4.2 10.1 12 12c-7.8 1.9-11.1 5.2-12 12c-.9-6.8-4.2-10.1-12-12C7.8 10.1 11.1 6.8 12 0Z";
