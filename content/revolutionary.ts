@@ -18,7 +18,7 @@ export const REVOLUTIONARY = {
       "You can be a creator. Go to church. Have a strong personal faith.",
       "And yet nothing about your content shares Jesus. He is compartmentalized into the offline areas of your life.",
       "It is not that you do not want to share Jesus. He is your Lord and Savior. But that is not what your audience wants. It is not what the algorithm rewards. Or so you believe.",
-      "So what do you do? You could start a second channel just for Christians. You could hint at God in your content. You could keep your faith offline. Most people do not share Jesus at their job anyway.",
+      "So what do you do? You could start a second channel just for Christians. You could hint at God in your content. You could keep your faith offline.",
       "But what if there was a different way?",
       "A way where you create with the passions God gave you. Not to make Bible content online, but to intentionally reach a secular audience for Jesus.",
       "Revolutionary is that. It is the introduction of a missionary lifestyle for creators.",
