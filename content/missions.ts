@@ -123,7 +123,7 @@ export const MISSIONS: Mission[] = [
         { name: "Jordan Orme", href: "https://www.youtube.com/@JordanOrme", niche: "Editing" },
         { name: "Austin Pepito", href: "https://www.instagram.com/austin.pep/", niche: "Dancing" },
         { name: "Blake Vandevegte", href: "https://www.instagram.com/blakevandevegte/", niche: "Christian Content" },
-        { name: "Jacob Vargas", href: "https://www.instagram.com/juicy.jacobb/", niche: "IRL Comedy" },
+        { name: "Juicy Jacob", href: "https://www.instagram.com/juicy.jacobb/", niche: "IRL Comedy" },
         { name: "Justin Leusner", href: "https://www.youtube.com/@JustinLeusner", niche: "Sports" },
         { name: "Nelly Crux", href: "http://johnelcruxmagic.com/", niche: "Magic" },
       ],
