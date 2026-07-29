@@ -52,7 +52,7 @@ export default function NicheCycler() {
   }, []);
 
   return (
-    <p className="mt-7 max-w-3xl font-display text-2xl leading-snug text-starlight/85 sm:text-3xl">
+    <p className="mt-7 min-h-[4.15rem] max-w-3xl font-display text-2xl leading-snug text-starlight/85 sm:min-h-0 sm:text-3xl">
       A missionary to the{" "}
       <span className="text-ember">{reduced ? "every" : display}</span> niche.
     </p>
