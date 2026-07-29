@@ -15,10 +15,12 @@ export const REVOLUTIONARY = {
   monologue: {
     kicker: "Sound familiar?",
     lines: [
-      "You can be a creator. Go to church. Have a strong personal faith.",
-      "And yet nothing about your content shares Jesus. He is compartmentalized into the offline areas of your life.",
-      "It is not that you do not want to share Jesus. He is your Lord and Savior. But that is not what your audience wants. It is not what the algorithm rewards. Or so you believe.",
-      "So what do you do? You could start a second channel just for Christians. You could hint at God in your content. You could keep your faith offline.",
+      "You love Jesus. You go to church. You create.",
+      "But your faith lives offline.",
+      "It\u2019s not that you don\u2019t want to share about God, rather that you don\u2019t want to become a Christian Bible teacher online.",
+      "Or maybe your content is all about Jesus, and you have an audience full of believers, but you realize you\u2019re not reaching the people that really need Him.",
+      "Either way, the secular audience scrolling right now hears nothing. Well nothing life changing that is.",
+      "Not because you do not care. Because the audience does not want it, the algorithm does not reward it, and the church lane feels safer. Or so you believe.",
       "But what if there was a different way?",
       "A way where you create with the passions God gave you. Not to make Bible content online, but to intentionally reach a secular audience for Jesus.",
       "Revolutionary is that. It is the introduction of a missionary lifestyle for creators.",
