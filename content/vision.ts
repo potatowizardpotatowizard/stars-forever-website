@@ -5,7 +5,7 @@ export const VISION = {
   title: "The Vision",
   hero: {
     kicker: "The vision",
-    heading: "Create Content Missionaries Worldwide",
+    heading: "Creator Missionaries Worldwide",
   },
   problem: {
     kicker: "Why this matters",
@@ -17,9 +17,9 @@ export const VISION = {
     ],
   },
   missionary: {
-    kicker: "Content missionaries",
+    kicker: "Creator missionaries",
     heading: "The Solution",
-    lead: "Create Content Missionaries.",
+    lead: "Creator Missionaries.",
     paragraphs: [
       "When a creator becomes Category 3, they essentially become a missionary to the content format and the niche they belong to. For example, a Category 3 food creator would create content around the topic of food, using their passion for food to bring food lovers around the world to Jesus.",
       "Similar to how someone who loves Jesus might move to Mexico, learn Spanish, and integrate into the relevant culture to reach the people for Jesus.",
@@ -27,7 +27,7 @@ export const VISION = {
   },
   parallel: {
     thenLabel: "Traditional Missionary",
-    nowLabel: "Content Missionary",
+    nowLabel: "Creator Missionary",
     pairs: [
       {
         then: "Moves to Location",
@@ -58,7 +58,7 @@ export const VISION = {
   programs: {
     kicker: "How we get there",
     heading: "Our Formation Process",
-    body: "Both things we do at Stars Forever: Partner Projects and the Revolutionary Cohort serve to create content missionaries, or as we call them, Category 3 creators.",
+    body: "Both things we do at Stars Forever: Partner Projects and the Revolutionary Cohort serve to form creator missionaries, or as we call them, Category 3 creators.",
     items: [
       {
         title: "Partner Projects",
@@ -82,7 +82,7 @@ export const VISION = {
     kicker: "Help write it",
     heading: "The sky has room for your star.",
     giveLine:
-      "Every gift funds another content missionary reaching another niche with the Gospel.",
+      "Every gift funds another creator missionary reaching another niche with the Gospel.",
     giveCta: "Give to the Vision",
     ctas: [
       { label: "Start an Application", href: "/apply" },
