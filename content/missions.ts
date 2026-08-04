@@ -228,6 +228,11 @@ export const MISSIONS: Mission[] = [
               label: "Watch on YouTube",
               href: "https://youtu.be/IpfF1SrzAvA?t=1010",
             },
+            {
+              label:
+                "Jesus shared to a secular audience through a music video breakdown",
+              href: "https://youtu.be/fmUOQkKEeRY?t=936",
+            },
           ],
         },
         {
