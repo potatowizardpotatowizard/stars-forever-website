@@ -225,13 +225,13 @@ export const MISSIONS: Mission[] = [
           line: "Started a new channel, shared Jesus in the first video.",
           links: [
             {
-              label: "Watch on YouTube",
-              href: "https://youtu.be/IpfF1SrzAvA?t=1010",
-            },
-            {
               label:
                 "Jesus shared to a secular audience through a music video breakdown",
               href: "https://youtu.be/fmUOQkKEeRY?t=936",
+            },
+            {
+              label: "Jesus shared in the first video of a brand new channel",
+              href: "https://youtu.be/IpfF1SrzAvA?t=1010",
             },
           ],
         },
