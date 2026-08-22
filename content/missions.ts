@@ -101,7 +101,7 @@ export const MISSIONS: Mission[] = [
         paragraphs: [
           "Weston, a fever dream short form creator, had an idea to share Jesus with his audience through a video about treasure. Soon after, Auzi had the same idea in prayer which confirmed it needed to be created, that idea took our friend group from California to Iceland. Together we sought God, shared Jesus, and made eternity changing art.",
         ],
-        imageSlots: ["rt-van-life", "rt-flight"],
+        imageSlots: ["rt-van-life", "rt-waterfall-group"],
       },
       {
         kicker: "God moved",
@@ -122,7 +122,7 @@ export const MISSIONS: Mission[] = [
           "A few days later we met more hitchhikers and invited them to do life together too. We took them on a treasure hunt and cooked dinner for them. They do not believe in God, but they were moved by our hospitality and let us pray for them. Even in rural Iceland, God still gave us the opportunity to be a part of His life giving work.",
         ],
         imageSlots: [
-          "rt-waterfall-group",
+          "rt-flight",
           "rt-abandoned-plane",
           "rt-treasure-hunt",
           "rt-rock-passage",
