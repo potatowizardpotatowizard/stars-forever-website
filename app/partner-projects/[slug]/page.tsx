@@ -287,7 +287,7 @@ export default async function MissionPage({
             {section.kicker ? <Kicker>{section.kicker}</Kicker> : null}
             <div className="mt-8 max-w-2xl space-y-6">
               {section.paragraphs.map((p) => (
-                <p key={p} className="text-lg leading-relaxed text-starlight/85">
+                <p key={p} className="text-lg leading-relaxed text-starlight/85 md:text-xl md:leading-relaxed">
                   {linkCategory3(p)}
                 </p>
               ))}
