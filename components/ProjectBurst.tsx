@@ -100,7 +100,8 @@ export default function ProjectBurst({
       if (centerEl && centerBox) {
         const w0 = centerBox.clientWidth || 1;
         const edgeScale = vw / w0;
-        const grow = smooth(clamp01((p - 0.18) / 0.66));
+        // finishes exactly at the release so the list follows instantly
+        const grow = smooth(clamp01((p - 0.22) / 0.78));
         const s = 1 + (edgeScale - 1) * grow;
         // drift from its collage spot up to true center as it grows
         const drift = 0.04 * vh * grow;
@@ -136,8 +137,16 @@ export default function ProjectBurst({
     );
   }
 
-  // one shared size for the six photos; the video sits slightly wider
-  const photoSize = "clamp(170px, 38vw, 470px)";
+  // one shared size for the six photos; the video sits slightly wider.
+  // Offsets are pixel capped so the cluster never climbs into the
+  // heading on wide screens.
+  const photoSize = "clamp(170px, 38vw, 420px)";
+  const xOff = (v: number) =>
+    `calc(50% ${v < 0 ? "-" : "+"} clamp(${Math.abs(v) < 30 ? 62 : 125}px, ${Math.abs(v)}vw, ${Math.abs(v) < 30 ? 250 : 470}px))`;
+  const yOff = (v: number) =>
+    v === 0
+      ? "60%"
+      : `calc(60% ${v < 0 ? "-" : "+"} clamp(80px, ${Math.abs(v)}vw, 150px))`;
 
   return (
     <div ref={wrapRef} className="relative" style={{ height: "170vh" }}>
@@ -147,13 +156,13 @@ export default function ProjectBurst({
         {/* the heading, above the collage on the same screen */}
         <div
           ref={headRef}
-          className="absolute inset-x-0 top-0 z-30 px-5 pt-24 text-center will-change-transform sm:pt-28"
+          className="absolute inset-x-0 top-0 z-30 px-5 pt-20 text-center will-change-transform sm:pt-24"
         >
           <Kicker>{kicker}</Kicker>
-          <h2 className="mt-4 font-display text-3xl font-bold sm:text-5xl">
+          <h2 className="mt-3 font-display text-3xl font-bold sm:text-4xl">
             {heading}
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-sm text-starlight/80 sm:text-lg">
+          <p className="mx-auto mt-3 max-w-lg text-sm text-starlight/80 sm:max-w-xl sm:text-base">
             {intro}
           </p>
         </div>
@@ -169,8 +178,8 @@ export default function ProjectBurst({
               }}
               className="absolute z-10 will-change-transform"
               style={{
-                left: `calc(50% + ${c.ox}vw)`,
-                top: `calc(54% + ${c.oy}vw)`,
+                left: xOff(c.ox),
+                top: yOff(c.oy),
                 width: photoSize,
                 transform: `translate(-50%, -50%) rotate(${c.rot}deg)`,
               }}
@@ -191,13 +200,13 @@ export default function ProjectBurst({
         {/* the video, growing until it touches the edges */}
         <div
           ref={centerRef}
-          className="absolute left-1/2 top-[54%] z-20 will-change-transform"
+          className="absolute left-1/2 top-[60%] z-20 will-change-transform"
           style={{ transform: "translate(-50%, -50%)" }}
         >
           <div
             ref={centerBoxRef}
             className="overflow-hidden rounded-lg border border-dust/30 shadow-[0_0_60px_rgb(109_40_217/0.3)]"
-            style={{ width: "clamp(190px, 44vw, 600px)" }}
+            style={{ width: "clamp(190px, 44vw, 540px)" }}
           >
             <video
               autoPlay

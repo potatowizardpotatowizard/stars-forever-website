@@ -177,7 +177,7 @@ export default function PartnerProjectsPage() {
         heading="The Projects So Far"
         intro={MISSIONS_INDEX.intro}
       />
-      <section className="mx-auto max-w-5xl space-y-12 px-5 pb-20 pt-8 sm:px-8 sm:pb-24 sm:pt-10">
+      <section className="relative z-20 mx-auto -mt-[20svh] max-w-5xl space-y-12 px-5 pb-20 sm:px-8 sm:pb-24">
         {timelineProjects.map((p) => (
           <Reveal key={p.slug}>
             <Link
