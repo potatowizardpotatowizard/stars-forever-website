@@ -159,10 +159,10 @@ export default function ProjectBurst({
           className="absolute inset-x-0 top-0 z-30 px-5 pt-20 text-center will-change-transform sm:pt-24"
         >
           <Kicker>{kicker}</Kicker>
-          <h2 className="mt-3 font-display text-3xl font-bold sm:text-4xl">
+          <h2 className="mt-6 font-display text-3xl font-bold sm:text-4xl">
             {heading}
           </h2>
-          <p className="mx-auto mt-3 max-w-lg text-sm text-starlight/80 sm:max-w-xl sm:text-base">
+          <p className="mx-auto mt-4 max-w-lg text-sm text-starlight/80 sm:max-w-xl sm:text-base">
             {intro}
           </p>
         </div>
