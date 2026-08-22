@@ -109,6 +109,12 @@ export const IMAGES: Record<string, ImageSlot> = {
   // ---- Mission: Real Treasure ----------------------------------------------
   "real-treasure-hero": {
     file: "real-treasure-hero.jpg",
+    alt: "Weston reading the treasure map before a waterfall, from the Real Treasure video",
+    caption: { where: "Iceland", when: "July 2026" },
+    ratio: "16 / 9",
+  },
+  "rt-crew": {
+    file: "rt-crew.jpg",
     alt: "The Real Treasure crew gathered against a mossy cliff in Iceland",
     caption: { where: "Iceland", when: "July 2026" },
     ratio: "16 / 9",
@@ -119,10 +125,10 @@ export const IMAGES: Record<string, ImageSlot> = {
     caption: { where: "Iceland", when: "July 2026" },
     ratio: "3 / 2",
   },
-  "rt-red-chair": {
-    file: "rt-red-chair.jpg",
-    alt: "Weston seated on the red chair from the video, alone on a rocky Icelandic plain",
-    caption: { who: "Weston", where: "Iceland" },
+  "rt-rock-passage": {
+    file: "rt-rock-passage.jpg",
+    alt: "Walking the narrow passage through a giant split rock in Iceland",
+    caption: { where: "Iceland" },
     ratio: "4 / 5",
   },
   "rt-flight": {

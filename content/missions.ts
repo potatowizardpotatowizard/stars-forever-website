@@ -65,27 +65,28 @@ export const MISSIONS: Mission[] = [
   {
     slug: "real-treasure",
     name: "Real Treasure",
-    location: "Southern California and Iceland",
+    location: "Iceland and Southern California",
     partner: "Weston Vansoest, Creative Partner 2",
     date: "July 9 to 17, 2026",
     summary:
       "A fever dream video about treasure carried the gospel from Southern California to Iceland and put Jesus in front of millions.",
     cardImageSlot: "real-treasure-card",
     heroSlot: "real-treasure-hero",
+    heroVideo: "/brand/video/real-treasure-hero-bg.mp4",
     burningQuestion:
       "You could spend your whole life chasing the things of this world. What is the real treasure?",
     stats: [
-      { value: "2M+", label: "views on TikTok" },
-      { value: "582K+", label: "likes on Instagram" },
-      { value: "11K+", label: "comments across platforms" },
+      { value: "2M+", label: "views across all platforms" },
+      { value: "1M+", label: "likes across all platforms" },
+      { value: "11K+", label: "comments across all platforms" },
     ],
     sections: [
       {
         kicker: "The dream",
         paragraphs: [
-          "We believe God places certain dreams on our hearts. Weston, a fever dream short form creator, had an idea to share Jesus with his audience through a video about treasure. After much prayer, that idea took our friend group from California to Iceland. Together we sought God, shared Jesus, and made eternity changing art.",
+          "Weston, a fever dream short form creator, had an idea to share Jesus with his audience through a video about treasure. Soon after, Auzi had the same idea in prayer which confirmed it needed to be created, that idea took our friend group from California to Iceland. Together we sought God, shared Jesus, and made eternity changing art.",
         ],
-        imageSlots: ["rt-red-chair", "rt-flight"],
+        imageSlots: ["rt-rock-passage", "rt-flight"],
       },
       {
         kicker: "God moved",
@@ -98,6 +99,11 @@ export const MISSIONS: Mission[] = [
         kicker: "Beyond the video",
         paragraphs: [
           "On our second day in the camper van we picked up a hitchhiker from Poland. We invited him into the video shoot, took him to an insane waterfall and an abandoned plane, and eventually shared Jesus with him in a deep spiritual conversation.",
+        ],
+        imageSlots: ["rt-crew"],
+      },
+      {
+        paragraphs: [
           "A few days later we met more hitchhikers and invited them to do life together too. We took them on a treasure hunt and cooked dinner for them. They do not believe in God, but they were moved by our hospitality and let us pray for them. Even in rural Iceland, God still gave us the opportunity to be a part of His life giving work.",
         ],
         imageSlots: [
