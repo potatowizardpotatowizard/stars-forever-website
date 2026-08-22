@@ -23,8 +23,8 @@ export default function CohortSpotlight() {
             <GlitchText text="Revolutionary Cohort" />
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-starlight/80">
-            The Revolutionary Cohort is a catalytic experience designed to
-            introduce creators to a missionary lifestyle.
+            A catalytic event designed to introduce creators to a missionary
+            lifestyle.
           </p>
         </Reveal>
 
@@ -106,22 +106,34 @@ export default function CohortSpotlight() {
           </ul>
         </Reveal>
 
-        {/* the first event */}
-        <Reveal className="mx-auto mt-14 max-w-2xl text-center">
-          <p className="meta-label text-ember">
-            Cohort 1 · Joshua Tree, California · May 15 to 17, 2026
-          </p>
-          <p className="mt-4 text-lg leading-relaxed text-starlight/80">
-            Ten creators in the desert for a weekend of teaching, prayer,
-            shared meals, and collaboration. It began at a house together and
-            ended under the stars.
-          </p>
+        {/* the first event, the next one, and the partnership */}
+        <Reveal className="mx-auto mt-12 max-w-2xl text-center">
           <Link
             href="/partner-projects/revolutionary-cohort"
-            className="mono-link mt-6 inline-block text-sm font-bold text-ember"
+            className="mono-link inline-block text-sm font-bold text-ember"
           >
-            Read about the first cohort →
+            Read About The First Event →
           </Link>
+          <p className="mt-12 font-display text-2xl font-bold text-starlight/90">
+            The next cohort is coming soon.
+          </p>
+          <Link
+            href="/apply"
+            className="mono-link mt-4 inline-block text-sm font-bold text-ember"
+          >
+            Apply to be part of it →
+          </Link>
+          <p className="meta-label mt-12 text-dust">
+            In collaboration with{" "}
+            <a
+              href="https://steiger.org"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline decoration-dust/40 underline-offset-4 transition-colors hover:text-ember"
+            >
+              Steiger
+            </a>
+          </p>
         </Reveal>
       </div>
     </section>
