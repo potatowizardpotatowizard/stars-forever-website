@@ -3,6 +3,16 @@ export const HOME = {
     missionLine:
       "Stars Forever is a ministry that helps creators use their lives and platforms for Jesus.",
   },
+  realTreasure: {
+    kicker: "The Most Recent Project",
+    heading: "Real Treasure",
+    line: "Weston's fever dream treasure hunt carried the gospel from Southern California to Iceland and put Jesus in front of millions.",
+    watchHref: "https://www.instagram.com/reel/Db9PKZrPr3g/",
+    watchLabel: "Watch on Instagram",
+    thumbnail: "/brand/poster-real-treasure.jpg",
+    storyCta: "Read the full story",
+    storyHref: "/partner-projects/real-treasure",
+  },
   reframe: {
     kicker: "What is a star?",
     lines: [

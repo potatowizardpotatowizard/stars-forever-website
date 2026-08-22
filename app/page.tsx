@@ -83,12 +83,66 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Two minute explainer, under the hero's purple afterglow */}
+      {/* Real Treasure, the most recent project, under the hero's afterglow */}
       <section className="relative overflow-hidden">
         <div
           aria-hidden="true"
           className="absolute inset-x-0 top-0 h-[50vh] bg-[linear-gradient(to_bottom,rgb(109_40_217/0.3),rgb(109_40_217/0.1)_45%,transparent)]"
         />
+        <Grain />
+        <div className="relative mx-auto max-w-7xl px-5 pb-6 pt-20 sm:px-8 sm:pt-24">
+          <div className="grid items-center gap-12 md:grid-cols-[3fr_2fr]">
+            <Reveal>
+              <Kicker>{HOME.realTreasure.kicker}</Kicker>
+              <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
+                <GlitchText text={HOME.realTreasure.heading} />
+              </h2>
+              <p className="mt-6 max-w-xl text-lg leading-relaxed text-starlight/85">
+                {HOME.realTreasure.line}
+              </p>
+              <Link
+                href={HOME.realTreasure.storyHref}
+                className="mono-link mt-8 inline-block text-sm font-bold text-ember"
+              >
+                {HOME.realTreasure.storyCta} →
+              </Link>
+            </Reveal>
+            <Reveal className="mx-auto w-full max-w-xs">
+              <a
+                href={HOME.realTreasure.watchHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block"
+              >
+                <div className="relative overflow-hidden rounded-xl border border-dust/20 bg-soot">
+                  <Image
+                    src={HOME.realTreasure.thumbnail}
+                    alt="Real Treasure, the full video"
+                    width={720}
+                    height={1280}
+                    sizes="20rem"
+                    className="block aspect-[9/16] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  />
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-0 flex items-center justify-center"
+                  >
+                    <span className="flex h-14 w-14 items-center justify-center rounded-full bg-night/70 pl-1 text-xl text-starlight backdrop-blur-sm transition-colors group-hover:bg-ember group-hover:text-night">
+                      ▶
+                    </span>
+                  </span>
+                  <span className="meta-label absolute inset-x-0 bottom-0 bg-gradient-to-t from-night/90 to-transparent px-5 pb-4 pt-10 text-center text-ember">
+                    {HOME.realTreasure.watchLabel} ↗
+                  </span>
+                </div>
+              </a>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* Two minute explainer */}
+      <section className="relative overflow-hidden">
         <Grain />
         <div className="relative mx-auto max-w-7xl px-5 pb-10 pt-20 sm:px-8 sm:pb-12 sm:pt-24">
           <Reveal className="max-w-3xl">
