@@ -179,6 +179,12 @@ export const IMAGES: Record<string, ImageSlot> = {
     caption: { where: "Rural Iceland" },
     ratio: "4 / 5",
   },
+  "rt-treasure-hunt-wide": {
+    file: "rt-treasure-hunt-wide.jpg",
+    alt: "A treasure hunt clue found in a stream in rural Iceland",
+    caption: { where: "Rural Iceland" },
+    ratio: "16 / 9",
+  },
   "rt-van-life": {
     file: "rt-van-life.jpg",
     alt: "Squeezed into the camper van together, all smiles",

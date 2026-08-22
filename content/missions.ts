@@ -138,7 +138,7 @@ export const MISSIONS: Mission[] = [
         paragraphs: [
           "The moment Weston posted the video, the comments started telling the story for us. Unbelievers praised the video despite not believing in Jesus, Christians praised its evangelistic power, and others were simply left in awe.",
         ],
-        imageSlots: ["rt-treasure-hunt"],
+        imageSlots: ["rt-treasure-hunt-wide"],
       },
     ],
     commentWall: {

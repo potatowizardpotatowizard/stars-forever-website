@@ -32,6 +32,16 @@ export default function RevolutionaryPage() {
           sizes="100vw"
           className="object-cover opacity-70"
         />
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          className="absolute inset-0 h-full w-full object-cover opacity-[0.16]"
+        >
+          <source src="/brand/video/cohort-dusk.mp4" type="video/mp4" />
+        </video>
         <div
           aria-hidden="true"
           className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night"
