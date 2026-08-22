@@ -109,7 +109,7 @@ export const IMAGES: Record<string, ImageSlot> = {
   // ---- Mission: Real Treasure ----------------------------------------------
   "real-treasure-hero": {
     file: "real-treasure-hero.jpg",
-    alt: "Weston reading the treasure map before a waterfall, from the Real Treasure video",
+    alt: "Weston carrying the treasure map through a flower field, from the Real Treasure video",
     caption: { where: "Iceland", when: "July 2026" },
     ratio: "16 / 9",
   },
