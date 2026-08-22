@@ -268,8 +268,22 @@ export default async function MissionPage({
 
       {/* Photo essay sections */}
       <div className="mx-auto max-w-7xl space-y-24 px-5 py-24 sm:px-8 sm:space-y-32 sm:py-32">
-        {mission.sections.map((section) => (
+        {mission.sections.map((section, si) => (
           <Reveal as="section" key={section.paragraphs[0]}>
+            {/* desktop: text beside the photos, sides alternating by
+                section; mobile keeps text above the photos */}
+            <div
+              className={
+                section.imageSlots?.length
+                  ? `md:grid md:items-center md:gap-14 ${
+                      si % 2 === 1
+                        ? "md:grid-cols-[5fr_4fr]"
+                        : "md:grid-cols-[4fr_5fr]"
+                    }`
+                  : undefined
+              }
+            >
+            <div className={si % 2 === 1 ? "md:order-2" : undefined}>
             {section.kicker ? <Kicker>{section.kicker}</Kicker> : null}
             <div className="mt-8 max-w-2xl space-y-6">
               {section.paragraphs.map((p) => (
@@ -286,11 +300,12 @@ export default async function MissionPage({
                 </Link>
               ) : null}
             </div>
+            </div>
             {section.imageSlots?.length ? (
               <div
-                className={`mt-14 grid gap-8 ${
+                className={`mt-14 grid gap-8 md:mt-0 ${
                   section.imageSlots.length === 1 ? "" : "sm:grid-cols-2"
-                }`}
+                } ${si % 2 === 1 ? "md:order-1" : ""}`}
               >
                 {section.imageSlots.map((slot) => {
                   const slotLink = mission.slotLinks?.[slot];
@@ -324,6 +339,7 @@ export default async function MissionPage({
                 })}
               </div>
             ) : null}
+            </div>
           </Reveal>
         ))}
       </div>
