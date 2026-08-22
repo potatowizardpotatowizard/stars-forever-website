@@ -9,6 +9,7 @@ import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
 import MissionIntro from "@/components/MissionIntro";
+import CohortGather from "@/components/CohortGather";
 import ProjectShowcase from "@/components/ProjectShowcase";
 import StarBridge from "@/components/StarBridge";
 import Reveal from "@/components/Reveal";
@@ -197,6 +198,30 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Recent work: the Revolutionary Cohort gathers in from the
+          edges of the screen, because that is what the cohort is */}
+      <CohortGather
+        photos={[
+          { src: "/images/joshua-candles.jpg", alt: "" },
+          { src: "/images/joshua-teaching.jpg", alt: "" },
+          { src: "/images/joshua-prayer.jpg", alt: "" },
+          { src: "/images/joshua-meal.jpg", alt: "" },
+          { src: "/images/joshua-discussion.jpg", alt: "" },
+          { src: "/images/joshua-stargazing.jpg", alt: "" },
+        ]}
+        videoSrc="/brand/video/cohort-dusk.mp4"
+        videoPoster="/images/joshua-hero.jpg"
+        kicker={HOME.proof.kicker}
+        heading="Revolutionary Cohort"
+        intro={HOME.proof.cards[0].body}
+        card={{
+          label: "Recent work · 2026",
+          name: "Revolutionary Cohort",
+          meta: "Joshua Tree, California · May 15 to 17, 2026",
+          href: "/partner-projects/revolutionary-cohort",
+        }}
+      />
+
       {/* The two creator programs */}
       <section
         aria-label={HOME.programs.heading}
@@ -280,48 +305,6 @@ export default function HomePage() {
               </Reveal>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Proof strip */}
-      <section className="relative overflow-hidden border-y border-dust/10 bg-soot/40">
-        <Grain />
-        <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
-        <Reveal>
-          <Kicker>{HOME.proof.kicker}</Kicker>
-          <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
-            <GlitchText text={HOME.proof.heading} />
-          </h2>
-        </Reveal>
-        <div className="mt-14 grid gap-10 md:grid-cols-3">
-          {HOME.proof.cards.map((card) => (
-            <Reveal key={card.title}>
-              <Link href={card.href} className="group block">
-                <MediaSlot
-                  name={card.imageSlot}
-                  sizes="(min-width: 768px) 33vw, 100vw"
-                  showCaption={false}
-                  className="overflow-hidden rounded-lg"
-                />
-                <p className="meta-label mt-6">{card.meta}</p>
-                <h3 className="mt-2 font-display text-2xl font-bold transition-colors group-hover:text-ember">
-                  {card.title}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-starlight/70">
-                  {card.body}
-                </p>
-              </Link>
-            </Reveal>
-          ))}
-        </div>
-        <Reveal className="mt-14">
-          <Link
-            href="/podcast"
-            className="meta-label inline-block text-dust transition-colors hover:text-ember"
-          >
-            Respectfully Inspired Podcast →
-          </Link>
-        </Reveal>
         </div>
       </section>
 
