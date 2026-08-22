@@ -162,7 +162,7 @@ export default function ProjectBurst({
           <h2 className="mt-6 font-display text-3xl font-bold sm:text-4xl">
             {heading}
           </h2>
-          <p className="mx-auto mt-4 max-w-lg text-sm text-starlight/80 sm:max-w-xl sm:text-base">
+          <p className="mx-auto mt-4 max-w-lg text-base text-starlight/80 sm:max-w-xl sm:text-lg">
             {intro}
           </p>
         </div>

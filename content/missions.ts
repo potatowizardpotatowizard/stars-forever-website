@@ -67,7 +67,7 @@ export const MISSIONS_INDEX = {
   title: "Missions",
   kicker: "Case studies",
   intro:
-    "Every mission is a real story of God moving through creators. Read them like field reports.",
+    "Every mission is a real story of God moving through creators.",
 };
 
 export const MISSIONS: Mission[] = [
