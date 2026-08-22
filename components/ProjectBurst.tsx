@@ -220,8 +220,8 @@ export default function ProjectBurst({
           const xOff = `calc(50% ${c.ox < 0 ? "-" : "+"} clamp(${Math.abs(c.ox) < 30 ? 62 : 125}px, ${Math.abs(c.ox)}vw, ${Math.abs(c.ox) < 30 ? 250 : 470}px))`;
           const yOff =
             c.oy === 0
-              ? "60%"
-              : `calc(60% ${c.oy < 0 ? "-" : "+"} clamp(80px, ${Math.abs(c.oy)}vw, 150px))`;
+              ? "56%"
+              : `calc(56% ${c.oy < 0 ? "-" : "+"} clamp(80px, ${Math.abs(c.oy)}vw, 150px))`;
           return (
             <div
               key={photo.src}
@@ -253,7 +253,7 @@ export default function ProjectBurst({
         <Link
           ref={centerRef}
           href={project.href}
-          className="group absolute left-1/2 top-[60%] z-20 block -translate-x-1/2 -translate-y-1/2"
+          className="group absolute left-1/2 top-[56%] z-20 block -translate-x-1/2 -translate-y-1/2"
           style={{ pointerEvents: "none" }}
         >
           <div
