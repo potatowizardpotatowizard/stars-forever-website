@@ -28,6 +28,9 @@ export type Mission = {
   };
   /** YouTube embed featured at the top of the project page */
   videoEmbed?: { youtubeId: string; caption: string };
+  /** Self hosted video featured at the top of the project page,
+      for projects that live on TikTok or Instagram instead of YouTube */
+  videoFile?: { src: string; poster: string; caption: string; vertical?: boolean };
   /** Ambient video that plays behind the hero */
   heroVideo?: string;
   /** Photo slots that click through to an external link */
@@ -75,6 +78,12 @@ export const MISSIONS: Mission[] = [
     heroVideo: "/brand/video/real-treasure-hero-bg.mp4",
     burningQuestion:
       "You could spend your whole life chasing the things of this world. What is the real treasure?",
+    videoFile: {
+      src: "/brand/video/real-treasure-full.mp4",
+      poster: "/brand/poster-real-treasure.jpg",
+      caption: "Real Treasure, the full video",
+      vertical: true,
+    },
     stats: [
       { value: "2M+", label: "views across all platforms" },
       { value: "1M+", label: "likes across all platforms" },

@@ -8,6 +8,7 @@ import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
 import Reveal from "@/components/Reveal";
+import VideoBlock from "@/components/VideoBlock";
 import YouTubeEmbed from "@/components/YouTubeEmbed";
 import { MISSIONS } from "@/content/missions";
 import { resolveSlot } from "@/lib/media";
@@ -191,6 +192,21 @@ export default async function MissionPage({
               youtubeId={mission.videoEmbed.youtubeId}
               title={mission.name}
               caption={mission.videoEmbed.caption}
+            />
+          </Reveal>
+        </div>
+      ) : null}
+
+      {mission.videoFile ? (
+        <div className="mx-auto max-w-7xl px-5 pt-20 sm:px-8">
+          <Reveal
+            className={`mx-auto ${mission.videoFile.vertical ? "max-w-sm" : "max-w-4xl"}`}
+          >
+            <VideoBlock
+              src={mission.videoFile.src}
+              poster={mission.videoFile.poster}
+              title={mission.videoFile.caption}
+              vertical={mission.videoFile.vertical}
             />
           </Reveal>
         </div>

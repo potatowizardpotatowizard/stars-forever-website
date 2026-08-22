@@ -5,11 +5,14 @@ export default function VideoBlock({
   poster,
   title,
   className = "",
+  vertical = false,
 }: {
   src: string;
   poster: string;
   title: string;
   className?: string;
+  /** Portrait 9:16 video, e.g. a short form video shown at phone proportions */
+  vertical?: boolean;
 }) {
   return (
     <figure className={className}>
@@ -19,7 +22,7 @@ export default function VideoBlock({
           preload="metadata"
           poster={poster}
           playsInline
-          className="block aspect-video w-full"
+          className={`block w-full ${vertical ? "aspect-[9/16]" : "aspect-video"}`}
         >
           <source src={src} type="video/mp4" />
         </video>
