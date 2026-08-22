@@ -100,12 +100,6 @@ export default function HomePage() {
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-starlight/85">
                 {HOME.realTreasure.line}
               </p>
-              <Link
-                href={HOME.realTreasure.storyHref}
-                className="mono-link mt-8 inline-block text-sm font-bold text-ember"
-              >
-                {HOME.realTreasure.storyCta} →
-              </Link>
             </Reveal>
             <Reveal className="mx-auto w-full max-w-xs">
               <a
@@ -136,6 +130,12 @@ export default function HomePage() {
                   </span>
                 </div>
               </a>
+              <Link
+                href={HOME.realTreasure.storyHref}
+                className="mono-link mt-5 block text-center text-sm font-bold text-ember"
+              >
+                {HOME.realTreasure.storyCta} →
+              </Link>
             </Reveal>
           </div>
         </div>
