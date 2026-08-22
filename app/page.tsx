@@ -101,7 +101,7 @@ export default function HomePage() {
         <div className="relative mx-auto max-w-7xl px-5 pb-10 pt-20 sm:px-8 sm:pb-12 sm:pt-24">
           <Reveal className="max-w-3xl md:max-w-none">
             <div className="md:grid md:grid-cols-[3fr_2fr] md:items-center md:gap-14">
-              <div className="md:order-2">
+              <div className="md:order-2 md:-translate-y-8">
                 <Kicker>{HOME.video.kicker}</Kicker>
                 <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
                   <GlitchText text={HOME.video.heading} />
