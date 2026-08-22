@@ -100,21 +100,12 @@ export default function ProjectBurst({
         el.style.transform = `translate(-50%, -50%) translate3d(${dx.toFixed(1)}px, ${dy.toFixed(1)}px, 0) rotate(${rot.toFixed(2)}deg)`;
       }
 
-      // heading: on phones it opens the scene and lifts away as the
-      // collage bursts; on desktop the photos peek in first and the
-      // heading arrives above the finished Real Treasure card instead
+      // heading: lifts away as the collage bursts
       const head = headRef.current;
-      const desktop = window.matchMedia("(min-width: 768px)").matches;
       if (head) {
-        if (desktop) {
-          const arrive = smooth(clamp01((p - 0.55) / 0.3));
-          head.style.opacity = arrive.toFixed(3);
-          head.style.transform = `translate3d(0, ${((1 - arrive) * 0.04 * vh).toFixed(1)}px, 0)`;
-        } else {
-          const fade = smooth(clamp01((p - 0.1) / 0.3));
-          head.style.opacity = (1 - fade).toFixed(3);
-          head.style.transform = `translate3d(0, ${(-fade * 0.1 * vh).toFixed(1)}px, 0)`;
-        }
+        const fade = smooth(clamp01((p - 0.1) / 0.3));
+        head.style.opacity = (1 - fade).toFixed(3);
+        head.style.transform = `translate3d(0, ${(-fade * 0.1 * vh).toFixed(1)}px, 0)`;
       }
 
       // center video: widens from its collage size to project card
@@ -205,11 +196,8 @@ export default function ProjectBurst({
   }
 
   return (
-    <div ref={wrapRef} className="relative md:-mt-[24svh]" style={{ height: "170vh" }}>
-      <div
-        ref={stickyRef}
-        className="sticky top-0 h-svh overflow-hidden [--ba:60%] [--bc:60%] md:[--ba:52%] md:[--bc:62%]"
-      >
+    <div ref={wrapRef} className="relative" style={{ height: "170vh" }}>
+      <div ref={stickyRef} className="sticky top-0 h-svh overflow-hidden">
         <Grain />
 
         {/* the heading, above the collage on the same screen */}
@@ -232,8 +220,8 @@ export default function ProjectBurst({
           const xOff = `calc(50% ${c.ox < 0 ? "-" : "+"} clamp(${Math.abs(c.ox) < 30 ? 62 : 125}px, ${Math.abs(c.ox)}vw, ${Math.abs(c.ox) < 30 ? 250 : 470}px))`;
           const yOff =
             c.oy === 0
-              ? "var(--ba)"
-              : `calc(var(--ba) ${c.oy < 0 ? "-" : "+"} clamp(80px, ${Math.abs(c.oy)}vw, 150px))`;
+              ? "60%"
+              : `calc(60% ${c.oy < 0 ? "-" : "+"} clamp(80px, ${Math.abs(c.oy)}vw, 150px))`;
           return (
             <div
               key={photo.src}
@@ -265,8 +253,8 @@ export default function ProjectBurst({
         <Link
           ref={centerRef}
           href={project.href}
-          className="group absolute left-1/2 z-20 block -translate-x-1/2 -translate-y-1/2"
-          style={{ pointerEvents: "none", top: "var(--bc)" }}
+          className="group absolute left-1/2 top-[60%] z-20 block -translate-x-1/2 -translate-y-1/2"
+          style={{ pointerEvents: "none" }}
         >
           <div
             ref={centerBoxRef}

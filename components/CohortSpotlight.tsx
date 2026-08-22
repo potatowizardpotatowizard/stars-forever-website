@@ -68,7 +68,7 @@ export default function CohortSpotlight() {
           <p className="meta-label text-center text-dust">
             The ten creators who attended · scroll →
           </p>
-          <ul className="mt-6 flex snap-x gap-4 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <ul className="mt-6 flex snap-x gap-4 overflow-x-auto pb-4 [scrollbar-width:none] md:mx-auto md:max-w-[46rem] [&::-webkit-scrollbar]:hidden">
             {people.map((person) => {
               const platform = person.href.includes("instagram")
                 ? "Instagram"

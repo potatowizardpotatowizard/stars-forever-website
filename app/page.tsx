@@ -123,7 +123,7 @@ export default function HomePage() {
               <p className="font-meta text-xl leading-relaxed text-starlight sm:text-2xl sm:leading-relaxed">
                 {ANCHOR_VERSE.text}
               </p>
-              <cite className="mt-5 block font-meta text-xl not-italic leading-relaxed text-starlight sm:text-2xl">
+              <cite className="mt-5 block font-meta text-base not-italic leading-relaxed text-starlight sm:text-lg">
                 {ANCHOR_VERSE.reference}
               </cite>
             </blockquote>
