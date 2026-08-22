@@ -50,7 +50,7 @@ export default function CohortSpotlight() {
                 className="absolute inset-0 bg-gradient-to-t from-night/85 via-night/10 to-transparent"
               />
               <div className="absolute bottom-0 left-0 p-5 text-left sm:p-8">
-                <p className="meta-label text-starlight/70">The First Cohort</p>
+                <p className="meta-label text-starlight/70">Revolutionary Cohort</p>
                 <h3 className="mt-2 font-display text-2xl font-bold transition-colors group-hover:text-ember sm:text-4xl">
                   Learn More
                 </h3>
