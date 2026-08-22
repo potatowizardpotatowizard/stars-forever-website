@@ -4,7 +4,6 @@ import GlitchText from "@/components/GlitchText";
 import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import Reveal from "@/components/Reveal";
-import VideoBlock from "@/components/VideoBlock";
 import { MISSIONS } from "@/content/missions";
 
 // Recent work: the Revolutionary Cohort. The dusk video leads and
@@ -122,12 +121,24 @@ export default function CohortSpotlight() {
           <p className="font-display text-2xl font-bold text-starlight/90 sm:text-3xl">
             The next cohort is coming soon.
           </p>
-          <VideoBlock
-            src="/brand/video/revolutionary-cohort-explainer.mp4"
-            poster="/brand/poster-revolutionary-cohort-explainer.jpg"
-            title="the Revolutionary Cohort in two minutes"
-            className="mt-8 text-left"
-          />
+          <figure className="mt-8">
+            <div className="relative overflow-hidden rounded-xl border border-dust/20 bg-soot">
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                poster="/brand/poster-cohort-montage.jpg"
+                className="block aspect-video w-full object-cover"
+              >
+                <source src="/brand/video/cohort-montage.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <figcaption className="meta-label mt-3 text-left">
+              <span className="star-underline">scenes from the first cohort</span>
+            </figcaption>
+          </figure>
           <Link
             href="/apply"
             className="mono-link mt-8 inline-block text-sm font-bold text-ember"
