@@ -8,7 +8,6 @@ import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
 import Reveal from "@/components/Reveal";
-import VideoBlock from "@/components/VideoBlock";
 import YouTubeEmbed from "@/components/YouTubeEmbed";
 import { MISSIONS } from "@/content/missions";
 import { resolveSlot } from "@/lib/media";
@@ -197,17 +196,42 @@ export default async function MissionPage({
         </div>
       ) : null}
 
-      {mission.videoFile ? (
+      {mission.videoLink ? (
         <div className="mx-auto max-w-7xl px-5 pt-20 sm:px-8">
-          <Reveal
-            className={`mx-auto ${mission.videoFile.vertical ? "max-w-sm" : "max-w-4xl"}`}
-          >
-            <VideoBlock
-              src={mission.videoFile.src}
-              poster={mission.videoFile.poster}
-              title={mission.videoFile.caption}
-              vertical={mission.videoFile.vertical}
-            />
+          <Reveal className="mx-auto max-w-sm">
+            <figure>
+              <a
+                href={mission.videoLink.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block"
+              >
+                <div className="relative overflow-hidden rounded-xl border border-dust/20 bg-soot">
+                  <Image
+                    src={mission.videoLink.thumbnail}
+                    alt={mission.name}
+                    width={720}
+                    height={1280}
+                    sizes="24rem"
+                    className="block aspect-[9/16] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  />
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-0 flex items-center justify-center"
+                  >
+                    <span className="flex h-16 w-16 items-center justify-center rounded-full bg-night/70 pl-1 text-2xl text-starlight backdrop-blur-sm transition-colors group-hover:bg-ember group-hover:text-night">
+                      ▶
+                    </span>
+                  </span>
+                  <span className="meta-label absolute inset-x-0 bottom-0 bg-gradient-to-t from-night/90 to-transparent px-5 pb-4 pt-10 text-center text-ember">
+                    {mission.videoLink.label} ↗
+                  </span>
+                </div>
+              </a>
+              <figcaption className="meta-label mt-3">
+                {mission.videoLink.caption}
+              </figcaption>
+            </figure>
           </Reveal>
         </div>
       ) : null}
