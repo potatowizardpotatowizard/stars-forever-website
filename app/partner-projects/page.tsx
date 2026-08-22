@@ -171,37 +171,7 @@ export default function PartnerProjectsPage() {
           </p>
         </Reveal>
       </section>
-      <div className="hidden md:block">
-        <ProjectTimeline projects={timelineProjects} />
-      </div>
-      <section className="mx-auto max-w-7xl px-5 pb-24 pt-14 sm:px-8 md:hidden">
-        <div className="grid gap-10 md:grid-cols-3">
-          {showcase.map((mission) => (
-            <Reveal key={mission.slug}>
-              <Link
-                href={`/partner-projects/${mission.slug}`}
-                className="group block"
-              >
-                <MediaSlot
-                  name={mission.cardImageSlot}
-                  sizes="(min-width: 768px) 33vw, 100vw"
-                  showCaption={false}
-                  className="overflow-hidden rounded-lg"
-                />
-                <p className="meta-label mt-6">
-                  {mission.location} · {mission.date}
-                </p>
-                <h3 className="mt-2 font-display text-2xl font-bold transition-colors group-hover:text-ember">
-                  {mission.name}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-starlight/70">
-                  {mission.summary}
-                </p>
-              </Link>
-            </Reveal>
-          ))}
-        </div>
-      </section>
+      <ProjectTimeline projects={timelineProjects} />
 
       {/* FAQ */}
       <section className="border-y border-dust/15 bg-soot/40">

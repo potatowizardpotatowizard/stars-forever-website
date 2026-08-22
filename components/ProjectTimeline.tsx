@@ -25,6 +25,7 @@ export default function ProjectTimeline({
   projects: TimelineProject[];
 }) {
   const wrapRef = useRef<HTMLDivElement>(null);
+  const stickyRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const [wrapH, setWrapH] = useState<number | null>(null);
   const [active, setActive] = useState(0);
@@ -45,9 +46,12 @@ export default function ProjectTimeline({
     if (reduced) return;
     const measure = () => {
       const track = trackRef.current;
-      if (!track) return;
+      const sticky = stickyRef.current;
+      if (!track || !sticky) return;
+      // svh sized sticky keeps the mobile toolbar from causing jitter;
+      // measure it rather than window.innerHeight for the same reason
       const overflow = Math.max(0, track.scrollWidth - window.innerWidth);
-      setWrapH(window.innerHeight + overflow);
+      setWrapH(sticky.clientHeight + overflow);
     };
     measure();
     window.addEventListener("resize", measure, { passive: true });
@@ -63,7 +67,8 @@ export default function ProjectTimeline({
       const track = trackRef.current;
       if (!wrap || !track) return;
       const rect = wrap.getBoundingClientRect();
-      const total = rect.height - window.innerHeight;
+      const vh = stickyRef.current?.clientHeight ?? window.innerHeight;
+      const total = rect.height - vh;
       const t = total > 0 ? Math.min(1, Math.max(0, -rect.top / total)) : 0;
       const overflow = Math.max(0, track.scrollWidth - window.innerWidth);
       track.style.transform = `translate3d(${(-t * overflow).toFixed(1)}px,0,0)`;
@@ -131,7 +136,10 @@ export default function ProjectTimeline({
       className="relative"
       style={{ height: wrapH ? `${wrapH}px` : "200vh" }}
     >
-      <div className="sticky top-0 flex h-screen items-center overflow-hidden">
+      <div
+        ref={stickyRef}
+        className="sticky top-0 flex h-svh items-center overflow-hidden"
+      >
         <Grain />
 
         {/* mission counter */}
@@ -158,7 +166,7 @@ export default function ProjectTimeline({
             <Link
               key={p.slug}
               href={`/partner-projects/${p.slug}`}
-              className="group relative block w-[52vw] max-w-[860px] flex-none"
+              className="group relative block w-[82vw] max-w-[860px] flex-none md:w-[52vw]"
             >
               <div className="relative overflow-hidden rounded-xl border border-dust/25">
                 {p.src ? (
@@ -179,21 +187,21 @@ export default function ProjectTimeline({
                   className="absolute inset-0 bg-gradient-to-t from-night/85 via-night/10 to-transparent"
                 />
                 {/* label, lower left like a field report */}
-                <div className="absolute bottom-0 left-0 p-7 text-left sm:p-9">
+                <div className="absolute bottom-0 left-0 p-5 text-left sm:p-9">
                   <p className="meta-label text-starlight/70">
                     Previous project · {p.year}
                   </p>
-                  <h3 className="mt-2 font-display text-4xl font-bold transition-colors group-hover:text-ember sm:text-5xl">
+                  <h3 className="mt-2 font-display text-2xl font-bold transition-colors group-hover:text-ember sm:text-5xl">
                     {p.name}
                   </h3>
-                  <p className="meta-label mt-3 text-dust">
+                  <p className="meta-label mt-3 hidden text-dust sm:block">
                     {p.location} · {p.date}
                   </p>
                 </div>
                 {/* arrow, lower right */}
                 <span
                   aria-hidden="true"
-                  className="absolute bottom-7 right-7 flex h-12 w-12 items-center justify-center rounded-full border border-starlight/40 text-lg text-starlight backdrop-blur-sm transition-all duration-300 group-hover:border-ember group-hover:bg-ember group-hover:text-night sm:bottom-9 sm:right-9"
+                  className="absolute bottom-5 right-5 flex h-9 w-9 items-center justify-center rounded-full border border-starlight/40 text-base text-starlight backdrop-blur-sm transition-all duration-300 group-hover:border-ember group-hover:bg-ember group-hover:text-night sm:bottom-9 sm:right-9 sm:h-12 sm:w-12 sm:text-lg"
                 >
                   →
                 </span>
@@ -202,7 +210,7 @@ export default function ProjectTimeline({
           ))}
 
           {/* the far end of the past: an invitation to write the next one */}
-          <div className="w-[26vw] max-w-[420px] flex-none">
+          <div className="w-[70vw] max-w-[420px] flex-none md:w-[26vw]">
             <p className="font-display text-3xl font-bold leading-snug text-starlight/85">
               The next project is unwritten.
             </p>
