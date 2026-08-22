@@ -24,12 +24,8 @@ export const metadata: Metadata = {
 
 export default function PartnerProjectsPage() {
   const showcase = MISSIONS.filter((m) => m.slug !== "revolutionary-cohort");
-  // Seven photos across the three projects for the burst intro
-  const burstCenter = {
-    src: "/images/real-treasure-card.jpg",
-    alt: "Three friends with arms wide open in front of a roaring Icelandic waterfall",
-  };
-  const burstOuter = [
+  // Six photos across the three projects collaged around the video
+  const burstPhotos = [
     { src: "/images/tokyo-drift-car.jpg", alt: "" },
     { src: "/images/rt-abandoned-plane.jpg", alt: "" },
     { src: "/images/home-proof-beast-games.jpg", alt: "" },
@@ -185,7 +181,11 @@ export default function PartnerProjectsPage() {
           </p>
         </Reveal>
       </section>
-      <ProjectBurst center={burstCenter} outer={burstOuter} />
+      <ProjectBurst
+        photos={burstPhotos}
+        videoSrc="/brand/video/real-treasure-hero-bg.mp4"
+        videoPoster="/images/real-treasure-hero.jpg"
+      />
       <section className="mx-auto max-w-5xl space-y-12 px-5 py-20 sm:px-8 sm:py-24">
         {timelineProjects.map((p) => (
           <Reveal key={p.slug}>
