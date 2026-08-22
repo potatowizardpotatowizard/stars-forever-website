@@ -19,7 +19,7 @@ export default function CohortSpotlight() {
       <Grain />
       <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
         <div className="md:grid md:grid-cols-[2fr_3fr] md:items-center md:gap-14">
-        <Reveal className="text-center md:text-left">
+        <Reveal className="text-center md:-translate-y-8 md:text-left">
           <Kicker>Recent Work</Kicker>
           <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
             <GlitchText text="Revolutionary Cohort" />
