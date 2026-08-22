@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import DesktopProjects from "@/components/DesktopProjects";
 import ProjectBurst from "@/components/ProjectBurst";
 import Reveal from "@/components/Reveal";
 import { MISSIONS, MISSIONS_INDEX } from "@/content/missions";
@@ -36,10 +37,43 @@ export default function ProjectShowcase() {
     };
   });
 
+  const rt = MISSIONS.find((m) => m.slug === "real-treasure");
+  const desktopProjects = [
+    {
+      name: "Real Treasure",
+      year: "2026",
+      meta: "Iceland and Southern California · July 9 to 17, 2026",
+      href: "/partner-projects/real-treasure",
+      video: "/brand/video/real-treasure-hero-bg.mp4",
+      poster: rt ? resolveSlot(rt.cardImageSlot).src : null,
+    },
+    ...projects.map((p) => ({
+      name: p.name,
+      year: p.year,
+      meta: `${p.location} · ${p.date}`,
+      href: `/partner-projects/${p.slug}`,
+      video: p.video ?? "",
+      poster: p.src,
+    })),
+  ];
+
   return (
     <>
-      {/* heading, bursting photo collage, and the project list flow
-          together as one continuous scene */}
+      {/* desktop: the meteor sky headline, then the projects slide by
+          sideways, after the reference the user shared */}
+      <div className="hidden md:block">
+        <DesktopProjects
+          photos={BURST_PHOTOS}
+          projects={desktopProjects}
+          kicker={MISSIONS_INDEX.kicker}
+          heading="The Projects So Far"
+          intro={MISSIONS_INDEX.intro}
+        />
+      </div>
+
+      {/* mobile: heading, bursting photo collage, and the vertical
+          project list flow together as one continuous scene */}
+      <div className="md:hidden">
       <ProjectBurst
         photos={BURST_PHOTOS}
         videoSrc="/brand/video/real-treasure-hero-bg.mp4"
@@ -122,6 +156,7 @@ export default function ProjectShowcase() {
           </Link>
         </Reveal>
       </section>
+      </div>
     </>
   );
 }
