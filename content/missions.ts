@@ -89,7 +89,7 @@ export const MISSIONS: Mission[] = [
     heroVideo: "/brand/video/real-treasure-hero-bg.mp4",
     burningQuestion:
       "You could spend your whole life chasing the things of this world. What is the real treasure?",
-    desktopHiddenSlots: ["rt-wing", "rt-weston", "rt-flight", "rt-rock-passage"],
+    desktopHiddenSlots: ["rt-wing", "rt-weston", "rt-flight"],
     videoLink: {
       href: "https://www.instagram.com/reel/Db9PKZrPr3g/",
       thumbnail: "/brand/poster-real-treasure.jpg",
@@ -130,7 +130,6 @@ export const MISSIONS: Mission[] = [
         imageSlots: [
           "rt-flight",
           "rt-abandoned-plane",
-          "rt-treasure-hunt",
           "rt-rock-passage",
         ],
       },
@@ -139,6 +138,7 @@ export const MISSIONS: Mission[] = [
         paragraphs: [
           "The moment Weston posted the video, the comments started telling the story for us. Unbelievers praised the video despite not believing in Jesus, Christians praised its evangelistic power, and others were simply left in awe.",
         ],
+        imageSlots: ["rt-treasure-hunt"],
       },
     ],
     commentWall: {
