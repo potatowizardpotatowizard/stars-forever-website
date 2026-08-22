@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import GlitchText from "@/components/GlitchText";
+import Cta from "@/components/Cta";
 import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import Reveal from "@/components/Reveal";
@@ -144,10 +145,13 @@ export default function CohortSpotlight() {
           <div className="md:col-start-2 md:row-start-2 md:self-start">
           <Link
             href="/apply"
-            className="mono-link mt-8 inline-block text-sm font-bold text-ember"
+            className="mono-link mt-8 inline-block text-sm font-bold text-ember md:hidden"
           >
             Apply to be part of it →
           </Link>
+          <div className="mt-8 hidden md:block">
+            <Cta href="/apply">Apply to be part of it</Cta>
+          </div>
           <p className="mt-12 text-sm text-starlight/75 md:mt-8">
             In collaboration with{" "}
             <a

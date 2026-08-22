@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import Cta from "@/components/Cta";
 import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 
@@ -498,12 +499,9 @@ export default function DesktopProjects({
               <p className="font-display text-3xl font-bold leading-snug text-starlight/85">
                 The next project is unwritten.
               </p>
-              <Link
-                href="/apply"
-                className="mono-link mt-6 inline-block text-sm font-bold text-ember"
-              >
-                Bring us your God dream →
-              </Link>
+              <div className="mt-8">
+                <Cta href="/apply">Bring us your God dream</Cta>
+              </div>
             </div>
           </div>
         </div>
