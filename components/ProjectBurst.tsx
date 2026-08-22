@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import Grain from "@/components/Grain";
+import Kicker from "@/components/Kicker";
 
 export type BurstPhoto = { src: string; alt: string };
 
@@ -30,16 +31,23 @@ export default function ProjectBurst({
   photos,
   videoSrc,
   videoPoster,
+  kicker,
+  heading,
+  intro,
 }: {
   photos: BurstPhoto[];
   videoSrc: string;
   videoPoster: string;
+  kicker: string;
+  heading: string;
+  intro: string;
 }) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
   const outerRefs = useRef<(HTMLDivElement | null)[]>([]);
   const centerRef = useRef<HTMLDivElement>(null);
   const centerBoxRef = useRef<HTMLDivElement>(null);
+  const headRef = useRef<HTMLDivElement>(null);
   const [reduced, setReduced] = useState(false);
 
   useEffect(() => {
@@ -77,6 +85,14 @@ export default function ProjectBurst({
         el.style.transform = `translate(-50%, -50%) translate3d(${dx.toFixed(1)}px, ${dy.toFixed(1)}px, 0) rotate(${rot.toFixed(2)}deg)`;
       }
 
+      // heading: lifts away as the collage bursts
+      const head = headRef.current;
+      if (head) {
+        const fade = smooth(clamp01((p - 0.1) / 0.3));
+        head.style.opacity = (1 - fade).toFixed(3);
+        head.style.transform = `translate3d(0, ${(-fade * 0.1 * vh).toFixed(1)}px, 0)`;
+      }
+
       // center video: grows until its width reaches the screen edges,
       // and no further
       const centerEl = centerRef.current;
@@ -86,7 +102,9 @@ export default function ProjectBurst({
         const edgeScale = vw / w0;
         const grow = smooth(clamp01((p - 0.22) / 0.68));
         const s = 1 + (edgeScale - 1) * grow;
-        centerEl.style.transform = `translate(-50%, -50%) scale(${s.toFixed(4)})`;
+        // drift from its collage spot up to true center as it grows
+        const drift = 0.08 * vh * grow;
+        centerEl.style.transform = `translate(-50%, -50%) translate3d(0, ${(-drift).toFixed(1)}px, 0) scale(${s.toFixed(4)})`;
       }
     };
 
@@ -103,8 +121,20 @@ export default function ProjectBurst({
     };
   }, [reduced]);
 
-  // Reduced motion: no cloud; the heading above and list below carry it.
-  if (reduced) return null;
+  // Reduced motion: just the heading; the list below carries the rest.
+  if (reduced) {
+    return (
+      <section className="mx-auto max-w-7xl px-5 pt-24 text-center sm:px-8 sm:pt-32">
+        <Kicker>{kicker}</Kicker>
+        <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
+          {heading}
+        </h2>
+        <p className="mx-auto mt-6 max-w-2xl text-lg text-starlight/80">
+          {intro}
+        </p>
+      </section>
+    );
+  }
 
   // one shared size for the six photos; the video sits slightly wider
   const photoSize = "clamp(150px, 34vw, 470px)";
@@ -113,6 +143,20 @@ export default function ProjectBurst({
     <div ref={wrapRef} className="relative" style={{ height: "220vh" }}>
       <div ref={stickyRef} className="sticky top-0 h-svh overflow-hidden">
         <Grain />
+
+        {/* the heading, above the collage on the same screen */}
+        <div
+          ref={headRef}
+          className="absolute inset-x-0 top-0 z-30 px-5 pt-24 text-center will-change-transform sm:pt-28"
+        >
+          <Kicker>{kicker}</Kicker>
+          <h2 className="mt-4 font-display text-3xl font-bold sm:text-5xl">
+            {heading}
+          </h2>
+          <p className="mx-auto mt-4 hidden max-w-2xl text-starlight/80 sm:block sm:text-lg">
+            {intro}
+          </p>
+        </div>
 
         {/* six photos packed into a collage, bursting outward */}
         {photos.slice(0, OUTER.length).map((photo, i) => {
@@ -126,7 +170,7 @@ export default function ProjectBurst({
               className="absolute z-10 will-change-transform"
               style={{
                 left: `calc(50% + ${c.ox}vw)`,
-                top: `calc(50% + ${c.oy}vw)`,
+                top: `calc(58% + ${c.oy}vw)`,
                 width: photoSize,
                 transform: `translate(-50%, -50%) rotate(${c.rot}deg)`,
               }}
@@ -147,7 +191,7 @@ export default function ProjectBurst({
         {/* the video, growing until it touches the edges */}
         <div
           ref={centerRef}
-          className="absolute left-1/2 top-1/2 z-20 will-change-transform"
+          className="absolute left-1/2 top-[58%] z-20 will-change-transform"
           style={{ transform: "translate(-50%, -50%)" }}
         >
           <div

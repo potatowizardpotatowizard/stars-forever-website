@@ -167,26 +167,17 @@ export default function PartnerProjectsPage() {
         </div>
       </section>
 
-      {/* Project showcase: the heading leads, a cloud of project photos
-          bursts apart as the visitor scrolls, then the past projects
-          rise up as a vertical list */}
-      <section className="mx-auto max-w-7xl px-5 pt-24 text-center sm:px-8 sm:pt-32">
-        <Reveal>
-          <Kicker>{MISSIONS_INDEX.kicker}</Kicker>
-          <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
-            <GlitchText text="The Projects So Far" />
-          </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-starlight/80">
-            {MISSIONS_INDEX.intro}
-          </p>
-        </Reveal>
-      </section>
+      {/* Project showcase: heading, bursting photo collage, and the
+          project list flow together as one continuous scene */}
       <ProjectBurst
         photos={burstPhotos}
         videoSrc="/brand/video/real-treasure-hero-bg.mp4"
         videoPoster="/images/real-treasure-hero.jpg"
+        kicker={MISSIONS_INDEX.kicker}
+        heading="The Projects So Far"
+        intro={MISSIONS_INDEX.intro}
       />
-      <section className="mx-auto max-w-5xl space-y-12 px-5 py-20 sm:px-8 sm:py-24">
+      <section className="mx-auto max-w-5xl space-y-12 px-5 pb-20 pt-8 sm:px-8 sm:pb-24 sm:pt-10">
         {timelineProjects.map((p) => (
           <Reveal key={p.slug}>
             <Link
