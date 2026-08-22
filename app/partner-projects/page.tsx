@@ -8,7 +8,9 @@ import GlitchText from "@/components/GlitchText";
 import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
+import ProjectTimeline from "@/components/ProjectTimeline";
 import Reveal from "@/components/Reveal";
+import { resolveSlot } from "@/lib/media";
 import VideoBlock from "@/components/VideoBlock";
 import { MISSIONS, MISSIONS_INDEX } from "@/content/missions";
 import { PARTNER } from "@/content/partner";
@@ -21,6 +23,20 @@ export const metadata: Metadata = {
 };
 
 export default function PartnerProjectsPage() {
+  const showcase = MISSIONS.filter((m) => m.slug !== "revolutionary-cohort");
+  const timelineProjects = showcase.map((m) => {
+    const slot = resolveSlot(m.cardImageSlot);
+    return {
+      slug: m.slug,
+      name: m.name,
+      location: m.location,
+      date: m.date,
+      summary: m.summary,
+      src: slot.src,
+      alt: slot.alt,
+      year: (m.date.match(/\d{4}/) ?? [""])[0],
+    };
+  });
   return (
     <article>
       {/* Analog hero band */}
@@ -142,8 +158,9 @@ export default function PartnerProjectsPage() {
         </div>
       </section>
 
-      {/* Project showcase */}
-      <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
+      {/* Project showcase: on desktop the section pins and each past
+          project flies toward the visitor; mobile keeps the calm grid */}
+      <section className="mx-auto max-w-7xl px-5 pt-24 sm:px-8 sm:pt-32">
         <Reveal>
           <Kicker>{MISSIONS_INDEX.kicker}</Kicker>
           <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
@@ -153,8 +170,13 @@ export default function PartnerProjectsPage() {
             {MISSIONS_INDEX.intro}
           </p>
         </Reveal>
-        <div className="mt-14 grid gap-10 md:grid-cols-3">
-          {MISSIONS.filter((m) => m.slug !== "revolutionary-cohort").map((mission) => (
+      </section>
+      <div className="hidden md:block">
+        <ProjectTimeline projects={timelineProjects} />
+      </div>
+      <section className="mx-auto max-w-7xl px-5 pb-24 pt-14 sm:px-8 md:hidden">
+        <div className="grid gap-10 md:grid-cols-3">
+          {showcase.map((mission) => (
             <Reveal key={mission.slug}>
               <Link
                 href={`/partner-projects/${mission.slug}`}
