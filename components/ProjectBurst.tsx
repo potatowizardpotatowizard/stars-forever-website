@@ -74,7 +74,7 @@ export default function ProjectBurst({
       const p = total > 0 ? clamp01(-rect.top / total) : 0;
 
       // outer photos: accelerate outward and leave the screen
-      const push = smooth(clamp01(p / 0.62));
+      const push = smooth(clamp01(p / 0.55));
       for (let i = 0; i < OUTER.length; i++) {
         const el = outerRefs.current[i];
         if (!el) continue;
@@ -100,10 +100,10 @@ export default function ProjectBurst({
       if (centerEl && centerBox) {
         const w0 = centerBox.clientWidth || 1;
         const edgeScale = vw / w0;
-        const grow = smooth(clamp01((p - 0.22) / 0.68));
+        const grow = smooth(clamp01((p - 0.18) / 0.66));
         const s = 1 + (edgeScale - 1) * grow;
         // drift from its collage spot up to true center as it grows
-        const drift = 0.08 * vh * grow;
+        const drift = 0.04 * vh * grow;
         centerEl.style.transform = `translate(-50%, -50%) translate3d(0, ${(-drift).toFixed(1)}px, 0) scale(${s.toFixed(4)})`;
       }
     };
@@ -137,10 +137,10 @@ export default function ProjectBurst({
   }
 
   // one shared size for the six photos; the video sits slightly wider
-  const photoSize = "clamp(150px, 34vw, 470px)";
+  const photoSize = "clamp(170px, 38vw, 470px)";
 
   return (
-    <div ref={wrapRef} className="relative" style={{ height: "220vh" }}>
+    <div ref={wrapRef} className="relative" style={{ height: "170vh" }}>
       <div ref={stickyRef} className="sticky top-0 h-svh overflow-hidden">
         <Grain />
 
@@ -153,7 +153,7 @@ export default function ProjectBurst({
           <h2 className="mt-4 font-display text-3xl font-bold sm:text-5xl">
             {heading}
           </h2>
-          <p className="mx-auto mt-4 hidden max-w-2xl text-starlight/80 sm:block sm:text-lg">
+          <p className="mx-auto mt-4 max-w-2xl text-sm text-starlight/80 sm:text-lg">
             {intro}
           </p>
         </div>
@@ -170,7 +170,7 @@ export default function ProjectBurst({
               className="absolute z-10 will-change-transform"
               style={{
                 left: `calc(50% + ${c.ox}vw)`,
-                top: `calc(58% + ${c.oy}vw)`,
+                top: `calc(54% + ${c.oy}vw)`,
                 width: photoSize,
                 transform: `translate(-50%, -50%) rotate(${c.rot}deg)`,
               }}
@@ -191,13 +191,13 @@ export default function ProjectBurst({
         {/* the video, growing until it touches the edges */}
         <div
           ref={centerRef}
-          className="absolute left-1/2 top-[58%] z-20 will-change-transform"
+          className="absolute left-1/2 top-[54%] z-20 will-change-transform"
           style={{ transform: "translate(-50%, -50%)" }}
         >
           <div
             ref={centerBoxRef}
             className="overflow-hidden rounded-lg border border-dust/30 shadow-[0_0_60px_rgb(109_40_217/0.3)]"
-            style={{ width: "clamp(170px, 38vw, 540px)" }}
+            style={{ width: "clamp(190px, 44vw, 600px)" }}
           >
             <video
               autoPlay
