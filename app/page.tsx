@@ -9,8 +9,9 @@ import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
 import MissionIntro from "@/components/MissionIntro";
-import CohortGather from "@/components/CohortGather";
+import CohortConstellation from "@/components/CohortConstellation";
 import ProjectShowcase from "@/components/ProjectShowcase";
+import { MISSIONS } from "@/content/missions";
 import StarBridge from "@/components/StarBridge";
 import Reveal from "@/components/Reveal";
 import StarField from "@/components/StarField";
@@ -24,6 +25,11 @@ import {
   HERO_MENU,
   SITE_NAME,
 } from "@/content/site";
+
+// The ten cohort creators, one star each
+const COHORT_STARS = (
+  MISSIONS.find((m) => m.slug === "revolutionary-cohort")?.roster?.people ?? []
+).map((p) => ({ name: p.name, niche: p.niche ?? "" }));
 
 export default function HomePage() {
   return (
@@ -198,17 +204,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Recent work: the Revolutionary Cohort gathers in from the
-          edges of the screen, because that is what the cohort is */}
-      <CohortGather
-        photos={[
-          { src: "/images/joshua-candles.jpg", alt: "" },
-          { src: "/images/joshua-teaching.jpg", alt: "" },
-          { src: "/images/joshua-prayer.jpg", alt: "" },
-          { src: "/images/joshua-meal.jpg", alt: "" },
-          { src: "/images/joshua-discussion.jpg", alt: "" },
-          { src: "/images/joshua-stargazing.jpg", alt: "" },
-        ]}
+      {/* Recent work: ten creators become ten stars joining into a
+          constellation, then the cohort's dusk video takes the sky */}
+      <CohortConstellation
+        stars={COHORT_STARS}
         videoSrc="/brand/video/cohort-dusk.mp4"
         videoPoster="/images/joshua-hero.jpg"
         kicker={HOME.proof.kicker}
