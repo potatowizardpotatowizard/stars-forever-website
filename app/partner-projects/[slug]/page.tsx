@@ -105,7 +105,25 @@ export default async function MissionPage({
           ).map(([label, value]) => (
             <div key={label}>
               <dt className="meta-label">{label}</dt>
-              <dd className="mt-2 text-sm text-starlight/85">{value}</dd>
+              <dd className="mt-2 text-sm text-starlight/85">
+                {label === "Partner" && mission.partnerHref ? (
+                  <>
+                    <a
+                      href={mission.partnerHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-ember underline decoration-ember/40 underline-offset-4 transition-colors hover:text-starlight"
+                    >
+                      {value.split(",")[0]}
+                    </a>
+                    {value.includes(",")
+                      ? `,${value.split(",").slice(1).join(",")}`
+                      : null}
+                  </>
+                ) : (
+                  value
+                )}
+              </dd>
             </div>
           ))}
         </dl>

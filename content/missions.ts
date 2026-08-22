@@ -12,6 +12,8 @@ export type Mission = {
   name: string;
   location: string;
   partner: string;
+  /** The partner's main platform; links their name in the metadata header */
+  partnerHref?: string;
   date: string;
   summary: string;
   cardImageSlot: string;
@@ -76,6 +78,7 @@ export const MISSIONS: Mission[] = [
     name: "Real Treasure",
     location: "Iceland and Southern California",
     partner: "Weston Vansoest, Creative Partner 2",
+    partnerHref: "https://www.instagram.com/westonvansoest/",
     date: "July 9 to 17, 2026",
     summary:
       "A fever dream video about treasure carried the gospel from Southern California to Iceland and put Jesus in front of millions.",
@@ -181,6 +184,7 @@ export const MISSIONS: Mission[] = [
     name: "Tokyo Drift",
     location: "Tokyo and rural Japan",
     partner: "Owen Tucker, Creative Partner 1",
+    partnerHref: "https://www.youtube.com/@owenkeilyntucker",
     date: "November 4 to December 4, 2025",
     summary:
       "What would it look like to share Jesus in a secular YouTube video? Thirty days in Japan answered the question and became the blueprint.",
@@ -234,6 +238,7 @@ export const MISSIONS: Mission[] = [
     name: "Revolutionary Cohort 1",
     location: "Joshua Tree, California",
     partner: "Ben Pierce, Steiger Ministries",
+    partnerHref: "https://steiger.org",
     date: "May 15 to 17, 2026",
     heroVideo: "/brand/video/cohort-dusk.mp4",
     roster: {
@@ -396,6 +401,7 @@ export const MISSIONS: Mission[] = [
     name: "Beast Games",
     location: "On set and beyond",
     partner: "Auzi Films",
+    partnerHref: "https://www.instagram.com/auzi.films/",
     date: "July 2024 to February 2025",
     summary:
       "Ten plus podcasts filmed around the biggest competition show on earth, many carrying Jesus conversations to a secular audience of fans.",
