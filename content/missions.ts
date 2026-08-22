@@ -89,7 +89,7 @@ export const MISSIONS: Mission[] = [
     heroVideo: "/brand/video/real-treasure-hero-bg.mp4",
     burningQuestion:
       "You could spend your whole life chasing the things of this world. What is the real treasure?",
-    desktopHiddenSlots: ["rt-wing", "rt-weston"],
+    desktopHiddenSlots: ["rt-wing", "rt-weston", "rt-flight", "rt-rock-passage"],
     videoLink: {
       href: "https://www.instagram.com/reel/Db9PKZrPr3g/",
       thumbnail: "/brand/poster-real-treasure.jpg",
