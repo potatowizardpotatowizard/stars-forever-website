@@ -216,8 +216,8 @@ export default async function MissionPage({
 
       {mission.videoLink ? (
         <div className="mx-auto max-w-7xl px-5 pt-20 sm:px-8">
-          <Reveal className="mx-auto max-w-sm">
-            <figure>
+          <Reveal className="mx-auto max-w-sm md:flex md:max-w-4xl md:items-center md:justify-center md:gap-20">
+            <figure className="md:w-80 md:flex-none">
               <a
                 href={mission.videoLink.href}
                 target="_blank"
@@ -250,6 +250,18 @@ export default async function MissionPage({
                 {mission.videoLink.caption}
               </figcaption>
             </figure>
+            {mission.stats ? (
+              <dl className="hidden text-center md:block md:space-y-12">
+                {mission.stats.map((stat) => (
+                  <div key={stat.label}>
+                    <dd className="vhs-glow font-display text-6xl font-bold text-ember">
+                      {stat.value}
+                    </dd>
+                    <dt className="meta-label mt-3">{stat.label}</dt>
+                  </div>
+                ))}
+              </dl>
+            ) : null}
           </Reveal>
         </div>
       ) : null}
@@ -343,7 +355,7 @@ export default async function MissionPage({
             ))}
           </div>
           {mission.stats ? (
-            <Reveal>
+            <Reveal className="md:hidden">
               <dl className="mt-12 grid gap-10 rounded-lg border border-dust/15 bg-soot/40 px-5 py-12 text-center sm:grid-cols-3 sm:px-8">
                 {mission.stats.map((stat) => (
                   <div key={stat.label}>
