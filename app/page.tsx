@@ -106,6 +106,24 @@ export default function HomePage() {
                 <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
                   <GlitchText text={HOME.video.heading} />
                 </h2>
+              <div className="mt-10 hidden md:block">
+                <blockquote>
+                  <p className="font-meta text-lg leading-relaxed text-starlight">
+                    {ANCHOR_VERSE.text}
+                  </p>
+                  <cite className="mt-4 block font-meta text-base not-italic leading-relaxed text-starlight">
+                    {ANCHOR_VERSE.reference}
+                  </cite>
+                </blockquote>
+                <a
+                  href="https://soulwealth.notion.site/Anchor-Verse-Explanation-2894679743818070951cefcd8c93c16b"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mono-link mt-4 inline-block text-sm font-bold text-ember"
+                >
+                  Anchor Verse Explained ↗
+                </a>
+              </div>
               </div>
               <VideoBlock
                 src={HOME.video.src}
@@ -121,8 +139,8 @@ export default function HomePage() {
       {/* Anchor verse and the reframe */}
       <section className="relative overflow-hidden">
         <Grain />
-        <div className="relative mx-auto max-w-7xl px-5 pb-24 pt-10 sm:px-8 sm:pb-28 sm:pt-12 md:grid md:grid-cols-2 md:items-center md:gap-16">
-          <Reveal className="max-w-3xl">
+        <div className="relative mx-auto max-w-7xl px-5 pb-24 pt-10 sm:px-8 sm:pb-28 sm:pt-12">
+          <Reveal className="max-w-3xl md:hidden">
             <blockquote>
               <p className="font-meta text-xl leading-relaxed text-starlight sm:text-2xl sm:leading-relaxed">
                 {ANCHOR_VERSE.text}
@@ -141,7 +159,7 @@ export default function HomePage() {
             </a>
           </Reveal>
 
-          <Reveal className="mt-24 max-w-3xl sm:mt-32 md:mt-0">
+          <Reveal className="mt-24 max-w-3xl sm:mt-32 md:mt-0 md:max-w-none">
             <Kicker>{HOME.reframe.kicker}</Kicker>
             <div className="mt-8 space-y-6">
               {HOME.reframe.lines.map((line, i) => {
