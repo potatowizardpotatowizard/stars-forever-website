@@ -9,7 +9,7 @@ import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
 import MissionIntro from "@/components/MissionIntro";
-import ProjectBurst from "@/components/ProjectBurst";
+import ProjectShowcase from "@/components/ProjectShowcase";
 import StarBridge from "@/components/StarBridge";
 import Reveal from "@/components/Reveal";
 import StarField from "@/components/StarField";
@@ -23,16 +23,6 @@ import {
   HERO_MENU,
   SITE_NAME,
 } from "@/content/site";
-
-// Six photos across the three projects, collaged around the video
-const BURST_PHOTOS = [
-  { src: "/images/tokyo-drift-car.jpg", alt: "" },
-  { src: "/images/rt-abandoned-plane.jpg", alt: "" },
-  { src: "/images/home-proof-beast-games.jpg", alt: "" },
-  { src: "/images/rt-church.jpg", alt: "" },
-  { src: "/images/tokyo-hitchhike.jpg", alt: "" },
-  { src: "/images/beast-island-prayer.jpg", alt: "" },
-];
 
 export default function HomePage() {
   return (
@@ -94,32 +84,18 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Real Treasure burst, the most recent project, under the
-          hero's afterglow: the collage scatters and the video becomes
-          the project preview */}
+      {/* The Projects So Far, under the hero's afterglow: the same
+          bursting showcase as the partner projects page */}
       <div className="relative">
         <div
           aria-hidden="true"
           className="absolute inset-x-0 top-0 h-[50vh] bg-[linear-gradient(to_bottom,rgb(109_40_217/0.3),rgb(109_40_217/0.1)_45%,transparent)]"
         />
-        <ProjectBurst
-          photos={BURST_PHOTOS}
-          videoSrc="/brand/video/real-treasure-hero-bg.mp4"
-          videoPoster="/images/real-treasure-hero.jpg"
-          kicker={HOME.realTreasure.kicker}
-          heading={HOME.realTreasure.heading}
-          intro={HOME.realTreasure.line}
-          project={{
-            name: "Real Treasure",
-            year: "2026",
-            meta: "Iceland and Southern California · July 9 to 17, 2026",
-            href: HOME.realTreasure.storyHref,
-          }}
-        />
+        <ProjectShowcase />
       </div>
 
       {/* Two minute explainer */}
-      <section className="relative z-20 -mt-[16svh] overflow-hidden sm:mt-0">
+      <section className="relative overflow-hidden">
         <Grain />
         <div className="relative mx-auto max-w-7xl px-5 pb-10 pt-20 sm:px-8 sm:pb-12 sm:pt-24">
           <Reveal className="max-w-3xl">
