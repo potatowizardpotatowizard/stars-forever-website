@@ -177,9 +177,17 @@ export default function PartnerProjectsPage() {
         kicker={MISSIONS_INDEX.kicker}
         heading="The Projects So Far"
         intro={MISSIONS_INDEX.intro}
+        project={{
+          name: "Real Treasure",
+          year: "2026",
+          meta: "Iceland and Southern California · July 9 to 17, 2026",
+          href: "/partner-projects/real-treasure",
+        }}
       />
-      <section className="relative z-20 mx-auto -mt-[20svh] max-w-5xl space-y-12 px-5 pb-20 sm:px-8 sm:pb-24">
-        {timelineProjects.map((p) => (
+      <section className="relative z-20 mx-auto -mt-[18svh] max-w-5xl space-y-12 px-5 pb-20 sm:mt-0 sm:pt-8 sm:px-8 sm:pb-24">
+        {timelineProjects
+          .filter((p) => p.slug !== "real-treasure")
+          .map((p) => (
           <Reveal key={p.slug}>
             <Link
               href={`/partner-projects/${p.slug}`}
