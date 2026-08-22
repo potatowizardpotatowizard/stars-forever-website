@@ -42,6 +42,7 @@ export default function PartnerProjectsPage() {
       date: m.date,
       summary: m.summary,
       src: slot.src,
+      video: m.heroVideo ?? null,
       alt: slot.alt,
       year: (m.date.match(/\d{4}/) ?? [""])[0],
     };
@@ -185,7 +186,20 @@ export default function PartnerProjectsPage() {
               className="group relative block"
             >
               <div className="relative overflow-hidden rounded-xl border border-dust/25">
-                {p.src ? (
+                {p.video ? (
+                  <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                    poster={p.src ?? undefined}
+                    aria-label={p.alt}
+                    className="aspect-[16/10] w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                  >
+                    <source src={p.video} type="video/mp4" />
+                  </video>
+                ) : p.src ? (
                   <Image
                     src={p.src}
                     alt={p.alt}
