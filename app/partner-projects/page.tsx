@@ -9,7 +9,6 @@ import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
 import ProjectBurst from "@/components/ProjectBurst";
-import ProjectTimeline from "@/components/ProjectTimeline";
 import Reveal from "@/components/Reveal";
 import { resolveSlot } from "@/lib/media";
 import VideoBlock from "@/components/VideoBlock";
@@ -172,16 +171,76 @@ export default function PartnerProjectsPage() {
         </div>
       </section>
 
-      {/* Project showcase: a cloud of project photos bursts apart as the
-          visitor scrolls, then the past projects slide by sideways */}
-      <ProjectBurst
-        center={burstCenter}
-        outer={burstOuter}
-        kicker={MISSIONS_INDEX.kicker}
-        heading="The Projects So Far"
-        intro={MISSIONS_INDEX.intro}
-      />
-      <ProjectTimeline projects={timelineProjects} />
+      {/* Project showcase: the heading leads, a cloud of project photos
+          bursts apart as the visitor scrolls, then the past projects
+          rise up as a vertical list */}
+      <section className="mx-auto max-w-7xl px-5 pt-24 text-center sm:px-8 sm:pt-32">
+        <Reveal>
+          <Kicker>{MISSIONS_INDEX.kicker}</Kicker>
+          <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
+            <GlitchText text="The Projects So Far" />
+          </h2>
+          <p className="mx-auto mt-6 max-w-2xl text-lg text-starlight/80">
+            {MISSIONS_INDEX.intro}
+          </p>
+        </Reveal>
+      </section>
+      <ProjectBurst center={burstCenter} outer={burstOuter} />
+      <section className="mx-auto max-w-5xl space-y-12 px-5 py-20 sm:px-8 sm:py-24">
+        {timelineProjects.map((p) => (
+          <Reveal key={p.slug}>
+            <Link
+              href={`/partner-projects/${p.slug}`}
+              className="group relative block"
+            >
+              <div className="relative overflow-hidden rounded-xl border border-dust/25">
+                {p.src ? (
+                  <Image
+                    src={p.src}
+                    alt={p.alt}
+                    width={1500}
+                    height={1000}
+                    sizes="(min-width: 1024px) 60rem, 100vw"
+                    className="aspect-[16/10] w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                  />
+                ) : null}
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 bg-gradient-to-t from-night/85 via-night/10 to-transparent"
+                />
+                <div className="absolute bottom-0 left-0 p-5 text-left sm:p-9">
+                  <p className="meta-label text-starlight/70">
+                    Previous project · {p.year}
+                  </p>
+                  <h3 className="mt-2 font-display text-2xl font-bold transition-colors group-hover:text-ember sm:text-5xl">
+                    {p.name}
+                  </h3>
+                  <p className="meta-label mt-3 hidden text-dust sm:block">
+                    {p.location} · {p.date}
+                  </p>
+                </div>
+                <span
+                  aria-hidden="true"
+                  className="absolute bottom-5 right-5 flex h-9 w-9 items-center justify-center rounded-full border border-starlight/40 text-base text-starlight backdrop-blur-sm transition-all duration-300 group-hover:border-ember group-hover:bg-ember group-hover:text-night sm:bottom-9 sm:right-9 sm:h-12 sm:w-12 sm:text-lg"
+                >
+                  →
+                </span>
+              </div>
+            </Link>
+          </Reveal>
+        ))}
+        <Reveal className="pt-6 text-center">
+          <p className="font-display text-3xl font-bold leading-snug text-starlight/85">
+            The next project is unwritten.
+          </p>
+          <Link
+            href="/apply"
+            className="mono-link mt-6 inline-block text-sm font-bold text-ember"
+          >
+            Bring us your God dream →
+          </Link>
+        </Reveal>
+      </section>
 
       {/* FAQ */}
       <section className="border-y border-dust/15 bg-soot/40">
