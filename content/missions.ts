@@ -108,7 +108,7 @@ export const MISSIONS: Mission[] = [
         paragraphs: [
           "This project had a low budget, so we prayed. God provided a free camper van, a free ice cave tour, and two standby tickets to fly to Iceland on an airline route that had only opened in the past three months. Many times on the trip we prayed for something specific and watched God come through with His supernatural power.",
         ],
-        imageSlots: ["rt-camper", "rt-wing", "rt-church", "rt-falls-quiet"],
+        imageSlots: ["rt-camper", "rt-wing", "rt-church", "rt-weston"],
       },
       {
         kicker: "Beyond the video",

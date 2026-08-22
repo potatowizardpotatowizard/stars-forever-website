@@ -310,20 +310,6 @@ export default async function MissionPage({
               {mission.commentWall.intro}
             </p>
           </Reveal>
-          {mission.stats ? (
-            <Reveal>
-              <dl className="mt-12 grid gap-10 rounded-lg border border-dust/15 bg-soot/40 px-5 py-12 text-center sm:grid-cols-3 sm:px-8">
-                {mission.stats.map((stat) => (
-                  <div key={stat.label}>
-                    <dd className="vhs-glow font-display text-5xl font-bold text-ember sm:text-6xl">
-                      {stat.value}
-                    </dd>
-                    <dt className="meta-label mt-3">{stat.label}</dt>
-                  </div>
-                ))}
-              </dl>
-            </Reveal>
-          ) : null}
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {mission.commentWall.comments.map((comment) => (
               <Reveal key={comment.text}>
@@ -338,6 +324,20 @@ export default async function MissionPage({
               </Reveal>
             ))}
           </div>
+          {mission.stats ? (
+            <Reveal>
+              <dl className="mt-12 grid gap-10 rounded-lg border border-dust/15 bg-soot/40 px-5 py-12 text-center sm:grid-cols-3 sm:px-8">
+                {mission.stats.map((stat) => (
+                  <div key={stat.label}>
+                    <dd className="vhs-glow font-display text-5xl font-bold text-ember sm:text-6xl">
+                      {stat.value}
+                    </dd>
+                    <dt className="meta-label mt-3">{stat.label}</dt>
+                  </div>
+                ))}
+              </dl>
+            </Reveal>
+          ) : null}
         </section>
       ) : null}
 
