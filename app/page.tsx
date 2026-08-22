@@ -173,6 +173,14 @@ export default function HomePage() {
                 {ANCHOR_VERSE.reference}
               </cite>
             </blockquote>
+            <a
+              href="https://soulwealth.notion.site/Anchor-Verse-Explanation-2894679743818070951cefcd8c93c16b"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="meta-label mt-4 inline-block text-dust transition-colors hover:text-ember"
+            >
+              Anchor Verse Explained ↗
+            </a>
           </Reveal>
 
           <Reveal className="mt-24 max-w-3xl sm:mt-32">
