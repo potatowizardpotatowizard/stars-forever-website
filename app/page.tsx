@@ -100,8 +100,8 @@ export default function HomePage() {
         <Grain />
         <div className="relative mx-auto max-w-7xl px-5 pb-10 pt-20 sm:px-8 sm:pb-12 sm:pt-24">
           <Reveal className="max-w-3xl md:max-w-none">
-            <div className="md:grid md:grid-cols-[3fr_2fr] md:items-center md:gap-14">
-              <div className="md:order-2 md:-translate-y-8">
+            <div className="md:grid md:grid-cols-[2fr_3fr] md:items-center md:gap-14">
+              <div className="md:-translate-y-8">
                 <Kicker>{HOME.video.kicker}</Kicker>
                 <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
                   <GlitchText text={HOME.video.heading} />
@@ -129,7 +129,7 @@ export default function HomePage() {
                 src={HOME.video.src}
                 poster={HOME.video.poster}
                 title={HOME.video.caption}
-                className="mt-10 md:order-1 md:mt-0"
+                className="mt-10 md:mt-0"
               />
             </div>
           </Reveal>
@@ -195,8 +195,8 @@ export default function HomePage() {
         <Grain />
         <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
         <Reveal className="mx-auto max-w-4xl md:max-w-none">
-          <div className="md:grid md:grid-cols-[2fr_3fr] md:items-center md:gap-14">
-            <div>
+          <div className="md:grid md:grid-cols-[3fr_2fr] md:items-center md:gap-14">
+            <div className="md:order-2">
               <Kicker>{HOME.feature.kicker}</Kicker>
               <h2
                 id="tokyo-anchor"
@@ -213,7 +213,7 @@ export default function HomePage() {
                 </Cta>
               </div>
             </div>
-            <div>
+            <div className="md:order-1">
               <YouTubeEmbed
                 youtubeId={HOME.feature.youtubeId}
                 title={HOME.feature.heading}

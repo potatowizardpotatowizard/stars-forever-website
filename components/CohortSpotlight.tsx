@@ -17,8 +17,8 @@ export default function CohortSpotlight() {
     <section className="relative overflow-hidden">
       <Grain />
       <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
-        <div className="md:grid md:grid-cols-[3fr_2fr] md:items-center md:gap-14">
-        <Reveal className="text-center md:order-2 md:text-left">
+        <div className="md:grid md:grid-cols-[2fr_3fr] md:items-center md:gap-14">
+        <Reveal className="text-center md:text-left">
           <Kicker>Recent Work</Kicker>
           <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
             <GlitchText text="Revolutionary Cohort" />
@@ -30,7 +30,7 @@ export default function CohortSpotlight() {
         </Reveal>
 
         {/* the dusk video, the door to the program */}
-        <Reveal className="mx-auto mt-12 max-w-3xl md:order-1 md:mt-0 md:max-w-none">
+        <Reveal className="mx-auto mt-12 max-w-3xl md:mt-0 md:max-w-none">
           <Link href="/revolutionary" className="group relative block">
             <div className="relative overflow-hidden rounded-xl border border-dust/25">
               <video
@@ -119,11 +119,11 @@ export default function CohortSpotlight() {
         </Reveal>
 
         {/* the next one */}
-        <Reveal className="mx-auto mt-16 max-w-3xl text-center sm:mt-20 md:grid md:max-w-none md:grid-cols-[2fr_3fr] md:grid-rows-[auto_auto] md:items-center md:gap-x-14 md:text-left">
-          <p className="font-display text-2xl font-bold text-starlight/90 sm:text-3xl md:col-start-1 md:row-start-1 md:self-end">
+        <Reveal className="mx-auto mt-16 max-w-3xl text-center sm:mt-20 md:grid md:max-w-none md:grid-cols-[3fr_2fr] md:grid-rows-[auto_auto] md:items-center md:gap-x-14 md:text-left">
+          <p className="font-display text-2xl font-bold text-starlight/90 sm:text-3xl md:col-start-2 md:row-start-1 md:self-end">
             The next cohort is coming soon.
           </p>
-          <figure className="mt-8 md:col-start-2 md:row-start-1 md:row-span-2 md:mt-0">
+          <figure className="mt-8 md:col-start-1 md:row-start-1 md:row-span-2 md:mt-0">
             <div className="relative overflow-hidden rounded-xl border border-dust/20 bg-soot">
               <video
                 autoPlay
@@ -141,7 +141,7 @@ export default function CohortSpotlight() {
               <span className="star-underline">scenes from the first cohort</span>
             </figcaption>
           </figure>
-          <div className="md:col-start-1 md:row-start-2 md:self-start">
+          <div className="md:col-start-2 md:row-start-2 md:self-start">
           <Link
             href="/apply"
             className="mono-link mt-8 inline-block text-sm font-bold text-ember"
