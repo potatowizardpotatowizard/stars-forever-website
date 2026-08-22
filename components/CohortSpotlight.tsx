@@ -152,7 +152,7 @@ export default function CohortSpotlight() {
             href="/apply"
             className="mono-link mt-8 inline-block text-sm font-bold text-ember md:hidden"
           >
-            Apply to be part of it →
+            Apply to be part of it
           </Link>
           <div className="mt-8 hidden md:block">
             <Cta href="/apply">Apply to be part of it</Cta>
