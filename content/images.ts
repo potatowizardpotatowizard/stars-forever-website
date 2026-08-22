@@ -155,9 +155,9 @@ export const IMAGES: Record<string, ImageSlot> = {
     caption: { where: "Hof, Iceland" },
     ratio: "4 / 5",
   },
-  "rt-waterfall-behind": {
-    file: "rt-waterfall-behind.jpg",
-    alt: "Arms stretched wide behind a thundering waterfall",
+  "rt-falls-quiet": {
+    file: "rt-falls-quiet.jpg",
+    alt: "Resting on the cliff edge beneath a thundering waterfall",
     caption: { where: "Seljalandsfoss, Iceland" },
     ratio: "4 / 5",
   },
@@ -179,9 +179,9 @@ export const IMAGES: Record<string, ImageSlot> = {
     caption: { where: "Rural Iceland" },
     ratio: "4 / 5",
   },
-  "rt-dinner": {
-    file: "rt-dinner.jpg",
-    alt: "Sharing dinner together after the treasure hunt",
+  "rt-van-life": {
+    file: "rt-van-life.jpg",
+    alt: "Squeezed into the camper van together, all smiles",
     caption: { where: "Iceland" },
     ratio: "4 / 5",
   },

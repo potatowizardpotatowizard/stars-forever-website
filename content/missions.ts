@@ -91,7 +91,7 @@ export const MISSIONS: Mission[] = [
       caption: "Real Treasure, the full video",
     },
     stats: [
-      { value: "2M+", label: "views across all platforms" },
+      { value: "6.7M+", label: "views across all platforms" },
       { value: "1M+", label: "likes across all platforms" },
       { value: "11K+", label: "comments across all platforms" },
     ],
@@ -108,7 +108,7 @@ export const MISSIONS: Mission[] = [
         paragraphs: [
           "This project had a low budget, so we prayed. God provided a free camper van, a free ice cave tour, and two standby tickets to fly to Iceland on an airline route that had only opened in the past three months. Many times on the trip we prayed for something specific and watched God come through with His supernatural power.",
         ],
-        imageSlots: ["rt-camper", "rt-wing", "rt-church", "rt-waterfall-behind"],
+        imageSlots: ["rt-camper", "rt-wing", "rt-church", "rt-falls-quiet"],
       },
       {
         kicker: "Beyond the video",
@@ -125,7 +125,7 @@ export const MISSIONS: Mission[] = [
           "rt-waterfall-group",
           "rt-abandoned-plane",
           "rt-treasure-hunt",
-          "rt-dinner",
+          "rt-van-life",
         ],
       },
       {
