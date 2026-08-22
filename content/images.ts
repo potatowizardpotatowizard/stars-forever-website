@@ -106,6 +106,80 @@ export const IMAGES: Record<string, ImageSlot> = {
     ratio: "4 / 5",
   },
 
+  // ---- Mission: Real Treasure ----------------------------------------------
+  "real-treasure-hero": {
+    file: "real-treasure-hero.jpg",
+    alt: "The Real Treasure crew gathered against a mossy cliff in Iceland",
+    caption: { where: "Iceland", when: "July 2026" },
+    ratio: "16 / 9",
+  },
+  "real-treasure-card": {
+    file: "real-treasure-card.jpg",
+    alt: "Three friends smiling in front of a roaring Icelandic waterfall",
+    caption: { where: "Iceland", when: "July 2026" },
+    ratio: "3 / 2",
+  },
+  "rt-red-chair": {
+    file: "rt-red-chair.jpg",
+    alt: "Weston seated on the red chair from the video, alone on a rocky Icelandic plain",
+    caption: { who: "Weston", where: "Iceland" },
+    ratio: "4 / 5",
+  },
+  "rt-flight": {
+    file: "rt-flight.jpg",
+    alt: "Two of the crew smiling on the standby flight to Iceland",
+    caption: { where: "Somewhere over the Atlantic" },
+    ratio: "4 / 5",
+  },
+  "rt-camper": {
+    file: "rt-camper.jpg",
+    alt: "Inside the camper van God provided for free",
+    caption: { where: "Iceland" },
+    ratio: "4 / 5",
+  },
+  "rt-wing": {
+    file: "rt-wing.jpg",
+    alt: "Sunset over the clouds from the plane window on the way to Iceland",
+    caption: { where: "Over the Atlantic" },
+    ratio: "4 / 5",
+  },
+  "rt-church": {
+    file: "rt-church.jpg",
+    alt: "A turf roofed church under an Icelandic mountain",
+    caption: { where: "Hof, Iceland" },
+    ratio: "4 / 5",
+  },
+  "rt-waterfall-behind": {
+    file: "rt-waterfall-behind.jpg",
+    alt: "Arms stretched wide behind a thundering waterfall",
+    caption: { where: "Seljalandsfoss, Iceland" },
+    ratio: "4 / 5",
+  },
+  "rt-waterfall-group": {
+    file: "rt-waterfall-group.jpg",
+    alt: "The crew and new friends celebrating at an insane waterfall",
+    caption: { where: "Iceland" },
+    ratio: "4 / 5",
+  },
+  "rt-abandoned-plane": {
+    file: "rt-abandoned-plane.jpg",
+    alt: "Standing inside the abandoned plane wreck on the black sand",
+    caption: { where: "Sólheimasandur, Iceland" },
+    ratio: "4 / 5",
+  },
+  "rt-treasure-hunt": {
+    file: "rt-treasure-hunt.jpg",
+    alt: "A treasure hunt clue found in a stream in rural Iceland",
+    caption: { where: "Rural Iceland" },
+    ratio: "4 / 5",
+  },
+  "rt-dinner": {
+    file: "rt-dinner.jpg",
+    alt: "Sharing dinner together after the treasure hunt",
+    caption: { where: "Iceland" },
+    ratio: "4 / 5",
+  },
+
   // ---- Mission: Tokyo Drift ----------------------------------------------
   "tokyo-hero": {
     file: "tokyo-hero.jpg",

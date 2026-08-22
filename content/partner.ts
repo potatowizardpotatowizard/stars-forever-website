@@ -5,9 +5,9 @@ export const PARTNER = {
   featured: {
     kicker: "The Most Recent Project",
     body: "Check out our most recent partner project where we boldly shared Jesus to a secular audience.",
-    cta: "Explore Tokyo Drift",
-    href: "/partner-projects/tokyo-drift",
-    imageSlot: "tokyo-drift-car",
+    cta: "Explore Real Treasure",
+    href: "/partner-projects/real-treasure",
+    imageSlot: "real-treasure-card",
   },
   metrics: {
     kicker: "Two success metrics",

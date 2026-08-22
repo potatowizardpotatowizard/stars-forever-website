@@ -23,6 +23,7 @@ function youtubeId(href: string): string | null {
 
 // Brand art colorway per project, shown until its hero photo arrives.
 const HERO_ART: Record<string, string> = {
+  "real-treasure": "/brand/bg-blue.jpg",
   "tokyo-drift": "/brand/bg-orange-comet.jpg",
   "revolutionary-cohort": "/brand/bg-greenpurple.jpg",
   "beast-games": "/brand/bg-green.jpg",
@@ -109,6 +110,21 @@ export default async function MissionPage({
           ))}
         </dl>
       </div>
+
+      {mission.stats ? (
+        <div className="border-b border-dust/15 bg-soot/40">
+          <dl className="mx-auto grid max-w-7xl gap-10 px-5 py-12 text-center sm:grid-cols-3 sm:px-8">
+            {mission.stats.map((stat) => (
+              <div key={stat.label}>
+                <dd className="vhs-glow font-display text-5xl font-bold text-ember sm:text-6xl">
+                  {stat.value}
+                </dd>
+                <dt className="meta-label mt-3">{stat.label}</dt>
+              </div>
+            ))}
+          </dl>
+        </div>
+      ) : null}
 
       {mission.burningQuestion ? (
         <div className="mx-auto max-w-7xl px-5 pt-24 sm:px-8">
@@ -256,6 +272,35 @@ export default async function MissionPage({
           </Reveal>
         ))}
       </div>
+
+      {/* Comment wall: real comments from the posted video as quote cards */}
+      {mission.commentWall ? (
+        <section className="mx-auto max-w-7xl px-5 pb-24 sm:px-8">
+          <Reveal>
+            <Kicker>{mission.commentWall.kicker}</Kicker>
+            <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
+              <GlitchText text={mission.commentWall.heading} />
+            </h2>
+            <p className="mt-6 max-w-2xl text-lg text-starlight/80">
+              {mission.commentWall.intro}
+            </p>
+          </Reveal>
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {mission.commentWall.comments.map((comment) => (
+              <Reveal key={comment.text}>
+                <figure className="flex h-full flex-col justify-between rounded-lg border border-dust/20 bg-night/50 p-6">
+                  <blockquote className="font-display text-lg font-bold leading-snug">
+                    “{comment.text}”
+                  </blockquote>
+                  <figcaption className="meta-label mt-5 text-ember">
+                    {comment.handle}
+                  </figcaption>
+                </figure>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       {/* Creator testimonies: collapsed rows that open into the story
           and the receipts. YouTube receipts show their thumbnails;

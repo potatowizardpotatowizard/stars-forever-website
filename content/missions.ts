@@ -17,6 +17,15 @@ export type Mission = {
   cardImageSlot: string;
   heroSlot: string;
   burningQuestion?: string;
+  /** Reach numbers rendered as a bold strip under the metadata header */
+  stats?: { value: string; label: string }[];
+  /** Real comments pulled from the posted video, rendered as quote cards */
+  commentWall?: {
+    kicker: string;
+    heading: string;
+    intro: string;
+    comments: { text: string; handle: string }[];
+  };
   /** YouTube embed featured at the top of the project page */
   videoEmbed?: { youtubeId: string; caption: string };
   /** Ambient video that plays behind the hero */
@@ -53,6 +62,99 @@ export const MISSIONS_INDEX = {
 };
 
 export const MISSIONS: Mission[] = [
+  {
+    slug: "real-treasure",
+    name: "Real Treasure",
+    location: "Southern California and Iceland",
+    partner: "Weston Vansoest, Creative Partner 2",
+    date: "July 9 to 17, 2026",
+    summary:
+      "A fever dream video about treasure carried the gospel from Southern California to Iceland and put Jesus in front of millions.",
+    cardImageSlot: "real-treasure-card",
+    heroSlot: "real-treasure-hero",
+    burningQuestion:
+      "You could spend your whole life chasing the things of this world. What is the real treasure?",
+    stats: [
+      { value: "2M+", label: "views on TikTok" },
+      { value: "582K+", label: "likes on Instagram" },
+      { value: "11K+", label: "comments across platforms" },
+    ],
+    sections: [
+      {
+        kicker: "The dream",
+        paragraphs: [
+          "We believe God places certain dreams on our hearts. Weston, a fever dream short form creator, had an idea to share Jesus with his audience through a video about treasure. After much prayer, that idea took our friend group from California to Iceland. Together we sought God, shared Jesus, and made eternity changing art.",
+        ],
+        imageSlots: ["rt-red-chair", "rt-flight"],
+      },
+      {
+        kicker: "God moved",
+        paragraphs: [
+          "This project had a low budget, so we prayed. God provided a free camper van, a free ice cave tour, and two standby tickets to fly to Iceland on an airline route that had only opened in the past three months. Many times on the trip we prayed for something specific and watched God come through with His supernatural power.",
+        ],
+        imageSlots: ["rt-camper", "rt-wing", "rt-church", "rt-waterfall-behind"],
+      },
+      {
+        kicker: "Beyond the video",
+        paragraphs: [
+          "On our second day in the camper van we picked up a hitchhiker from Poland. We invited him into the video shoot, took him to an insane waterfall and an abandoned plane, and eventually shared Jesus with him in a deep spiritual conversation.",
+          "A few days later we met more hitchhikers and invited them to do life together too. We took them on a treasure hunt and cooked dinner for them. They do not believe in God, but they were moved by our hospitality and let us pray for them. Even in rural Iceland, God still gave us the opportunity to be a part of His life giving work.",
+        ],
+        imageSlots: [
+          "rt-waterfall-group",
+          "rt-abandoned-plane",
+          "rt-treasure-hunt",
+          "rt-dinner",
+        ],
+      },
+      {
+        kicker: "After posting",
+        paragraphs: [
+          "The moment Weston posted the video, the comments started telling the story for us. Unbelievers praised the video despite not believing in Jesus, Christians praised its evangelistic power, and others were simply left in awe.",
+        ],
+      },
+    ],
+    commentWall: {
+      kicker: "Straight from the comments",
+      heading: "The Internet Responds",
+      intro:
+        "Real comments from the video, word for word, most of them from people who do not follow Jesus.",
+      comments: [
+        { text: "what a way to spread the gospel", handle: "TikTok" },
+        { text: "i am an atheist. loved the video :D", handle: "TikTok" },
+        {
+          text: "I did not see that coming, love it, God is great, He has saved me from depression and suicidal thoughts.",
+          handle: "TikTok",
+        },
+        { text: "Hi, atheist here, this is goated.", handle: "@tazlyman" },
+        {
+          text: "This is a great way to evangelize, keep this up",
+          handle: "@derekjacksonofficial",
+        },
+        {
+          text: "I was hoping it'd be faith, but didn't think there was a chance! Let's goooo",
+          handle: "@brettw_17",
+        },
+        {
+          text: "Not even a believer but this is cinema",
+          handle: "@imsoauratuff",
+        },
+        { text: "literal goosebumps at the ending", handle: "TikTok" },
+        { text: "needed to see this today, thank you.", handle: "@chelseydh_" },
+      ],
+    },
+    links: [
+      {
+        label: "Watch Real Treasure on Instagram",
+        href: "https://www.instagram.com/reel/Db9PKZrPr3g/",
+      },
+      {
+        label: "Watch Real Treasure on TikTok",
+        href: "https://www.tiktok.com/t/ZTDmy4fXm/",
+      },
+      { label: "Follow Weston", href: "https://www.instagram.com/westonvansoest/" },
+    ],
+  },
   {
     slug: "tokyo-drift",
     name: "Tokyo Drift",
