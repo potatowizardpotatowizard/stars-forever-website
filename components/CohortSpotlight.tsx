@@ -111,17 +111,9 @@ export default function CohortSpotlight() {
 
         {/* the first event, right under the creators who lived it */}
         <Reveal className="mt-4 text-center">
-          <Link
-            href="/partner-projects/revolutionary-cohort"
-            className="mono-link inline-block text-sm font-bold text-ember md:hidden"
-          >
-            Read About The First Event →
-          </Link>
-          <div className="hidden md:block">
-            <Cta href="/partner-projects/revolutionary-cohort" variant="ghost">
-              Read About The First Event
-            </Cta>
-          </div>
+          <Cta href="/partner-projects/revolutionary-cohort" variant="ghost">
+            Read About The First Event
+          </Cta>
         </Reveal>
 
         {/* the next one */}
