@@ -121,7 +121,7 @@ export const IMAGES: Record<string, ImageSlot> = {
   },
   "real-treasure-card": {
     file: "real-treasure-card.jpg",
-    alt: "Three friends smiling in front of a roaring Icelandic waterfall",
+    alt: "Three friends with arms wide open in front of a roaring Icelandic waterfall",
     caption: { where: "Iceland", when: "July 2026" },
     ratio: "3 / 2",
   },
