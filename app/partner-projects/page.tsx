@@ -151,6 +151,9 @@ export default function PartnerProjectsPage() {
         <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
           <Reveal>
             <Kicker>{PARTNER.faq.kicker}</Kicker>
+            <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
+              <GlitchText text="FAQ" />
+            </h2>
           </Reveal>
           <div className="mt-10 max-w-3xl">
             {PARTNER.faq.items.map((item) => (
