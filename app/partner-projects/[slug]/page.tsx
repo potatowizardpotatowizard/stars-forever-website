@@ -309,11 +309,13 @@ export default async function MissionPage({
               >
                 {section.imageSlots.map((slot) => {
                   const slotLink = mission.slotLinks?.[slot];
+                  const hiddenMd = mission.desktopHiddenSlots?.includes(slot);
                   const media = (
                     <MediaSlot
                       key={slotLink ? undefined : slot}
                       name={slot}
                       sizes="(min-width: 640px) 50vw, 100vw"
+                      className={hiddenMd ? "md:hidden" : ""}
                     />
                   );
                   if (!slotLink) return media;
@@ -323,7 +325,7 @@ export default async function MissionPage({
                       href={slotLink.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group relative block"
+                      className={`group relative block ${hiddenMd ? "md:hidden" : ""}`}
                     >
                       {media}
                       <span className="pointer-events-none absolute inset-0 flex items-center justify-center bg-night/60 px-6 text-center opacity-0 backdrop-blur-[2px] transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">

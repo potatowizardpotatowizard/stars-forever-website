@@ -43,6 +43,8 @@ export type Mission = {
   heroVideo?: string;
   /** Photo slots that click through to an external link */
   slotLinks?: Record<string, { href: string; label: string }>;
+  /** Slots shown on phones but hidden on desktop layouts */
+  desktopHiddenSlots?: string[];
   /** The people who took part, with their main channels */
   roster?: {
     heading: string;
@@ -87,6 +89,7 @@ export const MISSIONS: Mission[] = [
     heroVideo: "/brand/video/real-treasure-hero-bg.mp4",
     burningQuestion:
       "You could spend your whole life chasing the things of this world. What is the real treasure?",
+    desktopHiddenSlots: ["rt-wing", "rt-weston"],
     videoLink: {
       href: "https://www.instagram.com/reel/Db9PKZrPr3g/",
       thumbnail: "/brand/poster-real-treasure.jpg",
