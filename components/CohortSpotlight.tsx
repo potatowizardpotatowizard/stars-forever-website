@@ -4,6 +4,7 @@ import GlitchText from "@/components/GlitchText";
 import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import Reveal from "@/components/Reveal";
+import VideoBlock from "@/components/VideoBlock";
 import { MISSIONS } from "@/content/missions";
 
 // Recent work: the Revolutionary Cohort. The dusk video leads and
@@ -106,32 +107,42 @@ export default function CohortSpotlight() {
           </ul>
         </Reveal>
 
-        {/* the first event, the next one, and the partnership */}
-        <Reveal className="mx-auto mt-12 max-w-2xl text-center">
+        {/* the first event, right under the creators who lived it */}
+        <Reveal className="mt-4 text-center">
           <Link
             href="/partner-projects/revolutionary-cohort"
             className="mono-link inline-block text-sm font-bold text-ember"
           >
             Read About The First Event →
           </Link>
-          <p className="mt-12 font-display text-2xl font-bold text-starlight/90">
+        </Reveal>
+
+        {/* the next one */}
+        <Reveal className="mx-auto mt-16 max-w-3xl text-center sm:mt-20">
+          <p className="font-display text-2xl font-bold text-starlight/90 sm:text-3xl">
             The next cohort is coming soon.
           </p>
+          <VideoBlock
+            src="/brand/video/revolutionary-cohort-explainer.mp4"
+            poster="/brand/poster-revolutionary-cohort-explainer.jpg"
+            title="the Revolutionary Cohort in two minutes"
+            className="mt-8 text-left"
+          />
           <Link
             href="/apply"
-            className="mono-link mt-4 inline-block text-sm font-bold text-ember"
+            className="mono-link mt-8 inline-block text-sm font-bold text-ember"
           >
             Apply to be part of it →
           </Link>
-          <p className="meta-label mt-12 text-dust">
+          <p className="mt-12 text-sm text-starlight/75">
             In collaboration with{" "}
             <a
               href="https://steiger.org"
               target="_blank"
               rel="noopener noreferrer"
-              className="underline decoration-dust/40 underline-offset-4 transition-colors hover:text-ember"
+              className="font-bold text-ember underline decoration-ember/40 underline-offset-4 transition-colors hover:text-starlight"
             >
-              Steiger
+              Steiger ↗
             </a>
           </p>
         </Reveal>
