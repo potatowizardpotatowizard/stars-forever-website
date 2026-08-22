@@ -23,10 +23,10 @@ const SCATTER = [
   { ox: -38, oy: -26, rot: -6, speed: 1.1, w: 13 },
   { ox: -32, oy: 22, rot: 5, speed: 0.9, w: 11 },
   { ox: -12, oy: -34, rot: 3, speed: 1.3, w: 10 },
-  { ox: 14, oy: 30, rot: -4, speed: 1.2, w: 12 },
+  { ox: 30, oy: -26, rot: 7, speed: 1.2, w: 12 },
   { ox: 40, oy: 8, rot: -8, speed: 1.35, w: 11 },
 ];
-const RT_START = { ox: 30, oy: -26, rot: 7, w: 14 };
+const RT_START = { ox: 14, oy: 30, rot: -4, w: 14 };
 
 const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
 const smooth = (t: number) => t * t * (3 - 2 * t);
@@ -57,6 +57,7 @@ export default function DesktopProjects({
   const photoRefs = useRef<(HTMLDivElement | null)[]>([]);
   const trackRef = useRef<HTMLDivElement>(null);
   const firstCardRef = useRef<HTMLAnchorElement>(null);
+  const firstVideoRef = useRef<HTMLVideoElement>(null);
   const firstLabelRef = useRef<HTMLDivElement>(null);
   const restRefs = useRef<(HTMLElement | null)[]>([]);
   const counterRef = useRef<HTMLParagraphElement>(null);
@@ -241,6 +242,12 @@ export default function DesktopProjects({
         first.style.transform = `translate3d(${dx.toFixed(1)}px, ${dy.toFixed(1)}px, 0) scale(${s.toFixed(4)}) rotate(${rot.toFixed(2)}deg)`;
         firstLabel.style.opacity = smooth(clamp01((m - 0.75) / 0.25)).toFixed(3);
         first.style.pointerEvents = m > 0.6 ? "auto" : "none";
+        // a freeze frame in the cloud; the film starts once it lands
+        const vid = firstVideoRef.current;
+        if (vid) {
+          if (m > 0.55 && vid.paused) vid.play().catch(() => {});
+          else if (m < 0.45 && !vid.paused) vid.pause();
+        }
       }
 
       // the rest of the past waits until the freeze frame has landed
@@ -398,7 +405,7 @@ export default function DesktopProjects({
             >
               <div className="relative overflow-hidden rounded-xl border border-dust/25 shadow-[0_10px_40px_rgb(0_0_0/0.55)]">
                 <video
-                  autoPlay
+                  ref={firstVideoRef}
                   muted
                   loop
                   playsInline

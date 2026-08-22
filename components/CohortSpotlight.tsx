@@ -119,11 +119,11 @@ export default function CohortSpotlight() {
         </Reveal>
 
         {/* the next one */}
-        <Reveal className="mx-auto mt-16 max-w-3xl text-center sm:mt-20">
-          <p className="font-display text-2xl font-bold text-starlight/90 sm:text-3xl">
+        <Reveal className="mx-auto mt-16 max-w-3xl text-center sm:mt-20 md:grid md:max-w-none md:grid-cols-[2fr_3fr] md:grid-rows-[auto_auto] md:items-center md:gap-x-14 md:text-left">
+          <p className="font-display text-2xl font-bold text-starlight/90 sm:text-3xl md:col-start-1 md:row-start-1 md:self-end">
             The next cohort is coming soon.
           </p>
-          <figure className="mt-8">
+          <figure className="mt-8 md:col-start-2 md:row-start-1 md:row-span-2 md:mt-0">
             <div className="relative overflow-hidden rounded-xl border border-dust/20 bg-soot">
               <video
                 autoPlay
@@ -141,13 +141,14 @@ export default function CohortSpotlight() {
               <span className="star-underline">scenes from the first cohort</span>
             </figcaption>
           </figure>
+          <div className="md:col-start-1 md:row-start-2 md:self-start">
           <Link
             href="/apply"
             className="mono-link mt-8 inline-block text-sm font-bold text-ember"
           >
             Apply to be part of it →
           </Link>
-          <p className="mt-12 text-sm text-starlight/75">
+          <p className="mt-12 text-sm text-starlight/75 md:mt-8">
             In collaboration with{" "}
             <a
               href="https://steiger.org"
@@ -158,6 +159,7 @@ export default function CohortSpotlight() {
               Steiger ↗
             </a>
           </p>
+          </div>
         </Reveal>
       </div>
     </section>
