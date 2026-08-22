@@ -8,6 +8,7 @@ import GlitchText from "@/components/GlitchText";
 import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
+import ProjectBurst from "@/components/ProjectBurst";
 import ProjectTimeline from "@/components/ProjectTimeline";
 import Reveal from "@/components/Reveal";
 import { resolveSlot } from "@/lib/media";
@@ -24,6 +25,19 @@ export const metadata: Metadata = {
 
 export default function PartnerProjectsPage() {
   const showcase = MISSIONS.filter((m) => m.slug !== "revolutionary-cohort");
+  // Seven photos across the three projects for the burst intro
+  const burstCenter = {
+    src: "/images/real-treasure-card.jpg",
+    alt: "Three friends with arms wide open in front of a roaring Icelandic waterfall",
+  };
+  const burstOuter = [
+    { src: "/images/tokyo-drift-car.jpg", alt: "" },
+    { src: "/images/rt-abandoned-plane.jpg", alt: "" },
+    { src: "/images/home-proof-beast-games.jpg", alt: "" },
+    { src: "/images/rt-church.jpg", alt: "" },
+    { src: "/images/tokyo-hitchhike.jpg", alt: "" },
+    { src: "/images/beast-island-prayer.jpg", alt: "" },
+  ];
   const timelineProjects = showcase.map((m) => {
     const slot = resolveSlot(m.cardImageSlot);
     return {
@@ -158,19 +172,15 @@ export default function PartnerProjectsPage() {
         </div>
       </section>
 
-      {/* Project showcase: on desktop the section pins and each past
-          project flies toward the visitor; mobile keeps the calm grid */}
-      <section className="mx-auto max-w-7xl px-5 pt-24 sm:px-8 sm:pt-32">
-        <Reveal>
-          <Kicker>{MISSIONS_INDEX.kicker}</Kicker>
-          <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
-            <GlitchText text="The Projects So Far" />
-          </h2>
-          <p className="mt-6 max-w-2xl text-lg text-starlight/80">
-            {MISSIONS_INDEX.intro}
-          </p>
-        </Reveal>
-      </section>
+      {/* Project showcase: a cloud of project photos bursts apart as the
+          visitor scrolls, then the past projects slide by sideways */}
+      <ProjectBurst
+        center={burstCenter}
+        outer={burstOuter}
+        kicker={MISSIONS_INDEX.kicker}
+        heading="The Projects So Far"
+        intro={MISSIONS_INDEX.intro}
+      />
       <ProjectTimeline projects={timelineProjects} />
 
       {/* FAQ */}
