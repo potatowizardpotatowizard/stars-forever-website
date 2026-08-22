@@ -99,17 +99,21 @@ export default function HomePage() {
       <section className="relative overflow-hidden">
         <Grain />
         <div className="relative mx-auto max-w-7xl px-5 pb-10 pt-20 sm:px-8 sm:pb-12 sm:pt-24">
-          <Reveal className="max-w-3xl">
-            <Kicker>{HOME.video.kicker}</Kicker>
-            <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
-              <GlitchText text={HOME.video.heading} />
-            </h2>
-            <VideoBlock
-              src={HOME.video.src}
-              poster={HOME.video.poster}
-              title={HOME.video.caption}
-              className="mt-10"
-            />
+          <Reveal className="max-w-3xl md:max-w-none">
+            <div className="md:grid md:grid-cols-[3fr_2fr] md:items-center md:gap-14">
+              <div className="md:order-2">
+                <Kicker>{HOME.video.kicker}</Kicker>
+                <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
+                  <GlitchText text={HOME.video.heading} />
+                </h2>
+              </div>
+              <VideoBlock
+                src={HOME.video.src}
+                poster={HOME.video.poster}
+                title={HOME.video.caption}
+                className="mt-10 md:order-1 md:mt-0"
+              />
+            </div>
           </Reveal>
         </div>
       </section>
@@ -117,7 +121,7 @@ export default function HomePage() {
       {/* Anchor verse and the reframe */}
       <section className="relative overflow-hidden">
         <Grain />
-        <div className="relative mx-auto max-w-7xl px-5 pb-24 pt-10 sm:px-8 sm:pb-28 sm:pt-12">
+        <div className="relative mx-auto max-w-7xl px-5 pb-24 pt-10 sm:px-8 sm:pb-28 sm:pt-12 md:grid md:grid-cols-2 md:items-center md:gap-16">
           <Reveal className="max-w-3xl">
             <blockquote>
               <p className="font-meta text-xl leading-relaxed text-starlight sm:text-2xl sm:leading-relaxed">
@@ -137,7 +141,7 @@ export default function HomePage() {
             </a>
           </Reveal>
 
-          <Reveal className="mt-24 max-w-3xl sm:mt-32">
+          <Reveal className="mt-24 max-w-3xl sm:mt-32 md:mt-0">
             <Kicker>{HOME.reframe.kicker}</Kicker>
             <div className="mt-8 space-y-6">
               {HOME.reframe.lines.map((line, i) => {
@@ -172,27 +176,38 @@ export default function HomePage() {
       <section className="relative overflow-hidden border-y border-dust/10 bg-soot/40">
         <Grain />
         <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
-        <Reveal className="mx-auto max-w-4xl">
-          <Kicker>{HOME.feature.kicker}</Kicker>
-          <h2
-            id="tokyo-anchor"
-            className="mt-6 inline-block font-display text-4xl font-bold sm:text-5xl"
-          >
-            <GlitchText text={HOME.feature.heading} />
-          </h2>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-starlight/80">
-            {linkCategory3(HOME.feature.body)}
-          </p>
-          <YouTubeEmbed
-            youtubeId={HOME.feature.youtubeId}
-            title={HOME.feature.heading}
-            caption={HOME.feature.caption}
-            className="mt-10"
-          />
-          <div className="mt-8">
-            <Cta href={HOME.feature.href} variant="ghost">
-              {HOME.feature.cta}
-            </Cta>
+        <Reveal className="mx-auto max-w-4xl md:max-w-none">
+          <div className="md:grid md:grid-cols-[2fr_3fr] md:items-center md:gap-14">
+            <div>
+              <Kicker>{HOME.feature.kicker}</Kicker>
+              <h2
+                id="tokyo-anchor"
+                className="mt-6 inline-block font-display text-4xl font-bold sm:text-5xl"
+              >
+                <GlitchText text={HOME.feature.heading} />
+              </h2>
+              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-starlight/80">
+                {linkCategory3(HOME.feature.body)}
+              </p>
+              <div className="mt-8 hidden md:block">
+                <Cta href={HOME.feature.href} variant="ghost">
+                  {HOME.feature.cta}
+                </Cta>
+              </div>
+            </div>
+            <div>
+              <YouTubeEmbed
+                youtubeId={HOME.feature.youtubeId}
+                title={HOME.feature.heading}
+                caption={HOME.feature.caption}
+                className="mt-10 md:mt-0"
+              />
+              <div className="mt-8 md:hidden">
+                <Cta href={HOME.feature.href} variant="ghost">
+                  {HOME.feature.cta}
+                </Cta>
+              </div>
+            </div>
           </div>
         </Reveal>
         </div>

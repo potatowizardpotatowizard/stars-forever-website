@@ -17,19 +17,20 @@ export default function CohortSpotlight() {
     <section className="relative overflow-hidden">
       <Grain />
       <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
-        <Reveal className="text-center">
+        <div className="md:grid md:grid-cols-[3fr_2fr] md:items-center md:gap-14">
+        <Reveal className="text-center md:order-2 md:text-left">
           <Kicker>Recent Work</Kicker>
           <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
             <GlitchText text="Revolutionary Cohort" />
           </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-starlight/80">
+          <p className="mx-auto mt-6 max-w-2xl text-lg text-starlight/80 md:mx-0">
             A catalytic event designed to introduce creators to a missionary
             lifestyle.
           </p>
         </Reveal>
 
         {/* the dusk video, the door to the program */}
-        <Reveal className="mx-auto mt-12 max-w-3xl">
+        <Reveal className="mx-auto mt-12 max-w-3xl md:order-1 md:mt-0 md:max-w-none">
           <Link href="/revolutionary" className="group relative block">
             <div className="relative overflow-hidden rounded-xl border border-dust/25">
               <video
@@ -62,6 +63,7 @@ export default function CohortSpotlight() {
             </div>
           </Link>
         </Reveal>
+        </div>
 
         {/* the ten creators, an optional sideways scroll */}
         <Reveal className="mt-14">
