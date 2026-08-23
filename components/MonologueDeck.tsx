@@ -23,6 +23,11 @@ export default function MonologueDeck({
 }) {
   const listRef = useRef<HTMLUListElement>(null);
   const deckRef = useRef<HTMLDivElement>(null);
+  const trailRef = useRef<HTMLDivElement>(null);
+  const trailGlowRef = useRef<HTMLDivElement>(null);
+  const starRef = useRef<HTMLDivElement>(null);
+  const starGlowRef = useRef<HTMLDivElement>(null);
+  const sparksRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
 
   // the deck swells gently as it rises into view
@@ -61,6 +66,25 @@ export default function MonologueDeck({
     if (!el) return;
     const i = Math.round(el.scrollLeft / el.clientWidth);
     if (i !== active) setActive(Math.min(cards.length - 1, Math.max(0, i)));
+
+    // the shooting star behind the box charges with the story
+    const max = el.scrollWidth - el.clientWidth;
+    const t = max > 0 ? Math.min(1, Math.max(0, el.scrollLeft / max)) : 0;
+    const trail = trailRef.current;
+    if (trail) {
+      trail.style.transform = `scaleX(${(0.35 + 0.65 * t).toFixed(3)})`;
+      trail.style.opacity = (0.5 + 0.5 * t).toFixed(3);
+    }
+    const trailGlow = trailGlowRef.current;
+    if (trailGlow) trailGlow.style.opacity = (0.25 + 0.6 * t).toFixed(3);
+    const star = starRef.current;
+    if (star) {
+      star.style.transform = `translateY(-50%) scale(${(1 + 0.7 * t).toFixed(3)}) rotate(${(t * 90).toFixed(1)}deg)`;
+    }
+    const starGlow = starGlowRef.current;
+    if (starGlow) starGlow.style.opacity = (0.25 + 0.75 * t).toFixed(3);
+    const sparks = sparksRef.current;
+    if (sparks) sparks.style.opacity = Math.min(1, Math.max(0, (t - 0.35) * 1.8)).toFixed(3);
   };
 
   const jumpTo = (i: number) => {
@@ -72,14 +96,61 @@ export default function MonologueDeck({
   return (
     <div ref={deckRef} className="mx-auto max-w-3xl will-change-transform">
       <Kicker>{kicker}</Kicker>
+      <div className="relative mt-10">
+        {/* the shooting star behind the box: tail out the left,
+            head out the right, charging with every swipe */}
+        <div
+          ref={trailGlowRef}
+          aria-hidden="true"
+          className="absolute -left-44 top-1/2 h-8 w-44 -translate-y-1/2 rounded-full bg-[linear-gradient(90deg,transparent,rgb(109_40_217/0.35))] blur-md"
+          style={{ opacity: 0.25 }}
+        />
+        <div
+          ref={trailRef}
+          aria-hidden="true"
+          className="absolute -left-44 top-1/2 h-[3px] w-44 -translate-y-1/2 origin-right rounded-full bg-[linear-gradient(90deg,transparent,rgb(139_92_246/0.55),rgb(237_233_254/0.95))]"
+          style={{ transform: "scaleX(0.35)", opacity: 0.5 }}
+        />
+        <div
+          ref={starGlowRef}
+          aria-hidden="true"
+          className="absolute -right-16 top-1/2 h-24 w-24 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgb(109_40_217/0.55),transparent_70%)] blur-sm"
+          style={{ opacity: 0.25 }}
+        />
+        <div
+          ref={starRef}
+          aria-hidden="true"
+          className="absolute -right-12 top-1/2 h-16 w-16 will-change-transform"
+          style={{ transform: "translateY(-50%) scale(1)" }}
+        >
+          <span key={active} className="absolute inset-0 animate-ping rounded-full bg-ember/25" />
+          <svg viewBox="0 0 24 24" className="relative h-full w-full">
+            <path
+              d="M12 0C12.9 6.8 16.2 10.1 24 12C16.2 13.9 12.9 17.2 12 24C11.1 17.2 7.8 13.9 0 12C7.8 10.1 11.1 6.8 12 0Z"
+              fill="var(--color-starlight)"
+            />
+          </svg>
+        </div>
+        <div
+          ref={sparksRef}
+          aria-hidden="true"
+          className="absolute -right-20 top-1/2 h-28 w-28 -translate-y-1/2 animate-pulse"
+          style={{ opacity: 0 }}
+        >
+          <span className="absolute left-1 top-2 h-1.5 w-1.5 rotate-45 bg-ember" />
+          <span className="absolute right-2 top-6 h-2 w-2 rotate-45 bg-starlight" />
+          <span className="absolute bottom-3 left-6 h-1.5 w-1.5 rotate-45 bg-ember" />
+          <span className="absolute bottom-8 right-0 h-1 w-1 rotate-45 bg-starlight" />
+        </div>
+
       <ul
         ref={listRef}
         onScroll={onScroll}
-        className="mt-10 flex snap-x snap-mandatory overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="relative z-10 flex snap-x snap-mandatory overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {cards.map((card, i) => (
           <li key={card.lines[0]} className="w-full shrink-0 snap-center pr-4">
-            <div className="flex min-h-[22rem] flex-col justify-center rounded-xl border border-dust/20 bg-night/50 p-10">
+            <div className="flex min-h-[22rem] flex-col justify-center rounded-xl border border-dust/20 bg-night p-10">
               <svg
                 viewBox="0 0 24 24"
                 aria-hidden="true"
@@ -124,6 +195,7 @@ export default function MonologueDeck({
           </li>
         ))}
       </ul>
+      </div>
 
       {/* diamond pager */}
       <div className="mt-8 flex items-center gap-3">
