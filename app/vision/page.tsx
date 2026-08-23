@@ -11,6 +11,7 @@ import Kicker from "@/components/Kicker";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import StatCarousel from "@/components/StatCarousel";
+import ClosingStar from "@/components/ClosingStar";
 import { VISION } from "@/content/vision";
 import { GIVING_URL } from "@/content/site";
 
@@ -251,8 +252,9 @@ export default function VisionPage() {
       </section>
 
       {/* Closing */}
-      <section className="border-t border-dust/10 bg-soot/40">
-        <div className="mx-auto max-w-7xl px-5 py-24 text-center sm:px-8">
+      <section className="relative overflow-hidden border-t border-dust/10 bg-soot/40">
+        <ClosingStar />
+        <div className="relative mx-auto max-w-7xl px-5 py-24 text-center sm:px-8">
           <Reveal>
             <Image
               src="/brand/star-sharp.png"

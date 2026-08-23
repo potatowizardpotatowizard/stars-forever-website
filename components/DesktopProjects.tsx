@@ -417,6 +417,17 @@ export default function DesktopProjects({
                 >
                   <source src={firstProject.video} type="video/mp4" />
                 </video>
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 overflow-hidden opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="/brand/fx-streak-sweep.webp"
+                      alt=""
+                      className="absolute left-0 top-[-14%] w-[120%] max-w-none translate-x-[-115%] transition-transform duration-[1100ms] ease-out group-hover:translate-x-[55%]"
+                    />
+                  </span>
                 <div ref={firstLabelRef} style={{ opacity: 0 }}>
                   <div
                     aria-hidden="true"
@@ -466,6 +477,17 @@ export default function DesktopProjects({
                   >
                     <source src={p.video} type="video/mp4" />
                   </video>
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 overflow-hidden opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="/brand/fx-streak-sweep.webp"
+                      alt=""
+                      className="absolute left-0 top-[-14%] w-[120%] max-w-none translate-x-[-115%] transition-transform duration-[1100ms] ease-out group-hover:translate-x-[55%]"
+                    />
+                  </span>
                   <div
                     aria-hidden="true"
                     className="absolute inset-0 bg-gradient-to-t from-night/85 via-night/10 to-transparent"
