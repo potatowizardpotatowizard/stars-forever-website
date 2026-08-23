@@ -36,18 +36,26 @@ export default function PartnerProjectsPage() {
         {/* the hero's meteor again as a living overlay: it breathes,
             glows, and jiggles forward over its printed self */}
         <div aria-hidden="true" className="absolute inset-0 hidden md:block">
-          <div className="absolute inset-0 [animation:meteorite-jiggle_1.4s_ease-in-out_infinite]">
+          <div className="absolute inset-0 [animation:meteorite-jiggle-soft_2.8s_ease-in-out_infinite]">
+            {/* wide soft halo, tight glow, then the crisp comet: three
+                depths of the same light so it reads dimensional */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/brand/fx-hero-comet.webp"
               alt=""
-              className="absolute inset-0 h-full w-full object-cover opacity-90"
+              className="absolute inset-0 h-full w-full object-cover opacity-50 blur-2xl [animation:meteorite-flicker-soft_3.4s_ease-in-out_0.6s_infinite]"
             />
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/brand/fx-hero-comet.webp"
               alt=""
-              className="absolute inset-0 h-full w-full object-cover opacity-60 blur-md [animation:meteorite-flicker-soft_2.1s_ease-in-out_infinite]"
+              className="absolute inset-0 h-full w-full object-cover opacity-75 blur-md [animation:meteorite-flicker-soft_2.1s_ease-in-out_infinite]"
+            />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/brand/fx-hero-comet.webp"
+              alt=""
+              className="absolute inset-0 h-full w-full object-cover opacity-95 [filter:drop-shadow(0_0_26px_rgb(168_130_255/0.55))]"
             />
           </div>
         </div>
@@ -116,9 +124,9 @@ export default function PartnerProjectsPage() {
           className="pointer-events-none absolute inset-0 hidden lg:block"
         >
           {[
-            { w: 400, right: 90, top: 130, delay: "0s", op: 1 },
-            { w: 280, right: 330, top: 70, delay: "0.45s", op: 0.85 },
-            { w: 200, right: 180, top: 330, delay: "0.9s", op: 0.7 },
+            { w: 300, right: 380, top: 80, delay: "0s", op: 0.95, dur: "1.3s" },
+            { w: 300, right: 200, top: 160, delay: "0.45s", op: 1, dur: "1s" },
+            { w: 300, right: 60, top: 380, delay: "0.9s", op: 0.95, dur: "1.3s" },
           ].map((m) => (
             <div
               key={m.w}
@@ -133,8 +141,8 @@ export default function PartnerProjectsPage() {
               }}
             >
               <div
-                className="relative [animation:meteorite-jiggle_1.3s_ease-in-out_infinite]"
-                style={{ animationDelay: m.delay }}
+                className="relative"
+                style={{ animation: `meteorite-jiggle ${m.dur} ease-in-out ${m.delay} infinite` }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img

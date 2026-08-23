@@ -1598,3 +1598,9 @@ html.easter-sunday body::before {
   12% { opacity: 1; }
   100% { opacity: 0; transform: translate(-95px, 48px) scale(0) rotate(45deg); }
 }
+
+@keyframes meteorite-jiggle-soft {
+  0%, 100% { transform: translate(0, 0); }
+  30% { transform: translate(1.5px, -1px); }
+  60% { transform: translate(-1px, 1.5px); }
+}
