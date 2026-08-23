@@ -8,7 +8,6 @@ import GlitchText from "@/components/GlitchText";
 import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
-import ProcessConstellation from "@/components/ProcessConstellation";
 import ProjectShowcase from "@/components/ProjectShowcase";
 import Reveal from "@/components/Reveal";
 import VideoBlock from "@/components/VideoBlock";
@@ -117,9 +116,9 @@ export default function PartnerProjectsPage() {
           className="pointer-events-none absolute inset-0 hidden lg:block"
         >
           {[
-            { w: 860, right: 14, top: 170, delay: "0s", op: 1 },
-            { w: 600, right: 250, top: 60, delay: "0.45s", op: 0.85 },
-            { w: 440, right: 40, top: 360, delay: "0.9s", op: 0.7 },
+            { w: 400, right: 90, top: 130, delay: "0s", op: 1 },
+            { w: 280, right: 330, top: 70, delay: "0.45s", op: 0.85 },
+            { w: 200, right: 180, top: 330, delay: "0.9s", op: 0.7 },
           ].map((m) => (
             <div
               key={m.w}
@@ -190,21 +189,18 @@ export default function PartnerProjectsPage() {
               <GlitchText text={PARTNER.process.heading} />
             </h2>
           </Reveal>
-          <div className="md:grid md:grid-cols-[3fr_2fr] md:items-center md:gap-20">
-            <ol className="mt-14 max-w-3xl">
-              {PARTNER.process.steps.map((step, i) => (
-                <Reveal as="li" key={step}>
-                  <div className="flex gap-8 border-t border-dust/15 py-7">
-                    <span className="meta-label pt-1 text-ember">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <p className="text-lg text-starlight/85">{linkCategory3(step)}</p>
-                  </div>
-                </Reveal>
-              ))}
-            </ol>
-            <ProcessConstellation className="mt-14 hidden md:block" />
-          </div>
+          <ol className="mt-14 max-w-3xl">
+            {PARTNER.process.steps.map((step, i) => (
+              <Reveal as="li" key={step}>
+                <div className="flex gap-8 border-t border-dust/15 py-7">
+                  <span className="meta-label pt-1 text-ember">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <p className="text-lg text-starlight/85">{linkCategory3(step)}</p>
+                </div>
+              </Reveal>
+            ))}
+          </ol>
         </div>
       </section>
 
