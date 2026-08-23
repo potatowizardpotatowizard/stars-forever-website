@@ -8,6 +8,7 @@ import GlitchText from "@/components/GlitchText";
 import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
+import ProcessConstellation from "@/components/ProcessConstellation";
 import ProjectShowcase from "@/components/ProjectShowcase";
 import Reveal from "@/components/Reveal";
 import VideoBlock from "@/components/VideoBlock";
@@ -33,6 +34,24 @@ export default function PartnerProjectsPage() {
           sizes="100vw"
           className="object-cover opacity-70"
         />
+        {/* the hero's meteor again as a living overlay: it breathes,
+            glows, and jiggles forward over its printed self */}
+        <div aria-hidden="true" className="absolute inset-0 hidden md:block">
+          <div className="absolute inset-0 [animation:meteorite-jiggle_1.4s_ease-in-out_infinite]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/brand/fx-hero-comet.webp"
+              alt=""
+              className="absolute inset-0 h-full w-full object-cover opacity-90"
+            />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/brand/fx-hero-comet.webp"
+              alt=""
+              className="absolute inset-0 h-full w-full object-cover opacity-60 blur-md [animation:meteorite-flicker-soft_2.1s_ease-in-out_infinite]"
+            />
+          </div>
+        </div>
         <div
           aria-hidden="true"
           className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night"
@@ -91,6 +110,50 @@ export default function PartnerProjectsPage() {
             />
           </Reveal>
         </div>
+        {/* three purple meteorites racing from the video's corner
+            toward the top right of the page */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 hidden lg:block"
+        >
+          {[
+            { w: 860, right: 14, top: 170, delay: "0s", op: 1 },
+            { w: 600, right: 250, top: 60, delay: "0.45s", op: 0.85 },
+            { w: 440, right: 40, top: 360, delay: "0.9s", op: 0.7 },
+          ].map((m) => (
+            <div
+              key={m.w}
+              className="absolute"
+              style={{
+                right: m.right,
+                top: m.top,
+                width: m.w,
+                opacity: m.op,
+                transform: "rotate(-52deg)",
+                transformOrigin: "100% 50%",
+              }}
+            >
+              <div
+                className="relative [animation:meteorite-jiggle_1.3s_ease-in-out_infinite]"
+                style={{ animationDelay: m.delay }}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/brand/fx-meteor-purple.webp"
+                  alt=""
+                  className="w-full"
+                />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/brand/fx-meteor-purple.webp"
+                  alt=""
+                  className="absolute inset-0 w-full opacity-60 blur-md [animation:meteorite-flicker-soft_1.9s_ease-in-out_infinite]"
+                  style={{ animationDelay: m.delay }}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
       </section>
 
       {/* Success metrics */}
@@ -127,18 +190,21 @@ export default function PartnerProjectsPage() {
               <GlitchText text={PARTNER.process.heading} />
             </h2>
           </Reveal>
-          <ol className="mt-14 max-w-3xl">
-            {PARTNER.process.steps.map((step, i) => (
-              <Reveal as="li" key={step}>
-                <div className="flex gap-8 border-t border-dust/15 py-7">
-                  <span className="meta-label pt-1 text-ember">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <p className="text-lg text-starlight/85">{linkCategory3(step)}</p>
-                </div>
-              </Reveal>
-            ))}
-          </ol>
+          <div className="md:grid md:grid-cols-[3fr_2fr] md:items-center md:gap-20">
+            <ol className="mt-14 max-w-3xl">
+              {PARTNER.process.steps.map((step, i) => (
+                <Reveal as="li" key={step}>
+                  <div className="flex gap-8 border-t border-dust/15 py-7">
+                    <span className="meta-label pt-1 text-ember">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <p className="text-lg text-starlight/85">{linkCategory3(step)}</p>
+                  </div>
+                </Reveal>
+              ))}
+            </ol>
+            <ProcessConstellation className="mt-14 hidden md:block" />
+          </div>
         </div>
       </section>
 
