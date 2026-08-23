@@ -8,7 +8,6 @@ import GlitchText from "@/components/GlitchText";
 import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
-import ProcessConstellation from "@/components/ProcessConstellation";
 import ProjectShowcase from "@/components/ProjectShowcase";
 import Reveal from "@/components/Reveal";
 import VideoBlock from "@/components/VideoBlock";
@@ -91,32 +90,6 @@ export default function PartnerProjectsPage() {
               className="mt-10"
             />
           </Reveal>
-          {/* three brand stars climbing toward the top right, pulsing
-              in sequence beside the explainer */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute left-[51rem] top-[26rem] hidden lg:block"
-          >
-            {[
-              { x: 0, y: 150, size: 20, delay: "0s" },
-              { x: 62, y: 76, size: 28, delay: "0.4s" },
-              { x: 130, y: 0, size: 38, delay: "0.8s" },
-            ].map((star) => (
-              <svg
-                key={star.delay}
-                viewBox="0 0 24 24"
-                width={star.size}
-                height={star.size}
-                className="absolute [animation:star-pulse_2.4s_ease-in-out_infinite] [filter:drop-shadow(0_0_10px_rgb(230_225_255/0.65))]"
-                style={{ left: star.x, top: star.y, animationDelay: star.delay }}
-              >
-                <path
-                  fill="var(--color-starlight)"
-                  d="M12 0C12.9 6.8 16.2 10.1 24 12C16.2 13.9 12.9 17.2 12 24C11.1 17.2 7.8 13.9 0 12C7.8 10.1 11.1 6.8 12 0Z"
-                />
-              </svg>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -154,21 +127,18 @@ export default function PartnerProjectsPage() {
               <GlitchText text={PARTNER.process.heading} />
             </h2>
           </Reveal>
-          <div className="md:grid md:grid-cols-[3fr_2fr] md:items-center md:gap-20">
-            <ol className="mt-14 max-w-3xl">
-              {PARTNER.process.steps.map((step, i) => (
-                <Reveal as="li" key={step}>
-                  <div className="flex gap-8 border-t border-dust/15 py-7">
-                    <span className="meta-label pt-1 text-ember">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <p className="text-lg text-starlight/85">{linkCategory3(step)}</p>
-                  </div>
-                </Reveal>
-              ))}
-            </ol>
-            <ProcessConstellation className="mt-14 hidden md:block" />
-          </div>
+          <ol className="mt-14 max-w-3xl">
+            {PARTNER.process.steps.map((step, i) => (
+              <Reveal as="li" key={step}>
+                <div className="flex gap-8 border-t border-dust/15 py-7">
+                  <span className="meta-label pt-1 text-ember">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <p className="text-lg text-starlight/85">{linkCategory3(step)}</p>
+                </div>
+              </Reveal>
+            ))}
+          </ol>
         </div>
       </section>
 
@@ -177,15 +147,8 @@ export default function PartnerProjectsPage() {
       <ProjectShowcase />
 
       {/* FAQ */}
-      <section className="relative overflow-hidden border-y border-dust/15 bg-soot/40">
-        <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            aria-hidden="true"
-            src="/brand/fx-comet.webp"
-            alt=""
-            className="pointer-events-none absolute -right-8 top-4 hidden w-[460px] max-w-none opacity-50 md:block [animation:meteorite-jiggle_1.6s_ease-in-out_infinite]"
-          />
+      <section className="border-y border-dust/15 bg-soot/40">
+        <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
           <Reveal>
             <Kicker>{PARTNER.faq.kicker}</Kicker>
             <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">

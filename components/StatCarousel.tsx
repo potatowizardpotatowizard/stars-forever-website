@@ -34,29 +34,12 @@ export default function StatCarousel({
     el.scrollTo({ left: i * el.clientWidth, behavior: "smooth" });
   };
 
-  const frac = stats.length > 1 ? active / (stats.length - 1) : 0;
-
   return (
-    <div className="relative border-l border-dust/15 pl-10">
-      {/* a falling star from the brand kit, plunging deeper with each
-          statistic paged */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -right-16 -top-36 transition-transform duration-700 ease-out"
-        style={{ transform: `translate(${Math.round(130 * frac)}px, ${Math.round(170 * frac)}px)` }}
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/brand/fx-purple-fall.webp"
-          alt=""
-          className="w-[540px] max-w-none transition-opacity duration-700"
-          style={{ opacity: 0.3 + 0.55 * frac }}
-        />
-      </div>
+    <div className="border-l border-dust/15 pl-10">
       <ul
         ref={listRef}
         onScroll={onScroll}
-        className="relative z-10 flex snap-x snap-mandatory overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="flex snap-x snap-mandatory overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {stats.map((stat) => (
           <li key={stat.text} className="w-full shrink-0 snap-center pr-4">
@@ -83,7 +66,7 @@ export default function StatCarousel({
       </ul>
 
       {/* seven diamonds, one per statistic */}
-      <div className="relative z-10 mt-6 flex items-center gap-3">
+      <div className="mt-6 flex items-center gap-3">
         {stats.map((stat, i) => (
           <button
             key={stat.text}

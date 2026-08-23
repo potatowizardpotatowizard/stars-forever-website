@@ -13,7 +13,6 @@ import CohortSpotlight from "@/components/CohortSpotlight";
 import ProjectShowcase from "@/components/ProjectShowcase";
 import StarBridge from "@/components/StarBridge";
 import Reveal from "@/components/Reveal";
-import ShootingUnderline from "@/components/ShootingUnderline";
 import StarField from "@/components/StarField";
 import VideoBlock from "@/components/VideoBlock";
 import YouTubeEmbed from "@/components/YouTubeEmbed";
@@ -187,7 +186,6 @@ export default function HomePage() {
                 );
               })}
             </div>
-            <ShootingUnderline className="hidden md:block" />
           </Reveal>
         </div>
       </section>
