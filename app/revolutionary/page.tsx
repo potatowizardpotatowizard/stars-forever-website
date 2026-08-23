@@ -103,12 +103,6 @@ export default function RevolutionaryPage() {
           className="absolute inset-x-0 top-0 h-[45vh] bg-[linear-gradient(to_bottom,rgb(22_101_52/0.35),rgb(22_101_52/0.12)_45%,transparent)]"
         />
         <div className="relative mx-auto max-w-7xl px-5 pt-12 sm:px-8">
-        <Reveal className="max-w-3xl md:hidden">
-          <Kicker>Press play</Kicker>
-          <h2 className="mt-6 font-display text-4xl sm:text-5xl">
-            <GlitchText text="Revolutionary Cohort" />
-          </h2>
-        </Reveal>
         <GrowVideo
           src="/brand/video/revolutionary-cohort-explainer.mp4"
           poster="/brand/poster-revolutionary-cohort-explainer.jpg"
@@ -136,12 +130,12 @@ export default function RevolutionaryPage() {
           </div>
         </Reveal>
 
-        {/* desktop only: the Steiger doorway */}
+        {/* the Steiger doorway */}
         <a
           href="https://steiger.org"
           target="_blank"
           rel="noopener noreferrer"
-          className="group relative hidden w-80 flex-none flex-col justify-end overflow-hidden rounded-xl border border-dust/20 p-8 transition-all duration-300 hover:border-ember/70 hover:shadow-[0_0_28px_rgb(109_40_217/0.35)] md:flex"
+          className="group relative mt-8 flex min-h-[15rem] w-full flex-none flex-col justify-end overflow-hidden rounded-xl border border-dust/20 p-8 transition-all duration-300 hover:border-ember/70 hover:shadow-[0_0_28px_rgb(109_40_217/0.35)] md:mt-0 md:min-h-0 md:w-80"
         >
           <Image
             src="/brand/bg-green.jpg"
@@ -170,30 +164,11 @@ export default function RevolutionaryPage() {
       </section>
 
       {/* The monologue: narrative spine of the page */}
-      <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
-        <div className="hidden md:block">
-          <MonologueDeck
-            kicker={REVOLUTIONARY.monologue.kicker}
-            cards={REVOLUTIONARY.monologue.cards}
-          />
-        </div>
-        <Reveal className="mx-auto max-w-2xl md:hidden">
-          <Kicker>{REVOLUTIONARY.monologue.kicker}</Kicker>
-          <div className="mt-10 space-y-8">
-            {REVOLUTIONARY.monologue.lines.map((line, i) => (
-              <p
-                key={line}
-                className={
-                  i >= REVOLUTIONARY.monologue.lines.length - 3
-                    ? "font-display text-2xl leading-snug text-ember sm:text-3xl"
-                    : "font-display text-2xl leading-snug text-starlight/90 sm:text-3xl"
-                }
-              >
-                {line}
-              </p>
-            ))}
-          </div>
-        </Reveal>
+      <section className="mx-auto max-w-7xl px-5 py-24 max-md:overflow-x-clip sm:px-8 sm:py-32">
+        <MonologueDeck
+          kicker={REVOLUTIONARY.monologue.kicker}
+          cards={REVOLUTIONARY.monologue.cards}
+        />
       </section>
 
       {/* What to expect */}
@@ -250,6 +225,24 @@ export default function RevolutionaryPage() {
           </p>
           <div className="mt-10">
             <Cta href={CONTACT.bookingUrl}>{REVOLUTIONARY.cta.label}</Cta>
+          </div>
+          <div className="mt-8 flex flex-col items-center gap-1 md:hidden">
+            <span className="meta-label text-ember">or fill this out</span>
+            <svg
+              width="26"
+              height="46"
+              viewBox="0 0 26 46"
+              aria-hidden="true"
+              className="text-ember"
+            >
+              <path
+                d="M13 2 C 21 14, 6 26, 13 40 M13 40 l-7 -9 M13 40 l8 -8"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+              />
+            </svg>
           </div>
           <div className="mt-8 hidden items-center gap-4 md:flex">
             <span className="meta-label text-ember">or fill this out</span>

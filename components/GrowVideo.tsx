@@ -28,15 +28,15 @@ export default function GrowVideo({
       raf = 0;
       const el = frameRef.current;
       if (!el) return;
-      if (!window.matchMedia("(min-width: 768px)").matches ||
-          window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
         el.style.width = "100%";
         return;
       }
       const rect = el.getBoundingClientRect();
       const vh = window.innerHeight;
       const p = smooth(clamp01((vh * 0.92 - rect.top) / (vh * 0.72)));
-      el.style.width = `${(58 + 42 * p).toFixed(2)}%`;
+      const from = window.matchMedia("(min-width: 768px)").matches ? 58 : 74;
+      el.style.width = `${(from + (100 - from) * p).toFixed(2)}%`;
     };
 
     const onScroll = () => {

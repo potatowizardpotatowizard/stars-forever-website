@@ -45,6 +45,12 @@ export default function MonologueDeck({
       const vh = window.innerHeight;
       const p = smooth(clamp01((vh * 0.92 - rect.top) / (vh * 0.6)));
       el.style.transform = `scale(${(0.93 + 0.07 * p).toFixed(4)})`;
+      // size the meteorite for the viewport before the first swipe
+      const meteor = meteorRef.current;
+      if (meteor && !meteor.dataset.sized) {
+        meteor.dataset.sized = "1";
+        if (window.innerWidth < 768) meteor.style.width = "560px";
+      }
     };
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(tick);
@@ -72,7 +78,8 @@ export default function MonologueDeck({
     if (meteor) {
       // one continuous line anchored at the head: growing reveals more
       // of the burning trail out the left side
-      meteor.style.width = `${Math.round(1250 + 250 * t)}px`;
+      const mobile = window.innerWidth < 768;
+      meteor.style.width = `${Math.round(mobile ? 560 + 150 * t : 1250 + 250 * t)}px`;
       meteor.style.opacity = (0.8 + 0.2 * t).toFixed(3);
       // and the whole thing swells and burns hotter card by card
       meteor.style.transform = `scale(${(1 + 0.09 * t).toFixed(4)})`;
@@ -99,11 +106,11 @@ export default function MonologueDeck({
             revealed as the story advances */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-y-0 -left-[44rem] -right-[20rem]"
+          className="pointer-events-none absolute inset-y-0 -left-[20rem] -right-[4.25rem] md:-left-[44rem] md:-right-[20rem]"
         >
           <div
             ref={meteorRef}
-            className="absolute right-0 top-1/2 h-[36rem] -translate-y-1/2 overflow-hidden [transform-origin:88%_center] [mask-image:linear-gradient(90deg,transparent,black_140px)] [-webkit-mask-image:linear-gradient(90deg,transparent,black_140px)]"
+            className="absolute right-0 top-0 h-[17rem] -translate-y-1/2 overflow-hidden [transform-origin:88%_center] md:top-1/2 md:h-[36rem] [mask-image:linear-gradient(90deg,transparent,black_140px)] [-webkit-mask-image:linear-gradient(90deg,transparent,black_140px)]"
             style={{ width: "1250px", opacity: 0.8 }}
           >
             <div className="absolute inset-0 [animation:meteorite-jiggle_1.15s_ease-in-out_infinite]">
@@ -112,33 +119,33 @@ export default function MonologueDeck({
               <img
                 src="/brand/meteorite-orange.webp"
                 alt=""
-                className="absolute right-0 top-1/2 w-[1500px] max-w-none translate-y-[calc(-50%+20px)]"
+                className="absolute right-0 top-1/2 w-[680px] max-w-none translate-y-[calc(-50%+8px)] md:w-[1500px] md:translate-y-[calc(-50%+20px)]"
               />
               <div ref={glowRef} className="absolute inset-0" style={{ opacity: 0.4 }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/brand/meteorite-orange.webp"
                   alt=""
-                  className="absolute right-0 top-1/2 w-[1500px] max-w-none translate-y-[calc(-50%+20px)] blur-md [animation:meteorite-flicker-soft_1.9s_ease-in-out_infinite]"
+                  className="absolute right-0 top-1/2 w-[680px] max-w-none translate-y-[calc(-50%+8px)] blur-md md:w-[1500px] md:translate-y-[calc(-50%+20px)] [animation:meteorite-flicker-soft_1.9s_ease-in-out_infinite]"
                 />
               </div>
 
               {/* embers shaken loose, drifting back down the trail */}
-              <span className="absolute right-64 top-[calc(50%+58px)] h-1.5 w-1.5 rounded-full bg-orange-400 [animation:ember-drift_1.3s_linear_infinite]" />
-              <span className="absolute right-56 top-[calc(50%+92px)] h-1 w-1 rounded-full bg-yellow-200 [animation:ember-drift_1.8s_linear_0.5s_infinite]" />
-              <span className="absolute right-72 top-[calc(50%+44px)] h-1.5 w-1.5 rounded-full bg-orange-500/90 [animation:ember-drift_1.1s_linear_0.8s_infinite]" />
-              <span className="absolute right-60 top-[calc(50%+72px)] h-1 w-1 rounded-full bg-amber-300 [animation:ember-drift_2s_linear_0.2s_infinite]" />
+              <span className="hidden md:block absolute right-64 top-[calc(50%+58px)] h-1.5 w-1.5 rounded-full bg-orange-400 [animation:ember-drift_1.3s_linear_infinite]" />
+              <span className="hidden md:block absolute right-56 top-[calc(50%+92px)] h-1 w-1 rounded-full bg-yellow-200 [animation:ember-drift_1.8s_linear_0.5s_infinite]" />
+              <span className="hidden md:block absolute right-72 top-[calc(50%+44px)] h-1.5 w-1.5 rounded-full bg-orange-500/90 [animation:ember-drift_1.1s_linear_0.8s_infinite]" />
+              <span className="hidden md:block absolute right-60 top-[calc(50%+72px)] h-1 w-1 rounded-full bg-amber-300 [animation:ember-drift_2s_linear_0.2s_infinite]" />
 
               {/* sparks crackling off the burning head */}
-              <span className="absolute right-[180px] top-[calc(50%+40px)] h-1 w-1 bg-yellow-200 [animation:spark-fly-up_1.1s_ease-out_infinite]" />
-              <span className="absolute right-[200px] top-[calc(50%+90px)] h-1 w-1 bg-orange-400 [animation:spark-fly-down_1.4s_ease-out_0.3s_infinite]" />
-              <span className="absolute right-[170px] top-[calc(50%+70px)] h-1 w-1 bg-amber-300 [animation:spark-fly-up_0.9s_ease-out_0.6s_infinite]" />
-              <span className="absolute right-[220px] top-[calc(50%+55px)] h-1 w-1 bg-orange-300 [animation:spark-fly-down_1.7s_ease-out_0.15s_infinite]" />
-              <span className="absolute right-[150px] top-[calc(50%+65px)] h-1.5 w-1.5 bg-yellow-100 [animation:spark-fly-up_1.3s_ease-out_0.45s_infinite]" />
-              <span className="absolute right-[210px] top-[calc(50%+105px)] h-1 w-1 bg-orange-500 [animation:spark-fly-down_1s_ease-out_0.8s_infinite]" />
+              <span className="hidden md:block absolute right-[180px] top-[calc(50%+40px)] h-1 w-1 bg-yellow-200 [animation:spark-fly-up_1.1s_ease-out_infinite]" />
+              <span className="hidden md:block absolute right-[200px] top-[calc(50%+90px)] h-1 w-1 bg-orange-400 [animation:spark-fly-down_1.4s_ease-out_0.3s_infinite]" />
+              <span className="hidden md:block absolute right-[170px] top-[calc(50%+70px)] h-1 w-1 bg-amber-300 [animation:spark-fly-up_0.9s_ease-out_0.6s_infinite]" />
+              <span className="hidden md:block absolute right-[220px] top-[calc(50%+55px)] h-1 w-1 bg-orange-300 [animation:spark-fly-down_1.7s_ease-out_0.15s_infinite]" />
+              <span className="hidden md:block absolute right-[150px] top-[calc(50%+65px)] h-1.5 w-1.5 bg-yellow-100 [animation:spark-fly-up_1.3s_ease-out_0.45s_infinite]" />
+              <span className="hidden md:block absolute right-[210px] top-[calc(50%+105px)] h-1 w-1 bg-orange-500 [animation:spark-fly-down_1s_ease-out_0.8s_infinite]" />
               <div
                 ref={sparksRef}
-                className="absolute right-[166px] top-[calc(50%+80px)] h-32 w-32 -translate-y-1/2 animate-pulse"
+                className="absolute right-[166px] top-[calc(50%+80px)] hidden h-32 w-32 -translate-y-1/2 animate-pulse md:block"
                 style={{ opacity: 0 }}
               >
                 <span className="absolute left-2 top-4 h-2 w-2 rotate-45 bg-yellow-200" />
@@ -158,7 +165,7 @@ export default function MonologueDeck({
       >
         {cards.map((card, i) => (
           <li key={card.lines[0]} className="w-full shrink-0 snap-center pr-4">
-            <div className="flex min-h-[22rem] flex-col justify-center rounded-xl border border-dust/20 bg-night p-10">
+            <div className="flex min-h-[19rem] flex-col justify-center rounded-xl border border-dust/20 bg-night p-6 sm:min-h-[22rem] sm:p-10">
               <svg
                 viewBox="0 0 24 24"
                 aria-hidden="true"
@@ -176,8 +183,8 @@ export default function MonologueDeck({
                     key={line}
                     className={
                       card.ember
-                        ? "font-display text-3xl font-bold leading-snug text-ember"
-                        : "font-display text-3xl font-bold leading-snug text-starlight"
+                        ? "font-display text-2xl font-bold leading-snug text-ember sm:text-3xl"
+                        : "font-display text-2xl font-bold leading-snug text-starlight sm:text-3xl"
                     }
                   >
                     {line}
@@ -188,7 +195,7 @@ export default function MonologueDeck({
                     {card.list.map((item, n) => (
                       <li
                         key={item}
-                        className="flex items-baseline gap-4 font-display text-2xl font-bold leading-snug text-starlight/90"
+                        className="flex items-baseline gap-4 font-display text-xl font-bold leading-snug text-starlight/90 sm:text-2xl"
                       >
                         <span className="meta-label text-ember">
                           {String(n + 1).padStart(2, "0")}
