@@ -79,7 +79,7 @@ export const VISION = {
     skyCaption: "Every niche, a mission field. Every light, a creator who loves Jesus.",
   },
   closing: {
-    kicker: "Apply for a Partner Project",
+    kicker: "Create Eternity Changing Art",
     heading: "The sky has room for your star.",
     giveLine:
       "Every gift funds another creator missionary reaching another niche with the Gospel.",
