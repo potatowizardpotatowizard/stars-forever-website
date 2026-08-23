@@ -3,10 +3,14 @@
 import { useEffect, useRef, useState } from "react";
 import Kicker from "@/components/Kicker";
 
-// Desktop focus scroll for the monologue: every beat is on the page,
-// but only the line crossing the middle of the screen burns at full
-// brightness. The closing beats land in ember. Opacity only, no
-// pinning, so it glides with the site's smooth scrolling.
+const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
+
+const STAR_PATH =
+  "M12 0C12.9 6.8 16.2 10.1 24 12C16.2 13.9 12.9 17.2 12 24C11.1 17.2 7.8 13.9 0 12C7.8 10.1 11.1 6.8 12 0Z";
+
+// Desktop reading reveal for the monologue: a small Stars Forever
+// star draws itself beside each beat, then the words fill in from
+// left to right as the visitor scrolls, like a line being read.
 export default function FocusMonologue({
   kicker,
   lines,
@@ -16,7 +20,8 @@ export default function FocusMonologue({
   lines: string[];
   emberCount?: number;
 }) {
-  const lineRefs = useRef<(HTMLParagraphElement | null)[]>([]);
+  const textRefs = useRef<(HTMLParagraphElement | null)[]>([]);
+  const starRefs = useRef<(SVGPathElement | null)[]>([]);
   const [reduced, setReduced] = useState(false);
 
   useEffect(() => {
@@ -28,31 +33,45 @@ export default function FocusMonologue({
   }, []);
 
   useEffect(() => {
+    const lit = (i: number) =>
+      i >= lines.length - emberCount
+        ? "var(--color-ember)"
+        : "var(--color-starlight)";
+    const dim = "color-mix(in srgb, var(--color-starlight) 18%, transparent)";
+
     if (reduced) {
-      for (const el of lineRefs.current) {
-        if (el) {
-          el.style.opacity = "1";
-          el.style.transform = "none";
+      for (let i = 0; i < textRefs.current.length; i++) {
+        const el = textRefs.current[i];
+        if (el) el.style.backgroundImage = `linear-gradient(90deg, ${lit(i)} 100%, ${dim} 100%)`;
+        const star = starRefs.current[i];
+        if (star) {
+          star.style.strokeDashoffset = "0";
+          star.style.fillOpacity = "1";
         }
       }
       return;
     }
+
     let raf = 0;
     const tick = () => {
       raf = 0;
-      const mid = window.innerHeight / 2;
-      for (let i = 0; i < lineRefs.current.length; i++) {
-        const el = lineRefs.current[i];
+      const vh = window.innerHeight;
+      for (let i = 0; i < textRefs.current.length; i++) {
+        const el = textRefs.current[i];
         if (!el) continue;
-        const r = el.getBoundingClientRect();
-        const center = r.top + r.height / 2;
-        const away = Math.min(1, Math.abs(center - mid) / (window.innerHeight * 0.38));
-        const eased = away * away;
-        // each beat arrives from its own side: evens from the left,
-        // odds from the right, settling straight as it reaches center
-        const dir = i % 2 === 0 ? -1 : 1;
-        el.style.opacity = (1 - 0.72 * eased).toFixed(3);
-        el.style.transform = `translate3d(${(dir * 130 * eased).toFixed(1)}px, 0, 0)`;
+        const top = el.getBoundingClientRect().top;
+        // the line reads itself as it rises through the lower screen
+        const p = clamp01((vh * 0.88 - top) / (vh * 0.45));
+        const f = (p * 100).toFixed(1);
+        el.style.backgroundImage = `linear-gradient(90deg, ${lit(i)} ${f}%, ${dim} ${f}%)`;
+
+        // the star draws first, then fills
+        const star = starRefs.current[i];
+        if (star) {
+          const draw = clamp01(p * 2.2);
+          star.style.strokeDashoffset = (1 - draw).toFixed(3);
+          star.style.fillOpacity = clamp01((p - 0.5) * 2.4).toFixed(3);
+        }
       }
     };
     const onScroll = () => {
@@ -66,27 +85,56 @@ export default function FocusMonologue({
       window.removeEventListener("resize", onScroll);
       if (raf) cancelAnimationFrame(raf);
     };
-  }, [reduced, lines.length]);
+  }, [reduced, lines.length, emberCount]);
 
   return (
     <div className="mx-auto max-w-3xl">
       <Kicker>{kicker}</Kicker>
-      <div className="mt-14 space-y-14">
+      <div className="mt-14 space-y-12">
         {lines.map((line, i) => (
-          <p
-            ref={(el) => {
-              lineRefs.current[i] = el;
-            }}
-            key={line}
-            className={
-              i >= lines.length - emberCount
-                ? "font-display text-3xl font-bold leading-snug text-ember will-change-transform lg:text-4xl"
-                : "font-display text-3xl font-bold leading-snug text-starlight will-change-transform lg:text-4xl"
-            }
-            style={{ opacity: 0.28 }}
-          >
-            {line}
-          </p>
+          <div key={line} className="flex items-start gap-5">
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              className="mt-2 h-6 w-6 flex-none"
+            >
+              <path
+                ref={(el) => {
+                  starRefs.current[i] = el;
+                }}
+                d={STAR_PATH}
+                pathLength={1}
+                fill={
+                  i >= lines.length - emberCount
+                    ? "var(--color-ember)"
+                    : "var(--color-starlight)"
+                }
+                stroke={
+                  i >= lines.length - emberCount
+                    ? "var(--color-ember)"
+                    : "var(--color-starlight)"
+                }
+                strokeWidth="0.06"
+                strokeDasharray="1"
+                strokeDashoffset="1"
+                style={{ fillOpacity: 0 }}
+              />
+            </svg>
+            <p
+              ref={(el) => {
+                textRefs.current[i] = el;
+              }}
+              className="bg-clip-text font-display text-3xl font-bold leading-snug lg:text-4xl"
+              style={{
+                color: "transparent",
+                WebkitBackgroundClip: "text",
+                backgroundImage:
+                  "linear-gradient(90deg, color-mix(in srgb, var(--color-starlight) 18%, transparent) 0%, color-mix(in srgb, var(--color-starlight) 18%, transparent) 100%)",
+              }}
+            >
+              {line}
+            </p>
+          </div>
         ))}
       </div>
     </div>

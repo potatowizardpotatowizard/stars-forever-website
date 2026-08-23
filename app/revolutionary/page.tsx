@@ -175,6 +175,7 @@ export default function RevolutionaryPage() {
           <FocusMonologue
             kicker={REVOLUTIONARY.monologue.kicker}
             lines={REVOLUTIONARY.monologue.linesShort}
+            emberCount={1}
           />
         </div>
         <Reveal className="mx-auto max-w-2xl md:hidden">
