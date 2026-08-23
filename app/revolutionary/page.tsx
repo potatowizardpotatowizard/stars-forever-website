@@ -118,8 +118,8 @@ export default function RevolutionaryPage() {
         </div>
       </section>
 
-      {/* Ben Pierce intro block */}
-      <section className="mx-auto max-w-7xl px-5 py-12 sm:px-8">
+      {/* Ben Pierce intro block, with the door to Steiger beside it */}
+      <section className="mx-auto max-w-7xl px-5 py-12 sm:px-8 md:flex md:items-stretch md:gap-8">
         <Reveal className="grid max-w-4xl gap-8 border border-dust/20 bg-soot/40 p-8 sm:grid-cols-[14rem_1fr] sm:p-10">
           <MediaSlot
             name={REVOLUTIONARY.benPierce.imageSlot}
@@ -135,6 +135,38 @@ export default function RevolutionaryPage() {
             </p>
           </div>
         </Reveal>
+
+        {/* desktop only: the Steiger doorway */}
+        <a
+          href="https://steiger.org"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group relative hidden w-80 flex-none flex-col justify-end overflow-hidden rounded-xl border border-dust/20 p-8 transition-all duration-300 hover:border-ember/70 hover:shadow-[0_0_28px_rgb(109_40_217/0.35)] md:flex"
+        >
+          <Image
+            src="/brand/bg-green.jpg"
+            alt=""
+            fill
+            sizes="20rem"
+            className="object-cover opacity-35 transition-opacity duration-500 group-hover:opacity-50"
+          />
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-gradient-to-t from-night/85 via-night/30 to-transparent"
+          />
+          <div className="relative">
+            <p className="meta-label text-starlight/70">In collaboration with</p>
+            <p className="mt-2 font-display text-4xl font-bold transition-colors group-hover:text-ember">
+              Steiger
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-starlight/75">
+              A global mission reaching the secular youth culture for Jesus.
+            </p>
+            <span className="mono-link mt-6 inline-block text-sm font-bold text-ember">
+              Check out Steiger ↗
+            </span>
+          </div>
+        </a>
       </section>
 
       {/* The monologue: narrative spine of the page */}
