@@ -103,9 +103,9 @@ export default function RevolutionaryPage() {
           className="absolute inset-x-0 top-0 h-[45vh] bg-[linear-gradient(to_bottom,rgb(22_101_52/0.35),rgb(22_101_52/0.12)_45%,transparent)]"
         />
         <div className="relative mx-auto max-w-7xl px-5 pt-12 sm:px-8">
-        <Reveal className="max-w-3xl">
+        <Reveal className="max-w-3xl md:hidden">
           <Kicker>Press play</Kicker>
-          <h2 className="mt-6 font-display text-4xl sm:text-5xl md:hidden">
+          <h2 className="mt-6 font-display text-4xl sm:text-5xl">
             <GlitchText text="Revolutionary Cohort" />
           </h2>
         </Reveal>

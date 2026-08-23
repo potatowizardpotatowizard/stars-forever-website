@@ -30,7 +30,10 @@ export default function FocusMonologue({
   useEffect(() => {
     if (reduced) {
       for (const el of lineRefs.current) {
-        if (el) el.style.opacity = "1";
+        if (el) {
+          el.style.opacity = "1";
+          el.style.transform = "none";
+        }
       }
       return;
     }
@@ -38,12 +41,18 @@ export default function FocusMonologue({
     const tick = () => {
       raf = 0;
       const mid = window.innerHeight / 2;
-      for (const el of lineRefs.current) {
+      for (let i = 0; i < lineRefs.current.length; i++) {
+        const el = lineRefs.current[i];
         if (!el) continue;
         const r = el.getBoundingClientRect();
         const center = r.top + r.height / 2;
         const away = Math.min(1, Math.abs(center - mid) / (window.innerHeight * 0.38));
-        el.style.opacity = (1 - 0.72 * away * away).toFixed(3);
+        const eased = away * away;
+        // each beat arrives from its own side: evens from the left,
+        // odds from the right, settling straight as it reaches center
+        const dir = i % 2 === 0 ? -1 : 1;
+        el.style.opacity = (1 - 0.72 * eased).toFixed(3);
+        el.style.transform = `translate3d(${(dir * 130 * eased).toFixed(1)}px, 0, 0)`;
       }
     };
     const onScroll = () => {
@@ -71,8 +80,8 @@ export default function FocusMonologue({
             key={line}
             className={
               i >= lines.length - emberCount
-                ? "font-display text-3xl font-bold leading-snug text-ember lg:text-4xl"
-                : "font-display text-3xl font-bold leading-snug text-starlight lg:text-4xl"
+                ? "font-display text-3xl font-bold leading-snug text-ember will-change-transform lg:text-4xl"
+                : "font-display text-3xl font-bold leading-snug text-starlight will-change-transform lg:text-4xl"
             }
             style={{ opacity: 0.28 }}
           >
