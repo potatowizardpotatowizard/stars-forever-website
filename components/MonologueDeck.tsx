@@ -99,7 +99,7 @@ export default function MonologueDeck({
   return (
     <div ref={deckRef} className="mx-auto max-w-3xl will-change-transform">
       <Kicker>{kicker}</Kicker>
-      <div className="relative mt-24 md:mt-10">
+      <div className="relative mt-28 md:mt-10">
         {/* one continuous burning meteorite passing behind the box,
             cut from the brand's Orange 4 art: the starburst head out
             the right, the wispy fire trail out the left, more of it
@@ -110,7 +110,7 @@ export default function MonologueDeck({
         >
           <div
             ref={meteorRef}
-            className="absolute right-0 top-[-3rem] h-[17rem] -translate-y-1/2 overflow-hidden [transform-origin:88%_center] md:top-1/2 md:h-[36rem] [mask-image:linear-gradient(90deg,transparent,black_140px)] [-webkit-mask-image:linear-gradient(90deg,transparent,black_140px)]"
+            className="absolute right-0 top-[-4.5rem] h-[17rem] -translate-y-1/2 overflow-hidden [transform-origin:88%_center] md:top-1/2 md:h-[36rem] [mask-image:linear-gradient(90deg,transparent,black_140px)] [-webkit-mask-image:linear-gradient(90deg,transparent,black_140px)]"
             style={{ width: "1250px", opacity: 0.8 }}
           >
             <div className="absolute inset-0 [animation:meteorite-jiggle_1.15s_ease-in-out_infinite]">
@@ -177,7 +177,7 @@ export default function MonologueDeck({
                   opacity={card.ember ? 1 : 0.7}
                 />
               </svg>
-              <div className="mt-8 space-y-6">
+              <div className="mt-0 space-y-6 md:mt-8">
                 {card.lines.map((line) => (
                   <p
                     key={line}
