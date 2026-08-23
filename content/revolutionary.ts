@@ -17,6 +17,17 @@ export const REVOLUTIONARY = {
     lines: [
       "You love Jesus. You go to church. You create.",
       "But your faith lives offline.",
+      "It\u2019s not that you don\u2019t want to share about God, rather that you don\u2019t want to become a Christian Bible teacher online.",
+      "Or maybe your content is all about Jesus, and you have an audience full of believers, but you realize you\u2019re not reaching the people that really need Him.",
+      "Either way, the secular audience scrolling right now hears nothing. Well nothing life changing that is.",
+      "Not because you do not care. Because the audience does not want it, the algorithm does not reward it, and the church lane feels safer. Or so you believe.",
+      "But what if there was a different way?",
+      "A way where you create with the passions God gave you. Not to make Bible content online, but to intentionally reach a secular audience for Jesus.",
+      "Revolutionary is that. It is the introduction of a missionary lifestyle for creators.",
+    ],
+    linesShort: [
+      "You love Jesus. You go to church. You create.",
+      "But your faith lives offline.",
       "Or your content is all about Jesus, reaching an audience already full of believers.",
       "Either way, the secular audience scrolling right now hears nothing life changing.",
       "Not because you do not care. The algorithm does not reward it, and the church lane feels safer.",

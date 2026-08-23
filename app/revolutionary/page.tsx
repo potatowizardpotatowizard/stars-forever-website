@@ -105,7 +105,7 @@ export default function RevolutionaryPage() {
         <div className="relative mx-auto max-w-7xl px-5 pt-12 sm:px-8">
         <Reveal className="max-w-3xl">
           <Kicker>Press play</Kicker>
-          <h2 className="mt-6 font-display text-4xl sm:text-5xl">
+          <h2 className="mt-6 font-display text-4xl sm:text-5xl md:hidden">
             <GlitchText text="Revolutionary Cohort" />
           </h2>
         </Reveal>
@@ -142,7 +142,7 @@ export default function RevolutionaryPage() {
         <div className="hidden md:block">
           <FocusMonologue
             kicker={REVOLUTIONARY.monologue.kicker}
-            lines={REVOLUTIONARY.monologue.lines}
+            lines={REVOLUTIONARY.monologue.linesShort}
           />
         </div>
         <Reveal className="mx-auto max-w-2xl md:hidden">
