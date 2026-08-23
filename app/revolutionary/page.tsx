@@ -124,8 +124,30 @@ export default function RevolutionaryPage() {
             <h2 className="font-display text-3xl">
               {REVOLUTIONARY.benPierce.name}
             </h2>
-            <p className="mt-4 leading-relaxed text-starlight/75">
+            <p className="mt-4 hidden leading-relaxed text-starlight/75 md:block">
               {REVOLUTIONARY.benPierce.body}
+            </p>
+            <p className="mt-4 leading-relaxed text-starlight/75 md:hidden">
+              {(() => {
+                const marker = "Steiger Ministries";
+                const body = REVOLUTIONARY.benPierce.body;
+                const idx = body.indexOf(marker);
+                if (idx === -1) return body;
+                return (
+                  <>
+                    {body.slice(0, idx)}
+                    <a
+                      href="https://steiger.org"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-ember transition-colors hover:text-starlight"
+                    >
+                      Steiger
+                    </a>
+                    {body.slice(idx + marker.length)}
+                  </>
+                );
+              })()}
             </p>
           </div>
         </Reveal>
@@ -135,7 +157,7 @@ export default function RevolutionaryPage() {
           href="https://steiger.org"
           target="_blank"
           rel="noopener noreferrer"
-          className="group relative mt-8 flex w-full flex-none flex-col justify-end overflow-hidden rounded-xl border border-dust/20 p-6 transition-all duration-300 hover:border-ember/70 hover:shadow-[0_0_28px_rgb(109_40_217/0.35)] md:mt-0 md:w-80 md:p-8"
+          className="group relative hidden w-80 flex-none flex-col justify-end overflow-hidden rounded-xl border border-dust/20 p-8 transition-all duration-300 hover:border-ember/70 hover:shadow-[0_0_28px_rgb(109_40_217/0.35)] md:flex"
         >
           <Image
             src="/brand/bg-green.jpg"
