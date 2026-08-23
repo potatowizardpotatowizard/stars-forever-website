@@ -98,7 +98,9 @@ export default function MonologueDeck({
 
   return (
     <div ref={deckRef} className="mx-auto max-w-3xl will-change-transform">
-      <Kicker>{kicker}</Kicker>
+      <div className="hidden md:block">
+        <Kicker>{kicker}</Kicker>
+      </div>
       <div className="relative mt-32 md:mt-10">
         {/* one continuous burning meteorite passing behind the box,
             cut from the brand's Orange 4 art: the starburst head out
@@ -158,6 +160,9 @@ export default function MonologueDeck({
           </div>
         </div>
 
+      <div className="relative z-10 mb-4 md:hidden">
+        <Kicker>{kicker}</Kicker>
+      </div>
       <ul
         ref={listRef}
         onScroll={onScroll}
@@ -165,7 +170,7 @@ export default function MonologueDeck({
       >
         {cards.map((card, i) => (
           <li key={card.lines[0]} className="w-full shrink-0 snap-center pr-4">
-            <div className="flex min-h-[19rem] flex-col justify-center rounded-xl border border-dust/20 bg-night p-6 sm:min-h-[22rem] sm:p-10">
+            <div className="flex min-h-[15rem] flex-col justify-center rounded-xl border border-dust/20 bg-night p-6 sm:min-h-[22rem] sm:p-10">
               <svg
                 viewBox="0 0 24 24"
                 aria-hidden="true"
