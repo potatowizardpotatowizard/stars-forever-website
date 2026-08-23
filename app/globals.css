@@ -1580,3 +1580,9 @@ html.easter-sunday body::before {
   12% { opacity: 0.95; }
   100% { transform: translateX(-150px) scale(0.3); opacity: 0; }
 }
+
+@keyframes meteorite-flicker-soft {
+  0%, 100% { opacity: 0.55; }
+  40% { opacity: 0.3; }
+  65% { opacity: 0.7; }
+}
