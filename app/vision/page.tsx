@@ -9,6 +9,7 @@ import GlitchText from "@/components/GlitchText";
 import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import Link from "next/link";
+import ProblemScrolly from "@/components/ProblemScrolly";
 import Reveal from "@/components/Reveal";
 import { VISION } from "@/content/vision";
 import { GIVING_URL } from "@/content/site";
@@ -49,7 +50,7 @@ export default function VisionPage() {
       </header>
 
       {/* The problem: life moved online, and lostness moved with it */}
-      <section className="relative overflow-hidden">
+      <section className="relative">
         <div
           aria-hidden="true"
           className="absolute inset-x-0 top-0 h-[55vh]"
@@ -58,7 +59,16 @@ export default function VisionPage() {
               "radial-gradient(ellipse 55% 60% at 10% 0%, rgb(109 40 217 / 0.24), transparent 68%), radial-gradient(ellipse 80% 65% at 78% 0%, rgb(34 197 94 / 0.3), transparent 72%)",
           }}
         />
-        <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8">
+        {/* desktop: the argument pins and swaps beat by beat */}
+        <div className="hidden md:block">
+          <ProblemScrolly
+            kicker={VISION.problem.kicker}
+            heading={VISION.problem.heading}
+            paragraphs={VISION.problem.paragraphs}
+          />
+        </div>
+        {/* mobile: the plain stacked read */}
+        <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8 md:hidden">
           <Reveal className="max-w-3xl">
             <Kicker>{VISION.problem.kicker}</Kicker>
             <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
@@ -81,7 +91,8 @@ export default function VisionPage() {
       {/* A missionary to a niche */}
       <section className="relative overflow-hidden">
         <div className="relative mx-auto max-w-7xl px-5 pb-24 pt-4 sm:px-8">
-          <Reveal className="max-w-3xl">
+          <Reveal className="max-w-3xl md:grid md:max-w-none md:grid-cols-2 md:items-center md:gap-16">
+            <div>
             <Kicker>{VISION.missionary.kicker}</Kicker>
             <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
               <GlitchText text={VISION.missionary.heading} />
@@ -96,7 +107,8 @@ export default function VisionPage() {
                 </p>
               ))}
             </div>
-            <div className="mt-12 max-w-3xl">
+            </div>
+            <div className="mt-12 max-w-3xl md:mt-0">
             <div className="grid grid-cols-2 gap-6 border-b border-dust/20 pb-4">
               <p className="meta-label">{VISION.parallel.thenLabel}</p>
               <p className="meta-label text-ember">{VISION.parallel.nowLabel}</p>
@@ -138,8 +150,8 @@ export default function VisionPage() {
       </section>
 
       {/* The two programs */}
-      <section className="mx-auto max-w-7xl px-5 pb-24 pt-6 sm:px-8 sm:py-24">
-        <Reveal className="max-w-3xl">
+      <section className="mx-auto max-w-7xl px-5 pb-24 pt-6 sm:px-8 sm:py-24 md:grid md:grid-cols-[3fr_2fr] md:items-center md:gap-16">
+        <Reveal className="max-w-3xl md:order-2">
           <Kicker>{VISION.programs.kicker}</Kicker>
           <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
             <GlitchText text={VISION.programs.heading} />
@@ -148,7 +160,7 @@ export default function VisionPage() {
             {linkCategory3(VISION.programs.body)}
           </p>
         </Reveal>
-        <div className="mt-12 grid max-w-3xl gap-6 sm:grid-cols-2">
+        <div className="mt-12 grid max-w-3xl gap-6 sm:grid-cols-2 md:order-1 md:mt-0">
           {VISION.programs.items.map((item) => (
             <Reveal key={item.href}>
               <Link
