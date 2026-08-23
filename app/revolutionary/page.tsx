@@ -6,6 +6,8 @@ import Link from "next/link";
 import Cta from "@/components/Cta";
 import GlitchText from "@/components/GlitchText";
 import Grain from "@/components/Grain";
+import FocusMonologue from "@/components/FocusMonologue";
+import GrowVideo from "@/components/GrowVideo";
 import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
 import Reveal from "@/components/Reveal";
@@ -106,13 +108,13 @@ export default function RevolutionaryPage() {
           <h2 className="mt-6 font-display text-4xl sm:text-5xl">
             <GlitchText text="Revolutionary Cohort" />
           </h2>
-          <VideoBlock
-            src="/brand/video/revolutionary-cohort-explainer.mp4"
-            poster="/brand/poster-revolutionary-cohort-explainer.jpg"
-            title="explained in two minutes"
-            className="mt-10"
-          />
         </Reveal>
+        <GrowVideo
+          src="/brand/video/revolutionary-cohort-explainer.mp4"
+          poster="/brand/poster-revolutionary-cohort-explainer.jpg"
+          title="explained in two minutes"
+          className="mt-10"
+        />
         </div>
       </section>
 
@@ -137,7 +139,13 @@ export default function RevolutionaryPage() {
 
       {/* The monologue: narrative spine of the page */}
       <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
-        <Reveal className="mx-auto max-w-2xl">
+        <div className="hidden md:block">
+          <FocusMonologue
+            kicker={REVOLUTIONARY.monologue.kicker}
+            lines={REVOLUTIONARY.monologue.lines}
+          />
+        </div>
+        <Reveal className="mx-auto max-w-2xl md:hidden">
           <Kicker>{REVOLUTIONARY.monologue.kicker}</Kicker>
           <div className="mt-10 space-y-8">
             {REVOLUTIONARY.monologue.lines.map((line, i) => (
