@@ -10,6 +10,7 @@ import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
+import StatCarousel from "@/components/StatCarousel";
 import { VISION } from "@/content/vision";
 import { GIVING_URL } from "@/content/site";
 
@@ -76,63 +77,52 @@ export default function VisionPage() {
             </div>
           </Reveal>
 
-          {/* the numbers behind the problem, desktop only */}
+          {/* the numbers behind the problem, a swipeable deck. desktop only */}
           <Reveal className="hidden md:block">
-            <div className="space-y-10 border-l border-dust/15 pl-10">
-              <div>
-                <p className="vhs-glow font-display text-6xl font-bold text-ember">
-                  2h 21m
-                </p>
-                <p className="mt-3 text-sm leading-relaxed text-starlight/80">
-                  on social media every single day, the global average. Kept up
-                  for life, that adds up to roughly six years inside the feed.
-                </p>
-                <a
-                  href="https://datareportal.com/reports/digital-2026-global-overview-report"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="meta-label mt-2 inline-block text-dust transition-colors hover:text-ember"
-                >
-                  DataReportal ↗
-                </a>
-              </div>
-              <div>
-                <div className="flex items-center gap-3">
-                  {[0, 1, 2, 3, 4, 5, 6].map((d) => (
-                    <span
-                      key={d}
-                      aria-hidden="true"
-                      className={`h-3 w-3 rotate-45 ${
-                        d === 6
-                          ? "bg-ember shadow-[0_0_12px_rgb(109_40_217/0.9)]"
-                          : "border border-dust/40"
-                      }`}
-                    />
-                  ))}
-                </div>
-                <p className="mt-4 text-sm leading-relaxed text-starlight/80">
-                  18h 36m every week. More than one full waking day out of
-                  every seven, spent scrolling.
-                </p>
-              </div>
-              <div>
-                <p className="vhs-glow font-display text-6xl font-bold text-ember">
-                  4.8h
-                </p>
-                <p className="mt-3 text-sm leading-relaxed text-starlight/80">
-                  a day on social media for the average US teen. For teen
-                  girls it is 5.3.
-                </p>
-                <a
-                  href="https://news.gallup.com/poll/512576/teens-spend-average-hours-social-media-per-day.aspx"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="meta-label mt-2 inline-block text-dust transition-colors hover:text-ember"
-                >
-                  Gallup ↗
-                </a>
-              </div>
-            </div>
+            <StatCarousel
+              stats={[
+                {
+                  value: "2h 21m",
+                  text: "on social media every single day, the global average. Kept up for life, that adds up to roughly six years inside the feed.",
+                  sourceLabel: "DataReportal",
+                  sourceHref:
+                    "https://datareportal.com/reports/digital-2026-global-overview-report",
+                },
+                {
+                  week: true,
+                  text: "18h 36m every week. More than one full waking day out of every seven, spent scrolling.",
+                  sourceLabel: "DataReportal",
+                  sourceHref:
+                    "https://datareportal.com/reports/digital-2026-global-overview-report",
+                },
+                {
+                  value: "4.8h",
+                  text: "a day on social media for the average US teen. For teen girls it is 5.3.",
+                  sourceLabel: "Gallup",
+                  sourceHref:
+                    "https://news.gallup.com/poll/512576/teens-spend-average-hours-social-media-per-day.aspx",
+                },
+                {
+                  value: "46%",
+                  text: "of US teens say they are online almost constantly. A decade ago it was 24.",
+                  sourceLabel: "Pew Research Center",
+                  sourceHref:
+                    "https://www.pewresearch.org/internet/2024/12/12/teens-social-media-and-technology-2024/",
+                },
+                {
+                  value: "2x",
+                  text: "the risk of anxiety and depression symptoms for teens spending more than three hours a day on social media.",
+                  sourceLabel: "US Surgeon General",
+                  sourceHref: "https://pubmed.ncbi.nlm.nih.gov/37721985/",
+                },
+                {
+                  value: "95%",
+                  text: "of young people aged 13 to 17 use social media. This is where they live. This is the mission field.",
+                  sourceLabel: "US Surgeon General",
+                  sourceHref: "https://pubmed.ncbi.nlm.nih.gov/37721985/",
+                },
+              ]}
+            />
           </Reveal>
         </div>
       </section>
