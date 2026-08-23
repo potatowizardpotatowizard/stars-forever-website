@@ -1561,3 +1561,22 @@ html.easter-sunday body::before {
     }
   }
 }
+
+/* The burning meteorite behind the Sound Familiar story box */
+@keyframes meteorite-jiggle {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  22% { transform: translate(-4px, 3px) rotate(-0.4deg); }
+  48% { transform: translate(3px, -2px) rotate(0.3deg); }
+  74% { transform: translate(-2px, -2px) rotate(-0.2deg); }
+}
+@keyframes meteorite-flicker {
+  0%, 100% { opacity: 0.95; transform: scaleX(1); }
+  35% { opacity: 0.6; transform: scaleX(0.94); }
+  60% { opacity: 1; transform: scaleX(1.05); }
+  82% { opacity: 0.75; transform: scaleX(0.98); }
+}
+@keyframes ember-drift {
+  0% { transform: translateX(0) scale(1); opacity: 0; }
+  12% { opacity: 0.95; }
+  100% { transform: translateX(-150px) scale(0.3); opacity: 0; }
+}

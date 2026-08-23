@@ -23,10 +23,7 @@ export default function MonologueDeck({
 }) {
   const listRef = useRef<HTMLUListElement>(null);
   const deckRef = useRef<HTMLDivElement>(null);
-  const trailRef = useRef<HTMLDivElement>(null);
-  const trailGlowRef = useRef<HTMLDivElement>(null);
-  const starRef = useRef<HTMLDivElement>(null);
-  const starGlowRef = useRef<HTMLDivElement>(null);
+  const meteorRef = useRef<HTMLDivElement>(null);
   const sparksRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
 
@@ -67,24 +64,16 @@ export default function MonologueDeck({
     const i = Math.round(el.scrollLeft / el.clientWidth);
     if (i !== active) setActive(Math.min(cards.length - 1, Math.max(0, i)));
 
-    // the shooting star behind the box charges with the story
+    // the meteorite behind the box charges with the story
     const max = el.scrollWidth - el.clientWidth;
     const t = max > 0 ? Math.min(1, Math.max(0, el.scrollLeft / max)) : 0;
-    const trail = trailRef.current;
-    if (trail) {
-      trail.style.transform = `scaleX(${(0.35 + 0.65 * t).toFixed(3)})`;
-      trail.style.opacity = (0.5 + 0.5 * t).toFixed(3);
+    const meteor = meteorRef.current;
+    if (meteor) {
+      meteor.style.opacity = (0.7 + 0.3 * t).toFixed(3);
+      meteor.style.transform = `scale(${(1 + 0.22 * t).toFixed(3)})`;
     }
-    const trailGlow = trailGlowRef.current;
-    if (trailGlow) trailGlow.style.opacity = (0.25 + 0.6 * t).toFixed(3);
-    const star = starRef.current;
-    if (star) {
-      star.style.transform = `translateY(-50%) scale(${(1 + 0.7 * t).toFixed(3)}) rotate(${(t * 90).toFixed(1)}deg)`;
-    }
-    const starGlow = starGlowRef.current;
-    if (starGlow) starGlow.style.opacity = (0.25 + 0.75 * t).toFixed(3);
     const sparks = sparksRef.current;
-    if (sparks) sparks.style.opacity = Math.min(1, Math.max(0, (t - 0.35) * 1.8)).toFixed(3);
+    if (sparks) sparks.style.opacity = Math.min(1, Math.max(0, (t - 0.3) * 1.7)).toFixed(3);
   };
 
   const jumpTo = (i: number) => {
@@ -97,50 +86,53 @@ export default function MonologueDeck({
     <div ref={deckRef} className="mx-auto max-w-3xl will-change-transform">
       <Kicker>{kicker}</Kicker>
       <div className="relative mt-10">
-        {/* the shooting star behind the box: tail out the left,
-            head out the right, charging with every swipe */}
+        {/* the burning meteorite behind the box: a long layered
+            plume out the left, a white hot head out the right, embers
+            streaming backward, the whole thing straining forward */}
         <div
-          ref={trailGlowRef}
+          ref={meteorRef}
           aria-hidden="true"
-          className="absolute -left-44 top-1/2 h-8 w-44 -translate-y-1/2 rounded-full bg-[linear-gradient(90deg,transparent,rgb(109_40_217/0.35))] blur-md"
-          style={{ opacity: 0.25 }}
-        />
-        <div
-          ref={trailRef}
-          aria-hidden="true"
-          className="absolute -left-44 top-1/2 h-[3px] w-44 -translate-y-1/2 origin-right rounded-full bg-[linear-gradient(90deg,transparent,rgb(139_92_246/0.55),rgb(237_233_254/0.95))]"
-          style={{ transform: "scaleX(0.35)", opacity: 0.5 }}
-        />
-        <div
-          ref={starGlowRef}
-          aria-hidden="true"
-          className="absolute -right-16 top-1/2 h-24 w-24 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgb(109_40_217/0.55),transparent_70%)] blur-sm"
-          style={{ opacity: 0.25 }}
-        />
-        <div
-          ref={starRef}
-          aria-hidden="true"
-          className="absolute -right-12 top-1/2 h-16 w-16 will-change-transform"
-          style={{ transform: "translateY(-50%) scale(1)" }}
+          className="pointer-events-none absolute inset-0"
+          style={{ opacity: 0.7 }}
         >
-          <span key={active} className="absolute inset-0 animate-ping rounded-full bg-ember/25" />
-          <svg viewBox="0 0 24 24" className="relative h-full w-full">
-            <path
-              d="M12 0C12.9 6.8 16.2 10.1 24 12C16.2 13.9 12.9 17.2 12 24C11.1 17.2 7.8 13.9 0 12C7.8 10.1 11.1 6.8 12 0Z"
-              fill="var(--color-starlight)"
-            />
-          </svg>
-        </div>
-        <div
-          ref={sparksRef}
-          aria-hidden="true"
-          className="absolute -right-20 top-1/2 h-28 w-28 -translate-y-1/2 animate-pulse"
-          style={{ opacity: 0 }}
-        >
-          <span className="absolute left-1 top-2 h-1.5 w-1.5 rotate-45 bg-ember" />
-          <span className="absolute right-2 top-6 h-2 w-2 rotate-45 bg-starlight" />
-          <span className="absolute bottom-3 left-6 h-1.5 w-1.5 rotate-45 bg-ember" />
-          <span className="absolute bottom-8 right-0 h-1 w-1 rotate-45 bg-starlight" />
+          <div className="absolute inset-0 [animation:meteorite-jiggle_1.1s_ease-in-out_infinite]">
+            {/* the plume, layered hot to cold */}
+            <div className="absolute -left-[34rem] top-1/2 h-16 w-[34rem] -translate-y-1/2 rounded-full bg-[linear-gradient(90deg,transparent,rgb(109_40_217/0.28)_60%,rgb(139_92_246/0.45))] blur-lg [animation:meteorite-flicker_2.3s_ease-in-out_infinite]" />
+            <div className="absolute -left-[30rem] top-1/2 h-6 w-[30rem] -translate-y-1/2 rounded-full bg-[linear-gradient(90deg,transparent,rgb(139_92_246/0.4)_55%,rgb(196_181_253/0.75))] blur-md [animation:meteorite-flicker_1.7s_ease-in-out_infinite_reverse]" />
+            <div className="absolute -left-[28rem] top-[calc(50%-10px)] h-[2px] w-[24rem] rounded-full bg-[linear-gradient(90deg,transparent,rgb(139_92_246/0.5))] [animation:meteorite-flicker_1.3s_ease-in-out_infinite]" />
+            <div className="absolute -left-[28rem] top-[calc(50%+9px)] h-[2px] w-[21rem] rounded-full bg-[linear-gradient(90deg,transparent,rgb(139_92_246/0.45))] [animation:meteorite-flicker_1.9s_ease-in-out_infinite_reverse]" />
+            <div className="absolute -left-[28rem] top-1/2 h-[4px] w-[28rem] -translate-y-1/2 rounded-full bg-[linear-gradient(90deg,transparent,rgb(196_181_253/0.7)_70%,rgb(237_233_254/0.98))] [animation:meteorite-flicker_1.5s_ease-in-out_infinite]" />
+
+            {/* embers streaming off the head, back down the tail */}
+            <span className="absolute -left-6 top-[calc(50%-14px)] h-1.5 w-1.5 rotate-45 bg-ember [animation:ember-drift_1.4s_linear_infinite]" />
+            <span className="absolute -left-2 top-[calc(50%+12px)] h-1 w-1 rotate-45 bg-starlight [animation:ember-drift_1.8s_linear_0.5s_infinite]" />
+            <span className="absolute -left-10 top-[calc(50%+4px)] h-1.5 w-1.5 rotate-45 bg-ember/80 [animation:ember-drift_1.1s_linear_0.8s_infinite]" />
+            <span className="absolute -left-4 top-[calc(50%-6px)] h-1 w-1 rotate-45 bg-starlight/90 [animation:ember-drift_2.1s_linear_0.2s_infinite]" />
+
+            {/* the head, out past the right edge */}
+            <div className="absolute -right-16 top-1/2 h-28 w-28 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgb(139_92_246/0.6),rgb(109_40_217/0.25)_55%,transparent_72%)] blur-sm" />
+            <div className="absolute -right-11 top-1/2 h-16 w-16 -translate-y-1/2">
+              <span key={active} className="absolute inset-0 animate-ping rounded-full bg-ember/25" />
+              <span className="absolute inset-3 rounded-full bg-starlight/90 blur-[6px]" />
+              <svg viewBox="0 0 24 24" className="relative h-full w-full">
+                <path
+                  d="M12 0C12.9 6.8 16.2 10.1 24 12C16.2 13.9 12.9 17.2 12 24C11.1 17.2 7.8 13.9 0 12C7.8 10.1 11.1 6.8 12 0Z"
+                  fill="var(--color-starlight)"
+                />
+              </svg>
+            </div>
+            <div
+              ref={sparksRef}
+              className="absolute -right-20 top-1/2 h-32 w-32 -translate-y-1/2 animate-pulse"
+              style={{ opacity: 0 }}
+            >
+              <span className="absolute left-1 top-3 h-2 w-2 rotate-45 bg-ember" />
+              <span className="absolute right-2 top-8 h-2.5 w-2.5 rotate-45 bg-starlight" />
+              <span className="absolute bottom-4 left-7 h-1.5 w-1.5 rotate-45 bg-ember" />
+              <span className="absolute bottom-10 right-1 h-1 w-1 rotate-45 bg-starlight" />
+              <span className="absolute left-10 top-0 h-1 w-1 rotate-45 bg-ember/80" />
+            </div>
+          </div>
         </div>
 
       <ul
