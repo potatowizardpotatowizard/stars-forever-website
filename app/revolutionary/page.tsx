@@ -248,7 +248,7 @@ export default function RevolutionaryPage() {
           <div className="mt-10">
             <Cta href={CONTACT.bookingUrl}>{REVOLUTIONARY.cta.label}</Cta>
           </div>
-          <div className="mt-8 flex flex-col items-center gap-1 md:hidden">
+          <div className="mt-12 flex flex-col items-center gap-1 md:hidden">
             <span className="meta-label text-ember">or fill this out</span>
             <svg
               width="26"
