@@ -124,9 +124,9 @@ export default function PartnerProjectsPage() {
           className="pointer-events-none absolute inset-0 hidden lg:block"
         >
           {[
-            { w: 300, right: 380, top: 80, delay: "0s", op: 0.95, dur: "1.3s" },
-            { w: 300, right: 200, top: 160, delay: "0.45s", op: 1, dur: "1s" },
-            { w: 300, right: 60, top: 380, delay: "0.9s", op: 0.95, dur: "1.3s" },
+            { w: 340, right: 370, top: 110, delay: "0s", op: 0.75, dur: "1.3s" },
+            { w: 340, right: 165, top: 160, delay: "0.45s", op: 0.85, dur: "1s" },
+            { w: 340, right: 70, top: 350, delay: "0.9s", op: 0.75, dur: "1.3s" },
           ].map((m) => (
             <div
               key={m.w}
@@ -154,7 +154,7 @@ export default function PartnerProjectsPage() {
                 <img
                   src="/brand/fx-meteor-purple.webp"
                   alt=""
-                  className="absolute inset-0 w-full opacity-60 blur-md [animation:meteorite-flicker-soft_1.9s_ease-in-out_infinite]"
+                  className="absolute inset-0 w-full opacity-50 blur-md [animation:meteorite-flicker-soft_1.9s_ease-in-out_infinite]"
                   style={{ animationDelay: m.delay }}
                 />
               </div>
