@@ -473,9 +473,9 @@ export default async function MissionPage({
                             href={link.href}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="meta-label rounded-full border border-dust/30 px-4 py-2.5 text-starlight/85 transition-colors hover:border-ember hover:text-ember"
+                            className="meta-label rounded-full border border-ember/50 bg-ember/10 px-4 py-2.5 font-bold text-ember transition-colors hover:bg-ember hover:text-night"
                           >
-                            {link.label} ↗
+                            ▶ {link.label} ↗
                           </a>
                         );
                       })}
