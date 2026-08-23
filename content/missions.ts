@@ -301,6 +301,21 @@ export const MISSIONS: Mission[] = [
         "The weekend ended. The proclaiming did not. Open a name to see cohort creators carrying Jesus to secular audiences right now.",
       creators: [
         {
+          name: "Weston Vansoest",
+          tag: "Millions reached with a treasure hunt",
+          line: "Partnered with us on Real Treasure, a treasure hunt video that carried the gospel from Southern California to Iceland and put Jesus in front of millions.",
+          links: [
+            {
+              label: "Watch Real Treasure on Instagram",
+              href: "https://www.instagram.com/reel/Db9PKZrPr3g/",
+            },
+            {
+              label: "Watch on TikTok",
+              href: "https://www.tiktok.com/t/ZTDmy4fXm/",
+            },
+          ],
+        },
+        {
           name: "Juicy Jacob",
           tag: "Millions reached on stream",
           line: "Sharing Jesus at Streamers University on a bunch of different creators' streams, reaching millions of viewers.",
