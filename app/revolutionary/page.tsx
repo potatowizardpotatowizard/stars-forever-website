@@ -236,9 +236,11 @@ export default function RevolutionaryPage() {
         </Reveal>
       </section>
 
-      {/* How to attend + CTA */}
+      {/* How to attend + CTA: invite only on the left, the waitlist on
+          the right, an arrow bridging the two on desktop */}
       <section className="mx-auto max-w-7xl px-5 pb-32 sm:px-8">
-        <Reveal className="mx-auto max-w-2xl text-center">
+        <Reveal className="mx-auto max-w-2xl text-center md:grid md:max-w-5xl md:grid-cols-2 md:items-center md:gap-16 md:text-left">
+          <div>
           <Kicker>{REVOLUTIONARY.attend.kicker}</Kicker>
           <h2 className="mt-6 font-display text-4xl">
             <GlitchText text={REVOLUTIONARY.attend.heading} />
@@ -249,9 +251,29 @@ export default function RevolutionaryPage() {
           <div className="mt-10">
             <Cta href={CONTACT.bookingUrl}>{REVOLUTIONARY.cta.label}</Cta>
           </div>
-          <div className="mt-14">
+          <div className="mt-8 hidden items-center gap-4 md:flex">
+            <span className="meta-label text-ember">or fill this out</span>
+            <svg
+              width="150"
+              height="24"
+              viewBox="0 0 150 24"
+              aria-hidden="true"
+              className="text-ember"
+            >
+              <path
+                d="M2 18 C 50 4, 95 4, 140 12 M140 12 l-12 -7 M140 12 l-13 5"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+              />
+            </svg>
+          </div>
+          </div>
+          <div className="mt-14 md:mt-0">
             <WaitlistForm />
           </div>
+          <div className="md:col-span-2 md:text-center">
           <Link
             href="/story"
             className="meta-label mt-12 inline-block text-dust transition-colors hover:text-ember"
@@ -259,6 +281,7 @@ export default function RevolutionaryPage() {
             The story behind Stars Forever →
           </Link>
           <ConstellationWhisper className="mt-16" />
+          </div>
         </Reveal>
       </section>
     </article>
