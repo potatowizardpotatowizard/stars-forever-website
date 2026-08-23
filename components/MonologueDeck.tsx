@@ -99,7 +99,7 @@ export default function MonologueDeck({
   return (
     <div ref={deckRef} className="mx-auto max-w-3xl will-change-transform">
       <Kicker>{kicker}</Kicker>
-      <div className="relative mt-10">
+      <div className="relative mt-24 md:mt-10">
         {/* one continuous burning meteorite passing behind the box,
             cut from the brand's Orange 4 art: the starburst head out
             the right, the wispy fire trail out the left, more of it
@@ -110,7 +110,7 @@ export default function MonologueDeck({
         >
           <div
             ref={meteorRef}
-            className="absolute right-0 top-0 h-[17rem] -translate-y-1/2 overflow-hidden [transform-origin:88%_center] md:top-1/2 md:h-[36rem] [mask-image:linear-gradient(90deg,transparent,black_140px)] [-webkit-mask-image:linear-gradient(90deg,transparent,black_140px)]"
+            className="absolute right-0 top-[-3rem] h-[17rem] -translate-y-1/2 overflow-hidden [transform-origin:88%_center] md:top-1/2 md:h-[36rem] [mask-image:linear-gradient(90deg,transparent,black_140px)] [-webkit-mask-image:linear-gradient(90deg,transparent,black_140px)]"
             style={{ width: "1250px", opacity: 0.8 }}
           >
             <div className="absolute inset-0 [animation:meteorite-jiggle_1.15s_ease-in-out_infinite]">
@@ -169,7 +169,7 @@ export default function MonologueDeck({
               <svg
                 viewBox="0 0 24 24"
                 aria-hidden="true"
-                className="h-6 w-6"
+                className="hidden h-6 w-6 md:block"
               >
                 <path
                   d={STAR_PATH}

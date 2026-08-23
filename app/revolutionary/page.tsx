@@ -135,7 +135,7 @@ export default function RevolutionaryPage() {
           href="https://steiger.org"
           target="_blank"
           rel="noopener noreferrer"
-          className="group relative mt-8 flex min-h-[15rem] w-full flex-none flex-col justify-end overflow-hidden rounded-xl border border-dust/20 p-8 transition-all duration-300 hover:border-ember/70 hover:shadow-[0_0_28px_rgb(109_40_217/0.35)] md:mt-0 md:min-h-0 md:w-80"
+          className="group relative mt-8 flex w-full flex-none flex-col justify-end overflow-hidden rounded-xl border border-dust/20 p-6 transition-all duration-300 hover:border-ember/70 hover:shadow-[0_0_28px_rgb(109_40_217/0.35)] md:mt-0 md:w-80 md:p-8"
         >
           <Image
             src="/brand/bg-green.jpg"
@@ -150,13 +150,13 @@ export default function RevolutionaryPage() {
           />
           <div className="relative">
             <p className="meta-label text-starlight/70">In collaboration with</p>
-            <p className="mt-2 font-display text-4xl font-bold transition-colors group-hover:text-ember">
+            <p className="mt-2 font-display text-3xl font-bold transition-colors group-hover:text-ember md:text-4xl">
               Steiger
             </p>
             <p className="mt-3 text-sm leading-relaxed text-starlight/75">
               A global mission reaching the secular youth culture for Jesus.
             </p>
-            <span className="mono-link mt-6 inline-block text-sm font-bold text-ember">
+            <span className="mono-link mt-4 inline-block text-sm font-bold text-ember md:mt-6">
               Check out Steiger ↗
             </span>
           </div>
