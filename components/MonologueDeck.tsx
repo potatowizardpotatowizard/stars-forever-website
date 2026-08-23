@@ -25,6 +25,7 @@ export default function MonologueDeck({
   const deckRef = useRef<HTMLDivElement>(null);
   const meteorRef = useRef<HTMLDivElement>(null);
   const sparksRef = useRef<HTMLDivElement>(null);
+  const glowRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
 
   // the deck swells gently as it rises into view
@@ -73,7 +74,11 @@ export default function MonologueDeck({
       // of the burning trail out the left side
       meteor.style.width = `${Math.round(1250 + 250 * t)}px`;
       meteor.style.opacity = (0.8 + 0.2 * t).toFixed(3);
+      // and the whole thing swells and burns hotter card by card
+      meteor.style.transform = `scale(${(1 + 0.09 * t).toFixed(4)})`;
     }
+    const glow = glowRef.current;
+    if (glow) glow.style.opacity = (0.4 + 0.6 * t).toFixed(3);
     const sparks = sparksRef.current;
     if (sparks) sparks.style.opacity = Math.min(1, Math.max(0, (t - 0.3) * 1.7)).toFixed(3);
   };
@@ -98,7 +103,7 @@ export default function MonologueDeck({
         >
           <div
             ref={meteorRef}
-            className="absolute right-0 top-1/2 h-[36rem] -translate-y-1/2 overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_140px)] [-webkit-mask-image:linear-gradient(90deg,transparent,black_140px)]"
+            className="absolute right-0 top-1/2 h-[36rem] -translate-y-1/2 overflow-hidden [transform-origin:88%_center] [mask-image:linear-gradient(90deg,transparent,black_140px)] [-webkit-mask-image:linear-gradient(90deg,transparent,black_140px)]"
             style={{ width: "1250px", opacity: 0.8 }}
           >
             <div className="absolute inset-0 [animation:meteorite-jiggle_1.15s_ease-in-out_infinite]">
@@ -109,12 +114,14 @@ export default function MonologueDeck({
                 alt=""
                 className="absolute right-0 top-1/2 w-[1500px] max-w-none translate-y-[calc(-50%+20px)]"
               />
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/brand/meteorite-orange.webp"
-                alt=""
-                className="absolute right-0 top-1/2 w-[1500px] max-w-none translate-y-[calc(-50%+20px)] opacity-60 blur-md [animation:meteorite-flicker-soft_1.9s_ease-in-out_infinite]"
-              />
+              <div ref={glowRef} className="absolute inset-0" style={{ opacity: 0.4 }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/brand/meteorite-orange.webp"
+                  alt=""
+                  className="absolute right-0 top-1/2 w-[1500px] max-w-none translate-y-[calc(-50%+20px)] blur-md [animation:meteorite-flicker-soft_1.9s_ease-in-out_infinite]"
+                />
+              </div>
 
               {/* embers shaken loose, drifting back down the trail */}
               <span className="absolute right-64 top-[calc(50%+58px)] h-1.5 w-1.5 rounded-full bg-orange-400 [animation:ember-drift_1.3s_linear_infinite]" />
@@ -122,11 +129,13 @@ export default function MonologueDeck({
               <span className="absolute right-72 top-[calc(50%+44px)] h-1.5 w-1.5 rounded-full bg-orange-500/90 [animation:ember-drift_1.1s_linear_0.8s_infinite]" />
               <span className="absolute right-60 top-[calc(50%+72px)] h-1 w-1 rounded-full bg-amber-300 [animation:ember-drift_2s_linear_0.2s_infinite]" />
 
-              {/* the head answers each swipe */}
-              <span
-                key={active}
-                className="absolute right-[190px] top-[calc(50%+40px)] h-20 w-20 animate-ping rounded-full bg-orange-400/25"
-              />
+              {/* sparks crackling off the burning head */}
+              <span className="absolute right-[180px] top-[calc(50%+40px)] h-1 w-1 bg-yellow-200 [animation:spark-fly-up_1.1s_ease-out_infinite]" />
+              <span className="absolute right-[200px] top-[calc(50%+90px)] h-1 w-1 bg-orange-400 [animation:spark-fly-down_1.4s_ease-out_0.3s_infinite]" />
+              <span className="absolute right-[170px] top-[calc(50%+70px)] h-1 w-1 bg-amber-300 [animation:spark-fly-up_0.9s_ease-out_0.6s_infinite]" />
+              <span className="absolute right-[220px] top-[calc(50%+55px)] h-1 w-1 bg-orange-300 [animation:spark-fly-down_1.7s_ease-out_0.15s_infinite]" />
+              <span className="absolute right-[150px] top-[calc(50%+65px)] h-1.5 w-1.5 bg-yellow-100 [animation:spark-fly-up_1.3s_ease-out_0.45s_infinite]" />
+              <span className="absolute right-[210px] top-[calc(50%+105px)] h-1 w-1 bg-orange-500 [animation:spark-fly-down_1s_ease-out_0.8s_infinite]" />
               <div
                 ref={sparksRef}
                 className="absolute right-[166px] top-[calc(50%+80px)] h-32 w-32 -translate-y-1/2 animate-pulse"
