@@ -3,17 +3,14 @@
 import { useRef, useState } from "react";
 
 export type Stat = {
-  /** big glowing figure; omit for the week visual card */
-  value?: string;
-  /** render the one waking day in seven diamond row instead of a value */
-  week?: boolean;
+  value: string;
   text: string;
   sourceLabel?: string;
   sourceHref?: string;
 };
 
-// A sideways deck of the numbers behind the problem. Swipe or click a
-// diamond to move between statistics; every figure links its source.
+// One big statistic at a time, seven in the deck. Swipe the figure or
+// click a diamond to move through them; every figure links its source.
 export default function StatCarousel({ stats }: { stats: Stat[] }) {
   const listRef = useRef<HTMLUListElement>(null);
   const [active, setActive] = useState(0);
@@ -40,27 +37,11 @@ export default function StatCarousel({ stats }: { stats: Stat[] }) {
       >
         {stats.map((stat) => (
           <li key={stat.text} className="w-full shrink-0 snap-center pr-4">
-            <div className="flex min-h-[13rem] flex-col justify-center">
-              {stat.week ? (
-                <div className="flex items-center gap-3">
-                  {[0, 1, 2, 3, 4, 5, 6].map((d) => (
-                    <span
-                      key={d}
-                      aria-hidden="true"
-                      className={`h-3 w-3 rotate-45 ${
-                        d === 6
-                          ? "bg-ember shadow-[0_0_12px_rgb(109_40_217/0.9)]"
-                          : "border border-dust/40"
-                      }`}
-                    />
-                  ))}
-                </div>
-              ) : (
-                <p className="vhs-glow font-display text-6xl font-bold text-ember">
-                  {stat.value}
-                </p>
-              )}
-              <p className="mt-4 text-sm leading-relaxed text-starlight/80">
+            <div className="flex min-h-[17rem] flex-col justify-center">
+              <p className="vhs-glow font-display text-7xl font-bold text-ember">
+                {stat.value}
+              </p>
+              <p className="mt-5 max-w-sm text-base leading-relaxed text-starlight/85">
                 {stat.text}
               </p>
               {stat.sourceHref ? (
@@ -68,7 +49,7 @@ export default function StatCarousel({ stats }: { stats: Stat[] }) {
                   href={stat.sourceHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="meta-label mt-2 inline-block text-dust transition-colors hover:text-ember"
+                  className="meta-label mt-3 inline-block text-dust transition-colors hover:text-ember"
                 >
                   {stat.sourceLabel} ↗
                 </a>
@@ -78,22 +59,24 @@ export default function StatCarousel({ stats }: { stats: Stat[] }) {
         ))}
       </ul>
 
-      {/* the diamond pager */}
-      <div className="mt-6 flex items-center gap-3">
+      {/* seven diamonds, one per statistic */}
+      <div className="mt-8 flex items-center gap-3">
         {stats.map((stat, i) => (
           <button
             key={stat.text}
             type="button"
             aria-label={`Statistic ${i + 1}`}
             onClick={() => jumpTo(i)}
-            className={`h-2.5 w-2.5 rotate-45 border transition-all duration-300 ${
+            className={`h-3 w-3 rotate-45 border transition-all duration-300 ${
               i === active
                 ? "scale-125 border-ember bg-ember shadow-[0_0_12px_rgb(109_40_217/0.9)]"
                 : "border-dust/50 bg-transparent hover:border-ember"
             }`}
           />
         ))}
-        <span className="meta-label ml-2 text-dust">scroll →</span>
+        <span className="meta-label ml-2 text-dust">
+          {String(active + 1).padStart(2, "0")} / {String(stats.length).padStart(2, "0")}
+        </span>
       </div>
     </div>
   );

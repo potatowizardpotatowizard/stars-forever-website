@@ -83,14 +83,21 @@ export default function VisionPage() {
               stats={[
                 {
                   value: "2h 21m",
-                  text: "on social media every single day, the global average. Kept up for life, that adds up to roughly six years inside the feed.",
+                  text: "on social media every single day, the global average.",
                   sourceLabel: "DataReportal",
                   sourceHref:
                     "https://datareportal.com/reports/digital-2026-global-overview-report",
                 },
                 {
-                  week: true,
-                  text: "18h 36m every week. More than one full waking day out of every seven, spent scrolling.",
+                  value: "18h 36m",
+                  text: "every week. More than one full waking day out of every seven, spent scrolling.",
+                  sourceLabel: "DataReportal",
+                  sourceHref:
+                    "https://datareportal.com/reports/digital-2026-global-overview-report",
+                },
+                {
+                  value: "6 yrs",
+                  text: "of the average life spent inside the feed, if today's pace holds.",
                   sourceLabel: "DataReportal",
                   sourceHref:
                     "https://datareportal.com/reports/digital-2026-global-overview-report",
