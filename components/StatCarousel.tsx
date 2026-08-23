@@ -11,7 +11,13 @@ export type Stat = {
 
 // One big statistic at a time, seven in the deck. Swipe the figure or
 // click a diamond to move through them; every figure links its source.
-export default function StatCarousel({ stats }: { stats: Stat[] }) {
+export default function StatCarousel({
+  stats,
+  bottom,
+}: {
+  stats: Stat[];
+  bottom?: Stat;
+}) {
   const listRef = useRef<HTMLUListElement>(null);
   const [active, setActive] = useState(0);
 
@@ -37,11 +43,11 @@ export default function StatCarousel({ stats }: { stats: Stat[] }) {
       >
         {stats.map((stat) => (
           <li key={stat.text} className="w-full shrink-0 snap-center pr-4">
-            <div className="flex min-h-[17rem] flex-col justify-center">
+            <div className="flex min-h-[20rem] flex-col justify-center">
               <p className="vhs-glow font-display text-7xl font-bold text-ember">
                 {stat.value}
               </p>
-              <p className="mt-5 max-w-sm text-base leading-relaxed text-starlight/85">
+              <p className="mt-4 max-w-sm text-base leading-relaxed text-starlight/85">
                 {stat.text}
               </p>
               {stat.sourceHref ? (
@@ -49,7 +55,7 @@ export default function StatCarousel({ stats }: { stats: Stat[] }) {
                   href={stat.sourceHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="meta-label mt-3 inline-block text-dust transition-colors hover:text-ember"
+                  className="meta-label mt-2 inline-block text-dust transition-colors hover:text-ember"
                 >
                   {stat.sourceLabel} ↗
                 </a>
@@ -60,7 +66,7 @@ export default function StatCarousel({ stats }: { stats: Stat[] }) {
       </ul>
 
       {/* seven diamonds, one per statistic */}
-      <div className="mt-8 flex items-center gap-3">
+      <div className="mt-6 flex items-center gap-3">
         {stats.map((stat, i) => (
           <button
             key={stat.text}
@@ -78,6 +84,28 @@ export default function StatCarousel({ stats }: { stats: Stat[] }) {
           {String(active + 1).padStart(2, "0")} / {String(stats.length).padStart(2, "0")}
         </span>
       </div>
+
+      {/* the steady closing figure, exactly like the old layout */}
+      {bottom ? (
+        <div className="mt-10">
+          <p className="vhs-glow font-display text-6xl font-bold text-ember">
+            {bottom.value}
+          </p>
+          <p className="mt-3 max-w-sm text-sm leading-relaxed text-starlight/80">
+            {bottom.text}
+          </p>
+          {bottom.sourceHref ? (
+            <a
+              href={bottom.sourceHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="meta-label mt-2 inline-block text-dust transition-colors hover:text-ember"
+            >
+              {bottom.sourceLabel} ↗
+            </a>
+          ) : null}
+        </div>
+      ) : null}
     </div>
   );
 }
