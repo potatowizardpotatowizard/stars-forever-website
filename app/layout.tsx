@@ -8,6 +8,7 @@ import ConstellationTrail from "@/components/ConstellationTrail";
 import GoodFriday from "@/components/GoodFriday";
 import LetterFall from "@/components/LetterFall";
 import ShootingStar from "@/components/ShootingStar";
+import SmoothScroll from "@/components/SmoothScroll";
 import StarCursor from "@/components/StarCursor";
 import VerseSummon from "@/components/VerseSummon";
 import WarpScroll from "@/components/WarpScroll";
@@ -68,6 +69,7 @@ export default function RootLayout({
       className={`${archivo.variable} ${figtree.variable} ${fragmentMono.variable}`}
     >
       <body>
+        <SmoothScroll />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(ORG_JSON_LD) }}
