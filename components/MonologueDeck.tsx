@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Kicker from "@/components/Kicker";
 
 export type MonologueCard = {
@@ -22,7 +22,39 @@ export default function MonologueDeck({
   cards: MonologueCard[];
 }) {
   const listRef = useRef<HTMLUListElement>(null);
+  const deckRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
+
+  // the deck swells gently as it rises into view
+  useEffect(() => {
+    let raf = 0;
+    const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
+    const smooth = (t: number) => t * t * (3 - 2 * t);
+    const tick = () => {
+      raf = 0;
+      const el = deckRef.current;
+      if (!el) return;
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        el.style.transform = "none";
+        return;
+      }
+      const rect = el.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const p = smooth(clamp01((vh * 0.92 - rect.top) / (vh * 0.6)));
+      el.style.transform = `scale(${(0.93 + 0.07 * p).toFixed(4)})`;
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(tick);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    tick();
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
 
   const onScroll = () => {
     const el = listRef.current;
@@ -38,7 +70,7 @@ export default function MonologueDeck({
   };
 
   return (
-    <div className="mx-auto max-w-3xl">
+    <div ref={deckRef} className="mx-auto max-w-3xl will-change-transform">
       <Kicker>{kicker}</Kicker>
       <ul
         ref={listRef}
@@ -110,7 +142,14 @@ export default function MonologueDeck({
         ))}
         <span className="meta-label ml-2 text-dust">
           {String(active + 1).padStart(2, "0")} /{" "}
-          {String(cards.length).padStart(2, "0")} · swipe →
+          {String(cards.length).padStart(2, "0")}
+        </span>
+        <span
+          className={`meta-label text-ember transition-opacity duration-700 ${
+            active === 0 ? "animate-pulse opacity-90" : "opacity-0"
+          }`}
+        >
+          swipe through the story →
         </span>
       </div>
     </div>
