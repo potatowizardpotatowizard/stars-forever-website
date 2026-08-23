@@ -262,7 +262,7 @@ export default function VisionPage() {
               className="vhs-glow mx-auto"
             />
             <p className="meta-label mt-8 text-ember">{VISION.closing.kicker}</p>
-            <h2 className="mx-auto mt-6 max-w-2xl font-display text-4xl font-bold sm:text-5xl">
+            <h2 className="mx-auto mt-6 max-w-2xl font-display text-4xl font-bold sm:text-5xl md:max-w-none md:whitespace-nowrap">
               {VISION.closing.heading}
             </h2>
             <div className="mt-10 flex flex-wrap justify-center gap-4">
