@@ -34,6 +34,41 @@ export const REVOLUTIONARY = {
       "What if you could create with the passions God gave you to intentionally reach a secular audience for Jesus?",
       "Revolutionary is that: the introduction of a missionary lifestyle for creators.",
     ],
+    cards: [
+      {
+        lines: [
+          "You love Jesus. You go to church. You create content. But…",
+        ],
+      },
+      {
+        lines: ["You probably fall into one of two categories:"],
+        list: [
+          "Your Faith Lives Primarily Offline",
+          "You Make Mostly Christian Content",
+        ],
+      },
+      {
+        lines: [
+          "Either way, the secular audience that needs Jesus is seeing no eternity changing art right now.",
+        ],
+      },
+      {
+        lines: [
+          "Not because you do not care, but because you don\u2019t know the path.",
+        ],
+      },
+      {
+        lines: [
+          "What if you could create with the passions God gave you to intentionally reach a secular audience for Jesus?",
+        ],
+      },
+      {
+        lines: [
+          "Revolutionary is that: the introduction of a missionary lifestyle for creators.",
+        ],
+        ember: true,
+      },
+    ],
   },
   featured: {
     kicker: "The Most Recent Cohort",

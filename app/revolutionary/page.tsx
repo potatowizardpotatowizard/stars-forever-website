@@ -6,7 +6,7 @@ import Link from "next/link";
 import Cta from "@/components/Cta";
 import GlitchText from "@/components/GlitchText";
 import Grain from "@/components/Grain";
-import FocusMonologue from "@/components/FocusMonologue";
+import MonologueDeck from "@/components/MonologueDeck";
 import GrowVideo from "@/components/GrowVideo";
 import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
@@ -172,10 +172,9 @@ export default function RevolutionaryPage() {
       {/* The monologue: narrative spine of the page */}
       <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
         <div className="hidden md:block">
-          <FocusMonologue
+          <MonologueDeck
             kicker={REVOLUTIONARY.monologue.kicker}
-            lines={REVOLUTIONARY.monologue.linesShort}
-            emberCount={1}
+            cards={REVOLUTIONARY.monologue.cards}
           />
         </div>
         <Reveal className="mx-auto max-w-2xl md:hidden">
