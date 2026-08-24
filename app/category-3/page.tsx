@@ -104,7 +104,7 @@ export default function Category3Page() {
                   >
                     {cat.number}
                   </p>
-                  <h2 className="mt-4 whitespace-nowrap font-display text-[4.7vw] sm:whitespace-normal sm:text-2xl">{cat.name}</h2>
+                  <h2 className="mt-4 font-display text-2xl">{cat.name}</h2>
                   <p className="mt-4 flex-1 text-sm leading-relaxed text-starlight/70">
                     {cat.body}
                   </p>
