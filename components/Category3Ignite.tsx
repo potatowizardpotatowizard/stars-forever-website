@@ -69,7 +69,10 @@ export default function Category3Ignite({
       const r = wrap.getBoundingClientRect();
       const vh = window.innerHeight;
       const center = r.top + r.height / 2;
-      const p = clamp01(1 - Math.abs(center - vh * 0.52) / (vh * 0.6));
+      // once the card has passed the focus line it stays lit; the
+      // charge only reverses when scrolling back up above it
+      const d = center - vh * 0.52;
+      const p = d <= 0 ? 1 : clamp01(1 - d / (vh * 0.6));
       const s = smooth(p);
 
       // the charge: fiery bloom around the box, purple glow on the line
