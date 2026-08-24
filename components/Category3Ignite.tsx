@@ -35,9 +35,13 @@ export default function Category3Ignite({
       const active =
         window.matchMedia("(max-width: 767px)").matches &&
         !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const card = wrap.querySelector<HTMLElement>(
+        ':scope > div:not([aria-hidden="true"])',
+      );
       if (!active) {
         wrap.style.transform = "none";
         glow.style.opacity = "0";
+        if (card) card.style.boxShadow = "";
         for (const sib of siblings()) {
           sib.style.opacity = "";
           sib.style.filter = "";
@@ -45,6 +49,10 @@ export default function Category3Ignite({
         if (title) {
           title.style.color = "";
           title.style.backgroundImage = "";
+          title.style.backgroundSize = "";
+          title.style.animation = "";
+          title.style.filter = "";
+          delete title.dataset.burn;
         }
         return;
       }
@@ -54,9 +62,12 @@ export default function Category3Ignite({
       const p = clamp01(1 - Math.abs(center - vh * 0.52) / (vh * 0.6));
       const s = smooth(p);
 
-      // the charge
+      // the charge: fiery bloom around the box, purple glow on the line
       wrap.style.transform = `scale(${(1 + 0.04 * s).toFixed(4)})`;
       glow.style.opacity = s.toFixed(3);
+      if (card) {
+        card.style.boxShadow = `0 0 ${Math.round(14 * s)}px rgb(109 40 217 / ${(0.75 * s).toFixed(3)}), inset 0 0 ${Math.round(10 * s)}px rgb(109 40 217 / ${(0.3 * s).toFixed(3)})`;
+      }
 
       // the spotlight steal
       for (const sib of siblings()) {
@@ -64,13 +75,21 @@ export default function Category3Ignite({
         sib.style.filter = `saturate(${(1 - 0.5 * s).toFixed(3)})`;
       }
 
-      // the title writes itself in ember
+      // the title writes itself in burning, shimmering orange
       if (title) {
         const f = (clamp01(p * 1.15) * 100).toFixed(1);
+        const dim =
+          "color-mix(in srgb, var(--color-starlight) 30%, var(--color-soot))";
         title.style.color = "transparent";
         title.style.webkitBackgroundClip = "text";
         title.style.backgroundClip = "text";
-        title.style.backgroundImage = `linear-gradient(90deg, var(--color-ember) ${f}%, color-mix(in srgb, var(--color-starlight) 35%, transparent) ${f}%)`;
+        title.style.backgroundImage = `linear-gradient(90deg, transparent ${f}%, ${dim} ${f}%), linear-gradient(100deg, #ffb25e, #ffe8bc, #ff8a3c, #ffd089, #ff9b4a)`;
+        title.style.filter = `drop-shadow(0 0 ${(5 + 5 * s).toFixed(1)}px rgb(255 140 60 / 0.8)) drop-shadow(0 0 ${(14 * s).toFixed(1)}px rgb(255 120 40 / 0.45))`;
+        if (!title.dataset.burn) {
+          title.dataset.burn = "1";
+          title.style.backgroundSize = "100% 100%, 220% 100%";
+          title.style.animation = "cat3-burn 2.4s linear infinite";
+        }
       }
 
       // the label re-locks with a flicker at full charge
@@ -108,7 +127,7 @@ export default function Category3Ignite({
         style={{
           opacity: 0,
           boxShadow:
-            "0 0 42px rgb(109 40 217 / 0.5), 0 0 14px rgb(109 40 217 / 0.65)",
+            "0 0 46px rgb(255 140 60 / 0.45), 0 0 16px rgb(255 160 80 / 0.55)",
         }}
       />
       {children}
