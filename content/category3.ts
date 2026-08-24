@@ -21,15 +21,15 @@ export const CATEGORY3 = {
   categories: [
     {
       number: "Category 1",
-      name: "Church Focused Creators",
-      body: "Christians making content for the Church. Valuable inside Christian spaces, but rarely reaches a secular audience.",
+      name: "Faith Focused Creators",
+      body: "Christians making content for other Christians. Valuable for the body of Christ, but rarely reaches a secular audience.",
       example: "Girls Gone Bible",
       exampleHref: "https://www.youtube.com/@girlsgonebible",
     },
     {
       number: "Category 2",
-      name: "Secular Facing Creators",
-      body: "Christians making mainstream content that reaches a secular audience but rarely engages their faith.",
+      name: "Mainstream Focused Creators",
+      body: "Christians making content for a specific secular audience. Reaches mainstream people but rarely shares their faith with them.",
       example: "Ryan Trahan",
       exampleHref: "https://www.youtube.com/@ryan",
     },
