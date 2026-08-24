@@ -336,11 +336,14 @@ h4 {
 }
 .meteor-cta::before {
   content: "";
-  height: 30px;
-  width: 92px;
+  height: 22px;
+  width: 96px;
   flex: none;
-  background: url("/brand/fx-cta-meteor.webp") right center / auto 100% no-repeat;
-  filter: drop-shadow(0 0 10px rgb(255 165 80 / 0.55));
+  background:
+    url("/brand/fx-cta-meteor.webp") right center / auto 100% no-repeat,
+    linear-gradient(90deg, transparent, rgb(167 139 250 / 0.85)) left center /
+      calc(100% - 42px) 2px no-repeat;
+  filter: drop-shadow(0 0 9px rgb(213 152 132 / 0.6));
   transform-origin: right center;
   transition:
     transform 0.35s ease,
