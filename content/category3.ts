@@ -35,8 +35,8 @@ export const CATEGORY3 = {
     },
     {
       number: "Category 3",
-      name: "Culture Shaping Creators",
-      body: "Christians whose work clearly connects with a secular audience while intentionally weaving in the story of Jesus.",
+      name: "Eternity Shifting Creators",
+      body: "Christians whose content clearly connects with a specific secular audience while intentionally sharing Jesus with them.",
       example: "George Janko",
       exampleHref: "https://www.youtube.com/@GeorgeJanko",
     },
