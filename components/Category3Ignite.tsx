@@ -2,11 +2,10 @@
 
 import { useEffect, useRef } from "react";
 
-// As the Category 3 card scrolls toward center screen it
-// charges, swelling slightly and blooming a purple glow while its
-// title fills in ember from left to right like it is being written,
-// and the spotlight shifts: Categories 1 and 2 dim and desaturate as
-// Category 3 takes the light. Scrubbing back reverses everything.
+// As the Category 3 card scrolls toward center screen it charges:
+// swelling slightly, its border and bloom burning white, while the
+// spotlight shifts: Categories 1 and 2 dim and desaturate as
+// Category 3 takes the light. The charge stays once passed.
 export default function Category3Ignite({
   children,
 }: {
@@ -30,7 +29,6 @@ export default function Category3Ignite({
       const wrap = wrapRef.current;
       const glow = glowRef.current;
       if (!wrap || !glow) return;
-      const title = wrap.querySelector<HTMLElement>("h2");
       const active = !window.matchMedia("(prefers-reduced-motion: reduce)")
         .matches;
       const card = wrap.querySelector<HTMLElement>(
@@ -56,14 +54,6 @@ export default function Category3Ignite({
           const example = wrap.querySelector<HTMLElement>("a");
           if (example) example.style.color = "";
         }
-        if (title) {
-          title.style.color = "";
-          title.style.backgroundImage = "";
-          title.style.backgroundSize = "";
-          title.style.animation = "";
-          title.style.filter = "";
-          delete title.dataset.burn;
-        }
         return;
       }
       const r = wrap.getBoundingClientRect();
@@ -87,22 +77,6 @@ export default function Category3Ignite({
       for (const sib of siblings()) {
         sib.style.opacity = (1 - 0.45 * s).toFixed(3);
         sib.style.filter = `saturate(${(1 - 0.5 * s).toFixed(3)})`;
-      }
-
-      // the title starts white, then writes itself in burning,
-      // shimmering white fire
-      if (title) {
-        const f = (clamp01(p * 1.15) * 100).toFixed(1);
-        title.style.color = "transparent";
-        title.style.webkitBackgroundClip = "text";
-        title.style.backgroundClip = "text";
-        title.style.backgroundImage = `linear-gradient(90deg, transparent ${f}%, color-mix(in srgb, var(--color-starlight) 30%, var(--color-soot)) ${f}%), linear-gradient(100deg, #f3f0ff, #ffffff, #d9d4f2, #fffdf4, #efeaff)`;
-        title.style.filter = `drop-shadow(0 0 ${(5 + 5 * s).toFixed(1)}px rgb(255 255 255 / 0.85)) drop-shadow(0 0 ${(14 * s).toFixed(1)}px rgb(235 230 255 / 0.5))`;
-        if (!title.dataset.burn) {
-          title.dataset.burn = "1";
-          title.style.backgroundSize = "100% 100%, 220% 100%";
-          title.style.animation = "cat3-burn 2.4s linear infinite";
-        }
       }
 
       // CATEGORY 3 and the example link keep their purple
