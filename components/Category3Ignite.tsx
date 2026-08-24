@@ -80,8 +80,8 @@ export default function Category3Ignite({
       wrap.style.transform = `scale(${(1 + 0.04 * s).toFixed(4)})`;
       glow.style.opacity = s.toFixed(3);
       if (card) {
-        card.style.boxShadow = `0 0 ${Math.round(14 * s)}px rgb(255 145 55 / ${(0.85 * s).toFixed(3)}), inset 0 0 ${Math.round(10 * s)}px rgb(255 145 55 / ${(0.35 * s).toFixed(3)})`;
-        card.style.borderColor = `color-mix(in srgb, rgb(255 165 70) ${Math.round(80 * s)}%, rgb(255 140 60 / 0.65))`;
+        card.style.boxShadow = `0 0 ${Math.round(14 * s)}px rgb(255 255 255 / ${(0.7 * s).toFixed(3)}), inset 0 0 ${Math.round(10 * s)}px rgb(255 255 255 / ${(0.3 * s).toFixed(3)})`;
+        card.style.borderColor = `color-mix(in srgb, rgb(255 255 255) ${Math.round(80 * s)}%, rgb(240 238 250 / 0.6))`;
       }
 
       // the spotlight steal
@@ -91,14 +91,14 @@ export default function Category3Ignite({
       }
 
       // the title starts white, then writes itself in burning,
-      // shimmering orange fire
+      // shimmering white fire
       if (title) {
         const f = (clamp01(p * 1.15) * 100).toFixed(1);
         title.style.color = "transparent";
         title.style.webkitBackgroundClip = "text";
         title.style.backgroundClip = "text";
-        title.style.backgroundImage = `linear-gradient(90deg, transparent ${f}%, var(--color-starlight) ${f}%), linear-gradient(100deg, #ffb25e, #ffe8bc, #ff8a3c, #ffd089, #ff9b4a)`;
-        title.style.filter = `drop-shadow(0 0 ${(5 + 5 * s).toFixed(1)}px rgb(255 140 60 / 0.8)) drop-shadow(0 0 ${(14 * s).toFixed(1)}px rgb(255 120 40 / 0.45))`;
+        title.style.backgroundImage = `linear-gradient(90deg, transparent ${f}%, color-mix(in srgb, var(--color-starlight) 30%, var(--color-soot)) ${f}%), linear-gradient(100deg, #f3f0ff, #ffffff, #d9d4f2, #fffdf4, #efeaff)`;
+        title.style.filter = `drop-shadow(0 0 ${(5 + 5 * s).toFixed(1)}px rgb(255 255 255 / 0.85)) drop-shadow(0 0 ${(14 * s).toFixed(1)}px rgb(235 230 255 / 0.5))`;
         if (!title.dataset.burn) {
           title.dataset.burn = "1";
           title.style.backgroundSize = "100% 100%, 220% 100%";
@@ -106,15 +106,13 @@ export default function Category3Ignite({
         }
       }
 
-      // the example link wears orange the whole time on mobile
+      // CATEGORY 3 and the example link keep their purple
       const example = wrap.querySelector<HTMLElement>("a");
-      if (example) example.style.color = "rgb(255 160 75)";
-
-      // the label glows orange with the charge, steady, no blinking
+      if (example) example.style.color = "";
       const label = wrap.querySelector<HTMLElement>(".meta-label");
       if (label) {
-        label.style.color = `color-mix(in srgb, rgb(255 175 90) ${Math.round(90 * s)}%, rgb(255 140 60))`;
-        label.style.textShadow = `0 0 ${(10 * s).toFixed(1)}px rgb(255 140 50 / 0.85)`;
+        label.style.color = "";
+        label.style.textShadow = "";
       }
     };
     const onScroll = () => {
@@ -139,7 +137,7 @@ export default function Category3Ignite({
         style={{
           opacity: 0,
           boxShadow:
-            "0 0 46px rgb(255 140 60 / 0.45), 0 0 16px rgb(255 160 80 / 0.55)",
+            "0 0 46px rgb(255 255 255 / 0.4), 0 0 16px rgb(245 242 255 / 0.5)",
         }}
       />
       {children}
