@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import Category3Ignite from "@/components/Category3Ignite";
 import Cta from "@/components/Cta";
 import GlitchText from "@/components/GlitchText";
 import Grain from "@/components/Grain";
@@ -89,8 +90,7 @@ export default function Category3Page() {
         <ol className="mt-10 grid gap-6 md:grid-cols-3">
           {CATEGORY3.categories.map((cat, i) => {
             const isThree = i === 2;
-            return (
-              <Reveal as="li" key={cat.number}>
+            const card = (
                 <div
                   className={`flex h-full flex-col border p-8 ${
                     isThree
@@ -120,6 +120,10 @@ export default function Category3Page() {
                     </a>
                   </p>
                 </div>
+            );
+            return (
+              <Reveal as="li" key={cat.number}>
+                {isThree ? <Category3Ignite>{card}</Category3Ignite> : card}
               </Reveal>
             );
           })}
