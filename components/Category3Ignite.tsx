@@ -113,7 +113,7 @@ export default function Category3Ignite({
       // the label glows orange with the charge, steady, no blinking
       const label = wrap.querySelector<HTMLElement>(".meta-label");
       if (label) {
-        label.style.color = `color-mix(in srgb, rgb(255 160 70) ${Math.round(90 * s)}%, var(--color-ember))`;
+        label.style.color = `color-mix(in srgb, rgb(255 175 90) ${Math.round(90 * s)}%, rgb(255 140 60))`;
         label.style.textShadow = `0 0 ${(10 * s).toFixed(1)}px rgb(255 140 50 / 0.85)`;
       }
     };
