@@ -48,7 +48,7 @@ export default function RevolutionaryPage() {
         </p>
         {/* Attribution, near the top as required. Steiger is the link
             itself. */}
-        <p className="mt-8 max-w-2xl text-sm leading-relaxed text-dust">
+        <p className="mt-8 hidden max-w-2xl text-sm leading-relaxed text-dust md:block">
           {(() => {
             const name = "Steiger";
             const body = REVOLUTIONARY.attribution.body;
@@ -128,26 +128,19 @@ export default function RevolutionaryPage() {
               {REVOLUTIONARY.benPierce.body}
             </p>
             <p className="mt-4 leading-relaxed text-starlight/75 md:hidden">
-              {(() => {
-                const marker = "Steiger Ministries";
-                const body = REVOLUTIONARY.benPierce.body;
-                const idx = body.indexOf(marker);
-                if (idx === -1) return body;
-                return (
-                  <>
-                    {body.slice(0, idx)}
-                    <a
-                      href="https://steiger.org"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-ember transition-colors hover:text-starlight"
-                    >
-                      Steiger
-                    </a>
-                    {body.slice(idx + marker.length)}
-                  </>
-                );
-              })()}
+              Revolutionary is a mission led by Ben Pierce of{" "}
+              <a
+                href="https://steiger.org"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-ember transition-colors hover:text-starlight"
+              >
+                Steiger
+              </a>
+              , a global mission devoted to reaching the secular youth culture
+              for Jesus, in collaboration with Stars Forever. He brings the
+              Revolutionary teaching principles to every cohort and carries
+              decades of experience calling artists into bold, public faith.
             </p>
           </div>
         </Reveal>
