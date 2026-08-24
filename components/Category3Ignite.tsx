@@ -2,20 +2,17 @@
 
 import { useEffect, useRef } from "react";
 
-// Mobile only: as the Category 3 card scrolls toward center screen, a
-// bright star travels its border drawing an ember outline, while the
-// card charges: swelling slightly, blooming a purple glow, and
-// re-flickering its CATEGORY 3 label as it locks in. Scrubbing back
-// reverses the whole thing.
+// Mobile only: as the Category 3 card scrolls toward center screen it
+// charges, swelling slightly and blooming a purple glow while its
+// title fills in ember from left to right like it is being written,
+// and the spotlight shifts: Categories 1 and 2 dim and desaturate as
+// Category 3 takes the light. Scrubbing back reverses everything.
 export default function Category3Ignite({
   children,
 }: {
   children: React.ReactNode;
 }) {
   const wrapRef = useRef<HTMLDivElement>(null);
-  const svgRef = useRef<SVGSVGElement>(null);
-  const pathRef = useRef<SVGPathElement>(null);
-  const starRef = useRef<HTMLDivElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
   const lockedRef = useRef(false);
 
@@ -23,22 +20,32 @@ export default function Category3Ignite({
     let raf = 0;
     const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
     const smooth = (t: number) => t * t * (3 - 2 * t);
+    const siblings = () => {
+      const li = wrapRef.current?.closest("li");
+      const ol = li?.parentElement;
+      if (!li || !ol) return [] as HTMLElement[];
+      return [...ol.children].filter((c) => c !== li) as HTMLElement[];
+    };
     const tick = () => {
       raf = 0;
       const wrap = wrapRef.current;
-      const svg = svgRef.current;
-      const path = pathRef.current;
-      const star = starRef.current;
       const glow = glowRef.current;
-      if (!wrap || !svg || !path || !star || !glow) return;
+      if (!wrap || !glow) return;
+      const title = wrap.querySelector<HTMLElement>("h2");
       const active =
         window.matchMedia("(max-width: 767px)").matches &&
         !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       if (!active) {
         wrap.style.transform = "none";
-        svg.style.opacity = "0";
-        star.style.opacity = "0";
         glow.style.opacity = "0";
+        for (const sib of siblings()) {
+          sib.style.opacity = "";
+          sib.style.filter = "";
+        }
+        if (title) {
+          title.style.color = "";
+          title.style.backgroundImage = "";
+        }
         return;
       }
       const r = wrap.getBoundingClientRect();
@@ -47,26 +54,24 @@ export default function Category3Ignite({
       const p = clamp01(1 - Math.abs(center - vh * 0.52) / (vh * 0.6));
       const s = smooth(p);
 
-      // draw on the card's layout box (transform does not affect it)
-      const W = wrap.offsetWidth;
-      const H = wrap.offsetHeight;
-      const vb = `0 0 ${W} ${H}`;
-      if (svg.getAttribute("viewBox") !== vb) {
-        svg.setAttribute("viewBox", vb);
-        path.setAttribute("d", `M1 1 H ${W - 1} V ${H - 1} H 1 Z`);
-      }
-      const L = path.getTotalLength();
-      path.style.strokeDasharray = `${L}`;
-      path.style.strokeDashoffset = `${L * (1 - s)}`;
-      svg.style.opacity = (0.3 + 0.7 * s).toFixed(3);
-
-      const pt = path.getPointAtLength(Math.min(L * s, L - 0.01));
-      star.style.left = `${((pt.x / W) * 100).toFixed(2)}%`;
-      star.style.top = `${((pt.y / H) * 100).toFixed(2)}%`;
-      star.style.opacity = p > 0.02 && s < 0.985 ? "1" : "0";
-
+      // the charge
       wrap.style.transform = `scale(${(1 + 0.04 * s).toFixed(4)})`;
       glow.style.opacity = s.toFixed(3);
+
+      // the spotlight steal
+      for (const sib of siblings()) {
+        sib.style.opacity = (1 - 0.45 * s).toFixed(3);
+        sib.style.filter = `saturate(${(1 - 0.5 * s).toFixed(3)})`;
+      }
+
+      // the title writes itself in ember
+      if (title) {
+        const f = (clamp01(p * 1.15) * 100).toFixed(1);
+        title.style.color = "transparent";
+        title.style.webkitBackgroundClip = "text";
+        title.style.backgroundClip = "text";
+        title.style.backgroundImage = `linear-gradient(90deg, var(--color-ember) ${f}%, color-mix(in srgb, var(--color-starlight) 35%, transparent) ${f}%)`;
+      }
 
       // the label re-locks with a flicker at full charge
       const label = wrap.querySelector<HTMLElement>(".meta-label");
@@ -107,24 +112,6 @@ export default function Category3Ignite({
         }}
       />
       {children}
-      <svg
-        ref={svgRef}
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 h-full w-full"
-        style={{ opacity: 0 }}
-      >
-        <path ref={pathRef} fill="none" stroke="var(--color-ember)" strokeWidth="2" />
-      </svg>
-      <div
-        ref={starRef}
-        aria-hidden="true"
-        className="pointer-events-none absolute h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white"
-        style={{
-          opacity: 0,
-          boxShadow:
-            "0 0 10px 3px rgb(167 139 250 / 0.95), 0 0 24px 9px rgb(109 40 217 / 0.6)",
-        }}
-      />
     </div>
   );
 }
