@@ -41,10 +41,20 @@ export default function Category3Ignite({
       if (!active) {
         wrap.style.transform = "none";
         glow.style.opacity = "0";
-        if (card) card.style.boxShadow = "";
+        if (card) {
+          card.style.boxShadow = "";
+          card.style.borderColor = "";
+        }
         for (const sib of siblings()) {
           sib.style.opacity = "";
           sib.style.filter = "";
+        }
+        {
+          const label = wrap.querySelector<HTMLElement>(".meta-label");
+          if (label) {
+            label.style.color = "";
+            label.style.textShadow = "";
+          }
         }
         if (title) {
           title.style.color = "";
@@ -66,7 +76,8 @@ export default function Category3Ignite({
       wrap.style.transform = `scale(${(1 + 0.04 * s).toFixed(4)})`;
       glow.style.opacity = s.toFixed(3);
       if (card) {
-        card.style.boxShadow = `0 0 ${Math.round(14 * s)}px rgb(109 40 217 / ${(0.75 * s).toFixed(3)}), inset 0 0 ${Math.round(10 * s)}px rgb(109 40 217 / ${(0.3 * s).toFixed(3)})`;
+        card.style.boxShadow = `0 0 ${Math.round(14 * s)}px rgb(255 145 55 / ${(0.85 * s).toFixed(3)}), inset 0 0 ${Math.round(10 * s)}px rgb(255 145 55 / ${(0.35 * s).toFixed(3)})`;
+        card.style.borderColor = `color-mix(in srgb, rgb(255 155 60) ${Math.round(80 * s)}%, rgb(109 40 217 / 0.6))`;
       }
 
       // the spotlight steal
@@ -92,9 +103,12 @@ export default function Category3Ignite({
         }
       }
 
-      // the label re-locks with a flicker at full charge
+      // the label re-locks with a flicker at full charge, burning
+      // bright orange
       const label = wrap.querySelector<HTMLElement>(".meta-label");
       if (label) {
+        label.style.color = `color-mix(in srgb, rgb(255 160 70) ${Math.round(90 * s)}%, var(--color-ember))`;
+        label.style.textShadow = `0 0 ${(10 * s).toFixed(1)}px rgb(255 140 50 / 0.85)`;
         if (s > 0.95 && !lockedRef.current) {
           lockedRef.current = true;
           label.style.animation = "none";
