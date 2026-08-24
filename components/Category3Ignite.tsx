@@ -54,6 +54,15 @@ export default function Category3Ignite({
           const example = wrap.querySelector<HTMLElement>("a");
           if (example) example.style.color = "";
         }
+        const title = wrap.querySelector<HTMLElement>("h2");
+        if (title) {
+          title.style.color = "";
+          title.style.backgroundImage = "";
+          title.style.backgroundSize = "";
+          title.style.animation = "";
+          title.style.filter = "";
+          delete title.dataset.burn;
+        }
         return;
       }
       const r = wrap.getBoundingClientRect();
@@ -77,6 +86,23 @@ export default function Category3Ignite({
       for (const sib of siblings()) {
         sib.style.opacity = (1 - 0.45 * s).toFixed(3);
         sib.style.filter = `saturate(${(1 - 0.5 * s).toFixed(3)})`;
+      }
+
+      // the whole title fades into its glowing fiery look as the
+      // card charges: a plain starlight veil thins out over the fire
+      const title = wrap.querySelector<HTMLElement>("h2");
+      if (title) {
+        const veil = (1 - s).toFixed(3);
+        title.style.color = "transparent";
+        title.style.webkitBackgroundClip = "text";
+        title.style.backgroundClip = "text";
+        title.style.backgroundImage = `linear-gradient(0deg, rgb(239 236 247 / ${veil}), rgb(239 236 247 / ${veil})), linear-gradient(100deg, #f3f0ff, #ffffff, #d9d4f2, #fffdf4, #efeaff)`;
+        title.style.filter = `drop-shadow(0 0 ${(10 * s).toFixed(1)}px rgb(255 255 255 / ${(0.85 * s).toFixed(3)})) drop-shadow(0 0 ${(14 * s).toFixed(1)}px rgb(235 230 255 / ${(0.5 * s).toFixed(3)}))`;
+        if (!title.dataset.burn) {
+          title.dataset.burn = "1";
+          title.style.backgroundSize = "100% 100%, 220% 100%";
+          title.style.animation = "cat3-burn 2.4s linear infinite";
+        }
       }
 
       // CATEGORY 3 and the example link keep their purple
