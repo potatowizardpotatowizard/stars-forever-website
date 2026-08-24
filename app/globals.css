@@ -336,17 +336,14 @@ h4 {
 }
 .meteor-cta::before {
   content: "";
-  height: 12px;
-  width: 84px;
+  height: 30px;
+  width: 92px;
   flex: none;
-  background:
-    radial-gradient(circle, #ffffff 0%, rgb(167 139 250 / 0.95) 45%, transparent 70%)
-      right center / 12px 12px no-repeat,
-    linear-gradient(90deg, transparent, rgb(167 139 250 / 0.9)) left center /
-      calc(100% - 7px) 2px no-repeat;
-  filter: drop-shadow(0 0 8px rgb(167 139 250 / 0.8));
+  background: url("/brand/fx-cta-meteor.webp") right center / auto 100% no-repeat;
+  filter: drop-shadow(0 0 10px rgb(255 165 80 / 0.55));
+  transform-origin: right center;
   transition:
-    width 0.35s ease,
+    transform 0.35s ease,
     filter 0.35s ease;
 }
 .meteor-cta:hover {
@@ -354,8 +351,8 @@ h4 {
   text-shadow: 0 0 14px rgb(167 139 250 / 0.9);
 }
 .meteor-cta:hover::before {
-  width: 132px;
-  filter: drop-shadow(0 0 14px rgb(167 139 250 / 1)) brightness(1.25);
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 16px rgb(255 175 90 / 0.85)) brightness(1.2);
 }
 @media (prefers-reduced-motion: no-preference) {
   .meteor-cta {
