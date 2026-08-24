@@ -11,6 +11,7 @@ import GrowVideo from "@/components/GrowVideo";
 import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
 import Reveal from "@/components/Reveal";
+import ScrollSwell from "@/components/ScrollSwell";
 import VideoBlock from "@/components/VideoBlock";
 import WaitlistForm from "@/components/WaitlistForm";
 import { REVOLUTIONARY } from "@/content/revolutionary";
@@ -195,12 +196,14 @@ export default function RevolutionaryPage() {
           <div className="mt-12 grid gap-x-14 gap-y-10 md:grid-cols-2">
             {REVOLUTIONARY.expect.items.map((item) => (
               <Reveal key={item.title}>
-                <div className="border-t border-dust/20 pt-6">
-                  <h2 className="font-display text-xl">{item.title}</h2>
-                  <p className="mt-3 text-sm leading-relaxed text-starlight/70">
-                    {linkCategory3(item.body)}
-                  </p>
-                </div>
+                <ScrollSwell>
+                  <div className="border-t border-dust/20 pt-6">
+                    <h2 className="font-display text-xl">{item.title}</h2>
+                    <p className="mt-3 text-sm leading-relaxed text-starlight/70">
+                      {linkCategory3(item.body)}
+                    </p>
+                  </div>
+                </ScrollSwell>
               </Reveal>
             ))}
           </div>
