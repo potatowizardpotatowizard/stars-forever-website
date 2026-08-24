@@ -82,7 +82,7 @@ export default function Category3Page() {
         />
         <div className="relative mx-auto max-w-7xl px-5 py-12 sm:px-8">
         <Reveal>
-          <h2 className="font-display text-4xl font-bold sm:text-5xl">
+          <h2 className="whitespace-nowrap font-display text-[7.2vw] font-bold sm:whitespace-normal sm:text-5xl">
             <GlitchText text="Which Creator Are You?" />
           </h2>
         </Reveal>
