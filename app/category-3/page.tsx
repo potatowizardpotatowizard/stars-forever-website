@@ -81,7 +81,12 @@ export default function Category3Page() {
           className="absolute inset-x-0 top-0 h-[40vh] bg-[linear-gradient(to_bottom,rgb(239_236_247/0.07),rgb(239_236_247/0.02)_45%,transparent)]"
         />
         <div className="relative mx-auto max-w-7xl px-5 py-12 sm:px-8">
-        <ol className="grid gap-6 md:grid-cols-3">
+        <Reveal>
+          <h2 className="font-display text-4xl font-bold sm:text-5xl">
+            <GlitchText text="Which One Are You?" />
+          </h2>
+        </Reveal>
+        <ol className="mt-10 grid gap-6 md:grid-cols-3">
           {CATEGORY3.categories.map((cat, i) => {
             const isThree = i === 2;
             return (
