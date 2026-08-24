@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-// Mobile only: as the Category 3 card scrolls toward center screen it
+// As the Category 3 card scrolls toward center screen it
 // charges, swelling slightly and blooming a purple glow while its
 // title fills in ember from left to right like it is being written,
 // and the spotlight shifts: Categories 1 and 2 dim and desaturate as
@@ -31,9 +31,8 @@ export default function Category3Ignite({
       const glow = glowRef.current;
       if (!wrap || !glow) return;
       const title = wrap.querySelector<HTMLElement>("h2");
-      const active =
-        window.matchMedia("(max-width: 767px)").matches &&
-        !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const active = !window.matchMedia("(prefers-reduced-motion: reduce)")
+        .matches;
       const card = wrap.querySelector<HTMLElement>(
         ':scope > div:not([aria-hidden="true"])',
       );
