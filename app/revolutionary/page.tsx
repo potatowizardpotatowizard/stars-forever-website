@@ -140,7 +140,7 @@ export default function RevolutionaryPage() {
               , a global mission devoted to reaching the secular youth culture
               for Jesus, in collaboration with Stars Forever. He brings the
               Revolutionary teaching principles to every cohort and carries
-              decades of experience calling artists into bold, public faith.
+              decades of experience calling artists into bold faith.
             </p>
           </div>
         </Reveal>

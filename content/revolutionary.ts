@@ -10,7 +10,7 @@ export const REVOLUTIONARY = {
   benPierce: {
     imageSlot: "rev-ben-pierce",
     name: "Ben Pierce",
-    body: "Ben Pierce leads Steiger Ministries, a global mission devoted to reaching the secular youth culture for Jesus. He brings the Revolutionary teaching principles to every cohort and carries decades of experience calling artists into bold, public faith.",
+    body: "Ben Pierce leads Steiger Ministries, a global mission devoted to reaching the secular youth culture for Jesus. He brings the Revolutionary teaching principles to every cohort and carries decades of experience calling artists into bold faith.",
   },
   monologue: {
     kicker: "Sound familiar?",
