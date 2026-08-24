@@ -95,7 +95,7 @@ export default function Category3Ignite({
         title.style.color = "transparent";
         title.style.webkitBackgroundClip = "text";
         title.style.backgroundClip = "text";
-        title.style.backgroundImage = `linear-gradient(90deg, transparent ${f}%, var(--color-starlight) ${f}%), linear-gradient(100deg, #8ecbff, #e8f6ff, #4f9dff, #bfe3ff, #6bb4ff)`;
+        title.style.backgroundImage = `linear-gradient(90deg, transparent ${f}%, color-mix(in srgb, var(--color-starlight) 30%, var(--color-soot)) ${f}%), linear-gradient(100deg, #8ecbff, #e8f6ff, #4f9dff, #bfe3ff, #6bb4ff)`;
         title.style.filter = `drop-shadow(0 0 ${(5 + 5 * s).toFixed(1)}px rgb(110 170 255 / 0.8)) drop-shadow(0 0 ${(14 * s).toFixed(1)}px rgb(70 140 255 / 0.45))`;
         if (!title.dataset.burn) {
           title.dataset.burn = "1";
