@@ -13,15 +13,13 @@ export default function DreamStars() {
   const [play, setPlay] = useState(false);
 
   useEffect(() => {
-    // hold the choreography until the visitor has scrolled most of the
-    // hero away, then let it play
-    const hero = ref.current?.closest("section")?.previousElementSibling;
+    // hold the choreography until the stage itself has been scrolled
+    // to the middle of the screen
     const check = () => {
-      if (!hero) {
-        setPlay(true);
-        return true;
-      }
-      if (hero.getBoundingClientRect().bottom <= window.innerHeight * 0.4) {
+      const el = ref.current;
+      if (!el) return false;
+      const r = el.getBoundingClientRect();
+      if (r.top + r.height / 2 <= window.innerHeight * 0.55) {
         setPlay(true);
         return true;
       }

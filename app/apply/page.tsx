@@ -5,7 +5,6 @@ import MediaSlot from "@/components/MediaSlot";
 import ProofParallax from "@/components/ProofParallax";
 import ApplyForm from "@/components/ApplyForm";
 import GalaxyHero from "@/components/GalaxyHero";
-import GlitchText from "@/components/GlitchText";
 import DreamStars from "@/components/DreamStars";
 import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
@@ -61,9 +60,6 @@ export default function ApplyPage() {
           same night sky, no seam, the merged star pointing down at
           the first question */}
       <section className="mx-auto max-w-3xl px-5 pb-16 pt-28 sm:px-8 sm:pb-20 sm:pt-36">
-        <h2 className="font-display text-4xl font-bold sm:text-5xl">
-          <GlitchText text="Apply Now" />
-        </h2>
         <DreamStars />
         <div className="mt-2">
           <ApplyForm />

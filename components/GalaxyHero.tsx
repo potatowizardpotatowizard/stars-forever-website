@@ -18,6 +18,7 @@ type Star = {
 
 type Trail = {
   y0: number;
+  tilt: number;
   w: number;
   speed: number;
   phase: number;
@@ -81,12 +82,22 @@ export default function GalaxyHero() {
           twinkle: Math.random() * Math.PI * 2,
         };
       });
-      // long exposure light trails living strictly below the copy
-      const bandTop = W < 768 ? 0.6 : 0.55;
-      trails = Array.from({ length: W < 768 ? 8 : 12 }, () => {
+      // the light trail band starts exactly where the hero copy ends
+      let bandTop = 0.55;
+      const marks = canvas.parentElement!.querySelectorAll("h1, p");
+      let copyBottom = 0;
+      const heroTop = rect.top;
+      marks.forEach((m) => {
+        copyBottom = Math.max(copyBottom, m.getBoundingClientRect().bottom - heroTop);
+      });
+      if (copyBottom > 0) {
+        bandTop = Math.min(0.85, Math.max(0.25, (copyBottom + 26) / H));
+      }
+      trails = Array.from({ length: W < 768 ? 12 : 16 }, () => {
         const thick = Math.random() < 0.35;
         return {
-          y0: H * (bandTop + Math.random() * (0.95 - bandTop)),
+          y0: H * (bandTop + Math.random() * (0.97 - bandTop)),
+          tilt: (Math.random() - 0.5) * H * 0.04,
           w: thick ? 5 + Math.random() * 8 : 1 + Math.random() * 1.6,
           speed: 0.00012 + Math.random() * 0.00022,
           phase: Math.random(),
@@ -160,10 +171,9 @@ export default function GalaxyHero() {
       // soft ones and hairline crisp ones layered, each with a hot
       // pulse of light racing along it
       if (!reduced) {
-        ctx.lineCap = "round";
-        const vy = H * 0.72;
+        ctx.lineCap = "butt";
         for (const tr of trails) {
-          const y1 = vy + (tr.y0 - vy) * 0.35;
+          const y1 = tr.y0 + tr.tilt;
           const seg = (a: number, b: number) => ({
             ax: -60 + (W + 120) * a,
             ay: tr.y0 + (y1 - tr.y0) * a,
@@ -172,19 +182,19 @@ export default function GalaxyHero() {
           });
           // the standing trail: wide glow, tighter mid, thin core
           const full = seg(0, 1);
-          ctx.strokeStyle = `rgba(${tr.glow}, ${(0.09 * tr.alpha).toFixed(3)})`;
+          ctx.strokeStyle = `rgba(${tr.glow}, ${(0.16 * tr.alpha).toFixed(3)})`;
           ctx.lineWidth = tr.w * 3.4;
           ctx.beginPath();
           ctx.moveTo(full.ax, full.ay);
           ctx.lineTo(full.bx, full.by);
           ctx.stroke();
-          ctx.strokeStyle = `rgba(${tr.glow}, ${(0.2 * tr.alpha).toFixed(3)})`;
+          ctx.strokeStyle = `rgba(${tr.glow}, ${(0.34 * tr.alpha).toFixed(3)})`;
           ctx.lineWidth = tr.w * 1.7;
           ctx.beginPath();
           ctx.moveTo(full.ax, full.ay);
           ctx.lineTo(full.bx, full.by);
           ctx.stroke();
-          ctx.strokeStyle = `rgba(${tr.core}, ${(0.34 * tr.alpha).toFixed(3)})`;
+          ctx.strokeStyle = `rgba(${tr.core}, ${(0.55 * tr.alpha).toFixed(3)})`;
           ctx.lineWidth = Math.max(1, tr.w * 0.55);
           ctx.beginPath();
           ctx.moveTo(full.ax, full.ay);
@@ -197,8 +207,9 @@ export default function GalaxyHero() {
           if (u > -0.05 && u < 1.05) {
             const g = ctx.createLinearGradient(p.ax, p.ay, p.bx, p.by);
             g.addColorStop(0, `rgba(${tr.glow}, 0)`);
-            g.addColorStop(0.7, `rgba(${tr.core}, ${(0.75 * tr.alpha).toFixed(3)})`);
-            g.addColorStop(1, `rgba(255, 255, 255, ${(0.95 * tr.alpha).toFixed(3)})`);
+            g.addColorStop(0.6, `rgba(${tr.core}, ${(0.6 * tr.alpha).toFixed(3)})`);
+            g.addColorStop(0.92, `rgba(255, 255, 255, ${(0.95 * tr.alpha).toFixed(3)})`);
+            g.addColorStop(1, "rgba(255, 255, 255, 0)");
             ctx.strokeStyle = g;
             ctx.lineWidth = tr.w * 1.1;
             ctx.beginPath();
