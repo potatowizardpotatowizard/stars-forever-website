@@ -2,12 +2,9 @@
 
 import { useEffect, useRef } from "react";
 
-// A living purple galaxy tucked into the hero's top right corner:
-// stars in spiral arms with differential rotation around a white-hot
-// core, breathing nebula clouds, and, drifting in the space below the
-// copy, the words that hold creators back (fear, anxiety,
-// unworthiness...) getting pulled off their feet and swallowed into
-// the galaxy one by one. Reduced motion gets a single still frame.
+// A living purple galaxy in the hero's bottom right: stars in spiral
+// arms with differential rotation around a white-hot core and
+// breathing nebula clouds. Reduced motion gets a single still frame.
 type Star = {
   r: number;
   theta: number;
@@ -26,26 +23,6 @@ const TINTS = [
   "139, 92, 246",
 ];
 
-const WORDS = [
-  "FEAR",
-  "ANXIETY",
-  "UNWORTHINESS",
-  "DOUBT",
-  "SHAME",
-  "COMPARISON",
-  "INSECURITY",
-  "DISTRACTION",
-];
-
-type Word = {
-  text: string;
-  x0: number;
-  y0: number;
-  offset: number;
-  dur: number;
-  lastLocal: number;
-};
-
 export default function GalaxyHero() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -60,12 +37,6 @@ export default function GalaxyHero() {
     let W = 0;
     let H = 0;
     let stars: Star[] = [];
-    let words: Word[] = [];
-
-    const spawnWord = (w: Word) => {
-      w.x0 = W * (0.08 + Math.random() * 0.6);
-      w.y0 = H * (0.78 + Math.random() * 0.17);
-    };
 
     const build = () => {
       const rect = canvas.parentElement!.getBoundingClientRect();
@@ -76,7 +47,7 @@ export default function GalaxyHero() {
       canvas.height = Math.round(H * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       const count = W < 768 ? 300 : 560;
-      const maxR = Math.max(W, H) * 0.4;
+      const maxR = Math.max(W, H) * 0.46;
       stars = Array.from({ length: count }, (_, i) => {
         const arm = i % 3;
         const t = Math.pow(Math.random(), 0.75);
@@ -94,24 +65,12 @@ export default function GalaxyHero() {
           twinkle: Math.random() * Math.PI * 2,
         };
       });
-      words = WORDS.map((text, i) => {
-        const w: Word = {
-          text,
-          x0: 0,
-          y0: 0,
-          offset: i * 1500 + Math.random() * 700,
-          dur: 9500,
-          lastLocal: 0,
-        };
-        spawnWord(w);
-        return w;
-      });
     };
 
-    // the galaxy lives in the top right corner
+    // the galaxy lives in the hero's bottom right
     const draw = (t: number) => {
-      const cx = W * 0.86;
-      const cy = H * 0.22;
+      const cx = W * 0.82;
+      const cy = H * 0.72;
       ctx.clearRect(0, 0, W, H);
       ctx.globalCompositeOperation = "lighter";
 
@@ -164,43 +123,6 @@ export default function GalaxyHero() {
 
       ctx.globalCompositeOperation = "source-over";
 
-      // the words that hold you back, drifting, then dragged into the
-      // galaxy along a shrinking spiral and swallowed
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      for (const w of words) {
-        const local = ((t + w.offset) % w.dur) / w.dur;
-        if (local < w.lastLocal) spawnWord(w);
-        w.lastLocal = local;
-        let x = w.x0;
-        let y = w.y0;
-        let alpha = 0;
-        let size = W < 768 ? 12 : 14;
-        if (local < 0.5) {
-          const fadeIn = Math.min(1, local / 0.1);
-          alpha = 0.5 * fadeIn;
-          x += Math.sin(t * 0.0006 + w.offset) * 7;
-          y += Math.cos(t * 0.0005 + w.offset) * 5;
-        } else {
-          const v = (local - 0.5) / 0.45;
-          if (v >= 1) continue;
-          const e = v * v;
-          const dx = w.x0 - cx;
-          const dy = w.y0 - cy;
-          const r0 = Math.hypot(dx, dy);
-          const ang0 = Math.atan2(dy, dx);
-          const r = r0 * (1 - e);
-          const ang = ang0 + 2.6 * e;
-          x = cx + Math.cos(ang) * r;
-          y = cy + Math.sin(ang) * r * 0.85;
-          alpha = 0.5 * (1 - Math.max(0, (v - 0.7) / 0.3));
-          size *= 1 - 0.6 * e;
-        }
-        if (alpha <= 0.01) continue;
-        ctx.font = `700 ${size.toFixed(1)}px "IBM Plex Mono", monospace`;
-        ctx.fillStyle = `rgba(196, 181, 253, ${alpha.toFixed(3)})`;
-        ctx.fillText(w.text, x, y);
-      }
     };
 
     build();

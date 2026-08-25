@@ -35,7 +35,7 @@ export default function ApplyPage() {
           className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/25 to-night"
         />
         <Grain />
-        <div className="relative mx-auto max-w-7xl px-5 pb-20 pt-32 sm:px-8 sm:pb-24 sm:pt-40">
+        <div className="relative mx-auto max-w-7xl px-5 pb-44 pt-32 sm:px-8 sm:pb-56 sm:pt-40">
           <Kicker>Partner Project</Kicker>
           <h1 className="mt-6 font-display text-5xl font-bold sm:text-6xl">
             Bring Us Your God Dream
