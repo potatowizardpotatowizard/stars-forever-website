@@ -20,7 +20,6 @@ export default function GrowVideo({
   const frameRef = useRef<HTMLDivElement>(null);
   const dimRef = useRef<HTMLDivElement>(null);
   const hintTextRef = useRef<HTMLParagraphElement>(null);
-  const hintArrowsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let raf = 0;
@@ -52,14 +51,8 @@ export default function GrowVideo({
         dim.style.opacity = ((desktop ? 0.55 : 0.92) * k).toFixed(3);
       }
       const hintText = hintTextRef.current;
-      const hintArrows = hintArrowsRef.current;
       if (hintText) {
         hintText.style.opacity = desktop
-          ? "0"
-          : clamp01((k - 0.3) * 1.8).toFixed(3);
-      }
-      if (hintArrows) {
-        hintArrows.style.opacity = desktop
           ? "0"
           : clamp01((k - 0.3) * 1.8).toFixed(3);
       }
@@ -88,8 +81,7 @@ export default function GrowVideo({
       />
       <div ref={frameRef} className="relative z-20 mx-auto" style={{ width: "100%" }}>
         <VideoBlock src={src} poster={poster} title={title} />
-        {/* directly under the video: the glowing invitation and a
-            quarter turn arrow asking for the rotation */}
+        {/* the glowing invitation above the video */}
         <p
           ref={hintTextRef}
           aria-hidden="true"
@@ -98,33 +90,6 @@ export default function GrowVideo({
         >
           Press Play &amp; Rotate
         </p>
-        <div
-          ref={hintArrowsRef}
-          aria-hidden="true"
-          className="pointer-events-none absolute -bottom-8 right-0 animate-pulse md:hidden"
-          style={{ opacity: 0 }}
-        >
-          <svg
-            width="46"
-            height="42"
-            viewBox="0 0 46 42"
-            fill="none"
-            className="[filter:drop-shadow(0_0_10px_rgb(255_255_255/0.85))_drop-shadow(0_0_22px_rgb(167_139_250/0.7))]"
-          >
-            <path
-              d="M6 34 H 34 V 6"
-              stroke="#ffffff"
-              strokeWidth="2.6"
-              strokeLinejoin="miter"
-            />
-            <path
-              d="M34 6 l-5 9 M34 6 l5 9"
-              stroke="#ffffff"
-              strokeWidth="2.6"
-              strokeLinecap="round"
-            />
-          </svg>
-        </div>
       </div>
     </div>
   );
