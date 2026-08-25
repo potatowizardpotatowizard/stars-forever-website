@@ -786,22 +786,31 @@ html[data-mission-intro="1"] #hero > img {
   color: var(--color-dust);
   opacity: 0;
 }
-@media (prefers-reduced-motion: no-preference) {
-  .dream-small {
-    animation: dream-small 6.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+@media (prefers-reduced-motion: reduce) {
+  .dream-big,
+  .dream-arrow {
+    opacity: 1;
   }
   .dream-big {
+    transform: translate(-50%, calc(-50% + 18px)) scale(1.26);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .dream-play .dream-small {
+    animation: dream-small 6.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  .dream-play .dream-big {
     animation:
       dream-big 6.5s cubic-bezier(0.22, 1, 0.36, 1) forwards,
       dream-breathe 3.6s 6.5s ease-in-out infinite;
   }
-  .dream-label-big {
+  .dream-play .dream-label-big {
     animation: dream-label-big 6.5s linear forwards;
   }
-  .dream-flash {
+  .dream-play .dream-flash {
     animation: dream-flash 6.5s linear forwards;
   }
-  .dream-arrow {
+  .dream-play .dream-arrow {
     animation:
       dream-arrow-in 0.8s 6.8s ease forwards,
       dream-arrow-bob 2s 6.8s ease-in-out infinite;

@@ -1,12 +1,39 @@
-import Image from "next/image";
+"use client";
 
-// The apply hero's opening picture: a small star arrives carrying "Your
-// Dreams", a bigger star arrives carrying "God's Dreams", the big star
-// swallows the small one, and the merged star settles massive and glowing,
-// pointing down toward the application. Pure CSS choreography.
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
+
+// The opening picture above the application: a small star arrives
+// carrying "Your Dreams", a bigger star arrives carrying "God's
+// Dreams", the big star swallows the small one, and the merged star
+// settles massive and glowing, pointing down toward the form. Pure
+// CSS choreography that waits to play until scrolled into view.
 export default function DreamStars() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [play, setPlay] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setPlay(true);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.45 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   return (
-    <div aria-hidden="true" className="dream-stage">
+    <div
+      ref={ref}
+      aria-hidden="true"
+      className={`dream-stage${play ? " dream-play" : ""}`}
+    >
       <div className="dream-small">
         <Image src="/brand/star-sharp.png" alt="" width={44} height={44} />
         <span className="dream-label">Your Dreams</span>

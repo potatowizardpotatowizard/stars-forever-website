@@ -3,8 +3,10 @@
 import { useEffect, useRef } from "react";
 
 // A living purple galaxy in the hero's bottom right: stars in spiral
-// arms with differential rotation around a white-hot core and
-// breathing nebula clouds. Reduced motion gets a single still frame.
+// arms with differential rotation around a white-hot core, breathing
+// nebula clouds, and light speed streaks racing in from the left and
+// bending down into the core. Reduced motion gets a single still
+// frame with no streaks.
 type Star = {
   r: number;
   theta: number;
@@ -12,6 +14,14 @@ type Star = {
   tint: string;
   alpha: number;
   twinkle: number;
+};
+
+type Streak = {
+  x0: number;
+  y0: number;
+  offset: number;
+  dur: number;
+  w: number;
 };
 
 const TINTS = [
@@ -37,6 +47,7 @@ export default function GalaxyHero() {
     let W = 0;
     let H = 0;
     let stars: Star[] = [];
+    let streaks: Streak[] = [];
 
     const build = () => {
       const rect = canvas.parentElement!.getBoundingClientRect();
@@ -65,6 +76,13 @@ export default function GalaxyHero() {
           twinkle: Math.random() * Math.PI * 2,
         };
       });
+      streaks = Array.from({ length: W < 768 ? 14 : 24 }, () => ({
+        x0: -80 + Math.random() * W * 0.22,
+        y0: H * (0.34 + Math.random() * 0.55),
+        offset: Math.random() * 5000,
+        dur: 2400 + Math.random() * 2600,
+        w: 1.4 + Math.random() * 2.1,
+      }));
     };
 
     // the galaxy lives in the hero's bottom right

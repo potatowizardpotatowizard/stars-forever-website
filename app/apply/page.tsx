@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import MediaSlot from "@/components/MediaSlot";
-import ProofConstellation from "@/components/ProofConstellation";
+import ProofParallax from "@/components/ProofParallax";
 import ApplyForm from "@/components/ApplyForm";
 import GalaxyHero from "@/components/GalaxyHero";
 import DreamStars from "@/components/DreamStars";
@@ -35,7 +35,7 @@ export default function ApplyPage() {
           className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/25 to-night"
         />
         <Grain />
-        <div className="relative mx-auto max-w-7xl px-5 pb-44 pt-32 sm:px-8 sm:pb-56 sm:pt-40">
+        <div className="relative mx-auto min-h-svh w-full max-w-7xl px-5 pt-36 sm:px-8 sm:pt-44">
           <Kicker>Partner Project</Kicker>
           <h1 className="mt-6 font-display text-5xl font-bold sm:text-6xl">
             Bring Us Your God Dream
@@ -59,7 +59,7 @@ export default function ApplyPage() {
       {/* the star choreography flows straight into the application:
           same night sky, no seam, the merged star pointing down at
           the first question */}
-      <section className="mx-auto max-w-3xl px-5 pb-16 sm:px-8 sm:pb-20">
+      <section className="mx-auto max-w-3xl px-5 pb-16 pt-28 sm:px-8 sm:pb-20 sm:pt-36">
         <DreamStars />
         <div className="mt-2">
           <ApplyForm />
@@ -70,7 +70,7 @@ export default function ApplyPage() {
       <section className="border-t border-dust/10 bg-soot/40">
         <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
           <Kicker>Dreams that started right here</Kicker>
-          <ProofConstellation>
+          <ProofParallax>
           <div className="mt-8 grid gap-10 md:grid-cols-3 md:gap-6">
             {[
               {
@@ -110,7 +110,7 @@ export default function ApplyPage() {
               </Link>
             ))}
           </div>
-          </ProofConstellation>
+          </ProofParallax>
         </div>
       </section>
     </article>
