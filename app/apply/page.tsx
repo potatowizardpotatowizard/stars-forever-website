@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import MediaSlot from "@/components/MediaSlot";
 import ApplyForm from "@/components/ApplyForm";
+import GalaxyHero from "@/components/GalaxyHero";
 import DreamStars from "@/components/DreamStars";
 import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
@@ -27,12 +28,13 @@ export default function ApplyPage() {
           sizes="100vw"
           className="object-cover opacity-60"
         />
+        <GalaxyHero />
         <div
           aria-hidden="true"
           className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/25 to-night"
         />
         <Grain />
-        <div className="relative mx-auto max-w-7xl px-5 pb-12 pt-28 sm:px-8 sm:pt-32">
+        <div className="relative mx-auto max-w-7xl px-5 pb-20 pt-32 sm:px-8 sm:pb-24 sm:pt-40">
           <Kicker>Partner Project</Kicker>
           <h1 className="mt-6 font-display text-5xl font-bold sm:text-6xl">
             Bring Us Your God Dream
