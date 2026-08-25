@@ -12,7 +12,7 @@ export async function POST(request: Request) {
   // Honeypot: real people never fill this field.
   if (body.website) return NextResponse.json({ sent: true });
 
-  const { name, email, handle, list } = body;
+  const { name, email, handle, based, giveReceive, list } = body;
   if (!name?.trim() || !email?.includes("@")) {
     return NextResponse.json(
       { error: "Name and a valid email are required." },
@@ -27,6 +27,8 @@ export async function POST(request: Request) {
     `Name: ${name.trim()}`,
     `Email: ${email.trim()}`,
     `Channel: ${handle?.trim() || "not provided"}`,
+    `Based in: ${based?.trim() || "not provided"}`,
+    `Give and receive: ${giveReceive?.trim() || "not provided"}`,
   ].join("\n");
 
   const sent = await sendMail({

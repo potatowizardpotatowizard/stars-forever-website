@@ -29,11 +29,13 @@ export default function WaitlistForm({
     name: "",
     email: "",
     handle: "",
+    based: "",
+    giveReceive: "",
     website: "", // honeypot
   });
 
   const set = (key: keyof typeof form) =>
-    (e: React.ChangeEvent<HTMLInputElement>) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
       setForm((f) => ({ ...f, [key]: e.target.value }));
 
   const submit = async (e: React.FormEvent) => {
@@ -122,6 +124,34 @@ export default function WaitlistForm({
             className={field}
             value={form.handle}
             onChange={set("handle")}
+          />
+        </div>
+        <div>
+          <label htmlFor="wl-based" className="meta-label mb-2 block">
+            Where are you based?
+          </label>
+          <input
+            id="wl-based"
+            type="text"
+            required
+            autoComplete="address-level2"
+            className={field}
+            value={form.based}
+            onChange={set("based")}
+          />
+        </div>
+        <div>
+          <label htmlFor="wl-give-receive" className="meta-label mb-2 block">
+            What do you want to give and what do you want to receive from
+            this event?
+          </label>
+          <textarea
+            id="wl-give-receive"
+            rows={4}
+            required
+            className={field}
+            value={form.giveReceive}
+            onChange={set("giveReceive")}
           />
         </div>
         {/* Honeypot, hidden from people */}
