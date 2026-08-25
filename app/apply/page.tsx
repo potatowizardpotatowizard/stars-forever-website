@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import MediaSlot from "@/components/MediaSlot";
+import ProofConstellation from "@/components/ProofConstellation";
 import ApplyForm from "@/components/ApplyForm";
 import GalaxyHero from "@/components/GalaxyHero";
 import DreamStars from "@/components/DreamStars";
@@ -69,6 +70,7 @@ export default function ApplyPage() {
       <section className="border-t border-dust/10 bg-soot/40">
         <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
           <Kicker>Dreams that started right here</Kicker>
+          <ProofConstellation>
           <div className="mt-8 grid gap-10 md:grid-cols-3 md:gap-6">
             {[
               {
@@ -90,7 +92,11 @@ export default function ApplyPage() {
                 line: "Podcasts filmed around the biggest show on earth, carrying Jesus to a secular fanbase.",
               },
             ].map((proj) => (
-              <Link key={proj.href} href={proj.href} className="group block">
+              <Link
+                key={proj.href}
+                href={proj.href}
+                className="group relative z-10 block will-change-transform"
+              >
                 <MediaSlot
                   name={proj.slot}
                   sizes="(min-width: 768px) 30vw, 100vw"
@@ -104,6 +110,7 @@ export default function ApplyPage() {
               </Link>
             ))}
           </div>
+          </ProofConstellation>
         </div>
       </section>
     </article>
