@@ -27,12 +27,12 @@ export default function ApplyPage() {
           fill
           priority
           sizes="100vw"
-          className="object-cover opacity-60"
+          className="object-cover opacity-60 max-md:[mask-image:linear-gradient(to_bottom,black_55%,transparent_98%)]"
         />
         <GalaxyHero />
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/25 to-night"
+          className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/25 to-night max-md:[mask-image:linear-gradient(to_bottom,black_55%,transparent_98%)]"
         />
         <Grain />
         <div className="relative mx-auto w-full max-w-7xl px-5 pb-16 pt-32 sm:px-8 md:pb-48 md:pt-44">

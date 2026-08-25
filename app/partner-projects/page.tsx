@@ -10,6 +10,7 @@ import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
 import ProjectShowcase from "@/components/ProjectShowcase";
 import Reveal from "@/components/Reveal";
+import ScrollSwell from "@/components/ScrollSwell";
 import VideoBlock from "@/components/VideoBlock";
 import { PARTNER } from "@/content/partner";
 import { CONTACT } from "@/content/site";
@@ -193,12 +194,14 @@ export default function PartnerProjectsPage() {
           <ol className="mt-14 max-w-3xl">
             {PARTNER.process.steps.map((step, i) => (
               <Reveal as="li" key={step}>
-                <div className="flex gap-8 border-t border-dust/15 py-7">
-                  <span className="meta-label pt-1 text-ember">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <p className="text-lg text-starlight/85">{linkCategory3(step)}</p>
-                </div>
+                <ScrollSwell>
+                  <div className="flex gap-8 border-t border-dust/15 py-7">
+                    <span className="meta-label pt-1 text-ember">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <p className="text-lg text-starlight/85">{linkCategory3(step)}</p>
+                  </div>
+                </ScrollSwell>
               </Reveal>
             ))}
           </ol>
