@@ -16,13 +16,18 @@ type Star = {
   twinkle: number;
 };
 
-type Streak = {
-  x0: number;
+type Trail = {
   y0: number;
-  offset: number;
-  dur: number;
   w: number;
+  speed: number;
+  phase: number;
+  alpha: number;
+  glow: string;
+  core: string;
 };
+
+const TRAIL_GLOWS = ["139, 92, 246", "109, 40, 217", "167, 139, 250"];
+const TRAIL_CORES = ["243, 236, 255", "224, 211, 255", "255, 250, 255"];
 
 const TINTS = [
   "255, 255, 255",
@@ -47,7 +52,7 @@ export default function GalaxyHero() {
     let W = 0;
     let H = 0;
     let stars: Star[] = [];
-    let streaks: Streak[] = [];
+    let trails: Trail[] = [];
 
     const build = () => {
       const rect = canvas.parentElement!.getBoundingClientRect();
@@ -76,13 +81,20 @@ export default function GalaxyHero() {
           twinkle: Math.random() * Math.PI * 2,
         };
       });
-      streaks = Array.from({ length: W < 768 ? 12 : 24 }, () => ({
-        x0: -80 + Math.random() * W * 0.22,
-        y0: H * (0.34 + Math.random() * 0.55),
-        offset: Math.random() * 5000,
-        dur: 2400 + Math.random() * 2600,
-        w: 1.4 + Math.random() * 2.1,
-      }));
+      // long exposure light trails living strictly below the copy
+      const bandTop = W < 768 ? 0.6 : 0.55;
+      trails = Array.from({ length: W < 768 ? 8 : 12 }, () => {
+        const thick = Math.random() < 0.35;
+        return {
+          y0: H * (bandTop + Math.random() * (0.95 - bandTop)),
+          w: thick ? 5 + Math.random() * 8 : 1 + Math.random() * 1.6,
+          speed: 0.00012 + Math.random() * 0.00022,
+          phase: Math.random(),
+          alpha: 0.45 + Math.random() * 0.5,
+          glow: TRAIL_GLOWS[Math.floor(Math.random() * TRAIL_GLOWS.length)],
+          core: TRAIL_CORES[Math.floor(Math.random() * TRAIL_CORES.length)],
+        };
+      });
     };
 
     // the galaxy lives in the hero's bottom right on desktop; phones
@@ -143,43 +155,57 @@ export default function GalaxyHero() {
         ctx.fill();
       }
 
-      // light speed: streaks tear in from the left under the copy,
-      // bending into the core on desktop and racing clean off the
-      // right edge on phones, tails stretched by their speed
+      // long exposure light trails, purple, pulling left to right:
+      // full width bands that converge gently toward the right, thick
+      // soft ones and hairline crisp ones layered, each with a hot
+      // pulse of light racing along it
       if (!reduced) {
         ctx.lineCap = "round";
-        for (const sk of streaks) {
-          const local = ((t + sk.offset) % sk.dur) / sk.dur;
-          const tx = mobile ? W + 140 : cx;
-          const ty = mobile ? sk.y0 - 24 : cy;
-          const bez = (e: number) => {
-            const u = 1 - e;
-            const mx = (sk.x0 + tx) / 2;
-            return {
-              x: u * u * sk.x0 + 2 * u * e * mx + e * e * tx,
-              y: u * u * sk.y0 + 2 * u * e * sk.y0 + e * e * ty,
-            };
-          };
-          const head = bez(Math.pow(local, 2.1));
-          const tail = bez(Math.pow(Math.max(0, local - 0.09), 2.1));
-          const alpha =
-            Math.min(1, local / 0.14) *
-            (1 - Math.max(0, (local - 0.8) / 0.2));
-          if (alpha <= 0.01) continue;
-          const g = ctx.createLinearGradient(tail.x, tail.y, head.x, head.y);
-          g.addColorStop(0, "rgba(139, 92, 246, 0)");
-          g.addColorStop(0.6, `rgba(196, 181, 253, ${(alpha * 0.5).toFixed(3)})`);
-          g.addColorStop(1, `rgba(255, 255, 255, ${alpha.toFixed(3)})`);
-          ctx.strokeStyle = g;
-          ctx.lineWidth = sk.w;
+        const vy = H * 0.72;
+        for (const tr of trails) {
+          const y1 = vy + (tr.y0 - vy) * 0.35;
+          const seg = (a: number, b: number) => ({
+            ax: -60 + (W + 120) * a,
+            ay: tr.y0 + (y1 - tr.y0) * a,
+            bx: -60 + (W + 120) * b,
+            by: tr.y0 + (y1 - tr.y0) * b,
+          });
+          // the standing trail: wide glow, tighter mid, thin core
+          const full = seg(0, 1);
+          ctx.strokeStyle = `rgba(${tr.glow}, ${(0.09 * tr.alpha).toFixed(3)})`;
+          ctx.lineWidth = tr.w * 3.4;
           ctx.beginPath();
-          ctx.moveTo(tail.x, tail.y);
-          ctx.lineTo(head.x, head.y);
+          ctx.moveTo(full.ax, full.ay);
+          ctx.lineTo(full.bx, full.by);
           ctx.stroke();
-          ctx.fillStyle = `rgba(255, 255, 255, ${(alpha * 0.9).toFixed(3)})`;
+          ctx.strokeStyle = `rgba(${tr.glow}, ${(0.2 * tr.alpha).toFixed(3)})`;
+          ctx.lineWidth = tr.w * 1.7;
           ctx.beginPath();
-          ctx.arc(head.x, head.y, sk.w * 1.3, 0, Math.PI * 2);
-          ctx.fill();
+          ctx.moveTo(full.ax, full.ay);
+          ctx.lineTo(full.bx, full.by);
+          ctx.stroke();
+          ctx.strokeStyle = `rgba(${tr.core}, ${(0.34 * tr.alpha).toFixed(3)})`;
+          ctx.lineWidth = Math.max(1, tr.w * 0.55);
+          ctx.beginPath();
+          ctx.moveTo(full.ax, full.ay);
+          ctx.lineTo(full.bx, full.by);
+          ctx.stroke();
+
+          // the light racing down the trail, left to right
+          const u = ((t * tr.speed + tr.phase) % 1.25) - 0.125;
+          const p = seg(Math.max(0, u - 0.16), Math.min(1, u + 0.02));
+          if (u > -0.05 && u < 1.05) {
+            const g = ctx.createLinearGradient(p.ax, p.ay, p.bx, p.by);
+            g.addColorStop(0, `rgba(${tr.glow}, 0)`);
+            g.addColorStop(0.7, `rgba(${tr.core}, ${(0.75 * tr.alpha).toFixed(3)})`);
+            g.addColorStop(1, `rgba(255, 255, 255, ${(0.95 * tr.alpha).toFixed(3)})`);
+            ctx.strokeStyle = g;
+            ctx.lineWidth = tr.w * 1.1;
+            ctx.beginPath();
+            ctx.moveTo(p.ax, p.ay);
+            ctx.lineTo(p.bx, p.by);
+            ctx.stroke();
+          }
         }
       }
 

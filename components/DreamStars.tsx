@@ -13,19 +13,26 @@ export default function DreamStars() {
   const [play, setPlay] = useState(false);
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((e) => e.isIntersecting)) {
-          setPlay(true);
-          io.disconnect();
-        }
-      },
-      { threshold: 0.3, rootMargin: "0px 0px -30% 0px" },
-    );
-    io.observe(el);
-    return () => io.disconnect();
+    // hold the choreography until the visitor has scrolled most of the
+    // hero away, then let it play
+    const hero = ref.current?.closest("section")?.previousElementSibling;
+    const check = () => {
+      if (!hero) {
+        setPlay(true);
+        return true;
+      }
+      if (hero.getBoundingClientRect().bottom <= window.innerHeight * 0.4) {
+        setPlay(true);
+        return true;
+      }
+      return false;
+    };
+    if (check()) return;
+    const onScroll = () => {
+      if (check()) window.removeEventListener("scroll", onScroll);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
