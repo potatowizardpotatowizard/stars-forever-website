@@ -64,7 +64,7 @@ export default function GalaxyHero() {
       canvas.height = Math.round(H * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       const count = W < 768 ? 300 : 560;
-      const maxR = Math.max(W, H) * 0.46;
+      const maxR = Math.max(W, H) * 0.4;
       stars = Array.from({ length: count }, (_, i) => {
         const arm = i % 3;
         const t = Math.pow(Math.random(), 0.75);
@@ -108,12 +108,12 @@ export default function GalaxyHero() {
       });
     };
 
-    // the galaxy lives in the hero's bottom right on desktop; phones
-    // skip it and keep only the light speed streaks
+    // the galaxy lives in the hero's top right on desktop; phones
+    // skip it and keep only the light trails
     const draw = (t: number) => {
       const mobile = W < 768;
-      const cx = W * 0.82;
-      const cy = H * 0.72;
+      const cx = W * 0.86;
+      const cy = H * 0.24;
       ctx.clearRect(0, 0, W, H);
       ctx.globalCompositeOperation = "lighter";
 
