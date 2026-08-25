@@ -22,7 +22,7 @@ export default function DreamStars() {
           io.disconnect();
         }
       },
-      { threshold: 0.45 },
+      { threshold: 0.3, rootMargin: "0px 0px -30% 0px" },
     );
     io.observe(el);
     return () => io.disconnect();

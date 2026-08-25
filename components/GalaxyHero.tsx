@@ -76,7 +76,7 @@ export default function GalaxyHero() {
           twinkle: Math.random() * Math.PI * 2,
         };
       });
-      streaks = Array.from({ length: W < 768 ? 14 : 24 }, () => ({
+      streaks = Array.from({ length: W < 768 ? 12 : 24 }, () => ({
         x0: -80 + Math.random() * W * 0.22,
         y0: H * (0.34 + Math.random() * 0.55),
         offset: Math.random() * 5000,
@@ -85,15 +85,17 @@ export default function GalaxyHero() {
       }));
     };
 
-    // the galaxy lives in the hero's bottom right
+    // the galaxy lives in the hero's bottom right on desktop; phones
+    // skip it and keep only the light speed streaks
     const draw = (t: number) => {
+      const mobile = W < 768;
       const cx = W * 0.82;
       const cy = H * 0.72;
       ctx.clearRect(0, 0, W, H);
       ctx.globalCompositeOperation = "lighter";
 
       // breathing nebula clouds
-      for (let i = 0; i < 4; i++) {
+      for (let i = 0; i < (mobile ? 0 : 4); i++) {
         const ang = t * 0.00004 * (i % 2 ? 1 : -1) + i * 1.7;
         const nx = cx + Math.cos(ang) * (34 + i * 26);
         const ny = cy + Math.sin(ang) * (20 + i * 15);
@@ -109,7 +111,7 @@ export default function GalaxyHero() {
       }
 
       // the spiral: inner stars sweep faster than the rim
-      for (const s of stars) {
+      for (const s of mobile ? [] : stars) {
         const speed = 0.00034 / (0.25 + s.r * 0.0021);
         const th = s.theta + t * speed;
         const x = cx + Math.cos(th) * s.r;
@@ -129,18 +131,59 @@ export default function GalaxyHero() {
       }
 
       // white-hot core wrapped in violet
-      const core = ctx.createRadialGradient(cx, cy, 0, cx, cy, 110);
-      core.addColorStop(0, "rgba(255, 255, 255, 0.7)");
-      core.addColorStop(0.12, "rgba(233, 213, 255, 0.5)");
-      core.addColorStop(0.4, "rgba(167, 139, 250, 0.22)");
-      core.addColorStop(1, "rgba(167, 139, 250, 0)");
-      ctx.fillStyle = core;
-      ctx.beginPath();
-      ctx.arc(cx, cy, 110, 0, Math.PI * 2);
-      ctx.fill();
+      if (!mobile) {
+        const core = ctx.createRadialGradient(cx, cy, 0, cx, cy, 110);
+        core.addColorStop(0, "rgba(255, 255, 255, 0.7)");
+        core.addColorStop(0.12, "rgba(233, 213, 255, 0.5)");
+        core.addColorStop(0.4, "rgba(167, 139, 250, 0.22)");
+        core.addColorStop(1, "rgba(167, 139, 250, 0)");
+        ctx.fillStyle = core;
+        ctx.beginPath();
+        ctx.arc(cx, cy, 110, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // light speed: streaks tear in from the left under the copy,
+      // bending into the core on desktop and racing clean off the
+      // right edge on phones, tails stretched by their speed
+      if (!reduced) {
+        ctx.lineCap = "round";
+        for (const sk of streaks) {
+          const local = ((t + sk.offset) % sk.dur) / sk.dur;
+          const tx = mobile ? W + 140 : cx;
+          const ty = mobile ? sk.y0 - 24 : cy;
+          const bez = (e: number) => {
+            const u = 1 - e;
+            const mx = (sk.x0 + tx) / 2;
+            return {
+              x: u * u * sk.x0 + 2 * u * e * mx + e * e * tx,
+              y: u * u * sk.y0 + 2 * u * e * sk.y0 + e * e * ty,
+            };
+          };
+          const head = bez(Math.pow(local, 2.1));
+          const tail = bez(Math.pow(Math.max(0, local - 0.09), 2.1));
+          const alpha =
+            Math.min(1, local / 0.14) *
+            (1 - Math.max(0, (local - 0.8) / 0.2));
+          if (alpha <= 0.01) continue;
+          const g = ctx.createLinearGradient(tail.x, tail.y, head.x, head.y);
+          g.addColorStop(0, "rgba(139, 92, 246, 0)");
+          g.addColorStop(0.6, `rgba(196, 181, 253, ${(alpha * 0.5).toFixed(3)})`);
+          g.addColorStop(1, `rgba(255, 255, 255, ${alpha.toFixed(3)})`);
+          ctx.strokeStyle = g;
+          ctx.lineWidth = sk.w;
+          ctx.beginPath();
+          ctx.moveTo(tail.x, tail.y);
+          ctx.lineTo(head.x, head.y);
+          ctx.stroke();
+          ctx.fillStyle = `rgba(255, 255, 255, ${(alpha * 0.9).toFixed(3)})`;
+          ctx.beginPath();
+          ctx.arc(head.x, head.y, sk.w * 1.3, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
 
       ctx.globalCompositeOperation = "source-over";
-
     };
 
     build();

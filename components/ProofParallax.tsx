@@ -2,11 +2,9 @@
 
 import { useEffect, useRef } from "react";
 
-// Depth parallax for the proof cards: as the section scrolls through
-// the viewport each card drifts upward at its own speed, the middle
-// one hanging back, so the strip floats with depth.
-const SPEEDS = [0.11, 0.055, 0.085];
-
+// Charge on center: whichever proof card is nearest the middle of the
+// screen glows violet and swells slightly while the others rest, a
+// spotlight that hands off card to card as you scroll.
 export default function ProofParallax({
   children,
 }: {
@@ -16,25 +14,30 @@ export default function ProofParallax({
 
   useEffect(() => {
     let raf = 0;
+    const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
+    const smooth = (t: number) => t * t * (3 - 2 * t);
     const tick = () => {
       raf = 0;
       const wrap = wrapRef.current;
       if (!wrap) return;
       const cards = [...wrap.querySelectorAll<HTMLElement>("a")];
-      if (
-        window.matchMedia("(prefers-reduced-motion: reduce)").matches
-      ) {
-        for (const card of cards) card.style.transform = "none";
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        for (const card of cards) {
+          card.style.transform = "none";
+          card.style.filter = "";
+        }
         return;
       }
-      const rect = wrap.getBoundingClientRect();
       const vh = window.innerHeight;
-      const drive = rect.top + rect.height / 2 - vh * 0.55;
-      cards.forEach((card, i) => {
-        const k = SPEEDS[i % SPEEDS.length];
-        const y = Math.max(-90, Math.min(90, drive * k));
-        card.style.transform = `translateY(${y.toFixed(1)}px)`;
-      });
+      for (const card of cards) {
+        const r = card.getBoundingClientRect();
+        const center = r.top + r.height / 2;
+        const s = smooth(clamp01(1 - Math.abs(center - vh * 0.5) / (vh * 0.42)));
+        card.style.transform = `scale(${(1 + 0.035 * s).toFixed(4)})`;
+        card.style.filter = s > 0.02
+          ? `drop-shadow(0 0 ${(16 * s).toFixed(1)}px rgb(167 139 250 / ${(0.55 * s).toFixed(3)}))`
+          : "";
+      }
     };
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(tick);
