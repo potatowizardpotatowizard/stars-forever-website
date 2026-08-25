@@ -899,11 +899,10 @@ html[data-mission-intro="1"] #hero > img {
     }
   }
   @keyframes dream-label-merge {
-    0%,
-    8% {
+    0% {
       opacity: 1;
     }
-    30%,
+    14%,
     100% {
       opacity: 0;
     }
