@@ -82,10 +82,13 @@ export default function Category3Ignite({
         card.style.borderColor = `color-mix(in srgb, rgb(255 255 255) ${Math.round(80 * s)}%, rgb(240 238 250 / 0.6))`;
       }
 
-      // the spotlight steal
+      // the spotlight steal: mobile only, desktop keeps 1 and 2 lit
+      const steal = window.matchMedia("(max-width: 767px)").matches;
       for (const sib of siblings()) {
-        sib.style.opacity = (1 - 0.45 * s).toFixed(3);
-        sib.style.filter = `saturate(${(1 - 0.5 * s).toFixed(3)})`;
+        sib.style.opacity = steal ? (1 - 0.45 * s).toFixed(3) : "";
+        sib.style.filter = steal
+          ? `saturate(${(1 - 0.5 * s).toFixed(3)})`
+          : "";
       }
 
       // the whole title fades into its glowing fiery look as the
