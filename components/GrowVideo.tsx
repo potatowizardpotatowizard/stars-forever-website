@@ -19,6 +19,8 @@ export default function GrowVideo({
 }) {
   const frameRef = useRef<HTMLDivElement>(null);
   const dimRef = useRef<HTMLDivElement>(null);
+  const hintTextRef = useRef<HTMLParagraphElement>(null);
+  const hintArrowsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let raf = 0;
@@ -37,14 +39,29 @@ export default function GrowVideo({
       }
       const rect = el.getBoundingClientRect();
       const vh = window.innerHeight;
+      const desktop = window.matchMedia("(min-width: 768px)").matches;
       const p = smooth(clamp01((vh * 0.92 - rect.top) / (vh * 0.72)));
-      const from = window.matchMedia("(min-width: 768px)").matches ? 58 : 74;
+      const from = desktop ? 58 : 74;
       el.style.width = `${(from + (100 - from) * p).toFixed(2)}%`;
       // as the video takes the stage, the rest of the page falls dark
-      // so all the light is on it; the room comes back once it passes
+      // so all the light is on it; the room comes back once it passes.
+      // phones go nearly black and get a glowing rotate hint.
+      const hold = clamp01((rect.bottom - vh * 0.18) / (vh * 0.25));
+      const k = p * hold;
       if (dim) {
-        const hold = clamp01((rect.bottom - vh * 0.18) / (vh * 0.25));
-        dim.style.opacity = (0.55 * p * hold).toFixed(3);
+        dim.style.opacity = ((desktop ? 0.55 : 0.92) * k).toFixed(3);
+      }
+      const hintText = hintTextRef.current;
+      const hintArrows = hintArrowsRef.current;
+      if (hintText) {
+        hintText.style.opacity = desktop
+          ? "0"
+          : clamp01((k - 0.25) * 1.7).toFixed(3);
+      }
+      if (hintArrows) {
+        hintArrows.style.opacity = desktop
+          ? "0"
+          : clamp01((k - 0.45) * 2.2).toFixed(3);
       }
     };
 
@@ -69,6 +86,35 @@ export default function GrowVideo({
         className="pointer-events-none fixed inset-0 z-10 bg-night"
         style={{ opacity: 0 }}
       />
+      {/* mobile: the dark takes over, then the glowing invitation */}
+      <p
+        ref={hintTextRef}
+        aria-hidden="true"
+        className="pointer-events-none fixed left-1/2 top-[12%] z-10 -translate-x-1/2 whitespace-nowrap font-meta text-sm font-bold uppercase tracking-[0.22em] text-white [text-shadow:0_0_14px_rgb(255_255_255/0.9),0_0_34px_rgb(167_139_250/0.8)] md:hidden"
+        style={{ opacity: 0 }}
+      >
+        Press Play &amp; Rotate
+      </p>
+      <div
+        ref={hintArrowsRef}
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-0 z-10 md:hidden"
+        style={{ opacity: 0 }}
+      >
+        {[
+          { pos: "left-5 top-20", glyph: "\u2196" },
+          { pos: "right-5 top-20", glyph: "\u2197" },
+          { pos: "bottom-8 left-5", glyph: "\u2199" },
+          { pos: "bottom-8 right-5", glyph: "\u2198" },
+        ].map((a) => (
+          <span
+            key={a.pos}
+            className={`absolute ${a.pos} animate-pulse text-3xl text-white [text-shadow:0_0_12px_rgb(255_255_255/0.9),0_0_28px_rgb(167_139_250/0.8)]`}
+          >
+            {a.glyph}
+          </span>
+        ))}
+      </div>
       <div ref={frameRef} className="relative z-20 mx-auto" style={{ width: "100%" }}>
         <VideoBlock src={src} poster={poster} title={title} />
       </div>
