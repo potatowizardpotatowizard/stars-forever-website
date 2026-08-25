@@ -141,13 +141,13 @@ export default function CohortSpotlight() {
           </figure>
           <div className="md:col-start-2 md:row-start-2 md:self-start">
           <Link
-            href="/apply"
+            href="/revolutionary#attend"
             className="mono-link mt-8 inline-block text-sm font-bold text-ember md:hidden"
           >
             Apply to be part of it
           </Link>
           <div className="mt-8 hidden md:block">
-            <Cta href="/apply">Apply to be part of it</Cta>
+            <Cta href="/revolutionary#attend">Apply to be part of it</Cta>
           </div>
           <p className="mt-12 text-sm text-starlight/75 md:mt-8">
             In collaboration with{" "}

@@ -231,7 +231,7 @@ export default function RevolutionaryPage() {
 
       {/* How to attend + CTA: invite only on the left, the waitlist on
           the right, an arrow bridging the two on desktop */}
-      <section className="mx-auto max-w-7xl px-5 pb-32 sm:px-8">
+      <section id="attend" className="mx-auto max-w-7xl px-5 pb-32 pt-4 sm:px-8">
         <Reveal className="mx-auto max-w-2xl text-center md:grid md:max-w-5xl md:grid-cols-2 md:items-center md:gap-16 md:text-left">
           <div>
           <Kicker>{REVOLUTIONARY.attend.kicker}</Kicker>
