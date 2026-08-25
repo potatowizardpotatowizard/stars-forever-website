@@ -35,7 +35,7 @@ export default function ApplyPage() {
           className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/25 to-night"
         />
         <Grain />
-        <div className="relative mx-auto w-full max-w-7xl px-5 pb-44 pt-32 sm:px-8 md:pb-48 md:pt-44">
+        <div className="relative mx-auto w-full max-w-7xl px-5 pb-16 pt-32 sm:px-8 md:pb-48 md:pt-44">
           <Kicker>Partner Project</Kicker>
           <h1 className="mt-6 font-display text-5xl font-bold sm:text-6xl">
             Bring Us Your God Dream
@@ -59,7 +59,7 @@ export default function ApplyPage() {
       {/* the star choreography flows straight into the application:
           same night sky, no seam, the merged star pointing down at
           the first question */}
-      <section className="mx-auto max-w-3xl px-5 pb-16 pt-28 sm:px-8 sm:pb-20 sm:pt-36">
+      <section className="mx-auto max-w-3xl px-5 pb-16 pt-6 sm:px-8 sm:pb-20 sm:pt-12">
         <DreamStars />
         <div className="mt-2">
           <ApplyForm />
