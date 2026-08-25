@@ -93,7 +93,7 @@ export default function GrowVideo({
         <p
           ref={hintTextRef}
           aria-hidden="true"
-          className="pointer-events-none absolute -bottom-[3.1rem] left-1 whitespace-nowrap font-meta text-xs font-bold uppercase tracking-[0.2em] text-white [text-shadow:0_0_12px_rgb(255_255_255/0.9),0_0_28px_rgb(167_139_250/0.8)] md:hidden"
+          className="pointer-events-none absolute -top-11 left-1/2 -translate-x-1/2 whitespace-nowrap font-meta text-sm font-bold uppercase tracking-[0.22em] text-white [text-shadow:0_0_12px_rgb(255_255_255/0.9),0_0_28px_rgb(167_139_250/0.8)] md:hidden"
           style={{ opacity: 0 }}
         >
           Press Play &amp; Rotate
@@ -101,7 +101,7 @@ export default function GrowVideo({
         <div
           ref={hintArrowsRef}
           aria-hidden="true"
-          className="pointer-events-none absolute -bottom-16 right-1 animate-pulse md:hidden"
+          className="pointer-events-none absolute -bottom-14 right-2 animate-pulse md:hidden"
           style={{ opacity: 0 }}
         >
           <svg
@@ -112,13 +112,13 @@ export default function GrowVideo({
             className="[filter:drop-shadow(0_0_10px_rgb(255_255_255/0.85))_drop-shadow(0_0_22px_rgb(167_139_250/0.7))]"
           >
             <path
-              d="M8 8 A 26 26 0 0 1 36 32"
+              d="M10 4 V 32 H 38"
               stroke="#ffffff"
               strokeWidth="2.6"
-              strokeLinecap="round"
+              strokeLinejoin="miter"
             />
             <path
-              d="M36 32 l-9.5 -2.5 M36 32 l1.5 -9.5"
+              d="M38 32 l-9 -5 M38 32 l-9 5"
               stroke="#ffffff"
               strokeWidth="2.6"
               strokeLinecap="round"
