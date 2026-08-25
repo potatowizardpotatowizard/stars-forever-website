@@ -63,38 +63,6 @@ export default function ApplyPage() {
         </div>
       </section>
 
-      {/* What happens next: the three steps after the button */}
-      <section className="mx-auto max-w-3xl px-5 pb-20 sm:px-8">
-        <Kicker>What happens next</Kicker>
-        <ol className="mt-8 grid gap-8 sm:grid-cols-3">
-          {[
-            {
-              n: "01",
-              t: "Submit the dream",
-              b: "Three questions is all it takes. We read every single one.",
-            },
-            {
-              n: "02",
-              t: "We book a call",
-              b: "A call is not a commitment. It is a place to give your vision a chance.",
-            },
-            {
-              n: "03",
-              t: "We build it together",
-              b: "If it is a fit, we plan it, fund it, and film it with you.",
-            },
-          ].map((step) => (
-            <li key={step.n} className="border-t border-dust/20 pt-5">
-              <p className="meta-label text-ember">{step.n}</p>
-              <p className="mt-2 font-display text-xl font-bold">{step.t}</p>
-              <p className="mt-2 text-sm leading-relaxed text-starlight/70">
-                {step.b}
-              </p>
-            </li>
-          ))}
-        </ol>
-      </section>
-
       {/* Proof: dreams that came through this exact form */}
       <section className="border-t border-dust/10 bg-soot/40">
         <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
@@ -105,19 +73,19 @@ export default function ApplyPage() {
                 href: "/partner-projects/real-treasure",
                 slot: "real-treasure-card",
                 name: "Real Treasure",
-                line: "6.7M+ views across platforms",
+                line: "A treasure hunt from Southern California to Iceland that put Jesus in front of millions.",
               },
               {
                 href: "/partner-projects/tokyo-drift",
                 slot: "home-proof-tokyo",
                 name: "Tokyo Drift",
-                line: "A gospel video for a secular audience",
+                line: "Thirty days in Japan that became the blueprint for sharing Jesus on secular YouTube.",
               },
               {
                 href: "/partner-projects/beast-games",
                 slot: "home-proof-beast-games",
                 name: "Beast Games",
-                line: "Prayer on the world's biggest stage",
+                line: "Podcasts filmed around the biggest show on earth, carrying Jesus to a secular fanbase.",
               },
             ].map((proj) => (
               <Link key={proj.href} href={proj.href} className="group block">
@@ -130,7 +98,7 @@ export default function ApplyPage() {
                 <p className="mt-4 font-display text-xl font-bold transition-colors group-hover:text-ember">
                   {proj.name}
                 </p>
-                <p className="meta-label mt-1 text-dust">{proj.line}</p>
+                <p className="mt-2 max-w-xs text-sm leading-relaxed text-starlight/70">{proj.line}</p>
               </Link>
             ))}
           </div>
