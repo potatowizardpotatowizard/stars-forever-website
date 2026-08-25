@@ -29,6 +29,27 @@ type Trail = {
 };
 
 const TRAIL_GLOWS = ["139, 92, 246", "109, 40, 217", "167, 139, 250"];
+
+const DOUBTS = [
+  "UNWORTHY",
+  "SHAME",
+  "GUILT",
+  "FEAR",
+  "PROCRASTINATION",
+  "DOUBT",
+  "ANXIETY",
+  "COMPARISON",
+  "INSECURITY",
+  "DISTRACTION",
+];
+
+type Agent = {
+  trailIdx: number;
+  word: string;
+  offset: number;
+  dur: number;
+  lastLocal: number;
+};
 const TRAIL_CORES = ["243, 236, 255", "224, 211, 255", "255, 250, 255"];
 
 const TINTS = [
@@ -55,6 +76,7 @@ export default function GalaxyHero() {
     let H = 0;
     let stars: Star[] = [];
     let trails: Trail[] = [];
+    let agents: Agent[] = [];
 
     const build = () => {
       const rect = canvas.parentElement!.getBoundingClientRect();
@@ -108,6 +130,16 @@ export default function GalaxyHero() {
           core: TRAIL_CORES[Math.floor(Math.random() * TRAIL_CORES.length)],
         };
       });
+      agents =
+        W < 768
+          ? []
+          : Array.from({ length: 6 }, (_, i) => ({
+              trailIdx: Math.floor(Math.random() * trails.length),
+              word: DOUBTS[Math.floor(Math.random() * DOUBTS.length)],
+              offset: i * 1700 + Math.random() * 800,
+              dur: 8000 + Math.random() * 2500,
+              lastLocal: 0,
+            }));
     };
 
     // the galaxy lives in the hero's top right on desktop; phones
@@ -184,7 +216,7 @@ export default function GalaxyHero() {
             }
             if (u <= split) {
               const k = u / split;
-              return { x: -60 + (xBend + 60) * k, y: tr.y0 + tr.tilt * k };
+              return { x: 40 + (xBend - 40) * k, y: tr.y0 + tr.tilt * k };
             }
             const v = (u - split) / (1 - split);
             const iv = 1 - v;
@@ -213,7 +245,8 @@ export default function GalaxyHero() {
               mobile ? W : cx,
               mobile ? tr.y0 : cy,
             );
-            g.addColorStop(0, `rgba(${tint}, ${(a * 0.85).toFixed(3)})`);
+            g.addColorStop(0, `rgba(${tint}, 0)`);
+            g.addColorStop(0.14, `rgba(${tint}, ${(a * 0.85).toFixed(3)})`);
             g.addColorStop(0.72, `rgba(${tint}, ${a.toFixed(3)})`);
             g.addColorStop(1, `rgba(${tint}, 0)`);
             return g;
@@ -247,6 +280,87 @@ export default function GalaxyHero() {
               }
               ctx.stroke();
             }
+          }
+        }
+
+        // the doubts: words slip in from the left edge, caught by a
+        // trail, dragged along its exact path, and burned away in a
+        // white-violet flare inside the core
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        for (const ag of agents) {
+          const tr = trails[ag.trailIdx];
+          if (!tr) continue;
+          const local = ((t + ag.offset) % ag.dur) / ag.dur;
+          if (local < ag.lastLocal) {
+            ag.word = DOUBTS[Math.floor(Math.random() * DOUBTS.length)];
+            ag.trailIdx = Math.floor(Math.random() * trails.length);
+          }
+          ag.lastLocal = local;
+          const split = 0.55;
+          const xBend = W * tr.bend;
+          const y1 = tr.y0 + tr.tilt;
+          const pt = (u: number) => {
+            if (u <= split) {
+              const k = u / split;
+              return { x: 40 + (xBend - 40) * k, y: tr.y0 + tr.tilt * k };
+            }
+            const v = (u - split) / (1 - split);
+            const iv = 1 - v;
+            const cxq = xBend + (cx - xBend) * 0.65;
+            return {
+              x: iv * iv * xBend + 2 * iv * v * cxq + v * v * cx,
+              y: iv * iv * y1 + 2 * iv * v * y1 + v * v * cy,
+            };
+          };
+          if (local >= 0.9) {
+            // burn out: the word flares, blooms, and is gone
+            const b = (local - 0.9) / 0.1;
+            const r = 10 + 52 * b;
+            const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+            g.addColorStop(0, `rgba(255, 255, 255, ${(0.85 * (1 - b)).toFixed(3)})`);
+            g.addColorStop(0.5, `rgba(196, 181, 253, ${(0.55 * (1 - b)).toFixed(3)})`);
+            g.addColorStop(1, "rgba(139, 92, 246, 0)");
+            ctx.fillStyle = g;
+            ctx.beginPath();
+            ctx.arc(cx, cy, r, 0, Math.PI * 2);
+            ctx.fill();
+            const size = 13 * (1 + 1.1 * b);
+            ctx.font = `700 ${size.toFixed(1)}px "IBM Plex Mono", monospace`;
+            ctx.fillStyle = `rgba(255, 255, 255, ${(1 - b).toFixed(3)})`;
+            ctx.fillText(ag.word, cx, cy);
+          } else {
+            let x: number;
+            let y: number;
+            let alpha: number;
+            let size = 13;
+            if (local < 0.16) {
+              // slipping in from the left edge toward the trail start
+              const k = local / 0.16;
+              const p0 = pt(0);
+              x = -130 + (p0.x + 130) * k;
+              y = tr.y0;
+              alpha = 0.3 + 0.7 * k;
+            } else {
+              // caught: pulled along the trail, faster and faster
+              const v = (local - 0.16) / (0.9 - 0.16);
+              const u = Math.pow(v, 1.85);
+              const p = pt(u);
+              x = p.x;
+              y = p.y;
+              alpha = 1;
+              size = 13 * (1 - 0.3 * Math.max(0, (u - 0.72) / 0.28));
+            }
+            const glow = ctx.createRadialGradient(x, y, 0, x, y, 30);
+            glow.addColorStop(0, `rgba(139, 92, 246, ${(0.3 * alpha).toFixed(3)})`);
+            glow.addColorStop(1, "rgba(139, 92, 246, 0)");
+            ctx.fillStyle = glow;
+            ctx.beginPath();
+            ctx.arc(x, y, 30, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.font = `700 ${size.toFixed(1)}px "IBM Plex Mono", monospace`;
+            ctx.fillStyle = `rgba(228, 218, 255, ${alpha.toFixed(3)})`;
+            ctx.fillText(ag.word, x, y);
           }
         }
       }
