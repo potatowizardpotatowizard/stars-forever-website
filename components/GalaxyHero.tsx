@@ -2,11 +2,12 @@
 
 import { useEffect, useRef } from "react";
 
-// A living purple galaxy behind the apply hero: hundreds of stars in
-// spiral arms with differential rotation (inner stars orbit faster),
-// soft nebula clouds breathing around a white-hot core, all drawn
-// additively so the light stacks and blooms. Reduced motion gets a
-// single still frame.
+// A living purple galaxy tucked into the hero's top right corner:
+// stars in spiral arms with differential rotation around a white-hot
+// core, breathing nebula clouds, and, drifting in the space below the
+// copy, the words that hold creators back (fear, anxiety,
+// unworthiness...) getting pulled off their feet and swallowed into
+// the galaxy one by one. Reduced motion gets a single still frame.
 type Star = {
   r: number;
   theta: number;
@@ -25,6 +26,26 @@ const TINTS = [
   "139, 92, 246",
 ];
 
+const WORDS = [
+  "FEAR",
+  "ANXIETY",
+  "UNWORTHINESS",
+  "DOUBT",
+  "SHAME",
+  "COMPARISON",
+  "INSECURITY",
+  "DISTRACTION",
+];
+
+type Word = {
+  text: string;
+  x0: number;
+  y0: number;
+  offset: number;
+  dur: number;
+  lastLocal: number;
+};
+
 export default function GalaxyHero() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -39,6 +60,12 @@ export default function GalaxyHero() {
     let W = 0;
     let H = 0;
     let stars: Star[] = [];
+    let words: Word[] = [];
+
+    const spawnWord = (w: Word) => {
+      w.x0 = W * (0.08 + Math.random() * 0.6);
+      w.y0 = H * (0.78 + Math.random() * 0.17);
+    };
 
     const build = () => {
       const rect = canvas.parentElement!.getBoundingClientRect();
@@ -48,8 +75,8 @@ export default function GalaxyHero() {
       canvas.width = Math.round(W * dpr);
       canvas.height = Math.round(H * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const count = W < 768 ? 420 : 850;
-      const maxR = Math.max(W, H) * 0.72;
+      const count = W < 768 ? 300 : 560;
+      const maxR = Math.max(W, H) * 0.4;
       stars = Array.from({ length: count }, (_, i) => {
         const arm = i % 3;
         const t = Math.pow(Math.random(), 0.75);
@@ -63,28 +90,39 @@ export default function GalaxyHero() {
             (Math.random() - 0.5) * spread * Math.PI,
           size: 0.6 + Math.random() * 2.0,
           tint: TINTS[Math.floor(Math.random() * TINTS.length)],
-          alpha: 0.35 + Math.random() * 0.65,
+          alpha: 0.28 + Math.random() * 0.55,
           twinkle: Math.random() * Math.PI * 2,
         };
       });
+      words = WORDS.map((text, i) => {
+        const w: Word = {
+          text,
+          x0: 0,
+          y0: 0,
+          offset: i * 1500 + Math.random() * 700,
+          dur: 9500,
+          lastLocal: 0,
+        };
+        spawnWord(w);
+        return w;
+      });
     };
 
-    // galaxy center sits right of middle, up high, behind the copy's
-    // empty side
+    // the galaxy lives in the top right corner
     const draw = (t: number) => {
-      const cx = W * 0.7;
-      const cy = H * 0.48;
+      const cx = W * 0.86;
+      const cy = H * 0.22;
       ctx.clearRect(0, 0, W, H);
       ctx.globalCompositeOperation = "lighter";
 
       // breathing nebula clouds
       for (let i = 0; i < 4; i++) {
         const ang = t * 0.00004 * (i % 2 ? 1 : -1) + i * 1.7;
-        const nx = cx + Math.cos(ang) * (60 + i * 46);
-        const ny = cy + Math.sin(ang) * (34 + i * 26);
-        const nr = 210 + i * 120 + Math.sin(t * 0.00035 + i) * 34;
+        const nx = cx + Math.cos(ang) * (34 + i * 26);
+        const ny = cy + Math.sin(ang) * (20 + i * 15);
+        const nr = 120 + i * 66 + Math.sin(t * 0.00035 + i) * 20;
         const g = ctx.createRadialGradient(nx, ny, 0, nx, ny, nr);
-        g.addColorStop(0, `rgba(139, 92, 246, ${0.16 + 0.05 * Math.sin(t * 0.0005 + i * 2)})`);
+        g.addColorStop(0, `rgba(139, 92, 246, ${0.12 + 0.04 * Math.sin(t * 0.0005 + i * 2)})`);
         g.addColorStop(0.55, "rgba(109, 40, 217, 0.08)");
         g.addColorStop(1, "rgba(109, 40, 217, 0)");
         ctx.fillStyle = g;
@@ -114,17 +152,55 @@ export default function GalaxyHero() {
       }
 
       // white-hot core wrapped in violet
-      const core = ctx.createRadialGradient(cx, cy, 0, cx, cy, 190);
-      core.addColorStop(0, "rgba(255, 255, 255, 0.85)");
+      const core = ctx.createRadialGradient(cx, cy, 0, cx, cy, 110);
+      core.addColorStop(0, "rgba(255, 255, 255, 0.7)");
       core.addColorStop(0.12, "rgba(233, 213, 255, 0.5)");
       core.addColorStop(0.4, "rgba(167, 139, 250, 0.22)");
       core.addColorStop(1, "rgba(167, 139, 250, 0)");
       ctx.fillStyle = core;
       ctx.beginPath();
-      ctx.arc(cx, cy, 190, 0, Math.PI * 2);
+      ctx.arc(cx, cy, 110, 0, Math.PI * 2);
       ctx.fill();
 
       ctx.globalCompositeOperation = "source-over";
+
+      // the words that hold you back, drifting, then dragged into the
+      // galaxy along a shrinking spiral and swallowed
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      for (const w of words) {
+        const local = ((t + w.offset) % w.dur) / w.dur;
+        if (local < w.lastLocal) spawnWord(w);
+        w.lastLocal = local;
+        let x = w.x0;
+        let y = w.y0;
+        let alpha = 0;
+        let size = W < 768 ? 12 : 14;
+        if (local < 0.5) {
+          const fadeIn = Math.min(1, local / 0.1);
+          alpha = 0.5 * fadeIn;
+          x += Math.sin(t * 0.0006 + w.offset) * 7;
+          y += Math.cos(t * 0.0005 + w.offset) * 5;
+        } else {
+          const v = (local - 0.5) / 0.45;
+          if (v >= 1) continue;
+          const e = v * v;
+          const dx = w.x0 - cx;
+          const dy = w.y0 - cy;
+          const r0 = Math.hypot(dx, dy);
+          const ang0 = Math.atan2(dy, dx);
+          const r = r0 * (1 - e);
+          const ang = ang0 + 2.6 * e;
+          x = cx + Math.cos(ang) * r;
+          y = cy + Math.sin(ang) * r * 0.85;
+          alpha = 0.5 * (1 - Math.max(0, (v - 0.7) / 0.3));
+          size *= 1 - 0.6 * e;
+        }
+        if (alpha <= 0.01) continue;
+        ctx.font = `700 ${size.toFixed(1)}px "IBM Plex Mono", monospace`;
+        ctx.fillStyle = `rgba(196, 181, 253, ${alpha.toFixed(3)})`;
+        ctx.fillText(w.text, x, y);
+      }
     };
 
     build();
