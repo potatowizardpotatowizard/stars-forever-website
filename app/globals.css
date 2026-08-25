@@ -818,10 +818,10 @@ html[data-mission-intro="1"] #hero > img {
   /* mobile split: the stars arrive from the sides as soon as the page
      loads, then hold; the merge waits for scroll */
   .dream-arrive .dream-small {
-    animation: dream-small-in 1.8s 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation: dream-small-in 1.8s 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   }
   .dream-arrive .dream-big {
-    animation: dream-big-in 1.8s 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation: dream-big-in 1.8s 1.25s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   }
   .dream-merge .dream-small {
     animation: dream-small-merge 3.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
