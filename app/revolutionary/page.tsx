@@ -103,7 +103,7 @@ export default function RevolutionaryPage() {
           aria-hidden="true"
           className="absolute inset-x-0 top-0 h-[45vh] bg-[linear-gradient(to_bottom,rgb(22_101_52/0.35),rgb(22_101_52/0.12)_45%,transparent)]"
         />
-        <div className="relative mx-auto max-w-7xl px-5 pt-12 sm:px-8">
+        <div className="relative mx-auto max-w-7xl px-5 pb-24 pt-12 sm:px-8 md:pb-0">
         <GrowVideo
           src="/brand/video/revolutionary-cohort-explainer.mp4"
           poster="/brand/poster-revolutionary-cohort-explainer.jpg"

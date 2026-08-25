@@ -56,12 +56,12 @@ export default function GrowVideo({
       if (hintText) {
         hintText.style.opacity = desktop
           ? "0"
-          : clamp01((k - 0.25) * 1.7).toFixed(3);
+          : clamp01((k - 0.3) * 1.8).toFixed(3);
       }
       if (hintArrows) {
         hintArrows.style.opacity = desktop
           ? "0"
-          : clamp01((k - 0.45) * 2.2).toFixed(3);
+          : clamp01((k - 0.3) * 1.8).toFixed(3);
       }
     };
 
@@ -86,37 +86,45 @@ export default function GrowVideo({
         className="pointer-events-none fixed inset-0 z-10 bg-night"
         style={{ opacity: 0 }}
       />
-      {/* mobile: the dark takes over, then the glowing invitation */}
-      <p
-        ref={hintTextRef}
-        aria-hidden="true"
-        className="pointer-events-none fixed left-1/2 top-[12%] z-10 -translate-x-1/2 whitespace-nowrap font-meta text-sm font-bold uppercase tracking-[0.22em] text-white [text-shadow:0_0_14px_rgb(255_255_255/0.9),0_0_34px_rgb(167_139_250/0.8)] md:hidden"
-        style={{ opacity: 0 }}
-      >
-        Press Play &amp; Rotate
-      </p>
-      <div
-        ref={hintArrowsRef}
-        aria-hidden="true"
-        className="pointer-events-none fixed inset-0 z-10 md:hidden"
-        style={{ opacity: 0 }}
-      >
-        {[
-          { pos: "left-5 top-20", glyph: "\u2196" },
-          { pos: "right-5 top-20", glyph: "\u2197" },
-          { pos: "bottom-8 left-5", glyph: "\u2199" },
-          { pos: "bottom-8 right-5", glyph: "\u2198" },
-        ].map((a) => (
-          <span
-            key={a.pos}
-            className={`absolute ${a.pos} animate-pulse text-3xl text-white [text-shadow:0_0_12px_rgb(255_255_255/0.9),0_0_28px_rgb(167_139_250/0.8)]`}
-          >
-            {a.glyph}
-          </span>
-        ))}
-      </div>
       <div ref={frameRef} className="relative z-20 mx-auto" style={{ width: "100%" }}>
         <VideoBlock src={src} poster={poster} title={title} />
+        {/* directly under the video: the glowing invitation and a
+            quarter turn arrow asking for the rotation */}
+        <p
+          ref={hintTextRef}
+          aria-hidden="true"
+          className="pointer-events-none absolute -bottom-[3.1rem] left-1 whitespace-nowrap font-meta text-xs font-bold uppercase tracking-[0.2em] text-white [text-shadow:0_0_12px_rgb(255_255_255/0.9),0_0_28px_rgb(167_139_250/0.8)] md:hidden"
+          style={{ opacity: 0 }}
+        >
+          Press Play &amp; Rotate
+        </p>
+        <div
+          ref={hintArrowsRef}
+          aria-hidden="true"
+          className="pointer-events-none absolute -bottom-16 right-1 animate-pulse md:hidden"
+          style={{ opacity: 0 }}
+        >
+          <svg
+            width="46"
+            height="42"
+            viewBox="0 0 46 42"
+            fill="none"
+            className="[filter:drop-shadow(0_0_10px_rgb(255_255_255/0.85))_drop-shadow(0_0_22px_rgb(167_139_250/0.7))]"
+          >
+            <path
+              d="M8 8 A 26 26 0 0 1 36 32"
+              stroke="#ffffff"
+              strokeWidth="2.6"
+              strokeLinecap="round"
+            />
+            <path
+              d="M36 32 l-9.5 -2.5 M36 32 l1.5 -9.5"
+              stroke="#ffffff"
+              strokeWidth="2.6"
+              strokeLinecap="round"
+            />
+          </svg>
+        </div>
       </div>
     </div>
   );
