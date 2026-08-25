@@ -11,6 +11,11 @@ import { useEffect, useRef, useState } from "react";
 export default function DreamStars() {
   const ref = useRef<HTMLDivElement>(null);
   const [play, setPlay] = useState(false);
+  const [mobile, setMobile] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    setMobile(window.matchMedia("(max-width: 767px)").matches);
+  }, []);
 
   useEffect(() => {
     // hold the choreography until the stage itself has been scrolled
@@ -37,7 +42,11 @@ export default function DreamStars() {
     <div
       ref={ref}
       aria-hidden="true"
-      className={`dream-stage${play ? " dream-play" : ""}`}
+      className={
+        mobile
+          ? `dream-stage dream-arrive${play ? " dream-merge" : ""}`
+          : `dream-stage${play ? " dream-play" : ""}`
+      }
     >
       <div className="dream-small">
         <Image src="/brand/star-sharp.png" alt="" width={44} height={44} />
