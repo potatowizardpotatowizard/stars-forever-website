@@ -194,15 +194,15 @@ export default function SpeakingPage() {
                         />
                       ) : null}
                       <div
-                        className="journey-stop flex gap-3 sm:mx-3 sm:max-w-44 sm:flex-col sm:gap-0"
+                        className="journey-stop flex items-start gap-3.5 sm:mx-3 sm:max-w-44 sm:flex-col sm:gap-0"
                         style={{ transitionDelay: `${0.15 + j * 0.35}s` }}
                       >
                         <Image
                           src="/brand/star-sharp.png"
                           alt=""
-                          width={16}
-                          height={16}
-                          className="journey-star mt-0.5 shrink-0 sm:mt-0"
+                          width={18}
+                          height={18}
+                          className="journey-star mt-1 h-[18px] w-[18px] shrink-0 self-start sm:mt-0"
                         />
                         <div>
                           <p className="font-display text-base font-bold sm:mt-3">
