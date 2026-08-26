@@ -142,7 +142,7 @@ export default function VisionPage() {
                 },
               ]}
             />
-          </Reveal>
+          </div>
         </div>
         </section>
       </div>
