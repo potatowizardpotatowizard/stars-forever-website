@@ -143,7 +143,7 @@ export default function Header() {
               ))}
             </ul>
 
-            <p className="meta-label px-7 pb-8 text-dust sm:px-10">
+            <p className="meta-label pb-8 text-center text-dust">
               Create eternity changing art
             </p>
           </div>
