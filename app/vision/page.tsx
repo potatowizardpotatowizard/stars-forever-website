@@ -57,7 +57,7 @@ export default function VisionPage() {
         <section className="relative">
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 top-[-14svh] h-[70vh]"
+          className="absolute inset-x-0 top-[-14svh] h-[70vh] [mask-image:linear-gradient(to_bottom,transparent,black_30%,black_72%,transparent)]"
           style={{
             backgroundImage:
               "radial-gradient(ellipse 55% 60% at 10% 0%, rgb(109 40 217 / 0.22), transparent 68%), radial-gradient(ellipse 80% 65% at 78% 0%, rgb(34 197 94 / 0.26), transparent 72%)",
@@ -86,6 +86,13 @@ export default function VisionPage() {
             <StatCarousel
               stats={[
                 {
+                  value: "4.8h",
+                  text: "a day on social media for the average US teen. For teen girls it is 5.3.",
+                  sourceLabel: "Gallup",
+                  sourceHref:
+                    "https://news.gallup.com/poll/512576/teens-spend-average-hours-social-media-per-day.aspx",
+                },
+                {
                   value: "2h 21m",
                   text: "on social media every single day, the global average.",
                   sourceLabel: "DataReportal",
@@ -105,13 +112,6 @@ export default function VisionPage() {
                   sourceLabel: "DataReportal",
                   sourceHref:
                     "https://datareportal.com/reports/digital-2026-global-overview-report",
-                },
-                {
-                  value: "4.8h",
-                  text: "a day on social media for the average US teen. For teen girls it is 5.3.",
-                  sourceLabel: "Gallup",
-                  sourceHref:
-                    "https://news.gallup.com/poll/512576/teens-spend-average-hours-social-media-per-day.aspx",
                 },
                 {
                   value: "46%",

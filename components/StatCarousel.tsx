@@ -43,11 +43,11 @@ export default function StatCarousel({
       >
         {stats.map((stat) => (
           <li key={stat.text} className="w-full shrink-0 snap-center pr-4">
-            <div className="flex min-h-[20rem] flex-col justify-center">
-              <p className="vhs-glow font-display text-7xl font-bold text-ember">
+            <div className="flex min-h-[12rem] flex-col justify-center md:min-h-[20rem]">
+              <p className="vhs-glow font-display text-5xl font-bold text-ember md:text-7xl">
                 {stat.value}
               </p>
-              <p className="mt-4 max-w-sm text-base leading-relaxed text-starlight/85">
+              <p className="mt-3 max-w-sm text-sm leading-relaxed text-starlight/85 md:mt-4 md:text-base">
                 {stat.text}
               </p>
               {stat.sourceHref ? (
