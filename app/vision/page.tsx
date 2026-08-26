@@ -38,6 +38,15 @@ export default function VisionPage() {
             aria-hidden="true"
             className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night/70 [mask-image:linear-gradient(to_bottom,black_55%,transparent_97%)]"
           />
+          {/* extra nebula breath over the hero, photo untouched */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 [mask-image:linear-gradient(to_bottom,black_60%,transparent_97%)]"
+            style={{
+              backgroundImage:
+                "radial-gradient(ellipse 60% 55% at 12% 28%, rgb(109 40 217 / 0.3), transparent 70%), radial-gradient(ellipse 70% 60% at 86% 22%, rgb(34 197 94 / 0.24), transparent 72%), radial-gradient(ellipse 45% 40% at 55% 70%, rgb(139 92 246 / 0.18), transparent 70%)",
+            }}
+          />
         </div>
         <Grain />
         <header className="relative">
