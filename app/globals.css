@@ -665,6 +665,14 @@ html[data-mission-intro="1"] #hero > img {
   .reveal.is-visible .journey-line {
     transform: scaleX(1);
   }
+  /* phones show the stops as a vertical list: no stagger, they all
+     arrive together instead of popping in one by one */
+  @media (max-width: 639px) {
+    .journey-stop,
+    .journey-line {
+      transition-delay: 0s !important;
+    }
+  }
 }
 
 /* A tiny shooting star periodically streaks beneath the text, its trail
