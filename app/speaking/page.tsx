@@ -200,15 +200,15 @@ export default function SpeakingPage() {
                         <Image
                           src="/brand/star-sharp.png"
                           alt=""
-                          width={18}
-                          height={18}
-                          className="journey-star mt-1 h-[18px] w-[18px] shrink-0 self-start sm:mt-0"
+                          width={26}
+                          height={26}
+                          className="journey-star mt-1 h-[26px] w-[26px] shrink-0 self-start sm:mt-0 sm:h-4 sm:w-4"
                         />
                         <div>
-                          <p className="font-display text-base font-bold sm:mt-3">
+                          <p className="font-display text-xl font-bold sm:mt-3 sm:text-base">
                             {stop.label}
                           </p>
-                          <p className="mt-1 text-xs leading-relaxed text-dust">
+                          <p className="mt-1 text-sm leading-relaxed text-dust sm:text-xs">
                             {stop.note}
                           </p>
                         </div>
