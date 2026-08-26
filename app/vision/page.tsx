@@ -150,7 +150,7 @@ export default function VisionPage() {
 
       {/* A missionary to a niche */}
       <section className="relative overflow-hidden">
-        <div className="relative mx-auto max-w-7xl px-5 pb-24 pt-4 sm:px-8 md:pt-14">
+        <div className="relative mx-auto max-w-7xl px-5 pb-24 pt-16 sm:px-8 md:pt-14">
           <Reveal className="max-w-3xl md:grid md:max-w-none md:grid-cols-2 md:items-center md:gap-16">
             <div className="md:order-2">
             <Kicker>{VISION.missionary.kicker}</Kicker>
