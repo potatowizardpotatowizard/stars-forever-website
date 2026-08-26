@@ -13,14 +13,14 @@ function Row({ lit, hidden }: { lit?: boolean; hidden?: boolean }) {
           aria-hidden={hidden || undefined}
           className={`meta-label flex shrink-0 items-center gap-2.5 rounded-md border px-4 py-2.5 ${
             lit
-              ? "border-ember/60 bg-soot/70 font-bold text-starlight shadow-[0_0_20px_rgb(109_40_217/0.45)] [text-shadow:0_0_10px_rgb(196_181_253/0.45)]"
+              ? "border-ember bg-soot/80 font-bold text-white shadow-[0_0_14px_rgb(167_139_250/0.65),0_0_36px_rgb(109_40_217/0.55)] [text-shadow:0_0_12px_rgb(235_225_255/0.85),0_0_26px_rgb(167_139_250/0.6)]"
               : "border-dust/10 bg-night/30 text-starlight/30"
           }`}
         >
           <span
             className={
               lit
-                ? "text-ember drop-shadow-[0_0_7px_rgba(167,139,250,0.95)]"
+                ? "text-[#d9c8ff] drop-shadow-[0_0_9px_rgba(215,190,255,1)]"
                 : "text-dust/35"
             }
           >
