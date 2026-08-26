@@ -35,7 +35,7 @@ export default function GetInvolvedPage() {
           fill
           priority
           sizes="100vw"
-          className="object-cover opacity-70 [mask-image:linear-gradient(to_bottom,black_45%,transparent_96%)]"
+          className="object-cover opacity-50 brightness-90 [mask-image:linear-gradient(to_bottom,black_45%,transparent_96%)]"
         />
         <div
           aria-hidden="true"
