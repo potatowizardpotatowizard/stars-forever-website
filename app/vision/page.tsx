@@ -44,7 +44,7 @@ export default function VisionPage() {
             className="absolute inset-0 [mask-image:linear-gradient(to_bottom,black_60%,transparent_97%)]"
             style={{
               backgroundImage:
-                "radial-gradient(ellipse 60% 55% at 12% 28%, rgb(109 40 217 / 0.3), transparent 70%), radial-gradient(ellipse 70% 60% at 86% 22%, rgb(34 197 94 / 0.24), transparent 72%), radial-gradient(ellipse 45% 40% at 55% 70%, rgb(139 92 246 / 0.18), transparent 70%)",
+                "radial-gradient(ellipse 60% 55% at 12% 28%, rgb(109 40 217 / 0.2), transparent 70%), radial-gradient(ellipse 70% 60% at 86% 22%, rgb(34 197 94 / 0.16), transparent 72%), radial-gradient(ellipse 45% 40% at 55% 70%, rgb(139 92 246 / 0.12), transparent 70%)",
             }}
           />
         </div>
