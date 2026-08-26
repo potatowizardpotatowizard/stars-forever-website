@@ -113,7 +113,7 @@ export default function Header() {
               </button>
             </div>
 
-            <ul className="flex flex-1 flex-col items-center justify-center gap-1 px-7 pb-16 sm:px-10">
+            <ul className="flex flex-1 flex-col justify-center gap-1 px-7 pb-16 sm:px-10">
               {NAV.map((item, i) => (
                 <li
                   key={item.href}
@@ -124,17 +124,26 @@ export default function Header() {
                     href={item.href}
                     onClick={() => setOpen(false)}
                     aria-current={pathname === item.href ? "page" : undefined}
-                    className={`block py-3 text-center font-display text-3xl font-bold ${
+                    className={`group flex items-center gap-4 py-3 font-display text-3xl font-bold ${
                       pathname === item.href ? "text-ember" : "text-starlight"
                     }`}
                   >
+                    <Image
+                      src="/brand/star-sharp.png"
+                      alt=""
+                      width={18}
+                      height={18}
+                      className={`vhs-glow h-[18px] w-[18px] transition-opacity ${
+                        pathname === item.href ? "opacity-100" : "opacity-40"
+                      }`}
+                    />
                     {item.label}
                   </Link>
                 </li>
               ))}
             </ul>
 
-            <p className="meta-label pb-8 text-center text-dust">
+            <p className="meta-label px-7 pb-8 text-dust sm:px-10">
               Create eternity changing art
             </p>
           </div>
