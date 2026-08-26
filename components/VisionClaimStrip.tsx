@@ -50,7 +50,7 @@ export default function VisionClaimStrip() {
     return () => window.removeEventListener("sf-niche", onNiche);
   }, []);
   return (
-    <div className="-my-2 mt-4 space-y-4 overflow-hidden py-8 sm:mt-6">
+    <div className="-my-2 mt-0 space-y-4 overflow-hidden py-8 sm:mt-2">
       {/* the world as it is */}
       <div className="claim-marquee-left">
         <Row />

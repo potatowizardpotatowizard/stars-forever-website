@@ -51,8 +51,7 @@ export default function VisionPage() {
         <Grain />
         <header className="relative">
         <div className="relative mx-auto w-full max-w-7xl px-5 pt-32 sm:px-8 sm:pt-44">
-          <Kicker>{VISION.hero.kicker}</Kicker>
-          <h1 className="mt-6 max-w-4xl font-display text-5xl font-bold sm:text-6xl">
+          <h1 className="max-w-4xl font-display text-5xl font-bold sm:text-6xl">
             {VISION.hero.heading}
           </h1>
           <NicheCycler />
@@ -73,7 +72,7 @@ export default function VisionPage() {
           }}
         />
         <div className="relative mx-auto max-w-7xl px-5 pb-24 pt-28 sm:px-8 md:grid md:grid-cols-2 md:items-center md:gap-16 md:pt-24">
-          <Reveal className="max-w-3xl">
+          <div className="max-w-3xl">
             <Kicker>{VISION.problem.kicker}</Kicker>
             <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
               <GlitchText text={VISION.problem.heading} />
@@ -88,10 +87,10 @@ export default function VisionPage() {
                 </p>
               ))}
             </div>
-          </Reveal>
+          </div>
 
           {/* the numbers behind the problem, a swipeable deck */}
-          <Reveal className="mt-14 md:mt-0">
+          <div className="mt-14 md:mt-0">
             <StatCarousel
               stats={[
                 {

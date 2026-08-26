@@ -57,7 +57,7 @@ export default function NicheCycler() {
   }, []);
 
   return (
-    <p className="mt-2.5 min-h-[3.4rem] max-w-3xl font-display text-2xl leading-snug text-starlight sm:mt-7 sm:min-h-0 sm:text-4xl">
+    <p className="mt-6 min-h-[4rem] max-w-3xl font-display text-2xl leading-snug text-starlight sm:mt-7 sm:min-h-0 sm:text-4xl">
       A missionary to the{" "}
       <span className="relative inline-block">
         <span
