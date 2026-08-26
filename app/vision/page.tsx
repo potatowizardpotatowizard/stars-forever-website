@@ -93,6 +93,13 @@ export default function VisionPage() {
                     "https://news.gallup.com/poll/512576/teens-spend-average-hours-social-media-per-day.aspx",
                 },
                 {
+                  value: "46%",
+                  text: "of US teens say they are online almost constantly. A decade ago it was 24.",
+                  sourceLabel: "Pew Research Center",
+                  sourceHref:
+                    "https://www.pewresearch.org/internet/2024/12/12/teens-social-media-and-technology-2024/",
+                },
+                {
                   value: "2h 21m",
                   text: "on social media every single day, the global average.",
                   sourceLabel: "DataReportal",
@@ -112,13 +119,6 @@ export default function VisionPage() {
                   sourceLabel: "DataReportal",
                   sourceHref:
                     "https://datareportal.com/reports/digital-2026-global-overview-report",
-                },
-                {
-                  value: "46%",
-                  text: "of US teens say they are online almost constantly. A decade ago it was 24.",
-                  sourceLabel: "Pew Research Center",
-                  sourceHref:
-                    "https://www.pewresearch.org/internet/2024/12/12/teens-social-media-and-technology-2024/",
                 },
                 {
                   value: "2x",
