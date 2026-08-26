@@ -22,21 +22,25 @@ export const metadata: Metadata = {
 export default function VisionPage() {
   return (
     <article>
-      {/* Analog hero */}
-      <header className="relative overflow-hidden">
+      {/* Analog hero: hero and the problem share one continuous
+          canvas, the photo dissolving into open night */}
+      <div className="relative overflow-hidden">
+        <div aria-hidden="true" className="absolute inset-x-0 top-0 h-[70svh] md:h-[92svh]">
         <Image
           src="/brand/bg-greenpurple-star.jpg"
           alt=""
           fill
           priority
           sizes="100vw"
-          className="object-cover opacity-70"
+          className="object-cover opacity-70 [mask-image:linear-gradient(to_bottom,black_45%,transparent_96%)]"
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night"
+          className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night/70 [mask-image:linear-gradient(to_bottom,black_45%,transparent_96%)]"
         />
+        </div>
         <Grain />
+        <header className="relative">
         <div className="relative mx-auto w-full max-w-7xl px-5 pt-44 sm:px-8">
           <Kicker>{VISION.hero.kicker}</Kicker>
           <h1 className="mt-6 max-w-4xl font-display text-5xl font-bold sm:text-6xl">
@@ -47,13 +51,13 @@ export default function VisionPage() {
         {/* The claiming of the feed: ghost cards igniting one way,
             mission fields and fruit drifting the other */}
         <VisionClaimStrip />
-      </header>
+        </header>
 
       {/* The problem: life moved online, and lostness moved with it */}
-      <section className="relative">
+        <section className="relative">
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 top-0 h-[55vh]"
+          className="absolute inset-x-0 top-[-16svh] h-[70vh]"
           style={{
             backgroundImage:
               "radial-gradient(ellipse 55% 60% at 10% 0%, rgb(109 40 217 / 0.24), transparent 68%), radial-gradient(ellipse 80% 65% at 78% 0%, rgb(34 197 94 / 0.3), transparent 72%)",
@@ -132,7 +136,8 @@ export default function VisionPage() {
             />
           </Reveal>
         </div>
-      </section>
+        </section>
+      </div>
 
       {/* A missionary to a niche */}
       <section className="relative overflow-hidden">

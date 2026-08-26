@@ -25,21 +25,25 @@ export default function GetInvolvedPage() {
 
   return (
     <article>
-      {/* Analog hero band */}
-      <header className="relative overflow-hidden">
+      {/* Analog hero band: hero and the giving frame share one
+          continuous canvas, the photo dissolving into open night */}
+      <div className="relative overflow-hidden">
+        <div aria-hidden="true" className="absolute inset-x-0 top-0 h-[62svh] md:h-[80svh]">
         <Image
           src="/brand/bg-orange-star.jpg"
           alt=""
           fill
           priority
           sizes="100vw"
-          className="object-cover opacity-70"
+          className="object-cover opacity-70 [mask-image:linear-gradient(to_bottom,black_45%,transparent_96%)]"
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night"
+          className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night/70 [mask-image:linear-gradient(to_bottom,black_45%,transparent_96%)]"
         />
+        </div>
         <Grain />
+        <header className="relative">
         <span aria-hidden="true" className="hero-meteor" />
         <div className="relative mx-auto max-w-7xl px-5 pb-20 pt-44 sm:px-8">
           <h1 className="font-display text-5xl font-bold sm:text-6xl">
@@ -75,13 +79,13 @@ export default function GetInvolvedPage() {
             })}
           </div>
         </div>
-      </header>
+        </header>
 
-      {/* For supporters: why giving matters, under the hero's orange afterglow */}
-      <section className="relative overflow-hidden">
+        {/* For supporters: why giving matters, same sky */}
+        <section className="relative">
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 top-0 h-[45vh] bg-[linear-gradient(to_bottom,rgb(194_65_12/0.3),rgb(194_65_12/0.1)_45%,transparent)]"
+          className="absolute inset-x-0 top-[-14svh] h-[60vh] bg-[linear-gradient(to_bottom,transparent,rgb(194_65_12/0.28)_32%,rgb(194_65_12/0.1)_62%,transparent)]"
         />
         <div className="relative mx-auto max-w-7xl px-5 pt-12 sm:px-8">
           <Reveal className="max-w-3xl">
@@ -104,7 +108,8 @@ export default function GetInvolvedPage() {
             </Link>
           </Reveal>
         </div>
-      </section>
+        </section>
+      </div>
 
       {/* What giving produces */}
       <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8">
