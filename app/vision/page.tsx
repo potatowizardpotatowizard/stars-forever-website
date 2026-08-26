@@ -32,7 +32,7 @@ export default function VisionPage() {
             fill
             priority
             sizes="100vw"
-            className="object-cover opacity-70 [mask-image:linear-gradient(to_bottom,black_55%,transparent_97%)]"
+            className="object-cover opacity-55 brightness-90 [mask-image:linear-gradient(to_bottom,black_55%,transparent_97%)]"
           />
           <div
             aria-hidden="true"
