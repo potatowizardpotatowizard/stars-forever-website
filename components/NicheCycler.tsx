@@ -70,11 +70,6 @@ export default function NicheCycler() {
         >
           {reduced ? "every" : display}
         </span>
-        {!reduced && ignite ? (
-          <span aria-hidden="true" className="niche-spark text-ember">
-            {"\u2726"}
-          </span>
-        ) : null}
       </span>{" "}
       niche.
     </p>
