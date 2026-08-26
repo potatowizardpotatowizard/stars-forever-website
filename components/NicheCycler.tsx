@@ -65,7 +65,7 @@ export default function NicheCycler() {
           className={`transition-all duration-500 ${
             ignite
               ? "text-white [text-shadow:0_0_12px_rgb(255_255_255/0.95),0_0_26px_rgb(167_139_250/0.85)]"
-              : "text-ember"
+              : "text-[#b48cff] [text-shadow:0_0_10px_rgb(167_139_250/0.65),0_0_24px_rgb(139_92_246/0.4)]"
           }`}
         >
           {reduced ? "every" : display}
