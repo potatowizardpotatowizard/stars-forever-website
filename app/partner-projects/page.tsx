@@ -61,7 +61,7 @@ export default function PartnerProjectsPage() {
         </div>
         <Grain />
         <header className="relative">
-        <div className="relative mx-auto max-w-7xl px-5 pb-20 pt-44 sm:px-8">
+        <div className="relative mx-auto max-w-7xl px-5 pb-20 pt-32 sm:px-8 sm:pt-44">
           <h1 className="font-display text-5xl font-bold sm:text-6xl">
             Partner Projects
           </h1>

@@ -37,7 +37,7 @@ export default function VisionPage() {
           className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night"
         />
         <Grain />
-        <div className="relative mx-auto w-full max-w-7xl px-5 pt-44 sm:px-8">
+        <div className="relative mx-auto w-full max-w-7xl px-5 pt-32 sm:px-8 sm:pt-44">
           <Kicker>{VISION.hero.kicker}</Kicker>
           <h1 className="mt-6 max-w-4xl font-display text-5xl font-bold sm:text-6xl">
             {VISION.hero.heading}

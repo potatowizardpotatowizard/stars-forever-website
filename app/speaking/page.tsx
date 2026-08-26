@@ -50,7 +50,7 @@ export default function SpeakingPage() {
             className="broadcast-core"
           />
         </div>
-        <div className="relative mx-auto max-w-7xl px-5 pb-24 pt-44 sm:px-8">
+        <div className="relative mx-auto max-w-7xl px-5 pb-24 pt-32 sm:px-8 sm:pt-44">
           {/* The hero delivers its lines on beats: the claim, the answer,
               the receipts pinging their stars alight, then the invitation */}
           <p className="hero-beat meta-label" style={{ animationDelay: "0.1s" }}>

@@ -37,7 +37,7 @@ export default async function ConstellationPage() {
           className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/25 to-night"
         />
         <Grain />
-        <div className="relative mx-auto max-w-7xl px-5 pb-16 pt-44 sm:px-8">
+        <div className="relative mx-auto max-w-7xl px-5 pb-16 pt-32 sm:px-8 sm:pt-44">
           <Kicker>{CONSTELLATION.kicker}</Kicker>
           <h1 className="mt-6 font-display text-5xl font-bold sm:text-6xl">
             {CONSTELLATION.title}

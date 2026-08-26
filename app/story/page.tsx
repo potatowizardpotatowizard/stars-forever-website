@@ -38,7 +38,7 @@ export default function StoryPage() {
         />
         <Grain />
         <span aria-hidden="true" className="hero-meteor" />
-        <div className="relative mx-auto max-w-7xl px-5 pb-20 pt-44 sm:px-8">
+        <div className="relative mx-auto max-w-7xl px-5 pb-20 pt-32 sm:px-8 sm:pt-44">
           <p className="meta-label">
             {STORY.meta.who} · {STORY.meta.where} · {STORY.meta.when}
           </p>

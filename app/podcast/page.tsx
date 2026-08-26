@@ -40,7 +40,7 @@ export default function PodcastPage() {
           className="absolute inset-0 bg-gradient-to-b from-night/50 via-night/30 to-night"
         />
         <Grain />
-        <div className="relative mx-auto max-w-7xl px-5 pb-20 pt-44 sm:px-8">
+        <div className="relative mx-auto max-w-7xl px-5 pb-20 pt-32 sm:px-8 sm:pt-44">
           <Kicker>{PODCAST.kicker}</Kicker>
           <h1 className="mt-6 font-display text-5xl font-bold sm:text-7xl">
             {PODCAST.title}

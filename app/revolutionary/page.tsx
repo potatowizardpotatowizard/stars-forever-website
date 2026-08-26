@@ -46,7 +46,7 @@ export default function RevolutionaryPage() {
         </div>
         <Grain />
         <header className="relative">
-        <div className="relative mx-auto max-w-7xl px-5 pb-16 pt-44 sm:px-8">
+        <div className="relative mx-auto max-w-7xl px-5 pb-16 pt-32 sm:px-8 sm:pt-44">
         <h1 className="font-display text-5xl sm:text-6xl">
           {REVOLUTIONARY.title}
         </h1>

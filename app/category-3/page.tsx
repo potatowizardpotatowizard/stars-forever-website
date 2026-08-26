@@ -34,7 +34,7 @@ export default function Category3Page() {
           className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night"
         />
         <Grain />
-        <div className="relative mx-auto max-w-7xl px-5 pt-44 sm:px-8">
+        <div className="relative mx-auto max-w-7xl px-5 pt-32 sm:px-8 sm:pt-44">
           <Kicker>{CATEGORY3.burningQuestion.kicker}</Kicker>
           <h1 className="mt-8 max-w-4xl font-display text-3xl leading-tight sm:text-5xl sm:leading-tight">
             {CATEGORY3.burningQuestion.heading}
