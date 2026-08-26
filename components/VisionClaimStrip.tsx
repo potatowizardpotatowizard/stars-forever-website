@@ -32,15 +32,6 @@ function Row({
               : "border-dust/30 bg-night/30 text-starlight/60"
           }`}
         >
-          <span
-            className={
-              lit
-                ? "text-[#d9c8ff] drop-shadow-[0_0_5px_rgba(215,190,255,0.8)]"
-                : "text-dust/70"
-            }
-          >
-            {lit ? "\u2726" : "\u2727"}
-          </span>
           {niche}
         </span>
         );
@@ -59,7 +50,7 @@ export default function VisionClaimStrip() {
     return () => window.removeEventListener("sf-niche", onNiche);
   }, []);
   return (
-    <div className="mt-6 space-y-4 overflow-hidden pb-4 sm:mt-8 sm:pb-6">
+    <div className="-my-2 mt-4 space-y-4 overflow-hidden py-8 sm:mt-6">
       {/* the world as it is */}
       <div className="claim-marquee-left">
         <Row />
