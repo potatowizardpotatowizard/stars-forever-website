@@ -26,20 +26,26 @@ export const metadata: Metadata = {
 export default function RevolutionaryPage() {
   return (
     <article>
-      <header className="relative overflow-hidden">
-        <Image
-          src="/brand/bg-green.jpg"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover opacity-70"
-        />
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night"
-        />
+      {/* the hero and the explainer share one continuous canvas: the
+          photo dissolves into the page's night while the green
+          afterglow carries on beneath the video, one unbroken sky */}
+      <div className="relative overflow-hidden">
+        <div aria-hidden="true" className="absolute inset-x-0 top-0 h-[62svh] md:h-[80svh]">
+          <Image
+            src="/brand/bg-green.jpg"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover opacity-70 [mask-image:linear-gradient(to_bottom,black_45%,transparent_96%)]"
+          />
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night/70 [mask-image:linear-gradient(to_bottom,black_45%,transparent_96%)]"
+          />
+        </div>
         <Grain />
+        <header className="relative">
         <div className="relative mx-auto max-w-7xl px-5 pb-16 pt-44 sm:px-8">
         <h1 className="font-display text-5xl sm:text-6xl">
           {REVOLUTIONARY.title}
@@ -95,13 +101,13 @@ export default function RevolutionaryPage() {
           </Link>
         </Reveal>
         </div>
-      </header>
+        </header>
 
-      {/* Two minute explainer, under the hero's green afterglow */}
-      <section className="relative overflow-hidden">
+        {/* Two minute explainer, same sky */}
+        <section className="relative">
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 top-0 h-[45vh] bg-[linear-gradient(to_bottom,rgb(22_101_52/0.35),rgb(22_101_52/0.12)_45%,transparent)]"
+          className="absolute inset-x-0 top-[-14svh] h-[60vh] bg-[linear-gradient(to_bottom,transparent,rgb(22_101_52/0.32)_32%,rgb(22_101_52/0.12)_62%,transparent)]"
         />
         <div className="relative mx-auto max-w-7xl px-5 pb-24 pt-12 sm:px-8 md:pb-0">
         <GrowVideo
@@ -111,7 +117,8 @@ export default function RevolutionaryPage() {
           className="mt-10"
         />
         </div>
-      </section>
+        </section>
+      </div>
 
       {/* Ben Pierce intro block, with the door to Steiger beside it */}
       <section className="mx-auto max-w-7xl px-5 py-12 sm:px-8 md:flex md:items-stretch md:gap-8">
