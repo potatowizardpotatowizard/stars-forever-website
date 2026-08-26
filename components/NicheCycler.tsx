@@ -12,6 +12,7 @@ const POOL = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#[]<>/\\";
 export default function NicheCycler() {
   const [display, setDisplay] = useState(NICHES[0].toLowerCase());
   const [reduced, setReduced] = useState(false);
+  const [ignite, setIgnite] = useState(false);
   const index = useRef(0);
 
   useEffect(() => {
@@ -31,6 +32,10 @@ export default function NicheCycler() {
         if (locked >= target.length) {
           setDisplay(target);
           clearInterval(scramble);
+          // the word locks in and ignites; the claim strip hears it
+          window.dispatchEvent(new CustomEvent("sf-niche", { detail: target }));
+          setIgnite(true);
+          setTimeout(() => setIgnite(false), 700);
           return;
         }
         setDisplay(
@@ -54,7 +59,23 @@ export default function NicheCycler() {
   return (
     <p className="mt-2.5 min-h-[3.4rem] max-w-3xl font-display text-xl leading-snug text-starlight/85 sm:mt-7 sm:min-h-0 sm:text-3xl">
       A missionary to the{" "}
-      <span className="text-ember">{reduced ? "every" : display}</span> niche.
+      <span className="relative inline-block">
+        <span
+          className={`transition-all duration-500 ${
+            ignite
+              ? "text-white [text-shadow:0_0_12px_rgb(255_255_255/0.95),0_0_26px_rgb(167_139_250/0.85)]"
+              : "text-ember"
+          }`}
+        >
+          {reduced ? "every" : display}
+        </span>
+        {!reduced && ignite ? (
+          <span aria-hidden="true" className="niche-spark text-ember">
+            {"\u2726"}
+          </span>
+        ) : null}
+      </span>{" "}
+      niche.
     </p>
   );
 }
