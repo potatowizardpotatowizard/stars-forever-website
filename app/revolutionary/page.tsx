@@ -37,7 +37,7 @@ export default function RevolutionaryPage() {
             fill
             priority
             sizes="100vw"
-            className="object-cover opacity-50 brightness-90 [mask-image:linear-gradient(to_bottom,transparent_3%,black_16%,black_50%,transparent_96%)] max-md:translate-y-[14%] md:[mask-image:linear-gradient(to_bottom,black_45%,transparent_96%)]"
+            className="object-cover opacity-50 brightness-90 [mask-image:linear-gradient(to_bottom,black_45%,transparent_96%)]"
           />
           <div
             aria-hidden="true"
