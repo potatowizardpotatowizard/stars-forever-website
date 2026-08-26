@@ -35,7 +35,7 @@ export default function StatCarousel({
   };
 
   return (
-    <div className="border-l border-dust/15 pl-10">
+    <div className="md:border-l md:border-dust/15 md:pl-10">
       <ul
         ref={listRef}
         onScroll={onScroll}
