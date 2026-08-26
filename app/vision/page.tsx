@@ -22,21 +22,25 @@ export const metadata: Metadata = {
 export default function VisionPage() {
   return (
     <article>
-      {/* Analog hero */}
-      <header className="relative overflow-hidden">
-        <Image
-          src="/brand/bg-greenpurple-star.jpg"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover opacity-70"
-        />
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night"
-        />
+      {/* Analog hero: hero and the problem share one continuous
+          canvas, the photo dissolving into open night */}
+      <div className="relative overflow-hidden">
+        <div aria-hidden="true" className="absolute inset-x-0 top-0 h-[78svh] md:h-[96svh]">
+          <Image
+            src="/brand/bg-greenpurple-star.jpg"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover opacity-70 [mask-image:linear-gradient(to_bottom,black_55%,transparent_97%)]"
+          />
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night/70 [mask-image:linear-gradient(to_bottom,black_55%,transparent_97%)]"
+          />
+        </div>
         <Grain />
+        <header className="relative">
         <div className="relative mx-auto w-full max-w-7xl px-5 pt-32 sm:px-8 sm:pt-44">
           <Kicker>{VISION.hero.kicker}</Kicker>
           <h1 className="mt-6 max-w-4xl font-display text-5xl font-bold sm:text-6xl">
@@ -47,19 +51,19 @@ export default function VisionPage() {
         {/* The claiming of the feed: ghost cards igniting one way,
             mission fields and fruit drifting the other */}
         <VisionClaimStrip />
-      </header>
+        </header>
 
       {/* The problem: life moved online, and lostness moved with it */}
-      <section className="relative">
+        <section className="relative">
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 top-0 h-[55vh]"
+          className="absolute inset-x-0 top-[-14svh] h-[70vh]"
           style={{
             backgroundImage:
-              "radial-gradient(ellipse 55% 60% at 10% 0%, rgb(109 40 217 / 0.24), transparent 68%), radial-gradient(ellipse 80% 65% at 78% 0%, rgb(34 197 94 / 0.3), transparent 72%)",
+              "radial-gradient(ellipse 55% 60% at 10% 0%, rgb(109 40 217 / 0.22), transparent 68%), radial-gradient(ellipse 80% 65% at 78% 0%, rgb(34 197 94 / 0.26), transparent 72%)",
           }}
         />
-        <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8 md:grid md:grid-cols-2 md:items-center md:gap-16">
+        <div className="relative mx-auto max-w-7xl px-5 pb-24 pt-10 sm:px-8 md:grid md:grid-cols-2 md:items-center md:gap-16 md:pt-16">
           <Reveal className="max-w-3xl">
             <Kicker>{VISION.problem.kicker}</Kicker>
             <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
@@ -77,8 +81,8 @@ export default function VisionPage() {
             </div>
           </Reveal>
 
-          {/* the numbers behind the problem, a swipeable deck. desktop only */}
-          <Reveal className="hidden md:block">
+          {/* the numbers behind the problem, a swipeable deck */}
+          <Reveal className="mt-14 md:mt-0">
             <StatCarousel
               stats={[
                 {
@@ -132,7 +136,8 @@ export default function VisionPage() {
             />
           </Reveal>
         </div>
-      </section>
+        </section>
+      </div>
 
       {/* A missionary to a niche */}
       <section className="relative overflow-hidden">
