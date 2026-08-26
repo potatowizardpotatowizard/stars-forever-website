@@ -11,10 +11,10 @@ function Row({ lit, hidden }: { lit?: boolean; hidden?: boolean }) {
         <span
           key={niche}
           aria-hidden={hidden || undefined}
-          className={`meta-label flex shrink-0 items-center gap-2.5 rounded-md px-4 py-2.5 ${
+          className={`meta-label flex shrink-0 items-center gap-2.5 rounded-md border px-4 py-2.5 ${
             lit
-              ? "font-bold text-white [text-shadow:0_0_12px_rgb(255_255_255/0.9),0_0_28px_rgb(167_139_250/0.8)]"
-              : "border border-dust/10 bg-night/30 text-starlight/30"
+              ? "border-ember/70 bg-soot/70 font-bold text-white shadow-[0_0_16px_rgb(109_40_217/0.4)] [text-shadow:0_0_5px_rgb(255_255_255/0.5)]"
+              : "border-dust/10 bg-night/30 text-starlight/30"
           }`}
         >
           <span

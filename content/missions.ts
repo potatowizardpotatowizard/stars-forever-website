@@ -97,7 +97,7 @@ export const MISSIONS: Mission[] = [
       caption: "Real Treasure, the full video",
     },
     stats: [
-      { value: "6.7M+", label: "views across all platforms" },
+      { value: "7.2M+", label: "views across all platforms" },
       { value: "1M+", label: "likes across all platforms" },
       { value: "11K+", label: "comments across all platforms" },
     ],
