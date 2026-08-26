@@ -63,7 +63,7 @@ export default function VisionPage() {
               "radial-gradient(ellipse 55% 60% at 10% 0%, rgb(109 40 217 / 0.22), transparent 68%), radial-gradient(ellipse 80% 65% at 78% 0%, rgb(34 197 94 / 0.26), transparent 72%)",
           }}
         />
-        <div className="relative mx-auto max-w-7xl px-5 pb-24 pt-10 sm:px-8 md:grid md:grid-cols-2 md:items-center md:gap-16 md:pt-16">
+        <div className="relative mx-auto max-w-7xl px-5 pb-24 pt-20 sm:px-8 md:grid md:grid-cols-2 md:items-center md:gap-16 md:pt-24">
           <Reveal className="max-w-3xl">
             <Kicker>{VISION.problem.kicker}</Kicker>
             <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
