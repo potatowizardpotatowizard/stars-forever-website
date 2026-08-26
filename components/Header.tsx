@@ -83,7 +83,12 @@ export default function Header() {
           aria-label="Main"
           className="menu-overlay fixed inset-0 z-50 overflow-hidden lg:hidden"
         >
-          {/* the galaxy behind the menu */}
+          {/* the galaxy behind the menu: wandering nebulas and stars */}
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+            <div className="menu-blob menu-blob-a" />
+            <div className="menu-blob menu-blob-b" />
+            <div className="menu-blob menu-blob-c" />
+          </div>
           <StarField />
           <Grain />
 

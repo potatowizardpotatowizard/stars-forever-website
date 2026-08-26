@@ -1793,15 +1793,61 @@ html.easter-sunday body::before {
 
 /* Full screen galactic menu */
 .menu-overlay {
-  background:
-    radial-gradient(ellipse 75% 55% at 82% 12%, rgb(109 40 217 / 0.32), transparent 65%),
-    radial-gradient(ellipse 65% 50% at 12% 85%, rgb(139 92 246 / 0.22), transparent 65%),
-    radial-gradient(ellipse 45% 35% at 30% 25%, rgb(88 28 170 / 0.2), transparent 70%),
-    var(--color-night);
+  background: var(--color-night);
+}
+/* the nebulas, free floating so they can wander */
+.menu-blob {
+  position: absolute;
+  pointer-events: none;
+}
+.menu-blob-a {
+  top: -22%;
+  right: -28%;
+  width: 120vw;
+  height: 72vh;
+  background: radial-gradient(ellipse at center, rgb(109 40 217 / 0.32), transparent 65%);
+}
+.menu-blob-b {
+  bottom: -18%;
+  left: -30%;
+  width: 110vw;
+  height: 64vh;
+  background: radial-gradient(ellipse at center, rgb(139 92 246 / 0.22), transparent 65%);
+}
+.menu-blob-c {
+  top: 12%;
+  left: 2%;
+  width: 70vw;
+  height: 44vh;
+  background: radial-gradient(ellipse at center, rgb(88 28 170 / 0.22), transparent 70%);
 }
 @media (prefers-reduced-motion: no-preference) {
   .menu-overlay {
     animation: menu-in 0.4s ease-out;
+  }
+  .menu-blob-a {
+    animation: menu-blob-a 24s ease-in-out infinite alternate;
+  }
+  .menu-blob-b {
+    animation: menu-blob-b 30s ease-in-out infinite alternate;
+  }
+  .menu-blob-c {
+    animation: menu-blob-c 20s ease-in-out infinite alternate;
+  }
+  @keyframes menu-blob-a {
+    to {
+      transform: translate(-10vw, 12vh) scale(1.12);
+    }
+  }
+  @keyframes menu-blob-b {
+    to {
+      transform: translate(12vw, -10vh) scale(1.08);
+    }
+  }
+  @keyframes menu-blob-c {
+    to {
+      transform: translate(9vw, 9vh) scale(0.92);
+    }
   }
   .menu-link {
     opacity: 0;
