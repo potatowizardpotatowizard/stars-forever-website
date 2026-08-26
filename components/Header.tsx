@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Grain from "@/components/Grain";
+import StarField from "@/components/StarField";
 import { NAV, SITE_NAME } from "@/content/site";
 
 export default function Header() {
@@ -15,6 +17,14 @@ export default function Header() {
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
+
+  // the page behind the open menu holds still
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
 
   // The home page hero carries its own menu, like the brand page.
   if (pathname === "/") return null;
@@ -71,33 +81,72 @@ export default function Header() {
         <nav
           id="mobile-nav"
           aria-label="Main"
-          className="border-t border-dust/20 bg-night/95 backdrop-blur lg:hidden"
+          className="menu-overlay fixed inset-0 z-50 overflow-hidden lg:hidden"
         >
-          <ul className="mx-auto max-w-7xl space-y-1 px-5 py-6 sm:px-8">
-            <li>
+          {/* the galaxy behind the menu */}
+          <StarField />
+          <Grain />
+
+          <div className="relative flex h-full flex-col">
+            <div className="flex items-center justify-between px-5 py-5 sm:px-8">
               <Link
                 href="/"
+                className="flex items-center gap-2.5"
                 onClick={() => setOpen(false)}
-                className="mono-link block py-2.5 text-lg"
+                aria-label={`${SITE_NAME} home`}
               >
-                Home
+                <Image
+                  src="/brand/star-sharp.png"
+                  alt=""
+                  width={34}
+                  height={34}
+                  className="vhs-glow"
+                />
+                <span className="mono-link text-sm font-bold">{SITE_NAME}</span>
               </Link>
-            </li>
-            {NAV.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  aria-current={pathname === item.href ? "page" : undefined}
-                  className={`mono-link block py-2.5 text-lg ${
-                    pathname === item.href ? "text-ember" : ""
-                  }`}
+              <button
+                type="button"
+                className="meta-label -m-2 p-2 text-starlight"
+                onClick={() => setOpen(false)}
+              >
+                Close
+              </button>
+            </div>
+
+            <ul className="flex flex-1 flex-col justify-center gap-1 px-7 pb-16 sm:px-10">
+              {[{ label: "Home", href: "/" }, ...NAV].map((item, i) => (
+                <li
+                  key={item.href}
+                  className="menu-link"
+                  style={{ animationDelay: `${0.08 + i * 0.07}s` }}
                 >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
+                  <Link
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    aria-current={pathname === item.href ? "page" : undefined}
+                    className={`group flex items-center gap-4 py-3 font-display text-3xl font-bold ${
+                      pathname === item.href ? "text-ember" : "text-starlight"
+                    }`}
+                  >
+                    <Image
+                      src="/brand/star-sharp.png"
+                      alt=""
+                      width={18}
+                      height={18}
+                      className={`vhs-glow h-[18px] w-[18px] transition-opacity ${
+                        pathname === item.href ? "opacity-100" : "opacity-40"
+                      }`}
+                    />
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+
+            <p className="meta-label px-7 pb-8 text-dust sm:px-10">
+              Create eternity changing art
+            </p>
+          </div>
         </nav>
       ) : null}
     </header>
