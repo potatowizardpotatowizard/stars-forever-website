@@ -4,7 +4,7 @@ export const PARTNER = {
     "We help creators make the boldest project of their lives: one that puts Jesus in front of their audience and leaves them seeking God deeper than when they started.",
   featured: {
     kicker: "The Most Recent Project",
-    body: "Weston's treasure hunt video carried the gospel from Southern California to Iceland and put Jesus in front of millions.",
+    body: "Weston's treasure hunt video carried the gospel from California to Iceland and put Jesus in front of millions.",
     cta: "Explore Real Treasure",
     href: "/partner-projects/real-treasure",
     imageSlot: "real-treasure-card",

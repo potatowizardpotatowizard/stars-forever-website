@@ -35,7 +35,7 @@ function Row({ lit, hidden }: { lit?: boolean; hidden?: boolean }) {
 
 export default function VisionClaimStrip() {
   return (
-    <div className="mt-0 space-y-4 overflow-hidden pb-4 sm:mt-8 sm:pb-6">
+    <div className="mt-6 space-y-4 overflow-hidden pb-4 sm:mt-8 sm:pb-6">
       {/* the world as it is */}
       <div className="claim-marquee-left">
         <Row />
