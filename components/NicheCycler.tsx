@@ -57,8 +57,7 @@ export default function NicheCycler() {
   }, []);
 
   return (
-    <div className="-mx-5 mt-5 border-y border-ember/40 px-5 py-3.5 sm:-mx-8 sm:mt-8 sm:px-8 sm:py-5">
-    <p className="min-h-[3.4rem] font-display text-2xl leading-snug text-starlight sm:min-h-0 sm:text-4xl">
+    <p className="mt-2.5 min-h-[3.4rem] max-w-3xl font-display text-2xl leading-snug text-starlight sm:mt-7 sm:min-h-0 sm:text-4xl">
       A missionary to the{" "}
       <span className="relative inline-block">
         <span
@@ -73,6 +72,5 @@ export default function NicheCycler() {
       </span>{" "}
       niche.
     </p>
-    </div>
   );
 }
