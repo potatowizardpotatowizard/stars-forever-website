@@ -66,8 +66,13 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
       const p = clamp01(-rect.top / total);
       const z = p * maxZ;
       world.style.transform = `translateZ(${z.toFixed(1)}px)`;
+      const titleHolds = z < 450;
       itemRefs.current.forEach((el, i) => {
         if (!el) return;
+        if (titleHolds && i > 0) {
+          el.style.opacity = "0";
+          return;
+        }
         const d = i * SPACING + LEAD - z;
         // heavy fog: the focused plane owns the screen. photos may
         // ghost in the distance; text goes fully dark so words never
