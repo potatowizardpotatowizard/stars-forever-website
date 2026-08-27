@@ -205,6 +205,12 @@ export const IMAGES: Record<string, ImageSlot> = {
     caption: { where: "Japan" },
     ratio: "3 / 2",
   },
+  "tokyo-planning": {
+    file: "tokyo-planning.jpg",
+    alt: "Owen and Auzi planning the video with a laptop and microphone",
+    caption: { where: "Tokyo" },
+    ratio: "3 / 2",
+  },
   "tokyo-subway": {
     file: "tokyo-subway.jpg",
     alt: "A night out with new friends in Tokyo",

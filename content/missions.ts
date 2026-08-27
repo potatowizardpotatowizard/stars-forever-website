@@ -254,7 +254,7 @@ export const MISSIONS: Mission[] = [
         paragraphs: [
           "We believe God places certain dreams on our hearts. Owen, a travel adventure YouTuber, always dreamed of drifting in Japan. He loves cars so we started there and we sought God daily: God, help us make something of eternal value. Help us to be bold with the gospel in this video and our lives. Help us reach a secular audience who truly needs to know you.",
         ],
-        imageSlots: ["tokyo-owen", "tokyo-subway"],
+        imageSlots: ["tokyo-hero", "tokyo-planning"],
       },
       {
         kicker: "God moved",
@@ -262,7 +262,7 @@ export const MISSIONS: Mission[] = [
           "After our very first prayer walk, we felt led to talk to strangers with cameras. Five minutes later on the subway, the first strangers we met happened to be drifting YouTubers. When we were stuck in rural Japan with no ride, we prayed for one within a minute, and a Japanese grandma pulled over forty seven seconds later, on camera.",
           "By the second week we were drifting in a six car tandem at the biggest drifting event in the world, invited by people we had met through that first subway conversation.",
         ],
-        imageSlots: ["tokyo-hitchhike", "tokyo-circuit", "tokyo-ebisu", "tokyo-temple"],
+        imageSlots: ["tokyo-subway", "tokyo-owen", "tokyo-hitchhike", "tokyo-drift-car"],
       },
       {
         kicker: "Beyond the video",
@@ -270,7 +270,7 @@ export const MISSIONS: Mission[] = [
           "We shared life deeply with four unbelievers: church, lunches, baptisms, theme parks, birthdays. We discipled Seven, a local Japanese creator who drove hours to our shoots and learned to seek God inside his art. And pastor Kento, moved by the work, invited us in to talk about the mission.",
           "This trip is now the blueprint: help a creator seek God, encounter His power personally, preach the gospel through their creative gifts, strengthen the local church, and watch lives change.",
         ],
-        imageSlots: ["tokyo-church", "tokyo-seven", "tokyo-friends", "tokyo-community"],
+        imageSlots: ["tokyo-church", "tokyo-seven", "tokyo-friends", "tokyo-circuit", "tokyo-community", "tokyo-temple"],
       },
     ],
     links: [
