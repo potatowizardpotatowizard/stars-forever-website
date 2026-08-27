@@ -49,7 +49,7 @@ export default function JourneyThread() {
     <div
       ref={rootRef}
       aria-hidden="true"
-      className="relative mx-auto mt-16 h-64 w-px md:hidden"
+      className="relative mx-auto mb-16 mt-16 h-64 w-px md:hidden"
     >
       <div
         ref={lineRef}
