@@ -44,7 +44,22 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
   const worldRef = useRef<HTMLDivElement>(null);
   const hintRef = useRef<HTMLParagraphElement>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const sceneRef = useRef<HTMLDivElement>(null);
   const [reduced, setReduced] = useState(false);
+  const [near, setNear] = useState(false);
+
+  useEffect(() => {
+    const el = wrapRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        setNear(entries.some((e) => e.isIntersecting));
+      },
+      { rootMargin: "60% 0px 60% 0px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [reduced]);
 
   useEffect(() => {
     setReduced(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
@@ -66,12 +81,23 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
       if (!wrap || !world) return;
       const rect = wrap.getBoundingClientRect();
       const vh = window.innerHeight;
-      if (rect.bottom < -vh || rect.top > vh * 2) return;
+      if (rect.bottom < 40 || rect.top > vh * 1.6) return;
       const total = Math.max(rect.height - vh, 1);
       const p = clamp01(-rect.top / total);
-      const zTarget = p * maxZ;
+      const scene = sceneRef.current;
+      if (scene) {
+        const fade = 1 - clamp01((p - 0.9) / 0.085);
+        scene.style.opacity = fade.toFixed(3);
+      }
+      const zTarget = clamp01(p / 0.88) * maxZ;
+      const settled = zTarget === zCur;
       zCur += (zTarget - zCur) * 0.16;
       if (Math.abs(zTarget - zCur) < 0.08) zCur = zTarget;
+      if (settled && zTarget === zCur) {
+        const hint0 = hintRef.current;
+        if (hint0) hint0.style.opacity = p < 0.03 ? "1" : "0";
+        return;
+      }
       world.style.transform = `translateZ(${zCur.toFixed(2)}px)`;
       const titleHolds = zCur < 450;
       itemRefs.current.forEach((el, i) => {
@@ -149,8 +175,10 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
       style={{ height: `${items.length * 58 + 100}svh` }}
     >
       <div className="sticky top-0 h-svh overflow-hidden">
-        {/* deep space behind the flight */}
-        <StarField />
+        <div ref={sceneRef} className="absolute inset-0">
+        {/* deep space behind the flight, asleep once you have flown
+            past so it never competes with the rest of the page */}
+        {near ? <StarField /> : null}
 
         {/* the world the camera flies through */}
         <div className="absolute inset-0 [perspective:1100px]">
@@ -211,6 +239,8 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
               );
             })}
           </div>
+        </div>
+
         </div>
 
         {/* the invitation */}
