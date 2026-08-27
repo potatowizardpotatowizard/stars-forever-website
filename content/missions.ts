@@ -86,7 +86,7 @@ export const MISSIONS: Mission[] = [
     date: "July 9 to 17, 2026",
     summary:
       "A fever dream video about treasure carried the gospel from Southern California to Iceland and put Jesus in front of millions.",
-    journeySub: "From California to Iceland, hunting what treasure really means.",
+    journeySub: "From California to Iceland, hunting the treasure that the world can\u2019t give.",
     cardImageSlot: "real-treasure-card",
     heroSlot: "real-treasure-hero",
     heroVideo: "/brand/video/real-treasure-hero-bg.mp4",
