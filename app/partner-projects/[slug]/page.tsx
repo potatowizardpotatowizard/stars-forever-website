@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import GlitchText from "@/components/GlitchText";
+import JourneyScene, { type JourneyItem } from "@/components/JourneyScene";
 import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
@@ -266,7 +267,41 @@ export default async function MissionPage({
         </div>
       ) : null}
 
-      {/* Photo essay sections */}
+      {/* Photo essay sections. Tokyo Drift pilots the journey: the
+          story flown through as planes in deep space. */}
+      {mission.slug === "tokyo-drift" ? (
+        <JourneyScene
+          items={[
+            {
+              kind: "beat",
+              kicker: "The journey",
+              paragraphs: [
+                "Thirty days in Japan, from the first prayer walk to the biggest drifting event on earth.",
+              ],
+            } as JourneyItem,
+            ...mission.sections.flatMap((section): JourneyItem[] => [
+              {
+                kind: "beat",
+                kicker: section.kicker,
+                paragraphs: section.paragraphs,
+              },
+              ...(section.imageSlots ?? []).flatMap((slot): JourneyItem[] => {
+                const r = resolveSlot(slot);
+                return r.src
+                  ? [{ kind: "photo", src: r.src, alt: r.alt }]
+                  : [];
+              }),
+            ]),
+            {
+              kind: "beat",
+              kicker: "Touchdown",
+              paragraphs: [
+                "The full video, the numbers, and everything that came after are just below.",
+              ],
+            } as JourneyItem,
+          ]}
+        />
+      ) : (
       <div className="mx-auto max-w-7xl space-y-24 px-5 py-24 sm:px-8 sm:space-y-32 sm:py-32">
         {mission.sections.map((section, si) => (
           <Reveal as="section" key={section.paragraphs[0]}>
@@ -345,6 +380,7 @@ export default async function MissionPage({
           </Reveal>
         ))}
       </div>
+      )}
 
       {/* Comment wall: real comments from the posted video as quote cards */}
       {mission.commentWall ? (
