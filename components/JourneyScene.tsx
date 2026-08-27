@@ -142,6 +142,7 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
   return (
     <div
       ref={wrapRef}
+      id="journey-scene"
       className="relative"
       style={{ height: `${items.length * 58 + 100}svh` }}
     >

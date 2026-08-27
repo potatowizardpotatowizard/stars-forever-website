@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import GlitchText from "@/components/GlitchText";
+import BurningTease from "@/components/BurningTease";
 import JourneyScene, { type JourneyItem } from "@/components/JourneyScene";
 import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
@@ -131,7 +132,7 @@ export default async function MissionPage({
       </div>
 
       {mission.burningQuestion ? (
-        <div className="mx-auto max-w-7xl px-5 pt-24 sm:px-8">
+        <div id="burning-question" className="mx-auto max-w-7xl px-5 pt-24 sm:px-8">
           <Reveal className="mx-auto max-w-3xl text-center">
             <Kicker>The burning question</Kicker>
             <p className="mt-8 font-display text-3xl leading-snug sm:text-4xl">
@@ -270,6 +271,8 @@ export default async function MissionPage({
       {/* Photo essay sections. Tokyo Drift pilots the journey: the
           story flown through as planes in deep space. */}
       {mission.slug === "tokyo-drift" ? (
+        <>
+        <BurningTease />
         <JourneyScene
           items={[
             {
@@ -299,6 +302,7 @@ export default async function MissionPage({
             } as JourneyItem,
           ]}
         />
+        </>
       ) : (
       <div className="mx-auto max-w-7xl space-y-24 px-5 py-24 sm:px-8 sm:space-y-32 sm:py-32">
         {mission.sections.map((section, si) => (
