@@ -297,7 +297,7 @@ export default async function MissionPage({
               kind: "beat",
               kicker: "Touchdown",
               paragraphs: [
-                "The numbers and everything that came after are just below.",
+                "The response, the numbers, and everything that came after are just below.",
               ],
             } as JourneyItem,
           ]}
@@ -411,7 +411,7 @@ export default async function MissionPage({
               </Reveal>
             ))}
           </div>
-          {mission.stats ? (
+          {mission.stats && mission.videoLink ? (
             <Reveal className="md:hidden">
               <dl className="mt-12 grid gap-10 rounded-lg border border-dust/15 bg-soot/40 px-5 py-12 text-center sm:grid-cols-3 sm:px-8">
                 {mission.stats.map((stat) => (
