@@ -1,11 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import GlitchText from "@/components/GlitchText";
 import Kicker from "@/components/Kicker";
 import StarField from "@/components/StarField";
 import { linkCategory3 } from "@/components/Category3Link";
 
 export type JourneyItem =
+  | { kind: "title"; title: string; sub: string }
   | { kind: "beat"; kicker?: string; paragraphs: string[] }
   | { kind: "photo"; src: string; alt: string };
 
@@ -14,7 +16,7 @@ export type JourneyItem =
 // through them, the site's starfield streaming past. One transform
 // moves the whole world each frame; items only change opacity.
 const SPACING = 900;
-const LEAD = 500;
+const LEAD = 0;
 
 // deterministic scatter, gentle enough that planes never block the
 // one behind them completely
@@ -71,14 +73,14 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
         // heavy fog: the focused plane owns the screen. photos may
         // ghost in the distance; text goes fully dark so words never
         // stack over words.
-        const isBeat = items[i]?.kind === "beat";
+        const isBeat = items[i]?.kind !== "photo";
         let op: number;
         if (d < -380) op = 0;
         else if (d < 0) op = 1 + d / 380;
         else if (isBeat) {
-          if (d < 200) op = 1;
-          else if (d < 750) op = 1 - ((d - 200) / 550) * 0.97;
-          else op = 0.03;
+          if (d <= 350) op = 1;
+          else if (d < 700) op = (700 - d) / 350;
+          else op = 0;
         } else if (d < 260) op = 1;
         else if (d < 1300) op = 1 - ((d - 260) / 1040) * 0.94;
         else op = 0.06;
@@ -107,7 +109,12 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
     return (
       <div className="mx-auto max-w-7xl space-y-16 px-5 py-24 sm:px-8">
         {items.map((item, i) =>
-          item.kind === "beat" ? (
+          item.kind === "title" ? (
+            <div key={i} className="max-w-2xl">
+              <h2 className="font-display text-4xl font-bold">{item.title}</h2>
+              <p className="mt-4 text-lg text-starlight/80">{item.sub}</p>
+            </div>
+          ) : item.kind === "beat" ? (
             <div key={i} className="max-w-2xl">
               {item.kicker ? <Kicker>{item.kicker}</Kicker> : null}
               <div className="mt-6 space-y-5">
@@ -150,7 +157,7 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
           >
             {items.map((item, i) => {
               const [ox, oy] =
-                item.kind === "beat" ? [0, 0] : OFFSETS[i % OFFSETS.length];
+                item.kind === "photo" ? OFFSETS[i % OFFSETS.length] : [0, 0];
               const zi = i * SPACING + LEAD;
               return (
                 <div
@@ -164,7 +171,16 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
                     opacity: i === 0 ? 1 : 0.1,
                   }}
                 >
-                  {item.kind === "beat" ? (
+                  {item.kind === "title" ? (
+                    <div className="w-[88vw] max-w-2xl text-center">
+                      <h2 className="font-display text-4xl font-bold uppercase tracking-tight text-white [text-shadow:0_0_14px_rgb(255_255_255/0.85),0_0_36px_rgb(167_139_250/0.7)] sm:text-6xl">
+                        <GlitchText text={item.title} />
+                      </h2>
+                      <p className="mx-auto mt-5 max-w-md text-base leading-relaxed text-starlight/85 sm:text-lg">
+                        {item.sub}
+                      </p>
+                    </div>
+                  ) : item.kind === "beat" ? (
                     <div className="w-[80vw] max-w-xl">
                       {item.kicker ? <Kicker>{item.kicker}</Kicker> : null}
                       <div className="mt-6 space-y-5">

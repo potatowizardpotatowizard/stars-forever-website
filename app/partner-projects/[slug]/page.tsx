@@ -273,11 +273,9 @@ export default async function MissionPage({
         <JourneyScene
           items={[
             {
-              kind: "beat",
-              kicker: "The journey",
-              paragraphs: [
-                "Thirty days in Japan, from the first prayer walk to the biggest drifting event on earth.",
-              ],
+              kind: "title",
+              title: "The Journey",
+              sub: "Thirty days in Japan, from the first prayer walk to the biggest drifting event on earth.",
             } as JourneyItem,
             ...mission.sections.flatMap((section): JourneyItem[] => [
               {
