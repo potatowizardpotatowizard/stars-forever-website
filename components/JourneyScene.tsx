@@ -53,27 +53,34 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
   useEffect(() => {
     if (reduced) return;
     let raf = 0;
+    let zCur = 0;
     const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
-    const maxZ = (items.length - 1) * SPACING + 400;
-    const tick = () => {
-      raf = 0;
+    const maxZ = (items.length - 1) * SPACING + 100;
+    // a continuous loop with easing: iOS only delivers sparse scroll
+    // events during momentum, so the camera chases the scroll position
+    // every frame instead of waiting for events
+    const loop = () => {
+      raf = requestAnimationFrame(loop);
       const wrap = wrapRef.current;
       const world = worldRef.current;
       if (!wrap || !world) return;
       const rect = wrap.getBoundingClientRect();
       const vh = window.innerHeight;
+      if (rect.bottom < -vh || rect.top > vh * 2) return;
       const total = Math.max(rect.height - vh, 1);
       const p = clamp01(-rect.top / total);
-      const z = p * maxZ;
-      world.style.transform = `translateZ(${z.toFixed(1)}px)`;
-      const titleHolds = z < 450;
+      const zTarget = p * maxZ;
+      zCur += (zTarget - zCur) * 0.16;
+      if (Math.abs(zTarget - zCur) < 0.08) zCur = zTarget;
+      world.style.transform = `translateZ(${zCur.toFixed(2)}px)`;
+      const titleHolds = zCur < 450;
       itemRefs.current.forEach((el, i) => {
         if (!el) return;
         if (titleHolds && i > 0) {
           el.style.opacity = "0";
           return;
         }
-        const d = i * SPACING + LEAD - z;
+        const d = i * SPACING + LEAD - zCur;
         // heavy fog: the focused plane owns the screen. photos may
         // ghost in the distance; text goes fully dark so words never
         // stack over words.
@@ -93,18 +100,11 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
       const hint = hintRef.current;
       if (hint) hint.style.opacity = p < 0.03 ? "1" : "0";
     };
-    const onScroll = () => {
-      if (!raf) raf = requestAnimationFrame(tick);
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll, { passive: true });
-    tick();
+    raf = requestAnimationFrame(loop);
     return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
       if (raf) cancelAnimationFrame(raf);
     };
-  }, [reduced, items.length]);
+  }, [reduced, items]);
 
   // reduced motion reads the story as a quiet stacked essay instead
   if (reduced) {
@@ -168,7 +168,7 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
                   ref={(el) => {
                     itemRefs.current[i] = el;
                   }}
-                  className="absolute left-1/2 top-1/2"
+                  className="absolute left-1/2 top-1/2 [backface-visibility:hidden]"
                   style={{
                     transform: `translate3d(calc(-50% + ${ox}vw), calc(-50% + ${oy}vh), ${-zi}px)`,
                     opacity: i === 0 ? 1 : 0.1,
@@ -202,7 +202,8 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
                     <img
                       src={item.src}
                       alt={item.alt}
-                      loading={i < 5 ? "eager" : "lazy"}
+                      loading="eager"
+                      decoding="async"
                       className="w-[74vw] max-w-none rounded-lg border border-dust/25 shadow-[0_10px_50px_rgb(0_0_0/0.6)] md:w-[min(44vw,620px)]"
                     />
                   )}
