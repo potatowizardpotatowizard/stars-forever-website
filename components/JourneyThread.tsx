@@ -29,7 +29,7 @@ export default function JourneyThread() {
       const vh = window.innerHeight;
       const p = smooth(clamp01((vh * 0.92 - rect.top) / (vh * 0.8)));
       line.style.transform = `scaleY(${p.toFixed(4)})`;
-      tip.style.transform = `translate(-50%, ${(p * rect.height).toFixed(1)}px)`;
+      tip.style.transform = `translate(-50%, ${(p * rect.height - 10).toFixed(1)}px)`;
       tip.style.opacity = p > 0.02 && p < 0.99 ? "1" : "0";
     };
     const onScroll = () => {
@@ -49,7 +49,7 @@ export default function JourneyThread() {
     <div
       ref={rootRef}
       aria-hidden="true"
-      className="relative mx-auto mt-16 h-40 w-px md:hidden"
+      className="relative mx-auto mt-16 h-64 w-px md:hidden"
     >
       <div
         ref={lineRef}
@@ -58,7 +58,7 @@ export default function JourneyThread() {
       />
       <div
         ref={tipRef}
-        className="absolute left-1/2 top-0 h-1.5 w-1.5 rounded-full bg-white shadow-[0_0_10px_3px_rgb(180_140_255/0.9)]"
+        className="absolute left-1/2 top-0 h-5 w-5 animate-pulse rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.95),rgba(180,140,255,0.55)_45%,transparent_72%)] blur-[1.5px]"
         style={{ opacity: 0, transform: "translate(-50%, 0)" }}
       />
     </div>
