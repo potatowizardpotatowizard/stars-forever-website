@@ -206,12 +206,12 @@ export const MISSIONS: Mission[] = [
         "Real comments from the video, word for word, responding to the Jesus moments woven through it.",
       comments: [
         {
-          text: "Brother this video was amazing! I’ve been on two mission trips to Japan. I wanted to go to those tracks when I was there but obviously I was on mission. Maybe next time for sure🙏. The way God can make connections so quick is amazing to see. Stuff like that happened when I was there. I love that you guys also just want to show the world that as Christians we can still enjoy life. Absolutely amazing bro!",
-          handle: "@LukeLinares-k4c",
-        },
-        {
           text: "W video man was in my recommended and said why not lol, love the faith yall have in god and how you guys show it throughout the video. Gained a new fan and subscriber! 💪",
           handle: "@raulsoto4117",
+        },
+        {
+          text: "Brother this video was amazing! I’ve been on two mission trips to Japan. I wanted to go to those tracks when I was there but obviously I was on mission. Maybe next time for sure🙏. The way God can make connections so quick is amazing to see. Stuff like that happened when I was there. I love that you guys also just want to show the world that as Christians we can still enjoy life. Absolutely amazing bro!",
+          handle: "@LukeLinares-k4c",
         },
         {
           text: "This is soo cool. Jesus works in many ways... Love your content bro!",
