@@ -297,11 +297,29 @@ export default async function MissionPage({
               kind: "beat",
               kicker: "Touchdown",
               paragraphs: [
-                "The full video, the numbers, and everything that came after are just below.",
+                "The numbers and everything that came after are just below.",
               ],
             } as JourneyItem,
           ]}
         />
+        <JourneyThread />
+        {mission.stats ? (
+          <div className="mx-auto max-w-7xl px-5 pt-6 sm:px-8">
+            <Reveal className="mx-auto max-w-4xl text-center">
+              <Kicker>The numbers so far</Kicker>
+              <dl className="mt-10 grid grid-cols-2 gap-10 sm:gap-16">
+                {mission.stats.map((stat) => (
+                  <div key={stat.label}>
+                    <dd className="vhs-glow font-display text-5xl font-bold text-ember sm:text-6xl">
+                      {stat.value}
+                    </dd>
+                    <dt className="meta-label mt-3">{stat.label}</dt>
+                  </div>
+                ))}
+              </dl>
+            </Reveal>
+          </div>
+        ) : null}
         </>
       ) : (
       <div className="mx-auto max-w-7xl space-y-24 px-5 py-24 sm:px-8 sm:space-y-32 sm:py-32">
