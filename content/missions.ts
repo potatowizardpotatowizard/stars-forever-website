@@ -206,32 +206,36 @@ export const MISSIONS: Mission[] = [
         "Real comments from the video, word for word, responding to the Jesus moments woven through it.",
       comments: [
         {
+          text: "Been looking for a drifting car channel with God in it. Prayers answered!",
+          handle: "@Grc_Cj",
+        },
+        {
+          text: "W video man was in my recommended and said why not lol, love the faith yall have in god and how you guys show it throughout the video. Gained a new fan and subscriber! 💪",
+          handle: "@raulsoto4117",
+        },
+        {
           text: "This is soo cool. Jesus works in many ways... Love your content bro!",
           handle: "@Tdogverse",
         },
         {
-          text: "I guess I finally found some real cool youtubers who believe in Jesus. Thanksss God. Keep uploading guyssss",
+          text: "I guess I finally found some real cool youtubers who believe in Jesus.  Thanksss God . Keep uploading guyssss",
           handle: "@vrlegend1771",
         },
         {
-          text: "Loved how God answered the prayer. Great video mate!",
+          text: "Loved how God answered the prayer❤‍🔥 Great video mate! 😍🚀",
           handle: "@TopiaJOE",
         },
         {
-          text: "W video man was in my recommended and said why not lol, love the faith yall have in god and how you guys show it throughout the video. Gained a new fan and subscriber!",
-          handle: "@raulsoto4117",
-        },
-        {
-          text: "God is good! Inspiring to see you guys glorifying His name through your works! Great job brothers!",
+          text: "God is good! Inspiring to see you guys glorifying His name through your works! Great job brothers! 💪 🙏",
           handle: "@JasonJonathanA",
         },
         {
-          text: "The way God can make connections so quick is amazing to see. Stuff like that happened when I was there. I love that you guys also just want to show the world that as Christians we can still enjoy life.",
-          handle: "@LukeLinares-k4c",
+          text: "Christ is good",
+          handle: "@andrewhay7008",
         },
         {
-          text: "I can see this channel getting to 1 million really quick your editing and like everything is so good keep believing in god and keep cooking.",
-          handle: "@Spence-3434",
+          text: "Brother this video was amazing! I’ve been on two mission trips to Japan. I wanted to go to those tracks when I was there but obviously I was on mission. Maybe next time for sure🙏. The way God can make connections so quick is amazing to see. Stuff like that happened when I was there. I love that you guys also just want to show the world that as Christians we can still enjoy life. Absolutely amazing bro!",
+          handle: "@LukeLinares-k4c",
         },
       ],
     },
