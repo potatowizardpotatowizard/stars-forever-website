@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import GlitchText from "@/components/GlitchText";
-import BurningTease from "@/components/BurningTease";
+import JourneyThread from "@/components/JourneyThread";
 import JourneyScene, { type JourneyItem } from "@/components/JourneyScene";
 import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
@@ -272,7 +272,7 @@ export default async function MissionPage({
           story flown through as planes in deep space. */}
       {mission.slug === "tokyo-drift" ? (
         <>
-        <BurningTease />
+        <JourneyThread />
         <JourneyScene
           items={[
             {
