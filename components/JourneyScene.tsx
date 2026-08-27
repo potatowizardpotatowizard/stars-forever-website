@@ -43,7 +43,6 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const worldRef = useRef<HTMLDivElement>(null);
   const hintRef = useRef<HTMLParagraphElement>(null);
-  const railRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [reduced, setReduced] = useState(false);
 
@@ -88,8 +87,6 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
       });
       const hint = hintRef.current;
       if (hint) hint.style.opacity = p < 0.03 ? "1" : "0";
-      const rail = railRef.current;
-      if (rail) rail.style.transform = `translateY(${(p * 100).toFixed(2)}%)`;
     };
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(tick);
@@ -210,21 +207,11 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
           </div>
         </div>
 
-        {/* progress rail, a star riding the route */}
-        <div
-          aria-hidden="true"
-          className="absolute right-5 top-1/2 h-36 w-px -translate-y-1/2 bg-dust/25 sm:right-8"
-        >
-          <div ref={railRef} className="absolute left-0 top-0 h-full w-full">
-            <span className="absolute -left-[3.5px] top-0 h-2 w-2 rotate-45 bg-ember shadow-[0_0_10px_rgb(109_40_217/0.9)]" />
-          </div>
-        </div>
-
         {/* the invitation */}
         <p
           ref={hintRef}
           aria-hidden="true"
-          className="meta-label absolute bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap text-starlight/80 transition-opacity duration-700"
+          className="meta-label absolute bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap text-white transition-opacity duration-700 [text-shadow:0_0_10px_rgb(255_255_255/0.85),0_0_26px_rgb(167_139_250/0.7)]"
         >
           scroll to fly through the story
         </p>
