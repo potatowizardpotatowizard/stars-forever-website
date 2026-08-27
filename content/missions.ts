@@ -16,6 +16,8 @@ export type Mission = {
   partnerHref?: string;
   date: string;
   summary: string;
+  /** One line under THE JOURNEY title on the flight through the story */
+  journeySub?: string;
   cardImageSlot: string;
   heroSlot: string;
   burningQuestion?: string;
@@ -84,6 +86,7 @@ export const MISSIONS: Mission[] = [
     date: "July 9 to 17, 2026",
     summary:
       "A fever dream video about treasure carried the gospel from Southern California to Iceland and put Jesus in front of millions.",
+    journeySub: "From California to Iceland, hunting what treasure really means.",
     cardImageSlot: "real-treasure-card",
     heroSlot: "real-treasure-hero",
     heroVideo: "/brand/video/real-treasure-hero-bg.mp4",
@@ -191,6 +194,7 @@ export const MISSIONS: Mission[] = [
     date: "November 4 to December 4, 2025",
     summary:
       "What would it look like to share Jesus in a secular YouTube video? Thirty days in Japan answered the question and became the blueprint.",
+    journeySub: "Thirty days in Japan, from the first prayer walk to the biggest drifting event on earth.",
     cardImageSlot: "home-proof-tokyo",
     heroSlot: "tokyo-hero",
     burningQuestion:
@@ -305,6 +309,7 @@ export const MISSIONS: Mission[] = [
     },
     summary:
       "Ten creators from different niches, one desert house, a weekend of full commitment. Proof that the model works, and the invitation to the next one.",
+    journeySub: "Ten creators, one desert house, one weekend of full commitment.",
     cardImageSlot: "home-proof-joshua-tree",
     heroSlot: "joshua-hero",
     sections: [
@@ -467,6 +472,7 @@ export const MISSIONS: Mission[] = [
     date: "July 2024 to February 2025",
     summary:
       "Ten plus podcasts filmed around the biggest competition show on earth, many carrying Jesus conversations to a secular audience of fans.",
+    journeySub: "Carrying Jesus conversations through the biggest competition show on earth.",
     cardImageSlot: "home-proof-beast-games",
     heroSlot: "beast-hero",
     heroVideo: "/brand/video/beast-hero-bg.mp4",

@@ -268,122 +268,40 @@ export default async function MissionPage({
         </div>
       ) : null}
 
-      {/* Photo essay sections. Tokyo Drift pilots the journey: the
-          story flown through as planes in deep space. */}
-      {mission.slug === "tokyo-drift" ? (
-        <>
-        <JourneyThread />
-        <JourneyScene
-          items={[
-            {
-              kind: "title",
-              title: "The Journey",
-              sub: "Thirty days in Japan, from the first prayer walk to the biggest drifting event on earth.",
-            } as JourneyItem,
-            ...mission.sections.flatMap((section): JourneyItem[] => [
-              {
-                kind: "beat",
-                kicker: section.kicker,
-                paragraphs: section.paragraphs,
-              },
-              ...(section.imageSlots ?? []).flatMap((slot): JourneyItem[] => {
-                const r = resolveSlot(slot);
-                return r.src
-                  ? [{ kind: "photo", src: r.src, alt: r.alt }]
-                  : [];
-              }),
-            ]),
+      {/* The story, flown through: every photo and beat a plane in
+          deep space, glowing threads leading in and out on mobile */}
+      <JourneyThread />
+      <JourneyScene
+        items={[
+          {
+            kind: "title",
+            title: "The Journey",
+            sub: mission.journeySub ?? mission.summary,
+          } as JourneyItem,
+          ...mission.sections.flatMap((section): JourneyItem[] => [
             {
               kind: "beat",
-              kicker: "Touchdown",
-              paragraphs: [
-                "The response, the numbers, and everything that came after are just below.",
-              ],
-            } as JourneyItem,
-          ]}
-        />
-        <JourneyThread />
-        </>
-      ) : (
-      <div className="mx-auto max-w-7xl space-y-24 px-5 py-24 sm:px-8 sm:space-y-32 sm:py-32">
-        {mission.sections.map((section, si) => (
-          <Reveal as="section" key={section.paragraphs[0]}>
-            {/* desktop: text beside the photos, sides alternating by
-                section; mobile keeps text above the photos */}
-            <div
-              className={
-                section.imageSlots?.length
-                  ? `md:grid md:items-center md:gap-14 ${
-                      si % 2 === 1
-                        ? "md:grid-cols-[5fr_4fr]"
-                        : "md:grid-cols-[4fr_5fr]"
-                    }`
-                  : undefined
-              }
-            >
-            <div className={si % 2 === 1 ? "md:order-2" : undefined}>
-            {section.kicker ? <Kicker>{section.kicker}</Kicker> : null}
-            <div className="mt-8 max-w-2xl space-y-6">
-              {section.paragraphs.map((p) => (
-                <p key={p} className="text-lg leading-relaxed text-starlight/85 md:text-xl md:leading-relaxed">
-                  {linkCategory3(p)}
-                </p>
-              ))}
-              {section.link ? (
-                <Link
-                  href={section.link.href}
-                  className="mono-link inline-block text-sm font-bold text-ember"
-                >
-                  {section.link.label} →
-                </Link>
-              ) : null}
-            </div>
-            </div>
-            {section.imageSlots?.length ? (
-              <div
-                className={`mt-14 grid gap-8 md:mt-0 ${
-                  section.imageSlots.length === 1 ? "" : "sm:grid-cols-2"
-                } ${si % 2 === 1 ? "md:order-1" : ""}`}
-              >
-                {section.imageSlots.map((slot) => {
-                  const slotLink = mission.slotLinks?.[slot];
-                  const hiddenMd = mission.desktopHiddenSlots?.includes(slot);
-                  const media = (
-                    <MediaSlot
-                      key={slotLink ? undefined : slot}
-                      name={slot}
-                      sizes="(min-width: 640px) 50vw, 100vw"
-                      className={hiddenMd ? "md:hidden" : ""}
-                    />
-                  );
-                  if (!slotLink) return media;
-                  return (
-                    <a
-                      key={slot}
-                      href={slotLink.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`group relative block ${hiddenMd ? "md:hidden" : ""}`}
-                    >
-                      {media}
-                      <span className="pointer-events-none absolute inset-0 flex items-center justify-center bg-night/60 px-6 text-center opacity-0 backdrop-blur-[2px] transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
-                        <span className="mono-link text-sm font-bold">
-                          {slotLink.label}
-                        </span>
-                      </span>
-                      <span className="meta-label mt-2 inline-block text-ember sm:hidden">
-                        {slotLink.label}
-                      </span>
-                    </a>
-                  );
-                })}
-              </div>
-            ) : null}
-            </div>
-          </Reveal>
-        ))}
-      </div>
-      )}
+              kicker: section.kicker,
+              paragraphs: section.paragraphs,
+              link: section.link,
+            },
+            ...(section.imageSlots ?? []).flatMap((slot): JourneyItem[] => {
+              const r = resolveSlot(slot);
+              return r.src ? [{ kind: "photo", src: r.src, alt: r.alt }] : [];
+            }),
+          ]),
+          {
+            kind: "beat",
+            kicker: "Touchdown",
+            paragraphs: [
+              mission.commentWall
+                ? "The response and everything that came after are just below."
+                : "Everything that came after is just below.",
+            ],
+          } as JourneyItem,
+        ]}
+      />
+      <JourneyThread />
 
       {/* Comment wall: real comments from the posted video as quote cards */}
       {mission.commentWall ? (

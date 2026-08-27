@@ -8,7 +8,12 @@ import { linkCategory3 } from "@/components/Category3Link";
 
 export type JourneyItem =
   | { kind: "title"; title: string; sub: string }
-  | { kind: "beat"; kicker?: string; paragraphs: string[] }
+  | {
+      kind: "beat";
+      kicker?: string;
+      paragraphs: string[];
+      link?: { label: string; href: string };
+    }
   | { kind: "photo"; src: string; alt: string };
 
 // Tier one of the journey pages: every photo and story beat floats as
@@ -69,6 +74,7 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
     if (reduced) return;
     let raf = 0;
     let zCur = 0;
+    let lastApplied = -1;
     const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
     const maxZ = (items.length - 1) * SPACING + 100;
     // a continuous loop with easing: iOS only delivers sparse scroll
@@ -86,18 +92,20 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
       const p = clamp01(-rect.top / total);
       const scene = sceneRef.current;
       if (scene) {
-        const fade = 1 - clamp01((p - 0.9) / 0.085);
+        const fade = 1 - clamp01((p - 0.93) / 0.055);
         scene.style.opacity = fade.toFixed(3);
       }
-      const zTarget = clamp01(p / 0.88) * maxZ;
-      const settled = zTarget === zCur;
+      const zTarget = clamp01(p / 0.94) * maxZ;
       zCur += (zTarget - zCur) * 0.16;
       if (Math.abs(zTarget - zCur) < 0.08) zCur = zTarget;
-      if (settled && zTarget === zCur) {
+      // once settled and applied, stop touching styles; but always
+      // apply at least once so first paint never shows stale ghosts
+      if (zCur === zTarget && lastApplied === zCur) {
         const hint0 = hintRef.current;
         if (hint0) hint0.style.opacity = p < 0.03 ? "1" : "0";
         return;
       }
+      lastApplied = zCur === zTarget ? zCur : -1;
       world.style.transform = `translateZ(${zCur.toFixed(2)}px)`;
       const titleHolds = zCur < 450;
       itemRefs.current.forEach((el, i) => {
@@ -172,7 +180,7 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
       ref={wrapRef}
       id="journey-scene"
       className="relative"
-      style={{ height: `${items.length * 58 + 100}svh` }}
+      style={{ height: `${items.length * 54 + 100}svh` }}
     >
       <div className="sticky top-0 h-svh overflow-hidden">
         <div ref={sceneRef} className="absolute inset-0">
@@ -223,6 +231,14 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
                             {linkCategory3(p)}
                           </p>
                         ))}
+                        {item.link ? (
+                          <a
+                            href={item.link.href}
+                            className="mono-link inline-block text-sm font-bold text-ember"
+                          >
+                            {item.link.label} →
+                          </a>
+                        ) : null}
                       </div>
                     </div>
                   ) : (
