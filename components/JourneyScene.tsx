@@ -14,7 +14,7 @@ export type JourneyItem =
       paragraphs: string[];
       link?: { label: string; href: string };
     }
-  | { kind: "photo"; src: string; alt: string };
+  | { kind: "photo"; src: string; alt: string; tall?: boolean };
 
 // Tier one of the journey pages: every photo and story beat floats as
 // a plane in deep space, and scrolling flies the camera forward
@@ -196,7 +196,9 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
           >
             {items.map((item, i) => {
               const [ox, oy] =
-                item.kind === "photo" ? OFFSETS[i % OFFSETS.length] : [0, 0];
+                item.kind === "photo" && !item.tall
+                  ? OFFSETS[i % OFFSETS.length]
+                  : [0, 0];
               const zi = i * SPACING + LEAD;
               return (
                 <div
@@ -250,7 +252,11 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
                       alt={item.alt}
                       loading="eager"
                       decoding="async"
-                      className="w-[74vw] max-w-none rounded-lg border border-dust/25 shadow-[0_10px_50px_rgb(0_0_0/0.6)] md:w-[min(44vw,620px)]"
+                      className={
+                        item.tall
+                          ? "h-[60svh] w-auto max-w-[86vw] rounded-lg border border-dust/25 shadow-[0_10px_50px_rgb(0_0_0/0.6)] md:h-[76svh]"
+                          : "w-[74vw] max-w-none rounded-lg border border-dust/25 shadow-[0_10px_50px_rgb(0_0_0/0.6)] md:w-[min(44vw,620px)]"
+                      }
                     />
                   )}
                 </div>

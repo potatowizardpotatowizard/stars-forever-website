@@ -27,13 +27,26 @@ export default function StoryPage() {
   };
   const items: JourneyItem[] = [
     { kind: "title", title: STORY.intro, sub: "" },
+    // his brother, met before anything else
+    {
+      kind: "photo",
+      src: "/images/story-brother-portrait.jpg",
+      alt: "Auzi's brother",
+      tall: true,
+    },
+    { kind: "photo", src: "/images/story-brother-young.jpg", alt: "Auzi and his brother as kids" },
+    { kind: "photo", src: "/images/story-brother-london.jpg", alt: "Auzi's brother with his younger brothers in London" },
+    // the set photo lands after the line about entering the show,
+    // not behind the opening header
+    { kind: "beat", paragraphs: STORY.beats[0].paragraphs },
+    photo(STORY.beats[0].imageSlot),
+    photo(STORY.beats[1].imageSlot),
+    { kind: "beat", paragraphs: STORY.beats[1].paragraphs },
+    photo(STORY.beats[2].imageSlot),
+    { kind: "beat", paragraphs: STORY.beats[2].paragraphs },
+    photo(STORY.tribute.imageSlot),
+    { kind: "beat", paragraphs: STORY.tribute.lines },
   ];
-  STORY.beats.forEach((beat) => {
-    items.push(photo(beat.imageSlot));
-    items.push({ kind: "beat", paragraphs: beat.paragraphs });
-  });
-  items.push(photo(STORY.tribute.imageSlot));
-  items.push({ kind: "beat", paragraphs: STORY.tribute.lines });
 
   return (
     <article>

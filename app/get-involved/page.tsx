@@ -111,8 +111,9 @@ export default function GetInvolvedPage() {
         </section>
       </div>
 
-      {/* What giving produces */}
-      <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8">
+      {/* What giving produces: stacked above the comet bleed so the
+          photos stay crisp while the glow fills the sky around them */}
+      <section className="relative z-10 mx-auto max-w-7xl px-5 py-20 sm:px-8">
         <Reveal>
           <Kicker>{give.produces.kicker}</Kicker>
         </Reveal>
