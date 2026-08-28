@@ -95,7 +95,7 @@ export default async function MissionPage({
       </header>
 
       {/* Consistent metadata header */}
-      <div className="border-y border-dust/15">
+      <div className="bg-gradient-to-b from-transparent via-soot/40 to-transparent">
         <dl className="mx-auto grid max-w-7xl gap-6 px-5 py-8 sm:grid-cols-2 sm:px-8 lg:grid-cols-4">
           {(
             [

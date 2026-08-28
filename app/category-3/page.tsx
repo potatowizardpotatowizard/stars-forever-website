@@ -142,7 +142,7 @@ export default function Category3Page() {
         <div className="mt-16 space-y-16">
           {CATEGORY3.mechanism.paths.map((path, i) => (
             <Reveal key={path.title}>
-              <div className="grid gap-6 border-t border-dust/15 pt-10 md:grid-cols-[auto_1fr] md:gap-14">
+              <div className="grid gap-6 pt-10 md:grid-cols-[auto_1fr] md:gap-14">
                 <p className="font-display text-5xl text-ember/70">{i + 1}</p>
                 <div className="max-w-2xl">
                   <h3 className="font-display text-2xl sm:text-3xl">

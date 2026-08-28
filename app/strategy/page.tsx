@@ -153,7 +153,7 @@ export default function StrategyPage() {
       </section>
 
       {/* The systems */}
-      <section className="border-y border-white/10 bg-[#0d0709]">
+      <section className="bg-gradient-to-b from-transparent via-[#0d0709] to-transparent">
         <div className="mx-auto max-w-6xl px-5 py-24 sm:px-8">
           <Reveal>
             <StratLabel>{STRATEGY.systems.kicker}</StratLabel>
@@ -229,7 +229,7 @@ export default function StrategyPage() {
       </section>
 
       {/* Quotes */}
-      <section className="border-t border-white/10">
+      <section>
         <div className="mx-auto max-w-6xl px-5 py-24 sm:px-8">
         <Reveal>
           <StratLabel>{STRATEGY.quotes.kicker}</StratLabel>
@@ -252,7 +252,7 @@ export default function StrategyPage() {
       </section>
 
       {/* Offerings */}
-      <section className="border-t border-white/10 bg-[#0d0709]">
+      <section className="bg-gradient-to-b from-transparent via-[#0d0709] to-transparent">
         <div className="mx-auto max-w-6xl px-5 py-24 sm:px-8">
           <Reveal>
             <StratLabel>{STRATEGY.offers.kicker}</StratLabel>
