@@ -39,8 +39,8 @@ export default function StoryPage() {
     // the set photo lands after the line about entering the show,
     // not behind the opening header
     { kind: "beat", paragraphs: STORY.beats[0].paragraphs },
-    photo(STORY.beats[0].imageSlot),
     photo(STORY.beats[1].imageSlot),
+    photo(STORY.beats[0].imageSlot),
     { kind: "beat", paragraphs: STORY.beats[1].paragraphs },
     photo(STORY.beats[2].imageSlot),
     { kind: "beat", paragraphs: STORY.beats[2].paragraphs },
