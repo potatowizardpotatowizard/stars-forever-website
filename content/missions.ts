@@ -254,7 +254,7 @@ export const MISSIONS: Mission[] = [
         paragraphs: [
           "We believe God places certain dreams on our hearts. Owen, a travel adventure YouTuber, always dreamed of drifting in Japan. He loves cars so we started there and we sought God daily: God, help us make something of eternal value. Help us to be bold with the gospel in this video and our lives. Help us reach a secular audience who truly needs to know you.",
         ],
-        imageSlots: ["tokyo-hero", "tokyo-planning"],
+        imageSlots: ["tokyo-hero"],
       },
       {
         kicker: "God moved",
@@ -270,7 +270,7 @@ export const MISSIONS: Mission[] = [
           "We shared life deeply with four unbelievers: church, lunches, baptisms, theme parks, birthdays. We discipled Seven, a local Japanese creator who drove hours to our shoots and learned to seek God inside his art. And pastor Kento, moved by the work, invited us in to talk about the mission.",
           "This trip is now the blueprint: help a creator seek God, encounter His power personally, preach the gospel through their creative gifts, strengthen the local church, and watch lives change.",
         ],
-        imageSlots: ["tokyo-church", "tokyo-seven", "tokyo-friends", "tokyo-circuit", "tokyo-community", "tokyo-temple"],
+        imageSlots: ["tokyo-planning", "tokyo-church", "tokyo-seven", "tokyo-friends", "tokyo-circuit", "tokyo-community", "tokyo-temple"],
       },
     ],
     links: [

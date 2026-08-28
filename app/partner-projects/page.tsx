@@ -26,7 +26,7 @@ export default function PartnerProjectsPage() {
       {/* Analog hero band: hero and explainer share one continuous
           canvas, the photo dissolving into open night */}
       <div className="relative overflow-hidden">
-        <div aria-hidden="true" className="absolute inset-x-0 top-0 h-[62svh] md:h-[80svh]">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-[62svh] md:h-[80svh]">
         <Image
           src="/brand/bg-purple-meteor.jpg"
           alt=""
@@ -98,7 +98,7 @@ export default function PartnerProjectsPage() {
         <section className="relative">
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 top-[-14svh] h-[60vh] bg-[linear-gradient(to_bottom,transparent,rgb(109_40_217/0.28)_32%,rgb(109_40_217/0.1)_62%,transparent)]"
+          className="pointer-events-none absolute inset-x-0 top-[-14svh] h-[60vh] bg-[linear-gradient(to_bottom,transparent,rgb(109_40_217/0.28)_32%,rgb(109_40_217/0.1)_62%,transparent)]"
         />
         <div className="relative mx-auto max-w-7xl px-5 pb-12 pt-16 sm:px-8">
           <Reveal className="max-w-3xl">
@@ -121,9 +121,9 @@ export default function PartnerProjectsPage() {
           className="pointer-events-none absolute inset-0 hidden lg:block"
         >
           {[
-            { w: 340, right: 330, top: 130, delay: "0s", op: 0.95, dur: "1.3s" },
-            { w: 340, right: 180, top: 135, delay: "0.45s", op: 1, dur: "1s" },
-            { w: 340, right: 140, top: 280, delay: "0.9s", op: 0.95, dur: "1.3s" },
+            { w: 290, right: 350, top: 140, delay: "0s", op: 0.95, dur: "1.3s" },
+            { w: 290, right: 210, top: 145, delay: "0.45s", op: 1, dur: "1s" },
+            { w: 290, right: 165, top: 275, delay: "0.9s", op: 0.95, dur: "1.3s" },
           ].map((m) => (
             <div
               key={m.w}

@@ -28,7 +28,7 @@ export default function GetInvolvedPage() {
       {/* Analog hero band: hero and the giving frame share one
           continuous canvas, the photo dissolving into open night */}
       <div className="relative overflow-hidden">
-        <div aria-hidden="true" className="absolute inset-x-0 top-0 h-[62svh] md:h-[80svh]">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-[62svh] md:h-[80svh]">
         <Image
           src="/brand/bg-orange-star.jpg"
           alt=""
@@ -85,7 +85,7 @@ export default function GetInvolvedPage() {
         <section className="relative">
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 top-[-14svh] h-[60vh] bg-[linear-gradient(to_bottom,transparent,rgb(194_65_12/0.28)_32%,rgb(194_65_12/0.1)_62%,transparent)]"
+          className="pointer-events-none absolute inset-x-0 top-[-14svh] h-[60vh] bg-[linear-gradient(to_bottom,transparent,rgb(194_65_12/0.28)_32%,rgb(194_65_12/0.1)_62%,transparent)]"
         />
         <div className="relative mx-auto max-w-7xl px-5 pt-12 sm:px-8">
           <Reveal className="max-w-3xl">

@@ -25,7 +25,7 @@ export default function VisionPage() {
       {/* Analog hero: hero and the problem share one continuous
           canvas, the photo dissolving into open night */}
       <div className="relative overflow-hidden">
-        <div aria-hidden="true" className="absolute inset-x-0 top-0 h-[78svh] md:h-[96svh]">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-[78svh] md:h-[96svh]">
           <Image
             src="/brand/bg-greenpurple-star.jpg"
             alt=""
@@ -65,7 +65,7 @@ export default function VisionPage() {
         <section className="relative">
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 top-[-14svh] h-[70vh] [mask-image:linear-gradient(to_bottom,transparent,black_30%,black_72%,transparent)]"
+          className="pointer-events-none absolute inset-x-0 top-[-14svh] h-[70vh] [mask-image:linear-gradient(to_bottom,transparent,black_30%,black_72%,transparent)]"
           style={{
             backgroundImage:
               "radial-gradient(ellipse 55% 60% at 10% 0%, rgb(109 40 217 / 0.22), transparent 68%), radial-gradient(ellipse 80% 65% at 78% 0%, rgb(34 197 94 / 0.26), transparent 72%)",

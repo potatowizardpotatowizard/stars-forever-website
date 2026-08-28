@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import AnchorSnap from "@/components/AnchorSnap";
 import ConstellationWhisper from "@/components/ConstellationWhisper";
 import { linkCategory3 } from "@/components/Category3Link";
 import Image from "next/image";
@@ -26,11 +27,12 @@ export const metadata: Metadata = {
 export default function RevolutionaryPage() {
   return (
     <article>
+      <AnchorSnap id="attend" />
       {/* the hero and the explainer share one continuous canvas: the
           photo dissolves into the page's night while the green
           afterglow carries on beneath the video, one unbroken sky */}
       <div className="relative overflow-hidden">
-        <div aria-hidden="true" className="absolute inset-x-0 top-0 h-[62svh] md:h-[80svh]">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-[62svh] md:h-[80svh]">
           <Image
             src="/brand/bg-green.jpg"
             alt=""
@@ -107,7 +109,7 @@ export default function RevolutionaryPage() {
         <section className="relative">
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 top-[-14svh] h-[60vh] bg-[linear-gradient(to_bottom,transparent,rgb(22_101_52/0.32)_32%,rgb(22_101_52/0.12)_62%,transparent)]"
+          className="pointer-events-none absolute inset-x-0 top-[-14svh] h-[60vh] bg-[linear-gradient(to_bottom,transparent,rgb(22_101_52/0.32)_32%,rgb(22_101_52/0.12)_62%,transparent)]"
         />
         <div className="relative mx-auto max-w-7xl px-5 pb-24 pt-24 sm:px-8 md:pb-0 md:pt-12">
         <GrowVideo
