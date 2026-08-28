@@ -33,11 +33,11 @@ export default function PodcastPage() {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-top opacity-45"
+          className="object-cover object-top opacity-45 [mask-image:linear-gradient(to_bottom,black_55%,transparent_97%)]"
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-b from-night/50 via-night/30 to-night"
+          className="absolute inset-0 bg-gradient-to-b from-night/50 via-night/30 to-night/70 [mask-image:linear-gradient(to_bottom,black_55%,transparent_97%)]"
         />
         <Grain />
         <div className="relative mx-auto max-w-7xl px-5 pb-20 pt-32 sm:px-8 sm:pt-44">
@@ -63,7 +63,7 @@ export default function PodcastPage() {
       <section className="relative overflow-hidden border-b border-dust/15">
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 top-0 h-[40vh] bg-[linear-gradient(to_bottom,rgb(30_64_175/0.3),rgb(30_64_175/0.1)_45%,transparent)]"
+          className="absolute inset-x-0 top-0 h-[40vh] bg-[linear-gradient(to_bottom,transparent,rgb(30_64_175/0.26)_30%,rgb(30_64_175/0.08)_62%,transparent)]"
         />
         <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8">
           <Reveal>

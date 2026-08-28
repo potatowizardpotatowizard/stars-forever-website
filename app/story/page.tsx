@@ -30,11 +30,11 @@ export default function StoryPage() {
           fill
           priority
           sizes="100vw"
-          className="object-cover opacity-70"
+          className="object-cover opacity-70 [mask-image:linear-gradient(to_bottom,black_55%,transparent_97%)]"
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night"
+          className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night/70 [mask-image:linear-gradient(to_bottom,black_55%,transparent_97%)]"
         />
         <Grain />
         <span aria-hidden="true" className="hero-meteor" />
@@ -55,7 +55,7 @@ export default function StoryPage() {
       <div className="relative">
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 top-0 h-[45vh] bg-[linear-gradient(to_bottom,rgb(34_30_121/0.45),rgb(34_30_121/0.16)_45%,transparent)]"
+          className="absolute inset-x-0 top-0 h-[45vh] bg-[linear-gradient(to_bottom,transparent,rgb(34_30_121/0.38)_30%,rgb(34_30_121/0.13)_62%,transparent)]"
         />
         <div className="relative mx-auto max-w-7xl px-5 pt-10 sm:px-8">
         <StoryJourney

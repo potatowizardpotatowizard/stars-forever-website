@@ -27,11 +27,11 @@ export default function Category3Page() {
           fill
           priority
           sizes="100vw"
-          className="object-cover opacity-70"
+          className="object-cover opacity-70 [mask-image:linear-gradient(to_bottom,black_55%,transparent_97%)]"
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night"
+          className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night/70 [mask-image:linear-gradient(to_bottom,black_55%,transparent_97%)]"
         />
         <Grain />
         <div className="relative mx-auto max-w-7xl px-5 pt-32 sm:px-8 sm:pt-44">
@@ -79,7 +79,7 @@ export default function Category3Page() {
       >
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 top-0 h-[40vh] bg-[linear-gradient(to_bottom,rgb(239_236_247/0.07),rgb(239_236_247/0.02)_45%,transparent)]"
+          className="absolute inset-x-0 top-0 h-[40vh] bg-[linear-gradient(to_bottom,transparent,rgb(239_236_247/0.06)_30%,rgb(239_236_247/0.02)_62%,transparent)]"
         />
         <div className="relative mx-auto max-w-7xl px-5 py-12 sm:px-8">
         <Reveal>

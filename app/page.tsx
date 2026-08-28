@@ -90,7 +90,7 @@ export default function HomePage() {
       <div className="relative">
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 top-0 h-[50vh] bg-[linear-gradient(to_bottom,rgb(109_40_217/0.3),rgb(109_40_217/0.1)_45%,transparent)]"
+          className="absolute inset-x-0 top-0 h-[50vh] bg-[linear-gradient(to_bottom,transparent,rgb(109_40_217/0.26)_30%,rgb(109_40_217/0.08)_62%,transparent)]"
         />
         <ProjectShowcase />
       </div>
@@ -328,7 +328,7 @@ export default function HomePage() {
           alt=""
           fill
           sizes="100vw"
-          className="object-cover opacity-60"
+          className="object-cover opacity-60 [mask-image:linear-gradient(to_bottom,transparent,black_18%,black_82%,transparent)]"
         />
         <Grain />
         <div className="relative mx-auto max-w-7xl px-5 py-28 text-center sm:px-8 sm:py-36">
