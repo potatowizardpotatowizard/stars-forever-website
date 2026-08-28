@@ -26,7 +26,7 @@ export default function StoryPage() {
     return { kind: "photo", src: s.src ?? "", alt: s.alt };
   };
   const items: JourneyItem[] = [
-    { kind: "title", title: STORY.intro, sub: "" },
+    { kind: "title", title: STORY.intro, sub: "", glitch: false },
     // his brother, met before anything else
     {
       kind: "photo",

@@ -7,7 +7,7 @@ import StarField from "@/components/StarField";
 import { linkCategory3 } from "@/components/Category3Link";
 
 export type JourneyItem =
-  | { kind: "title"; title: string; sub: string }
+  | { kind: "title"; title: string; sub: string; glitch?: boolean }
   | {
       kind: "beat";
       kicker?: string;
@@ -215,7 +215,11 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
                   {item.kind === "title" ? (
                     <div className="w-[88vw] max-w-2xl text-center">
                       <h2 className="font-display text-4xl font-bold uppercase tracking-tight text-white [text-shadow:0_0_14px_rgb(255_255_255/0.85),0_0_36px_rgb(167_139_250/0.7)] sm:text-6xl">
-                        <GlitchText text={item.title} />
+                        {item.glitch === false ? (
+                          item.title
+                        ) : (
+                          <GlitchText text={item.title} />
+                        )}
                       </h2>
                       {item.sub ? (
                         <p className="mx-auto mt-5 max-w-md text-base leading-relaxed text-starlight/85 sm:text-lg">
