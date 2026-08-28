@@ -215,9 +215,11 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
                       <h2 className="font-display text-4xl font-bold uppercase tracking-tight text-white [text-shadow:0_0_14px_rgb(255_255_255/0.85),0_0_36px_rgb(167_139_250/0.7)] sm:text-6xl">
                         <GlitchText text={item.title} />
                       </h2>
-                      <p className="mx-auto mt-5 max-w-md text-base leading-relaxed text-starlight/85 sm:text-lg">
-                        {item.sub}
-                      </p>
+                      {item.sub ? (
+                        <p className="mx-auto mt-5 max-w-md text-base leading-relaxed text-starlight/85 sm:text-lg">
+                          {item.sub}
+                        </p>
+                      ) : null}
                     </div>
                   ) : item.kind === "beat" ? (
                     <div className="w-[80vw] max-w-xl">

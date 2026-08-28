@@ -26,11 +26,7 @@ export default function StoryPage() {
     return { kind: "photo", src: s.src ?? "", alt: s.alt };
   };
   const items: JourneyItem[] = [
-    {
-      kind: "title",
-      title: STORY.intro,
-      sub: `${STORY.meta.who} · ${STORY.meta.where} · ${STORY.meta.when}`,
-    },
+    { kind: "title", title: STORY.intro, sub: "" },
   ];
   STORY.beats.forEach((beat) => {
     items.push(photo(beat.imageSlot));
