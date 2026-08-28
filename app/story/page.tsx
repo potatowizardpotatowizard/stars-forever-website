@@ -14,7 +14,7 @@ import { resolveSlot } from "@/lib/media";
 export const metadata: Metadata = {
   title: "The Story",
   description:
-    "Seven days before Beast Games season one, Auzi's brother died. What happened next became Stars Forever.",
+    "Seven days before Beast Games, Auzi's brother died. What happened next became Stars Forever.",
   openGraph: { images: [{ url: "/brand/og-story.jpg", width: 1200, height: 630 }] },
 };
 

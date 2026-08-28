@@ -3,7 +3,7 @@
 
 export const STORY = {
   title: "The Story",
-  intro: "Seven days before Beast Games season one, my brother died.",
+  intro: "Seven days before Beast Games, my brother died.",
   meta: { who: "Auzi's story", where: "Beast Games", when: "July 2024 to February 2025" },
   beats: [
     {
