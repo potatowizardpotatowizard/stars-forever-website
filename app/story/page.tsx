@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import GlitchText from "@/components/GlitchText";
-import Grain from "@/components/Grain";
+import JourneyScene, { type JourneyItem } from "@/components/JourneyScene";
+import JourneyThread from "@/components/JourneyThread";
 import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
 import Reveal from "@/components/Reveal";
-import StoryJourney from "@/components/StoryJourney";
 import Cta from "@/components/Cta";
 import { STORY } from "@/content/story";
 import { FOUNDERS, GIVING_URL } from "@/content/site";
@@ -20,62 +19,31 @@ export const metadata: Metadata = {
 };
 
 export default function StoryPage() {
+  // The whole story is the flight: the old header is now the opening
+  // plane of the journey, so the page begins already inside it.
+  const photo = (slot: string): JourneyItem => {
+    const s = resolveSlot(slot);
+    return { kind: "photo", src: s.src ?? "", alt: s.alt };
+  };
+  const items: JourneyItem[] = [
+    {
+      kind: "title",
+      title: STORY.intro,
+      sub: `${STORY.meta.who} · ${STORY.meta.where} · ${STORY.meta.when}`,
+    },
+  ];
+  STORY.beats.forEach((beat) => {
+    items.push(photo(beat.imageSlot));
+    items.push({ kind: "beat", paragraphs: beat.paragraphs });
+  });
+  items.push(photo(STORY.tribute.imageSlot));
+  items.push({ kind: "beat", paragraphs: STORY.tribute.lines });
+
   return (
     <article>
-      {/* Opening: quiet, typographic, held by the deep blue starfield */}
-      <header className="relative overflow-hidden">
-        <Image
-          src="/brand/bg-blue.jpg"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover opacity-70 [mask-image:linear-gradient(to_bottom,black_55%,transparent_97%)]"
-        />
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night/70 [mask-image:linear-gradient(to_bottom,black_55%,transparent_97%)]"
-        />
-        <Grain />
-        <span aria-hidden="true" className="hero-meteor" />
-        <div className="relative mx-auto max-w-7xl px-5 pb-20 pt-32 sm:px-8 sm:pt-44">
-          <p className="meta-label">
-            {STORY.meta.who} · {STORY.meta.where} · {STORY.meta.when}
-          </p>
-          <h1 className="mt-8 max-w-4xl font-display text-4xl leading-tight sm:text-6xl sm:leading-tight">
-            {STORY.intro}
-          </h1>
-        </div>
-      </header>
+      <JourneyScene items={items} />
+      <JourneyThread />
 
-      {/* The journey: chapters scattered across the sky, a guiding star
-          traveling the constellation between them, ending at the cross.
-          Opens under the hero's blue afterglow. Not overflow clipped, so
-          the origin star can descend out of the hero above. */}
-      <div className="relative">
-        <div
-          aria-hidden="true"
-          className="absolute inset-x-0 top-0 h-[45vh] bg-[linear-gradient(to_bottom,transparent,rgb(34_30_121/0.38)_30%,rgb(34_30_121/0.13)_62%,transparent)]"
-        />
-        <div className="relative mx-auto max-w-7xl px-5 pt-10 sm:px-8">
-        <StoryJourney
-          beats={STORY.beats.map((beat) => {
-            const slot = resolveSlot(beat.imageSlot);
-            return {
-              src: slot.src ?? "",
-              alt: slot.alt,
-              ratio: slot.ratio,
-              paragraphs: beat.paragraphs,
-            };
-          })}
-          tribute={{
-            src: resolveSlot(STORY.tribute.imageSlot).src ?? "",
-            alt: resolveSlot(STORY.tribute.imageSlot).alt,
-            lines: STORY.tribute.lines,
-          }}
-        />
-        </div>
-      </div>
 
       {/* Bridge into the vision */}
       <section className="bg-gradient-to-b from-transparent via-soot/50 to-transparent">
