@@ -18,6 +18,9 @@ export type Mission = {
   summary: string;
   /** One line under THE JOURNEY title on the flight through the story */
   journeySub?: string;
+  /** Route interlude drawn mid-flight: an ember line traveling the
+      mission's geography, inserted after the named section */
+  journeyRoute?: { afterKicker: string; from: string; via?: string; to: string };
   cardImageSlot: string;
   heroSlot: string;
   burningQuestion?: string;
@@ -195,6 +198,12 @@ export const MISSIONS: Mission[] = [
     summary:
       "What would it look like to share Jesus in a secular YouTube video? Thirty days in Japan answered the question and became the blueprint.",
     journeySub: "Thirty days in Japan, from the first prayer walk to the biggest drifting event on earth.",
+    journeyRoute: {
+      afterKicker: "God moved",
+      from: "Tokyo",
+      via: "Rural Japan",
+      to: "Ebisu Circuit",
+    },
     cardImageSlot: "home-proof-tokyo",
     heroSlot: "tokyo-hero",
     burningQuestion:

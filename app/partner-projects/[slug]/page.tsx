@@ -289,6 +289,17 @@ export default async function MissionPage({
               const r = resolveSlot(slot);
               return r.src ? [{ kind: "photo", src: r.src, alt: r.alt }] : [];
             }),
+            ...(mission.journeyRoute &&
+            mission.journeyRoute.afterKicker === section.kicker
+              ? [
+                  {
+                    kind: "route",
+                    from: mission.journeyRoute.from,
+                    via: mission.journeyRoute.via,
+                    to: mission.journeyRoute.to,
+                  } as JourneyItem,
+                ]
+              : []),
           ]),
           {
             kind: "beat",

@@ -14,7 +14,8 @@ export type JourneyItem =
       paragraphs: string[];
       link?: { label: string; href: string };
     }
-  | { kind: "photo"; src: string; alt: string; tall?: boolean };
+  | { kind: "photo"; src: string; alt: string; tall?: boolean }
+  | { kind: "route"; from: string; via?: string; to: string };
 
 // Tier one of the journey pages: every photo and story beat floats as
 // a plane in deep space, and scrolling flies the camera forward
@@ -130,6 +131,25 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
         else if (d < 1300) op = 1 - ((d - 260) / 1040) * 0.94;
         else op = 0.06;
         el.style.opacity = op.toFixed(3);
+        // route planes draw their ember line as the camera approaches,
+        // the traveling star riding the tip
+        if (items[i]?.kind === "route" && op > 0) {
+          const path = el.querySelector<SVGPathElement>("[data-route-path]");
+          if (path) {
+            const lp = clamp01((600 - d) / 550);
+            path.style.strokeDashoffset = (1 - lp).toFixed(4);
+            const star = el.querySelector<SVGGElement>("[data-route-star]");
+            if (star) {
+              const len = path.getTotalLength();
+              const pt = path.getPointAtLength(len * lp);
+              star.setAttribute("transform", `translate(${pt.x} ${pt.y})`);
+              star.style.opacity = lp > 0.01 ? "1" : "0";
+            }
+            el.querySelectorAll<SVGGElement>("[data-route-node]").forEach((node) => {
+              node.style.opacity = lp >= Number(node.dataset.at ?? 0) ? "1" : "0";
+            });
+          }
+        }
       });
       const hint = hintRef.current;
       if (hint) hint.style.opacity = p < 0.03 ? "1" : "0";
@@ -161,6 +181,10 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
                 ))}
               </div>
             </div>
+          ) : item.kind === "route" ? (
+            <p key={i} className="meta-label text-dust">
+              {[item.from, item.via, item.to].filter(Boolean).join(" → ")}
+            </p>
           ) : (
             // eslint-disable-next-line @next/next/no-img-element
             <img
@@ -226,6 +250,54 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
                           {item.sub}
                         </p>
                       ) : null}
+                    </div>
+                  ) : item.kind === "route" ? (
+                    <div className="w-[88vw] max-w-2xl">
+                      <svg
+                        viewBox="0 0 600 400"
+                        fill="none"
+                        className="w-full overflow-visible"
+                        aria-label={`Route from ${item.from} to ${item.to}`}
+                      >
+                        {/* the flight line, drawn by scroll */}
+                        <path
+                          data-route-path
+                          d="M60 330 C 170 312, 238 244, 308 188 C 378 132, 468 96, 540 74"
+                          pathLength={1}
+                          strokeDasharray="1"
+                          strokeDashoffset="1"
+                          stroke="rgba(237,233,254,0.9)"
+                          strokeWidth="1.6"
+                          strokeLinecap="round"
+                          style={{ filter: "drop-shadow(0 0 6px rgba(180,140,255,0.8))" }}
+                        />
+                        {/* waypoints ignite as the line reaches them */}
+                        <g data-route-node data-at="0.02" className="transition-opacity duration-500" opacity="0">
+                          <circle cx="60" cy="330" r="3.5" fill="#efecf7" style={{ filter: "drop-shadow(0 0 8px rgba(180,140,255,0.9))" }} />
+                          <text x="60" y="360" textAnchor="start" fill="#b7aecb" fontSize="13" letterSpacing="0.22em" style={{ fontFamily: "var(--font-fragment)" }}>
+                            {item.from.toUpperCase()}
+                          </text>
+                        </g>
+                        {item.via ? (
+                          <g data-route-node data-at="0.5" className="transition-opacity duration-500" opacity="0">
+                            <circle cx="308" cy="188" r="2.8" fill="#efecf7" style={{ filter: "drop-shadow(0 0 7px rgba(180,140,255,0.85))" }} />
+                            <text x="308" y="222" textAnchor="middle" fill="#b7aecb" fontSize="13" letterSpacing="0.22em" style={{ fontFamily: "var(--font-fragment)" }}>
+                              {item.via.toUpperCase()}
+                            </text>
+                          </g>
+                        ) : null}
+                        <g data-route-node data-at="0.96" className="transition-opacity duration-500" opacity="0">
+                          <circle cx="540" cy="74" r="4" fill="#ffffff" style={{ filter: "drop-shadow(0 0 10px rgba(180,140,255,1))" }} />
+                          <text x="540" y="46" textAnchor="end" fill="#efecf7" fontSize="13" letterSpacing="0.22em" style={{ fontFamily: "var(--font-fragment)" }}>
+                            {item.to.toUpperCase()}
+                          </text>
+                        </g>
+                        {/* the traveling star riding the line */}
+                        <g data-route-star opacity="0">
+                          <circle r="7" fill="rgba(180,140,255,0.45)" style={{ filter: "blur(3px)" }} />
+                          <circle r="2.6" fill="#ffffff" style={{ filter: "drop-shadow(0 0 6px rgba(255,255,255,0.95))" }} />
+                        </g>
+                      </svg>
                     </div>
                   ) : item.kind === "beat" ? (
                     <div className="w-[80vw] max-w-xl">
