@@ -115,7 +115,7 @@ export default function MonologueDeck({
             className="absolute right-0 top-[-7.5rem] h-[17rem] -translate-y-1/2 overflow-hidden [transform-origin:88%_center] md:top-1/2 md:h-[36rem] [mask-image:linear-gradient(90deg,transparent,black_140px)] [-webkit-mask-image:linear-gradient(90deg,transparent,black_140px)]"
             style={{ width: "1250px", opacity: 0.8 }}
           >
-            <div className="absolute inset-0 [animation:meteorite-jiggle_1.15s_ease-in-out_infinite]">
+            <div className="absolute inset-0 [animation:meteorite-jiggle_1.15s_steps(14)_infinite]">
               {/* the meteor itself, and a breathing burn above it */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -128,23 +128,23 @@ export default function MonologueDeck({
                 <img
                   src="/brand/meteorite-orange.webp"
                   alt=""
-                  className="absolute right-0 top-1/2 w-[680px] max-w-none translate-y-[calc(-50%+8px)] blur-md md:w-[1500px] md:translate-y-[calc(-50%+20px)] [animation:meteorite-flicker-soft_1.9s_ease-in-out_infinite]"
+                  className="absolute right-0 top-1/2 w-[680px] max-w-none translate-y-[calc(-50%+8px)] blur-md md:w-[1500px] md:translate-y-[calc(-50%+20px)] [animation:meteorite-flicker-soft_1.9s_steps(16)_infinite]"
                 />
               </div>
 
               {/* embers shaken loose, drifting back down the trail */}
-              <span className="hidden md:block absolute right-64 top-[calc(50%+58px)] h-1.5 w-1.5 rounded-full bg-orange-400 [animation:ember-drift_1.3s_linear_infinite]" />
-              <span className="hidden md:block absolute right-56 top-[calc(50%+92px)] h-1 w-1 rounded-full bg-yellow-200 [animation:ember-drift_1.8s_linear_0.5s_infinite]" />
-              <span className="hidden md:block absolute right-72 top-[calc(50%+44px)] h-1.5 w-1.5 rounded-full bg-orange-500/90 [animation:ember-drift_1.1s_linear_0.8s_infinite]" />
-              <span className="hidden md:block absolute right-60 top-[calc(50%+72px)] h-1 w-1 rounded-full bg-amber-300 [animation:ember-drift_2s_linear_0.2s_infinite]" />
+              <span className="hidden md:block absolute right-64 top-[calc(50%+58px)] h-1.5 w-1.5 rounded-full bg-orange-400 [animation:ember-drift_1.3s_steps(10)_infinite]" />
+              <span className="hidden md:block absolute right-56 top-[calc(50%+92px)] h-1 w-1 rounded-full bg-yellow-200 [animation:ember-drift_1.8s_steps(14)_0.5s_infinite]" />
+              <span className="hidden md:block absolute right-72 top-[calc(50%+44px)] h-1.5 w-1.5 rounded-full bg-orange-500/90 [animation:ember-drift_1.1s_steps(9)_0.8s_infinite]" />
+              <span className="hidden md:block absolute right-60 top-[calc(50%+72px)] h-1 w-1 rounded-full bg-amber-300 [animation:ember-drift_2s_steps(16)_0.2s_infinite]" />
 
               {/* sparks crackling off the burning head */}
-              <span className="hidden md:block absolute right-[180px] top-[calc(50%+40px)] h-1 w-1 bg-yellow-200 [animation:spark-fly-up_1.1s_ease-out_infinite]" />
-              <span className="hidden md:block absolute right-[200px] top-[calc(50%+90px)] h-1 w-1 bg-orange-400 [animation:spark-fly-down_1.4s_ease-out_0.3s_infinite]" />
-              <span className="hidden md:block absolute right-[170px] top-[calc(50%+70px)] h-1 w-1 bg-amber-300 [animation:spark-fly-up_0.9s_ease-out_0.6s_infinite]" />
-              <span className="hidden md:block absolute right-[220px] top-[calc(50%+55px)] h-1 w-1 bg-orange-300 [animation:spark-fly-down_1.7s_ease-out_0.15s_infinite]" />
-              <span className="hidden md:block absolute right-[150px] top-[calc(50%+65px)] h-1.5 w-1.5 bg-yellow-100 [animation:spark-fly-up_1.3s_ease-out_0.45s_infinite]" />
-              <span className="hidden md:block absolute right-[210px] top-[calc(50%+105px)] h-1 w-1 bg-orange-500 [animation:spark-fly-down_1s_ease-out_0.8s_infinite]" />
+              <span className="hidden md:block absolute right-[180px] top-[calc(50%+40px)] h-1 w-1 bg-yellow-200 [animation:spark-fly-up_1.1s_steps(9)_infinite]" />
+              <span className="hidden md:block absolute right-[200px] top-[calc(50%+90px)] h-1 w-1 bg-orange-400 [animation:spark-fly-down_1.4s_steps(11)_0.3s_infinite]" />
+              <span className="hidden md:block absolute right-[170px] top-[calc(50%+70px)] h-1 w-1 bg-amber-300 [animation:spark-fly-up_0.9s_steps(8)_0.6s_infinite]" />
+              <span className="hidden md:block absolute right-[220px] top-[calc(50%+55px)] h-1 w-1 bg-orange-300 [animation:spark-fly-down_1.7s_steps(14)_0.15s_infinite]" />
+              <span className="hidden md:block absolute right-[150px] top-[calc(50%+65px)] h-1.5 w-1.5 bg-yellow-100 [animation:spark-fly-up_1.3s_steps(11)_0.45s_infinite]" />
+              <span className="hidden md:block absolute right-[210px] top-[calc(50%+105px)] h-1 w-1 bg-orange-500 [animation:spark-fly-down_1s_steps(8)_0.8s_infinite]" />
               <div
                 ref={sparksRef}
                 className="absolute right-[166px] top-[calc(50%+80px)] hidden h-32 w-32 -translate-y-1/2 animate-pulse md:block"

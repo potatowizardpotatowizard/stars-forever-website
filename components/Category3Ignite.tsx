@@ -104,7 +104,7 @@ export default function Category3Ignite({
         if (!title.dataset.burn) {
           title.dataset.burn = "1";
           title.style.backgroundSize = "100% 100%, 220% 100%";
-          title.style.animation = "cat3-burn 2.4s linear infinite";
+          title.style.animation = "cat3-burn 2.4s steps(29) infinite";
         }
       }
 

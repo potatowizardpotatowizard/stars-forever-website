@@ -383,11 +383,11 @@ h4 {
   .meteor-cta::before {
     animation:
       meteor-flicker 5.5s ease-in-out infinite,
-      fire-lick 1.15s ease-in-out infinite;
+      fire-lick 1.15s steps(10) infinite;
     animation-delay: inherit;
   }
   .meteor-cta::after {
-    animation: flame-pulse 1.3s ease-in-out infinite;
+    animation: flame-pulse 1.3s steps(12) infinite;
     animation-delay: inherit;
   }
   @keyframes fire-lick {
