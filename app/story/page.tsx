@@ -78,7 +78,7 @@ export default function StoryPage() {
       </div>
 
       {/* Bridge into the vision */}
-      <section className="border-t border-dust/15 bg-soot/40">
+      <section className="bg-gradient-to-b from-transparent via-soot/50 to-transparent">
         <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
           <Reveal className="mx-auto max-w-2xl">
             <Kicker>{STORY.vision.kicker}</Kicker>
@@ -164,7 +164,7 @@ export default function StoryPage() {
       </section>
 
       {/* Help write the next chapter */}
-      <section className="border-t border-dust/15 bg-soot/40">
+      <section className="bg-gradient-to-b from-transparent via-soot/50 to-transparent">
         <div className="mx-auto max-w-7xl px-5 py-24 text-center sm:px-8">
           <Reveal>
             <h2 className="mx-auto max-w-2xl font-display text-3xl sm:text-4xl">

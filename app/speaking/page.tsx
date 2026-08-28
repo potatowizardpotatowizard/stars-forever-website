@@ -99,7 +99,7 @@ export default function SpeakingPage() {
       </header>
 
       {/* Topics */}
-      <section className="border-y border-dust/15 bg-soot/40">
+      <section className="bg-gradient-to-b from-transparent via-soot/50 to-transparent">
         <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8">
           <Reveal>
             <Kicker>{SPEAKING.topics.kicker}</Kicker>
@@ -223,7 +223,7 @@ export default function SpeakingPage() {
       </section>
 
       {/* CTA + inquiry form */}
-      <section className="border-t border-dust/15 bg-soot/40">
+      <section className="bg-gradient-to-b from-transparent via-soot/50 to-transparent">
         <div className="mx-auto max-w-7xl px-5 py-28 text-center sm:px-8">
           <Reveal>
             <h2 className="mx-auto max-w-2xl font-display text-4xl sm:text-5xl">

@@ -175,7 +175,7 @@ export default function Category3Page() {
       </section>
 
       {/* Close */}
-      <section className="border-t border-dust/15 bg-soot/40">
+      <section className="bg-gradient-to-b from-transparent via-soot/50 to-transparent">
         <div className="mx-auto max-w-7xl px-5 py-28 text-center sm:px-8">
           <Reveal>
             <Image

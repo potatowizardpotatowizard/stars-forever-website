@@ -191,7 +191,7 @@ export default function HomePage() {
       </section>
 
       {/* Featured: the Tokyo Drift video */}
-      <section className="relative overflow-hidden border-y border-dust/10 bg-soot/40">
+      <section className="relative overflow-hidden bg-gradient-to-b from-transparent via-soot/50 to-transparent">
         <Grain />
         <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
         <Reveal className="mx-auto max-w-4xl md:max-w-none">
@@ -322,7 +322,7 @@ export default function HomePage() {
       </section>
 
       {/* Closing call to action */}
-      <section className="relative overflow-hidden border-t border-dust/10">
+      <section className="relative overflow-hidden">
         <Image
           src="/brand/bg-black-stars.jpg"
           alt=""

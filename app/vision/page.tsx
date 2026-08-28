@@ -242,7 +242,7 @@ export default function VisionPage() {
       </section>
 
       {/* The ten year dream, drawn in light */}
-      <section className="relative overflow-hidden border-t border-dust/10">
+      <section className="relative overflow-hidden">
         <Grain />
         <div className="relative mx-auto max-w-7xl px-5 pt-24 sm:px-8">
           <Reveal className="max-w-3xl">
@@ -264,7 +264,7 @@ export default function VisionPage() {
       </section>
 
       {/* Closing */}
-      <section className="border-t border-dust/10 bg-soot/40">
+      <section className="bg-gradient-to-b from-transparent via-soot/50 to-transparent">
         <div className="mx-auto max-w-7xl px-5 py-24 text-center sm:px-8">
           <Reveal>
             <Image

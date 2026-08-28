@@ -197,7 +197,7 @@ export default function RevolutionaryPage() {
       </section>
 
       {/* What to expect */}
-      <section className="border-y border-dust/15 bg-soot/40">
+      <section className="bg-gradient-to-b from-transparent via-soot/50 to-transparent">
         <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
           <Reveal>
             <Kicker>{REVOLUTIONARY.expect.kicker}</Kicker>

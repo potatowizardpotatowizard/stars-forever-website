@@ -67,7 +67,7 @@ export default function ApplyPage() {
       </section>
 
       {/* Proof: dreams that came through this exact form */}
-      <section className="border-t border-dust/10 bg-soot/40">
+      <section className="bg-gradient-to-b from-transparent via-soot/50 to-transparent">
         <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
           <Kicker>Dreams that started right here</Kicker>
           <ProofParallax>

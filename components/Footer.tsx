@@ -22,7 +22,7 @@ export default function Footer() {
   const minimal = usePathname() === "/strategy";
 
   return (
-    <footer className="relative border-t border-dust/15">
+    <footer className="relative">
       <Grain />
       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
         <div className="grid gap-12 md:grid-cols-4">

@@ -186,7 +186,7 @@ export default function PartnerProjectsPage() {
       </section>
 
       {/* The process */}
-      <section className="relative overflow-hidden border-y border-dust/10 bg-soot/40">
+      <section className="relative overflow-hidden bg-gradient-to-b from-transparent via-soot/50 to-transparent">
         <Grain />
         <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
           <Reveal>
@@ -215,7 +215,7 @@ export default function PartnerProjectsPage() {
       <ProjectShowcase />
 
       {/* FAQ */}
-      <section className="border-y border-dust/15 bg-soot/40">
+      <section className="bg-gradient-to-b from-transparent via-soot/50 to-transparent">
         <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
           <Reveal>
             <Kicker>{PARTNER.faq.kicker}</Kicker>

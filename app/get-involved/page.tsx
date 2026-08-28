@@ -287,7 +287,7 @@ export default function GetInvolvedPage() {
       {/* Contact block */}
       <section
         id="contact"
-        className="border-t border-dust/15 bg-soot/40"
+        className="bg-gradient-to-b from-transparent via-soot/50 to-transparent"
       >
         <div className="mx-auto max-w-7xl px-5 py-24 text-center sm:px-8">
           <Reveal>
