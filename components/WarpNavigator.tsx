@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { flushSync } from "react-dom";
 import { usePathname, useRouter } from "next/navigation";
 
 // The signature move: internal navigation is a hyperspace jump. Clicking a
@@ -116,7 +117,11 @@ export default function WarpNavigator() {
       // can close itself while the warp plays.
       e.preventDefault();
       jumping.current = true;
-      setPhaseBoth("warping");
+      // flushSync so the overlay canvas is mounted before drawing starts;
+      // without it runWarp sees a null canvas and skips the whole jump
+      flushSync(() => {
+        setPhaseBoth("warping");
+      });
       runWarp(() => {
         router.push(href);
       });
