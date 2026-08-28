@@ -153,14 +153,19 @@ export default function GetInvolvedPage() {
       </section>
 
       {/* Primary giving CTA */}
-      <section className="relative overflow-hidden">
-        <Image
-          src="/brand/bg-orange-comet.jpg"
-          alt=""
-          fill
-          sizes="100vw"
-          className="object-cover opacity-60 [mask-image:linear-gradient(to_bottom,transparent,black_12%,black_88%,transparent)]"
-        />
+      <section className="relative">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 -bottom-[55svh] -top-[55svh]"
+        >
+          <Image
+            src="/brand/bg-orange-comet.jpg"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover opacity-60 [mask-image:linear-gradient(to_bottom,transparent,black_38%,black_62%,transparent)]"
+          />
+        </div>
         <Grain />
         <div className="relative mx-auto max-w-7xl px-5 py-28 text-center sm:px-8 sm:py-36">
           <Reveal>
@@ -181,11 +186,7 @@ export default function GetInvolvedPage() {
 
       {/* Secondary, quieter: consulting, under the giving section's orange
           afterglow fading down into black */}
-      <section className="relative overflow-hidden">
-        <div
-          aria-hidden="true"
-          className="absolute inset-x-0 top-0 h-[110vh] bg-[linear-gradient(to_bottom,transparent,rgb(194_65_12/0.26)_12%,rgb(194_65_12/0.12)_55%,transparent)]"
-        />
+      <section className="relative">
         <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8">
         <Reveal className="max-w-2xl">
           <Kicker>{give.consulting.kicker}</Kicker>
