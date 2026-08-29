@@ -105,18 +105,22 @@ const ROUTE_ICONS: Record<string, React.ReactNode> = {
     </>
   ),
   panama: (
-    // the isthmus on the map
+    // the island itself, palm on the sand ringed by water
     <>
-      <path d="M-18 0 Q-13 -6 -6 -3 Q2 1 8 -2 Q14 -6 18 -2 L17 4 Q12 8 7 4 Q0 8 -7 3 Q-13 8 -18 5 Z" />
-      <circle cx="0" cy="1" r="1.4" fill="currentColor" stroke="none" />
+      <path d="M-14 8 Q0 2 14 8 Q0 14 -14 8 Z" />
+      <path d="M0 5 Q2 -3 0 -8" />
+      <path d="M0 -8 Q-9 -13 -15 -8" />
+      <path d="M0 -8 Q9 -13 15 -8" />
+      <path d="M0 -8 Q2 -19 10 -18" />
+      <path d="M-20 14 Q-14 12 -8 14 M8 14 Q14 12 20 14" />
     </>
   ),
   "beast games": (
-    // trophy
+    // the beast: panther face
     <>
-      <path d="M-10 -16 L10 -16 L8.8 -2 Q8 6 0 6 Q-8 6 -8.8 -2 Z" />
-      <path d="M-10 -14 Q-18 -12 -9.2 -4 M10 -14 Q18 -12 9.2 -4" />
-      <path d="M0 6 L0 12 M-8 16 L8 16 M-8 16 Q0 12 8 16" />
+      <path d="M-16 -2 L-13 -15 L-5 -8 Q0 -10 5 -8 L13 -15 L16 -2 Q16 8 8 13 Q4 16 0 16 Q-4 16 -8 13 Q-16 8 -16 -2 Z" />
+      <path d="M-9 -1 L-3 1 M9 -1 L3 1" />
+      <path d="M-2 8 L0 10 L2 8" />
     </>
   ),
   "the island": (
@@ -130,8 +134,11 @@ const ROUTE_ICONS: Record<string, React.ReactNode> = {
     </>
   ),
   "stars forever": (
-    // the brand's four point star
-    <path d="M0 -20 Q3.2 -3.2 20 0 Q3.2 3.2 0 20 Q-3.2 3.2 -20 0 Q-3.2 -3.2 0 -20 Z" />
+    // the stars forever logo: sharp five point star with the flourish
+    <>
+      <path d="M0 -17 L4.1 -5.7 L17.1 -5.6 L6.7 2.2 L10.6 14.6 L0 7 L-10.6 14.6 L-6.7 2.2 L-17.1 -5.6 L-4.1 -5.7 Z" />
+      <path d="M-21 13 Q0 20 21 9" />
+    </>
   ),
 };
 
