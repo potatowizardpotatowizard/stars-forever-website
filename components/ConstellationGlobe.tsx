@@ -612,7 +612,7 @@ export default function ConstellationGlobe({
           className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 text-center"
         >
           <p className="meta-label text-dust">{CONSTELLATION.kicker}</p>
-          <h1 className="mt-6 max-w-3xl font-display text-4xl font-bold uppercase tracking-tight text-white [text-shadow:0_0_14px_rgb(255_255_255/0.85),0_0_36px_rgb(167_139_250/0.7)] sm:text-6xl">
+          <h1 className="mt-6 whitespace-nowrap font-display text-[8.2vw] font-bold uppercase tracking-tight text-white [text-shadow:0_0_14px_rgb(255_255_255/0.85),0_0_36px_rgb(167_139_250/0.7)] sm:text-6xl">
             {CONSTELLATION.title}
           </h1>
           <p className="mx-auto mt-6 max-w-md text-base leading-relaxed text-starlight/85 sm:text-lg">
