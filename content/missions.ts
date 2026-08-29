@@ -487,8 +487,9 @@ export const MISSIONS: Mission[] = [
     slug: "beast-games",
     journeyRoute: {
       afterKicker: "The island",
-      from: "The set",
-      to: "The island",
+      from: "Las Vegas",
+      via: "Toronto",
+      to: "Panama",
     },
     name: "Beast Games",
     location: "On set and beyond",
