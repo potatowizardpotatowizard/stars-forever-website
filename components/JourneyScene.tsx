@@ -242,16 +242,20 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
         // heavy fog: the focused plane owns the screen. photos may
         // ghost in the distance; text goes fully dark so words never
         // stack over words.
-        // photos right after a route hold in the dark until the map has
-        // finished drawing, so the two never share the screen
-        const isBeat =
-          items[i]?.kind !== "photo" || items[i - 1]?.kind === "route";
+        const isBeat = items[i]?.kind !== "photo";
+        // photos right after words or a route map hold in pure black
+        // until the reading is done, so there is space to process
+        const afterText = !isBeat && i > 0 && items[i - 1]?.kind !== "photo";
         let op: number;
         if (d < -380) op = 0;
         else if (d < 0) op = 1 + d / 380;
         else if (isBeat) {
           if (d <= 350) op = 1;
           else if (d < 700) op = (700 - d) / 350;
+          else op = 0;
+        } else if (afterText) {
+          if (d <= 260) op = 1;
+          else if (d < 480) op = (480 - d) / 220;
           else op = 0;
         } else if (d < 260) op = 1;
         else if (d < 1300) op = 1 - ((d - 260) / 1040) * 0.94;
@@ -406,15 +410,20 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
                             evenly along the path and placed by the loop */}
                         {item.stops.map((stop, si) => {
                           const n = item.stops.length;
-                          const frac = n === 1 ? 0 : si / (n - 1);
                           const first = si === 0;
                           const last = si === n - 1;
+                          // middle stops huddle toward the center of the
+                          // line instead of spreading edge to edge
+                          let frac = n === 1 ? 0 : si / (n - 1);
+                          if (!first && !last) frac = 0.5 + (frac - 0.5) * 0.75;
                           // drawings alternate above and below the line;
                           // each label takes the opposite side of its
                           // drawing, leaning AWAY from the rising line so
                           // the line never slices through the words
                           const iconAbove = si % 2 === 0;
-                          const labelY = iconAbove ? 36 : -30;
+                          // the line arrives at the final stop from the
+                          // lower left, so its below-label sits deeper
+                          const labelY = iconAbove ? (last ? 54 : 36) : -30;
                           const iconY = iconAbove ? -46 : 46;
                           const labelX = first || last ? 0 : iconAbove ? 8 : -8;
                           const anchor = first
