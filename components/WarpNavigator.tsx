@@ -67,12 +67,20 @@ export default function WarpNavigator() {
       flushSync(() => setActive(true));
       startField();
 
-      // the old page fades out INTO the star field while it accelerates;
-      // no scaling on the way out, so its edges never show
+      // Only the surface the viewer is looking at fades into the jump.
+      // Menu open: the menu alone dissolves (Header fades it out), and
+      // the stale page behind it hides instantly so it can never ghost
+      // through the fade. Menu closed: the page itself fades out.
+      const menuOpen = !!document.getElementById("mobile-nav");
       const main = document.getElementById("main");
       if (main) {
-        main.style.transition = "opacity 420ms cubic-bezier(0.4,0,0.8,1)";
-        main.style.opacity = "0";
+        if (menuOpen) {
+          main.style.transition = "none";
+          main.style.opacity = "0";
+        } else {
+          main.style.transition = "opacity 420ms cubic-bezier(0.4,0,0.8,1)";
+          main.style.opacity = "0";
+        }
       }
       router.prefetch(path);
       window.setTimeout(() => router.push(href), PUSH_DELAY_MS);
