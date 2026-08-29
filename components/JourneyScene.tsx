@@ -440,7 +440,9 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
                           // alternating, counted back from the end
                           const labelAbove = (n - 1 - si) % 2 === 0;
                           const iconAbove = !labelAbove;
-                          const labelY = labelAbove ? -30 : 36;
+                          // the first stop's above-label rides higher: the
+                          // line launches rightward straight under it
+                          const labelY = labelAbove ? (first ? -42 : -30) : 36;
                           const iconY = iconAbove ? -46 : 46;
                           const labelX = first || last ? 0 : labelAbove ? -8 : 8;
                           const anchor = first
