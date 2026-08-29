@@ -57,10 +57,10 @@ const ROUTE_ICONS: Record<string, React.ReactNode> = {
     <path d="M-11 -20 L3 -18 L1 -5 L13 9 L12 16 L2 15 Q-5 7 -8 -2 Q-12 -12 -11 -20 Z" />
   ),
   iceland: (
-    // the country on the map
+    // the country on the map, fjords and all
     <>
-      <path d="M-16 2 Q-19 -5 -12 -6 Q-15 -12 -8 -10 Q-2 -15 6 -12 Q16 -11 16 -3 Q15 6 6 8 Q-3 12 -10 8 Q-16 9 -16 2 Z" />
-      <path d="M-12 -6 Q-9 -7 -8 -10" />
+      <path d="M-19 0 L-14 -3 L-17 -7 L-12 -6 L-13 -11 L-8 -7 L-3 -11 L3 -9 L9 -12 L15 -7 L19 -3 L17 3 L11 7 L3 9 L-4 7 L-11 9 L-9 4 L-16 4 Z" />
+      <circle cx="-2" cy="13" r="1.2" fill="currentColor" stroke="none" />
     </>
   ),
   "the shared house": (
@@ -116,12 +116,14 @@ const ROUTE_ICONS: Record<string, React.ReactNode> = {
     </>
   ),
   "beast games": (
-    // the beast: panther face
-    <>
-      <path d="M-16 -2 L-13 -15 L-5 -8 Q0 -10 5 -8 L13 -15 L16 -2 Q16 8 8 13 Q4 16 0 16 Q-4 16 -8 13 Q-16 8 -16 -2 Z" />
-      <path d="M-9 -1 L-3 1 M9 -1 L3 1" />
-      <path d="M-2 8 L0 10 L2 8" />
-    </>
+    // the real mrbeast panther, in starlight
+    <image
+      href="/brand/route-beast.png"
+      x="-27"
+      y="-18"
+      width="54"
+      height="36.5"
+    />
   ),
   "the island": (
     // island with palm
@@ -134,11 +136,14 @@ const ROUTE_ICONS: Record<string, React.ReactNode> = {
     </>
   ),
   "stars forever": (
-    // the stars forever logo: sharp five point star with the flourish
-    <>
-      <path d="M0 -17 L4.1 -5.7 L17.1 -5.6 L6.7 2.2 L10.6 14.6 L0 7 L-10.6 14.6 L-6.7 2.2 L-17.1 -5.6 L-4.1 -5.7 Z" />
-      <path d="M-21 13 Q0 20 21 9" />
-    </>
+    // the real stars forever logo
+    <image
+      href="/brand/route-star.png"
+      x="-22"
+      y="-20"
+      width="44"
+      height="40"
+    />
   ),
 };
 
@@ -405,10 +410,20 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
                           const first = si === 0;
                           const last = si === n - 1;
                           // drawings alternate above and below the line;
-                          // each label takes the opposite side of its drawing
+                          // each label takes the opposite side of its
+                          // drawing, leaning AWAY from the rising line so
+                          // the line never slices through the words
                           const iconAbove = si % 2 === 0;
-                          const labelY = iconAbove ? 32 : -26;
-                          const iconY = iconAbove ? -40 : 40;
+                          const labelY = iconAbove ? 36 : -30;
+                          const iconY = iconAbove ? -46 : 46;
+                          const labelX = first || last ? 0 : iconAbove ? 8 : -8;
+                          const anchor = first
+                            ? "start"
+                            : last
+                              ? "end"
+                              : iconAbove
+                                ? "start"
+                                : "end";
                           const icon = ROUTE_ICONS[stop.toLowerCase()];
                           return (
                             <g
@@ -425,8 +440,9 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
                                 style={{ filter: `drop-shadow(0 0 ${last ? 10 : 8}px rgba(180,140,255,${last ? 1 : 0.9}))` }}
                               />
                               <text
+                                x={labelX}
                                 y={labelY}
-                                textAnchor={first ? "start" : last ? "end" : "middle"}
+                                textAnchor={anchor}
                                 fill={last ? "#efecf7" : "#b7aecb"}
                                 fontSize="13"
                                 letterSpacing="0.22em"
