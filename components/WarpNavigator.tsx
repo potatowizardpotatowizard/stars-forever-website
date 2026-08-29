@@ -165,9 +165,6 @@ export default function WarpNavigator() {
       lastFrame = now;
       // acceleration multiplier over the field's natural drift
       const boost = 1 + 60 * up * up * (1 - inT * 0.85);
-      // tails lean purple as the field goes to light speed
-      const k = up * 0.75;
-      const tailColor = `${Math.round(239 - 59 * k)},${Math.round(236 - 96 * k)},${Math.round(247 + 8 * k)}`;
       ctx.lineCap = "round";
       for (const s of stars) {
         s.z -= s.speed * boost * dt;
@@ -190,9 +187,18 @@ export default function WarpNavigator() {
         const zBack = s.z + (0.07 + 0.07 * depth) * (1 + 9 * up);
         const bx = w / 2 + (s.x / zBack) * scale;
         const by = h / 2 + (s.y / zBack) * scale;
+        // a violet body under a near-white core: purple presence
+        // without the fat neon bars of the first pass
+        ctx.globalAlpha = Math.min(1, alpha * (0.35 + 0.4 * up));
+        ctx.strokeStyle = "rgb(180,140,255)";
+        ctx.lineWidth = 0.7 + 1.7 * depth;
+        ctx.beginPath();
+        ctx.moveTo(bx, by);
+        ctx.lineTo(px, py);
+        ctx.stroke();
         ctx.globalAlpha = Math.min(1, alpha * (0.55 + 0.4 * up));
-        ctx.strokeStyle = `rgb(${tailColor})`;
-        ctx.lineWidth = Math.max(0.4, radius * 0.7);
+        ctx.strokeStyle = "#efecf7";
+        ctx.lineWidth = Math.max(0.4, radius * 0.6);
         ctx.beginPath();
         ctx.moveTo(bx, by);
         ctx.lineTo(px, py);

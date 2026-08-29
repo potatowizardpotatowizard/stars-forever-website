@@ -98,8 +98,8 @@ export default function Header() {
         <nav
           id="mobile-nav"
           aria-label="Main"
-          className={`menu-overlay fixed inset-0 z-50 overflow-hidden transition-[opacity,transform] duration-[420ms] ease-in lg:hidden ${
-            closing ? "scale-[0.96] opacity-0" : ""
+          className={`menu-overlay fixed inset-0 z-50 overflow-hidden transition-opacity duration-[420ms] ease-in lg:hidden ${
+            closing ? "opacity-0" : ""
           }`}
         >
           {/* the galaxy behind the menu: wandering nebulas and stars */}
