@@ -82,6 +82,11 @@ export const MISSIONS_INDEX = {
 export const MISSIONS: Mission[] = [
   {
     slug: "real-treasure",
+    journeyRoute: {
+      afterKicker: "God moved",
+      from: "California",
+      to: "Iceland",
+    },
     name: "Real Treasure",
     location: "Iceland and Southern California",
     partner: "Weston Vansoest, Creative Partner 2",
@@ -295,6 +300,12 @@ export const MISSIONS: Mission[] = [
   },
   {
     slug: "revolutionary-cohort",
+    journeyRoute: {
+      afterKicker: "The rhythm",
+      from: "The shared house",
+      via: "The desert",
+      to: "Joshua Tree",
+    },
     name: "Revolutionary Cohort 1",
     location: "Joshua Tree, California",
     partner: "Ben Pierce, Steiger Ministries",
@@ -474,6 +485,11 @@ export const MISSIONS: Mission[] = [
   },
   {
     slug: "beast-games",
+    journeyRoute: {
+      afterKicker: "The island",
+      from: "The set",
+      to: "The island",
+    },
     name: "Beast Games",
     location: "On set and beyond",
     partner: "Auzi Films",

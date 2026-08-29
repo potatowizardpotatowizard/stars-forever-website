@@ -44,6 +44,8 @@ export default function StoryPage() {
     { kind: "beat", paragraphs: STORY.beats[1].paragraphs },
     photo(STORY.beats[2].imageSlot),
     { kind: "beat", paragraphs: STORY.beats[2].paragraphs },
+    // the road the story traveled, drawn as an ember line
+    { kind: "route", from: "Beast Games", via: "The island", to: "Stars Forever" },
     photo(STORY.tribute.imageSlot),
     { kind: "beat", paragraphs: STORY.tribute.lines },
   ];
