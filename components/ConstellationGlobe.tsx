@@ -2,17 +2,18 @@
 
 import { useEffect, useRef, useState } from "react";
 import ConstellationMap from "@/components/ConstellationMap";
+import Kicker from "@/components/Kicker";
 import {
   CONSTELLATION,
   type ConstellationMember,
 } from "@/content/constellation";
 
-// The Constellation as a planet: Earth's landmasses are thousands of
-// star particles on a sphere floating in the site's night, members are
-// bright stars pinned at their real coordinates. Drag to spin, pinch or
-// scroll to zoom, tap a star to meet the creator. On arrival the whole
-// planet assembles itself out of the starfield. Falls back to the flat
-// map under reduced motion or when WebGL is unavailable.
+// The Constellation opens as a flight: the page lands inside deep space
+// with the hero copy glowing center screen, and scrolling assembles the
+// planet out of scattered stars — Earth's landmasses as particles,
+// members as bright stars at their real coordinates. Once built: drag
+// to spin, pinch to zoom, tap a star to meet the creator. Falls back to
+// the flat hero and map under reduced motion or without WebGL.
 
 const R = 100;
 
@@ -26,6 +27,8 @@ function toXYZ(lat: number, lng: number, r = R): [number, number, number] {
   ];
 }
 
+const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
+
 type Mode = "loading" | "globe" | "flat";
 
 export default function ConstellationGlobe({
@@ -33,17 +36,22 @@ export default function ConstellationGlobe({
 }: {
   members?: ConstellationMember[];
 }) {
+  const wrapRef = useRef<HTMLDivElement>(null);
   const hostRef = useRef<HTMLDivElement>(null);
-  const svgRef = useRef<SVGSVGElement>(null);
+  const copyRef = useRef<HTMLDivElement>(null);
+  const hintRef = useRef<HTMLParagraphElement>(null);
   const lineRef = useRef<SVGLineElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const [mode, setMode] = useState<Mode>("loading");
+  const [built, setBuilt] = useState(false);
   const [selected, setSelected] = useState<ConstellationMember | null>(null);
   const [linesOn, setLinesOn] = useState(false);
   const linesOnRef = useRef(false);
   const selectedRef = useRef<ConstellationMember | null>(null);
+  const builtRef = useRef(false);
   selectedRef.current = selected;
   linesOnRef.current = linesOn;
+  builtRef.current = built;
 
   const seen = new Set<string>();
   const members = [...CONSTELLATION.members, ...notionMembers].filter((m) => {
@@ -88,18 +96,16 @@ export default function ConstellationGlobe({
       setMode("globe");
       renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
       renderer.domElement.style.display = "block";
-      renderer.domElement.style.touchAction = "none";
+      // vertical swipes keep scrolling the page; horizontal drags spin
+      renderer.domElement.style.touchAction = "pan-y";
       renderer.domElement.style.cursor = "grab";
       host.prepend(renderer.domElement);
 
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(40, 1, 1, 2000);
-      // narrow screens start further out so the whole planet fits
-      const startZ =
-        host.clientWidth < host.clientHeight * 0.9 ? 480 : 310;
-      camera.position.z = startZ;
+      const startZ = host.clientWidth < host.clientHeight * 0.9 ? 480 : 310;
+      camera.position.z = startZ * 1.55;
       const globe = new THREE.Group();
-      // tilt slightly and face the Americas/Atlantic on arrival
       globe.rotation.x = 0.22;
       globe.rotation.y = -0.9;
       scene.add(globe);
@@ -123,46 +129,45 @@ export default function ConstellationGlobe({
         const lat = land[i * 2 + 1];
         const [x, y, z] = toXYZ(lat, lng);
         targets.set([x, y, z], i * 3);
-        // fly in from a wide scattered shell
-        const rr = 320 + rand() * 340;
+        const rr = 320 + rand() * 380;
         const u = rand() * 2 - 1;
         const th = rand() * Math.PI * 2;
         const sq = Math.sqrt(1 - u * u);
-        starts.set([rr * sq * Math.cos(th), rr * u, rr * sq * Math.sin(th)], i * 3);
-        delays[i] = rand() * 0.55;
+        starts.set(
+          [rr * sq * Math.cos(th), rr * u, rr * sq * Math.sin(th)],
+          i * 3,
+        );
+        delays[i] = rand() * 0.4;
         const warm = 0.72 + rand() * 0.28;
         colors.set([warm * 0.86, warm * 0.82, warm], i * 3);
       }
-      const flown = sessionStorage.getItem("sf-globe-flown") === "1";
       const geo = new THREE.BufferGeometry();
-      geo.setAttribute(
-        "position",
-        new THREE.BufferAttribute(flown ? targets.slice() : starts.slice(), 3),
-      );
+      geo.setAttribute("position", new THREE.BufferAttribute(starts.slice(), 3));
       geo.setAttribute("color", new THREE.BufferAttribute(colors, 3));
-      const dust = new THREE.Points(
-        geo,
-        new THREE.PointsMaterial({
-          size: 1.9,
-          vertexColors: true,
-          transparent: true,
-          opacity: 0.9,
-          depthWrite: false,
-          sizeAttenuation: true,
-        }),
-      );
-      globe.add(dust);
+      const dustMat = new THREE.PointsMaterial({
+        size: 1.9,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.4,
+        depthWrite: false,
+        sizeAttenuation: true,
+      });
+      globe.add(new THREE.Points(geo, dustMat));
 
-      // a night-dark body inside the dust so the far side hides and the
-      // planet reads as solid instead of a see-through scatter
+      // solid night body so the far side hides once assembled
+      const shellMat = new THREE.MeshBasicMaterial({
+        color: 0x07050c,
+        transparent: true,
+        opacity: 0,
+      });
       const shell = new THREE.Mesh(
         new THREE.SphereGeometry(R - 2.5, 48, 32),
-        new THREE.MeshBasicMaterial({ color: 0x07050c }),
+        shellMat,
       );
       shell.renderOrder = -1;
       globe.add(shell);
 
-      // ---- glow texture for stars ------------------------------------
+      // ---- glow texture ----------------------------------------------
       const starTex = (() => {
         const c = document.createElement("canvas");
         c.width = c.height = 64;
@@ -224,10 +229,7 @@ export default function ConstellationGlobe({
           const t = i / segs;
           const v = va
             .clone()
-            .applyAxisAngle(
-              va.clone().cross(vb).normalize(),
-              angle * t,
-            )
+            .applyAxisAngle(va.clone().cross(vb).normalize(), angle * t)
             .normalize();
           const lift = 1 + Math.sin(t * Math.PI) * (0.08 + angle * 0.1);
           pts.push(v.multiplyScalar(R * lift));
@@ -253,7 +255,6 @@ export default function ConstellationGlobe({
       webGroup.visible = false;
       globe.add(webGroup);
       if (mem.length > 1) {
-        // greedy chain through nearest unvisited neighbors
         const left = [...mem];
         let cur = left.shift()!;
         while (left.length) {
@@ -348,8 +349,7 @@ export default function ConstellationGlobe({
         dragging = false;
         el.style.cursor = "grab";
         lastTouch = performance.now();
-        if (moved < 8) {
-          // a tap: try to meet a creator
+        if (moved < 8 && builtRef.current) {
           const rect = el.getBoundingClientRect();
           const ndc = new THREE.Vector2(
             ((e.clientX - rect.left) / rect.width) * 2 - 1,
@@ -358,21 +358,20 @@ export default function ConstellationGlobe({
           raycaster.setFromCamera(ndc, camera);
           const hits = raycaster
             .intersectObjects(memberSprites)
-            .filter((h) => (h.object as import("three").Sprite).material.opacity > 0.4);
+            .filter(
+              (h) =>
+                (h.object as import("three").Sprite).material.opacity > 0.4,
+            );
           setSelected(
             hits.length
-              ? ((hits[0].object.userData.member as ConstellationMember) ?? null)
+              ? ((hits[0].object.userData.member as ConstellationMember) ??
+                  null)
               : null,
           );
         }
       };
-      const onWheel = (e: WheelEvent) => {
-        e.preventDefault();
-        zoom = Math.max(210, Math.min(560, zoom + e.deltaY * 0.4));
-        lastTouch = performance.now();
-      };
       const onTouchMove = (e: TouchEvent) => {
-        if (e.touches.length === 2) {
+        if (e.touches.length === 2 && builtRef.current) {
           const d = Math.hypot(
             e.touches[0].clientX - e.touches[1].clientX,
             e.touches[0].clientY - e.touches[1].clientY,
@@ -390,7 +389,6 @@ export default function ConstellationGlobe({
       el.addEventListener("pointerdown", onDown);
       window.addEventListener("pointermove", onMove);
       window.addEventListener("pointerup", onUp);
-      el.addEventListener("wheel", onWheel, { passive: false });
       el.addEventListener("touchmove", onTouchMove, { passive: true });
       el.addEventListener("touchend", onTouchEnd);
 
@@ -402,43 +400,62 @@ export default function ConstellationGlobe({
         },
         { rootMargin: "20%" },
       );
-      io.observe(host);
+      io.observe(wrapRef.current!);
 
-      const t0 = performance.now();
-      const FLY_MS = 2300;
       let raf = 0;
-      let lastArc = performance.now() + 3500;
+      let lastArc = 0;
+      let lastBuild = -1;
       const camDir = new THREE.Vector3();
       const wp = new THREE.Vector3();
 
       const frame = (now: number) => {
         raf = requestAnimationFrame(frame);
         if (!running) return;
+        const wrap = wrapRef.current;
+        if (!wrap) return;
 
-        // fly-in: dust streams from the void into continents
-        const ft = flown ? 1 : Math.min(1, (now - t0) / FLY_MS);
-        if (ft < 1) {
-          const pos = geo.getAttribute("position") as import("three").BufferAttribute;
+        // scroll progress across the whole scene
+        const rect = wrap.getBoundingClientRect();
+        const vh = window.innerHeight;
+        const total = Math.max(rect.height - vh, 1);
+        const p = clamp01(-rect.top / total);
+
+        // the hero copy flies past, then the world assembles
+        const copy = copyRef.current;
+        if (copy) {
+          const fade = 1 - clamp01((p - 0.2) / 0.16);
+          copy.style.opacity = fade.toFixed(3);
+          copy.style.transform = `scale(${(1 + 0.16 * (1 - fade)).toFixed(3)})`;
+          copy.style.pointerEvents = fade > 0.1 ? "auto" : "none";
+        }
+        const hint = hintRef.current;
+        if (hint) hint.style.opacity = p < 0.04 ? "1" : "0";
+
+        const build = clamp01((p - 0.3) / 0.42);
+        const be = 1 - Math.pow(1 - build, 3);
+        if (build !== lastBuild) {
+          lastBuild = build;
+          const pos = geo.getAttribute(
+            "position",
+          ) as import("three").BufferAttribute;
           const arr = pos.array as Float32Array;
           for (let i = 0; i < count; i++) {
-            const lt = Math.min(
-              1,
-              Math.max(0, (ft - delays[i] * 0.55) / (1 - delays[i] * 0.55)),
-            );
+            const lt = clamp01((build - delays[i] * 0.4) / (1 - delays[i] * 0.4));
             const e = 1 - Math.pow(1 - lt, 3);
             for (let k = 0; k < 3; k++) {
               arr[i * 3 + k] =
-                starts[i * 3 + k] + (targets[i * 3 + k] - starts[i * 3 + k]) * e;
+                starts[i * 3 + k] +
+                (targets[i * 3 + k] - starts[i * 3 + k]) * e;
             }
           }
           pos.needsUpdate = true;
-          if (ft >= 1) sessionStorage.setItem("sf-globe-flown", "1");
-        } else if (!flown && !sessionStorage.getItem("sf-globe-flown")) {
-          sessionStorage.setItem("sf-globe-flown", "1");
+          dustMat.opacity = 0.4 + 0.5 * be;
+          shellMat.opacity = be;
         }
+        if (build >= 1 !== builtRef.current) setBuilt(build >= 1);
 
-        // members and the wandering star fade up once land has settled
-        const reveal = flown ? 1 : Math.min(1, Math.max(0, (now - t0 - FLY_MS + 300) / 700));
+        // members fade up as the planet completes
+        const reveal = clamp01((p - 0.68) / 0.14);
         camera.getWorldDirection(camDir);
         memberSprites.forEach((s, i) => {
           wp.copy(s.position).applyMatrix4(globe.matrixWorld).normalize();
@@ -454,8 +471,7 @@ export default function ConstellationGlobe({
           Math.sin(now / 6100) * 26,
           Math.sin(ga) * (R + 30),
         );
-        ghost.material.opacity =
-          reveal * (0.3 + 0.15 * Math.sin(now / 700));
+        ghost.material.opacity = reveal * (0.3 + 0.15 * Math.sin(now / 700));
 
         // idle spin and momentum
         if (!dragging) {
@@ -468,9 +484,15 @@ export default function ConstellationGlobe({
           vy *= 0.94;
           if (now - lastTouch > 3500) globe.rotation.y += 0.00085;
         }
-        camera.position.z += (zoom - camera.position.z) * 0.12;
+        // approach the planet while it builds, then hand zoom to pinch
+        if (build < 1) {
+          camera.position.z = startZ * (1.55 - 0.55 * be);
+          zoom = startZ;
+        } else {
+          camera.position.z += (zoom - camera.position.z) * 0.12;
+        }
 
-        // pulse arcs between random members
+        // arcs pulse between members once the world is real
         if (
           reveal >= 1 &&
           !linesOnRef.current &&
@@ -488,7 +510,10 @@ export default function ConstellationGlobe({
           const a = arcs[i];
           const age = now - a.born;
           if (age < 1100) {
-            a.line.geometry.setDrawRange(0, Math.floor((age / 1100) * a.segs) + 1);
+            a.line.geometry.setDrawRange(
+              0,
+              Math.floor((age / 1100) * a.segs) + 1,
+            );
           } else if (age < 2600) {
             (a.line.material as import("three").LineBasicMaterial).opacity =
               0.85 * (1 - (age - 1100) / 1500);
@@ -501,25 +526,26 @@ export default function ConstellationGlobe({
         }
         webGroup.visible = linesOnRef.current;
 
-        // the thread from the selected star to its card
+        // thread from the chosen star to its card
         const sel = selectedRef.current;
         const line = lineRef.current;
         const card = cardRef.current;
         if (sel && line && card) {
-          const sp = memberSprites.find(
-            (s) => s.userData.member === sel,
-          );
+          const sp = memberSprites.find((s) => s.userData.member === sel);
           if (sp) {
             wp.copy(sp.position).applyMatrix4(globe.matrixWorld);
             const v = wp.clone().project(camera);
-            const rect = host.getBoundingClientRect();
-            const sx = ((v.x + 1) / 2) * rect.width;
-            const sy = ((1 - v.y) / 2) * rect.height;
+            const hostRect = host.getBoundingClientRect();
+            const sx = ((v.x + 1) / 2) * hostRect.width;
+            const sy = ((1 - v.y) / 2) * hostRect.height;
             const cr = card.getBoundingClientRect();
             line.setAttribute("x1", String(sx));
             line.setAttribute("y1", String(sy));
-            line.setAttribute("x2", String(cr.left - rect.left + cr.width / 2));
-            line.setAttribute("y2", String(cr.top - rect.top));
+            line.setAttribute(
+              "x2",
+              String(cr.left - hostRect.left + cr.width / 2),
+            );
+            line.setAttribute("y2", String(cr.top - hostRect.top));
             wp.normalize();
             line.style.opacity = wp.dot(camDir) < -0.05 ? "0.8" : "0.15";
           }
@@ -536,7 +562,6 @@ export default function ConstellationGlobe({
         el.removeEventListener("pointerdown", onDown);
         window.removeEventListener("pointermove", onMove);
         window.removeEventListener("pointerup", onUp);
-        el.removeEventListener("wheel", onWheel);
         el.removeEventListener("touchmove", onTouchMove);
         el.removeEventListener("touchend", onTouchEnd);
         renderer.dispose();
@@ -553,71 +578,113 @@ export default function ConstellationGlobe({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (mode === "flat") return <ConstellationMap members={notionMembers} />;
+  // reduced motion or no WebGL: the quiet hero and the flat map
+  if (mode === "flat") {
+    return (
+      <div>
+        <header className="mx-auto max-w-7xl px-5 pb-16 pt-32 sm:px-8 sm:pt-44">
+          <Kicker>{CONSTELLATION.kicker}</Kicker>
+          <h1 className="mt-6 font-display text-5xl font-bold sm:text-6xl">
+            {CONSTELLATION.title}
+          </h1>
+          <p className="mt-8 max-w-2xl font-display text-2xl leading-snug text-starlight/90 sm:text-3xl">
+            {CONSTELLATION.intro}
+          </p>
+        </header>
+        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+          <ConstellationMap members={notionMembers} />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div
+      ref={wrapRef}
       id="constellation-map"
-      ref={hostRef}
-      className="relative h-[68svh] w-full overflow-hidden md:h-[76svh]"
+      className="relative"
+      style={{ height: "230svh" }}
     >
-      {/* thread between a chosen star and its card */}
-      <svg
-        ref={svgRef}
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 h-full w-full"
-      >
-        <line
-          ref={lineRef}
-          stroke="rgba(216,204,255,0.8)"
-          strokeWidth="1"
-          style={{ opacity: selected ? 1 : 0 }}
-        />
-      </svg>
-
-      {/* the chosen creator */}
-      {selected ? (
+      <div ref={hostRef} className="sticky top-0 h-svh overflow-hidden">
+        {/* the hero copy, floating in the void before the world exists */}
         <div
-          ref={cardRef}
-          className="absolute bottom-5 left-1/2 z-10 w-[86%] max-w-xs -translate-x-1/2 rounded-lg border border-dust/30 bg-night/90 px-5 py-4 text-center backdrop-blur-sm"
+          ref={copyRef}
+          className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 text-center"
         >
-          <p className="font-display text-lg font-bold">{selected.name}</p>
-          <p className="meta-label mt-1">
-            {selected.city}, {selected.country}
+          <p className="meta-label text-dust">{CONSTELLATION.kicker}</p>
+          <h1 className="mt-6 max-w-3xl font-display text-4xl font-bold uppercase tracking-tight text-white [text-shadow:0_0_14px_rgb(255_255_255/0.85),0_0_36px_rgb(167_139_250/0.7)] sm:text-6xl">
+            {CONSTELLATION.title}
+          </h1>
+          <p className="mx-auto mt-6 max-w-md text-base leading-relaxed text-starlight/85 sm:text-lg">
+            {CONSTELLATION.intro}
           </p>
-          {selected.href ? (
-            <a
-              href={selected.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mono-link mt-3 inline-block text-sm font-bold text-ember"
-            >
-              See their work ↗
-            </a>
-          ) : null}
         </div>
-      ) : null}
 
-      {/* constellation mode */}
-      {members.length > 1 ? (
-        <button
-          type="button"
-          onClick={() => setLinesOn((v) => !v)}
-          className={`meta-label absolute left-4 top-4 z-10 rounded-full border px-4 py-2 transition-colors ${
-            linesOn
-              ? "border-ember bg-ember/20 text-starlight"
-              : "border-dust/30 bg-night/60 text-dust hover:text-starlight"
-          }`}
+        <p
+          ref={hintRef}
+          aria-hidden="true"
+          className="meta-label absolute bottom-8 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap text-white transition-opacity duration-700 [text-shadow:0_0_10px_rgb(255_255_255/0.85),0_0_26px_rgb(167_139_250/0.7)]"
         >
-          {linesOn ? "Hide the constellation" : "See the constellation"}
-        </button>
-      ) : null}
-
-      {members.length === 0 && mode === "globe" ? (
-        <p className="pointer-events-none absolute inset-x-0 bottom-6 px-6 text-center font-meta text-xs uppercase tracking-[0.18em] text-starlight/80">
-          {CONSTELLATION.emptyNote}
+          scroll to build the world
         </p>
-      ) : null}
+
+        {/* thread between a chosen star and its card */}
+        <svg
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-10 h-full w-full"
+        >
+          <line
+            ref={lineRef}
+            stroke="rgba(216,204,255,0.8)"
+            strokeWidth="1"
+            style={{ opacity: selected ? 1 : 0 }}
+          />
+        </svg>
+
+        {/* the chosen creator */}
+        {selected ? (
+          <div
+            ref={cardRef}
+            className="absolute bottom-5 left-1/2 z-10 w-[86%] max-w-xs -translate-x-1/2 rounded-lg border border-dust/30 bg-night/90 px-5 py-4 text-center backdrop-blur-sm"
+          >
+            <p className="font-display text-lg font-bold">{selected.name}</p>
+            <p className="meta-label mt-1">
+              {selected.city}, {selected.country}
+            </p>
+            {selected.href ? (
+              <a
+                href={selected.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mono-link mt-3 inline-block text-sm font-bold text-ember"
+              >
+                See their work ↗
+              </a>
+            ) : null}
+          </div>
+        ) : null}
+
+        {/* constellation mode, once the world exists */}
+        {built && members.length > 1 ? (
+          <button
+            type="button"
+            onClick={() => setLinesOn((v) => !v)}
+            className={`meta-label absolute left-4 top-20 z-10 rounded-full border px-4 py-2 transition-colors ${
+              linesOn
+                ? "border-ember bg-ember/20 text-starlight"
+                : "border-dust/30 bg-night/60 text-dust hover:text-starlight"
+            }`}
+          >
+            {linesOn ? "Hide the constellation" : "See the constellation"}
+          </button>
+        ) : null}
+
+        {built && members.length === 0 ? (
+          <p className="pointer-events-none absolute inset-x-0 bottom-6 z-10 px-6 text-center font-meta text-xs uppercase tracking-[0.18em] text-starlight/80">
+            {CONSTELLATION.emptyNote}
+          </p>
+        ) : null}
+      </div>
     </div>
   );
 }
