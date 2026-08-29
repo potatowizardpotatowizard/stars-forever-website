@@ -1,102 +1,37 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import { usePathname, useRouter } from "next/navigation";
 
-// The signature move: internal navigation is a hyperspace jump. Clicking a
-// link accelerates a star field to light speed over ~450ms, the screen
-// whites out to black, the route changes, and the destination fades in.
-// Reduced motion users navigate normally.
+// The signature move: internal navigation is a hyperspace jump. The
+// destination loads WHILE the star field accelerates, so there is never
+// a frozen black hold; the page itself falls away into the jump and the
+// new one decelerates in. Reduced motion users navigate normally.
 
-type Phase = "idle" | "warping" | "arriving";
-
-const WARP_MS = 480;
-const ARRIVE_MS = 350;
+const PUSH_DELAY_MS = 150; // page is faded under the streaks before swap
+const OUT_MS = 380; // acceleration ramp
+const MIN_JUMP_MS = 560; // shortest full jump even on instant loads
+const IN_MS = 360; // deceleration + reveal
+const BAIL_MS = 5000; // reveal anyway if a load hangs
 
 export default function WarpNavigator() {
   const router = useRouter();
   const pathname = usePathname();
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [phase, setPhase] = useState<Phase>("idle");
-  const phaseRef = useRef<Phase>("idle");
-  const jumping = useRef(false);
+  const [active, setActive] = useState(false);
+  const jump = useRef<{
+    start: number;
+    arrived: boolean;
+    inStart: number;
+    done: boolean;
+  } | null>(null);
   const raf = useRef(0);
-
-  const setPhaseBoth = (p: Phase) => {
-    phaseRef.current = p;
-    setPhase(p);
-  };
-
-  // Draw an accelerating star field on the overlay canvas.
-  const runWarp = useCallback((onDone: () => void) => {
-    const canvas = canvasRef.current;
-    const ctx = canvas?.getContext("2d");
-    if (!canvas || !ctx) {
-      onDone();
-      return;
-    }
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const w = window.innerWidth;
-    const h = window.innerHeight;
-    canvas.width = w * dpr;
-    canvas.height = h * dpr;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-    const scale = Math.min(w, h) * 0.5;
-    const stars = Array.from({ length: 180 }, () => ({
-      x: Math.random() * 2 - 1,
-      y: Math.random() * 2 - 1,
-      z: 0.08 + Math.random() * 0.92,
-    }));
-
-    let start = 0;
-    const frame = (t: number) => {
-      if (!start) start = t;
-      const p = Math.min(1, (t - start) / WARP_MS);
-      // Speed ramps hard toward the end of the jump.
-      const speed = 0.4 + 5 * p * p;
-
-      ctx.clearRect(0, 0, w, h);
-      // Darken toward black as the jump completes.
-      ctx.globalAlpha = 0.25 + 0.75 * p;
-      ctx.fillStyle = "#07050c";
-      ctx.fillRect(0, 0, w, h);
-
-      for (const s of stars) {
-        s.z -= (speed * 0.016 * s.z + 0.002);
-        if (s.z <= 0.02) s.z = 1;
-        const px = w / 2 + (s.x / s.z) * scale;
-        const py = h / 2 + (s.y / s.z) * scale;
-        const bx = w / 2 + (s.x / Math.min(1, s.z + 0.04 + 0.25 * p)) * scale;
-        const by = h / 2 + (s.y / Math.min(1, s.z + 0.04 + 0.25 * p)) * scale;
-        const depth = 1 - s.z;
-        ctx.globalAlpha = (0.2 + 0.7 * depth) * (0.5 + 0.5 * p);
-        ctx.strokeStyle = "#efecf7";
-        ctx.lineWidth = 0.6 + 1.6 * depth;
-        ctx.lineCap = "round";
-        ctx.beginPath();
-        ctx.moveTo(bx, by);
-        ctx.lineTo(px, py);
-        ctx.stroke();
-      }
-
-      if (p < 1) {
-        raf.current = requestAnimationFrame(frame);
-      } else {
-        ctx.globalAlpha = 1;
-        ctx.fillStyle = "#07050c";
-        ctx.fillRect(0, 0, w, h);
-        onDone();
-      }
-    };
-    raf.current = requestAnimationFrame(frame);
-  }, []);
 
   // Intercept internal link clicks.
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
-      if (phaseRef.current !== "idle") return;
+      if (jump.current && !jump.current.done) return;
       if (e.defaultPrevented || e.button !== 0) return;
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -116,50 +51,135 @@ export default function WarpNavigator() {
       // left alone so UI like the mobile menu still hears the click and
       // can close itself while the warp plays.
       e.preventDefault();
-      jumping.current = true;
-      // flushSync so the overlay canvas is mounted before drawing starts;
-      // without it runWarp sees a null canvas and skips the whole jump
-      flushSync(() => {
-        setPhaseBoth("warping");
-      });
-      runWarp(() => {
-        router.push(href);
-      });
+      jump.current = {
+        start: performance.now(),
+        arrived: false,
+        inStart: 0,
+        done: false,
+      };
+      // flushSync so the overlay canvas exists before the first frame
+      flushSync(() => setActive(true));
+      startField();
+
+      // the old page falls into the jump while the new one loads
+      const main = document.getElementById("main");
+      if (main) {
+        main.style.transition = "opacity 150ms ease-in, transform 150ms ease-in";
+        main.style.opacity = "0";
+        main.style.transform = "scale(1.045)";
+      }
+      router.prefetch(path);
+      window.setTimeout(() => router.push(href), PUSH_DELAY_MS);
     };
     document.addEventListener("click", onClick, true);
     return () => {
       document.removeEventListener("click", onClick, true);
       cancelAnimationFrame(raf.current);
     };
-  }, [router, runWarp]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router]);
 
-  // When the route actually changes after a jump, fade in from black.
+  // The route changed: the new page is mounted (still invisible).
   useEffect(() => {
-    if (!jumping.current) return;
-    jumping.current = false;
-    setPhaseBoth("arriving");
-    const t = setTimeout(() => setPhaseBoth("idle"), ARRIVE_MS + 60);
-    return () => clearTimeout(t);
+    if (jump.current && !jump.current.done) jump.current.arrived = true;
   }, [pathname]);
 
-  if (phase === "idle") return null;
+  // Continuous star field: accelerate, flow while loading, decelerate.
+  const startField = () => {
+    const canvas = canvasRef.current;
+    const ctx = canvas?.getContext("2d");
+    const j = jump.current;
+    if (!canvas || !ctx || !j) {
+      finishNow();
+      return;
+    }
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    canvas.style.opacity = "1";
+
+    const scale = Math.min(w, h) * 0.5;
+    const stars = Array.from({ length: 150 }, () => ({
+      x: Math.random() * 2 - 1,
+      y: Math.random() * 2 - 1,
+      z: 0.08 + Math.random() * 0.92,
+    }));
+    const easeInOut = (t: number) =>
+      t < 0.5 ? 2 * t * t : 1 - (1 - t) * (2 - 2 * t) * 0.5;
+
+    const frame = (now: number) => {
+      const t = now - j.start;
+      // arrival begins only once loaded AND the jump has had its moment
+      if (j.arrived && t >= MIN_JUMP_MS && !j.inStart) {
+        j.inStart = now;
+        const main = document.getElementById("main");
+        if (main) {
+          main.style.transition = `opacity ${IN_MS}ms ease-out, transform ${IN_MS}ms ease-out`;
+          main.style.opacity = "1";
+          main.style.transform = "scale(1)";
+        }
+      }
+      if (!j.arrived && t > BAIL_MS) j.arrived = true;
+
+      const inT = j.inStart ? Math.min(1, (now - j.inStart) / IN_MS) : 0;
+      if (inT >= 1) {
+        finishNow();
+        return;
+      }
+      // speed: ease up over OUT_MS, hold, wind down on arrival
+      const up = easeInOut(Math.min(1, t / OUT_MS));
+      const speed = (0.3 + 5 * up) * (1 - inT * 0.85);
+      // darkness eases in instead of slamming
+      const dark = 0.85 * up * (1 - inT);
+
+      ctx.clearRect(0, 0, w, h);
+      ctx.globalAlpha = dark;
+      ctx.fillStyle = "#07050c";
+      ctx.fillRect(0, 0, w, h);
+
+      for (const s of stars) {
+        s.z -= speed * 0.016 * s.z + 0.002;
+        if (s.z <= 0.02) s.z = 1;
+        const px = w / 2 + (s.x / s.z) * scale;
+        const py = h / 2 + (s.y / s.z) * scale;
+        const stretch = Math.min(1, s.z + 0.04 + 0.28 * up * (1 - inT));
+        const bx = w / 2 + (s.x / stretch) * scale;
+        const by = h / 2 + (s.y / stretch) * scale;
+        const depth = 1 - s.z;
+        ctx.globalAlpha = (0.2 + 0.7 * depth) * (0.25 + 0.75 * up) * (1 - inT);
+        ctx.strokeStyle = "#efecf7";
+        ctx.lineWidth = 0.6 + 1.6 * depth;
+        ctx.lineCap = "round";
+        ctx.beginPath();
+        ctx.moveTo(bx, by);
+        ctx.lineTo(px, py);
+        ctx.stroke();
+      }
+      raf.current = requestAnimationFrame(frame);
+    };
+    raf.current = requestAnimationFrame(frame);
+  };
+
+  const finishNow = () => {
+    cancelAnimationFrame(raf.current);
+    if (jump.current) jump.current.done = true;
+    const main = document.getElementById("main");
+    if (main) {
+      main.style.transition = "";
+      main.style.opacity = "";
+      main.style.transform = "";
+    }
+    setActive(false);
+  };
+
+  if (!active) return null;
 
   return (
-    <div
-      aria-hidden="true"
-      className="pointer-events-none fixed inset-0 z-[100]"
-      style={
-        phase === "arriving"
-          ? {
-              backgroundColor: "#07050c",
-              animation: `warp-arrive ${ARRIVE_MS}ms ease-out forwards`,
-            }
-          : undefined
-      }
-    >
-      {phase === "warping" ? (
-        <canvas ref={canvasRef} className="h-full w-full" />
-      ) : null}
+    <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-[100]">
+      <canvas ref={canvasRef} className="h-full w-full" />
     </div>
   );
 }
