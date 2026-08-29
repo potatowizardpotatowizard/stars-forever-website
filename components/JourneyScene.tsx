@@ -24,122 +24,114 @@ export type JourneyItem =
 const SPACING = 900;
 const LEAD = 0;
 
-// Tiny outline drawings for route waypoints, keyed by stop name.
-// Single-stroke constellation style, each within a ~24px box.
+// Outline drawings for route waypoints, keyed by stop name. Real map
+// outlines for geographic stops; symbolic line art for the rest.
+// Constellation-thin strokes, each within a ~44px box.
 const ROUTE_ICONS: Record<string, React.ReactNode> = {
   tokyo: (
     // torii gate
     <>
-      <path d="M-10 -7 Q0 -10 10 -7" />
-      <path d="M-8 -6.5 L-8 -4 M8 -6.5 L8 -4" />
-      <path d="M-7 -4 L7 -4" />
-      <path d="M-5.5 -4 L-6.5 8 M5.5 -4 L6.5 8" />
+      <path d="M-20 -14 Q0 -20 20 -14" />
+      <path d="M-16 -13 L-16 -8 M16 -13 L16 -8" />
+      <path d="M-14 -8 L14 -8" />
+      <path d="M-11 -8 L-13 16 M11 -8 L13 16" />
+      <path d="M0 -8 L0 -14" />
     </>
   ),
   "rural japan": (
     // mountains
     <>
-      <path d="M-10 8 L-3 -6 L1 0 L5 -4 L10 8" />
-      <path d="M-5.5 -1 L-3 -6 L-0.5 -1" />
+      <path d="M-20 16 L-6 -12 L2 0 L10 -8 L20 16" />
+      <path d="M-11 -2 L-6 -12 L-1 -2" />
     </>
   ),
   "ebisu circuit": (
-    // drift car
+    // the circuit, drawn like a track map
     <>
-      <path d="M-9 3 Q-9 -1 -4 -2 L-2 -5 L4 -5 L6 -2 Q9 -1 9 3 Z" />
-      <circle cx="-5" cy="4" r="2" />
-      <circle cx="5" cy="4" r="2" />
+      <path d="M-14 4 Q-18 -8 -8 -10 Q0 -14 10 -10 Q18 -7 15 2 Q13 9 4 7 Q0 5 -4 10 Q-11 15 -14 4 Z" />
+      <path d="M-3 -11.5 L-3 -7.5" />
     </>
   ),
   california: (
-    // palm tree
-    <>
-      <path d="M0 8 Q1 1 0 -3" />
-      <path d="M0 -3 Q-5 -7 -9 -4" />
-      <path d="M0 -3 Q5 -7 9 -4" />
-      <path d="M0 -3 Q-2 -9 -6 -9" />
-      <path d="M0 -3 Q2 -9 6 -9" />
-    </>
+    // the state on the map
+    <path d="M-11 -20 L3 -18 L1 -5 L13 9 L12 16 L2 15 Q-5 7 -8 -2 Q-12 -12 -11 -20 Z" />
   ),
   iceland: (
-    // glacier peaks
+    // the country on the map
     <>
-      <path d="M-10 8 L-4 -5 L0 -1 L4 -7 L10 8" />
-      <path d="M-5.5 -2 L-4 -5 L-2.5 -2 M2.7 -4.5 L4 -7 L5.3 -4.5" />
+      <path d="M-16 2 Q-19 -5 -12 -6 Q-15 -12 -8 -10 Q-2 -15 6 -12 Q16 -11 16 -3 Q15 6 6 8 Q-3 12 -10 8 Q-16 9 -16 2 Z" />
+      <path d="M-12 -6 Q-9 -7 -8 -10" />
     </>
   ),
   "the shared house": (
     // house
     <>
-      <path d="M-9 8 L-9 -2 L0 -9 L9 -2 L9 8 Z" />
-      <path d="M-2 8 L-2 2 L2 2 L2 8" />
+      <path d="M-16 16 L-16 -4 L0 -17 L16 -4 L16 16 Z" />
+      <path d="M-4 16 L-4 4 L4 4 L4 16" />
     </>
   ),
   "the desert": (
     // saguaro
     <>
-      <path d="M0 8 L0 -8" />
-      <path d="M0 -1 Q-6 -1 -6 -7" />
-      <path d="M0 1 Q6 1 6 -4" />
+      <path d="M0 16 L0 -16" />
+      <path d="M0 -2 Q-12 -2 -12 -14" />
+      <path d="M0 2 Q12 2 12 -8" />
     </>
   ),
   "joshua tree": (
     // joshua tree
     <>
-      <path d="M0 8 L0 -1" />
-      <path d="M0 -1 L-6 -6 M-6 -6 L-9 -4 M-6 -6 L-7 -9" />
-      <path d="M0 -1 L5 -5 M5 -5 L8 -3 M5 -5 L5 -9" />
+      <path d="M0 16 L0 -2" />
+      <path d="M0 -2 L-11 -12 M-11 -12 L-17 -8 M-11 -12 L-13 -18" />
+      <path d="M0 -2 L10 -10 M10 -10 L16 -6 M10 -10 L10 -18" />
     </>
   ),
   "las vegas": (
     // dice
     <>
-      <rect x="-8" y="-8" width="16" height="16" rx="3" />
-      <circle cx="-3.5" cy="-3.5" r="1.1" fill="currentColor" stroke="none" />
-      <circle cx="0" cy="0" r="1.1" fill="currentColor" stroke="none" />
-      <circle cx="3.5" cy="3.5" r="1.1" fill="currentColor" stroke="none" />
+      <rect x="-15" y="-15" width="30" height="30" rx="5" />
+      <circle cx="-7" cy="-7" r="2" fill="currentColor" stroke="none" />
+      <circle cx="0" cy="0" r="2" fill="currentColor" stroke="none" />
+      <circle cx="7" cy="7" r="2" fill="currentColor" stroke="none" />
     </>
   ),
   toronto: (
     // cn tower
     <>
-      <path d="M0 -10 L0 -6 M-1.5 -6 L1.5 -6" />
-      <path d="M-4 -3.5 Q0 -6 4 -3.5 Q0 -1 -4 -3.5" />
-      <path d="M-1.5 -2 L-3 8 M1.5 -2 L3 8" />
-      <path d="M-3 8 L3 8" />
+      <path d="M0 -20 L0 -12 M-3 -12 L3 -12" />
+      <path d="M-8 -7 Q0 -12 8 -7 Q0 -2 -8 -7" />
+      <path d="M-3 -4 L-6 16 M3 -4 L6 16" />
+      <path d="M-6 16 L6 16" />
     </>
   ),
   panama: (
-    // palm island
+    // the isthmus on the map
     <>
-      <path d="M-10 8 Q0 4 10 8" />
-      <path d="M0 6 Q1 1 0 -3" />
-      <path d="M0 -3 Q-5 -6 -8 -3" />
-      <path d="M0 -3 Q5 -6 8 -3" />
-      <path d="M0 -3 Q-1 -9 -5 -9" />
+      <path d="M-18 0 Q-13 -6 -6 -3 Q2 1 8 -2 Q14 -6 18 -2 L17 4 Q12 8 7 4 Q0 8 -7 3 Q-13 8 -18 5 Z" />
+      <circle cx="0" cy="1" r="1.4" fill="currentColor" stroke="none" />
     </>
   ),
   "beast games": (
     // trophy
     <>
-      <path d="M-5 -8 L5 -8 L4.4 -1 Q4 3 0 3 Q-4 3 -4.4 -1 Z" />
-      <path d="M-5 -7 Q-9 -6 -4.6 -2 M5 -7 Q9 -6 4.6 -2" />
-      <path d="M0 3 L0 6 M-4 8 L4 8 M-4 8 Q0 6 4 8" />
+      <path d="M-10 -16 L10 -16 L8.8 -2 Q8 6 0 6 Q-8 6 -8.8 -2 Z" />
+      <path d="M-10 -14 Q-18 -12 -9.2 -4 M10 -14 Q18 -12 9.2 -4" />
+      <path d="M0 6 L0 12 M-8 16 L8 16 M-8 16 Q0 12 8 16" />
     </>
   ),
   "the island": (
     // island with palm
     <>
-      <path d="M-10 8 Q0 4 10 8" />
-      <path d="M0 6 Q1 1 0 -3" />
-      <path d="M0 -3 Q-5 -6 -8 -3" />
-      <path d="M0 -3 Q5 -6 8 -3" />
-      <path d="M0 -3 Q1 -9 5 -9" />
+      <path d="M-20 16 Q0 8 20 16" />
+      <path d="M0 12 Q2 2 0 -6" />
+      <path d="M0 -6 Q-10 -12 -16 -6" />
+      <path d="M0 -6 Q10 -12 16 -6" />
+      <path d="M0 -6 Q2 -18 10 -18" />
     </>
   ),
   "stars forever": (
     // the brand's four point star
-    <path d="M0 -10 Q1.6 -1.6 10 0 Q1.6 1.6 0 10 Q-1.6 1.6 -10 0 Q-1.6 -1.6 0 -10 Z" />
+    <path d="M0 -20 Q3.2 -3.2 20 0 Q3.2 3.2 0 20 Q-3.2 3.2 -20 0 Q-3.2 -3.2 0 -20 Z" />
   ),
 };
 
@@ -238,7 +230,10 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
         // heavy fog: the focused plane owns the screen. photos may
         // ghost in the distance; text goes fully dark so words never
         // stack over words.
-        const isBeat = items[i]?.kind !== "photo";
+        // photos right after a route hold in the dark until the map has
+        // finished drawing, so the two never share the screen
+        const isBeat =
+          items[i]?.kind !== "photo" || items[i - 1]?.kind === "route";
         let op: number;
         if (d < -380) op = 0;
         else if (d < 0) op = 1 + d / 380;
@@ -402,9 +397,12 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
                           const frac = n === 1 ? 0 : si / (n - 1);
                           const first = si === 0;
                           const last = si === n - 1;
-                          const labelY = first ? 30 : last ? -28 : si % 2 === 1 ? 34 : -24;
+                          // drawings alternate above and below the line;
+                          // each label takes the opposite side of its drawing
+                          const iconAbove = si % 2 === 0;
+                          const labelY = iconAbove ? 32 : -26;
+                          const iconY = iconAbove ? -40 : 40;
                           const icon = ROUTE_ICONS[stop.toLowerCase()];
-                          const iconY = labelY > 0 ? labelY + 22 : labelY - 26;
                           return (
                             <g
                               key={stop}
