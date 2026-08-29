@@ -20,7 +20,7 @@ export type Mission = {
   journeySub?: string;
   /** Route interlude drawn mid-flight: an ember line traveling the
       mission's geography, inserted after the named section */
-  journeyRoute?: { afterKicker: string; from: string; via?: string; to: string };
+  journeyRoute?: { afterKicker: string; stops: string[] };
   cardImageSlot: string;
   heroSlot: string;
   burningQuestion?: string;
@@ -84,8 +84,7 @@ export const MISSIONS: Mission[] = [
     slug: "real-treasure",
     journeyRoute: {
       afterKicker: "God moved",
-      from: "California",
-      to: "Iceland",
+      stops: ["California", "Iceland"],
     },
     name: "Real Treasure",
     location: "Iceland and Southern California",
@@ -205,9 +204,7 @@ export const MISSIONS: Mission[] = [
     journeySub: "Thirty days in Japan, from the first prayer walk to the biggest drifting event on earth.",
     journeyRoute: {
       afterKicker: "God moved",
-      from: "Tokyo",
-      via: "Rural Japan",
-      to: "Ebisu Circuit",
+      stops: ["Tokyo", "Rural Japan", "Ebisu Circuit"],
     },
     cardImageSlot: "home-proof-tokyo",
     heroSlot: "tokyo-hero",
@@ -302,9 +299,7 @@ export const MISSIONS: Mission[] = [
     slug: "revolutionary-cohort",
     journeyRoute: {
       afterKicker: "The rhythm",
-      from: "The shared house",
-      via: "The desert",
-      to: "Joshua Tree",
+      stops: ["The shared house", "The desert", "Joshua Tree"],
     },
     name: "Revolutionary Cohort 1",
     location: "Joshua Tree, California",
@@ -487,9 +482,7 @@ export const MISSIONS: Mission[] = [
     slug: "beast-games",
     journeyRoute: {
       afterKicker: "The island",
-      from: "Las Vegas",
-      via: "Toronto",
-      to: "Panama",
+      stops: ["Las Vegas", "Toronto", "Panama"],
     },
     name: "Beast Games",
     location: "On set and beyond",

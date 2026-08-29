@@ -15,7 +15,7 @@ export type JourneyItem =
       link?: { label: string; href: string };
     }
   | { kind: "photo"; src: string; alt: string; tall?: boolean }
-  | { kind: "route"; from: string; via?: string; to: string };
+  | { kind: "route"; stops: string[] };
 
 // Tier one of the journey pages: every photo and story beat floats as
 // a plane in deep space, and scrolling flies the camera forward
@@ -138,14 +138,19 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
           if (path) {
             const lp = clamp01((600 - d) / 550);
             path.style.strokeDashoffset = (1 - lp).toFixed(4);
+            const len = path.getTotalLength();
             const star = el.querySelector<SVGGElement>("[data-route-star]");
             if (star) {
-              const len = path.getTotalLength();
               const pt = path.getPointAtLength(len * lp);
               star.setAttribute("transform", `translate(${pt.x} ${pt.y})`);
               star.style.opacity = lp > 0.01 ? "1" : "0";
             }
             el.querySelectorAll<SVGGElement>("[data-route-node]").forEach((node) => {
+              if (!node.dataset.placed) {
+                const pt = path.getPointAtLength(len * Number(node.dataset.frac ?? 0));
+                node.setAttribute("transform", `translate(${pt.x} ${pt.y})`);
+                node.dataset.placed = "1";
+              }
               node.style.opacity = lp >= Number(node.dataset.at ?? 0) ? "1" : "0";
             });
           }
@@ -183,7 +188,7 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
             </div>
           ) : item.kind === "route" ? (
             <p key={i} className="meta-label text-dust">
-              {[item.from, item.via, item.to].filter(Boolean).join(" → ")}
+              {item.stops.join(" → ")}
             </p>
           ) : (
             // eslint-disable-next-line @next/next/no-img-element
@@ -257,7 +262,7 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
                         viewBox="0 0 600 400"
                         fill="none"
                         className="w-full overflow-visible"
-                        aria-label={`Route from ${item.from} to ${item.to}`}
+                        aria-label={`Route: ${item.stops.join(" to ")}`}
                       >
                         {/* the flight line, drawn by scroll */}
                         <path
@@ -271,27 +276,41 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
                           strokeLinecap="round"
                           style={{ filter: "drop-shadow(0 0 6px rgba(180,140,255,0.8))" }}
                         />
-                        {/* waypoints ignite as the line reaches them */}
-                        <g data-route-node data-at="0.02" className="transition-opacity duration-500" opacity="0">
-                          <circle cx="60" cy="330" r="3.5" fill="#efecf7" style={{ filter: "drop-shadow(0 0 8px rgba(180,140,255,0.9))" }} />
-                          <text x="60" y="360" textAnchor="start" fill="#b7aecb" fontSize="13" letterSpacing="0.22em" style={{ fontFamily: "var(--font-fragment)" }}>
-                            {item.from.toUpperCase()}
-                          </text>
-                        </g>
-                        {item.via ? (
-                          <g data-route-node data-at="0.5" className="transition-opacity duration-500" opacity="0">
-                            <circle cx="308" cy="188" r="2.8" fill="#efecf7" style={{ filter: "drop-shadow(0 0 7px rgba(180,140,255,0.85))" }} />
-                            <text x="308" y="222" textAnchor="middle" fill="#b7aecb" fontSize="13" letterSpacing="0.22em" style={{ fontFamily: "var(--font-fragment)" }}>
-                              {item.via.toUpperCase()}
-                            </text>
-                          </g>
-                        ) : null}
-                        <g data-route-node data-at="0.96" className="transition-opacity duration-500" opacity="0">
-                          <circle cx="540" cy="74" r="4" fill="#ffffff" style={{ filter: "drop-shadow(0 0 10px rgba(180,140,255,1))" }} />
-                          <text x="540" y="46" textAnchor="end" fill="#efecf7" fontSize="13" letterSpacing="0.22em" style={{ fontFamily: "var(--font-fragment)" }}>
-                            {item.to.toUpperCase()}
-                          </text>
-                        </g>
+                        {/* waypoints ignite as the line reaches them, spaced
+                            evenly along the path and placed by the loop */}
+                        {item.stops.map((stop, si) => {
+                          const n = item.stops.length;
+                          const frac = n === 1 ? 0 : si / (n - 1);
+                          const first = si === 0;
+                          const last = si === n - 1;
+                          const labelY = first ? 30 : last ? -28 : si % 2 === 1 ? 34 : -24;
+                          return (
+                            <g
+                              key={stop}
+                              data-route-node
+                              data-frac={frac}
+                              data-at={first ? 0.02 : Math.min(0.97, frac * 0.97)}
+                              className="transition-opacity duration-500"
+                              opacity="0"
+                            >
+                              <circle
+                                r={first || last ? 3.5 : 2.8}
+                                fill={last ? "#ffffff" : "#efecf7"}
+                                style={{ filter: `drop-shadow(0 0 ${last ? 10 : 8}px rgba(180,140,255,${last ? 1 : 0.9}))` }}
+                              />
+                              <text
+                                y={labelY}
+                                textAnchor={first ? "start" : last ? "end" : "middle"}
+                                fill={last ? "#efecf7" : "#b7aecb"}
+                                fontSize="13"
+                                letterSpacing="0.22em"
+                                style={{ fontFamily: "var(--font-fragment)" }}
+                              >
+                                {stop.toUpperCase()}
+                              </text>
+                            </g>
+                          );
+                        })}
                         {/* the traveling star riding the line */}
                         <g data-route-star opacity="0">
                           <circle r="7" fill="rgba(180,140,255,0.45)" style={{ filter: "blur(3px)" }} />

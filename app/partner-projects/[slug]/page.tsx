@@ -294,9 +294,7 @@ export default async function MissionPage({
               ? [
                   {
                     kind: "route",
-                    from: mission.journeyRoute.from,
-                    via: mission.journeyRoute.via,
-                    to: mission.journeyRoute.to,
+                    stops: mission.journeyRoute.stops,
                   } as JourneyItem,
                 ]
               : []),
