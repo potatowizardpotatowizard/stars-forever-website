@@ -9,11 +9,17 @@ import { usePathname, useRouter } from "next/navigation";
 // a frozen black hold; the page itself falls away into the jump and the
 // new one decelerates in. Reduced motion users navigate normally.
 
-const PUSH_DELAY_MS = 150; // page is faded under the streaks before swap
+const PUSH_DELAY_MS = 200; // page is sucked away under the streaks before swap
 const OUT_MS = 380; // acceleration ramp
 const MIN_JUMP_MS = 560; // shortest full jump even on instant loads
-const IN_MS = 360; // deceleration + reveal
+const IN_MS = 400; // deceleration + reveal
 const BAIL_MS = 5000; // reveal anyway if a load hangs
+
+// scale around the middle of what the viewer is LOOKING at, not the
+// middle of the whole document; otherwise a tall page appears to slide
+// down from the top instead of flying in
+const viewportOrigin = (el: HTMLElement) =>
+  `50% ${window.scrollY + window.innerHeight / 2 - el.offsetTop}px`;
 
 export default function WarpNavigator() {
   const router = useRouter();
@@ -61,12 +67,13 @@ export default function WarpNavigator() {
       flushSync(() => setActive(true));
       startField();
 
-      // the old page falls into the jump while the new one loads
+      // the old page is sucked into the jump while the new one loads
       const main = document.getElementById("main");
       if (main) {
-        main.style.transition = "opacity 150ms ease-in, transform 150ms ease-in";
+        main.style.transformOrigin = viewportOrigin(main);
+        main.style.transition = "opacity 220ms ease-in, transform 220ms ease-in";
         main.style.opacity = "0";
-        main.style.transform = "scale(1.045)";
+        main.style.transform = "scale(0.86)";
       }
       router.prefetch(path);
       window.setTimeout(() => router.push(href), PUSH_DELAY_MS);
@@ -117,7 +124,14 @@ export default function WarpNavigator() {
         j.inStart = now;
         const main = document.getElementById("main");
         if (main) {
-          main.style.transition = `opacity ${IN_MS}ms ease-out, transform ${IN_MS}ms ease-out`;
+          // the new page emerges out of the warp: starts deep and small
+          // around the viewport center, decelerates up to full size
+          main.style.transition = "none";
+          main.style.transformOrigin = viewportOrigin(main);
+          main.style.opacity = "0";
+          main.style.transform = "scale(0.88)";
+          void main.offsetWidth;
+          main.style.transition = `opacity ${IN_MS}ms ease-out, transform ${IN_MS}ms cubic-bezier(0.16,1,0.3,1)`;
           main.style.opacity = "1";
           main.style.transform = "scale(1)";
         }
@@ -140,19 +154,28 @@ export default function WarpNavigator() {
       ctx.fillStyle = "#07050c";
       ctx.fillRect(0, 0, w, h);
 
+      ctx.globalAlpha = 1;
+      ctx.lineCap = "round";
       for (const s of stars) {
         s.z -= speed * 0.016 * s.z + 0.002;
         if (s.z <= 0.02) s.z = 1;
         const px = w / 2 + (s.x / s.z) * scale;
         const py = h / 2 + (s.y / s.z) * scale;
-        const stretch = Math.min(1, s.z + 0.04 + 0.28 * up * (1 - inT));
+        const stretch = Math.min(1, s.z + 0.03 + 0.42 * up * (1 - inT));
         const bx = w / 2 + (s.x / stretch) * scale;
         const by = h / 2 + (s.y / stretch) * scale;
         const depth = 1 - s.z;
-        ctx.globalAlpha = (0.2 + 0.7 * depth) * (0.25 + 0.75 * up) * (1 - inT);
-        ctx.strokeStyle = "#efecf7";
-        ctx.lineWidth = 0.6 + 1.6 * depth;
-        ctx.lineCap = "round";
+        const a = (0.2 + 0.7 * depth) * (0.25 + 0.75 * up) * (1 - inT);
+        // the brand's long exposure purple trails: violet glow body
+        // with a bright near-white core riding it
+        ctx.strokeStyle = `rgba(180,140,255,${(a * 0.8).toFixed(3)})`;
+        ctx.lineWidth = 1.5 + 2.8 * depth;
+        ctx.beginPath();
+        ctx.moveTo(bx, by);
+        ctx.lineTo(px, py);
+        ctx.stroke();
+        ctx.strokeStyle = `rgba(244,240,255,${a.toFixed(3)})`;
+        ctx.lineWidth = 0.5 + 1.1 * depth;
         ctx.beginPath();
         ctx.moveTo(bx, by);
         ctx.lineTo(px, py);
@@ -171,6 +194,7 @@ export default function WarpNavigator() {
       main.style.transition = "";
       main.style.opacity = "";
       main.style.transform = "";
+      main.style.transformOrigin = "";
     }
     setActive(false);
   };
