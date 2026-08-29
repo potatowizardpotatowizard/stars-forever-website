@@ -159,6 +159,9 @@ export default function ConstellationGlobe({
         color: 0x07050c,
         transparent: true,
         opacity: 0,
+        // must not occlude while invisible: an early depth write would
+        // swallow the star-written headline inside its silhouette
+        depthWrite: false,
       });
       const shell = new THREE.Mesh(
         new THREE.SphereGeometry(R - 2.5, 48, 32),
@@ -181,6 +184,82 @@ export default function ConstellationGlobe({
         g.fillRect(0, 0, 64, 64);
         return new THREE.CanvasTexture(c);
       })();
+
+      // ---- the star-written headline ---------------------------------
+      // THE CONSTELLATION is spelled in star particles; on scroll the
+      // letters disband into the same swarm that builds the planet
+      await document.fonts.ready.catch(() => undefined);
+      const fam =
+        getComputedStyle(document.documentElement)
+          .getPropertyValue("--font-archivo")
+          .trim() || "sans-serif";
+      const tc = document.createElement("canvas");
+      const tw = 1400;
+      const th = 220;
+      tc.width = tw;
+      tc.height = th;
+      const tg = tc.getContext("2d")!;
+      tg.font = `700 130px ${fam}`;
+      tg.textAlign = "center";
+      tg.textBaseline = "middle";
+      tg.fillStyle = "#fff";
+      const TITLE = CONSTELLATION.title.toUpperCase();
+      tg.fillText(TITLE, tw / 2, th / 2);
+      const measured = tg.measureText(TITLE).width;
+      const img = tg.getImageData(0, 0, tw, th).data;
+      const letterPts: [number, number][] = [];
+      for (let y = 0; y < th; y += 3) {
+        for (let x = 0; x < tw; x += 3) {
+          if (img[(y * tw + x) * 4 + 3] > 128 && rand() < 0.8) {
+            letterPts.push([x - tw / 2, th / 2 - y]);
+          }
+        }
+      }
+      const camZ0 = startZ * 1.55;
+      const aspect0 = host.clientWidth / host.clientHeight;
+      const worldH0 = 2 * Math.tan((20 * Math.PI) / 180) * camZ0;
+      const worldW0 = worldH0 * aspect0;
+      const textWorldW = aspect0 > 1 ? worldW0 * 0.46 : worldW0 * 0.92;
+      const ts = textWorldW / measured;
+      const n2 = letterPts.length;
+      const textTarget = new Float32Array(n2 * 3);
+      const textBirth = new Float32Array(n2 * 3);
+      const textScatter = new Float32Array(n2 * 3);
+      for (let i = 0; i < n2; i++) {
+        const [lx, ly] = letterPts[i];
+        textTarget.set([lx * ts, ly * ts, 0], i * 3);
+        textBirth.set(
+          [
+            lx * ts + (rand() - 0.5) * 90,
+            ly * ts + (rand() - 0.5) * 90,
+            (rand() - 0.5) * 120,
+          ],
+          i * 3,
+        );
+        const rr = 340 + rand() * 360;
+        const u = rand() * 2 - 1;
+        const thr = rand() * Math.PI * 2;
+        const sq = Math.sqrt(1 - u * u);
+        textScatter.set(
+          [rr * sq * Math.cos(thr), rr * u, rr * sq * Math.sin(thr)],
+          i * 3,
+        );
+      }
+      const textGeo = new THREE.BufferGeometry();
+      textGeo.setAttribute(
+        "position",
+        new THREE.BufferAttribute(textBirth.slice(), 3),
+      );
+      const textMat = new THREE.PointsMaterial({
+        size: 2.6,
+        color: 0xf3efff,
+        transparent: true,
+        opacity: 0,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+        sizeAttenuation: true,
+      });
+      scene.add(new THREE.Points(textGeo, textMat));
 
       // ---- member stars ----------------------------------------------
       const mem = membersRef.current;
@@ -405,6 +484,8 @@ export default function ConstellationGlobe({
       let raf = 0;
       let lastArc = 0;
       let lastBuild = -1;
+      let lastText = -1;
+      const t0 = performance.now();
       const camDir = new THREE.Vector3();
       const wp = new THREE.Vector3();
 
@@ -431,6 +512,28 @@ export default function ConstellationGlobe({
         const hint = hintRef.current;
         if (hint) hint.style.opacity = p < 0.04 ? "1" : "0";
 
+        // the headline: stars gather into letters, then disband into
+        // the swarm as the scroll begins
+        const tIn = clamp01((now - t0) / 950);
+        const tie = 1 - Math.pow(1 - tIn, 3);
+        const ds = clamp01((p - 0.14) / 0.24);
+        const dse = ds * ds * (3 - 2 * ds);
+        const textKey = tie * 1000 + dse;
+        if (textKey !== lastText) {
+          lastText = textKey;
+          const tp = textGeo.getAttribute(
+            "position",
+          ) as import("three").BufferAttribute;
+          const ta = tp.array as Float32Array;
+          for (let i = 0; i < n2 * 3; i++) {
+            const formed =
+              textBirth[i] + (textTarget[i] - textBirth[i]) * tie;
+            ta[i] = formed + (textScatter[i] - formed) * dse;
+          }
+          tp.needsUpdate = true;
+          textMat.opacity = (0.25 + 0.75 * tie) * (1 - dse * 0.97);
+        }
+
         const build = clamp01((p - 0.3) / 0.42);
         const be = 1 - Math.pow(1 - build, 3);
         if (build !== lastBuild) {
@@ -451,6 +554,7 @@ export default function ConstellationGlobe({
           pos.needsUpdate = true;
           dustMat.opacity = 0.4 + 0.5 * be;
           shellMat.opacity = be;
+          shellMat.depthWrite = be > 0.35;
         }
         if (build >= 1 !== builtRef.current) setBuilt(build >= 1);
 
@@ -612,9 +716,9 @@ export default function ConstellationGlobe({
           className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 text-center"
         >
           <p className="meta-label text-dust">{CONSTELLATION.kicker}</p>
-          <h1 className="mt-6 whitespace-nowrap font-display text-[8.2vw] font-bold uppercase tracking-tight text-white [text-shadow:0_0_14px_rgb(255_255_255/0.85),0_0_36px_rgb(167_139_250/0.7)] sm:text-6xl">
-            {CONSTELLATION.title}
-          </h1>
+          {/* the headline itself is written in stars on the canvas */}
+          <h1 className="sr-only">{CONSTELLATION.title}</h1>
+          <div aria-hidden="true" className="h-[16vw] sm:h-28" />
           <p className="mx-auto mt-6 max-w-md text-base leading-relaxed text-starlight/85 sm:text-lg">
             {CONSTELLATION.intro}
           </p>
