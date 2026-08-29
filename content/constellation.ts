@@ -16,7 +16,7 @@ export const CONSTELLATION = {
   title: "The Constellation",
   kicker: "Creators across the earth",
   intro:
-    "A map of creators who love Jesus and share the Stars Forever vision. Put your star on the map, get exclusive access to the private group chat, connect with like-hearted individuals, and find Christ centered creators as you travel.",
+    "A map of creators who love Jesus and share the Stars Forever vision.",
   how: {
     kicker: "How it works",
     items: [
