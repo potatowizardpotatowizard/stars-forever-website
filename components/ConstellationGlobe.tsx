@@ -29,6 +29,93 @@ function toXYZ(lat: number, lng: number, r = R): [number, number, number] {
 
 const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
 
+// ---- region drill-down ---------------------------------------------
+// continent → camera centroid; membership resolved from each member's
+// country name with a lat/lng fallback for anything unlisted
+const CONTINENTS: Record<string, { lat: number; lng: number }> = {
+  "North America": { lat: 42, lng: -100 },
+  "South America": { lat: -15, lng: -60 },
+  Europe: { lat: 50, lng: 15 },
+  Africa: { lat: 2, lng: 20 },
+  Asia: { lat: 34, lng: 95 },
+  Oceania: { lat: -26, lng: 140 },
+};
+
+const COUNTRY_CONTINENT: Record<string, string> = {
+  usa: "North America",
+  "united states": "North America",
+  canada: "North America",
+  mexico: "North America",
+  panama: "North America",
+  brazil: "South America",
+  argentina: "South America",
+  chile: "South America",
+  colombia: "South America",
+  peru: "South America",
+  iceland: "Europe",
+  uk: "Europe",
+  "united kingdom": "Europe",
+  england: "Europe",
+  germany: "Europe",
+  france: "Europe",
+  spain: "Europe",
+  italy: "Europe",
+  norway: "Europe",
+  netherlands: "Europe",
+  poland: "Europe",
+  sweden: "Europe",
+  switzerland: "Europe",
+  portugal: "Europe",
+  ireland: "Europe",
+  japan: "Asia",
+  india: "Asia",
+  philippines: "Asia",
+  "south korea": "Asia",
+  korea: "Asia",
+  china: "Asia",
+  indonesia: "Asia",
+  thailand: "Asia",
+  israel: "Asia",
+  singapore: "Asia",
+  vietnam: "Asia",
+  malaysia: "Asia",
+  australia: "Oceania",
+  "new zealand": "Oceania",
+  "south africa": "Africa",
+  nigeria: "Africa",
+  kenya: "Africa",
+  ghana: "Africa",
+  egypt: "Africa",
+  uganda: "Africa",
+  ethiopia: "Africa",
+  morocco: "Africa",
+};
+
+function continentOf(m: ConstellationMember): string {
+  const named = COUNTRY_CONTINENT[m.country.trim().toLowerCase()];
+  if (named) return named;
+  const { lat, lng } = m;
+  if (lng < -25) return lat >= 13 ? "North America" : "South America";
+  if (lng < 52 && lat <= 36) return "Africa";
+  if (lng < 45) return "Europe";
+  if (lng >= 110 && lat < 5) return "Oceania";
+  return "Asia";
+}
+
+type View =
+  | { level: 0 }
+  | { level: 1; continent: string }
+  | { level: 2; continent: string; country: string }
+  | { level: 3; continent: string; country: string; city: string };
+
+type FlyReq = {
+  id: number;
+  lat: number;
+  lng: number;
+  zoom: number;
+  zoomOnly?: boolean;
+};
+
 type Mode = "loading" | "globe" | "flat";
 
 export default function ConstellationGlobe({
@@ -62,6 +149,106 @@ export default function ConstellationGlobe({
   });
   const membersRef = useRef(members);
   membersRef.current = members;
+
+  // ---- drill-down: continent → country → city --------------------
+  const [view, setView] = useState<View>({ level: 0 });
+  const flyReq = useRef<FlyReq | null>(null);
+  const flyId = useRef(0);
+
+  const inView = members.filter((m) => {
+    if (view.level === 0) return true;
+    if (continentOf(m) !== view.continent) return false;
+    if (view.level === 1) return true;
+    if (m.country !== view.country) return false;
+    if (view.level === 2) return true;
+    return m.city === view.city;
+  });
+  const chips: { name: string; count: number; onPick: () => void }[] = [];
+  const centroid = (list: ConstellationMember[]) => ({
+    lat: list.reduce((a, m) => a + m.lat, 0) / list.length,
+    lng: list.reduce((a, m) => a + m.lng, 0) / list.length,
+  });
+  const narrow = () =>
+    typeof window !== "undefined" && window.innerWidth < 640;
+  const fly = (lat: number, lng: number, zoom: number, zoomOnly = false) => {
+    flyReq.current = { id: ++flyId.current, lat, lng, zoom, zoomOnly };
+  };
+  if (view.level === 0) {
+    Object.keys(CONTINENTS).forEach((c) => {
+      const list = members.filter((m) => continentOf(m) === c);
+      if (!list.length) return;
+      chips.push({
+        name: c,
+        count: list.length,
+        onPick: () => {
+          setView({ level: 1, continent: c });
+          fly(CONTINENTS[c].lat, CONTINENTS[c].lng, narrow() ? 380 : 300);
+        },
+      });
+    });
+  } else if (view.level === 1) {
+    const inCont = members.filter((m) => continentOf(m) === view.continent);
+    [...new Set(inCont.map((m) => m.country))].forEach((c) => {
+      const list = inCont.filter((m) => m.country === c);
+      const ct = centroid(list);
+      chips.push({
+        name: c,
+        count: list.length,
+        onPick: () => {
+          setView({ level: 2, continent: view.continent, country: c });
+          fly(ct.lat, ct.lng, narrow() ? 310 : 250);
+        },
+      });
+    });
+  } else if (view.level === 2) {
+    const inCountry = members.filter(
+      (m) => continentOf(m) === view.continent && m.country === view.country,
+    );
+    [...new Set(inCountry.map((m) => m.city))].forEach((c) => {
+      const list = inCountry.filter((m) => m.city === c);
+      const ct = centroid(list);
+      chips.push({
+        name: c,
+        count: list.length,
+        onPick: () => {
+          setView({
+            level: 3,
+            continent: view.continent,
+            country: view.country,
+            city: c,
+          });
+          fly(ct.lat, ct.lng, narrow() ? 270 : 225);
+        },
+      });
+    });
+  }
+  const goBack = () => {
+    if (view.level === 1) {
+      setView({ level: 0 });
+      const hostW = hostRef.current?.clientWidth ?? 0;
+      const hostH = hostRef.current?.clientHeight ?? 1;
+      fly(0, 0, hostW < hostH * 0.9 ? 480 : 310, true);
+    } else if (view.level === 2) {
+      setView({ level: 1, continent: view.continent });
+      const c = CONTINENTS[view.continent];
+      fly(c.lat, c.lng, narrow() ? 380 : 300);
+    } else if (view.level === 3) {
+      setView({ level: 2, continent: view.continent, country: view.country });
+      const list = members.filter(
+        (m) => continentOf(m) === view.continent && m.country === view.country,
+      );
+      const ct = centroid(list);
+      fly(ct.lat, ct.lng, narrow() ? 310 : 250);
+    }
+  };
+  const regionName =
+    view.level === 0
+      ? "across the earth"
+      : view.level === 1
+        ? `in ${view.continent}`
+        : view.level === 2
+          ? `in ${view.country}`
+          : `in ${view.city}`;
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -184,6 +371,10 @@ export default function ConstellationGlobe({
         g.fillRect(0, 0, 64, 64);
         return new THREE.CanvasTexture(c);
       })();
+      // soft round particles instead of hard squares when zoomed close
+      dustMat.map = starTex;
+      dustMat.alphaTest = 0.03;
+      dustMat.needsUpdate = true;
 
       // ---- the star-written headline ---------------------------------
       // THE CONSTELLATION is spelled in star particles; on scroll the
@@ -404,6 +595,7 @@ export default function ConstellationGlobe({
 
       const onDown = (e: PointerEvent) => {
         dragging = true;
+        flying = false;
         moved = 0;
         px = e.clientX;
         py = e.clientY;
@@ -420,7 +612,10 @@ export default function ConstellationGlobe({
         vx = dx * 0.0045;
         vy = dy * 0.0045;
         globe.rotation.y += vx;
-        globe.rotation.x = Math.max(-0.9, Math.min(0.9, globe.rotation.x + vy));
+        globe.rotation.x = Math.max(
+          -1.35,
+          Math.min(1.35, globe.rotation.x + vy),
+        );
         lastTouch = performance.now();
       };
       const raycaster = new THREE.Raycaster();
@@ -485,6 +680,10 @@ export default function ConstellationGlobe({
       let lastArc = 0;
       let lastBuild = -1;
       let lastText = -1;
+      let flying = false;
+      let flyDone = 0;
+      let flyZ = zoom;
+      const flyQ = new THREE.Quaternion();
       const t0 = performance.now();
       const camDir = new THREE.Vector3();
       const wp = new THREE.Vector3();
@@ -577,12 +776,43 @@ export default function ConstellationGlobe({
         );
         ghost.material.opacity = reveal * (0.3 + 0.15 * Math.sin(now / 700));
 
+        // fly-to requests from the region drill-down
+        const fr = flyReq.current;
+        if (fr && fr.id !== flyDone) {
+          flyDone = fr.id;
+          flyZ = fr.zoom;
+          if (fr.zoomOnly) {
+            flyQ.copy(globe.quaternion);
+          } else {
+            const pv = new THREE.Vector3(...toXYZ(fr.lat, fr.lng)).normalize();
+            flyQ.setFromUnitVectors(pv, new THREE.Vector3(0, 0, 1));
+            // keep north pointing up after the arc
+            const nw = new THREE.Vector3(0, 1, 0).applyQuaternion(flyQ);
+            flyQ.premultiply(
+              new THREE.Quaternion().setFromAxisAngle(
+                new THREE.Vector3(0, 0, 1),
+                -Math.atan2(nw.x, nw.y),
+              ),
+            );
+          }
+          flying = true;
+          lastTouch = now;
+        }
+        if (flying) {
+          globe.quaternion.slerp(flyQ, 0.09);
+          zoom += (flyZ - zoom) * 0.09;
+          if (globe.quaternion.angleTo(flyQ) < 0.005 && Math.abs(flyZ - zoom) < 2) {
+            flying = false;
+          }
+          lastTouch = now;
+        }
+
         // idle spin and momentum
-        if (!dragging) {
+        if (!dragging && !flying) {
           globe.rotation.y += vx;
           globe.rotation.x = Math.max(
-            -0.9,
-            Math.min(0.9, globe.rotation.x + vy),
+            -1.35,
+            Math.min(1.35, globe.rotation.x + vy),
           );
           vx *= 0.94;
           vy *= 0.94;
@@ -732,6 +962,43 @@ export default function ConstellationGlobe({
           scroll to build the world
         </p>
 
+        {/* region drill-down: continent, country, city, each with its
+            count of creators serious about Jesus */}
+        {built && members.length > 0 ? (
+          <div className="pointer-events-none absolute inset-x-0 top-16 z-10 px-4 text-center">
+            <p className="font-display text-2xl font-bold text-white [text-shadow:0_0_12px_rgb(255_255_255/0.7),0_0_30px_rgb(167_139_250/0.6)]">
+              {inView.length}
+            </p>
+            <p className="meta-label mt-1 text-starlight/80">
+              creator{inView.length === 1 ? "" : "s"} serious about Jesus{" "}
+              {regionName}
+            </p>
+          </div>
+        ) : null}
+        {built && members.length > 0 && !selected ? (
+          <div className="absolute inset-x-0 bottom-6 z-10 flex flex-wrap items-center justify-center gap-2 px-4">
+            {view.level > 0 ? (
+              <button
+                type="button"
+                onClick={goBack}
+                className="meta-label rounded-full border border-ember/60 bg-night/70 px-4 py-2 text-starlight transition-colors hover:border-ember"
+              >
+                ← Back
+              </button>
+            ) : null}
+            {chips.map((c) => (
+              <button
+                key={c.name}
+                type="button"
+                onClick={c.onPick}
+                className="meta-label rounded-full border border-dust/30 bg-night/70 px-4 py-2 text-dust transition-colors hover:border-ember hover:text-starlight"
+              >
+                {c.name} · {c.count}
+              </button>
+            ))}
+          </div>
+        ) : null}
+
         {/* thread between a chosen star and its card */}
         <svg
           aria-hidden="true"
@@ -769,11 +1036,11 @@ export default function ConstellationGlobe({
         ) : null}
 
         {/* constellation mode, once the world exists */}
-        {built && members.length > 1 ? (
+        {built && members.length > 1 && !selected ? (
           <button
             type="button"
             onClick={() => setLinesOn((v) => !v)}
-            className={`meta-label absolute left-4 top-20 z-10 rounded-full border px-4 py-2 transition-colors ${
+            className={`meta-label absolute bottom-[4.6rem] left-1/2 z-10 -translate-x-1/2 rounded-full border px-4 py-2 transition-colors ${
               linesOn
                 ? "border-ember bg-ember/20 text-starlight"
                 : "border-dust/30 bg-night/60 text-dust hover:text-starlight"
