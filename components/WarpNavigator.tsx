@@ -9,9 +9,9 @@ import { usePathname, useRouter } from "next/navigation";
 // a frozen black hold; the page itself falls away into the jump and the
 // new one decelerates in. Reduced motion users navigate normally.
 
-const PUSH_DELAY_MS = 200; // page is sucked away under the streaks before swap
-const OUT_MS = 380; // acceleration ramp
-const MIN_JUMP_MS = 560; // shortest full jump even on instant loads
+const PUSH_DELAY_MS = 300; // page has faded into the field before swap
+const OUT_MS = 560; // stars appear at rest, then accelerate to light speed
+const MIN_JUMP_MS = 760; // shortest full jump even on instant loads
 const IN_MS = 400; // deceleration + reveal
 const BAIL_MS = 5000; // reveal anyway if a load hangs
 
@@ -67,13 +67,15 @@ export default function WarpNavigator() {
       flushSync(() => setActive(true));
       startField();
 
-      // the old page is sucked into the jump while the new one loads
+      // the old page fades out INTO the star field while it accelerates,
+      // gently pulled toward the center as it goes
       const main = document.getElementById("main");
       if (main) {
         main.style.transformOrigin = viewportOrigin(main);
-        main.style.transition = "opacity 220ms ease-in, transform 220ms ease-in";
+        main.style.transition =
+          "opacity 420ms cubic-bezier(0.4,0,0.8,1), transform 420ms cubic-bezier(0.55,0,1,1)";
         main.style.opacity = "0";
-        main.style.transform = "scale(0.86)";
+        main.style.transform = "scale(0.88)";
       }
       router.prefetch(path);
       window.setTimeout(() => router.push(href), PUSH_DELAY_MS);
@@ -143,11 +145,13 @@ export default function WarpNavigator() {
         finishNow();
         return;
       }
-      // speed: ease up over OUT_MS, hold, wind down on arrival
+      // speed: stars sit at rest first, then ease up to light speed
       const up = easeInOut(Math.min(1, t / OUT_MS));
-      const speed = (0.3 + 5 * up) * (1 - inT * 0.85);
-      // darkness eases in instead of slamming
-      const dark = 0.85 * up * (1 - inT);
+      const speed = (0.02 + 5.5 * up * up) * (1 - inT * 0.85);
+      // stars materialize quickly; darkness waits, then eases in
+      const aIn = Math.min(1, t / 140);
+      const dark =
+        0.85 * Math.min(1, Math.max(0, (t - 200) / (OUT_MS - 200))) * (1 - inT);
 
       ctx.clearRect(0, 0, w, h);
       ctx.globalAlpha = dark;
@@ -162,10 +166,12 @@ export default function WarpNavigator() {
         const px = w / 2 + (s.x / s.z) * scale;
         const py = h / 2 + (s.y / s.z) * scale;
         const stretch = Math.min(1, s.z + 0.03 + 0.42 * up * (1 - inT));
-        const bx = w / 2 + (s.x / stretch) * scale;
-        const by = h / 2 + (s.y / stretch) * scale;
+        // tails grow from nothing: a resting star is a dot, not a line
+        const tail = Math.min(1, up * 1.5);
+        const bx = px + (w / 2 + (s.x / stretch) * scale - px) * tail;
+        const by = py + (h / 2 + (s.y / stretch) * scale - py) * tail;
         const depth = 1 - s.z;
-        const a = (0.2 + 0.7 * depth) * (0.25 + 0.75 * up) * (1 - inT);
+        const a = (0.2 + 0.7 * depth) * (0.35 + 0.65 * up) * aIn * (1 - inT);
         // the brand's long exposure purple trails: violet glow body
         // with a bright near-white core riding it
         ctx.strokeStyle = `rgba(180,140,255,${(a * 0.8).toFixed(3)})`;

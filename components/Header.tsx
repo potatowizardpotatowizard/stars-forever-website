@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -10,13 +10,30 @@ import { NAV, SITE_NAME } from "@/content/site";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const [closing, setClosing] = useState(false);
+  const closeTimer = useRef(0);
   const pathname = usePathname();
+
+  // Navigating away: the menu fades out into the warp's star field
+  // instead of vanishing on a hard cut.
+  const closeSoft = () => {
+    if (closing) return;
+    setClosing(true);
+    closeTimer.current = window.setTimeout(() => {
+      setOpen(false);
+      setClosing(false);
+    }, 460);
+  };
 
   // Belt and braces: the menu is never left hanging over a freshly
   // loaded page, no matter how the navigation happened.
   useEffect(() => {
+    window.clearTimeout(closeTimer.current);
     setOpen(false);
+    setClosing(false);
   }, [pathname]);
+
+  useEffect(() => () => window.clearTimeout(closeTimer.current), []);
 
   // the page behind the open menu holds still
   useEffect(() => {
@@ -81,7 +98,9 @@ export default function Header() {
         <nav
           id="mobile-nav"
           aria-label="Main"
-          className="menu-overlay fixed inset-0 z-50 overflow-hidden lg:hidden"
+          className={`menu-overlay fixed inset-0 z-50 overflow-hidden transition-[opacity,transform] duration-[420ms] ease-in lg:hidden ${
+            closing ? "scale-[0.96] opacity-0" : ""
+          }`}
         >
           {/* the galaxy behind the menu: wandering nebulas and stars */}
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -97,7 +116,7 @@ export default function Header() {
               <Link
                 href="/"
                 className="flex items-center gap-2.5"
-                onClick={() => setOpen(false)}
+                onClick={closeSoft}
                 aria-label={`${SITE_NAME} home`}
               >
                 <Image
@@ -127,7 +146,7 @@ export default function Header() {
                 >
                   <Link
                     href={item.href}
-                    onClick={() => setOpen(false)}
+                    onClick={closeSoft}
                     aria-current={pathname === item.href ? "page" : undefined}
                     className={`group flex items-center gap-4 py-3 font-display text-3xl font-bold ${
                       pathname === item.href ? "text-ember" : "text-starlight"
