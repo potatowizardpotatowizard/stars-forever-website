@@ -23,6 +23,24 @@ export type JourneyItem =
 // moves the whole world each frame; items only change opacity.
 const SPACING = 900;
 const LEAD = 0;
+// extra depth of pure black after words or a route map, so there is
+// room to finish reading before the next photo drifts in normally
+const READ_GAP = 450;
+
+const zPositions = (items: JourneyItem[]) => {
+  const zs: number[] = [];
+  let z = 0;
+  items.forEach((item, i) => {
+    if (i > 0) {
+      const prev = items[i - 1];
+      z +=
+        SPACING +
+        (prev.kind !== "photo" && item.kind === "photo" ? READ_GAP : 0);
+    }
+    zs.push(z);
+  });
+  return zs;
+};
 
 // Outline drawings for route waypoints, keyed by stop name. Real map
 // outlines for geographic stops; symbolic line art for the rest.
@@ -200,7 +218,8 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
     let zCur = 0;
     let lastApplied = -1;
     const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
-    const maxZ = (items.length - 1) * SPACING + 100;
+    const zs = zPositions(items);
+    const maxZ = zs[zs.length - 1] + 100;
     // a continuous loop with easing: iOS only delivers sparse scroll
     // events during momentum, so the camera chases the scroll position
     // every frame instead of waiting for events
@@ -238,24 +257,17 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
           el.style.opacity = "0";
           return;
         }
-        const d = i * SPACING + LEAD - zCur;
+        const d = zs[i] + LEAD - zCur;
         // heavy fog: the focused plane owns the screen. photos may
         // ghost in the distance; text goes fully dark so words never
         // stack over words.
         const isBeat = items[i]?.kind !== "photo";
-        // photos right after words or a route map hold in pure black
-        // until the reading is done, so there is space to process
-        const afterText = !isBeat && i > 0 && items[i - 1]?.kind !== "photo";
         let op: number;
         if (d < -380) op = 0;
         else if (d < 0) op = 1 + d / 380;
         else if (isBeat) {
           if (d <= 350) op = 1;
           else if (d < 700) op = (700 - d) / 350;
-          else op = 0;
-        } else if (afterText) {
-          if (d <= 260) op = 1;
-          else if (d < 480) op = (480 - d) / 220;
           else op = 0;
         } else if (d < 260) op = 1;
         else if (d < 1300) op = 1 - ((d - 260) / 1040) * 0.94;
@@ -334,12 +346,15 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
     );
   }
 
+  const zs = zPositions(items);
   return (
     <div
       ref={wrapRef}
       id="journey-scene"
       className="relative"
-      style={{ height: `${items.length * 54 + 100}svh` }}
+      style={{
+        height: `${Math.round((zs[zs.length - 1] / SPACING) * 54) + 100}svh`,
+      }}
     >
       <div className="sticky top-0 h-svh overflow-hidden">
         <div ref={sceneRef} className="absolute inset-0">
@@ -358,7 +373,7 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
                 item.kind === "photo" && !item.tall
                   ? OFFSETS[i % OFFSETS.length]
                   : [0, 0];
-              const zi = i * SPACING + LEAD;
+              const zi = zs[i] + LEAD;
               return (
                 <div
                   key={i}
@@ -420,19 +435,21 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
                           // each label takes the opposite side of its
                           // drawing, leaning AWAY from the rising line so
                           // the line never slices through the words
-                          const iconAbove = si % 2 === 0;
-                          // the line arrives at the final stop from the
-                          // lower left, so its below-label sits deeper
-                          const labelY = iconAbove ? (last ? 54 : 36) : -30;
+                          // the line dives down-left into the final stop,
+                          // so its label must sit on top; the rest keep
+                          // alternating, counted back from the end
+                          const labelAbove = (n - 1 - si) % 2 === 0;
+                          const iconAbove = !labelAbove;
+                          const labelY = labelAbove ? -30 : 36;
                           const iconY = iconAbove ? -46 : 46;
-                          const labelX = first || last ? 0 : iconAbove ? 8 : -8;
+                          const labelX = first || last ? 0 : labelAbove ? -8 : 8;
                           const anchor = first
                             ? "start"
                             : last
                               ? "end"
-                              : iconAbove
-                                ? "start"
-                                : "end";
+                              : labelAbove
+                                ? "end"
+                                : "start";
                           const icon = ROUTE_ICONS[stop.toLowerCase()];
                           return (
                             <g
