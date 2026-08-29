@@ -24,6 +24,125 @@ export type JourneyItem =
 const SPACING = 900;
 const LEAD = 0;
 
+// Tiny outline drawings for route waypoints, keyed by stop name.
+// Single-stroke constellation style, each within a ~24px box.
+const ROUTE_ICONS: Record<string, React.ReactNode> = {
+  tokyo: (
+    // torii gate
+    <>
+      <path d="M-10 -7 Q0 -10 10 -7" />
+      <path d="M-8 -6.5 L-8 -4 M8 -6.5 L8 -4" />
+      <path d="M-7 -4 L7 -4" />
+      <path d="M-5.5 -4 L-6.5 8 M5.5 -4 L6.5 8" />
+    </>
+  ),
+  "rural japan": (
+    // mountains
+    <>
+      <path d="M-10 8 L-3 -6 L1 0 L5 -4 L10 8" />
+      <path d="M-5.5 -1 L-3 -6 L-0.5 -1" />
+    </>
+  ),
+  "ebisu circuit": (
+    // drift car
+    <>
+      <path d="M-9 3 Q-9 -1 -4 -2 L-2 -5 L4 -5 L6 -2 Q9 -1 9 3 Z" />
+      <circle cx="-5" cy="4" r="2" />
+      <circle cx="5" cy="4" r="2" />
+    </>
+  ),
+  california: (
+    // palm tree
+    <>
+      <path d="M0 8 Q1 1 0 -3" />
+      <path d="M0 -3 Q-5 -7 -9 -4" />
+      <path d="M0 -3 Q5 -7 9 -4" />
+      <path d="M0 -3 Q-2 -9 -6 -9" />
+      <path d="M0 -3 Q2 -9 6 -9" />
+    </>
+  ),
+  iceland: (
+    // glacier peaks
+    <>
+      <path d="M-10 8 L-4 -5 L0 -1 L4 -7 L10 8" />
+      <path d="M-5.5 -2 L-4 -5 L-2.5 -2 M2.7 -4.5 L4 -7 L5.3 -4.5" />
+    </>
+  ),
+  "the shared house": (
+    // house
+    <>
+      <path d="M-9 8 L-9 -2 L0 -9 L9 -2 L9 8 Z" />
+      <path d="M-2 8 L-2 2 L2 2 L2 8" />
+    </>
+  ),
+  "the desert": (
+    // saguaro
+    <>
+      <path d="M0 8 L0 -8" />
+      <path d="M0 -1 Q-6 -1 -6 -7" />
+      <path d="M0 1 Q6 1 6 -4" />
+    </>
+  ),
+  "joshua tree": (
+    // joshua tree
+    <>
+      <path d="M0 8 L0 -1" />
+      <path d="M0 -1 L-6 -6 M-6 -6 L-9 -4 M-6 -6 L-7 -9" />
+      <path d="M0 -1 L5 -5 M5 -5 L8 -3 M5 -5 L5 -9" />
+    </>
+  ),
+  "las vegas": (
+    // dice
+    <>
+      <rect x="-8" y="-8" width="16" height="16" rx="3" />
+      <circle cx="-3.5" cy="-3.5" r="1.1" fill="currentColor" stroke="none" />
+      <circle cx="0" cy="0" r="1.1" fill="currentColor" stroke="none" />
+      <circle cx="3.5" cy="3.5" r="1.1" fill="currentColor" stroke="none" />
+    </>
+  ),
+  toronto: (
+    // cn tower
+    <>
+      <path d="M0 -10 L0 -6 M-1.5 -6 L1.5 -6" />
+      <path d="M-4 -3.5 Q0 -6 4 -3.5 Q0 -1 -4 -3.5" />
+      <path d="M-1.5 -2 L-3 8 M1.5 -2 L3 8" />
+      <path d="M-3 8 L3 8" />
+    </>
+  ),
+  panama: (
+    // palm island
+    <>
+      <path d="M-10 8 Q0 4 10 8" />
+      <path d="M0 6 Q1 1 0 -3" />
+      <path d="M0 -3 Q-5 -6 -8 -3" />
+      <path d="M0 -3 Q5 -6 8 -3" />
+      <path d="M0 -3 Q-1 -9 -5 -9" />
+    </>
+  ),
+  "beast games": (
+    // trophy
+    <>
+      <path d="M-5 -8 L5 -8 L4.4 -1 Q4 3 0 3 Q-4 3 -4.4 -1 Z" />
+      <path d="M-5 -7 Q-9 -6 -4.6 -2 M5 -7 Q9 -6 4.6 -2" />
+      <path d="M0 3 L0 6 M-4 8 L4 8 M-4 8 Q0 6 4 8" />
+    </>
+  ),
+  "the island": (
+    // island with palm
+    <>
+      <path d="M-10 8 Q0 4 10 8" />
+      <path d="M0 6 Q1 1 0 -3" />
+      <path d="M0 -3 Q-5 -6 -8 -3" />
+      <path d="M0 -3 Q5 -6 8 -3" />
+      <path d="M0 -3 Q1 -9 5 -9" />
+    </>
+  ),
+  "stars forever": (
+    // the brand's four point star
+    <path d="M0 -10 Q1.6 -1.6 10 0 Q1.6 1.6 0 10 Q-1.6 1.6 -10 0 Q-1.6 -1.6 0 -10 Z" />
+  ),
+};
+
 // deterministic scatter, gentle enough that planes never block the
 // one behind them completely
 const OFFSETS: [number, number][] = [
@@ -284,6 +403,8 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
                           const first = si === 0;
                           const last = si === n - 1;
                           const labelY = first ? 30 : last ? -28 : si % 2 === 1 ? 34 : -24;
+                          const icon = ROUTE_ICONS[stop.toLowerCase()];
+                          const iconY = labelY > 0 ? labelY + 22 : labelY - 26;
                           return (
                             <g
                               key={stop}
@@ -308,6 +429,20 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
                               >
                                 {stop.toUpperCase()}
                               </text>
+                              {icon ? (
+                                <g
+                                  transform={`translate(0 ${iconY})`}
+                                  stroke="rgba(199,191,222,0.85)"
+                                  strokeWidth="1.1"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  fill="none"
+                                  color="rgba(199,191,222,0.85)"
+                                  style={{ filter: "drop-shadow(0 0 4px rgba(180,140,255,0.5))" }}
+                                >
+                                  {icon}
+                                </g>
+                              ) : null}
                             </g>
                           );
                         })}
