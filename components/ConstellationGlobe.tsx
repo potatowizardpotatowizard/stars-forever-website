@@ -106,7 +106,7 @@ type View =
   | { level: 0 }
   | { level: 1; continent: string }
   | { level: 2; continent: string; country: string }
-  | { level: 3; continent: string; country: string; city: string };
+  | { level: 3; continent: string; country: string; state: string };
 
 type FlyReq = {
   id: number;
@@ -142,7 +142,7 @@ export default function ConstellationGlobe({
 
   const seen = new Set<string>();
   const members = [...CONSTELLATION.members, ...notionMembers].filter((m) => {
-    const key = `${m.name}|${m.city}`.toLowerCase();
+    const key = `${m.name}|${m.state}`.toLowerCase();
     if (seen.has(key)) return false;
     seen.add(key);
     return true;
@@ -161,7 +161,7 @@ export default function ConstellationGlobe({
     if (view.level === 1) return true;
     if (m.country !== view.country) return false;
     if (view.level === 2) return true;
-    return m.city === view.city;
+    return m.state === view.state;
   });
   const chips: { name: string; count: number; onPick: () => void }[] = [];
   const centroid = (list: ConstellationMember[]) => ({
@@ -204,8 +204,8 @@ export default function ConstellationGlobe({
     const inCountry = members.filter(
       (m) => continentOf(m) === view.continent && m.country === view.country,
     );
-    [...new Set(inCountry.map((m) => m.city))].forEach((c) => {
-      const list = inCountry.filter((m) => m.city === c);
+    [...new Set(inCountry.map((m) => m.state))].forEach((c) => {
+      const list = inCountry.filter((m) => m.state === c);
       const ct = centroid(list);
       chips.push({
         name: c,
@@ -215,7 +215,7 @@ export default function ConstellationGlobe({
             level: 3,
             continent: view.continent,
             country: view.country,
-            city: c,
+            state: c,
           });
           fly(ct.lat, ct.lng, narrow() ? 270 : 225);
         },
@@ -248,7 +248,34 @@ export default function ConstellationGlobe({
         ? `in ${view.continent}`
         : view.level === 2
           ? `in ${view.country}`
-          : `in ${view.city}`;
+          : `in ${view.state}`;
+  const backLabel =
+    view.level === 1
+      ? "Earth"
+      : view.level === 2
+        ? view.continent
+        : view.level === 3
+          ? view.country
+          : "";
+  const prompt =
+    view.level === 0
+      ? "tap a continent to fly in"
+      : view.level === 1
+        ? "tap a country to go deeper"
+        : view.level === 2
+          ? "tap a state to land"
+          : "you have landed";
+  const crumbs =
+    view.level === 0
+      ? ""
+      : [
+          "Earth",
+          view.continent,
+          view.level === 2 || view.level === 3 ? view.country : "",
+          view.level === 3 ? view.state : "",
+        ]
+          .filter(Boolean)
+          .join(" → ");
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -371,8 +398,21 @@ export default function ConstellationGlobe({
         g.fillRect(0, 0, 64, 64);
         return new THREE.CanvasTexture(c);
       })();
-      // soft round particles instead of hard squares when zoomed close
-      dustMat.map = starTex;
+      // soft round WHITE particles for the land: the member-star texture
+      // carries a purple halo that must not tint the continents
+      const dotTex = (() => {
+        const c = document.createElement("canvas");
+        c.width = c.height = 32;
+        const g = c.getContext("2d")!;
+        const grad = g.createRadialGradient(16, 16, 0, 16, 16, 16);
+        grad.addColorStop(0, "rgba(255,255,255,1)");
+        grad.addColorStop(0.5, "rgba(255,255,255,0.9)");
+        grad.addColorStop(1, "rgba(255,255,255,0)");
+        g.fillStyle = grad;
+        g.fillRect(0, 0, 32, 32);
+        return new THREE.CanvasTexture(c);
+      })();
+      dustMat.map = dotTex;
       dustMat.alphaTest = 0.03;
       dustMat.needsUpdate = true;
 
@@ -681,6 +721,7 @@ export default function ConstellationGlobe({
       let lastBuild = -1;
       let lastText = -1;
       let flying = false;
+      let everBuilt = false;
       let flyDone = 0;
       let flyZ = zoom;
       const flyQ = new THREE.Quaternion();
@@ -733,7 +774,9 @@ export default function ConstellationGlobe({
           textMat.opacity = (0.25 + 0.75 * tie) * (1 - dse * 0.97);
         }
 
-        const build = clamp01((p - 0.3) / 0.42);
+        let build = clamp01((p - 0.3) / 0.42);
+        if (build >= 1) everBuilt = true;
+        if (everBuilt && p > 0.45) build = 1;
         const be = 1 - Math.pow(1 - build, 3);
         if (build !== lastBuild) {
           lastBuild = build;
@@ -973,29 +1016,37 @@ export default function ConstellationGlobe({
               creator{inView.length === 1 ? "" : "s"} serious about Jesus{" "}
               {regionName}
             </p>
+            {crumbs ? (
+              <p className="meta-label mt-2 text-[10px] text-dust">{crumbs}</p>
+            ) : null}
           </div>
         ) : null}
         {built && members.length > 0 && !selected ? (
-          <div className="absolute inset-x-0 bottom-6 z-10 flex flex-wrap items-center justify-center gap-2 px-4">
-            {view.level > 0 ? (
-              <button
-                type="button"
-                onClick={goBack}
-                className="meta-label rounded-full border border-ember/60 bg-night/70 px-4 py-2 text-starlight transition-colors hover:border-ember"
-              >
-                ← Back
-              </button>
-            ) : null}
-            {chips.map((c) => (
-              <button
-                key={c.name}
-                type="button"
-                onClick={c.onPick}
-                className="meta-label rounded-full border border-dust/30 bg-night/70 px-4 py-2 text-dust transition-colors hover:border-ember hover:text-starlight"
-              >
-                {c.name} · {c.count}
-              </button>
-            ))}
+          <div className="absolute inset-x-0 bottom-5 z-10 px-4">
+            <p className="meta-label mb-3 text-center text-white [text-shadow:0_0_10px_rgb(255_255_255/0.7),0_0_24px_rgb(167_139_250/0.6)]">
+              {prompt}
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-2">
+              {view.level > 0 ? (
+                <button
+                  type="button"
+                  onClick={goBack}
+                  className="meta-label rounded-full border border-ember bg-ember/15 px-4 py-2.5 text-starlight transition-colors hover:bg-ember/30"
+                >
+                  ← {backLabel}
+                </button>
+              ) : null}
+              {chips.map((c) => (
+                <button
+                  key={c.name}
+                  type="button"
+                  onClick={c.onPick}
+                  className="meta-label rounded-full border border-dust/40 bg-night/80 px-4 py-2.5 text-starlight transition-colors hover:border-ember"
+                >
+                  {c.name} <span className="text-ember">{c.count}</span>
+                </button>
+              ))}
+            </div>
           </div>
         ) : null}
 
@@ -1020,7 +1071,7 @@ export default function ConstellationGlobe({
           >
             <p className="font-display text-lg font-bold">{selected.name}</p>
             <p className="meta-label mt-1">
-              {selected.city}, {selected.country}
+              {selected.state}, {selected.country}
             </p>
             {selected.href ? (
               <a

@@ -5,7 +5,8 @@
 //
 // Notion is also the map's source of truth: rows whose Status is
 // "Accepted" become stars on the Constellation map, geocoded from
-// their city. Flipping the select in Notion is the whole workflow.
+// their state or region. Flipping the select in Notion is the whole
+// workflow. The City column holds the state/region value.
 //
 // Expected database properties:
 //   Name (title), Email (email), Channel (url), City (rich_text),
@@ -20,22 +21,22 @@ const NOTION_HEADERS = (token: string) => ({
 export type AcceptedMember = {
   name: string;
   href: string | null;
-  city: string;
+  state: string;
   country: string;
   lat: number;
   lng: number;
 };
 
-// City name to coordinates via the free Open-Meteo geocoder. Results
-// are cached for a day; a city that cannot be resolved is skipped
-// rather than mapped wrong.
+// Place name (state, region, or city) to coordinates via the free
+// Open-Meteo geocoder. Results are cached for a day; a place that
+// cannot be resolved is skipped rather than mapped wrong.
 async function geocode(
-  city: string,
+  place: string,
   country: string,
 ): Promise<{ lat: number; lng: number } | null> {
   try {
     const res = await fetch(
-      `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=5&language=en`,
+      `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(place)}&count=5&language=en`,
       { next: { revalidate: 86400 } },
     );
     if (!res.ok) return null;
@@ -92,17 +93,18 @@ export async function getAcceptedMembers(): Promise<AcceptedMember[]> {
     for (const row of data.results ?? []) {
       const p = row.properties ?? {};
       const name: string | undefined = p.Name?.title?.[0]?.plain_text?.trim();
-      const city: string | undefined =
+      // the City column carries the state/region value
+      const state: string | undefined =
         p.City?.rich_text?.[0]?.plain_text?.trim();
       const country: string =
         p.Country?.rich_text?.[0]?.plain_text?.trim() ?? "";
-      if (!name || !city) continue;
-      const geo = await geocode(city, country);
+      if (!name || !state) continue;
+      const geo = await geocode(state, country);
       if (!geo) continue;
       members.push({
         name,
         href: p.Channel?.url ?? null,
-        city,
+        state,
         country,
         lat: geo.lat,
         lng: geo.lng,
@@ -118,14 +120,14 @@ export async function addConstellationRequest({
   name,
   email,
   handle,
-  city,
+  state,
   country,
   note,
 }: {
   name: string;
   email: string;
   handle?: string;
-  city: string;
+  state: string;
   country?: string;
   note?: string;
 }): Promise<boolean> {
@@ -153,7 +155,8 @@ export async function addConstellationRequest({
               },
             }
           : {}),
-        City: text(city),
+        // the City column holds the state/region value
+        City: text(state),
         ...(country ? { Country: text(country) } : {}),
         ...(note ? { Note: text(note.slice(0, 1900)) } : {}),
         Status: { select: { name: "New" } },

@@ -21,7 +21,7 @@ export default function ConstellationForm() {
     name: "",
     email: "",
     handle: "",
-    city: "",
+    state: "",
     country: "",
     note: "",
     website: "", // honeypot
@@ -34,7 +34,7 @@ export default function ConstellationForm() {
   const canSubmit =
     form.name.trim().length > 1 &&
     form.email.includes("@") &&
-    form.city.trim().length > 1 &&
+    form.state.trim().length > 1 &&
     consent;
 
   const submit = async (e: React.FormEvent) => {
@@ -138,17 +138,17 @@ export default function ConstellationForm() {
           />
         </div>
         <div>
-          <label htmlFor="cn-city" className={label}>
-            City
+          <label htmlFor="cn-state" className={label}>
+            State / Region
           </label>
           <input
-            id="cn-city"
+            id="cn-state"
             type="text"
             required
             placeholder="Where your star belongs"
             className={field}
-            value={form.city}
-            onChange={set("city")}
+            value={form.state}
+            onChange={set("state")}
           />
         </div>
         <div>
@@ -197,8 +197,8 @@ export default function ConstellationForm() {
         />
         <span>
           I consent to appearing on the public Constellation map with my name,
-          my city, and a link to my public channel. Nothing else is shown, and
-          I can ask to be removed at any time.
+          my state, and a link to my public channel. Nothing else is shown,
+          and I can ask to be removed at any time.
         </span>
       </label>
       {error ? (

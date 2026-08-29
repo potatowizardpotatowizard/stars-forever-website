@@ -13,10 +13,10 @@ export async function POST(request: Request) {
   // Honeypot: real people never fill this field.
   if (body.website) return NextResponse.json({ sent: true });
 
-  const { name, email, handle, city, country, note, consent } = body;
-  if (!name?.trim() || !email?.includes("@") || !city?.trim()) {
+  const { name, email, handle, state, country, note, consent } = body;
+  if (!name?.trim() || !email?.includes("@") || !state?.trim()) {
     return NextResponse.json(
-      { error: "Name, a valid email, and your city are required." },
+      { error: "Name, a valid email, and your state are required." },
       { status: 400 },
     );
   }
@@ -33,7 +33,7 @@ export async function POST(request: Request) {
     `Name: ${name.trim()}`,
     `Email: ${email.trim()}`,
     `Channel: ${handle?.trim() || "not provided"}`,
-    `City: ${city.trim()}`,
+    `State: ${state.trim()}`,
     `Country: ${country?.trim() || "not provided"}`,
     `Consented to public map: yes`,
     ``,
@@ -42,7 +42,7 @@ export async function POST(request: Request) {
 
   const [sent, stored] = await Promise.all([
     sendMail({
-      subject: `Constellation request: ${name.trim()} (${city.trim()})`,
+      subject: `Constellation request: ${name.trim()} (${state.trim()})`,
       text,
       replyTo: email.trim(),
     }),
@@ -50,7 +50,7 @@ export async function POST(request: Request) {
       name: name.trim(),
       email: email.trim(),
       handle: handle?.trim() || undefined,
-      city: city.trim(),
+      state: state.trim(),
       country: country?.trim() || undefined,
       note: note?.trim() || undefined,
     }),

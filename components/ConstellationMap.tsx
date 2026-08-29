@@ -23,7 +23,7 @@ export default function ConstellationMap({
 }) {
   const seen = new Set<string>();
   const members = [...CONSTELLATION.members, ...notionMembers].filter((m) => {
-    const key = `${m.name}|${m.city}`.toLowerCase();
+    const key = `${m.name}|${m.state}`.toLowerCase();
     if (seen.has(key)) return false;
     seen.add(key);
     return true;
@@ -47,22 +47,22 @@ export default function ConstellationMap({
               <span className="block font-display text-sm font-bold">
                 {m.name}
               </span>
-              <span className="meta-label">{m.city}, {m.country}</span>
+              <span className="meta-label">{m.state}, {m.country}</span>
             </span>
           </span>
         );
         return m.href ? (
           <a
-            key={`${m.name}-${m.city}`}
+            key={`${m.name}-${m.state}`}
             href={m.href}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`${m.name} in ${m.city}, ${m.country}`}
+            aria-label={`${m.name} in ${m.state}, ${m.country}`}
           >
             {star}
           </a>
         ) : (
-          <span key={`${m.name}-${m.city}`}>{star}</span>
+          <span key={`${m.name}-${m.state}`}>{star}</span>
         );
       })}
       {members.length === 0 ? (
