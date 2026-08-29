@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import Image from "next/image";
 import ConstellationForm from "@/components/ConstellationForm";
-import ConstellationMap from "@/components/ConstellationMap";
+import ConstellationGlobe from "@/components/ConstellationGlobe";
 import SendStar from "@/components/SendStar";
 import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
@@ -51,7 +51,7 @@ export default async function ConstellationPage() {
       {/* The map */}
       <section className="mx-auto max-w-7xl px-5 pt-8 sm:px-8">
         <Reveal>
-          <ConstellationMap members={members} />
+          <ConstellationGlobe members={members} />
         </Reveal>
       </section>
 
