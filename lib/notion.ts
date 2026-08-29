@@ -84,7 +84,10 @@ export async function getAcceptedMembers(): Promise<AcceptedMember[]> {
           filter: { property: "Status", select: { equals: "Accepted" } },
           page_size: 100,
         }),
-        next: { revalidate: 300 },
+        // always ask Notion directly: the page's own revalidation is the
+        // rate limiter, and Vercel's fetch cache once pinned an empty
+        // result here across deployments
+        cache: "no-store",
       },
     );
     if (!res.ok) return [];
