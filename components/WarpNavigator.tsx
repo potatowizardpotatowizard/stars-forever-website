@@ -67,15 +67,12 @@ export default function WarpNavigator() {
       flushSync(() => setActive(true));
       startField();
 
-      // the old page fades out INTO the star field while it accelerates,
-      // gently pulled toward the center as it goes
+      // the old page fades out INTO the star field while it accelerates;
+      // no scaling on the way out, so its edges never show
       const main = document.getElementById("main");
       if (main) {
-        main.style.transformOrigin = viewportOrigin(main);
-        main.style.transition =
-          "opacity 420ms cubic-bezier(0.4,0,0.8,1), transform 420ms cubic-bezier(0.55,0,1,1)";
+        main.style.transition = "opacity 420ms cubic-bezier(0.4,0,0.8,1)";
         main.style.opacity = "0";
-        main.style.transform = "scale(0.88)";
       }
       router.prefetch(path);
       window.setTimeout(() => router.push(href), PUSH_DELAY_MS);
@@ -110,12 +107,19 @@ export default function WarpNavigator() {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     canvas.style.opacity = "1";
 
+    // The exact same sky as StarField: identical spawn ranges, speeds,
+    // projection, dot sizes, and tail lengths, so the warp IS the
+    // background stars accelerating rather than a different animation.
+    const FAR = 1.0;
+    const NEAR = 0.05;
     const scale = Math.min(w, h) * 0.5;
-    const stars = Array.from({ length: 150 }, () => ({
+    const stars = Array.from({ length: 170 }, () => ({
       x: Math.random() * 2 - 1,
       y: Math.random() * 2 - 1,
-      z: 0.08 + Math.random() * 0.92,
+      z: NEAR + Math.random() * (FAR - NEAR),
+      speed: 0.055 + Math.random() * 0.1,
     }));
+    let lastFrame = 0;
     const easeInOut = (t: number) =>
       t < 0.5 ? 2 * t * t : 1 - (1 - t) * (2 - 2 * t) * 0.5;
 
@@ -147,7 +151,6 @@ export default function WarpNavigator() {
       }
       // speed: stars sit at rest first, then ease up to light speed
       const up = easeInOut(Math.min(1, t / OUT_MS));
-      const speed = (0.02 + 5.5 * up * up) * (1 - inT * 0.85);
       // stars materialize quickly; darkness waits, then eases in
       const aIn = Math.min(1, t / 140);
       const dark =
@@ -158,35 +161,49 @@ export default function WarpNavigator() {
       ctx.fillStyle = "#07050c";
       ctx.fillRect(0, 0, w, h);
 
-      ctx.globalAlpha = 1;
+      const dt = lastFrame ? Math.min(0.05, (now - lastFrame) / 1000) : 0.016;
+      lastFrame = now;
+      // acceleration multiplier over the field's natural drift
+      const boost = 1 + 60 * up * up * (1 - inT * 0.85);
+      // tails lean purple as the field goes to light speed
+      const k = up * 0.75;
+      const tailColor = `${Math.round(239 - 59 * k)},${Math.round(236 - 96 * k)},${Math.round(247 + 8 * k)}`;
       ctx.lineCap = "round";
       for (const s of stars) {
-        s.z -= speed * 0.016 * s.z + 0.002;
-        if (s.z <= 0.02) s.z = 1;
+        s.z -= s.speed * boost * dt;
+        if (s.z <= NEAR) {
+          s.z = FAR;
+          s.x = Math.random() * 2 - 1;
+          s.y = Math.random() * 2 - 1;
+        }
         const px = w / 2 + (s.x / s.z) * scale;
         const py = h / 2 + (s.y / s.z) * scale;
-        const stretch = Math.min(1, s.z + 0.03 + 0.42 * up * (1 - inT));
-        // tails grow from nothing: a resting star is a dot, not a line
-        const tail = Math.min(1, up * 1.5);
-        const bx = px + (w / 2 + (s.x / stretch) * scale - px) * tail;
-        const by = py + (h / 2 + (s.y / stretch) * scale - py) * tail;
-        const depth = 1 - s.z;
-        const a = (0.2 + 0.7 * depth) * (0.35 + 0.65 * up) * aIn * (1 - inT);
-        // the brand's long exposure purple trails: violet glow body
-        // with a bright near-white core riding it
-        ctx.strokeStyle = `rgba(180,140,255,${(a * 0.8).toFixed(3)})`;
-        ctx.lineWidth = 1.5 + 2.8 * depth;
+        if (px < -40 || px > w + 40 || py < -40 || py > h + 40) {
+          s.z = FAR;
+          continue;
+        }
+        const depth = 1 - (s.z - NEAR) / (FAR - NEAR);
+        const alpha = (0.12 + 0.65 * depth * depth) * aIn * (1 - inT);
+        const radius = 0.3 + 1.2 * depth;
+        // same thin tails as the background field, reaching further
+        // back as the speed climbs
+        const zBack = s.z + (0.07 + 0.07 * depth) * (1 + 9 * up);
+        const bx = w / 2 + (s.x / zBack) * scale;
+        const by = h / 2 + (s.y / zBack) * scale;
+        ctx.globalAlpha = Math.min(1, alpha * (0.55 + 0.4 * up));
+        ctx.strokeStyle = `rgb(${tailColor})`;
+        ctx.lineWidth = Math.max(0.4, radius * 0.7);
         ctx.beginPath();
         ctx.moveTo(bx, by);
         ctx.lineTo(px, py);
         ctx.stroke();
-        ctx.strokeStyle = `rgba(244,240,255,${a.toFixed(3)})`;
-        ctx.lineWidth = 0.5 + 1.1 * depth;
+        ctx.globalAlpha = Math.min(1, alpha);
+        ctx.fillStyle = "#efecf7";
         ctx.beginPath();
-        ctx.moveTo(bx, by);
-        ctx.lineTo(px, py);
-        ctx.stroke();
+        ctx.arc(px, py, radius, 0, Math.PI * 2);
+        ctx.fill();
       }
+      ctx.globalAlpha = 1;
       raf.current = requestAnimationFrame(frame);
     };
     raf.current = requestAnimationFrame(frame);
