@@ -454,6 +454,10 @@ export const MISSIONS: Mission[] = [
               label: "Watch on YouTube",
               href: "https://youtu.be/HErdFjrQt1E?t=527",
             },
+            {
+              label: "Watch on Instagram",
+              href: "https://www.instagram.com/reel/DccJ1smhB1f/",
+            },
           ],
         },
         {
