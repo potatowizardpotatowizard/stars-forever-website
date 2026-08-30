@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import LazyVideo from "@/components/LazyVideo";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import Kicker from "@/components/Kicker";
@@ -259,17 +260,11 @@ export default function ProjectBurst({
             className="relative overflow-hidden rounded-xl border border-dust/30 shadow-[0_0_60px_rgb(109_40_217/0.3)]"
             style={{ width: "clamp(190px, 44vw, 540px)" }}
           >
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
+            <LazyVideo
+              src={videoSrc}
               poster={videoPoster}
               className="block aspect-[16/10] w-full object-cover"
-            >
-              <source src={videoSrc} type="video/mp4" />
-            </video>
+            />
             <div ref={labelRef} style={{ opacity: 0 }}>
               {cardLabel}
             </div>

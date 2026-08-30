@@ -408,7 +408,7 @@ export default function DesktopProjects({
                   muted
                   loop
                   playsInline
-                  preload="metadata"
+                  preload="none"
                   poster={firstProject.poster ?? undefined}
                   aria-label={firstProject.name}
                   className="aspect-[16/10] w-full object-cover"
@@ -457,7 +457,7 @@ export default function DesktopProjects({
                     muted
                     loop
                     playsInline
-                    preload="metadata"
+                    preload="none"
                     poster={p.poster ?? undefined}
                     aria-label={p.name}
                     className="aspect-[16/10] w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import LazyVideo from "@/components/LazyVideo";
 import Link from "next/link";
 import GlitchText from "@/components/GlitchText";
 import Cta from "@/components/Cta";
@@ -32,17 +33,11 @@ export default function CohortSpotlight() {
         <Reveal className="mx-auto mt-12 max-w-3xl md:mt-0 md:max-w-none">
           <Link href="/revolutionary" className="group relative block">
             <div className="relative overflow-hidden rounded-xl border border-dust/25">
-              <video
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
+              <LazyVideo
+                src="/brand/video/cohort-dusk.mp4"
                 poster="/images/joshua-hero.jpg"
                 className="block aspect-[16/10] w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-              >
-                <source src="/brand/video/cohort-dusk.mp4" type="video/mp4" />
-              </video>
+              />
               <div
                 aria-hidden="true"
                 className="absolute inset-0 bg-gradient-to-t from-night/85 via-night/10 to-transparent"
@@ -122,17 +117,11 @@ export default function CohortSpotlight() {
           </p>
           <figure className="mt-8 md:col-start-1 md:row-start-1 md:row-span-2 md:mt-0">
             <div className="relative overflow-hidden rounded-xl border border-dust/20 bg-soot">
-              <video
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
+              <LazyVideo
+                src="/brand/video/cohort-montage.mp4"
                 poster="/brand/poster-cohort-montage.jpg"
                 className="block aspect-video w-full object-cover"
-              >
-                <source src="/brand/video/cohort-montage.mp4" type="video/mp4" />
-              </video>
+              />
             </div>
             <figcaption className="meta-label mt-3 text-left">
               <span className="star-underline">scenes from the first cohort</span>
