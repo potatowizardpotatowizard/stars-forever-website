@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import LazyVideo from "@/components/LazyVideo";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import Cta from "@/components/Cta";
@@ -243,6 +244,7 @@ export default function DesktopProjects({
         firstLabel.style.opacity = smooth(clamp01((m - 0.75) / 0.25)).toFixed(3);
         first.style.pointerEvents = m > 0.6 ? "auto" : "none";
         // a freeze frame in the cloud; the film starts once it lands
+        if (sticky.clientWidth === 0) return; // hidden on mobile
         const vid = firstVideoRef.current;
         if (vid) {
           if (m > 0.55 && vid.paused) vid.play().catch(() => {});
@@ -452,18 +454,12 @@ export default function DesktopProjects({
                 style={{ opacity: 0 }}
               >
                 <div className="relative overflow-hidden rounded-xl border border-dust/25">
-                  <video
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    preload="none"
+                  <LazyVideo
+                    src={p.video}
                     poster={p.poster ?? undefined}
-                    aria-label={p.name}
+                    label={p.name}
                     className="aspect-[16/10] w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                  >
-                    <source src={p.video} type="video/mp4" />
-                  </video>
+                  />
                   <div
                     aria-hidden="true"
                     className="absolute inset-0 bg-gradient-to-t from-night/85 via-night/10 to-transparent"

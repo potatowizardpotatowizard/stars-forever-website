@@ -10,10 +10,12 @@ export default function LazyVideo({
   src,
   poster,
   className,
+  label,
 }: {
   src: string;
   poster?: string;
   className?: string;
+  label?: string;
 }) {
   const ref = useRef<HTMLVideoElement>(null);
 
@@ -46,6 +48,7 @@ export default function LazyVideo({
       playsInline
       preload="none"
       poster={poster}
+      aria-label={label}
       className={className}
     />
   );
