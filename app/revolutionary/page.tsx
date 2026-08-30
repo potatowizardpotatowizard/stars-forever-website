@@ -239,8 +239,21 @@ export default function RevolutionaryPage() {
       </section>
 
       {/* How to attend + CTA: invite only on the left, the waitlist on
-          the right, an arrow bridging the two on desktop */}
-      <section id="attend" className="mx-auto max-w-7xl px-5 pb-32 pt-4 sm:px-8">
+          the right, an arrow bridging the two on desktop. The green
+          star streaks behind it, flying its own direction. */}
+      <div className="relative">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 -bottom-[45svh] -top-[45svh] [mask-image:linear-gradient(to_bottom,transparent,black_40%,black_60%,transparent)]"
+          style={{
+            background: [
+              "radial-gradient(85% 24% at 34% 47%, rgb(238 255 246 / 0.5), rgb(150 235 190 / 0.24) 40%, transparent 68%)",
+              "radial-gradient(130% 46% at 58% 52%, rgb(22 138 96 / 0.42), rgb(8 66 46 / 0.2) 58%, transparent 80%)",
+              "linear-gradient(245deg, transparent 14%, rgb(16 122 87 / 0.3) 40%, rgb(60 180 130 / 0.34) 52%, rgb(16 122 87 / 0.26) 64%, transparent 86%)",
+            ].join(","),
+          }}
+        />
+      <section id="attend" className="relative mx-auto max-w-7xl px-5 pb-32 pt-4 sm:px-8">
         <Reveal className="mx-auto max-w-2xl text-center md:grid md:max-w-5xl md:grid-cols-2 md:items-center md:gap-16 md:text-left">
           <div>
           <Kicker>{REVOLUTIONARY.attend.kicker}</Kicker>
@@ -304,6 +317,7 @@ export default function RevolutionaryPage() {
           </div>
         </Reveal>
       </section>
+      </div>
     </article>
   );
 }
