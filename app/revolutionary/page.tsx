@@ -247,9 +247,9 @@ export default function RevolutionaryPage() {
           className="pointer-events-none absolute inset-x-0 -bottom-[45svh] -top-[45svh] [mask-image:linear-gradient(to_bottom,transparent,black_40%,black_60%,transparent)]"
           style={{
             background: [
-              "radial-gradient(85% 24% at 34% 47%, rgb(238 255 246 / 0.5), rgb(150 235 190 / 0.24) 40%, transparent 68%)",
-              "radial-gradient(130% 46% at 58% 52%, rgb(22 138 96 / 0.42), rgb(8 66 46 / 0.2) 58%, transparent 80%)",
-              "linear-gradient(245deg, transparent 14%, rgb(16 122 87 / 0.3) 40%, rgb(60 180 130 / 0.34) 52%, rgb(16 122 87 / 0.26) 64%, transparent 86%)",
+              "radial-gradient(85% 24% at 34% 47%, rgb(238 255 246 / 0.32), rgb(150 235 190 / 0.16) 40%, transparent 68%)",
+              "radial-gradient(130% 46% at 58% 52%, rgb(22 138 96 / 0.28), rgb(8 66 46 / 0.14) 58%, transparent 80%)",
+              "linear-gradient(245deg, transparent 14%, rgb(16 122 87 / 0.2) 40%, rgb(60 180 130 / 0.22) 52%, rgb(16 122 87 / 0.17) 64%, transparent 86%)",
             ].join(","),
           }}
         />
