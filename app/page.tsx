@@ -1,5 +1,4 @@
 import Image from "next/image";
-import PageAmbience from "@/components/PageAmbience";
 import ConstellationWhisper from "@/components/ConstellationWhisper";
 import Link from "next/link";
 import { linkCategory3 } from "@/components/Category3Link";
@@ -28,8 +27,7 @@ import {
 
 export default function HomePage() {
   return (
-    <div className="relative">
-      <PageAmbience rgb="109 40 217" centers={[32, 60, 90]} />
+    <>
       {/* A shooting star bridges the reframe line into the Tokyo Drift header */}
       <StarBridge />
 
@@ -92,7 +90,7 @@ export default function HomePage() {
       <div className="relative">
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 top-0 h-[60vh] bg-[linear-gradient(to_bottom,transparent_32%,rgb(109_40_217/0.26)_62%,rgb(109_40_217/0.08)_82%,transparent)]"
+          className="absolute inset-x-0 top-0 h-[50vh] bg-[linear-gradient(to_bottom,transparent,rgb(109_40_217/0.26)_30%,rgb(109_40_217/0.08)_62%,transparent)]"
         />
         <ProjectShowcase />
       </div>
@@ -369,6 +367,6 @@ export default function HomePage() {
           </Reveal>
         </div>
       </section>
-    </div>
+    </>
   );
 }

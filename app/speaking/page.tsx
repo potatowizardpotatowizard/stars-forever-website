@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import PageAmbience from "@/components/PageAmbience";
 import Image from "next/image";
 import Link from "next/link";
 import Cta from "@/components/Cta";
@@ -20,8 +19,7 @@ export const metadata: Metadata = {
 
 export default function SpeakingPage() {
   return (
-    <article className="relative">
-      <PageAmbience rgb="109 40 217" />
+    <article>
       <header className="relative overflow-hidden">
         <Image
           src="/brand/bg-blue.jpg"

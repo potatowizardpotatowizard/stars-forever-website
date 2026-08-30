@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import PageAmbience from "@/components/PageAmbience";
 import { linkCategory3 } from "@/components/Category3Link";
 import Image from "next/image";
 import Link from "next/link";
@@ -25,8 +24,7 @@ export default function GetInvolvedPage() {
     `mailto:${CONTACT.primaryEmail}?subject=${encodeURIComponent(give.donate.subject)}`;
 
   return (
-    <article className="relative">
-      <PageAmbience rgb="194 65 12" />
+    <article>
       {/* Analog hero band: hero and the giving frame share one
           continuous canvas, the photo dissolving into open night */}
       <div className="relative overflow-hidden">
@@ -37,11 +35,11 @@ export default function GetInvolvedPage() {
           fill
           priority
           sizes="100vw"
-          className="object-cover opacity-50 brightness-90 [mask-image:linear-gradient(to_bottom,black_30%,transparent_72%)]"
+          className="object-cover opacity-50 brightness-90 [mask-image:linear-gradient(to_bottom,black_45%,transparent_96%)]"
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night/70 [mask-image:linear-gradient(to_bottom,black_30%,transparent_72%)]"
+          className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night/70 [mask-image:linear-gradient(to_bottom,black_45%,transparent_96%)]"
         />
         </div>
         <Grain />

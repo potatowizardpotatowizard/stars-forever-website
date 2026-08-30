@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import PageAmbience from "@/components/PageAmbience";
 import { linkCategory3 } from "@/components/Category3Link";
 import Image from "next/image";
 import Link from "next/link";
@@ -58,8 +57,7 @@ export default async function MissionPage({
   const heroPhoto = resolveSlot(mission.heroSlot);
 
   return (
-    <article className="relative">
-      <PageAmbience rgb="109 40 217" />
+    <article>
       {/* Full bleed hero: ambient video when provided, else photo or art */}
       <header className="relative flex min-h-[70svh] items-end overflow-hidden">
         {mission.heroVideo ? (

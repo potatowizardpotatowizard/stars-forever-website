@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import PageAmbience from "@/components/PageAmbience";
 import Link from "next/link";
 import GlitchText from "@/components/GlitchText";
 import JourneyScene, { type JourneyItem } from "@/components/JourneyScene";
@@ -52,8 +51,7 @@ export default function StoryPage() {
   ];
 
   return (
-    <article className="relative">
-      <PageAmbience rgb="34 30 121" />
+    <article>
       <JourneyScene items={items} />
       <JourneyThread />
 
