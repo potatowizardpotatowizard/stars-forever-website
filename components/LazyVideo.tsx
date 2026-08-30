@@ -33,7 +33,7 @@ export default function LazyVideo({
           io.disconnect();
         }
       },
-      { rootMargin: "80% 0px" },
+      { rootMargin: "35% 0px" },
     );
     io.observe(el);
     return () => io.disconnect();
