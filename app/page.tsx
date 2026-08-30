@@ -37,7 +37,7 @@ export default function HomePage() {
           glowing wordmark. The menu IS the navigation on this page. */}
       <section
         id="hero"
-        className="relative flex min-h-svh flex-col overflow-hidden"
+        className="relative flex min-h-svh flex-col overflow-hidden bg-night"
       >
         <Image
           src="/brand/bg-purple-hero.jpg"
@@ -45,18 +45,13 @@ export default function HomePage() {
           fill
           priority
           sizes="100vw"
-          className="object-cover [mask-image:linear-gradient(to_bottom,black_60%,transparent_97%)]"
+          className="object-cover"
         />
         <div
           aria-hidden="true"
           className="absolute inset-0 bg-[linear-gradient(to_bottom,rgb(7_5_12/0.6),rgb(7_5_12/0.3)_55%,rgb(7_5_12/0.75)_85%,var(--color-night))]"
         />
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 [mask-image:linear-gradient(to_bottom,black_70%,transparent_98%)]"
-        >
-          <StarField />
-        </div>
+        <StarField />
         <Grain />
 
         <h1 className="sr-only">
