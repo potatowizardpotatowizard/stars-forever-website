@@ -121,7 +121,7 @@ export default function ProjectBurst({
         // it settles onto the bottom edge of the frame, so the list
         // below continues in plain flow: the gap is a real margin, not
         // viewport math, and is identical in every browser chrome
-        const settle = smooth(clamp01((p - 0.5) / 0.5));
+        const settle = smooth(clamp01((p - 0.82) / 0.18));
         const extra = (vh - (0.53 * vh + centerBox.offsetHeight / 2)) * settle;
         centerEl.style.transform = `translate3d(0, ${extra.toFixed(1)}px, 0)`;
       }
