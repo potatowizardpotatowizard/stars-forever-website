@@ -66,7 +66,6 @@ export default function ProjectShowcase() {
         <DesktopProjects
           photos={BURST_PHOTOS}
           projects={desktopProjects}
-          kicker={MISSIONS_INDEX.kicker}
           heading="The Projects So Far"
           intro={MISSIONS_INDEX.intro}
         />
@@ -79,7 +78,6 @@ export default function ProjectShowcase() {
         photos={BURST_PHOTOS}
         videoSrc="/brand/video/real-treasure-hero-bg.mp4"
         videoPoster="/images/real-treasure-hero.jpg"
-        kicker={MISSIONS_INDEX.kicker}
         heading="The Projects So Far"
         intro={MISSIONS_INDEX.intro}
         project={{

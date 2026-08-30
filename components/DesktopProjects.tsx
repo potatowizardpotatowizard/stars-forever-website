@@ -41,13 +41,11 @@ type Meteor = { x: number; y: number; vx: number; vy: number; life: number };
 export default function DesktopProjects({
   photos,
   projects,
-  kicker,
   heading,
   intro,
 }: {
   photos: DesktopPhoto[];
   projects: DesktopProject[];
-  kicker: string;
   heading: string;
   intro: string;
 }) {

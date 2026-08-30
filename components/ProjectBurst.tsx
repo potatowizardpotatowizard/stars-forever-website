@@ -43,7 +43,6 @@ export default function ProjectBurst({
   photos,
   videoSrc,
   videoPoster,
-  kicker,
   heading,
   intro,
   project,
@@ -51,7 +50,6 @@ export default function ProjectBurst({
   photos: BurstPhoto[];
   videoSrc: string;
   videoPoster: string;
-  kicker: string;
   heading: string;
   intro: string;
   project: BurstProject;
