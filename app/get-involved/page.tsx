@@ -42,7 +42,7 @@ export default function GetInvolvedPage() {
         />
         </div>
         <header className="relative">
-        <span aria-hidden="true" className="hero-meteor" />
+        <span aria-hidden="true" className="hero-meteor opacity-75" />
         <div className="relative mx-auto max-w-7xl px-5 pb-20 pt-32 sm:px-8 sm:pt-44">
           <h1 className="font-display text-5xl font-bold sm:text-6xl">
             {GET_INVOLVED.title}
@@ -83,7 +83,7 @@ export default function GetInvolvedPage() {
         <section className="relative">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 top-[-14svh] h-[60vh] bg-[linear-gradient(to_bottom,transparent,rgb(194_65_12/0.08)_12%,rgb(194_65_12/0.21)_24%,rgb(194_65_12/0.28)_32%,rgb(194_65_12/0.19)_46%,rgb(194_65_12/0.1)_62%,rgb(194_65_12/0.04)_80%,transparent)]"
+          className="pointer-events-none absolute inset-x-0 top-0 h-[60vh] bg-[linear-gradient(to_bottom,transparent,rgb(194_65_12/0.08)_12%,rgb(194_65_12/0.21)_24%,rgb(194_65_12/0.28)_32%,rgb(194_65_12/0.19)_46%,rgb(194_65_12/0.1)_62%,rgb(194_65_12/0.04)_80%,transparent)]"
         />
         <div className="relative mx-auto max-w-7xl px-5 pt-12 sm:px-8">
           <Reveal className="max-w-2xl">
@@ -155,7 +155,7 @@ export default function GetInvolvedPage() {
       <section className="relative">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 -bottom-[55svh] -top-[55svh]"
+          className="pointer-events-none absolute inset-x-0 -bottom-[36svh] -top-[36svh]"
         >
           <Image
             src="/brand/bg-orange-comet.jpg"
