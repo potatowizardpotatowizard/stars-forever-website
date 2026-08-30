@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import LazyVideo from "@/components/LazyVideo";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 
 export type BurstPhoto = { src: string; alt: string };
@@ -43,6 +43,7 @@ export default function ProjectBurst({
   photos,
   videoSrc,
   videoPoster,
+  kicker,
   heading,
   intro,
   project,
@@ -50,6 +51,7 @@ export default function ProjectBurst({
   photos: BurstPhoto[];
   videoSrc: string;
   videoPoster: string;
+  kicker: string;
   heading: string;
   intro: string;
   project: BurstProject;
@@ -166,7 +168,8 @@ export default function ProjectBurst({
     return (
       <>
         <section className="mx-auto max-w-7xl px-5 pt-24 text-center sm:px-8 sm:pt-32">
-          <h2 className="font-display text-4xl font-bold sm:text-5xl">
+          <Kicker>{kicker}</Kicker>
+          <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
             {heading}
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-starlight/80">
@@ -195,13 +198,15 @@ export default function ProjectBurst({
   return (
     <div ref={wrapRef} className="relative" style={{ height: "170vh" }}>
       <div ref={stickyRef} className="sticky top-0 h-svh overflow-hidden">
+        <Grain />
 
         {/* the heading, above the collage on the same screen */}
         <div
           ref={headRef}
           className="absolute inset-x-0 top-0 z-30 px-5 pt-20 text-center will-change-transform sm:pt-24"
         >
-          <h2 className="font-display text-3xl font-bold sm:text-4xl">
+          <Kicker>{kicker}</Kicker>
+          <h2 className="mt-6 font-display text-3xl font-bold sm:text-4xl">
             {heading}
           </h2>
           <p className="mx-auto mt-4 max-w-lg text-base text-starlight/80 sm:max-w-xl sm:text-lg">
@@ -256,11 +261,17 @@ export default function ProjectBurst({
             className="relative overflow-hidden rounded-xl border border-dust/30 shadow-[0_0_60px_rgb(109_40_217/0.3)]"
             style={{ width: "clamp(190px, 44vw, 540px)" }}
           >
-            <LazyVideo
-              src={videoSrc}
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
               poster={videoPoster}
               className="block aspect-[16/10] w-full object-cover"
-            />
+            >
+              <source src={videoSrc} type="video/mp4" />
+            </video>
             <div ref={labelRef} style={{ opacity: 0 }}>
               {cardLabel}
             </div>

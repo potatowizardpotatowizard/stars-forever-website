@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import LazyVideo from "@/components/LazyVideo";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import Cta from "@/components/Cta";
+import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 
 export type DesktopPhoto = { src: string; alt: string };
@@ -41,11 +41,13 @@ type Meteor = { x: number; y: number; vx: number; vy: number; life: number };
 export default function DesktopProjects({
   photos,
   projects,
+  kicker,
   heading,
   intro,
 }: {
   photos: DesktopPhoto[];
   projects: DesktopProject[];
+  kicker: string;
   heading: string;
   intro: string;
 }) {
@@ -242,7 +244,6 @@ export default function DesktopProjects({
         firstLabel.style.opacity = smooth(clamp01((m - 0.75) / 0.25)).toFixed(3);
         first.style.pointerEvents = m > 0.6 ? "auto" : "none";
         // a freeze frame in the cloud; the film starts once it lands
-        if (sticky.clientWidth === 0) return; // hidden on mobile
         const vid = firstVideoRef.current;
         if (vid) {
           if (m > 0.55 && vid.paused) vid.play().catch(() => {});
@@ -291,7 +292,8 @@ export default function DesktopProjects({
     return (
       <>
         <section className="mx-auto max-w-7xl px-5 pt-24 text-center sm:px-8 sm:pt-32">
-          <h2 className="font-display text-5xl font-bold">{heading}</h2>
+          <Kicker>{kicker}</Kicker>
+          <h2 className="mt-6 font-display text-5xl font-bold">{heading}</h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-starlight/80">
             {intro}
           </p>
@@ -329,6 +331,7 @@ export default function DesktopProjects({
       style={{ height: wrapH ? `${wrapH}px` : "350vh" }}
     >
       <div ref={stickyRef} className="sticky top-0 h-svh overflow-hidden">
+        <Grain />
         <canvas
           ref={canvasRef}
           aria-hidden="true"
@@ -370,7 +373,8 @@ export default function DesktopProjects({
           ref={headRef}
           className="absolute inset-0 z-20 flex flex-col items-center justify-center px-8 text-center will-change-transform"
         >
-          <h2 className="max-w-4xl font-display text-6xl font-bold uppercase leading-[1.05] tracking-tight [text-shadow:0_2px_40px_rgb(4_4_8/0.8)] lg:text-7xl">
+          <Kicker>{kicker}</Kicker>
+          <h2 className="mt-8 max-w-4xl font-display text-6xl font-bold uppercase leading-[1.05] tracking-tight [text-shadow:0_2px_40px_rgb(4_4_8/0.8)] lg:text-7xl">
             {heading}
           </h2>
           <p className="mt-8 max-w-xl text-lg text-starlight/85 [text-shadow:0_1px_16px_rgb(4_4_8/0.9)]">
@@ -406,7 +410,7 @@ export default function DesktopProjects({
                   muted
                   loop
                   playsInline
-                  preload="none"
+                  preload="metadata"
                   poster={firstProject.poster ?? undefined}
                   aria-label={firstProject.name}
                   className="aspect-[16/10] w-full object-cover"
@@ -450,12 +454,18 @@ export default function DesktopProjects({
                 style={{ opacity: 0 }}
               >
                 <div className="relative overflow-hidden rounded-xl border border-dust/25">
-                  <LazyVideo
-                    src={p.video}
+                  <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
                     poster={p.poster ?? undefined}
-                    label={p.name}
+                    aria-label={p.name}
                     className="aspect-[16/10] w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                  />
+                  >
+                    <source src={p.video} type="video/mp4" />
+                  </video>
                   <div
                     aria-hidden="true"
                     className="absolute inset-0 bg-gradient-to-t from-night/85 via-night/10 to-transparent"

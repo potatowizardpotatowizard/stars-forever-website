@@ -1,5 +1,4 @@
 import Image from "next/image";
-import LazyVideo from "@/components/LazyVideo";
 import Link from "next/link";
 import DesktopProjects from "@/components/DesktopProjects";
 import ProjectBurst from "@/components/ProjectBurst";
@@ -66,6 +65,7 @@ export default function ProjectShowcase() {
         <DesktopProjects
           photos={BURST_PHOTOS}
           projects={desktopProjects}
+          kicker={MISSIONS_INDEX.kicker}
           heading="The Projects So Far"
           intro={MISSIONS_INDEX.intro}
         />
@@ -78,6 +78,7 @@ export default function ProjectShowcase() {
         photos={BURST_PHOTOS}
         videoSrc="/brand/video/real-treasure-hero-bg.mp4"
         videoPoster="/images/real-treasure-hero.jpg"
+        kicker={MISSIONS_INDEX.kicker}
         heading="The Projects So Far"
         intro={MISSIONS_INDEX.intro}
         project={{
@@ -96,12 +97,18 @@ export default function ProjectShowcase() {
             >
               <div className="relative overflow-hidden rounded-xl border border-dust/25">
                 {p.video ? (
-                  <LazyVideo
-                    src={p.video}
+                  <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
                     poster={p.src ?? undefined}
-                    label={p.alt}
+                    aria-label={p.alt}
                     className="aspect-[16/10] w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                  />
+                  >
+                    <source src={p.video} type="video/mp4" />
+                  </video>
                 ) : p.src ? (
                   <Image
                     src={p.src}
