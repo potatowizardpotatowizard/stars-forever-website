@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 export default function Category3Page() {
   return (
-    <article className="relative">
+    <article>
       <header className="relative overflow-hidden">
         <Image
           src="/brand/bg-black-meteor.jpg"
