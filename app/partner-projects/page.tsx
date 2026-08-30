@@ -114,50 +114,6 @@ export default function PartnerProjectsPage() {
             />
           </Reveal>
         </div>
-        {/* three purple meteorites racing from the video's corner
-            toward the top right of the page */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 hidden lg:block"
-        >
-          {[
-            { w: 200, right: 300, top: 120, delay: "0s", op: 0.95, dur: "1.3s" },
-            { w: 200, right: 185, top: 125, delay: "0.45s", op: 1, dur: "1s" },
-            { w: 200, right: 145, top: 230, delay: "0.9s", op: 0.95, dur: "1.3s" },
-          ].map((m) => (
-            <div
-              key={m.w}
-              className="absolute"
-              style={{
-                right: m.right,
-                top: m.top,
-                width: m.w,
-                opacity: m.op,
-                transform: "rotate(-52deg)",
-                transformOrigin: "100% 50%",
-              }}
-            >
-              <div
-                className="relative"
-                style={{ animation: `meteorite-jiggle ${m.dur} steps(14) ${m.delay} infinite` }}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/brand/fx-meteor-purple.webp"
-                  alt=""
-                  className="w-full"
-                />
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/brand/fx-meteor-purple.webp"
-                  alt=""
-                  className="absolute inset-0 w-full opacity-60 blur-md [animation:meteorite-flicker-soft_1.9s_steps(16)_infinite]"
-                  style={{ animationDelay: m.delay }}
-                />
-              </div>
-            </div>
-          ))}
-        </div>
         </section>
       </div>
 
