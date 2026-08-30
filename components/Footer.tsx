@@ -62,7 +62,7 @@ export default function Footer() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="transition-colors hover:text-ember"
+                    className="inline-block py-1.5 -my-1.5 transition-colors hover:text-ember"
                   >
                     {item.label}
                   </Link>
@@ -80,7 +80,7 @@ export default function Footer() {
               <li>
                 <a
                   href={`mailto:${CONTACT.primaryEmail}`}
-                  className="transition-colors hover:text-ember"
+                  className="inline-block py-1.5 -my-1.5 transition-colors hover:text-ember"
                 >
                   {CONTACT.primaryEmail}
                 </a>
@@ -90,7 +90,7 @@ export default function Footer() {
                   href={CONTACT.bookingUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="transition-colors hover:text-ember"
+                  className="inline-block py-1.5 -my-1.5 transition-colors hover:text-ember"
                 >
                   Book a Call
                 </a>
@@ -116,7 +116,7 @@ export default function Footer() {
                 <p className="mt-4 text-sm text-starlight/85">
                   <a
                     href="mailto:flixforauzi@gmail.com"
-                    className="transition-colors hover:text-ember"
+                    className="inline-block py-1.5 -my-1.5 transition-colors hover:text-ember"
                   >
                     flixforauzi@gmail.com
                   </a>
@@ -131,7 +131,7 @@ export default function Footer() {
                     href={s.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="transition-colors hover:text-ember"
+                    className="inline-block py-1.5 -my-1.5 transition-colors hover:text-ember"
                   >
                     {s.label}
                   </a>
