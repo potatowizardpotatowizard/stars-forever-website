@@ -116,7 +116,7 @@ export default function PartnerProjectsPage() {
       </div>
 
       {/* Success metrics */}
-      <section className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
+      <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
         <Reveal>
           <h2 className="font-display text-4xl font-bold sm:text-5xl">
             <GlitchText text="What Matters to Us" />

@@ -66,7 +66,7 @@ export default function ApplyPage() {
 
       {/* Proof: dreams that came through this exact form */}
       <section className="bg-[linear-gradient(to_bottom,transparent_0%,rgb(19_13_29/0.048)_10.0%,rgb(19_13_29/0.173)_20.0%,rgb(19_13_29/0.327)_30.0%,rgb(19_13_29/0.452)_40.0%,rgb(19_13_29/0.5)_50%,rgb(19_13_29/0.452)_60.0%,rgb(19_13_29/0.327)_70.0%,rgb(19_13_29/0.173)_80.0%,rgb(19_13_29/0.048)_90.0%,transparent_100%)]">
-        <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
+        <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
           <Kicker>Dreams that started right here</Kicker>
           <ProofParallax>
           <div className="mt-8 grid gap-10 md:grid-cols-3 md:gap-6">

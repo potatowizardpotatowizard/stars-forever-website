@@ -133,7 +133,7 @@ export default async function MissionPage({
         <div id="burning-question" className="mx-auto max-w-7xl px-5 pt-24 sm:px-8">
           <Reveal className="mx-auto max-w-3xl text-center">
             <Kicker>The burning question</Kicker>
-            <p className="mt-8 font-display text-3xl leading-snug sm:text-4xl">
+            <p className="mt-6 font-display text-3xl leading-snug sm:text-4xl">
               {mission.burningQuestion}
             </p>
           </Reveal>

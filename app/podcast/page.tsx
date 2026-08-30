@@ -114,7 +114,7 @@ export default function PodcastPage() {
       </section>
 
       {/* Why it exists */}
-      <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-28">
+      <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
         <Reveal className="grid items-center gap-10 md:grid-cols-[16rem_1fr] md:gap-16">
           <Image
             src="/images/podcast-hat.jpg"
