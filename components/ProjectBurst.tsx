@@ -178,7 +178,7 @@ export default function ProjectBurst({
         </section>
         <section className="mx-auto max-w-5xl px-5 pt-14 sm:px-8">
           <Link href={project.href} className="group relative block">
-            <div className="relative overflow-hidden rounded-xl border border-dust/25">
+            <div className="relative overflow-hidden rounded-xl border border-dust/50">
               <Image
                 src={videoPoster}
                 alt={project.name}
@@ -258,7 +258,7 @@ export default function ProjectBurst({
         >
           <div
             ref={centerBoxRef}
-            className="relative overflow-hidden rounded-xl border border-dust/30 shadow-[0_0_60px_rgb(109_40_217/0.3)]"
+            className="relative overflow-hidden rounded-xl border border-dust/50 shadow-[0_0_60px_rgb(109_40_217/0.3)]"
             style={{ width: "clamp(190px, 44vw, 540px)" }}
           >
             <video

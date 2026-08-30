@@ -404,7 +404,7 @@ export default function DesktopProjects({
               className="group relative block w-[52vw] max-w-[900px] flex-none will-change-transform"
               style={{ pointerEvents: "none" }}
             >
-              <div className="relative overflow-hidden rounded-xl border border-dust/25 shadow-[0_10px_40px_rgb(0_0_0/0.55)]">
+              <div className="relative overflow-hidden rounded-xl border border-dust/50 shadow-[0_10px_40px_rgb(0_0_0/0.55)]">
                 <video
                   ref={firstVideoRef}
                   muted
@@ -453,7 +453,7 @@ export default function DesktopProjects({
                 className="group relative block w-[52vw] max-w-[900px] flex-none"
                 style={{ opacity: 0 }}
               >
-                <div className="relative overflow-hidden rounded-xl border border-dust/25">
+                <div className="relative overflow-hidden rounded-xl border border-dust/50">
                   <video
                     autoPlay
                     muted

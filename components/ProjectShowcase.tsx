@@ -95,7 +95,7 @@ export default function ProjectShowcase() {
               href={`/partner-projects/${p.slug}`}
               className="group relative block"
             >
-              <div className="relative overflow-hidden rounded-xl border border-dust/25">
+              <div className="relative overflow-hidden rounded-xl border border-dust/50">
                 {p.video ? (
                   <video
                     autoPlay
