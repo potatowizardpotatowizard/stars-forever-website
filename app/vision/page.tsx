@@ -250,7 +250,7 @@ export default function VisionPage() {
             <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
               <GlitchText text={VISION.dream.heading} />
             </h2>
-            <p className="mt-8 text-lg leading-relaxed text-starlight/85">
+            <p className="mt-8 max-w-2xl text-lg leading-relaxed text-starlight/85">
               {VISION.dream.body}
             </p>
           </Reveal>

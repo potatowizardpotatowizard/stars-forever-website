@@ -88,7 +88,7 @@ export default function GetInvolvedPage() {
           className="pointer-events-none absolute inset-x-0 top-[-14svh] h-[60vh] bg-[linear-gradient(to_bottom,transparent,rgb(194_65_12/0.28)_32%,rgb(194_65_12/0.1)_62%,transparent)]"
         />
         <div className="relative mx-auto max-w-7xl px-5 pt-12 sm:px-8">
-          <Reveal className="max-w-3xl">
+          <Reveal className="max-w-2xl">
             <Kicker>{give.frame.kicker}</Kicker>
             <h2 className="mt-6 font-display text-4xl font-bold leading-tight sm:text-5xl">
               {give.frame.heading}
@@ -274,7 +274,7 @@ export default function GetInvolvedPage() {
               <h3 className="font-display text-2xl font-bold transition-colors group-hover:text-ember">
                 Invite Us to Speak
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-starlight/75">
+              <p className="mt-2 max-w-lg text-sm leading-relaxed text-starlight/75">
                 For churches, conferences, and events. We are not pastors, but
                 we have shared Jesus in places most ministries never reach.
               </p>

@@ -194,7 +194,7 @@ export default function PartnerProjectsPage() {
                     +
                   </span>
                 </summary>
-                <p className="pb-8 leading-relaxed text-starlight/75">
+                <p className="max-w-xl pb-8 leading-relaxed text-starlight/75">
                   {item.answer}
                 </p>
               </details>
