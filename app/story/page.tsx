@@ -146,7 +146,7 @@ export default function StoryPage() {
       <section className="bg-gradient-to-b from-transparent via-soot/50 to-transparent">
         <div className="mx-auto max-w-7xl px-5 py-24 text-center sm:px-8">
           <Reveal>
-            <h2 className="mx-auto max-w-2xl font-display text-3xl sm:text-4xl">
+            <h2 className="mx-auto max-w-2xl font-display text-3xl font-bold sm:text-4xl">
               {STORY.give.heading}
             </h2>
             <p className="mx-auto mt-5 max-w-xl text-starlight/75">

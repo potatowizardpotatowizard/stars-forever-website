@@ -36,7 +36,7 @@ export default function Category3Page() {
         <Grain />
         <div className="relative mx-auto max-w-7xl px-5 pt-32 sm:px-8 sm:pt-44">
           <Kicker>{CATEGORY3.burningQuestion.kicker}</Kicker>
-          <h1 className="mt-8 max-w-4xl font-display text-3xl leading-tight sm:text-5xl sm:leading-tight">
+          <h1 className="mt-8 max-w-4xl font-display text-4xl leading-tight sm:text-5xl sm:leading-tight">
             {CATEGORY3.burningQuestion.heading}
           </h1>
           <p className="mt-8 max-w-2xl text-lg leading-relaxed text-starlight/80">

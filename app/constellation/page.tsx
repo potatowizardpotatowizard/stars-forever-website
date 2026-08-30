@@ -49,7 +49,7 @@ export default async function ConstellationPage() {
         <div className="mx-auto max-w-7xl px-5 py-24 text-center sm:px-8">
           <Reveal>
             <Kicker>{CONSTELLATION.form.kicker}</Kicker>
-            <h2 className="mx-auto mt-6 max-w-2xl font-display text-4xl font-bold">
+            <h2 className="mx-auto mt-6 max-w-2xl font-display text-4xl font-bold sm:text-5xl">
               {CONSTELLATION.form.heading}
             </h2>
             <p className="mx-auto mt-4 max-w-md text-starlight/70">

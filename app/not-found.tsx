@@ -17,7 +17,7 @@ export default function NotFound() {
           className="vhs-glow vhs-flicker mx-auto"
         />
         <p className="meta-label mt-10">Error 404</p>
-        <h1 className="mt-4 font-display text-4xl font-bold sm:text-5xl">
+        <h1 className="mt-4 font-display text-5xl font-bold sm:text-6xl">
           This page burned up on entry.
         </h1>
         <p className="mx-auto mt-5 max-w-md text-starlight/70">

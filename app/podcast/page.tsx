@@ -42,7 +42,7 @@ export default function PodcastPage() {
         <Grain />
         <div className="relative mx-auto max-w-7xl px-5 pb-20 pt-32 sm:px-8 sm:pt-44">
           <Kicker>{PODCAST.kicker}</Kicker>
-          <h1 className="mt-6 font-display text-5xl font-bold sm:text-7xl">
+          <h1 className="mt-6 font-display text-5xl font-bold sm:text-6xl">
             {PODCAST.title}
           </h1>
           <p className="mt-8 max-w-2xl font-display text-2xl leading-snug text-starlight/90 sm:text-3xl">

@@ -294,7 +294,7 @@ export default function GetInvolvedPage() {
         <div className="mx-auto max-w-7xl px-5 py-24 text-center sm:px-8">
           <Reveal>
             <Kicker>Contact</Kicker>
-            <h2 className="mx-auto mt-6 max-w-2xl font-display text-4xl font-bold">
+            <h2 className="mx-auto mt-6 max-w-2xl font-display text-4xl font-bold sm:text-5xl">
               <GlitchText text="Talk to a Human" />
             </h2>
             <p className="mx-auto mt-5 max-w-xl text-starlight/75">

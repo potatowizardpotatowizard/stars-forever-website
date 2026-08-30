@@ -49,7 +49,7 @@ export default function RevolutionaryPage() {
         <Grain />
         <header className="relative">
         <div className="relative mx-auto max-w-7xl px-5 pb-20 pt-32 sm:px-8 sm:pt-44">
-        <h1 className="font-display text-5xl sm:text-6xl">
+        <h1 className="font-display text-5xl font-bold sm:text-6xl">
           {REVOLUTIONARY.title}
         </h1>
         <p className="mt-8 max-w-3xl font-display text-2xl leading-snug text-starlight/90 sm:text-3xl">
@@ -131,7 +131,7 @@ export default function RevolutionaryPage() {
             showCaption={false}
           />
           <div>
-            <h2 className="font-display text-3xl">
+            <h2 className="font-display text-3xl font-bold sm:text-4xl">
               {REVOLUTIONARY.benPierce.name}
             </h2>
             <p className="mt-4 hidden leading-relaxed text-starlight/75 md:block">
@@ -257,7 +257,7 @@ export default function RevolutionaryPage() {
         <Reveal className="mx-auto max-w-2xl text-center md:grid md:max-w-5xl md:grid-cols-2 md:items-center md:gap-16 md:text-left">
           <div>
           <Kicker>{REVOLUTIONARY.attend.kicker}</Kicker>
-          <h2 className="mt-6 font-display text-4xl">
+          <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
             <GlitchText text={REVOLUTIONARY.attend.heading} />
           </h2>
           <p className="mt-6 leading-relaxed text-starlight/75">

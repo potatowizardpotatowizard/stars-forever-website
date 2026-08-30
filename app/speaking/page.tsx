@@ -57,7 +57,7 @@ export default function SpeakingPage() {
             {SPEAKING.opening.kicker}
           </p>
           <h1
-            className="hero-beat mt-6 font-display text-5xl sm:text-7xl"
+            className="hero-beat mt-6 font-display text-5xl font-bold sm:text-6xl"
             style={{ animationDelay: "0.4s" }}
           >
             {SPEAKING.opening.heading}
@@ -141,7 +141,7 @@ export default function SpeakingPage() {
                     className={i % 2 === 1 ? "md:order-2" : ""}
                   />
                   <div className="max-w-2xl">
-                    <h2 className="font-display text-4xl">{speaker.name}</h2>
+                    <h2 className="font-display text-4xl font-bold sm:text-5xl">{speaker.name}</h2>
                     <div className="mt-6 space-y-6">
                       {speaker.bio.map((p) => (
                         <p key={p} className="leading-relaxed text-starlight/80">

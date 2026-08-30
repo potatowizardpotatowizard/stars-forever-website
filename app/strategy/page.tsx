@@ -38,7 +38,7 @@ export default function StrategyPage() {
         <Grain />
         <div className="relative mx-auto max-w-6xl px-5 pb-20 pt-32 sm:px-8 sm:pt-44">
           <StratLabel>{STRATEGY.kicker}</StratLabel>
-          <h1 className="mt-8 max-w-3xl font-display text-5xl font-bold leading-[1.05] sm:text-7xl">
+          <h1 className="mt-8 max-w-3xl font-display text-5xl font-bold leading-[1.05] sm:text-6xl">
             {STRATEGY.heading}
           </h1>
           <p className="mt-8 max-w-xl text-lg leading-relaxed text-starlight/80">
