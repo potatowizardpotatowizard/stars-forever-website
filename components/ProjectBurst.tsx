@@ -118,12 +118,6 @@ export default function ProjectBurst({
         // the card label fades in over the last stretch of the growth
         label.style.opacity = clamp01((grow - 0.65) / 0.35).toFixed(3);
         centerEl.style.pointerEvents = grow > 0.6 ? "auto" : "none";
-        // it settles onto the bottom edge of the frame, so the list
-        // below continues in plain flow: the gap is a real margin, not
-        // viewport math, and is identical in every browser chrome
-        const settle = smooth(clamp01((p - 0.82) / 0.18));
-        const extra = (vh - (0.53 * vh + centerBox.offsetHeight / 2)) * settle;
-        centerEl.style.transform = `translate3d(0, ${extra.toFixed(1)}px, 0)`;
       }
     };
 
