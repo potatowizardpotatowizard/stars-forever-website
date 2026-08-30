@@ -6,7 +6,6 @@ import ProofParallax from "@/components/ProofParallax";
 import ApplyForm from "@/components/ApplyForm";
 import GalaxyHero from "@/components/GalaxyHero";
 import DreamStars from "@/components/DreamStars";
-import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import { CONTACT } from "@/content/site";
 
@@ -27,14 +26,13 @@ export default function ApplyPage() {
           fill
           priority
           sizes="100vw"
-          className="object-cover opacity-60 max-md:[mask-image:linear-gradient(to_bottom,black_55%,transparent_98%)]"
+          className="object-cover opacity-60 max-md:[mask-image:linear-gradient(to_bottom,black_55%,rgb(0_0_0/0.933)_61.7%,rgb(0_0_0/0.75)_68.3%,rgb(0_0_0/0.5)_75.0%,rgb(0_0_0/0.25)_81.7%,rgb(0_0_0/0.067)_88.3%,transparent_95.0%)]"
         />
         <GalaxyHero />
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/25 to-night max-md:[mask-image:linear-gradient(to_bottom,black_55%,transparent_98%)]"
+          className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/25 to-night max-md:[mask-image:linear-gradient(to_bottom,black_55%,rgb(0_0_0/0.933)_61.7%,rgb(0_0_0/0.75)_68.3%,rgb(0_0_0/0.5)_75.0%,rgb(0_0_0/0.25)_81.7%,rgb(0_0_0/0.067)_88.3%,transparent_95.0%)]"
         />
-        <Grain />
         <div className="relative mx-auto w-full max-w-7xl px-5 pb-16 pt-32 sm:px-8 md:pb-48 md:pt-44">
           <Kicker>Partner Project</Kicker>
           <h1 className="mt-6 font-display text-5xl font-bold sm:text-6xl">
@@ -67,7 +65,7 @@ export default function ApplyPage() {
       </section>
 
       {/* Proof: dreams that came through this exact form */}
-      <section className="bg-gradient-to-b from-transparent via-soot/50 to-transparent">
+      <section className="bg-[linear-gradient(to_bottom,transparent_0%,rgb(19_13_29/0.048)_10.0%,rgb(19_13_29/0.173)_20.0%,rgb(19_13_29/0.327)_30.0%,rgb(19_13_29/0.452)_40.0%,rgb(19_13_29/0.5)_50%,rgb(19_13_29/0.452)_60.0%,rgb(19_13_29/0.327)_70.0%,rgb(19_13_29/0.173)_80.0%,rgb(19_13_29/0.048)_90.0%,transparent_100%)]">
         <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
           <Kicker>Dreams that started right here</Kicker>
           <ProofParallax>

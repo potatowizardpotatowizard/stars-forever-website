@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 
 export type BurstPhoto = { src: string; alt: string };
@@ -198,7 +197,6 @@ export default function ProjectBurst({
   return (
     <div ref={wrapRef} className="relative" style={{ height: "170vh" }}>
       <div ref={stickyRef} className="sticky top-0 h-svh overflow-hidden">
-        <Grain />
 
         {/* the heading, above the collage on the same screen */}
         <div

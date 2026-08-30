@@ -3,7 +3,6 @@ import { linkCategory3 } from "@/components/Category3Link";
 import Image from "next/image";
 import Cta from "@/components/Cta";
 import GlitchText from "@/components/GlitchText";
-import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import Reveal from "@/components/Reveal";
 import { PODCAST } from "@/content/podcast";
@@ -33,13 +32,12 @@ export default function PodcastPage() {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-top opacity-45 [mask-image:linear-gradient(to_bottom,black_55%,transparent_97%)]"
+          className="object-cover object-top opacity-45 [mask-image:linear-gradient(to_bottom,black_55%,rgb(0_0_0/0.933)_61.5%,rgb(0_0_0/0.75)_68.0%,rgb(0_0_0/0.5)_74.5%,rgb(0_0_0/0.25)_81.0%,rgb(0_0_0/0.067)_87.5%,transparent_94.0%)]"
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-b from-night/50 via-night/30 to-night/70 [mask-image:linear-gradient(to_bottom,black_55%,transparent_97%)]"
+          className="absolute inset-0 bg-gradient-to-b from-night/50 via-night/30 to-night/70 [mask-image:linear-gradient(to_bottom,black_55%,rgb(0_0_0/0.933)_61.5%,rgb(0_0_0/0.75)_68.0%,rgb(0_0_0/0.5)_74.5%,rgb(0_0_0/0.25)_81.0%,rgb(0_0_0/0.067)_87.5%,transparent_94.0%)]"
         />
-        <Grain />
         <div className="relative mx-auto max-w-7xl px-5 pb-20 pt-32 sm:px-8 sm:pt-44">
           <Kicker>{PODCAST.kicker}</Kicker>
           <h1 className="mt-6 font-display text-5xl font-bold sm:text-6xl">

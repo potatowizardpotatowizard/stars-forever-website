@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import GlitchText from "@/components/GlitchText";
 import Cta from "@/components/Cta";
-import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import Reveal from "@/components/Reveal";
 import { MISSIONS } from "@/content/missions";
@@ -16,7 +15,6 @@ export default function CohortSpotlight() {
 
   return (
     <section className="relative overflow-hidden">
-      <Grain />
       <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
         <div className="md:grid md:grid-cols-[2fr_3fr] md:items-center md:gap-14">
         <Reveal className="text-center md:-translate-y-8 md:text-left">

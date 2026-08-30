@@ -6,7 +6,6 @@ import DigitalSky from "@/components/DigitalSky";
 import VisionClaimStrip from "@/components/VisionClaimStrip";
 import NicheCycler from "@/components/NicheCycler";
 import GlitchText from "@/components/GlitchText";
-import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
@@ -32,23 +31,22 @@ export default function VisionPage() {
             fill
             priority
             sizes="100vw"
-            className="object-cover opacity-55 brightness-90 [mask-image:linear-gradient(to_bottom,black_55%,transparent_97%)]"
+            className="object-cover opacity-55 brightness-90 [mask-image:linear-gradient(to_bottom,black_55%,rgb(0_0_0/0.933)_61.5%,rgb(0_0_0/0.75)_68.0%,rgb(0_0_0/0.5)_74.5%,rgb(0_0_0/0.25)_81.0%,rgb(0_0_0/0.067)_87.5%,transparent_94.0%)]"
           />
           <div
             aria-hidden="true"
-            className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night/70 [mask-image:linear-gradient(to_bottom,black_55%,transparent_97%)]"
+            className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night/70 [mask-image:linear-gradient(to_bottom,black_55%,rgb(0_0_0/0.933)_61.5%,rgb(0_0_0/0.75)_68.0%,rgb(0_0_0/0.5)_74.5%,rgb(0_0_0/0.25)_81.0%,rgb(0_0_0/0.067)_87.5%,transparent_94.0%)]"
           />
           {/* extra nebula breath over the hero, photo untouched */}
           <div
             aria-hidden="true"
-            className="absolute inset-0 [mask-image:linear-gradient(to_bottom,black_60%,transparent_97%)]"
+            className="absolute inset-0 [mask-image:linear-gradient(to_bottom,black_60%,rgb(0_0_0/0.933)_65.7%,rgb(0_0_0/0.75)_71.3%,rgb(0_0_0/0.5)_77.0%,rgb(0_0_0/0.25)_82.7%,rgb(0_0_0/0.067)_88.3%,transparent_94.0%)]"
             style={{
               backgroundImage:
                 "radial-gradient(ellipse 60% 55% at 12% 28%, rgb(109 40 217 / 0.2), transparent 70%), radial-gradient(ellipse 70% 60% at 86% 22%, rgb(34 197 94 / 0.16), transparent 72%), radial-gradient(ellipse 45% 40% at 55% 70%, rgb(139 92 246 / 0.12), transparent 70%)",
             }}
           />
         </div>
-        <Grain />
         <header className="relative">
         <div className="relative mx-auto w-full max-w-7xl px-5 pt-32 sm:px-8 sm:pt-44">
           <h1 className="max-w-4xl font-display text-5xl font-bold sm:text-6xl">
@@ -65,7 +63,7 @@ export default function VisionPage() {
         <section className="relative">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 top-[-14svh] h-[70vh] [mask-image:linear-gradient(to_bottom,transparent,black_30%,black_72%,transparent)]"
+          className="pointer-events-none absolute inset-x-0 top-[-14svh] h-[70vh] [mask-image:linear-gradient(to_bottom,transparent_4.0%,rgb(0_0_0/0.067)_8.3%,rgb(0_0_0/0.25)_12.7%,rgb(0_0_0/0.5)_17.0%,rgb(0_0_0/0.75)_21.3%,rgb(0_0_0/0.933)_25.7%,rgb(0_0_0/1.0)_30.0%,black_30%,black_72%,rgb(0_0_0/0.933)_75.8%,rgb(0_0_0/0.75)_79.7%,rgb(0_0_0/0.5)_83.5%,rgb(0_0_0/0.25)_87.3%,rgb(0_0_0/0.067)_91.2%,transparent_95.0%)]"
           style={{
             backgroundImage:
               "radial-gradient(ellipse 55% 60% at 10% 0%, rgb(109 40 217 / 0.22), transparent 68%), radial-gradient(ellipse 80% 65% at 78% 0%, rgb(34 197 94 / 0.26), transparent 72%)",
@@ -243,7 +241,6 @@ export default function VisionPage() {
 
       {/* The ten year dream, drawn in light */}
       <section className="relative overflow-hidden">
-        <Grain />
         <div className="relative mx-auto max-w-7xl px-5 pt-24 sm:px-8">
           <Reveal className="max-w-3xl">
             <Kicker>{VISION.dream.kicker}</Kicker>
@@ -264,7 +261,7 @@ export default function VisionPage() {
       </section>
 
       {/* Closing */}
-      <section className="bg-gradient-to-b from-transparent via-soot/50 to-transparent">
+      <section className="bg-[linear-gradient(to_bottom,transparent_0%,rgb(19_13_29/0.048)_10.0%,rgb(19_13_29/0.173)_20.0%,rgb(19_13_29/0.327)_30.0%,rgb(19_13_29/0.452)_40.0%,rgb(19_13_29/0.5)_50%,rgb(19_13_29/0.452)_60.0%,rgb(19_13_29/0.327)_70.0%,rgb(19_13_29/0.173)_80.0%,rgb(19_13_29/0.048)_90.0%,transparent_100%)]">
         <div className="mx-auto max-w-7xl px-5 py-24 text-center sm:px-8">
           <Reveal>
             <Image

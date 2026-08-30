@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import Cta from "@/components/Cta";
 import GlitchText from "@/components/GlitchText";
-import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
 import ProjectShowcase from "@/components/ProjectShowcase";
@@ -33,7 +32,7 @@ export default function PartnerProjectsPage() {
           fill
           priority
           sizes="100vw"
-          className="object-cover opacity-70 [mask-image:linear-gradient(to_bottom,black_45%,transparent_96%)]"
+          className="object-cover opacity-70 [mask-image:linear-gradient(to_bottom,black_45%,rgb(0_0_0/0.933)_53.0%,rgb(0_0_0/0.75)_61.0%,rgb(0_0_0/0.5)_69.0%,rgb(0_0_0/0.25)_77.0%,rgb(0_0_0/0.067)_85.0%,transparent_93.0%)]"
         />
         {/* the hero's meteor again as a living overlay: it breathes,
             glows, and jiggles forward over its printed self */}
@@ -56,10 +55,9 @@ export default function PartnerProjectsPage() {
         </div>
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night/70 [mask-image:linear-gradient(to_bottom,black_45%,transparent_96%)]"
+          className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night/70 [mask-image:linear-gradient(to_bottom,black_45%,rgb(0_0_0/0.933)_53.0%,rgb(0_0_0/0.75)_61.0%,rgb(0_0_0/0.5)_69.0%,rgb(0_0_0/0.25)_77.0%,rgb(0_0_0/0.067)_85.0%,transparent_93.0%)]"
         />
         </div>
-        <Grain />
         <header className="relative">
         <div className="relative mx-auto max-w-7xl px-5 pb-20 pt-32 sm:px-8 sm:pt-44">
           <h1 className="font-display text-5xl font-bold sm:text-6xl">
@@ -142,8 +140,7 @@ export default function PartnerProjectsPage() {
       </section>
 
       {/* The process */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-transparent via-soot/50 to-transparent">
-        <Grain />
+      <section className="relative overflow-hidden bg-[linear-gradient(to_bottom,transparent_0%,rgb(19_13_29/0.048)_10.0%,rgb(19_13_29/0.173)_20.0%,rgb(19_13_29/0.327)_30.0%,rgb(19_13_29/0.452)_40.0%,rgb(19_13_29/0.5)_50%,rgb(19_13_29/0.452)_60.0%,rgb(19_13_29/0.327)_70.0%,rgb(19_13_29/0.173)_80.0%,rgb(19_13_29/0.048)_90.0%,transparent_100%)]">
         <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
           <Reveal>
             <Kicker>{PARTNER.process.kicker}</Kicker>
@@ -171,7 +168,7 @@ export default function PartnerProjectsPage() {
       <ProjectShowcase />
 
       {/* FAQ */}
-      <section className="bg-gradient-to-b from-transparent via-soot/50 to-transparent">
+      <section className="bg-[linear-gradient(to_bottom,transparent_0%,rgb(19_13_29/0.048)_10.0%,rgb(19_13_29/0.173)_20.0%,rgb(19_13_29/0.327)_30.0%,rgb(19_13_29/0.452)_40.0%,rgb(19_13_29/0.5)_50%,rgb(19_13_29/0.452)_60.0%,rgb(19_13_29/0.327)_70.0%,rgb(19_13_29/0.173)_80.0%,rgb(19_13_29/0.048)_90.0%,transparent_100%)]">
         <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
           <Reveal>
             <Kicker>{PARTNER.faq.kicker}</Kicker>

@@ -5,7 +5,6 @@ import { linkCategory3 } from "@/components/Category3Link";
 import Cta from "@/components/Cta";
 import GlitchText from "@/components/GlitchText";
 import HeroStarLogo from "@/components/HeroStarLogo";
-import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
 import MissionIntro from "@/components/MissionIntro";
@@ -47,10 +46,9 @@ export default function HomePage() {
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-[linear-gradient(to_bottom,rgb(7_5_12/0.6),rgb(7_5_12/0.3)_55%,rgb(7_5_12/0.75)_85%,var(--color-night))]"
+          className="absolute inset-0 bg-[linear-gradient(to_bottom,rgb(7_5_12/0.6),rgb(7_5_12/0.44)_38%,rgb(7_5_12/0.3)_55%,rgb(7_5_12/0.44)_68%,rgb(7_5_12/0.62)_78%,rgb(7_5_12/0.82)_87%,rgb(7_5_12/0.95)_93%,var(--color-night)_97%)]"
         />
         <StarField />
-        <Grain />
 
         <h1 className="sr-only">
           {SITE_NAME}: a ministry for creators, artists, and entrepreneurs
@@ -97,7 +95,6 @@ export default function HomePage() {
 
       {/* Two minute explainer */}
       <section className="relative overflow-hidden">
-        <Grain />
         <div className="relative mx-auto max-w-7xl px-5 pb-10 pt-20 sm:px-8 sm:pb-12 sm:pt-24">
           <Reveal className="max-w-3xl md:max-w-none">
             <div className="md:grid md:grid-cols-[2fr_3fr] md:items-center md:gap-14">
@@ -138,7 +135,6 @@ export default function HomePage() {
 
       {/* Anchor verse and the reframe */}
       <section className="relative overflow-hidden">
-        <Grain />
         <div className="relative mx-auto max-w-7xl px-5 pb-24 pt-10 sm:px-8 sm:pb-28 sm:pt-12">
           <Reveal className="max-w-3xl md:hidden">
             <blockquote>
@@ -191,8 +187,7 @@ export default function HomePage() {
       </section>
 
       {/* Featured: the Tokyo Drift video */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-transparent via-soot/50 to-transparent">
-        <Grain />
+      <section className="relative overflow-hidden bg-[linear-gradient(to_bottom,transparent_0%,rgb(19_13_29/0.048)_10.0%,rgb(19_13_29/0.173)_20.0%,rgb(19_13_29/0.327)_30.0%,rgb(19_13_29/0.452)_40.0%,rgb(19_13_29/0.5)_50%,rgb(19_13_29/0.452)_60.0%,rgb(19_13_29/0.327)_70.0%,rgb(19_13_29/0.173)_80.0%,rgb(19_13_29/0.048)_90.0%,transparent_100%)]">
         <div className="relative mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
         <Reveal className="mx-auto max-w-4xl md:max-w-none">
           <div className="md:grid md:grid-cols-[3fr_2fr] md:items-center md:gap-14">
@@ -328,9 +323,8 @@ export default function HomePage() {
           alt=""
           fill
           sizes="100vw"
-          className="object-cover opacity-60 [mask-image:linear-gradient(to_bottom,transparent,black_18%,black_82%,transparent)]"
+          className="object-cover opacity-60 [mask-image:linear-gradient(to_bottom,transparent_3.0%,rgb(0_0_0/0.067)_5.5%,rgb(0_0_0/0.25)_8.0%,rgb(0_0_0/0.5)_10.5%,rgb(0_0_0/0.75)_13.0%,rgb(0_0_0/0.933)_15.5%,rgb(0_0_0/1.0)_18.0%,black_18%,black_82%,rgb(0_0_0/0.933)_84.3%,rgb(0_0_0/0.75)_86.7%,rgb(0_0_0/0.5)_89.0%,rgb(0_0_0/0.25)_91.3%,rgb(0_0_0/0.067)_93.7%,transparent_96.0%)]"
         />
-        <Grain />
         <div className="relative mx-auto max-w-7xl px-5 py-28 text-center sm:px-8 sm:py-36">
           <Reveal>
             <Image

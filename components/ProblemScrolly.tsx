@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Grain from "@/components/Grain";
 import GlitchText from "@/components/GlitchText";
 import Kicker from "@/components/Kicker";
 
@@ -107,7 +106,6 @@ export default function ProblemScrolly({
       style={{ height: `${100 + (n - 1) * 65}vh` }}
     >
       <div ref={stickyRef} className="sticky top-0 h-svh overflow-hidden">
-        <Grain />
         <div className="mx-auto flex h-full max-w-7xl flex-col justify-center px-8">
           <div>
             <Kicker>{kicker}</Kicker>

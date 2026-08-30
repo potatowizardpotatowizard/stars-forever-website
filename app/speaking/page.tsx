@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Cta from "@/components/Cta";
-import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
 import Reveal from "@/components/Reveal";
@@ -27,13 +26,12 @@ export default function SpeakingPage() {
           fill
           priority
           sizes="100vw"
-          className="object-cover opacity-60 [mask-image:linear-gradient(to_bottom,black_55%,transparent_97%)]"
+          className="object-cover opacity-60 [mask-image:linear-gradient(to_bottom,black_55%,rgb(0_0_0/0.933)_61.5%,rgb(0_0_0/0.75)_68.0%,rgb(0_0_0/0.5)_74.5%,rgb(0_0_0/0.25)_81.0%,rgb(0_0_0/0.067)_87.5%,transparent_94.0%)]"
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/25 to-night/70 [mask-image:linear-gradient(to_bottom,black_55%,transparent_97%)]"
+          className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/25 to-night/70 [mask-image:linear-gradient(to_bottom,black_55%,rgb(0_0_0/0.933)_61.5%,rgb(0_0_0/0.75)_68.0%,rgb(0_0_0/0.5)_74.5%,rgb(0_0_0/0.25)_81.0%,rgb(0_0_0/0.067)_87.5%,transparent_94.0%)]"
         />
-        <Grain />
         {/* A star broadcasting its signal into space, off to the side */}
         <div
           aria-hidden="true"
@@ -99,7 +97,7 @@ export default function SpeakingPage() {
       </header>
 
       {/* Topics */}
-      <section className="bg-gradient-to-b from-transparent via-soot/50 to-transparent">
+      <section className="bg-[linear-gradient(to_bottom,transparent_0%,rgb(19_13_29/0.048)_10.0%,rgb(19_13_29/0.173)_20.0%,rgb(19_13_29/0.327)_30.0%,rgb(19_13_29/0.452)_40.0%,rgb(19_13_29/0.5)_50%,rgb(19_13_29/0.452)_60.0%,rgb(19_13_29/0.327)_70.0%,rgb(19_13_29/0.173)_80.0%,rgb(19_13_29/0.048)_90.0%,transparent_100%)]">
         <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
           <Reveal>
             <Kicker>{SPEAKING.topics.kicker}</Kicker>
@@ -223,7 +221,7 @@ export default function SpeakingPage() {
       </section>
 
       {/* CTA + inquiry form */}
-      <section className="bg-gradient-to-b from-transparent via-soot/50 to-transparent">
+      <section className="bg-[linear-gradient(to_bottom,transparent_0%,rgb(19_13_29/0.048)_10.0%,rgb(19_13_29/0.173)_20.0%,rgb(19_13_29/0.327)_30.0%,rgb(19_13_29/0.452)_40.0%,rgb(19_13_29/0.5)_50%,rgb(19_13_29/0.452)_60.0%,rgb(19_13_29/0.327)_70.0%,rgb(19_13_29/0.173)_80.0%,rgb(19_13_29/0.048)_90.0%,transparent_100%)]">
         <div className="mx-auto max-w-7xl px-5 py-28 sm:py-36 text-center sm:px-8">
           <Reveal>
             <h2 className="mx-auto max-w-2xl font-display text-4xl sm:text-5xl">

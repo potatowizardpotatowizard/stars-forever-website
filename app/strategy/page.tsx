@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Grain from "@/components/Grain";
 import Reveal from "@/components/Reveal";
 import { STRATEGY } from "@/content/strategy";
 import { CONTACT } from "@/content/site";
@@ -35,7 +34,6 @@ export default function StrategyPage() {
           aria-hidden="true"
           className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgb(255_69_84/0.16),transparent_55%)]"
         />
-        <Grain />
         <div className="relative mx-auto max-w-6xl px-5 pb-20 pt-32 sm:px-8 sm:pt-44">
           <StratLabel>{STRATEGY.kicker}</StratLabel>
           <h1 className="mt-8 max-w-3xl font-display text-5xl font-bold leading-[1.05] sm:text-6xl">

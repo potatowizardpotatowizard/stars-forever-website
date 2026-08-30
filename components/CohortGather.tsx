@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 
 export type GatherPhoto = { src: string; alt: string };
@@ -163,7 +162,6 @@ export default function CohortGather({
   return (
     <div ref={wrapRef} className="relative" style={{ height: "150vh" }}>
       <div ref={stickyRef} className="sticky top-0 h-svh overflow-hidden">
-        <Grain />
 
         {/* the heading, above the gathering on the same screen */}
         <div className="absolute inset-x-0 top-0 z-30 px-5 pt-20 text-center sm:pt-24">

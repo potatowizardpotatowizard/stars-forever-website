@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import Cta from "@/components/Cta";
 import GlitchText from "@/components/GlitchText";
-import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
 import Reveal from "@/components/Reveal";
@@ -35,14 +34,13 @@ export default function GetInvolvedPage() {
           fill
           priority
           sizes="100vw"
-          className="object-cover opacity-50 brightness-90 [mask-image:linear-gradient(to_bottom,black_45%,transparent_96%)]"
+          className="object-cover opacity-50 brightness-90 [mask-image:linear-gradient(to_bottom,black_45%,rgb(0_0_0/0.933)_53.0%,rgb(0_0_0/0.75)_61.0%,rgb(0_0_0/0.5)_69.0%,rgb(0_0_0/0.25)_77.0%,rgb(0_0_0/0.067)_85.0%,transparent_93.0%)]"
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night/70 [mask-image:linear-gradient(to_bottom,black_45%,transparent_96%)]"
+          className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night/70 [mask-image:linear-gradient(to_bottom,black_45%,rgb(0_0_0/0.933)_53.0%,rgb(0_0_0/0.75)_61.0%,rgb(0_0_0/0.5)_69.0%,rgb(0_0_0/0.25)_77.0%,rgb(0_0_0/0.067)_85.0%,transparent_93.0%)]"
         />
         </div>
-        <Grain />
         <header className="relative">
         <span aria-hidden="true" className="hero-meteor" />
         <div className="relative mx-auto max-w-7xl px-5 pb-20 pt-32 sm:px-8 sm:pt-44">
@@ -85,7 +83,7 @@ export default function GetInvolvedPage() {
         <section className="relative">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 top-[-14svh] h-[60vh] bg-[linear-gradient(to_bottom,transparent,rgb(194_65_12/0.28)_32%,rgb(194_65_12/0.1)_62%,transparent)]"
+          className="pointer-events-none absolute inset-x-0 top-[-14svh] h-[60vh] bg-[linear-gradient(to_bottom,transparent,rgb(194_65_12/0.08)_12%,rgb(194_65_12/0.21)_24%,rgb(194_65_12/0.28)_32%,rgb(194_65_12/0.19)_46%,rgb(194_65_12/0.1)_62%,rgb(194_65_12/0.04)_80%,transparent)]"
         />
         <div className="relative mx-auto max-w-7xl px-5 pt-12 sm:px-8">
           <Reveal className="max-w-2xl">
@@ -164,10 +162,9 @@ export default function GetInvolvedPage() {
             alt=""
             fill
             sizes="100vw"
-            className="object-cover opacity-60 [mask-image:linear-gradient(to_bottom,transparent,black_38%,black_62%,transparent)]"
+            className="object-cover opacity-60 [mask-image:linear-gradient(to_bottom,transparent_6.0%,rgb(0_0_0/0.067)_11.3%,rgb(0_0_0/0.25)_16.7%,rgb(0_0_0/0.5)_22.0%,rgb(0_0_0/0.75)_27.3%,rgb(0_0_0/0.933)_32.7%,rgb(0_0_0/1.0)_38.0%,black_38%,black_62%,rgb(0_0_0/0.933)_67.3%,rgb(0_0_0/0.75)_72.7%,rgb(0_0_0/0.5)_78.0%,rgb(0_0_0/0.25)_83.3%,rgb(0_0_0/0.067)_88.7%,transparent_94.0%)]"
           />
         </div>
-        <Grain />
         <div className="relative mx-auto max-w-7xl px-5 py-28 text-center sm:px-8 sm:py-36">
           <Reveal>
             <h2 className="mx-auto max-w-2xl font-display text-4xl font-bold sm:text-5xl">
@@ -289,7 +286,7 @@ export default function GetInvolvedPage() {
       {/* Contact block */}
       <section
         id="contact"
-        className="bg-gradient-to-b from-transparent via-soot/50 to-transparent"
+        className="bg-[linear-gradient(to_bottom,transparent_0%,rgb(19_13_29/0.048)_10.0%,rgb(19_13_29/0.173)_20.0%,rgb(19_13_29/0.327)_30.0%,rgb(19_13_29/0.452)_40.0%,rgb(19_13_29/0.5)_50%,rgb(19_13_29/0.452)_60.0%,rgb(19_13_29/0.327)_70.0%,rgb(19_13_29/0.173)_80.0%,rgb(19_13_29/0.048)_90.0%,transparent_100%)]"
       >
         <div className="mx-auto max-w-7xl px-5 py-24 text-center sm:px-8">
           <Reveal>

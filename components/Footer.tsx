@@ -12,7 +12,6 @@ import {
   SITE_NAME,
   SOCIAL,
 } from "@/content/site";
-import Grain from "@/components/Grain";
 import NewsletterForm from "@/components/NewsletterForm";
 import Reveal from "@/components/Reveal";
 
@@ -23,7 +22,6 @@ export default function Footer() {
 
   return (
     <footer className="relative">
-      <Grain />
       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
         <div className="grid gap-12 md:grid-cols-4">
           <div className="md:col-span-2">

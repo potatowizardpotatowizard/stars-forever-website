@@ -6,7 +6,6 @@ import { notFound } from "next/navigation";
 import GlitchText from "@/components/GlitchText";
 import JourneyThread from "@/components/JourneyThread";
 import JourneyScene, { type JourneyItem } from "@/components/JourneyScene";
-import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 import MediaSlot from "@/components/MediaSlot";
 import Reveal from "@/components/Reveal";
@@ -88,14 +87,13 @@ export default async function MissionPage({
           aria-hidden="true"
           className="absolute inset-0 bg-gradient-to-b from-night/45 via-transparent to-night/90"
         />
-        <Grain />
         <div className="relative mx-auto w-full max-w-7xl px-5 pb-16 pt-44 sm:px-8">
           <h1 className="font-display text-5xl sm:text-7xl">{mission.name}</h1>
         </div>
       </header>
 
       {/* Consistent metadata header */}
-      <div className="bg-gradient-to-b from-transparent via-soot/40 to-transparent">
+      <div className="bg-[linear-gradient(to_bottom,transparent_0%,rgb(19_13_29/0.038)_10.0%,rgb(19_13_29/0.138)_20.0%,rgb(19_13_29/0.262)_30.0%,rgb(19_13_29/0.362)_40.0%,rgb(19_13_29/0.4)_50%,rgb(19_13_29/0.362)_60.0%,rgb(19_13_29/0.262)_70.0%,rgb(19_13_29/0.138)_80.0%,rgb(19_13_29/0.038)_90.0%,transparent_100%)]">
         <dl className="mx-auto grid max-w-7xl gap-6 px-5 py-8 sm:grid-cols-2 sm:px-8 lg:grid-cols-4">
           {(
             [
@@ -455,7 +453,7 @@ export default async function MissionPage({
       ) : null}
 
       {/* Linked media: YouTube links show their real thumbnails */}
-      <section className="bg-gradient-to-b from-transparent via-soot/50 to-transparent">
+      <section className="bg-[linear-gradient(to_bottom,transparent_0%,rgb(19_13_29/0.048)_10.0%,rgb(19_13_29/0.173)_20.0%,rgb(19_13_29/0.327)_30.0%,rgb(19_13_29/0.452)_40.0%,rgb(19_13_29/0.5)_50%,rgb(19_13_29/0.452)_60.0%,rgb(19_13_29/0.327)_70.0%,rgb(19_13_29/0.173)_80.0%,rgb(19_13_29/0.048)_90.0%,transparent_100%)]">
         <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
           <Kicker>Go deeper</Kicker>
           {mission.stats && !mission.videoLink ? (

@@ -81,6 +81,12 @@ export default function RootLayout({
           Skip to content
         </a>
         <TapeIntro />
+        {/* one grain over the whole site: no section can ever end it */}
+        <div
+          aria-hidden="true"
+          className="grain-layer"
+          style={{ position: "fixed", zIndex: 30 }}
+        />
         <ShootingStar />
         <Header />
         <main id="main">{children}</main>

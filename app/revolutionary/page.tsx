@@ -6,7 +6,6 @@ import Image from "next/image";
 import Link from "next/link";
 import Cta from "@/components/Cta";
 import GlitchText from "@/components/GlitchText";
-import Grain from "@/components/Grain";
 import MonologueDeck from "@/components/MonologueDeck";
 import GrowVideo from "@/components/GrowVideo";
 import Kicker from "@/components/Kicker";
@@ -39,14 +38,13 @@ export default function RevolutionaryPage() {
             fill
             priority
             sizes="100vw"
-            className="object-cover opacity-50 brightness-90 [mask-image:linear-gradient(to_bottom,black_45%,transparent_96%)]"
+            className="object-cover opacity-50 brightness-90 [mask-image:linear-gradient(to_bottom,black_45%,rgb(0_0_0/0.933)_53.0%,rgb(0_0_0/0.75)_61.0%,rgb(0_0_0/0.5)_69.0%,rgb(0_0_0/0.25)_77.0%,rgb(0_0_0/0.067)_85.0%,transparent_93.0%)]"
           />
           <div
             aria-hidden="true"
-            className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night/70 [mask-image:linear-gradient(to_bottom,black_45%,transparent_96%)]"
+            className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night/70 [mask-image:linear-gradient(to_bottom,black_45%,rgb(0_0_0/0.933)_53.0%,rgb(0_0_0/0.75)_61.0%,rgb(0_0_0/0.5)_69.0%,rgb(0_0_0/0.25)_77.0%,rgb(0_0_0/0.067)_85.0%,transparent_93.0%)]"
           />
         </div>
-        <Grain />
         <header className="relative">
         <div className="relative mx-auto max-w-7xl px-5 pb-20 pt-32 sm:px-8 sm:pt-44">
         <h1 className="font-display text-5xl font-bold sm:text-6xl">
@@ -197,7 +195,7 @@ export default function RevolutionaryPage() {
       </section>
 
       {/* What to expect */}
-      <section className="bg-gradient-to-b from-transparent via-soot/50 to-transparent">
+      <section className="bg-[linear-gradient(to_bottom,transparent_0%,rgb(19_13_29/0.048)_10.0%,rgb(19_13_29/0.173)_20.0%,rgb(19_13_29/0.327)_30.0%,rgb(19_13_29/0.452)_40.0%,rgb(19_13_29/0.5)_50%,rgb(19_13_29/0.452)_60.0%,rgb(19_13_29/0.327)_70.0%,rgb(19_13_29/0.173)_80.0%,rgb(19_13_29/0.048)_90.0%,transparent_100%)]">
         <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
           <Reveal>
             <Kicker>{REVOLUTIONARY.expect.kicker}</Kicker>
@@ -244,7 +242,7 @@ export default function RevolutionaryPage() {
       <div className="relative">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 -bottom-[45svh] -top-[45svh] [mask-image:linear-gradient(to_bottom,transparent,black_40%,black_60%,transparent)]"
+          className="pointer-events-none absolute inset-x-0 -bottom-[45svh] -top-[45svh] [mask-image:linear-gradient(to_bottom,transparent_6.0%,rgb(0_0_0/0.067)_11.7%,rgb(0_0_0/0.25)_17.3%,rgb(0_0_0/0.5)_23.0%,rgb(0_0_0/0.75)_28.7%,rgb(0_0_0/0.933)_34.3%,rgb(0_0_0/1.0)_40.0%,black_40%,black_60%,rgb(0_0_0/0.933)_65.7%,rgb(0_0_0/0.75)_71.3%,rgb(0_0_0/0.5)_77.0%,rgb(0_0_0/0.25)_82.7%,rgb(0_0_0/0.067)_88.3%,transparent_94.0%)]"
           style={{
             background: [
               "radial-gradient(85% 24% at 34% 47%, rgb(238 255 246 / 0.32), rgb(150 235 190 / 0.16) 40%, transparent 68%)",

@@ -1,13 +1,11 @@
 import Image from "next/image";
 import Cta from "@/components/Cta";
-import Grain from "@/components/Grain";
 import StarField from "@/components/StarField";
 
 export default function NotFound() {
   return (
     <section className="relative flex min-h-svh items-center justify-center overflow-hidden">
       <StarField />
-      <Grain />
       <div className="relative px-5 text-center">
         <Image
           src="/brand/star-smeared.png"

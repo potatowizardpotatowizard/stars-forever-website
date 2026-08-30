@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import Cta from "@/components/Cta";
-import Grain from "@/components/Grain";
 import Kicker from "@/components/Kicker";
 
 export type DesktopPhoto = { src: string; alt: string };
@@ -331,7 +330,6 @@ export default function DesktopProjects({
       style={{ height: wrapH ? `${wrapH}px` : "350vh" }}
     >
       <div ref={stickyRef} className="sticky top-0 h-svh overflow-hidden">
-        <Grain />
         <canvas
           ref={canvasRef}
           aria-hidden="true"
