@@ -29,7 +29,7 @@ function Row({
               ? isActive
                 ? "scale-[1.07] border-starlight bg-soot/80 font-bold text-white shadow-[0_0_26px_rgb(167_139_250/0.8)]"
                 : "border-ember bg-soot/70 font-bold text-white shadow-[0_0_20px_rgb(109_40_217/0.55)]"
-              : "border-dust/30 bg-night/30 text-starlight/60"
+              : "border-dust/30 bg-night/30 text-white"
           }`}
         >
           {niche}
