@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import ConstellationMap from "@/components/ConstellationMap";
 import Kicker from "@/components/Kicker";
 import {
@@ -1026,27 +1027,40 @@ export default function ConstellationGlobe({
             <p className="meta-label mb-3 text-center text-white [text-shadow:0_0_10px_rgb(255_255_255/0.7),0_0_24px_rgb(167_139_250/0.6)]">
               {prompt}
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-2">
+            <motion.div layout className="flex flex-wrap items-center justify-center gap-2">
+              <AnimatePresence mode="popLayout">
               {view.level > 0 ? (
-                <button
+                <motion.button
+                  key={`back-${view.level}`}
+                  layout
+                  initial={{ opacity: 0, scale: 0.8, y: 14 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.85, y: 10 }}
+                  transition={{ type: "spring", stiffness: 520, damping: 30 }}
                   type="button"
                   onClick={goBack}
                   className="meta-label rounded-full border border-ember bg-ember/15 px-4 py-2.5 text-starlight transition-colors hover:bg-ember/30"
                 >
                   ← {backLabel}
-                </button>
+                </motion.button>
               ) : null}
-              {chips.map((c) => (
-                <button
-                  key={c.name}
+              {chips.map((c, ci) => (
+                <motion.button
+                  key={`${view.level}-${c.name}`}
+                  layout
+                  initial={{ opacity: 0, scale: 0.8, y: 14 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.85, y: 10 }}
+                  transition={{ type: "spring", stiffness: 520, damping: 30, delay: ci * 0.045 }}
                   type="button"
                   onClick={c.onPick}
                   className="meta-label rounded-full border border-dust/40 bg-night/80 px-4 py-2.5 text-starlight transition-colors hover:border-ember"
                 >
                   {c.name} <span className="text-ember">{c.count}</span>
-                </button>
+                </motion.button>
               ))}
-            </div>
+              </AnimatePresence>
+            </motion.div>
           </div>
         ) : null}
 
@@ -1064,9 +1078,15 @@ export default function ConstellationGlobe({
         </svg>
 
         {/* the chosen creator */}
+        <AnimatePresence>
         {selected ? (
-          <div
+          <motion.div
+            key={selected.name}
             ref={cardRef}
+            initial={{ opacity: 0, y: 26, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 18, scale: 0.97 }}
+            transition={{ type: "spring", stiffness: 460, damping: 32 }}
             className="absolute bottom-5 left-1/2 z-10 w-[86%] max-w-xs -translate-x-1/2 rounded-lg border border-dust/30 bg-night/90 px-5 py-4 text-center backdrop-blur-sm"
           >
             <p className="font-display text-lg font-bold">{selected.name}</p>
@@ -1083,8 +1103,9 @@ export default function ConstellationGlobe({
                 See their work ↗
               </a>
             ) : null}
-          </div>
+          </motion.div>
         ) : null}
+        </AnimatePresence>
 
         {/* constellation mode, once the world exists */}
         {built && members.length > 1 && !selected ? (
