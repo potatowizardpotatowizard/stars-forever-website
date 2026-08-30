@@ -46,7 +46,7 @@ export default function HomePage() {
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-[linear-gradient(to_bottom,rgb(7_5_12/0.6),rgb(7_5_12/0.44)_38%,rgb(7_5_12/0.3)_55%,rgb(7_5_12/0.44)_68%,rgb(7_5_12/0.62)_78%,rgb(7_5_12/0.82)_87%,rgb(7_5_12/0.95)_93%,var(--color-night)_97%)]"
+          className="absolute inset-0 bg-[linear-gradient(to_bottom,rgb(7_5_12/0.6),rgb(7_5_12/0.3)_55%,rgb(7_5_12/0.75)_85%,var(--color-night))]"
         />
         <StarField />
 
