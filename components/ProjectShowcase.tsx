@@ -88,7 +88,7 @@ export default function ProjectShowcase() {
           href: "/partner-projects/real-treasure",
         }}
       />
-      <section className="relative z-20 mx-auto -mt-[28svh] max-w-5xl space-y-12 px-5 pb-20 sm:mt-0 sm:px-8 sm:pb-24 sm:pt-8">
+      <section className="relative z-20 mx-auto -mt-[calc(47svh-48px-min(31.25vw-12.5px,307.5px))] max-w-5xl space-y-12 px-5 pb-20 sm:mt-0 sm:px-8 sm:pb-24 sm:pt-8">
         {projects.map((p) => (
           <Reveal key={p.slug}>
             <Link
