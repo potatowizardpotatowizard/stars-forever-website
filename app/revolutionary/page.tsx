@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 export default function RevolutionaryPage() {
   return (
     <article className="relative">
-      <PageAmbience rgb="16 122 87" rgbB="109 40 217" />
+      <PageAmbience rgb="16 122 87" />
       <AnchorSnap id="attend" />
       {/* the hero and the explainer share one continuous canvas: the
           photo dissolves into the page's night while the green

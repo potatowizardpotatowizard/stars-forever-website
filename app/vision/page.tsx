@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 export default function VisionPage() {
   return (
     <article className="relative">
-      <PageAmbience rgb="16 122 87" rgbB="109 40 217" />
+      <PageAmbience rgb="16 122 87" />
       {/* Analog hero: hero and the problem share one continuous
           canvas, the photo dissolving into open night */}
       <div className="relative overflow-hidden">

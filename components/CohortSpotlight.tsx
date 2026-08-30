@@ -69,9 +69,10 @@ export default function CohortSpotlight() {
         {/* the ten creators, an optional sideways scroll */}
         <Reveal className="mt-14">
           <p className="meta-label text-center text-dust">
-            The ten creators who attended · scroll →
+            The ten creators who attended
+            <span className="md:hidden"> · scroll →</span>
           </p>
-          <ul className="mt-6 flex snap-x gap-4 overflow-x-auto pb-4 [scrollbar-width:none] md:mx-auto md:max-w-[74rem] [&::-webkit-scrollbar]:hidden">
+          <ul className="mt-6 flex snap-x gap-4 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:mx-auto md:grid md:max-w-[74rem] md:grid-cols-5 md:overflow-visible">
             {people.map((person) => {
               const platform = person.href.includes("instagram")
                 ? "Instagram"
@@ -79,7 +80,7 @@ export default function CohortSpotlight() {
                   ? "YouTube"
                   : "Website";
               return (
-                <li key={person.name} className="w-48 shrink-0 snap-start sm:w-56">
+                <li key={person.name} className="w-48 shrink-0 snap-start sm:w-56 md:w-auto">
                   <a
                     href={person.href}
                     target="_blank"

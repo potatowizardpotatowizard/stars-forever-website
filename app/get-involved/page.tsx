@@ -37,11 +37,11 @@ export default function GetInvolvedPage() {
           fill
           priority
           sizes="100vw"
-          className="object-cover opacity-50 brightness-90 [mask-image:linear-gradient(to_bottom,black_45%,transparent_96%)]"
+          className="object-cover opacity-50 brightness-90 [mask-image:linear-gradient(to_bottom,black_30%,transparent_72%)]"
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night/70 [mask-image:linear-gradient(to_bottom,black_45%,transparent_96%)]"
+          className="absolute inset-0 bg-gradient-to-b from-night/40 via-night/20 to-night/70 [mask-image:linear-gradient(to_bottom,black_30%,transparent_72%)]"
         />
         </div>
         <Grain />
