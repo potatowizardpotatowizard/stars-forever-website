@@ -293,7 +293,6 @@ export default function DesktopProjects({
     return (
       <>
         <section className="mx-auto max-w-7xl px-5 pt-24 text-center sm:px-8 sm:pt-32">
-          <Kicker>{kicker}</Kicker>
           <h2 className="mt-6 font-display text-5xl font-bold">{heading}</h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-starlight/80">
             {intro}
@@ -373,7 +372,6 @@ export default function DesktopProjects({
           ref={headRef}
           className="absolute inset-0 z-20 flex flex-col items-center justify-center px-8 text-center will-change-transform"
         >
-          <Kicker>{kicker}</Kicker>
           <h2 className="mt-6 max-w-4xl font-display text-6xl font-bold uppercase leading-[1.05] tracking-tight [text-shadow:0_2px_40px_rgb(4_4_8/0.8)] lg:text-7xl">
             {heading}
           </h2>

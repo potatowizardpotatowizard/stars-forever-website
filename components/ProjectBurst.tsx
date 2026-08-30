@@ -168,7 +168,6 @@ export default function ProjectBurst({
     return (
       <>
         <section className="mx-auto max-w-7xl px-5 pt-24 text-center sm:px-8 sm:pt-32">
-          <Kicker>{kicker}</Kicker>
           <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
             {heading}
           </h2>
@@ -204,7 +203,6 @@ export default function ProjectBurst({
           ref={headRef}
           className="absolute inset-x-0 top-0 z-30 px-5 pt-20 text-center will-change-transform sm:pt-24"
         >
-          <Kicker>{kicker}</Kicker>
           <h2 className="mt-6 font-display text-3xl font-bold sm:text-4xl">
             {heading}
           </h2>
