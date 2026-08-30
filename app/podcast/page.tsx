@@ -128,7 +128,7 @@ export default function PodcastPage() {
           />
           <div className="max-w-2xl">
             <Kicker>{PODCAST.why.kicker}</Kicker>
-            <div className="mt-8 space-y-5">
+            <div className="mt-8 space-y-6">
               {PODCAST.why.paragraphs.map((p) => (
                 <p key={p} className="text-lg leading-relaxed text-starlight/85">
                   {linkCategory3(p)}

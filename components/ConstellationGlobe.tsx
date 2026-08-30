@@ -959,7 +959,7 @@ export default function ConstellationGlobe({
   if (mode === "flat") {
     return (
       <div>
-        <header className="mx-auto max-w-7xl px-5 pb-16 pt-32 sm:px-8 sm:pt-44">
+        <header className="mx-auto max-w-7xl px-5 pb-20 pt-32 sm:px-8 sm:pt-44">
           <Kicker>{CONSTELLATION.kicker}</Kicker>
           <h1 className="mt-6 font-display text-5xl font-bold sm:text-6xl">
             {CONSTELLATION.title}

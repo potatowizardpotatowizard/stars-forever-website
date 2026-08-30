@@ -320,7 +320,7 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
           ) : item.kind === "beat" ? (
             <div key={i} className="max-w-2xl">
               {item.kicker ? <Kicker>{item.kicker}</Kicker> : null}
-              <div className="mt-6 space-y-5">
+              <div className="mt-6 space-y-6">
                 {item.paragraphs.map((p) => (
                   <p key={p} className="text-lg leading-relaxed text-starlight/85">
                     {linkCategory3(p)}
@@ -505,7 +505,7 @@ export default function JourneyScene({ items }: { items: JourneyItem[] }) {
                   ) : item.kind === "beat" ? (
                     <div className="w-[80vw] max-w-xl">
                       {item.kicker ? <Kicker>{item.kicker}</Kicker> : null}
-                      <div className="mt-6 space-y-5">
+                      <div className="mt-6 space-y-6">
                         {item.paragraphs.map((p) => (
                           <p
                             key={p}

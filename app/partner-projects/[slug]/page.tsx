@@ -456,7 +456,7 @@ export default async function MissionPage({
 
       {/* Linked media: YouTube links show their real thumbnails */}
       <section className="bg-gradient-to-b from-transparent via-soot/50 to-transparent">
-        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8">
+        <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
           <Kicker>Go deeper</Kicker>
           {mission.stats && !mission.videoLink ? (
             <dl className="mt-10 grid max-w-xl grid-cols-2 gap-10 text-center sm:gap-16">

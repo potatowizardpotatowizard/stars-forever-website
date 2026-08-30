@@ -329,7 +329,7 @@ export default function StoryJourney({
               </div>
             </div>
             <div
-              className={`mt-8 space-y-5 md:mt-0 ${
+              className={`mt-8 space-y-6 md:mt-0 ${
                 i % 2 === 0
                   ? "md:col-span-5 md:col-start-8"
                   : "md:col-span-5 md:col-start-1 md:row-start-1"

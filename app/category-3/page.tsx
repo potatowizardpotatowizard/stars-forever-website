@@ -176,7 +176,7 @@ export default function Category3Page() {
 
       {/* Close */}
       <section className="bg-gradient-to-b from-transparent via-soot/50 to-transparent">
-        <div className="mx-auto max-w-7xl px-5 py-28 text-center sm:px-8">
+        <div className="mx-auto max-w-7xl px-5 py-28 sm:py-36 text-center sm:px-8">
           <Reveal>
             <Image
               src="/brand/star-sharp.png"

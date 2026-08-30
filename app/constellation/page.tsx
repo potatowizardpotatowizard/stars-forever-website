@@ -26,7 +26,7 @@ export default async function ConstellationPage() {
       <ConstellationGlobe members={members} />
 
       {/* How it works */}
-      <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8">
+      <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
         <Reveal>
           <Kicker>{CONSTELLATION.how.kicker}</Kicker>
         </Reveal>

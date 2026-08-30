@@ -93,7 +93,7 @@ export default function GetInvolvedPage() {
             <h2 className="mt-6 font-display text-4xl font-bold leading-tight sm:text-5xl">
               {give.frame.heading}
             </h2>
-            <div className="mt-8 space-y-5">
+            <div className="mt-8 space-y-6">
               {give.frame.paragraphs.map((p) => (
                 <p key={p} className="text-lg leading-relaxed text-starlight/80">
                   {p}
@@ -113,7 +113,7 @@ export default function GetInvolvedPage() {
 
       {/* What giving produces: stacked above the comet bleed so the
           photos stay crisp while the glow fills the sky around them */}
-      <section className="relative z-10 mx-auto max-w-7xl px-5 py-20 sm:px-8">
+      <section className="relative z-10 mx-auto max-w-7xl px-5 py-24 sm:px-8">
         <Reveal>
           <Kicker>{give.produces.kicker}</Kicker>
         </Reveal>

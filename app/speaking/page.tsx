@@ -50,7 +50,7 @@ export default function SpeakingPage() {
             className="broadcast-core"
           />
         </div>
-        <div className="relative mx-auto max-w-7xl px-5 pb-24 pt-32 sm:px-8 sm:pt-44">
+        <div className="relative mx-auto max-w-7xl px-5 pb-20 pt-32 sm:px-8 sm:pt-44">
           {/* The hero delivers its lines on beats: the claim, the answer,
               the receipts pinging their stars alight, then the invitation */}
           <p className="hero-beat meta-label" style={{ animationDelay: "0.1s" }}>
@@ -100,7 +100,7 @@ export default function SpeakingPage() {
 
       {/* Topics */}
       <section className="bg-gradient-to-b from-transparent via-soot/50 to-transparent">
-        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8">
+        <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
           <Reveal>
             <Kicker>{SPEAKING.topics.kicker}</Kicker>
           </Reveal>
@@ -142,7 +142,7 @@ export default function SpeakingPage() {
                   />
                   <div className="max-w-2xl">
                     <h2 className="font-display text-4xl">{speaker.name}</h2>
-                    <div className="mt-6 space-y-5">
+                    <div className="mt-6 space-y-6">
                       {speaker.bio.map((p) => (
                         <p key={p} className="leading-relaxed text-starlight/80">
                           {p}
@@ -224,7 +224,7 @@ export default function SpeakingPage() {
 
       {/* CTA + inquiry form */}
       <section className="bg-gradient-to-b from-transparent via-soot/50 to-transparent">
-        <div className="mx-auto max-w-7xl px-5 py-28 text-center sm:px-8">
+        <div className="mx-auto max-w-7xl px-5 py-28 sm:py-36 text-center sm:px-8">
           <Reveal>
             <h2 className="mx-auto max-w-2xl font-display text-4xl sm:text-5xl">
               {SPEAKING.closing.heading}
