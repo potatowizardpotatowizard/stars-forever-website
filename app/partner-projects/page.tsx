@@ -121,9 +121,9 @@ export default function PartnerProjectsPage() {
           className="pointer-events-none absolute inset-0 hidden lg:block"
         >
           {[
-            { w: 290, right: 350, top: 140, delay: "0s", op: 0.95, dur: "1.3s" },
-            { w: 290, right: 210, top: 145, delay: "0.45s", op: 1, dur: "1s" },
-            { w: 290, right: 165, top: 275, delay: "0.9s", op: 0.95, dur: "1.3s" },
+            { w: 240, right: 375, top: 155, delay: "0s", op: 0.95, dur: "1.3s" },
+            { w: 240, right: 235, top: 160, delay: "0.45s", op: 1, dur: "1s" },
+            { w: 240, right: 190, top: 285, delay: "0.9s", op: 0.95, dur: "1.3s" },
           ].map((m) => (
             <div
               key={m.w}
