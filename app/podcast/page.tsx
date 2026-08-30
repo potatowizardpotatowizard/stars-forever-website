@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import PageAmbience from "@/components/PageAmbience";
 import { linkCategory3 } from "@/components/Category3Link";
 import Image from "next/image";
 import Cta from "@/components/Cta";
@@ -24,7 +25,8 @@ function youtubeId(href: string): string | null {
 
 export default function PodcastPage() {
   return (
-    <article>
+    <article className="relative">
+      <PageAmbience rgb="30 64 175" />
       {/* Hero: behind the mic */}
       <header className="relative overflow-hidden">
         <Image

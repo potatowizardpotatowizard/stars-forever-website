@@ -1,4 +1,5 @@
 import Image from "next/image";
+import PageAmbience from "@/components/PageAmbience";
 import ConstellationWhisper from "@/components/ConstellationWhisper";
 import Link from "next/link";
 import { linkCategory3 } from "@/components/Category3Link";
@@ -27,7 +28,8 @@ import {
 
 export default function HomePage() {
   return (
-    <>
+    <div className="relative">
+      <PageAmbience rgb="109 40 217" />
       {/* A shooting star bridges the reframe line into the Tokyo Drift header */}
       <StarBridge />
 
@@ -35,7 +37,7 @@ export default function HomePage() {
           glowing wordmark. The menu IS the navigation on this page. */}
       <section
         id="hero"
-        className="relative flex min-h-svh flex-col overflow-hidden bg-night"
+        className="relative flex min-h-svh flex-col overflow-hidden"
       >
         <Image
           src="/brand/bg-purple-hero.jpg"
@@ -43,13 +45,18 @@ export default function HomePage() {
           fill
           priority
           sizes="100vw"
-          className="object-cover"
+          className="object-cover [mask-image:linear-gradient(to_bottom,black_60%,transparent_97%)]"
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-[linear-gradient(to_bottom,rgb(7_5_12/0.6),rgb(7_5_12/0.3)_55%,rgb(7_5_12/0.75)_85%,var(--color-night))]"
+          className="absolute inset-0 bg-[linear-gradient(to_bottom,rgb(7_5_12/0.6),rgb(7_5_12/0.3)_55%,rgb(7_5_12/0.5)_78%,rgb(7_5_12/0)_96%)]"
         />
-        <StarField />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 [mask-image:linear-gradient(to_bottom,black_70%,transparent_98%)]"
+        >
+          <StarField />
+        </div>
         <Grain />
 
         <h1 className="sr-only">
@@ -367,6 +374,6 @@ export default function HomePage() {
           </Reveal>
         </div>
       </section>
-    </>
+    </div>
   );
 }

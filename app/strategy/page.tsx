@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import PageAmbience from "@/components/PageAmbience";
 import Link from "next/link";
 import Grain from "@/components/Grain";
 import Reveal from "@/components/Reveal";
@@ -28,7 +29,8 @@ function StratLabel({ children }: { children: React.ReactNode }) {
 
 export default function StrategyPage() {
   return (
-    <article className="bg-[#0a0507]">
+    <article className="relative bg-[#0a0507]">
+      <PageAmbience rgb="120 28 24" />
       {/* Hero: a strategy desk, not a night sky */}
       <header className="relative overflow-hidden border-b border-white/10">
         <div

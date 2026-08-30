@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import PageAmbience from "@/components/PageAmbience";
 import Image from "next/image";
 import Link from "next/link";
 import Category3Ignite from "@/components/Category3Ignite";
@@ -19,7 +20,8 @@ export const metadata: Metadata = {
 
 export default function Category3Page() {
   return (
-    <article>
+    <article className="relative">
+      <PageAmbience rgb="180 60 16" rgbB="109 40 217" />
       <header className="relative overflow-hidden">
         <Image
           src="/brand/bg-black-meteor.jpg"

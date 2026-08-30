@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import PageAmbience from "@/components/PageAmbience";
 import { linkCategory3 } from "@/components/Category3Link";
 import Image from "next/image";
 import Link from "next/link";
@@ -24,7 +25,8 @@ export default function GetInvolvedPage() {
     `mailto:${CONTACT.primaryEmail}?subject=${encodeURIComponent(give.donate.subject)}`;
 
   return (
-    <article>
+    <article className="relative">
+      <PageAmbience rgb="194 65 12" />
       {/* Analog hero band: hero and the giving frame share one
           continuous canvas, the photo dissolving into open night */}
       <div className="relative overflow-hidden">

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import PageAmbience from "@/components/PageAmbience";
 import AnchorSnap from "@/components/AnchorSnap";
 import ConstellationWhisper from "@/components/ConstellationWhisper";
 import { linkCategory3 } from "@/components/Category3Link";
@@ -26,7 +27,8 @@ export const metadata: Metadata = {
 
 export default function RevolutionaryPage() {
   return (
-    <article>
+    <article className="relative">
+      <PageAmbience rgb="16 122 87" rgbB="109 40 217" />
       <AnchorSnap id="attend" />
       {/* the hero and the explainer share one continuous canvas: the
           photo dissolves into the page's night while the green

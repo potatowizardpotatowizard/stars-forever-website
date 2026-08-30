@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import PageAmbience from "@/components/PageAmbience";
 import Image from "next/image";
 import Link from "next/link";
 import MediaSlot from "@/components/MediaSlot";
@@ -19,7 +20,8 @@ export const metadata: Metadata = {
 
 export default function ApplyPage() {
   return (
-    <article>
+    <article className="relative">
+      <PageAmbience rgb="109 40 217" />
       <header className="relative overflow-hidden">
         <Image
           src="/brand/bg-purple-meteor.jpg"

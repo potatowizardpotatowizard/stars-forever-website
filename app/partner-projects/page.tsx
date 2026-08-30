@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import PageAmbience from "@/components/PageAmbience";
 import ConstellationWhisper from "@/components/ConstellationWhisper";
 import { linkCategory3 } from "@/components/Category3Link";
 import Image from "next/image";
@@ -22,7 +23,8 @@ export const metadata: Metadata = {
 
 export default function PartnerProjectsPage() {
   return (
-    <article>
+    <article className="relative">
+      <PageAmbience rgb="109 40 217" />
       {/* Analog hero band: hero and explainer share one continuous
           canvas, the photo dissolving into open night */}
       <div className="relative overflow-hidden">
@@ -121,9 +123,9 @@ export default function PartnerProjectsPage() {
           className="pointer-events-none absolute inset-0 hidden lg:block"
         >
           {[
-            { w: 240, right: 375, top: 155, delay: "0s", op: 0.95, dur: "1.3s" },
-            { w: 240, right: 235, top: 160, delay: "0.45s", op: 1, dur: "1s" },
-            { w: 240, right: 190, top: 285, delay: "0.9s", op: 0.95, dur: "1.3s" },
+            { w: 200, right: 300, top: 120, delay: "0s", op: 0.95, dur: "1.3s" },
+            { w: 200, right: 185, top: 125, delay: "0.45s", op: 1, dur: "1s" },
+            { w: 200, right: 145, top: 230, delay: "0.9s", op: 0.95, dur: "1.3s" },
           ].map((m) => (
             <div
               key={m.w}

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import PageAmbience from "@/components/PageAmbience";
 import Image from "next/image";
 import { linkCategory3 } from "@/components/Category3Link";
 import Cta from "@/components/Cta";
@@ -21,7 +22,8 @@ export const metadata: Metadata = {
 
 export default function VisionPage() {
   return (
-    <article>
+    <article className="relative">
+      <PageAmbience rgb="16 122 87" rgbB="109 40 217" />
       {/* Analog hero: hero and the problem share one continuous
           canvas, the photo dissolving into open night */}
       <div className="relative overflow-hidden">

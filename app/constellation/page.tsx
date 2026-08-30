@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import PageAmbience from "@/components/PageAmbience";
 import { Suspense } from "react";
 import ConstellationForm from "@/components/ConstellationForm";
 import ConstellationGlobe from "@/components/ConstellationGlobe";
@@ -20,7 +21,8 @@ export const revalidate = 300;
 export default async function ConstellationPage() {
   const members = await getAcceptedMembers();
   return (
-    <article>
+    <article className="relative">
+      <PageAmbience rgb="109 40 217" />
       {/* The page IS the flight: hero copy floats in the void, then
           scrolling assembles the world */}
       <ConstellationGlobe members={members} />
