@@ -118,6 +118,12 @@ export default function ProjectBurst({
         // the card label fades in over the last stretch of the growth
         label.style.opacity = clamp01((grow - 0.65) / 0.35).toFixed(3);
         centerEl.style.pointerEvents = grow > 0.6 ? "auto" : "none";
+        // it settles onto the bottom edge of the frame, so the list
+        // below continues in plain flow: the gap is a real margin, not
+        // viewport math, and is identical in every browser chrome
+        const settle = smooth(clamp01((p - 0.5) / 0.5));
+        const extra = (vh - (0.53 * vh + centerBox.offsetHeight / 2)) * settle;
+        centerEl.style.transform = `translate3d(0, ${extra.toFixed(1)}px, 0)`;
       }
     };
 
@@ -166,7 +172,7 @@ export default function ProjectBurst({
     return (
       <>
         <section className="mx-auto max-w-7xl px-5 pt-24 text-center sm:px-8 sm:pt-32">
-          <h2 className="mt-6 font-display text-4xl font-bold sm:text-5xl">
+          <h2 className="font-display text-4xl font-bold sm:text-5xl">
             {heading}
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-starlight/80">
@@ -201,7 +207,7 @@ export default function ProjectBurst({
           ref={headRef}
           className="absolute inset-x-0 top-0 z-30 px-5 pt-20 text-center will-change-transform sm:pt-24"
         >
-          <h2 className="mt-6 font-display text-3xl font-bold sm:text-4xl">
+          <h2 className="font-display text-3xl font-bold sm:text-4xl">
             {heading}
           </h2>
           <p className="mx-auto mt-4 max-w-lg text-base text-starlight/80 sm:max-w-xl sm:text-lg">
