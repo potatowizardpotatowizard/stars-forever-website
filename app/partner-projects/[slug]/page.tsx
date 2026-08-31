@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import NumberTicker from "@/components/NumberTicker";
 import { linkCategory3 } from "@/components/Category3Link";
 import Image from "next/image";
 import Link from "next/link";
@@ -255,7 +256,7 @@ export default async function MissionPage({
                 {mission.stats.map((stat) => (
                   <div key={stat.label}>
                     <dd className="vhs-glow font-display text-6xl font-bold text-ember">
-                      {stat.value}
+                      <NumberTicker value={stat.value} />
                     </dd>
                     <dt className="meta-label mt-3">{stat.label}</dt>
                   </div>
@@ -342,7 +343,7 @@ export default async function MissionPage({
                 {mission.stats.map((stat) => (
                   <div key={stat.label}>
                     <dd className="vhs-glow font-display text-5xl font-bold text-ember sm:text-6xl">
-                      {stat.value}
+                      <NumberTicker value={stat.value} />
                     </dd>
                     <dt className="meta-label mt-3">{stat.label}</dt>
                   </div>
@@ -461,7 +462,7 @@ export default async function MissionPage({
               {mission.stats.map((stat) => (
                 <div key={stat.label}>
                   <dd className="vhs-glow font-display text-5xl font-bold text-ember sm:text-6xl">
-                    {stat.value}
+                    <NumberTicker value={stat.value} />
                   </dd>
                   <dt className="meta-label mt-3">{stat.label}</dt>
                 </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import SuccessStars from "@/components/SuccessStars";
 import { track } from "@vercel/analytics";
 import { CONTACT } from "@/content/site";
 
@@ -69,7 +70,8 @@ export default function WaitlistForm({
 
   if (status === "done") {
     return (
-      <div className="rounded-lg border border-ember/40 bg-soot/50 p-8 text-center">
+      <div className="relative rounded-lg border border-ember/40 bg-soot/50 p-8 text-center">
+        <SuccessStars />
         <p className="font-display text-2xl font-bold">You are on the list.</p>
         <p className="mx-auto mt-3 max-w-md text-sm text-starlight/75">
           {doneNote}
