@@ -103,6 +103,87 @@ function continentOf(m: ConstellationMember): string {
   return "Asia";
 }
 
+// Places the drill-down offers even when no creator lives there yet:
+// the map is explorable first, inhabited second.
+const COUNTRY_CATALOG: Record<string, { name: string; lat: number; lng: number }[]> = {
+  "North America": [
+    { name: "United States", lat: 39, lng: -98 },
+    { name: "Canada", lat: 53, lng: -103 },
+    { name: "Mexico", lat: 23.6, lng: -102.5 },
+    { name: "Panama", lat: 8.5, lng: -80.8 },
+  ],
+  "South America": [
+    { name: "Brazil", lat: -10.8, lng: -52.9 },
+    { name: "Argentina", lat: -34.6, lng: -64.7 },
+    { name: "Colombia", lat: 4.6, lng: -74.1 },
+    { name: "Chile", lat: -33.5, lng: -70.7 },
+    { name: "Peru", lat: -9.2, lng: -75 },
+  ],
+  Europe: [
+    { name: "United Kingdom", lat: 53.8, lng: -1.6 },
+    { name: "Germany", lat: 51.1, lng: 10.4 },
+    { name: "France", lat: 46.6, lng: 2.5 },
+    { name: "Spain", lat: 40.3, lng: -3.7 },
+    { name: "Italy", lat: 42.8, lng: 12.8 },
+    { name: "Netherlands", lat: 52.2, lng: 5.5 },
+    { name: "Norway", lat: 61, lng: 9 },
+    { name: "Iceland", lat: 64.9, lng: -18.6 },
+    { name: "Portugal", lat: 39.6, lng: -8.1 },
+    { name: "Poland", lat: 52, lng: 19.3 },
+  ],
+  Africa: [
+    { name: "South Africa", lat: -29, lng: 24.7 },
+    { name: "Nigeria", lat: 9.1, lng: 8.7 },
+    { name: "Kenya", lat: 0.2, lng: 37.9 },
+    { name: "Ghana", lat: 7.9, lng: -1 },
+    { name: "Egypt", lat: 26.8, lng: 30 },
+  ],
+  Asia: [
+    { name: "Japan", lat: 36.2, lng: 138.3 },
+    { name: "South Korea", lat: 36.5, lng: 127.9 },
+    { name: "Philippines", lat: 12.9, lng: 121.8 },
+    { name: "India", lat: 21.1, lng: 78.7 },
+    { name: "Indonesia", lat: -2.5, lng: 118 },
+    { name: "Thailand", lat: 15.1, lng: 101 },
+    { name: "Israel", lat: 31.4, lng: 35 },
+    { name: "Singapore", lat: 1.35, lng: 103.8 },
+  ],
+  Oceania: [
+    { name: "Australia", lat: -25.3, lng: 133.8 },
+    { name: "New Zealand", lat: -41.8, lng: 172.8 },
+  ],
+};
+
+const US_STATES: { name: string; lat: number; lng: number }[] = [
+  { name: "California", lat: 36.7, lng: -119.4 },
+  { name: "Texas", lat: 31, lng: -99 },
+  { name: "Florida", lat: 27.8, lng: -81.6 },
+  { name: "New York", lat: 42.9, lng: -75.5 },
+  { name: "Tennessee", lat: 35.8, lng: -86.4 },
+  { name: "Georgia", lat: 32.6, lng: -83.4 },
+  { name: "Arizona", lat: 34.2, lng: -111.6 },
+  { name: "Colorado", lat: 39, lng: -105.5 },
+  { name: "Washington", lat: 47.4, lng: -120.5 },
+  { name: "North Carolina", lat: 35.5, lng: -79.4 },
+];
+
+const COUNTRY_CANON: Record<string, string> = {
+  usa: "United States",
+  us: "United States",
+  "united states": "United States",
+  america: "United States",
+  uk: "United Kingdom",
+  england: "United Kingdom",
+  "united kingdom": "United Kingdom",
+  korea: "South Korea",
+  "south korea": "South Korea",
+};
+
+function canonCountry(c: string): string {
+  const k = c.trim().toLowerCase();
+  return COUNTRY_CANON[k] ?? c.trim();
+}
+
 type View =
   | { level: 0 }
   | { level: 1; continent: string }
@@ -160,7 +241,7 @@ export default function ConstellationGlobe({
     if (view.level === 0) return true;
     if (continentOf(m) !== view.continent) return false;
     if (view.level === 1) return true;
-    if (m.country !== view.country) return false;
+    if (canonCountry(m.country) !== view.country) return false;
     if (view.level === 2) return true;
     return m.state === view.state;
   });
@@ -177,7 +258,6 @@ export default function ConstellationGlobe({
   if (view.level === 0) {
     Object.keys(CONTINENTS).forEach((c) => {
       const list = members.filter((m) => continentOf(m) === c);
-      if (!list.length) return;
       chips.push({
         name: c,
         count: list.length,
@@ -189,9 +269,16 @@ export default function ConstellationGlobe({
     });
   } else if (view.level === 1) {
     const inCont = members.filter((m) => continentOf(m) === view.continent);
-    [...new Set(inCont.map((m) => m.country))].forEach((c) => {
-      const list = inCont.filter((m) => m.country === c);
-      const ct = centroid(list);
+    const names = [
+      ...(COUNTRY_CATALOG[view.continent] ?? []).map((c) => c.name),
+      ...inCont.map((m) => canonCountry(m.country)),
+    ];
+    [...new Set(names)].forEach((c) => {
+      const list = inCont.filter((m) => canonCountry(m.country) === c);
+      const cat = (COUNTRY_CATALOG[view.continent] ?? []).find(
+        (x) => x.name === c,
+      );
+      const ct = list.length ? centroid(list) : cat!;
       chips.push({
         name: c,
         count: list.length,
@@ -203,11 +290,19 @@ export default function ConstellationGlobe({
     });
   } else if (view.level === 2) {
     const inCountry = members.filter(
-      (m) => continentOf(m) === view.continent && m.country === view.country,
+      (m) =>
+        continentOf(m) === view.continent &&
+        canonCountry(m.country) === view.country,
     );
-    [...new Set(inCountry.map((m) => m.state))].forEach((c) => {
+    const catalog = view.country === "United States" ? US_STATES : [];
+    const names = [
+      ...catalog.map((x) => x.name),
+      ...inCountry.map((m) => m.state),
+    ];
+    [...new Set(names)].forEach((c) => {
       const list = inCountry.filter((m) => m.state === c);
-      const ct = centroid(list);
+      const cat = catalog.find((x) => x.name === c);
+      const ct = list.length ? centroid(list) : cat!;
       chips.push({
         name: c,
         count: list.length,
@@ -223,6 +318,8 @@ export default function ConstellationGlobe({
       });
     });
   }
+  // the inhabited places lead, the empty frontier follows
+  chips.sort((a, b) => b.count - a.count);
   const goBack = () => {
     if (view.level === 1) {
       setView({ level: 0 });
@@ -1014,7 +1111,7 @@ export default function ConstellationGlobe({
 
         {/* region drill-down: continent, country, city, each with its
             count of creators serious about Jesus */}
-        {built && members.length > 0 ? (
+        {built ? (
           <div className="pointer-events-none absolute inset-x-0 top-16 z-10 px-4 text-center">
             <p className="font-display text-2xl font-bold text-white [text-shadow:0_0_12px_rgb(255_255_255/0.7),0_0_30px_rgb(167_139_250/0.6)]">
               {inView.length}
@@ -1028,7 +1125,7 @@ export default function ConstellationGlobe({
             ) : null}
           </div>
         ) : null}
-        {built && members.length > 0 && !selected ? (
+        {built && !selected ? (
           <div className="absolute inset-x-0 bottom-5 z-10 px-4">
             <p className="meta-label mb-3 text-center text-white [text-shadow:0_0_10px_rgb(255_255_255/0.7),0_0_24px_rgb(167_139_250/0.6)]">
               {prompt}
@@ -1062,7 +1159,10 @@ export default function ConstellationGlobe({
                   onClick={c.onPick}
                   className="meta-label rounded-full border border-dust/40 bg-night/80 px-4 py-2.5 text-starlight transition-colors hover:border-ember"
                 >
-                  {c.name} <span className="text-ember">{c.count}</span>
+                  {c.name}
+                  {c.count > 0 ? (
+                    <span className="text-ember"> {c.count}</span>
+                  ) : null}
                 </motion.button>
               ))}
               </AnimatePresence>
@@ -1128,11 +1228,6 @@ export default function ConstellationGlobe({
           </button>
         ) : null}
 
-        {built && members.length === 0 ? (
-          <p className="pointer-events-none absolute inset-x-0 bottom-6 z-10 px-6 text-center font-meta text-xs uppercase tracking-[0.18em] text-starlight/80">
-            {CONSTELLATION.emptyNote}
-          </p>
-        ) : null}
       </div>
     </div>
   );
