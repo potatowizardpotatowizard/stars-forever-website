@@ -234,6 +234,9 @@ export default function ConstellationGlobe({
 
   // ---- drill-down: continent → country → city --------------------
   const [view, setView] = useState<View>({ level: 0 });
+  const [preview, setPreview] = useState<string | null>(null);
+  const lastCentered = useRef<string>("");
+  const railRef = useRef<HTMLDivElement>(null);
   const flyReq = useRef<FlyReq | null>(null);
   const regionReq = useRef<{
     id: number;
@@ -344,6 +347,8 @@ export default function ConstellationGlobe({
   // the inhabited places lead, the empty frontier follows
   chips.sort((a, b) => b.count - a.count);
   const goBack = () => {
+    setPreview(null);
+    lastCentered.current = "";
     if (view.level === 1) {
       setView({ level: 0 });
       regionReq.current = {
@@ -373,6 +378,84 @@ export default function ConstellationGlobe({
       goRegion(2, view.country, ct.lat, ct.lng, cat?.r ?? 8);
     }
   };
+  const ALL = "__all__";
+  const centerOn = (name: string) => {
+    if (name === lastCentered.current) return;
+    lastCentered.current = name;
+    if (name === ALL) {
+      setPreview(null);
+      if (view.level === 1) {
+        const c = CONTINENTS[view.continent];
+        goRegion(1, view.continent, c.lat, c.lng, c.r);
+      } else if (view.level === 2) {
+        const cat = (COUNTRY_CATALOG[view.continent] ?? []).find(
+          (x) => x.name === view.country,
+        );
+        if (cat) goRegion(2, view.country, cat.lat, cat.lng, cat.r);
+      }
+      return;
+    }
+    setPreview(name);
+    if (view.level === 1) {
+      const cat = (COUNTRY_CATALOG[view.continent] ?? []).find(
+        (x) => x.name === name,
+      );
+      const list = members.filter((m) => canonCountry(m.country) === name);
+      const ct = cat ?? (list.length ? centroid(list) : CONTINENTS[view.continent]);
+      goRegion(2, name, ct.lat, ct.lng, cat?.r ?? 8);
+    } else if (view.level === 2) {
+      const st = US_STATES.find((x) => x.name === name);
+      const list = members.filter((m) => m.state === name);
+      const ct = st ?? (list.length ? centroid(list) : null);
+      if (ct) goRegion(3, name, ct.lat, ct.lng, st?.r ?? 5);
+    }
+  };
+  const railDebounce = useRef<number>(0);
+  const onRailScroll = () => {
+    window.clearTimeout(railDebounce.current);
+    railDebounce.current = window.setTimeout(() => {
+      const rail = railRef.current;
+      if (!rail) return;
+    const mid = rail.scrollLeft + rail.clientWidth / 2;
+    let best: HTMLElement | null = null;
+    let bd = Infinity;
+    for (const child of [...rail.children] as HTMLElement[]) {
+      const c = child.offsetLeft + child.offsetWidth / 2;
+      const d = Math.abs(c - mid);
+      if (d < bd) {
+        bd = d;
+        best = child;
+      }
+    }
+      if (best?.dataset.place) centerOn(best.dataset.place);
+    }, 90);
+  };
+  const railTap = (name: string, el: HTMLElement | null) => {
+    if (name !== lastCentered.current) {
+      el?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+      return;
+    }
+    if (name === ALL) return;
+    if (view.level === 1) {
+      setView({ level: 2, continent: view.continent, country: name });
+      setPreview(null);
+      lastCentered.current = "";
+    } else if (view.level === 2) {
+      setView({
+        level: 3,
+        continent: view.continent,
+        country: view.country,
+        state: name,
+      });
+      setPreview(null);
+      lastCentered.current = "";
+    }
+  };
+  const shownCount = preview
+    ? view.level === 1
+      ? members.filter((m) => canonCountry(m.country) === preview).length
+      : members.filter((m) => m.state === preview).length
+    : inView.length;
   const regionName =
     view.level === 0
       ? "across the earth"
@@ -393,9 +476,9 @@ export default function ConstellationGlobe({
     view.level === 0
       ? "tap a continent to fly in"
       : view.level === 1
-        ? "tap a country to go deeper"
+        ? "swipe the countries · tap to enter"
         : view.level === 2
-          ? "tap a state to land"
+          ? "swipe the states · tap to land"
           : "you have landed";
   const crumbs =
     view.level === 0
@@ -775,7 +858,7 @@ export default function ConstellationGlobe({
         lastTouch = performance.now();
       };
       const onMove = (e: PointerEvent) => {
-        if (!dragging) return;
+        if (!dragging || regionLevel > 0) return;
         const dx = e.clientX - px;
         const dy = e.clientY - py;
         moved += Math.abs(dx) + Math.abs(dy);
@@ -1198,8 +1281,8 @@ export default function ConstellationGlobe({
           memberSprites.forEach((sp, i) => sp.position.lerp(memberTgt[i], 0.05));
         }
 
-        // idle spin and momentum
-        if (!dragging && !flying) {
+        // idle spin and momentum: only while the free globe is up
+        if (!dragging && !flying && regionLevel === 0) {
           globe.rotation.y += vx;
           globe.rotation.x = Math.max(
             -1.35,
@@ -1359,10 +1442,11 @@ export default function ConstellationGlobe({
         {built ? (
           <div className="pointer-events-none absolute inset-x-0 top-16 z-10 px-4 text-center">
             <p className="font-display text-2xl font-bold text-white [text-shadow:0_0_12px_rgb(255_255_255/0.7),0_0_30px_rgb(167_139_250/0.6)]">
-              {inView.length}
+              {shownCount}
             </p>
             <p className="meta-label mt-1 text-starlight/80">
-              creator{inView.length === 1 ? "" : "s"} {regionName}
+              creator{shownCount === 1 ? "" : "s"}{" "}
+              {preview ? `in ${preview}` : regionName}
             </p>
             {crumbs ? (
               <p className="meta-label mt-2 text-[10px] text-dust">{crumbs}</p>
@@ -1374,23 +1458,9 @@ export default function ConstellationGlobe({
             <p className="meta-label mb-3 text-center text-white [text-shadow:0_0_10px_rgb(255_255_255/0.7),0_0_24px_rgb(167_139_250/0.6)]">
               {prompt}
             </p>
+            {view.level === 0 ? (
             <motion.div layout className="flex flex-wrap items-center justify-center gap-2">
               <AnimatePresence mode="popLayout">
-              {view.level > 0 ? (
-                <motion.button
-                  key={`back-${view.level}`}
-                  layout
-                  initial={{ opacity: 0, scale: 0.8, y: 14 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.85, y: 10 }}
-                  transition={{ type: "spring", stiffness: 520, damping: 30 }}
-                  type="button"
-                  onClick={goBack}
-                  className="meta-label rounded-full border border-ember bg-ember/15 px-4 py-2.5 text-starlight transition-colors hover:bg-ember/30"
-                >
-                  ← {backLabel}
-                </motion.button>
-              ) : null}
               {chips.map((c, ci) => (
                 <motion.button
                   key={`${view.level}-${c.name}`}
@@ -1411,6 +1481,54 @@ export default function ConstellationGlobe({
               ))}
               </AnimatePresence>
             </motion.div>
+            ) : (
+            <div className="relative">
+              <div className="mb-3 flex justify-center">
+                <button
+                  type="button"
+                  onClick={goBack}
+                  className="meta-label rounded-full border border-ember bg-ember/15 px-4 py-2 text-starlight transition-colors hover:bg-ember/30"
+                >
+                  ← {backLabel}
+                </button>
+              </div>
+              <div
+                ref={railRef}
+                onScroll={onRailScroll}
+                className="flex snap-x snap-mandatory gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                style={{ paddingLeft: "38vw", paddingRight: "38vw" }}
+              >
+                {[{ name: ALL, count: inView.length }, ...chips].map((c) => {
+                  const label =
+                    c.name === ALL
+                      ? view.level === 1
+                        ? `All ${"continent" in view ? view.continent : ""}`
+                        : `All ${"country" in view ? view.country : ""}`
+                      : c.name;
+                  const active =
+                    preview === c.name || (c.name === ALL && !preview);
+                  return (
+                    <button
+                      key={c.name}
+                      data-place={c.name}
+                      type="button"
+                      onClick={(e) => railTap(c.name, e.currentTarget)}
+                      className={`meta-label shrink-0 snap-center whitespace-nowrap rounded-full border px-4 py-2.5 transition-colors ${
+                        active
+                          ? "border-starlight bg-soot/80 text-white shadow-[0_0_18px_rgb(167_139_250/0.5)]"
+                          : "border-dust/40 bg-night/80 text-starlight"
+                      }`}
+                    >
+                      {label}
+                      {c.count > 0 ? (
+                        <span className="text-ember"> {c.count}</span>
+                      ) : null}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+            )}
           </div>
         ) : null}
 
