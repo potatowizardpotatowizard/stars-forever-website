@@ -723,6 +723,7 @@ export default function ConstellationGlobe({
       let lastText = -1;
       let flying = false;
       let everBuilt = false;
+      let buildCur = 0;
       let flyDone = 0;
       let flyZ = zoom;
       const flyQ = new THREE.Quaternion();
@@ -775,9 +776,14 @@ export default function ConstellationGlobe({
           textMat.opacity = (0.25 + 0.75 * tie) * (1 - dse * 0.97);
         }
 
-        let build = clamp01((p - 0.3) / 0.42);
-        if (build >= 1) everBuilt = true;
-        if (everBuilt && p > 0.45) build = 1;
+        // scroll sets the destination, but the stars always take their
+        // time flying there: a fast flick still gets the full formation
+        let buildTarget = clamp01((p - 0.3) / 0.42);
+        if (buildTarget >= 1) everBuilt = true;
+        if (everBuilt && p > 0.45) buildTarget = 1;
+        buildCur += (buildTarget - buildCur) * 0.045;
+        if (Math.abs(buildTarget - buildCur) < 0.0004) buildCur = buildTarget;
+        const build = buildCur;
         const be = 1 - Math.pow(1 - build, 3);
         if (build !== lastBuild) {
           lastBuild = build;
