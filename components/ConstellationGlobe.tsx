@@ -238,6 +238,7 @@ export default function ConstellationGlobe({
   const regionReq = useRef<{
     id: number;
     level: number;
+    name: string;
     lat: number;
     lng: number;
     r: number;
@@ -248,8 +249,14 @@ export default function ConstellationGlobe({
     const hh = hostRef.current?.clientHeight ?? 1;
     return hw < hh * 0.9 ? 480 : 310;
   };
-  const goRegion = (level: number, lat: number, lng: number, r: number) => {
-    regionReq.current = { id: ++flyId.current, level, lat, lng, r };
+  const goRegion = (
+    level: number,
+    name: string,
+    lat: number,
+    lng: number,
+    r: number,
+  ) => {
+    regionReq.current = { id: ++flyId.current, level, name, lat, lng, r };
     fly(lat, lng, baseZ());
   };
 
@@ -279,7 +286,7 @@ export default function ConstellationGlobe({
         count: list.length,
         onPick: () => {
           setView({ level: 1, continent: c });
-          goRegion(1, CONTINENTS[c].lat, CONTINENTS[c].lng, CONTINENTS[c].r);
+          goRegion(1, c, CONTINENTS[c].lat, CONTINENTS[c].lng, CONTINENTS[c].r);
         },
       });
     });
@@ -300,7 +307,7 @@ export default function ConstellationGlobe({
         count: list.length,
         onPick: () => {
           setView({ level: 2, continent: view.continent, country: c });
-          goRegion(2, ct.lat, ct.lng, cat?.r ?? 8);
+          goRegion(2, c, ct.lat, ct.lng, cat?.r ?? 8);
         },
       });
     });
@@ -329,7 +336,7 @@ export default function ConstellationGlobe({
             country: view.country,
             state: c,
           });
-          goRegion(3, ct.lat, ct.lng, cat?.r ?? 5);
+          goRegion(3, c, ct.lat, ct.lng, cat?.r ?? 5);
         },
       });
     });
@@ -339,12 +346,19 @@ export default function ConstellationGlobe({
   const goBack = () => {
     if (view.level === 1) {
       setView({ level: 0 });
-      regionReq.current = { id: ++flyId.current, level: 0, lat: 0, lng: 0, r: 0 };
+      regionReq.current = {
+        id: ++flyId.current,
+        level: 0,
+        name: "",
+        lat: 0,
+        lng: 0,
+        r: 0,
+      };
       fly(0, 0, baseZ(), true);
     } else if (view.level === 2) {
       setView({ level: 1, continent: view.continent });
       const c = CONTINENTS[view.continent];
-      goRegion(1, c.lat, c.lng, c.r);
+      goRegion(1, view.continent, c.lat, c.lng, c.r);
     } else if (view.level === 3) {
       setView({ level: 2, continent: view.continent, country: view.country });
       const cat = (COUNTRY_CATALOG[view.continent] ?? []).find(
@@ -356,7 +370,7 @@ export default function ConstellationGlobe({
           canonCountry(m.country) === view.country,
       );
       const ct = cat ?? (list.length ? centroid(list) : CONTINENTS[view.continent]);
-      goRegion(2, ct.lat, ct.lng, cat?.r ?? 8);
+      goRegion(2, view.country, ct.lat, ct.lng, cat?.r ?? 8);
     }
   };
   const regionName =
@@ -842,10 +856,58 @@ export default function ConstellationGlobe({
       let everBuilt = false;
       let buildCur = 0;
       // region morphing: dots re-form into the chosen zone's map
+      let shapes: {
+        continents: Record<string, number[][][]>;
+        countries: Record<string, number[][][]>;
+        states: Record<string, number[][][]>;
+      } | null = null;
+      let shapesLoading = false;
+      const pointInRings = (lng: number, lat: number, rings: number[][][]) => {
+        let inside = false;
+        for (const ring of rings) {
+          for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+            const [xi, yi] = ring[i];
+            const [xj, yj] = ring[j];
+            if (
+              yi > lat !== yj > lat &&
+              lng < ((xj - xi) * (lat - yi)) / (yj - yi) + xi
+            ) {
+              inside = !inside;
+            }
+          }
+        }
+        return inside;
+      };
+      const sampleShape = (rings: number[][][], targetN: number) => {
+        let minX = 999, maxX = -999, minY = 999, maxY = -999;
+        for (const ring of rings) {
+          for (const [x, y] of ring) {
+            if (x < minX) minX = x;
+            if (x > maxX) maxX = x;
+            if (y < minY) minY = y;
+            if (y > maxY) maxY = y;
+          }
+        }
+        let step = Math.sqrt(((maxX - minX) * (maxY - minY)) / (targetN * 2.4));
+        for (let attempt = 0; attempt < 3; attempt++) {
+          const pts: [number, number][] = [];
+          for (let y = minY + step / 2; y < maxY; y += step) {
+            for (let x = minX + step / 2; x < maxX; x += step) {
+              if (pointInRings(x, y, rings)) pts.push([x, y]);
+            }
+          }
+          if (pts.length >= Math.min(140, targetN / 4) || step < 0.02) {
+            return { pts, step };
+          }
+          step /= 2;
+        }
+        return { pts: [] as [number, number][], step };
+      };
       let lastRegion = -1;
       let regionLevel = 0;
       let dustTgt: Float32Array | null = null;
       const memberBase = memberSprites.map((sp) => sp.position.clone());
+      const memberLatLng = mem.map((m) => [m.lat, m.lng] as [number, number]);
       const memberTgt = memberSprites.map((sp) => sp.position.clone());
       const memberIn: boolean[] = memberSprites.map(() => true);
       let flyDone = 0;
@@ -1002,79 +1064,122 @@ export default function ConstellationGlobe({
               memberIn[i] = true;
             });
           } else {
+            // real geography arrives lazily; retry this request until
+            // the boundary shapes are in hand
+            if (!shapes) {
+              lastRegion = -1;
+              if (!shapesLoading) {
+                shapesLoading = true;
+                fetch("/region-shapes.json")
+                  .then((r2) => r2.json())
+                  .then((j) => {
+                    shapes = j;
+                  })
+                  .catch(() => {
+                    shapesLoading = false;
+                  });
+              }
+              renderer.render(scene, camera);
+              return;
+            }
+            const shapeRings =
+              rr.level === 1
+                ? shapes.continents[rr.name]
+                : rr.level === 2
+                  ? shapes.countries[rr.name]
+                  : shapes.states[rr.name];
             const cV = new THREE.Vector3(...toXYZ(rr.lat, rr.lng)).normalize();
             const east = new THREE.Vector3(0, 1, 0).cross(cV).normalize();
             const north = cV.clone().cross(east).normalize();
             const rRad = (rr.r * Math.PI) / 180;
-            const visH = 2 * Math.tan((20 * Math.PI) / 180) * (host.clientWidth < host.clientHeight * 0.9 ? 480 : 310);
-            const visMin = Math.min(visH, visH * (host.clientWidth / host.clientHeight));
-            const sFac = (0.42 * visMin) / (Math.tan(rRad) * R);
-            const dv = new THREE.Vector3();
-            const flat = (x: number, y: number, z: number): [number, number] | null => {
-              dv.set(x, y, z).normalize();
-              if (dv.angleTo(cV) >= rRad) return null;
-              const t = dv.clone().divideScalar(dv.dot(cV)).sub(cV);
-              return [t.dot(east) * R * sFac, t.dot(north) * R * sFac];
-            };
             const toWorld = (gx: number, gy: number) =>
               cV.clone().multiplyScalar(R + 2)
                 .add(east.clone().multiplyScalar(gx))
                 .add(north.clone().multiplyScalar(gy));
-            // first pass: the zone's own dots keep their true places
-            const inFlat: [number, number][] = [];
-            const own: (null | [number, number])[] = [];
-            for (let i = 0; i < count; i++) {
-              const f = flat(targets[i * 3], targets[i * 3 + 1], targets[i * 3 + 2]);
-              own.push(f);
-              if (f) inFlat.push(f);
-            }
-            // second pass: every outside dot becomes filler, thickening
-            // the zone so even a small island renders dense
-            // filler scatter: never tighter than the source grid, and
-            // round, so small zones melt into one mass instead of tiles
-            const jr =
-              Math.max(
-                0.017,
-                Math.tan(rRad) * (inFlat.length < 30 ? 0.32 : 0.045),
-              ) * R * sFac;
             const scatter = (radius: number): [number, number] => {
               const a = Math.random() * Math.PI * 2;
               const d = radius * Math.sqrt(Math.random());
               return [Math.cos(a) * d, Math.sin(a) * d];
             };
-            for (let i = 0; i < count; i++) {
-              let gx: number;
-              let gy: number;
-              const f = own[i];
-              if (f) {
-                [gx, gy] = f;
-              } else if (inFlat.length) {
-                const seed = inFlat[i % inFlat.length];
+            const dv = new THREE.Vector3();
+            const sampled = shapeRings
+              ? sampleShape(shapeRings, 2400)
+              : { pts: [] as [number, number][], step: 1 };
+            if (sampled.pts.length > 40) {
+              // the real outline: local map projection, fit to screen
+              let minX = 999, maxX = -999, minY = 999, maxY = -999;
+              const latMid =
+                sampled.pts.reduce((a, p2) => a + p2[1], 0) / sampled.pts.length;
+              const kx = Math.cos((latMid * Math.PI) / 180);
+              const loc = sampled.pts.map(([lng2, lat2]) => {
+                const x = lng2 * kx;
+                const y = lat2;
+                if (x < minX) minX = x;
+                if (x > maxX) maxX = x;
+                if (y < minY) minY = y;
+                if (y > maxY) maxY = y;
+                return [x, y] as [number, number];
+              });
+              const cx = (minX + maxX) / 2;
+              const cy = (minY + maxY) / 2;
+              const visH = 2 * Math.tan((20 * Math.PI) / 180) * (host.clientWidth < host.clientHeight * 0.9 ? 480 : 310);
+              const visW = visH * (host.clientWidth / host.clientHeight);
+              const S = Math.min(
+                (0.86 * visW) / Math.max(maxX - minX, 0.1),
+                (0.7 * visH) / Math.max(maxY - minY, 0.1),
+              );
+              const jr = sampled.step * 0.48 * kx * S;
+              for (let i = 0; i < count; i++) {
+                const p2 = loc[i % loc.length];
                 const [jx, jy] = scatter(jr);
-                gx = seed[0] + jx;
-                gy = seed[1] + jy;
-              } else {
-                const [jx, jy] = scatter(jr * 6);
-                gx = jx;
-                gy = jy;
+                const o = toWorld((p2[0] - cx) * S + jx, (p2[1] - cy) * S + jy);
+                dustTgt![i * 3] = o.x;
+                dustTgt![i * 3 + 1] = o.y;
+                dustTgt![i * 3 + 2] = o.z;
               }
-              const o = toWorld(gx, gy);
-              dustTgt![i * 3] = o.x;
-              dustTgt![i * 3 + 1] = o.y;
-              dustTgt![i * 3 + 2] = o.z;
-            }
-            memberSprites.forEach((sp, i) => {
-              const f = flat(memberBase[i].x, memberBase[i].y, memberBase[i].z);
-              if (f) {
-                const o = toWorld(f[0], f[1]);
-                memberTgt[i].set(o.x, o.y, o.z);
-                memberIn[i] = true;
-              } else {
+              memberSprites.forEach((sp, i) => {
+                const mLat = memberLatLng[i][0];
+                const mLng = memberLatLng[i][1];
+                if (pointInRings(mLng, mLat, shapeRings!)) {
+                  const o = toWorld((mLng * kx - cx) * S, (mLat - cy) * S);
+                  memberTgt[i].set(o.x, o.y, o.z);
+                  memberIn[i] = true;
+                } else {
+                  dv.copy(memberBase[i]).normalize();
+                  memberTgt[i].copy(dv.multiplyScalar(R * 3.6));
+                  memberIn[i] = false;
+                }
+              });
+            } else {
+              // no boundary data for this place: a soft disc stands in
+              const visH = 2 * Math.tan((20 * Math.PI) / 180) * (host.clientWidth < host.clientHeight * 0.9 ? 480 : 310);
+              const visMin = Math.min(visH, visH * (host.clientWidth / host.clientHeight));
+              const sFac2 = (0.42 * visMin) / (Math.tan(rRad) * R);
+              const discR = Math.tan(rRad) * R * sFac2 * 0.5;
+              for (let i = 0; i < count; i++) {
+                const [jx, jy] = scatter(discR);
+                const o = toWorld(jx, jy);
+                dustTgt![i * 3] = o.x;
+                dustTgt![i * 3 + 1] = o.y;
+                dustTgt![i * 3 + 2] = o.z;
+              }
+              memberSprites.forEach((sp, i) => {
                 dv.copy(memberBase[i]).normalize();
-                memberTgt[i].copy(dv.multiplyScalar(R * 3.6));
-                memberIn[i] = false;
-              }
-            });
+                const d = dv.angleTo(cV);
+                if (d < rRad) {
+                  const t = dv.clone().divideScalar(dv.dot(cV)).sub(cV);
+                  const o = toWorld(
+                    t.dot(east) * R * sFac2,
+                    t.dot(north) * R * sFac2,
+                  );
+                  memberTgt[i].set(o.x, o.y, o.z);
+                  memberIn[i] = true;
+                } else {
+                  memberTgt[i].copy(dv.multiplyScalar(R * 3.6));
+                  memberIn[i] = false;
+                }
+              });
+            }
           }
         }
         // the dots always take their time flying to wherever they belong
