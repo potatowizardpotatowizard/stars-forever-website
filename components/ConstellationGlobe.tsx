@@ -33,13 +33,13 @@ const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
 // ---- region drill-down ---------------------------------------------
 // continent → camera centroid; membership resolved from each member's
 // country name with a lat/lng fallback for anything unlisted
-const CONTINENTS: Record<string, { lat: number; lng: number }> = {
-  "North America": { lat: 42, lng: -100 },
-  "South America": { lat: -15, lng: -60 },
-  Europe: { lat: 50, lng: 15 },
-  Africa: { lat: 2, lng: 20 },
-  Asia: { lat: 34, lng: 95 },
-  Oceania: { lat: -26, lng: 140 },
+const CONTINENTS: Record<string, { lat: number; lng: number; r: number }> = {
+  "North America": { lat: 42, lng: -100, r: 42 },
+  "South America": { lat: -15, lng: -60, r: 35 },
+  Europe: { lat: 52, lng: 15, r: 26 },
+  Africa: { lat: 2, lng: 20, r: 38 },
+  Asia: { lat: 34, lng: 95, r: 45 },
+  Oceania: { lat: -28, lng: 147, r: 30 },
 };
 
 const COUNTRY_CONTINENT: Record<string, string> = {
@@ -105,66 +105,66 @@ function continentOf(m: ConstellationMember): string {
 
 // Places the drill-down offers even when no creator lives there yet:
 // the map is explorable first, inhabited second.
-const COUNTRY_CATALOG: Record<string, { name: string; lat: number; lng: number }[]> = {
+const COUNTRY_CATALOG: Record<string, { name: string; lat: number; lng: number; r: number }[]> = {
   "North America": [
-    { name: "United States", lat: 39, lng: -98 },
-    { name: "Canada", lat: 53, lng: -103 },
-    { name: "Mexico", lat: 23.6, lng: -102.5 },
-    { name: "Panama", lat: 8.5, lng: -80.8 },
+    { name: "United States", lat: 39, lng: -98, r: 26 },
+    { name: "Canada", lat: 53, lng: -103, r: 28 },
+    { name: "Mexico", lat: 23.6, lng: -102.5, r: 13 },
+    { name: "Panama", lat: 8.5, lng: -80.8, r: 5 },
   ],
   "South America": [
-    { name: "Brazil", lat: -10.8, lng: -52.9 },
-    { name: "Argentina", lat: -34.6, lng: -64.7 },
-    { name: "Colombia", lat: 4.6, lng: -74.1 },
-    { name: "Chile", lat: -33.5, lng: -70.7 },
-    { name: "Peru", lat: -9.2, lng: -75 },
+    { name: "Brazil", lat: -10.8, lng: -52.9, r: 21 },
+    { name: "Argentina", lat: -34.6, lng: -64.7, r: 17 },
+    { name: "Colombia", lat: 4.6, lng: -74.1, r: 9 },
+    { name: "Chile", lat: -33.5, lng: -70.7, r: 16 },
+    { name: "Peru", lat: -9.2, lng: -75, r: 10 },
   ],
   Europe: [
-    { name: "United Kingdom", lat: 53.8, lng: -1.6 },
-    { name: "Germany", lat: 51.1, lng: 10.4 },
-    { name: "France", lat: 46.6, lng: 2.5 },
-    { name: "Spain", lat: 40.3, lng: -3.7 },
-    { name: "Italy", lat: 42.8, lng: 12.8 },
-    { name: "Netherlands", lat: 52.2, lng: 5.5 },
-    { name: "Norway", lat: 61, lng: 9 },
-    { name: "Iceland", lat: 64.9, lng: -18.6 },
-    { name: "Portugal", lat: 39.6, lng: -8.1 },
-    { name: "Poland", lat: 52, lng: 19.3 },
+    { name: "United Kingdom", lat: 53.8, lng: -1.6, r: 7 },
+    { name: "Germany", lat: 51.1, lng: 10.4, r: 6 },
+    { name: "France", lat: 46.6, lng: 2.5, r: 7 },
+    { name: "Spain", lat: 40.3, lng: -3.7, r: 7 },
+    { name: "Italy", lat: 42.8, lng: 12.8, r: 7 },
+    { name: "Netherlands", lat: 52.2, lng: 5.5, r: 4 },
+    { name: "Norway", lat: 61, lng: 9, r: 10 },
+    { name: "Iceland", lat: 64.9, lng: -18.6, r: 5 },
+    { name: "Portugal", lat: 39.6, lng: -8.1, r: 5 },
+    { name: "Poland", lat: 52, lng: 19.3, r: 6 },
   ],
   Africa: [
-    { name: "South Africa", lat: -29, lng: 24.7 },
-    { name: "Nigeria", lat: 9.1, lng: 8.7 },
-    { name: "Kenya", lat: 0.2, lng: 37.9 },
-    { name: "Ghana", lat: 7.9, lng: -1 },
-    { name: "Egypt", lat: 26.8, lng: 30 },
+    { name: "South Africa", lat: -29, lng: 24.7, r: 9 },
+    { name: "Nigeria", lat: 9.1, lng: 8.7, r: 7 },
+    { name: "Kenya", lat: 0.2, lng: 37.9, r: 6 },
+    { name: "Ghana", lat: 7.9, lng: -1, r: 5 },
+    { name: "Egypt", lat: 26.8, lng: 30, r: 8 },
   ],
   Asia: [
-    { name: "Japan", lat: 36.2, lng: 138.3 },
-    { name: "South Korea", lat: 36.5, lng: 127.9 },
-    { name: "Philippines", lat: 12.9, lng: 121.8 },
-    { name: "India", lat: 21.1, lng: 78.7 },
-    { name: "Indonesia", lat: -2.5, lng: 118 },
-    { name: "Thailand", lat: 15.1, lng: 101 },
-    { name: "Israel", lat: 31.4, lng: 35 },
-    { name: "Singapore", lat: 1.35, lng: 103.8 },
+    { name: "Japan", lat: 36.2, lng: 138.3, r: 11 },
+    { name: "South Korea", lat: 36.5, lng: 127.9, r: 5 },
+    { name: "Philippines", lat: 12.9, lng: 121.8, r: 9 },
+    { name: "India", lat: 21.1, lng: 78.7, r: 16 },
+    { name: "Indonesia", lat: -2.5, lng: 118, r: 17 },
+    { name: "Thailand", lat: 15.1, lng: 101, r: 8 },
+    { name: "Israel", lat: 31.4, lng: 35, r: 4 },
+    { name: "Singapore", lat: 1.35, lng: 103.8, r: 2.5 },
   ],
   Oceania: [
-    { name: "Australia", lat: -25.3, lng: 133.8 },
-    { name: "New Zealand", lat: -41.8, lng: 172.8 },
+    { name: "Australia", lat: -25.3, lng: 133.8, r: 21 },
+    { name: "New Zealand", lat: -41.8, lng: 172.8, r: 9 },
   ],
 };
 
-const US_STATES: { name: string; lat: number; lng: number }[] = [
-  { name: "California", lat: 36.7, lng: -119.4 },
-  { name: "Texas", lat: 31, lng: -99 },
-  { name: "Florida", lat: 27.8, lng: -81.6 },
-  { name: "New York", lat: 42.9, lng: -75.5 },
-  { name: "Tennessee", lat: 35.8, lng: -86.4 },
-  { name: "Georgia", lat: 32.6, lng: -83.4 },
-  { name: "Arizona", lat: 34.2, lng: -111.6 },
-  { name: "Colorado", lat: 39, lng: -105.5 },
-  { name: "Washington", lat: 47.4, lng: -120.5 },
-  { name: "North Carolina", lat: 35.5, lng: -79.4 },
+const US_STATES: { name: string; lat: number; lng: number; r: number }[] = [
+  { name: "California", lat: 36.7, lng: -119.4, r: 8 },
+  { name: "Texas", lat: 31, lng: -99, r: 8 },
+  { name: "Florida", lat: 27.8, lng: -81.6, r: 8 },
+  { name: "New York", lat: 42.9, lng: -75.5, r: 8 },
+  { name: "Tennessee", lat: 35.8, lng: -86.4, r: 8 },
+  { name: "Georgia", lat: 32.6, lng: -83.4, r: 8 },
+  { name: "Arizona", lat: 34.2, lng: -111.6, r: 8 },
+  { name: "Colorado", lat: 39, lng: -105.5, r: 8 },
+  { name: "Washington", lat: 47.4, lng: -120.5, r: 8 },
+  { name: "North Carolina", lat: 35.5, lng: -79.4, r: 8 },
 ];
 
 const COUNTRY_CANON: Record<string, string> = {
@@ -235,7 +235,23 @@ export default function ConstellationGlobe({
   // ---- drill-down: continent → country → city --------------------
   const [view, setView] = useState<View>({ level: 0 });
   const flyReq = useRef<FlyReq | null>(null);
+  const regionReq = useRef<{
+    id: number;
+    level: number;
+    lat: number;
+    lng: number;
+    r: number;
+  } | null>(null);
   const flyId = useRef(0);
+  const baseZ = () => {
+    const hw = hostRef.current?.clientWidth ?? 0;
+    const hh = hostRef.current?.clientHeight ?? 1;
+    return hw < hh * 0.9 ? 480 : 310;
+  };
+  const goRegion = (level: number, lat: number, lng: number, r: number) => {
+    regionReq.current = { id: ++flyId.current, level, lat, lng, r };
+    fly(lat, lng, baseZ());
+  };
 
   const inView = members.filter((m) => {
     if (view.level === 0) return true;
@@ -263,7 +279,7 @@ export default function ConstellationGlobe({
         count: list.length,
         onPick: () => {
           setView({ level: 1, continent: c });
-          fly(CONTINENTS[c].lat, CONTINENTS[c].lng, narrow() ? 380 : 300);
+          goRegion(1, CONTINENTS[c].lat, CONTINENTS[c].lng, CONTINENTS[c].r);
         },
       });
     });
@@ -284,7 +300,7 @@ export default function ConstellationGlobe({
         count: list.length,
         onPick: () => {
           setView({ level: 2, continent: view.continent, country: c });
-          fly(ct.lat, ct.lng, narrow() ? 310 : 250);
+          goRegion(2, ct.lat, ct.lng, cat?.r ?? 8);
         },
       });
     });
@@ -313,7 +329,7 @@ export default function ConstellationGlobe({
             country: view.country,
             state: c,
           });
-          fly(ct.lat, ct.lng, narrow() ? 270 : 225);
+          goRegion(3, ct.lat, ct.lng, cat?.r ?? 5);
         },
       });
     });
@@ -323,20 +339,24 @@ export default function ConstellationGlobe({
   const goBack = () => {
     if (view.level === 1) {
       setView({ level: 0 });
-      const hostW = hostRef.current?.clientWidth ?? 0;
-      const hostH = hostRef.current?.clientHeight ?? 1;
-      fly(0, 0, hostW < hostH * 0.9 ? 480 : 310, true);
+      regionReq.current = { id: ++flyId.current, level: 0, lat: 0, lng: 0, r: 0 };
+      fly(0, 0, baseZ(), true);
     } else if (view.level === 2) {
       setView({ level: 1, continent: view.continent });
       const c = CONTINENTS[view.continent];
-      fly(c.lat, c.lng, narrow() ? 380 : 300);
+      goRegion(1, c.lat, c.lng, c.r);
     } else if (view.level === 3) {
       setView({ level: 2, continent: view.continent, country: view.country });
-      const list = members.filter(
-        (m) => continentOf(m) === view.continent && m.country === view.country,
+      const cat = (COUNTRY_CATALOG[view.continent] ?? []).find(
+        (x) => x.name === view.country,
       );
-      const ct = centroid(list);
-      fly(ct.lat, ct.lng, narrow() ? 310 : 250);
+      const list = members.filter(
+        (m) =>
+          continentOf(m) === view.continent &&
+          canonCountry(m.country) === view.country,
+      );
+      const ct = cat ?? (list.length ? centroid(list) : CONTINENTS[view.continent]);
+      goRegion(2, ct.lat, ct.lng, cat?.r ?? 8);
     }
   };
   const regionName =
@@ -821,6 +841,13 @@ export default function ConstellationGlobe({
       let flying = false;
       let everBuilt = false;
       let buildCur = 0;
+      // region morphing: dots re-form into the chosen zone's map
+      let lastRegion = -1;
+      let regionLevel = 0;
+      let dustTgt: Float32Array | null = null;
+      const memberBase = memberSprites.map((sp) => sp.position.clone());
+      const memberTgt = memberSprites.map((sp) => sp.position.clone());
+      const memberIn: boolean[] = memberSprites.map(() => true);
       let flyDone = 0;
       let flyZ = zoom;
       const flyQ = new THREE.Quaternion();
@@ -909,7 +936,14 @@ export default function ConstellationGlobe({
         camera.getWorldDirection(camDir);
         memberSprites.forEach((s, i) => {
           wp.copy(s.position).applyMatrix4(globe.matrixWorld).normalize();
-          const facing = wp.dot(camDir) < -0.08 ? 1 : 0.12;
+          const facing =
+            regionLevel > 0
+              ? memberIn[i]
+                ? 1
+                : 0
+              : wp.dot(camDir) < -0.08
+                ? 1
+                : 0.12;
           const tw = 0.85 + 0.15 * Math.sin(now / 460 + i * 1.7);
           s.material.opacity = reveal * facing * tw;
         });
@@ -921,7 +955,7 @@ export default function ConstellationGlobe({
           Math.sin(now / 6100) * 26,
           Math.sin(ga) * (R + 30),
         );
-        ghost.material.opacity = reveal * (0.3 + 0.15 * Math.sin(now / 700));
+        ghost.material.opacity = regionLevel === 0 ? reveal * (0.3 + 0.15 * Math.sin(now / 700)) : 0;
 
         // fly-to requests from the region drill-down
         const fr = flyReq.current;
@@ -954,6 +988,111 @@ export default function ConstellationGlobe({
           lastTouch = now;
         }
 
+        // region morph requests: project the zone onto a screen-filling
+        // tangent-plane map; everything outside flies away as stars
+        const rr = regionReq.current;
+        if (rr && rr.id !== lastRegion && buildCur >= 1) {
+          lastRegion = rr.id;
+          regionLevel = rr.level;
+          if (!dustTgt) dustTgt = targets.slice();
+          if (rr.level === 0) {
+            dustTgt.set(targets);
+            memberSprites.forEach((sp, i) => {
+              memberTgt[i].copy(memberBase[i]);
+              memberIn[i] = true;
+            });
+          } else {
+            const cV = new THREE.Vector3(...toXYZ(rr.lat, rr.lng)).normalize();
+            const east = new THREE.Vector3(0, 1, 0).cross(cV).normalize();
+            const north = cV.clone().cross(east).normalize();
+            const rRad = (rr.r * Math.PI) / 180;
+            const visH = 2 * Math.tan((20 * Math.PI) / 180) * (host.clientWidth < host.clientHeight * 0.9 ? 480 : 310);
+            const visMin = Math.min(visH, visH * (host.clientWidth / host.clientHeight));
+            const sFac = (0.42 * visMin) / (Math.tan(rRad) * R);
+            const dv = new THREE.Vector3();
+            const flat = (x: number, y: number, z: number): [number, number] | null => {
+              dv.set(x, y, z).normalize();
+              if (dv.angleTo(cV) >= rRad) return null;
+              const t = dv.clone().divideScalar(dv.dot(cV)).sub(cV);
+              return [t.dot(east) * R * sFac, t.dot(north) * R * sFac];
+            };
+            const toWorld = (gx: number, gy: number) =>
+              cV.clone().multiplyScalar(R + 2)
+                .add(east.clone().multiplyScalar(gx))
+                .add(north.clone().multiplyScalar(gy));
+            // first pass: the zone's own dots keep their true places
+            const inFlat: [number, number][] = [];
+            const own: (null | [number, number])[] = [];
+            for (let i = 0; i < count; i++) {
+              const f = flat(targets[i * 3], targets[i * 3 + 1], targets[i * 3 + 2]);
+              own.push(f);
+              if (f) inFlat.push(f);
+            }
+            // second pass: every outside dot becomes filler, thickening
+            // the zone so even a small island renders dense
+            // filler scatter: never tighter than the source grid, and
+            // round, so small zones melt into one mass instead of tiles
+            const jr =
+              Math.max(
+                0.017,
+                Math.tan(rRad) * (inFlat.length < 30 ? 0.32 : 0.045),
+              ) * R * sFac;
+            const scatter = (radius: number): [number, number] => {
+              const a = Math.random() * Math.PI * 2;
+              const d = radius * Math.sqrt(Math.random());
+              return [Math.cos(a) * d, Math.sin(a) * d];
+            };
+            for (let i = 0; i < count; i++) {
+              let gx: number;
+              let gy: number;
+              const f = own[i];
+              if (f) {
+                [gx, gy] = f;
+              } else if (inFlat.length) {
+                const seed = inFlat[i % inFlat.length];
+                const [jx, jy] = scatter(jr);
+                gx = seed[0] + jx;
+                gy = seed[1] + jy;
+              } else {
+                const [jx, jy] = scatter(jr * 6);
+                gx = jx;
+                gy = jy;
+              }
+              const o = toWorld(gx, gy);
+              dustTgt![i * 3] = o.x;
+              dustTgt![i * 3 + 1] = o.y;
+              dustTgt![i * 3 + 2] = o.z;
+            }
+            memberSprites.forEach((sp, i) => {
+              const f = flat(memberBase[i].x, memberBase[i].y, memberBase[i].z);
+              if (f) {
+                const o = toWorld(f[0], f[1]);
+                memberTgt[i].set(o.x, o.y, o.z);
+                memberIn[i] = true;
+              } else {
+                dv.copy(memberBase[i]).normalize();
+                memberTgt[i].copy(dv.multiplyScalar(R * 3.6));
+                memberIn[i] = false;
+              }
+            });
+          }
+        }
+        // the dots always take their time flying to wherever they belong
+        if (buildCur >= 1 && dustTgt) {
+          const pos = geo.getAttribute("position") as import("three").BufferAttribute;
+          const arr = pos.array as Float32Array;
+          let moving = false;
+          for (let i = 0; i < count * 3; i++) {
+            const d = dustTgt[i] - arr[i];
+            if (Math.abs(d) > 0.05) {
+              arr[i] += d * 0.05;
+              moving = true;
+            }
+          }
+          if (moving) pos.needsUpdate = true;
+          memberSprites.forEach((sp, i) => sp.position.lerp(memberTgt[i], 0.05));
+        }
+
         // idle spin and momentum
         if (!dragging && !flying) {
           globe.rotation.y += vx;
@@ -976,6 +1115,7 @@ export default function ConstellationGlobe({
         // arcs pulse between members once the world is real
         if (
           reveal >= 1 &&
+          regionLevel === 0 &&
           !linesOnRef.current &&
           membersRef.current.length > 1 &&
           now - lastArc > 4200
@@ -1005,7 +1145,7 @@ export default function ConstellationGlobe({
             arcs.splice(i, 1);
           }
         }
-        webGroup.visible = linesOnRef.current;
+        webGroup.visible = linesOnRef.current && regionLevel === 0;
 
         // thread from the chosen star to its card
         const sel = selectedRef.current;
@@ -1117,8 +1257,7 @@ export default function ConstellationGlobe({
               {inView.length}
             </p>
             <p className="meta-label mt-1 text-starlight/80">
-              creator{inView.length === 1 ? "" : "s"} serious about Jesus{" "}
-              {regionName}
+              creator{inView.length === 1 ? "" : "s"} {regionName}
             </p>
             {crumbs ? (
               <p className="meta-label mt-2 text-[10px] text-dust">{crumbs}</p>
