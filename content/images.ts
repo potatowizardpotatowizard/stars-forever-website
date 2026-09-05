@@ -143,6 +143,12 @@ export const IMAGES: Record<string, ImageSlot> = {
     caption: { where: "Iceland" },
     ratio: "4 / 5",
   },
+  "rt-hitchhiker": {
+    file: "rt-hitchhiker.jpg",
+    alt: "Arms around the hitchhiker on the roadside where the crew picked him up",
+    caption: { where: "Iceland" },
+    ratio: "3 / 2",
+  },
   "rt-iceberg": {
     file: "rt-iceberg.jpg",
     alt: "Crouched on a chunk of glacier ice washed up on the black sand",

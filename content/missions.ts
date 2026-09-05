@@ -131,7 +131,12 @@ export const MISSIONS: Mission[] = [
         paragraphs: [
           "On our second day in the camper van we picked up a hitchhiker from Poland. We invited him into the video shoot, took him to an insane waterfall and an abandoned plane, and eventually shared Jesus with him in a deep spiritual conversation.",
         ],
-        imageSlots: ["rt-crew", "rt-waterfall-group", "rt-abandoned-plane"],
+        imageSlots: [
+          "rt-hitchhiker",
+          "rt-waterfall-group",
+          "rt-abandoned-plane",
+          "rt-crew",
+        ],
       },
       {
         paragraphs: [
