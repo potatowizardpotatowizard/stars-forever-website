@@ -1944,6 +1944,18 @@ html.easter-sunday body::before {
   .explore-meteor { animation: none !important; opacity: 0 !important; }
 }
 
+/* explore viewfinder: the focused photo drifts slowly, Ken Burns style */
+.explore-drift {
+  animation: explore-drift 16s ease-in-out infinite alternate;
+}
+@keyframes explore-drift {
+  from { transform: scale(1.06) translate(1.4%, 1%); }
+  to { transform: scale(1.06) translate(-1.4%, -1%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .explore-drift { animation: none; transform: none; }
+}
+
 /* orbit swipe cue: a double ended arrow that glides side to side */
 .orbit-arrow {
   color: rgb(196 181 253 / 0.85);

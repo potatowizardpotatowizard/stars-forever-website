@@ -9,7 +9,7 @@ import {
   SITE_NAME,
   SOCIAL,
 } from "@/content/site";
-import ExploreIndex from "@/components/ExploreIndex";
+import ExploreSplit from "@/components/ExploreSplit";
 import NewsletterForm from "@/components/NewsletterForm";
 import Reveal from "@/components/Reveal";
 import StarVerse from "@/components/StarVerse";
@@ -77,7 +77,7 @@ export default function Footer() {
   return (
     <footer className="relative">
       <div className="mx-auto max-w-7xl px-5 pt-16 sm:px-8 sm:pt-20">
-        <ExploreIndex />
+        <ExploreSplit />
       </div>
 
       {/* the anchor verse, written in stars beneath the orbit */}
