@@ -127,8 +127,9 @@ export default function ExploreSplit() {
     <nav aria-label="Explore">
       <h2 className="meta-label">Explore</h2>
       <div className="mt-8 md:grid md:grid-cols-2 md:items-center md:gap-14">
-        {/* the viewfinder window */}
-        <div className="md:order-2">
+        {/* the viewfinder window: pinned on phones so it never scrolls
+            out of frame while the list is still being browsed */}
+        <div className="sticky top-4 z-10 md:static md:order-2">
           <div className="relative aspect-[16/10] overflow-hidden rounded-xl border border-dust/40 md:aspect-[4/3]">
             {PAGES.map((p, i) => (
               <Image
