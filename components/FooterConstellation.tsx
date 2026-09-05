@@ -37,18 +37,19 @@ const SKY_WIDE: Node[] = [
   { x: 440, y: 322 }, // YouTube Strategy
 ];
 
-// phone sky, viewBox 380 x 560
+// phone sky, viewBox 380 x 300: two stars per row so the map stays
+// wide and short instead of a tall column
 const SKY_TALL: Node[] = [
-  { x: 56, y: 42 },
-  { x: 268, y: 74, end: true },
-  { x: 84, y: 138 },
-  { x: 284, y: 182, end: true },
-  { x: 66, y: 240 },
-  { x: 272, y: 284, end: true },
-  { x: 88, y: 348 },
-  { x: 286, y: 390, end: true },
-  { x: 72, y: 456 },
-  { x: 264, y: 500, end: true },
+  { x: 26, y: 22 }, // The Vision
+  { x: 354, y: 38, end: true }, // Partner Projects
+  { x: 22, y: 88 }, // Find Your Creator Type
+  { x: 28, y: 152 }, // Revolutionary Cohort
+  { x: 352, y: 162, end: true }, // Get Involved
+  { x: 350, y: 96, end: true }, // The Story
+  { x: 34, y: 216 }, // The Constellation
+  { x: 348, y: 224, end: true }, // Speaking
+  { x: 30, y: 278 }, // Podcast
+  { x: 352, y: 270, end: true }, // YouTube Strategy
 ];
 
 function Sky({
@@ -184,7 +185,7 @@ export default function FooterConstellation() {
         <Sky nodes={SKY_WIDE} vw={600} vh={420} active={active} />
       </div>
       <div className="mt-4 md:hidden">
-        <Sky nodes={SKY_TALL} vw={380} vh={560} active={active} />
+        <Sky nodes={SKY_TALL} vw={380} vh={300} active={active} />
       </div>
     </nav>
   );

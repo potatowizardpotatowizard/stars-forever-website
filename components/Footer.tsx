@@ -86,8 +86,8 @@ export default function Footer() {
       </div>
 
       <div className="mx-auto max-w-7xl px-5 pb-16 pt-16 sm:px-8 sm:pt-20">
-        <div className="grid gap-14 md:grid-cols-5 md:gap-10">
-          <div className="md:col-span-2">
+        <div className="grid gap-12 md:grid-cols-5 md:gap-10">
+          <div className="order-3 md:order-none md:col-span-2">
             <Reveal>
               <Image
                 src="/brand/logo-full.png"
@@ -106,59 +106,63 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="md:col-span-2">
+          <div className="order-1 md:order-none md:col-span-2">
             <FooterConstellation />
           </div>
 
-          <div>
-            <h2 className="meta-label">Contact</h2>
-            <ul className="mt-4 space-y-2.5 text-sm text-starlight/85">
-              <li>
-                <a
-                  href={`mailto:${CONTACT.primaryEmail}`}
-                  className="inline-block py-1.5 -my-1.5 transition-colors hover:text-ember"
-                >
-                  {CONTACT.primaryEmail}
-                </a>
-              </li>
-              <li>
-                <a
-                  href={CONTACT.bookingUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block py-1.5 -my-1.5 transition-colors hover:text-ember"
-                >
-                  Book a Call
-                </a>
-              </li>
-              {GIVING_URL ? (
+          <div className="order-2 grid grid-cols-2 gap-10 md:order-none md:block">
+            <div>
+              <h2 className="meta-label">Contact</h2>
+              <ul className="mt-4 space-y-2.5 text-sm text-starlight/85">
                 <li>
                   <a
-                    href={GIVING_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-bold text-ember transition-colors hover:text-starlight"
+                    href={`mailto:${CONTACT.primaryEmail}`}
+                    className="inline-block break-all py-1.5 -my-1.5 transition-colors hover:text-ember"
                   >
-                    Give to the Mission
+                    {CONTACT.primaryEmail}
                   </a>
                 </li>
-              ) : null}
-            </ul>
-            <h2 className="meta-label mt-8">Follow</h2>
-            <ul className="mt-4 space-y-2.5 text-sm text-starlight/85">
-              {SOCIAL.map((s) => (
-                <li key={s.label}>
+                <li>
                   <a
-                    href={s.href}
+                    href={CONTACT.bookingUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-block py-1.5 -my-1.5 transition-colors hover:text-ember"
                   >
-                    {s.label}
+                    Book a Call
                   </a>
                 </li>
-              ))}
-            </ul>
+                {GIVING_URL ? (
+                  <li>
+                    <a
+                      href={GIVING_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-bold text-ember transition-colors hover:text-starlight"
+                    >
+                      Give to the Mission
+                    </a>
+                  </li>
+                ) : null}
+              </ul>
+            </div>
+            <div className="md:mt-8">
+              <h2 className="meta-label">Follow</h2>
+              <ul className="mt-4 space-y-2.5 text-sm text-starlight/85">
+                {SOCIAL.map((s) => (
+                  <li key={s.label}>
+                    <a
+                      href={s.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block py-1.5 -my-1.5 transition-colors hover:text-ember"
+                    >
+                      {s.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
 
