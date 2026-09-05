@@ -76,15 +76,17 @@ export default function Footer() {
 
   return (
     <footer className="relative">
-      {/* the anchor verse, written in stars as the final scene */}
-      <div className="mx-auto max-w-7xl px-5 pt-20 sm:px-8">
+      <div className="mx-auto max-w-7xl px-5 pt-16 sm:px-8 sm:pt-20">
+        <ExploreOrbit />
+      </div>
+
+      {/* the anchor verse, written in stars beneath the orbit */}
+      <div className="mx-auto max-w-7xl px-5 pt-16 sm:px-8 sm:pt-20">
         <StarVerse />
       </div>
 
       <div className="mx-auto max-w-7xl px-5 pb-16 pt-16 sm:px-8 sm:pt-20">
-        <ExploreOrbit />
-
-        <div className="mt-16 grid grid-cols-2 gap-10 sm:mt-20 md:grid-cols-4">
+        <div className="grid grid-cols-2 gap-10 md:grid-cols-4">
           <div className="md:order-2">
             <h2 className="meta-label">Contact</h2>
             <ul className="mt-4 space-y-2.5 text-sm text-starlight/85">
