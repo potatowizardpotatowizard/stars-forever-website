@@ -9,7 +9,7 @@ import {
   SITE_NAME,
   SOCIAL,
 } from "@/content/site";
-import ExploreIndex from "@/components/ExploreIndex";
+import ExploreOrbit from "@/components/ExploreOrbit";
 import NewsletterForm from "@/components/NewsletterForm";
 import Reveal from "@/components/Reveal";
 import StarVerse from "@/components/StarVerse";
@@ -82,7 +82,7 @@ export default function Footer() {
       </div>
 
       <div className="mx-auto max-w-7xl px-5 pb-16 pt-16 sm:px-8 sm:pt-20">
-        <ExploreIndex />
+        <ExploreOrbit />
 
         <div className="mt-16 grid grid-cols-2 gap-10 sm:mt-20 md:grid-cols-4">
           <div className="md:order-2">
