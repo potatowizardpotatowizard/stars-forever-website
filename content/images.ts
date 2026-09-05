@@ -127,7 +127,7 @@ export const IMAGES: Record<string, ImageSlot> = {
   },
   "rt-weston-map": {
     file: "rt-weston-map.jpg",
-    alt: "Weston holding the treasure map at the base of a waterfall, from the Real Treasure video",
+    alt: "Weston holding the treasure map open at the base of the waterfall",
     caption: { who: "Weston", where: "Iceland" },
     ratio: "4 / 5",
   },
