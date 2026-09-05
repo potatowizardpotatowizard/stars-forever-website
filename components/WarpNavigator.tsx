@@ -94,8 +94,12 @@ export default function WarpNavigator() {
   }, [router]);
 
   // The route changed: the new page is mounted (still invisible).
+  // Every jump lands at the top of the destination.
   useEffect(() => {
-    if (jump.current && !jump.current.done) jump.current.arrived = true;
+    if (jump.current && !jump.current.done) {
+      jump.current.arrived = true;
+      window.scrollTo(0, 0);
+    }
   }, [pathname]);
 
   // Continuous star field: accelerate, flow while loading, decelerate.

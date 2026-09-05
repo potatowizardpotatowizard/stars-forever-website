@@ -133,7 +133,11 @@ export default function ExploreSplit() {
         {/* the viewfinder window: pinned on phones so it never scrolls
             out of frame while the list is still being browsed */}
         <div className="sticky top-4 z-10 md:static md:order-2">
-          <div className="relative aspect-[16/10] overflow-hidden rounded-xl border border-dust/40 md:aspect-[4/3]">
+          <Link
+            href={focused.href}
+            aria-label={`Open ${focused.label}`}
+            className="relative block aspect-[16/10] overflow-hidden rounded-xl border border-dust/40 transition-colors duration-300 hover:border-starlight/60 md:aspect-[4/3]"
+          >
             {PAGES.map((p, i) => (
               <Image
                 key={p.href}
@@ -158,7 +162,7 @@ export default function ExploreSplit() {
                 {focused.summary}
               </p>
             </div>
-          </div>
+          </Link>
         </div>
 
         {/* the index */}
