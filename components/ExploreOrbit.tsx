@@ -90,12 +90,13 @@ export default function ExploreOrbit() {
         if (Math.abs(vel.current) > 0.02) {
           angle.current += vel.current;
           vel.current *= 0.94;
-        } else if (idleFor > 4500) {
-          angle.current += 0.028; // slow ambient orbit
         } else {
-          // settle onto the nearest gate
+          // settle onto the nearest gate; once idle, breathe gently
+          // around it instead of wandering off center
           const snap = Math.round(a / STEP) * STEP;
-          angle.current += shortest(0, snap - a) * 0.09;
+          const sway =
+            idleFor > 4500 ? Math.sin(performance.now() / 1600) * 2.6 : 0;
+          angle.current += shortest(0, snap + sway - a) * 0.09;
         }
       }
       ring.style.transform = `translate(-50%, -50%) translateZ(${-radius.current}px) rotateY(${angle.current.toFixed(3)}deg)`;
@@ -232,7 +233,7 @@ export default function ExploreOrbit() {
       <h2 className="meta-label">Explore</h2>
       <div
         ref={sceneRef}
-        className="relative mt-2 h-[23rem] cursor-grab touch-pan-y select-none overflow-hidden active:cursor-grabbing sm:h-[26rem]"
+        className="relative mt-2 h-[19rem] cursor-grab touch-pan-y select-none overflow-hidden active:cursor-grabbing sm:h-[26rem]"
       >
         <div
           ref={ringRef}
@@ -269,9 +270,22 @@ export default function ExploreOrbit() {
           })}
         </div>
       </div>
-      <p className="meta-label mt-2 text-center">
-        swipe to orbit · tap a page to land
-      </p>
+      <div className="mt-2 flex justify-center" aria-hidden="true">
+        <svg
+          viewBox="0 0 120 14"
+          fill="none"
+          className="orbit-arrow h-3.5 w-28"
+        >
+          <path
+            d="M12 7h96M12 7l9-5M12 7l9 5M108 7l-9-5M108 7l-9 5"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </div>
+      <p className="sr-only">Swipe left or right to browse pages</p>
     </nav>
   );
 }

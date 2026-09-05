@@ -1943,3 +1943,17 @@ html.easter-sunday body::before {
 @media (prefers-reduced-motion: reduce) {
   .explore-meteor { animation: none !important; opacity: 0 !important; }
 }
+
+/* orbit swipe cue: a double ended arrow that glides side to side */
+.orbit-arrow {
+  color: rgb(196 181 253 / 0.85);
+  filter: drop-shadow(0 0 7px rgb(167 139 250 / 0.8));
+  animation: orbit-arrow-sway 2.6s ease-in-out infinite;
+}
+@keyframes orbit-arrow-sway {
+  0%, 100% { transform: translateX(-7px); }
+  50% { transform: translateX(7px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .orbit-arrow { animation: none; }
+}
