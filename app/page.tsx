@@ -318,7 +318,7 @@ export default function HomePage() {
 
       {/* Closing call to action */}
       <section className="relative overflow-hidden">
-        <div className="relative mx-auto max-w-7xl px-5 py-28 text-center sm:px-8 sm:py-36">
+        <div className="relative mx-auto max-w-7xl px-5 pb-28 pt-20 text-center sm:px-8 sm:pb-36">
           <Reveal>
             <Image
               src="/brand/star-sharp.png"
