@@ -1,5 +1,6 @@
 import Image from "next/image";
 import ConstellationWhisper from "@/components/ConstellationWhisper";
+import ExploreSplit from "@/components/ExploreSplit";
 import Link from "next/link";
 import { linkCategory3 } from "@/components/Category3Link";
 import Cta from "@/components/Cta";
@@ -314,6 +315,11 @@ export default function HomePage() {
             ))}
           </div>
         </div>
+      </section>
+
+      {/* Explore, ahead of the closing word */}
+      <section className="mx-auto max-w-7xl px-5 sm:px-8">
+        <ExploreSplit />
       </section>
 
       {/* Closing call to action */}

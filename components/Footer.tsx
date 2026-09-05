@@ -16,8 +16,12 @@ import StarVerse from "@/components/StarVerse";
 
 export default function Footer() {
   // The strategy page is its own product: no mission updates, explore,
-  // or contact columns there. Everywhere else, the full footer.
-  const minimal = usePathname() === "/strategy";
+  // or contact columns there. Everywhere else, the full footer. The
+  // home page renders Explore inline above its closing word, so the
+  // footer skips its own copy there.
+  const pathname = usePathname();
+  const minimal = pathname === "/strategy";
+  const home = pathname === "/";
 
   if (minimal) {
     return (
@@ -76,11 +80,13 @@ export default function Footer() {
 
   return (
     <footer className="relative">
-      <div className="mx-auto max-w-7xl px-5 pt-16 sm:px-8 sm:pt-20">
-        <ExploreSplit />
-      </div>
+      {home ? null : (
+        <div className="mx-auto max-w-7xl px-5 pt-16 sm:px-8 sm:pt-20">
+          <ExploreSplit />
+        </div>
+      )}
 
-      {/* the anchor verse, written in stars beneath the orbit */}
+      {/* the anchor verse, written in stars beneath explore */}
       <div className="mx-auto max-w-7xl px-5 pt-16 sm:px-8 sm:pt-20">
         <StarVerse />
       </div>
