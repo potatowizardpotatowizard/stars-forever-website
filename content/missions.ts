@@ -99,7 +99,7 @@ export const MISSIONS: Mission[] = [
     heroVideo: "/brand/video/real-treasure-hero-bg.mp4",
     burningQuestion:
       "You could spend your whole life chasing the things of this world. What is the real treasure?",
-    desktopHiddenSlots: ["rt-wing", "rt-weston", "rt-flight"],
+    desktopHiddenSlots: ["rt-wing"],
     videoLink: {
       href: "https://www.instagram.com/reel/Db9PKZrPr3g/",
       thumbnail: "/brand/poster-real-treasure.jpg",
@@ -117,31 +117,27 @@ export const MISSIONS: Mission[] = [
         paragraphs: [
           "Weston, a fever dream short form creator, had an idea to share Jesus with his audience through a video about treasure. Soon after, Auzi had the same idea in prayer which confirmed it needed to be created, that idea took our friend group from California to Iceland. Together we sought God, shared Jesus, and made eternity changing art.",
         ],
-        imageSlots: ["rt-van-life", "rt-waterfall-group"],
+        imageSlots: ["rt-weston-map", "rt-van-life", "rt-waterfall-trio"],
       },
       {
         kicker: "God moved",
         paragraphs: [
           "This project had a low budget, so we prayed. God provided a free camper van, a free ice cave tour, and two standby tickets to fly to Iceland on an airline route that had only opened in the past three months. Many times on the trip we prayed for something specific and watched God come through with His supernatural power.",
         ],
-        imageSlots: ["rt-camper", "rt-wing", "rt-church", "rt-weston"],
+        imageSlots: ["rt-camper", "rt-wing", "rt-ice-cave", "rt-church"],
       },
       {
         kicker: "Beyond the video",
         paragraphs: [
           "On our second day in the camper van we picked up a hitchhiker from Poland. We invited him into the video shoot, took him to an insane waterfall and an abandoned plane, and eventually shared Jesus with him in a deep spiritual conversation.",
         ],
-        imageSlots: ["rt-crew"],
+        imageSlots: ["rt-crew", "rt-waterfall-group", "rt-abandoned-plane"],
       },
       {
         paragraphs: [
           "A few days later we met more hitchhikers and invited them to do life together too. We took them on a treasure hunt and cooked dinner for them. They do not believe in God, but they were moved by our hospitality and let us pray for them. Even in rural Iceland, God still gave us the opportunity to be a part of His life giving work.",
         ],
-        imageSlots: [
-          "rt-flight",
-          "rt-abandoned-plane",
-          "rt-rock-passage",
-        ],
+        imageSlots: ["rt-horses", "rt-iceberg", "rt-rock-passage"],
       },
       {
         kicker: "After posting",

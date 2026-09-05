@@ -121,8 +121,38 @@ export const IMAGES: Record<string, ImageSlot> = {
   },
   "real-treasure-card": {
     file: "real-treasure-card.jpg",
-    alt: "Three friends with arms wide open in front of a roaring Icelandic waterfall",
+    alt: "Three friends arm in arm on the black sand with glacier mountains behind them",
     caption: { where: "Iceland", when: "July 2026" },
+    ratio: "3 / 2",
+  },
+  "rt-weston-map": {
+    file: "rt-weston-map.jpg",
+    alt: "Weston holding the treasure map at the base of a waterfall, from the Real Treasure video",
+    caption: { who: "Weston", where: "Iceland" },
+    ratio: "4 / 5",
+  },
+  "rt-waterfall-trio": {
+    file: "rt-waterfall-trio.jpg",
+    alt: "Arms wide open under a towering waterfall on the way to the treasure",
+    caption: { where: "Iceland" },
+    ratio: "4 / 5",
+  },
+  "rt-ice-cave": {
+    file: "rt-ice-cave.jpg",
+    alt: "Helmets on inside the ice cave God provided for free",
+    caption: { where: "Iceland" },
+    ratio: "4 / 5",
+  },
+  "rt-iceberg": {
+    file: "rt-iceberg.jpg",
+    alt: "Crouched on a chunk of glacier ice washed up on the black sand",
+    caption: { where: "Iceland" },
+    ratio: "4 / 5",
+  },
+  "rt-horses": {
+    file: "rt-horses.jpg",
+    alt: "Riding Icelandic horses through a green valley in rural Iceland",
+    caption: { where: "Rural Iceland" },
     ratio: "3 / 2",
   },
   "rt-rock-passage": {
