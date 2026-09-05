@@ -25,7 +25,7 @@ const PAGES: Page[] = [
     href: "/vision",
     label: "The Vision",
     summary: "Why we exist and where all of this is going.",
-    img: "/images/story-vision.jpg",
+    img: "/images/joshua-desert.jpg",
   },
   {
     href: "/partner-projects",
