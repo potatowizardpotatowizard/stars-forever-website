@@ -1909,3 +1909,37 @@ html.easter-sunday body::before {
 @media (prefers-reduced-motion: reduce) {
   .success-star { animation: none; opacity: 0; }
 }
+
+/* Footer explore index: a meteor streaks through a credit line when it
+   ignites. The streak lives inside an overflow-hidden line and crosses
+   the full width with fading tails on both sides. */
+.explore-meteor {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -180px;
+  width: 150px;
+  pointer-events: none;
+  opacity: 0;
+  transform: skewX(-18deg);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(196 170 255 / 0.35) 35%,
+    rgb(255 255 255 / 0.85) 55%,
+    transparent
+  );
+  filter: blur(1.5px);
+}
+.explore-line:hover .explore-meteor,
+.explore-line:focus-visible .explore-meteor {
+  animation: explore-meteor-fly 0.75s cubic-bezier(0.3, 0.7, 0.2, 1) forwards;
+}
+@keyframes explore-meteor-fly {
+  0% { opacity: 0; transform: translateX(0) skewX(-18deg); }
+  12% { opacity: 1; }
+  100% { opacity: 0; transform: translateX(min(135vw, 1550px)) skewX(-18deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .explore-meteor { animation: none !important; opacity: 0 !important; }
+}

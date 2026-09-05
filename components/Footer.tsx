@@ -9,7 +9,7 @@ import {
   SITE_NAME,
   SOCIAL,
 } from "@/content/site";
-import FooterConstellation from "@/components/FooterConstellation";
+import ExploreIndex from "@/components/ExploreIndex";
 import NewsletterForm from "@/components/NewsletterForm";
 import Reveal from "@/components/Reveal";
 import StarVerse from "@/components/StarVerse";
@@ -86,8 +86,64 @@ export default function Footer() {
       </div>
 
       <div className="mx-auto max-w-7xl px-5 pb-16 pt-16 sm:px-8 sm:pt-20">
-        <div className="grid gap-12 md:grid-cols-5 md:gap-10">
-          <div className="order-3 md:order-none md:col-span-2">
+        <ExploreIndex />
+
+        <div className="mt-16 grid grid-cols-2 gap-10 sm:mt-20 md:grid-cols-4">
+          <div className="md:order-2">
+            <h2 className="meta-label">Contact</h2>
+            <ul className="mt-4 space-y-2.5 text-sm text-starlight/85">
+              <li>
+                <a
+                  href={`mailto:${CONTACT.primaryEmail}`}
+                  className="inline-block break-all py-1.5 -my-1.5 transition-colors hover:text-ember"
+                >
+                  {CONTACT.primaryEmail}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={CONTACT.bookingUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block py-1.5 -my-1.5 transition-colors hover:text-ember"
+                >
+                  Book a Call
+                </a>
+              </li>
+              {GIVING_URL ? (
+                <li>
+                  <a
+                    href={GIVING_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-bold text-ember transition-colors hover:text-starlight"
+                  >
+                    Give to the Mission
+                  </a>
+                </li>
+              ) : null}
+            </ul>
+          </div>
+
+          <div className="md:order-3">
+            <h2 className="meta-label">Follow</h2>
+            <ul className="mt-4 space-y-2.5 text-sm text-starlight/85">
+              {SOCIAL.map((s) => (
+                <li key={s.label}>
+                  <a
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block py-1.5 -my-1.5 transition-colors hover:text-ember"
+                  >
+                    {s.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="col-span-2 md:order-1 md:col-span-2">
             <Reveal>
               <Image
                 src="/brand/logo-full.png"
@@ -103,65 +159,6 @@ export default function Footer() {
             </p>
             <div className="mt-4">
               <NewsletterForm />
-            </div>
-          </div>
-
-          <div className="order-1 md:order-none md:col-span-2">
-            <FooterConstellation />
-          </div>
-
-          <div className="order-2 grid grid-cols-2 gap-10 md:order-none md:block">
-            <div>
-              <h2 className="meta-label">Contact</h2>
-              <ul className="mt-4 space-y-2.5 text-sm text-starlight/85">
-                <li>
-                  <a
-                    href={`mailto:${CONTACT.primaryEmail}`}
-                    className="inline-block break-all py-1.5 -my-1.5 transition-colors hover:text-ember"
-                  >
-                    {CONTACT.primaryEmail}
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href={CONTACT.bookingUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block py-1.5 -my-1.5 transition-colors hover:text-ember"
-                  >
-                    Book a Call
-                  </a>
-                </li>
-                {GIVING_URL ? (
-                  <li>
-                    <a
-                      href={GIVING_URL}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-bold text-ember transition-colors hover:text-starlight"
-                    >
-                      Give to the Mission
-                    </a>
-                  </li>
-                ) : null}
-              </ul>
-            </div>
-            <div className="md:mt-8">
-              <h2 className="meta-label">Follow</h2>
-              <ul className="mt-4 space-y-2.5 text-sm text-starlight/85">
-                {SOCIAL.map((s) => (
-                  <li key={s.label}>
-                    <a
-                      href={s.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block py-1.5 -my-1.5 transition-colors hover:text-ember"
-                    >
-                      {s.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
             </div>
           </div>
         </div>
