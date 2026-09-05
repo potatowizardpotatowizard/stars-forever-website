@@ -134,12 +134,13 @@ export default function StarVerse() {
       c.clearRect(0, 0, W, H);
       for (const p of parts) {
         const k = clamp01((t - p.delay) / 1300);
+        if (k === 0) continue; // invisible until this star begins its flight
         const e = easeOut(k);
         const x = p.sx + (p.tx - p.sx) * e;
         const y = p.sy + (p.ty - p.sy) * e;
         const settled = k >= 1;
         const tw = settled ? 0.6 + 0.4 * Math.sin(t / 640 + p.ph) : 0.55;
-        c.globalAlpha = (0.28 + 0.72 * e) * tw;
+        c.globalAlpha = Math.min(1, e * 1.3) * tw;
         const s = p.size * (settled ? 2.6 : 2.2);
         c.drawImage(
           p.tint > 0.88 ? spriteLav : sprite,
