@@ -17,15 +17,15 @@ const LINKS = [...NAV, ...FOOTER_NAV];
 
 const SUMMARIES: Record<string, string> = {
   "/vision": "Why we exist and where all of this is going.",
-  "/partner-projects": "Real missions with real creators, gospel first.",
-  "/category-3": "Discover how God wired you to create.",
-  "/revolutionary": "A desert cohort that forges creator missionaries.",
-  "/get-involved": "Give, partner, or come build with us.",
-  "/story": "Seven days before Beast Games, everything changed.",
-  "/constellation": "Creators serious about Jesus, all over the globe.",
-  "/speaking": "Bring the mission to your stage or church.",
-  "/podcast": "Faith conversations from the biggest sets on earth.",
-  "/strategy": "The framework behind content that reaches millions.",
+  "/partner-projects": "Every mission we have filmed with partner creators.",
+  "/category-3": "Find out how God wired you to create.",
+  "/revolutionary": "Our cohort that trains creators for mission.",
+  "/get-involved": "Ways to give, partner, or build with us.",
+  "/story": "How Stars Forever began.",
+  "/constellation": "A global map of creators serious about Jesus.",
+  "/speaking": "Book us to speak at your event or church.",
+  "/podcast": "Our conversations about faith and creating.",
+  "/strategy": "The framework we use to reach millions.",
 };
 
 const STEP = 360 / LINKS.length;
@@ -261,7 +261,7 @@ export default function ExploreOrbit() {
                 >
                   {item.label}
                 </span>
-                <span className="mx-auto mt-3 block max-w-[74vw] whitespace-normal text-sm leading-relaxed text-starlight/75 opacity-0 transition-opacity duration-300 group-data-[focus]:opacity-100 sm:max-w-sm sm:text-base">
+                <span className="mx-auto mt-3 block w-[70vw] max-w-xs whitespace-normal text-sm leading-relaxed text-starlight/75 opacity-0 transition-opacity duration-300 group-data-[focus]:opacity-100 sm:w-auto sm:max-w-sm sm:text-base">
                   {SUMMARIES[item.href]}
                 </span>
               </Link>
