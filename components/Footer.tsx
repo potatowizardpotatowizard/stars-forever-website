@@ -9,7 +9,7 @@ import {
   SITE_NAME,
   SOCIAL,
 } from "@/content/site";
-import ExploreIndex from "@/components/ExploreIndex";
+import ExploreTunnel from "@/components/ExploreTunnel";
 import NewsletterForm from "@/components/NewsletterForm";
 import Reveal from "@/components/Reveal";
 import StarVerse from "@/components/StarVerse";
@@ -81,10 +81,12 @@ export default function Footer() {
         <StarVerse />
       </div>
 
-      <div className="mx-auto max-w-7xl px-5 pb-16 pt-16 sm:px-8 sm:pt-20">
-        <ExploreIndex />
+      <div className="mt-14 sm:mt-16">
+        <ExploreTunnel />
+      </div>
 
-        <div className="mt-16 grid grid-cols-2 gap-10 sm:mt-20 md:grid-cols-4">
+      <div className="mx-auto max-w-7xl px-5 pb-16 sm:px-8">
+        <div className="grid grid-cols-2 gap-10 md:grid-cols-4">
           <div className="md:order-2">
             <h2 className="meta-label">Contact</h2>
             <ul className="mt-4 space-y-2.5 text-sm text-starlight/85">
