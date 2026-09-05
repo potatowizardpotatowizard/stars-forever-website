@@ -128,7 +128,7 @@ export default function ExploreSplit() {
 
   return (
     <nav aria-label="Explore">
-      <h2 className="meta-label">Explore</h2>
+      <h2 className="meta-label">Explore The Website</h2>
       <div className="mt-8 md:grid md:grid-cols-2 md:items-center md:gap-14">
         {/* the viewfinder window: pinned on phones so it never scrolls
             out of frame while the list is still being browsed */}
