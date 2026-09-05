@@ -16,6 +16,8 @@ type Page = {
   label: string;
   summary: string;
   img: string;
+  /** object-position focal point for the viewfinder crop */
+  pos?: string;
 };
 
 const PAGES: Page[] = [
@@ -66,6 +68,7 @@ const PAGES: Page[] = [
     label: "Speaking",
     summary: "Book us to speak at your event or church.",
     img: "/images/speak-auzi.jpg",
+    pos: "50% 18%",
   },
   {
     href: "/podcast",
@@ -142,6 +145,7 @@ export default function ExploreSplit() {
                 className={`object-cover transition-opacity duration-700 ${
                   i === focus ? "explore-drift opacity-100" : "opacity-0"
                 }`}
+                style={p.pos ? { objectPosition: p.pos } : undefined}
               />
             ))}
             <div
