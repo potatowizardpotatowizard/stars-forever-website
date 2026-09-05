@@ -318,13 +318,6 @@ export default function HomePage() {
 
       {/* Closing call to action */}
       <section className="relative overflow-hidden">
-        <Image
-          src="/brand/bg-black-stars.jpg"
-          alt=""
-          fill
-          sizes="100vw"
-          className="object-cover opacity-60 [mask-image:linear-gradient(to_bottom,transparent_3.0%,rgb(0_0_0/0.067)_5.5%,rgb(0_0_0/0.25)_8.0%,rgb(0_0_0/0.5)_10.5%,rgb(0_0_0/0.75)_13.0%,rgb(0_0_0/0.933)_15.5%,rgb(0_0_0/1.0)_18.0%,black_18%,black_82%,rgb(0_0_0/0.933)_84.3%,rgb(0_0_0/0.75)_86.7%,rgb(0_0_0/0.5)_89.0%,rgb(0_0_0/0.25)_91.3%,rgb(0_0_0/0.067)_93.7%,transparent_96.0%)]"
-        />
         <div className="relative mx-auto max-w-7xl px-5 py-28 text-center sm:px-8 sm:py-36">
           <Reveal>
             <Image
