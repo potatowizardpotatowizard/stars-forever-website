@@ -459,6 +459,10 @@ export const MISSIONS: Mission[] = [
               label: "Watch on Instagram",
               href: "https://www.instagram.com/reel/DccJ1smhB1f/",
             },
+            {
+              label: "Side questing with Edgar",
+              href: "https://www.instagram.com/reel/DdRyNdgxHNv/",
+            },
           ],
         },
         {
