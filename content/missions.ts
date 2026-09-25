@@ -452,6 +452,10 @@ export const MISSIONS: Mission[] = [
           line: "Took a grandma skydiving, reaching a secular audience, then shared Jesus with her.",
           links: [
             {
+              label: "Side questing with Scrappy",
+              href: "https://www.instagram.com/reel/Dcd_rMiv9oZ/",
+            },
+            {
               label: "Watch on YouTube",
               href: "https://youtu.be/HErdFjrQt1E?t=527",
             },
@@ -460,8 +464,8 @@ export const MISSIONS: Mission[] = [
               href: "https://www.instagram.com/reel/DccJ1smhB1f/",
             },
             {
-              label: "Side questing with Scrappy",
-              href: "https://www.instagram.com/reel/Dcd_rMiv9oZ/",
+              label: "Side questing with Edgar",
+              href: "https://www.instagram.com/reel/DdRyNdgxHNv/",
             },
           ],
         },
