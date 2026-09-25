@@ -460,8 +460,8 @@ export const MISSIONS: Mission[] = [
               href: "https://www.instagram.com/reel/DccJ1smhB1f/",
             },
             {
-              label: "Side questing with Edgar",
-              href: "https://www.instagram.com/reel/DdRyNdgxHNv/",
+              label: "Side questing with Scrappy",
+              href: "https://www.instagram.com/reel/Dcd_rMiv9oZ/",
             },
           ],
         },
