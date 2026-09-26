@@ -25,6 +25,8 @@ export default function StarBridge() {
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    // desktop only: on phones the star crowds the text, so it stays home
+    if (!window.matchMedia("(min-width: 768px)").matches) return;
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext("2d");
     if (!canvas || !ctx) return;
@@ -235,7 +237,7 @@ export default function StarBridge() {
     <canvas
       ref={canvasRef}
       aria-hidden="true"
-      className="pointer-events-none fixed inset-0 z-30 h-full w-full"
+      className="pointer-events-none fixed inset-0 z-30 hidden h-full w-full md:block"
     />
   );
 }
