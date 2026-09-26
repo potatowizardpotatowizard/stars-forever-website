@@ -398,7 +398,7 @@ export default async function MissionPage({
                     </p>
                     <div className="mt-6 flex flex-wrap items-start gap-3">
                       {creator.links.map((link) => {
-                        const yt = youtubeId(link.href);
+                        const yt = link.pill ? null : youtubeId(link.href);
                         if (yt) {
                           return (
                             <a

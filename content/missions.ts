@@ -67,7 +67,8 @@ export type Mission = {
       name: string;
       tag: string;
       line: string;
-      links: { label: string; href: string }[];
+      /** pill forces a plain link pill even for YouTube receipts */
+      links: { label: string; href: string; pill?: boolean }[];
     }[];
   };
 };
@@ -458,6 +459,7 @@ export const MISSIONS: Mission[] = [
             {
               label: "Watch on YouTube",
               href: "https://youtu.be/HErdFjrQt1E?t=527",
+              pill: true,
             },
             {
               label: "Watch on Instagram",
