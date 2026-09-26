@@ -136,7 +136,7 @@ export default function HomePage() {
 
       {/* Anchor verse and the reframe */}
       <section className="relative overflow-hidden">
-        <div className="relative mx-auto max-w-7xl px-5 pb-10 pt-10 sm:px-8 sm:pb-28 sm:pt-12">
+        <div className="relative mx-auto max-w-7xl px-5 pb-16 pt-10 sm:px-8 sm:pb-28 sm:pt-12">
           <Reveal className="max-w-3xl md:hidden">
             <blockquote>
               <p className="font-meta text-xl leading-relaxed text-starlight sm:text-2xl sm:leading-relaxed">
@@ -189,7 +189,7 @@ export default function HomePage() {
 
       {/* Featured: the Tokyo Drift video */}
       <section className="relative overflow-hidden bg-[linear-gradient(to_bottom,transparent_0%,rgb(19_13_29/0.048)_10.0%,rgb(19_13_29/0.173)_20.0%,rgb(19_13_29/0.327)_30.0%,rgb(19_13_29/0.452)_40.0%,rgb(19_13_29/0.5)_50%,rgb(19_13_29/0.452)_60.0%,rgb(19_13_29/0.327)_70.0%,rgb(19_13_29/0.173)_80.0%,rgb(19_13_29/0.048)_90.0%,transparent_100%)]">
-        <div className="relative mx-auto max-w-7xl px-5 pb-24 pt-12 sm:px-8 sm:py-32">
+        <div className="relative mx-auto max-w-7xl px-5 pb-24 pt-16 sm:px-8 sm:py-32">
         <Reveal className="mx-auto max-w-4xl md:max-w-none">
           <div className="md:grid md:grid-cols-[3fr_2fr] md:items-center md:gap-14">
             <div className="md:order-2">
