@@ -40,22 +40,18 @@ export default function MissionIntro({ text }: { text: string }) {
     }, 3100);
   }, []);
 
-  // On desktop, "for Jesus" stays together on the final line
-  const match = text.match(/^(.*)\s(for Jesus\.?)$/i);
-
+  // Hand-set line breaks: three lines on phones (that / and leading
+  // their lines), two on desktop.
+  void text;
   return (
     <p
       ref={ref}
-      className="mx-auto max-w-md text-center font-meta text-sm uppercase leading-relaxed tracking-[0.14em] text-starlight/75"
+      className="mx-auto max-w-md text-center font-meta text-[13px] uppercase leading-relaxed tracking-[0.1em] text-starlight/75 sm:text-sm md:max-w-xl md:tracking-[0.14em]"
     >
-      {match ? (
-        <>
-          {match[1]}{" "}
-          <span className="md:whitespace-nowrap">{match[2]}</span>
-        </>
-      ) : (
-        text
-      )}
+      Stars Forever is a ministry
+      <br className="md:hidden" /> that helps creators
+      <br className="hidden md:inline" /> use their lives
+      <br className="md:hidden" /> and platforms for Jesus.
     </p>
   );
 }
