@@ -269,7 +269,7 @@ export default async function MissionPage({
 
       {/* The story, flown through: every photo and beat a plane in
           deep space, glowing threads leading in and out on mobile */}
-      {mission.slug === "tokyo-drift" ? null : <JourneyThread />}
+      <JourneyThread />
       <JourneyScene
         items={[
           {
@@ -309,7 +309,7 @@ export default async function MissionPage({
           } as JourneyItem,
         ]}
       />
-      {mission.slug === "tokyo-drift" ? null : <JourneyThread />}
+      <JourneyThread />
 
       {/* Comment wall: real comments from the posted video as quote cards */}
       {mission.commentWall ? (
