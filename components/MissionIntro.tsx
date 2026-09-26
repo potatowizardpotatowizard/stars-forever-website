@@ -46,7 +46,7 @@ export default function MissionIntro({ text }: { text: string }) {
   return (
     <p
       ref={ref}
-      className="mx-auto max-w-md text-center font-meta text-[13px] uppercase leading-relaxed tracking-[0.1em] text-starlight/75 sm:text-sm md:max-w-xl md:tracking-[0.14em]"
+      className="mx-auto max-w-md text-center font-meta text-sm uppercase leading-relaxed tracking-[0.06em] text-starlight/75 sm:tracking-[0.1em] md:max-w-xl md:tracking-[0.14em]"
     >
       Stars Forever is a ministry
       <br className="md:hidden" /> that helps creators
