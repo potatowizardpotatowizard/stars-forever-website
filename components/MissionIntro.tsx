@@ -46,7 +46,7 @@ export default function MissionIntro({ text }: { text: string }) {
   return (
     <p
       ref={ref}
-      className="max-w-md font-meta text-sm uppercase leading-relaxed tracking-[0.14em] text-starlight/75"
+      className="mx-auto max-w-md text-center font-meta text-sm uppercase leading-relaxed tracking-[0.14em] text-starlight/75"
     >
       {match ? (
         <>
