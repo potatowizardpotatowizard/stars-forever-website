@@ -88,6 +88,22 @@ export default function ProjectBurst({
       const total = rect.height - vh;
       const p = total > 0 ? clamp01(-rect.top / total) : 0;
 
+      // the collage centers at 48% of the viewport, but on short or
+      // narrow screens the heading grows tall enough to reach the top
+      // photo row. Measure and slide the whole cluster down just far
+      // enough that the text always clears it.
+      const headEl = headRef.current;
+      const probe = outerRefs.current[0];
+      if (headEl && probe) {
+        const rise = Math.min(150, Math.max(80, 0.23 * vw));
+        const half = probe.offsetHeight / 2;
+        const clear = headEl.offsetHeight + 26 + rise + half;
+        const base = 0.48 * vh;
+        const deepest = vh - (rise + half + 10);
+        const cy = Math.min(Math.max(base, clear), Math.max(base, deepest));
+        sticky.style.setProperty("--sf-cy", `${cy.toFixed(1)}px`);
+      }
+
       // outer photos: accelerate outward and leave the screen
       const push = smooth(clamp01(p / 0.55));
       for (let i = 0; i < OUTER.length; i++) {
@@ -218,8 +234,8 @@ export default function ProjectBurst({
           const xOff = `calc(50% ${c.ox < 0 ? "-" : "+"} clamp(${Math.abs(c.ox) < 30 ? 62 : 125}px, ${Math.abs(c.ox)}vw, ${Math.abs(c.ox) < 30 ? 250 : 470}px))`;
           const yOff =
             c.oy === 0
-              ? "48%"
-              : `calc(48% ${c.oy < 0 ? "-" : "+"} clamp(80px, ${Math.abs(c.oy)}vw, 150px))`;
+              ? "var(--sf-cy, 48%)"
+              : `calc(var(--sf-cy, 48%) ${c.oy < 0 ? "-" : "+"} clamp(80px, ${Math.abs(c.oy)}vw, 150px))`;
           return (
             <div
               key={photo.src}
@@ -251,8 +267,8 @@ export default function ProjectBurst({
         <Link
           ref={centerRef}
           href={project.href}
-          className="group absolute left-1/2 top-[48%] z-20 block -translate-x-1/2 -translate-y-1/2"
-          style={{ pointerEvents: "none" }}
+          className="group absolute left-1/2 z-20 block -translate-x-1/2 -translate-y-1/2"
+          style={{ pointerEvents: "none", top: "var(--sf-cy, 48%)" }}
         >
           <div
             ref={centerBoxRef}
