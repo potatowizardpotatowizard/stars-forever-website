@@ -89,6 +89,7 @@ export default function Footer() {
       {/* the anchor verse, written in stars beneath explore */}
       <div className="mx-auto max-w-7xl px-5 pt-16 sm:px-8 sm:pt-20">
         <StarVerse />
+        <p className="meta-label mt-6 text-center">{ANCHOR_VERSE.reference}</p>
       </div>
 
       <div className="mx-auto max-w-7xl px-5 pb-16 pt-16 sm:px-8 sm:pt-20">

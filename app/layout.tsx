@@ -14,6 +14,7 @@ import VerseSummon from "@/components/VerseSummon";
 import WarpScroll from "@/components/WarpScroll";
 import TapeIntro from "@/components/TapeIntro";
 import WarpNavigator from "@/components/WarpNavigator";
+import ScrollReset from "@/components/ScrollReset";
 import { SITE_NAME, SITE_DESCRIPTION } from "@/content/site";
 import "./globals.css";
 
@@ -92,6 +93,7 @@ export default function RootLayout({
         <main id="main">{children}</main>
         <Footer />
         <WarpNavigator />
+        <ScrollReset />
         <ConstellationTrail />
         <StarCursor />
         <WarpScroll />
