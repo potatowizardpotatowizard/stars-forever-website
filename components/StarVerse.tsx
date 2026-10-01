@@ -80,8 +80,17 @@ export default function StarVerse() {
       fs = Math.min(narrow ? 54 : 84, (fs * (cw * 0.92)) / widest);
 
       const lineH = fs * 1.22;
+      // the reference line is part of the star field too, smaller and
+      // forming after the phrase has swept in
+      const metaFamily =
+        getComputedStyle(document.documentElement)
+          .getPropertyValue("--font-meta")
+          .trim() || "monospace";
+      const refFs = Math.max(15, fs * 0.27);
+      const mainH = lines.length * lineH + fs * 0.35;
+      const refY = mainH + refFs * 1.6;
       W = cw;
-      H = Math.round(lines.length * lineH + fs * 0.7);
+      H = Math.round(refY + refFs * 1.2);
       dpr = Math.min(2, window.devicePixelRatio || 1);
       canvas.width = Math.round(W * dpr);
       canvas.height = Math.round(H * dpr);
@@ -98,7 +107,11 @@ export default function StarVerse() {
       o.textBaseline = "middle";
       o.font = `800 ${fs}px ${family}`;
       lines.forEach((l, i) => {
-        o.fillText(l, W / 2, H / 2 + (i - (lines.length - 1) / 2) * lineH);
+        o.fillText(
+          l,
+          W / 2,
+          mainH / 2 + (i - (lines.length - 1) / 2) * lineH,
+        );
       });
       const data = o.getImageData(0, 0, W, H).data;
       const step = narrow ? 2 : 3;
@@ -123,6 +136,35 @@ export default function StarVerse() {
         ph: Math.random() * Math.PI * 2,
         tint: Math.random(),
       }));
+
+      // second pass: the reference, denser sampling so the small
+      // letters stay legible in stars
+      o.clearRect(0, 0, W, H);
+      o.font = `400 ${refFs}px ${metaFamily}`;
+      try {
+        (o as CanvasRenderingContext2D & { letterSpacing: string }).letterSpacing =
+          `${Math.round(refFs * 0.22)}px`;
+      } catch {
+        /* letterSpacing unsupported: plain spacing still reads fine */
+      }
+      o.fillText("DANIEL 12:3", W / 2, refY);
+      const refData = o.getImageData(0, 0, W, H).data;
+      for (let y = 0; y < H; y += 1) {
+        for (let x = (y % 2); x < W; x += 2) {
+          if (refData[(y * W + x) * 4 + 3] > 120) {
+            parts.push({
+              sx: Math.random() * W,
+              sy: Math.random() * H,
+              tx: x,
+              ty: y,
+              delay: 1500 + (x / W) * 350 + Math.random() * 300,
+              size: 0.55 + Math.random() * 0.45,
+              ph: Math.random() * Math.PI * 2,
+              tint: Math.random(),
+            });
+          }
+        }
+      }
       draw(reduced ? 1e9 : 0);
     };
 
@@ -197,7 +239,7 @@ export default function StarVerse() {
   return (
     <div ref={wrapRef} className="w-full">
       <canvas ref={canvasRef} aria-hidden="true" className="block w-full" />
-      <p className="sr-only">Like the stars forever and ever</p>
+      <p className="sr-only">Like the stars forever and ever. Daniel 12:3</p>
     </div>
   );
 }
